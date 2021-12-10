@@ -1,0 +1,1 @@
+Case ID 27.0 Lesion ID 2.0 is not exist on Truth worksheet. : C:\Documents and Settings\dev1\Desktop\JAFROC_V3\test_data\BadDataSets\D_litchfield 3 modalities exp.xls: Data File Error

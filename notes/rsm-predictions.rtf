@@ -1,0 +1,206 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 It can be confirmed that for $\\zeta = -\\infty$ Eqn. \\@ref(eq:rsm-pred-tpf)) yields the same expression for $\\text\{TPF\}_\{max\}$ as Eqn. \\@ref(eq:rsm-predictions-tpf-max):\
+\
+\
+\
+\\begin\{equation\}\
+\\left. \
+\\begin\{aligned\}\
+& \\text\{TPF\}\\left (-\\infty , \\mu, \\lambda', \\nu', L \\right ) \\\\\
+=& 1 - \\left ( 1 - \\nu' \\right )^L \\text\{exp\}\\left ( -\\lambda' \\right )\\\\\
+\\end\{aligned\}\
+\\right \\\}\
+(\\#eq:rsm-tpf-limit)\
+\\end\{equation\}\
+\
+\
+\
+\
+Using \\@ref(eq:rsm-inv-transform) the formula is readily transformed to intrinsic RSM parameters $\\lambda$ and  $\\nu$. As $\\lambda \\rightarrow \\infty$, $\\left (\\text\{FPF\}_\{max\}, \\text\{TPF\}_\{max\} \\right )$ approaches (1,1), because in this limit $\\lambda \\rightarrow \\infty$ and every case is assured to have a latent NL, thereby yielding a finite z-sample, and will be marked at sufficiently low $\\zeta_1$. Conversely, as $\\lambda \\rightarrow 0$, $\\left (\\text\{FPF\}_\{max\}, \\text\{TPF\}_\{max\} \\right )$ approaches:\
+\
+$$\\left (0, 1 - \\text\{exp\} \\left ( - \\nu \\mu L \\right ) \\right )$$\
+\
+as in this limit there are no cases with latent NLs, so all non-diseased cases are unmarked and lesions are marked to the extent determined by the product $\\nu \\mu L$. As this product increases, $\\text\{TPF\}_\{max\}$ approaches unity, in other words, in the simultaneous limits  $\\lambda \\rightarrow 0$ and $\\mu \\nu \\rightarrow \\infty$, the ROC plot approaches perfect performance, i.e., a vertical line from the origin to (0,1) - the continuously accessible section - followed by the continuously inaccessible horizontal line connecting (0,1) to (1,1). Since $\\nu$ is positive, $\\mu \\nu \\rightarrow \\infty$ is equivalent to $\\mu \\rightarrow \\infty$. The expression also approaches unity as $L$ increases; with more lesions per diseased case the probability that one of them will be marked increases.\
+\
+\
+\
+\
+\
+\\begin\{equation\}\
+\\left.\
+\\begin\{aligned\}\
+& \\text\{TPF\}\\left (\\zeta , \\mu, \\lambda', \\nu', L \\right ) \\\\\
+&= 1 - \\left ( 1 - \\frac\{\\nu'\}\{2\} + \\frac\{\\nu'\}\{2\} \\text\{erf\} \\left ( \\frac\{\\zeta - \\mu\}\{\\sqrt\{2\}\} \\right ) \\right )^L \\times \\\\\
+& \\text\{exp\}\\left ( -\\frac\{\\lambda'\}\{2\} + \\frac\{\\lambda'\}\{2\} \\left ( \\text\{erf\} \\left ( \\frac \{\\zeta\}\{\\sqrt\{2\}\} \\right ) \\right )\\right )\
+\\end\{aligned\}\
+\\right \\\}\
+(\\#eq:rsm-predictions-tpf-after-maple)\
+\\end\{equation\}\
+\
+\
+\
+\
+\
+\\begin\{equation\}\
+\\left.\
+\\begin\{aligned\}\
+& \\text\{TPF\}\\left (\\zeta , \\mu, \\lambda', \\nu', \\overrightarrow\{f_L\} \\right ) =  \\\\\
+& 1 - \\text\{exp\}\\left ( -\\frac\{\\lambda'\}\{2\} + \\frac\{\\lambda'\}\{2\} \\left ( \\text\{erf\} \\left ( \\frac \{\\zeta\}\{\\sqrt\{2\}\} \\right ) \\right )\\right ) \\times \\\\\
+& \\sum_\{L=1\}^\{L_\{max\}\} f_L \\left ( 1 - \\left ( 1 - \\frac\{\\nu'\}\{2\} + \\frac\{\\nu'\}\{2\} \\text\{erf\} \\left ( \\frac\{\\zeta - \\mu\}\{\\sqrt\{2\}\} \\right ) \\right )^L \\right ) \
+\\end\{aligned\}\
+\\right \\\}\
+(\\#eq:rsm-predictions-tpf-after-maple-varyl)\
+\\end\{equation\}\
+\
+\
+\
+\\begin\{equation\}\
+\\left.\
+\\begin\{aligned\}\
+& \\text\{TPF\}\\left (\\zeta , \\mu, \\lambda', \\nu', \\overrightarrow\{f_L\} \\right ) =  \\\\\
+& 1 - \\text\{exp\}\\left ( -\\lambda' \\left ( \\Phi \\left ( -\\zeta \\right ) \\right )\\right ) \\times \\\\\
+& \\sum_\{L=1\}^\{L_\{max\}\} f_L \\left ( 1 - \\left ( 1 - \\frac\{\\nu'\}\{2\} \\left (1 - \\text\{erf\} \\left ( \\frac\{\\zeta - \\mu\}\{\\sqrt\{2\}\}   \\right )\\right ) \\right )^L \\right ) \
+\\end\{aligned\}\
+\\right \\\}\
+(\\#eq:rsm-predictions-tpf-after-maple-varyl1)\
+\\end\{equation\}\
+\
+\
+\
+\
+\
+I have a large house (3500 cu feet) and about two decades (~2003) ago I bought a humidifier from Sears for about $250. It was large, heavy, hard to fill the two plastic containers (had to do in my bathtub because of the needed vertical clearance and there was water spillage) and noisy. Over the years I got disillusioned with it and eventually I junked it. In the winter months I suffered from static electricity shocks, cracked heels and nose bleeds. Humidity was about 25%. Resorted to nasal saline rinses as a way to alleviate the sinuses - very effective.\
+\
+This device is well-designed. The filling procedure and controls are very intuitive - I did not need to read the manual (which is well written). It can be easily moved as it is very light and compact. The containers can be easily filled in my kitchen sink and there was no water spillage when putting them in the machine. The controls are simple. Total set up time was about 10 minutes. The water levels in the containers are easy to see, so I know when to refill them. It is much less noisy than what I was used to and it is really making a difference.  Its capacity is not enough for the whole house but it did raise the humidity in my home office, which is open to other rooms, to about 35%.\
+\
+I would buy it again.\
+\
+ \
+\
+\
+\
+, which is needed because the derived expressions are needed to derive the ROC-likelihood function, which is used to estimate RSM parameters from ROC data in TBA Chapter 19. The preceding sentence should lead the inquisitive reader to the question: *since the ROC paradigm ignores search, how is it possible to derive parameters of a model of search from the ROC curve?* The answer is that the *shape* of the ROC curve contains information about the RSM parameters. It is fundamentally different from predictions of all conventional ROC models: binormal [@RN1081], contaminated binormal model [@RN1501], bigamma [@RN100] and proper ROC [@RN1499], namely it has a *constrained end-point property*, while all other models predict that the *end-point*, namely the uppermost non-trivial point on the ROC, reached at infinitely low reporting threshold, is (1,1), while the RSM predicts it does not reach (1,1). The nature of search is such that the limiting end-point is constrained to be below and to the left of (1,1). This key difference, allows one to estimate search parameters from ROC data. \
+\
+; if classified as a NL it would not be marked (in the mind of the observer every mark is a potential LL, albeit at different confidence levels)\
+\
+This is because $\\lambda'$ and $\\nu'$ determine the probability that a case has one or more marks.\
+\
+See further elaboration of this point, in particular why guessing to operate along the dashed line, is not an option, in TBA \'a717.12.1.\
+\
+#' @param zeta1 Array, the lowest reporting threshold; if missing the default \
+#'    is -3. [Used to demonstrate continuity of the slope of the ROC at the \
+#'    end point; TBA Online Appendix 17.H.3] \
+\
+\
+```\{r, attr.source = ".numberLines", echo=FALSE\}\
+wafroc <- PlotRsmOperatingCharacteristics(\
+     c(2,2),\
+     lambdaArr[c(1,1)],\
+     c(1,1),\
+     c(-Inf, 1),\
+     lesDistr = c(0.5, 0.5),\
+     relWeights = c(0.5, 0.5),\
+     OpChType = "wAFROC",\
+     legendPosition = "null"\
+)$wAFROCPlot\
+```\
+\
+\
+\
+\
+```\{r rsm-predictions-wafroc-zeta1, fig.cap="wAFROC curves for two values of $\\\\zeta_1$: both curves correspond to $\\\\mu = 2$, $\\\\nu = 1$ and $\\\\lambda = 1$. The optimal reporting theshold $\\\\zeta_1$ is determined by the selected FOM. The red curve corresponds to FOM = wAFROC-AUC and the blue curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC.  The two wAFROC-AUCs are 0.880 and 0.856, respectively.", fig.show='hold', echo=FALSE\}\
+grid.arrange(wafroc)\
+```\
+\
+\
+```\{r UtilAnalyticalAucsRSM, echo=TRUE\}\
+mu <- 1; lambda <- 1; nu <- 1\
+lesDistr <- c(0.5, 0.3, 0.2) # imples L_max = 3\
+aucs <- UtilAnalyticalAucsRSM(mu = mu, \
+                              lambda = lambda, \
+                              nu = nu, \
+                              lesDistr = lesDistr, \
+                              relWeights = 0)\
+cat("mu = ", mu, \
+", lambda = ", lambda, \
+", nu = ", nu,  \
+", AUC ROC = ", aucs$aucROC, \
+", AUC AFROC = ", aucs$aucAFROC, "\\n",\
+", AUC wAFROC = ", aucs$aucwAFROC, "\\n")\
+```\
+\
+\
+This function was used with varying RSM parameters to generate the following Table. \
+\
+\
+```\{r doOneRow, echo=FALSE\}\
+doOneRow <- function(mu, lambda, nu, lesDistr) \{\
+  dig <- 4\
+  L_max <- which(lesDistr == 1)\
+  aucs <- UtilAnalyticalAucsRSM(mu = mu, lambda = lambda, nu = nu, lesDistr = lesDistr, relWeights = 0)\
+  ret <- c(format(mu, digits = dig), \
+           format(lambda, digits = dig), \
+           format(nu, digits = dig), \
+           format(L_max, digits = dig),\
+           format(aucs$aucROC, digits = dig), \
+           format(aucs$aucAFROC, digits = dig))\
+  return(ret)\
+\}\
+```\
+\
+\
+\
+```\{r allCellsSigTest, echo=FALSE\}\
+allCells <- array("", dim = c(11,6))\
+\
+allCells[1,] <- doOneRow (1, 1, 1, c(1,0,0))  \
+allCells[2,] <- doOneRow (2, 1, 1, c(1,0,0))   \
+allCells[3,] <- doOneRow (3, 1, 1, c(1,0,0)) \
+\
+allCells[4,] <- doOneRow (1, 0.5, 1, c(1,0,0))  \
+allCells[5,] <- doOneRow (1, 0.1, 1, c(1,0,0))  \
+\
+allCells[6,] <- doOneRow (1, 1, 2, c(1,0,0))  \
+allCells[7,] <- doOneRow (1, 1, 0.5, c(1,0,0))  \
+allCells[8,] <- doOneRow (1, 1, 0.25, c(1,0,0))  \
+\
+allCells[9,] <- doOneRow (1, 1, 1, c(0,1,0))  \
+allCells[10,] <- doOneRow (1, 1, 1, c(0,0,1))  \
+allCells[11,] <- doOneRow (3, 1, 1, c(0,0,1))  \
+\
+```\
+\
+\
+\
+```\{r rsm-predictions-table1, echo=FALSE\}\
+cells = array(dim = c(11,6))\
+\
+for (j in 1:11) cells[j,]  <- allCells[j,]\
+\
+df <- as.data.frame(cells, stringsAsFactors = FALSE)\
+colnames(df) <-c("$\\\\mu$", "$\\\\lambda$", "$\\\\nu$", "$L_\{max\}$", "AUC-ROC", "AUC-AFROC")\
+# escape = FALSE is critical in getting Math right\
+kbl(df, caption = "The last two columns list the RSM-predicted AUCs under the ROC and AFROC, respectively. The corresponding RSM parameters are listed in the first four columns.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1, 2, 3, 4), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") \
+```\
+\
+\
+Examination of Table \\@ref(tab:rsm-predictions-table1) reveals the following points.\
+\
+* Both AUCs are increasing functions of $\\mu$. Increasing perceptual signal-to-noise-ratio always leads to improved performance: for background on this important dependence the reader is referred to the "solar analogy" in \\@ref(froc-paradigm-solar-analogy). Increasing $\\mu$ increases the separation between the two pdfs defining the ROC curve, which increases AUC. Furthermore, the number of NLs decreases because $\\lambda' = \\lambda / \\mu$ decreases, which increases performance as fewer NLs are generated. Finally, $\\nu'$ increases and approaches unity, which leads to more LL events and increased performance. *Because all three effects reinforce each other, a change in $\\mu$ results in a large effect on performance.* This is evident from the first three rows of Table \\@ref(tab:rsm-predictions-table1). \
+\
+* Both AUCs are increasing functions of *decreasing* $\\lambda$. This is because decreasing $\\lambda$ results in fewer latent NLs per case and fewer NLs are marked. This is a relatively weak effect.\
+	\
+* Both AUCs are increasing functions of $\\nu$. Increasing $\\nu$ results in more LLs being marked, which increases performance. This is a relatively strong effect. \
+\
+* ROC AUC increases with $L_\{max\}$, since with more lesions per case, there is increased probability that that at least one of them will be found, i.e., will be a latent LL, and therefore more likely to be marked, and the diseased distribution pdf moves to the right. However, AFROC-AUC is independent of $L_\{max\}$, because the y-axis is LLF (not TPF!) which is independent of the number of lesions in the dataset or their distribution. \
+\
+* ROC AUC values are constrained to the range 0.5 to 1 while the AFROC AUC values are constrained to the larger range 0 to 1. The reader should confirm that the difference in ROC AUC between any two rows in Table \\@ref(tab:rsm-predictions-table1) is smaller than the corresponding difference in AFROC AUC: i.e., the AFROC effect-size is always larger than the corresponding ROC effect-size, an important consideration when doing sample size estimates.\
+\
+\
+}

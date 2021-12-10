@@ -1,0 +1,4 @@
+Only one operaing point on AFROC curve for treatment Abn:Cutoff 20   0.0% FP (in negatives) and reader R1.: DataFile Error
+An operating point is defined by a pair of counts in FP and LL bins.: DataFile Error
+Must have at least 5 counts in each bin.: DataFile Error
+Cannot proceed.: DataFile Error

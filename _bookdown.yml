@@ -1,0 +1,34 @@
+book_filename: "RJafroc Froc Book"
+chapter_name: "Chapter "
+repo: https://github.com/dpc10ster/RJafrocFrocBook
+output_dir: docs
+delete_merged_file: TRUE
+rmd_files: [
+  "index.Rmd", 
+  "12-froc.Rmd",
+  "15-visual-search.Rmd",
+  "16-rsm.Rmd",
+  "17a-rsm-predictions.Rmd",
+  "13a-froc-empirical1.Rmd",
+  "13b-froc-empirical2.Rmd",
+  "13c-froc-vs-wafroc.Rmd",
+  "14-froc-meanings-foms-ocs.Rmd",
+  "17b-rsm-search-classification.Rmd",
+  "17d-rsm-goodbye-froc.Rmd",
+  "19a-rsm-fitting.Rmd",
+  "19b-rsm-3-fits.Rmd",
+  "20-standalone-cad.Rmd",
+  "21-optim-op-point.Rmd",
+  "99-references.Rmd",
+  "83-classification-task.Rmd", 
+  "84-split-plot.Rmd",
+]
+clean: [packages.bib, myRefs.bbl]
+new_session: yes
+language:
+  label:
+    fig: "FIGURE "
+    tab: "TABLE "
+  ui:
+    edit: "Edit"
+    chapter_name: "Chapter "
