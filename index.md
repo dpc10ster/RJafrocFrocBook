@@ -1,5 +1,5 @@
 --- 
-title: "The RJafroc Book"
+title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
 date: "2021-12-10"
 site: bookdown::bookdown_site
