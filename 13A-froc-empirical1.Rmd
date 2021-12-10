@@ -55,7 +55,7 @@ To distinguish between suspicious regions that were considered for marking and r
 
 ### Binning rule
 
-Recall from Section \@ref(binary-task-model-z-sample-model) that ROC data modeling requires the existence of a *case-dependent* decision variable, or z-sample $z$, and case-independent decision thresholds $\zeta_r$, where $r = 0, 1, ..., R_{ROC}-1$ and $R_{ROC}$ is the number of ROC study bins, and the rule that if $\zeta_r \leq z < \zeta_{r+1}$ the case is rated $r + 1$. Dummy cutoffs are defined as $\zeta_0 = -\infty$ and $\zeta_{R_{ROC}} = \infty$. The z-sample applies to the whole case. To summarize:
+Recall from Section TBA (binary-task-model-z-sample-model) that ROC data modeling requires the existence of a *case-dependent* decision variable, or z-sample $z$, and case-independent decision thresholds $\zeta_r$, where $r = 0, 1, ..., R_{ROC}-1$ and $R_{ROC}$ is the number of ROC study bins, and the rule that if $\zeta_r \leq z < \zeta_{r+1}$ the case is rated $r + 1$. Dummy cutoffs are defined as $\zeta_0 = -\infty$ and $\zeta_{R_{ROC}} = \infty$. The z-sample applies to the whole case. To summarize:
 
 ```{=tex}
 \begin{equation}

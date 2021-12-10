@@ -315,7 +315,7 @@ These equations have exactly the same structure as [@swensson1996unified] Eqns. 
 
 ## ROC decision variable pdfs {#rsm-pred-roc-curve-pdfs}
 
-In \@ref(binormal-model-pdf-curves-appendix-1) the pdf functions were derived for non-diseased and diseased cases for the unequal variance binormal ROC model. The procedure was to take the derivative of the appropriate cumulative distribution function (CDF) with respect to $\zeta$. An identical procedure is used for the RSM. 
+In TBA (binormal-model-pdf-curves-appendix-1) the pdf functions were derived for non-diseased and diseased cases for the unequal variance binormal ROC model. The procedure was to take the derivative of the appropriate cumulative distribution function (CDF) with respect to $\zeta$. An identical procedure is used for the RSM. 
 
 The CDF for non-diseased cases is the complement of FPF. The pdf for non-diseased cases is given by:	
 
