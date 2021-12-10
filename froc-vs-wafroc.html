@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 FROC vs. wAFROC | The RJafroc Book</title>
+  <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 FROC vs. wAFROC | The RJafroc Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Artificial intelligence and observer performance book based on RJafroc." />
+  <meta name="github-repo" content="dpc10ster/RJafrocFrocBook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 FROC vs. wAFROC | The RJafroc Book" />
+  
+  <meta name="twitter:description" content="Artificial intelligence and observer performance book based on RJafroc." />
+  
+
+<meta name="author" content="Dev P. Chakraborty, PhD" />
+
+
+<meta name="date" content="2021-12-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="froc-empirical-examples.html"/>
+<link rel="next" href="froc-meanings.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">RJafroc documentation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tba-how-much-finished"><i class="fa fa-check"></i>TBA How much finished</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-pdf-file-of-the-book"><i class="fa fa-check"></i>The pdf file of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-html-version-of-the-book"><i class="fa fa-check"></i>The html version of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#a-note-on-the-online-distribution-mechanism-of-the-book"><i class="fa fa-check"></i>A note on the online distribution mechanism of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributing-to-this-book"><i class="fa fa-check"></i>Contributing to this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todos-tba"><i class="fa fa-check"></i>ToDos TBA</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids"><i class="fa fa-check"></i>Coding aids</a></li>
+</ul></li>
+<li class="part"><span><b>FROC paradigm</b></span></li>
+<li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm</a><ul>
+<li class="chapter" data-level="1.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-how-much-finished"><i class="fa fa-check"></i><b>1.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="1.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>1.2</b> Introduction</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#chapter-outline"><i class="fa fa-check"></i><b>1.2.1</b> Chapter outline</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#location-specific-paradigms"><i class="fa fa-check"></i><b>1.3</b> Location specific paradigms</a></li>
+<li class="chapter" data-level="1.4" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-vis-search"><i class="fa fa-check"></i><b>1.4</b> Visual search</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-scoring-the-data"><i class="fa fa-check"></i><b>1.4.1</b> Proximity criterion and scoring the data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#multiple-marks-in-the-same-vicinity"><i class="fa fa-check"></i><b>1.4.2</b> Multiple marks in the same vicinity</a></li>
+<li class="chapter" data-level="1.4.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#historical-context"><i class="fa fa-check"></i><b>1.4.3</b> Historical context</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>1.5</b> The free-response receiver operating characteristic (FROC) plot</a></li>
+<li class="chapter" data-level="1.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>1.6</b> The “solar” analogy</a></li>
+<li class="chapter" data-level="1.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>1.7</b> Discussion and suggestions</a></li>
+<li class="chapter" data-level="1.8" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-references"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>2</b> Visual Search</a><ul>
+<li class="chapter" data-level="2.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-how-much-finished"><i class="fa fa-check"></i><b>2.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="2.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-intro"><i class="fa fa-check"></i><b>2.2</b> Introduction</a></li>
+<li class="chapter" data-level="2.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-grouping-labeling-rois"><i class="fa fa-check"></i><b>2.3</b> Grouping and labeling ROIs</a></li>
+<li class="chapter" data-level="2.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>2.4</b> Recognition vs. detection</a></li>
+<li class="chapter" data-level="2.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>2.5</b> TBA Search vs. classification</a></li>
+<li class="chapter" data-level="2.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>2.6</b> The Kundel - Nodine search model</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>2.6.1</b> Glancing / Global impression</a></li>
+<li class="chapter" data-level="2.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>2.6.2</b> Scanning / Local feature analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="visual-search.html"><a href="visual-search.html#visual-search-Kundel-Nodine-model-CAD"><i class="fa fa-check"></i><b>2.7</b> Kundel-Nodine model and CAD algorithms</a></li>
+<li class="chapter" data-level="2.8" data-path="visual-search.html"><a href="visual-search.html#visual-search-discussion-summary"><i class="fa fa-check"></i><b>2.8</b> TBA Discussion / Summary</a></li>
+<li class="chapter" data-level="2.9" data-path="visual-search.html"><a href="visual-search.html#visual-search-references"><i class="fa fa-check"></i><b>2.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>3</b> The radiological search model</a><ul>
+<li class="chapter" data-level="3.1" data-path="rsm.html"><a href="rsm.html#rsm-how-much-finished"><i class="fa fa-check"></i><b>3.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="3.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
+<li class="chapter" data-level="3.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>3.3</b> The radiological search model</a></li>
+<li class="chapter" data-level="3.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>3.4</b> RSM assumptions</a></li>
+<li class="chapter" data-level="3.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-interpretations"><i class="fa fa-check"></i><b>3.5</b> Physical interpretation of RSM parameters</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>3.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
+<li class="chapter" data-level="3.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-prime-parameter"><i class="fa fa-check"></i><b>3.5.2</b> The <span class="math inline">\(\lambda&#39;\)</span> parameter</a></li>
+<li class="chapter" data-level="3.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>3.5.3</b> The <span class="math inline">\(\nu&#39;\)</span> parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="rsm.html"><a href="rsm.html#rsm-re-parameterization"><i class="fa fa-check"></i><b>3.6</b> Model re-parameterization</a></li>
+<li class="chapter" data-level="3.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>3.7</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="rsm.html"><a href="rsm.html#rsm-references"><i class="fa fa-check"></i><b>3.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rsm-pred.html"><a href="rsm-pred.html"><i class="fa fa-check"></i><b>4</b> ROC curve implications of the RSM</a><ul>
+<li class="chapter" data-level="4.1" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-how-much-finished"><i class="fa fa-check"></i><b>4.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="4.2" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-intro"><i class="fa fa-check"></i><b>4.2</b> TBA Introduction</a></li>
+<li class="chapter" data-level="4.3" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-inferred-roc"><i class="fa fa-check"></i><b>4.3</b> Inferred ROC ratings</a></li>
+<li class="chapter" data-level="4.4" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-end-point"><i class="fa fa-check"></i><b>4.4</b> End-point of the ROC</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-constrained-end-point-abscissa"><i class="fa fa-check"></i><b>4.4.1</b> The abscissa of the ROC end-point</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-constrained-end-point-ordinate"><i class="fa fa-check"></i><b>4.4.2</b> The ordinate of the ROC end-point</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-end-point-variable-number-lesions"><i class="fa fa-check"></i><b>4.4.3</b> Variable number of lesions per case</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve"><i class="fa fa-check"></i><b>4.5</b> ROC curve</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-fpf"><i class="fa fa-check"></i><b>4.5.1</b> Derivation of FPF</a></li>
+<li class="chapter" data-level="4.5.2" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-tpf"><i class="fa fa-check"></i><b>4.5.2</b> Derivation of TPF</a></li>
+<li class="chapter" data-level="4.5.3" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-tpf-varying-lesions"><i class="fa fa-check"></i><b>4.5.3</b> Variable number of lesions per case</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-proper"><i class="fa fa-check"></i><b>4.6</b> Proper ROC curve</a></li>
+<li class="chapter" data-level="4.7" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-pdfs"><i class="fa fa-check"></i><b>4.7</b> ROC decision variable pdfs</a></li>
+<li class="chapter" data-level="4.8" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-auc"><i class="fa fa-check"></i><b>4.8</b> ROC AUC</a></li>
+<li class="chapter" data-level="4.9" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-aucs-zeta1"><i class="fa fa-check"></i><b>4.9</b> <span class="math inline">\(\zeta_1\)</span> dependence of ROC AUC</a></li>
+<li class="chapter" data-level="4.10" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curves"><i class="fa fa-check"></i><b>4.10</b> Example ROC curves</a></li>
+<li class="chapter" data-level="4.11" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-pdf-curves"><i class="fa fa-check"></i><b>4.11</b> Example RSM pdf curves</a></li>
+<li class="chapter" data-level="4.12" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-discussion-summary"><i class="fa fa-check"></i><b>4.12</b> TBA Discussion / Summary</a><ul>
+<li class="chapter" data-level="4.12.1" data-path="rsm-pred.html"><a href="rsm-pred.html#the-wagner-review"><i class="fa fa-check"></i><b>4.12.1</b> The Wagner review</a></li>
+</ul></li>
+<li class="chapter" data-level="4.13" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-appendix1"><i class="fa fa-check"></i><b>4.13</b> Appendix 1: Proof of continuity of slope at the end-point</a></li>
+<li class="chapter" data-level="4.14" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-appendix2"><i class="fa fa-check"></i><b>4.14</b> Appendix 2: Numerical illustration of continuity</a></li>
+<li class="chapter" data-level="4.15" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-references"><i class="fa fa-check"></i><b>4.15</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="froc-empirical.html"><a href="froc-empirical.html"><i class="fa fa-check"></i><b>5</b> Empirical plots</a><ul>
+<li class="chapter" data-level="5.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-how-much-finished"><i class="fa fa-check"></i><b>5.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="5.2" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-intro"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
+<li class="chapter" data-level="5.3" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-mark-rating-pairs"><i class="fa fa-check"></i><b>5.3</b> Mark rating pairs</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="froc-empirical.html"><a href="froc-empirical.html#latent-vs.-actual-marks"><i class="fa fa-check"></i><b>5.3.1</b> Latent vs. actual marks</a></li>
+<li class="chapter" data-level="5.3.2" data-path="froc-empirical.html"><a href="froc-empirical.html#binning-rule"><i class="fa fa-check"></i><b>5.3.2</b> Binning rule</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-notation"><i class="fa fa-check"></i><b>5.4</b> FROC notation</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="froc-empirical.html"><a href="froc-empirical.html#comments-on-table-reftabfroc-empirical-notation"><i class="fa fa-check"></i><b>5.4.1</b> Comments on Table @ref(tab:froc-empirical-notation)</a></li>
+<li class="chapter" data-level="5.4.2" data-path="froc-empirical.html"><a href="froc-empirical.html#discussion-cases-with-zero-latent-nl-marks"><i class="fa fa-check"></i><b>5.4.2</b> Discussion: cases with zero latent NL marks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-froc-plot"><i class="fa fa-check"></i><b>5.5</b> The empirical FROC</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-FROC"><i class="fa fa-check"></i><b>5.5.1</b> Definition</a></li>
+<li class="chapter" data-level="5.5.2" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-origin-trivial-point"><i class="fa fa-check"></i><b>5.5.2</b> The origin, a trivial point</a></li>
+<li class="chapter" data-level="5.5.3" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-end-point"><i class="fa fa-check"></i><b>5.5.3</b> The observed end-point and its semi-constrained property</a></li>
+<li class="chapter" data-level="5.5.4" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-froc-plot-futility-extrapolation"><i class="fa fa-check"></i><b>5.5.4</b> Futility of extrapolation outside the observed end-point</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-ROC"><i class="fa fa-check"></i><b>5.6</b> The inferred ROC plot</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="froc-empirical.html"><a href="froc-empirical.html#inferred-roc-rating"><i class="fa fa-check"></i><b>5.6.1</b> Inferred-ROC rating</a></li>
+<li class="chapter" data-level="5.6.2" data-path="froc-empirical.html"><a href="froc-empirical.html#inferred-fpf"><i class="fa fa-check"></i><b>5.6.2</b> Inferred FPF</a></li>
+<li class="chapter" data-level="5.6.3" data-path="froc-empirical.html"><a href="froc-empirical.html#inferred-tpf"><i class="fa fa-check"></i><b>5.6.3</b> Inferred TPF</a></li>
+<li class="chapter" data-level="5.6.4" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-ROC"><i class="fa fa-check"></i><b>5.6.4</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-AFROC"><i class="fa fa-check"></i><b>5.7</b> The alternative FROC (AFROC) plot</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-AFROC"><i class="fa fa-check"></i><b>5.7.1</b> Definition</a></li>
+<li class="chapter" data-level="5.7.2" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-AFROC-constrained"><i class="fa fa-check"></i><b>5.7.2</b> The constrained observed end-point of the AFROC</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-wAFROC"><i class="fa fa-check"></i><b>5.8</b> The weighted-AFROC (wAFROC) plot</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-wAFROC"><i class="fa fa-check"></i><b>5.8.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-AFROC1"><i class="fa fa-check"></i><b>5.9</b> The AFROC1 plot</a><ul>
+<li class="chapter" data-level="5.9.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-AFROC1"><i class="fa fa-check"></i><b>5.9.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-wAFROC1"><i class="fa fa-check"></i><b>5.10</b> The weighted-AFROC1 (wAFROC1) plot</a><ul>
+<li class="chapter" data-level="5.10.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-wAFROC1"><i class="fa fa-check"></i><b>5.10.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-EFROC"><i class="fa fa-check"></i><b>5.11</b> The EFROC plot</a><ul>
+<li class="chapter" data-level="5.11.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-EFROC"><i class="fa fa-check"></i><b>5.11.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.12" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-Discussion"><i class="fa fa-check"></i><b>5.12</b> Discussion</a></li>
+<li class="chapter" data-level="5.13" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-references"><i class="fa fa-check"></i><b>5.13</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html"><i class="fa fa-check"></i><b>6</b> Empirical plot examples</a><ul>
+<li class="chapter" data-level="6.1" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="6.2" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-intro"><i class="fa fa-check"></i><b>6.2</b> Introduction</a></li>
+<li class="chapter" data-level="6.3" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#raw-frocafrocroc-plots"><i class="fa fa-check"></i><b>6.3</b> Raw FROC/AFROC/ROC plots</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-raw-plots-code1"><i class="fa fa-check"></i><b>6.3.1</b> Code for raw plots</a></li>
+<li class="chapter" data-level="6.3.2" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#explanation-of-the-code"><i class="fa fa-check"></i><b>6.3.2</b> Explanation of the code</a></li>
+<li class="chapter" data-level="6.3.3" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#key-differences-from-the-roc-paradigm"><i class="fa fa-check"></i><b>6.3.3</b> Key differences from the ROC paradigm:</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#the-chance-level-froc-and-afroc"><i class="fa fa-check"></i><b>6.4</b> The chance level FROC and AFROC</a></li>
+<li class="chapter" data-level="6.5" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#location-level-true-negatives"><i class="fa fa-check"></i><b>6.5</b> Location-level “true-negatives”</a></li>
+<li class="chapter" data-level="6.6" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#binned-frocafrocroc-plots"><i class="fa fa-check"></i><b>6.6</b> Binned FROC/AFROC/ROC plots</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#binned-plots-code1"><i class="fa fa-check"></i><b>6.6.1</b> Code for binned plots</a></li>
+<li class="chapter" data-level="6.6.2" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#effect-of-seed-on-binned-plots"><i class="fa fa-check"></i><b>6.6.2</b> Effect of <code>seed</code> on binned plots</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-str-binned-data"><i class="fa fa-check"></i><b>6.7</b> Structure of the binned data</a></li>
+<li class="chapter" data-level="6.8" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-summary"><i class="fa fa-check"></i><b>6.8</b> Summary</a></li>
+<li class="chapter" data-level="6.9" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-Discussion"><i class="fa fa-check"></i><b>6.9</b> Discussion</a></li>
+<li class="chapter" data-level="6.10" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-references"><i class="fa fa-check"></i><b>6.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html"><i class="fa fa-check"></i><b>7</b> FROC vs. wAFROC</a><ul>
+<li class="chapter" data-level="7.1" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="7.2" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-intro"><i class="fa fa-check"></i><b>7.2</b> Introduction</a></li>
+<li class="chapter" data-level="7.3" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs.-wafroc"><i class="fa fa-check"></i><b>7.3</b> FROC vs. wAFROC</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#moderate-difference-in-performance"><i class="fa fa-check"></i><b>7.3.1</b> Moderate difference in performance</a></li>
+<li class="chapter" data-level="7.3.2" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#large-difference-in-performance"><i class="fa fa-check"></i><b>7.3.2</b> Large difference in performance</a></li>
+<li class="chapter" data-level="7.3.3" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#small-difference-in-performance-and-identical-thresholds"><i class="fa fa-check"></i><b>7.3.3</b> Small difference in performance and identical thresholds</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#summary-of-simulations"><i class="fa fa-check"></i><b>7.4</b> Summary of simulations</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#summary-of-r1-simulations"><i class="fa fa-check"></i><b>7.4.1</b> Summary of R1 simulations</a></li>
+<li class="chapter" data-level="7.4.2" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#summary-of-r2-simulations"><i class="fa fa-check"></i><b>7.4.2</b> Summary of R2 simulations</a></li>
+<li class="chapter" data-level="7.4.3" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-comments"><i class="fa fa-check"></i><b>7.4.3</b> Comments</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-effect-sizes"><i class="fa fa-check"></i><b>7.5</b> Effect size comparison</a></li>
+<li class="chapter" data-level="7.6" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-peformance-depends-on-zeta1"><i class="fa fa-check"></i><b>7.6</b> Performance depends on <span class="math inline">\(\zeta_1\)</span></a></li>
+<li class="chapter" data-level="7.7" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-Discussion"><i class="fa fa-check"></i><b>7.7</b> Discussion</a></li>
+<li class="chapter" data-level="7.8" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-references"><i class="fa fa-check"></i><b>7.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="froc-meanings.html"><a href="froc-meanings.html"><i class="fa fa-check"></i><b>8</b> Meanings of FROC figures of merit</a><ul>
+<li class="chapter" data-level="8.1" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="8.2" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-intro"><i class="fa fa-check"></i><b>8.2</b> Introduction</a></li>
+<li class="chapter" data-level="8.3" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-afroc"><i class="fa fa-check"></i><b>8.3</b> Empirical AFROC FOM-statistic</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="froc-meanings.html"><a href="froc-meanings.html#upper-limit-for-afroc-fom-statistic"><i class="fa fa-check"></i><b>8.3.1</b> Upper limit for AFROC FOM-statistic</a></li>
+<li class="chapter" data-level="8.3.2" data-path="froc-meanings.html"><a href="froc-meanings.html#range-of-afroc-fom-statistic"><i class="fa fa-check"></i><b>8.3.2</b> Range of AFROC FOM-statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-wafroc"><i class="fa fa-check"></i><b>8.4</b> Empirical weighted-AFROC FOM-statistic</a></li>
+<li class="chapter" data-level="8.5" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-two-theorems"><i class="fa fa-check"></i><b>8.5</b> Two Theorems</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-two-theorems-1"><i class="fa fa-check"></i><b>8.5.1</b> Theorem 1</a></li>
+<li class="chapter" data-level="8.5.2" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-two-theorems-2"><i class="fa fa-check"></i><b>8.5.2</b> Theorem 2</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-numerical-illustrations"><i class="fa fa-check"></i><b>8.6</b> Numerical illustrations</a></li>
+<li class="chapter" data-level="8.7" data-path="froc-meanings.html"><a href="froc-meanings.html#summary-tables-of-ratings"><i class="fa fa-check"></i><b>8.7</b> Summary tables of ratings</a></li>
+<li class="chapter" data-level="8.8" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-AFROC-plot-first-principles"><i class="fa fa-check"></i><b>8.8</b> AFROC plot from first principles</a></li>
+<li class="chapter" data-level="8.9" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-wAFROC-plot-first-principles"><i class="fa fa-check"></i><b>8.9</b> wAFROC plot from first principles</a></li>
+<li class="chapter" data-level="8.10" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-physical-interpretions"><i class="fa fa-check"></i><b>8.10</b> Physical interpretations</a><ul>
+<li class="chapter" data-level="8.10.1" data-path="froc-meanings.html"><a href="froc-meanings.html#physical-interpretation-of-area-under-afroc"><i class="fa fa-check"></i><b>8.10.1</b> Physical interpretation of area under AFROC</a></li>
+<li class="chapter" data-level="8.10.2" data-path="froc-meanings.html"><a href="froc-meanings.html#physical-interpretation-of-area-under-wafroc"><i class="fa fa-check"></i><b>8.10.2</b> Physical interpretation of area under wAFROC</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-Discussion"><i class="fa fa-check"></i><b>8.11</b> Discussion</a></li>
+<li class="chapter" data-level="8.12" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-references"><i class="fa fa-check"></i><b>8.12</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rsm-sc.html"><a href="rsm-sc.html"><i class="fa fa-check"></i><b>9</b> Search and classification performances</a><ul>
+<li class="chapter" data-level="9.1" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="9.2" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-intro"><i class="fa fa-check"></i><b>9.2</b> Introduction</a></li>
+<li class="chapter" data-level="9.3" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-end-point"><i class="fa fa-check"></i><b>9.3</b> Location of ROC end-point</a></li>
+<li class="chapter" data-level="9.4" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-quantifying"><i class="fa fa-check"></i><b>9.4</b> Quantifying search performance</a></li>
+<li class="chapter" data-level="9.5" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-performance"><i class="fa fa-check"></i><b>9.5</b> Quantifying lesion-classification performance</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-search-classification-2afc-lke"><i class="fa fa-check"></i><b>9.5.1</b> Lesion-classification performance and the 2AFC LKE task</a></li>
+<li class="chapter" data-level="9.5.2" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-search-classification-significance"><i class="fa fa-check"></i><b>9.5.2</b> Significance of measuring search and lesion-classification performance</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-discussion-summary"><i class="fa fa-check"></i><b>9.6</b> Discussion / Summary</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="rsm-sc.html"><a href="rsm-sc.html#the-wagner-review-1"><i class="fa fa-check"></i><b>9.6.1</b> The Wagner review</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-references"><i class="fa fa-check"></i><b>9.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html"><i class="fa fa-check"></i><b>10</b> The FROC should not be used to measure performance</a><ul>
+<li class="chapter" data-level="10.1" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="10.2" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-intro"><i class="fa fa-check"></i><b>10.2</b> Introduction</a></li>
+<li class="chapter" data-level="10.3" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-froc-poor"><i class="fa fa-check"></i><b>10.3</b> The FROC curve is a poor descriptor of search performance</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#clinically-relevant-portion-of-an-operating-characteristic-rsm-goodbye-froc-clinically-relevant"><i class="fa fa-check"></i><b>10.3.1</b> Clinically relevant portion of an operating characteristic #rsm-goodbye-froc-clinically-relevant}</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-discussion-summary"><i class="fa fa-check"></i><b>10.4</b> Discussion / Summary</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#the-wagner-review-2"><i class="fa fa-check"></i><b>10.4.1</b> The Wagner review</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-references"><i class="fa fa-check"></i><b>10.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>11</b> RSM fitting</a><ul>
+<li class="chapter" data-level="11.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="11.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-intro"><i class="fa fa-check"></i><b>11.2</b> Introduction</a></li>
+<li class="chapter" data-level="11.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-likelihood"><i class="fa fa-check"></i><b>11.3</b> FROC likelihood function</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-nls"><i class="fa fa-check"></i><b>11.3.1</b> Contribution of NLs</a></li>
+<li class="chapter" data-level="11.3.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-lls"><i class="fa fa-check"></i><b>11.3.2</b> Contribution of LLs</a></li>
+<li class="chapter" data-level="11.3.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-degeneracy"><i class="fa fa-check"></i><b>11.3.3</b> Degeneracy problems</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-idca"><i class="fa fa-check"></i><b>11.4</b> IDCA Likelihood function</a></li>
+<li class="chapter" data-level="11.5" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-roc-likelihood"><i class="fa fa-check"></i><b>11.5</b> ROC Likelihood function</a></li>
+<li class="chapter" data-level="11.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-implementation"><i class="fa fa-check"></i><b>11.6</b> <code>FitRsmROC</code> implementation</a></li>
+<li class="chapter" data-level="11.7" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example"><i class="fa fa-check"></i><b>11.7</b> <code>FitRsmROC</code> usage example</a></li>
+<li class="chapter" data-level="11.8" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>11.8</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="11.9" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-references"><i class="fa fa-check"></i><b>11.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>12</b> Three proper ROC fits</a><ul>
+<li class="chapter" data-level="12.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-how-much-finished"><i class="fa fa-check"></i><b>12.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="12.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-intro"><i class="fa fa-check"></i><b>12.2</b> Introduction</a></li>
+<li class="chapter" data-level="12.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-applications"><i class="fa fa-check"></i><b>12.3</b> Applications</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-two-datasets"><i class="fa fa-check"></i><b>12.3.1</b> Application to two datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-composite-plots"><i class="fa fa-check"></i><b>12.4</b> Displaying composite plots</a></li>
+<li class="chapter" data-level="12.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>12.5</b> Displaying RSM parameters</a></li>
+<li class="chapter" data-level="12.6" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-cbm-parameters"><i class="fa fa-check"></i><b>12.6</b> Displaying CBM parameters</a></li>
+<li class="chapter" data-level="12.7" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-proproc-parameters"><i class="fa fa-check"></i><b>12.7</b> Displaying PROPROC parameters</a></li>
+<li class="chapter" data-level="12.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>12.8</b> Overview of findings</a><ul>
+<li class="chapter" data-level="12.8.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes"><i class="fa fa-check"></i><b>12.8.1</b> Slopes</a></li>
+<li class="chapter" data-level="12.8.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-confidence-intervals"><i class="fa fa-check"></i><b>12.8.2</b> Confidence intervals</a></li>
+<li class="chapter" data-level="12.8.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes-confidence-intervals-summary"><i class="fa fa-check"></i><b>12.8.3</b> Summary of slopes and confidence intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-discussion-summary"><i class="fa fa-check"></i><b>12.9</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="12.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a></li>
+<li class="chapter" data-level="12.11" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-14-datasets"><i class="fa fa-check"></i><b>12.11</b> Datasets</a></li>
+<li class="chapter" data-level="12.12" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-one-dataset-proproc"><i class="fa fa-check"></i><b>12.12</b> Location of PROPROC files</a></li>
+<li class="chapter" data-level="12.13" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results"><i class="fa fa-check"></i><b>12.13</b> Location of pre-analyzed results</a></li>
+<li class="chapter" data-level="12.14" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-representative-plots-van-dyke"><i class="fa fa-check"></i><b>12.14</b> Plots for Van Dyke dataset</a></li>
+<li class="chapter" data-level="12.15" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-references"><i class="fa fa-check"></i><b>12.15</b> References</a></li>
+</ul></li>
+<li class="part"><span><b>CAD</b></span></li>
+<li class="chapter" data-level="13" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>13</b> Standalone CAD vs. Radiologists</a><ul>
+<li class="chapter" data-level="13.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>13.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="13.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-abstract"><i class="fa fa-check"></i><b>13.2</b> Abstract</a></li>
+<li class="chapter" data-level="13.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-ker-words"><i class="fa fa-check"></i><b>13.3</b> Keywords</a></li>
+<li class="chapter" data-level="13.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>13.4</b> Introduction</a></li>
+<li class="chapter" data-level="13.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>13.5</b> Methods</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>13.5.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
+<li class="chapter" data-level="13.5.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>13.5.2</b> The 1T-RRFC analysis model</a></li>
+<li class="chapter" data-level="13.5.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>13.5.3</b> The 2T-RRRC analysis model</a></li>
+<li class="chapter" data-level="13.5.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-1TRRRC-anlaysis"><i class="fa fa-check"></i><b>13.5.4</b> The 1T-RRRC analysis model</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>13.6</b> Software implementation</a></li>
+<li class="chapter" data-level="13.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>13.7</b> Results</a></li>
+<li class="chapter" data-level="13.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>13.8</b> Discussion</a></li>
+<li class="chapter" data-level="13.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix"><i class="fa fa-check"></i><b>13.9</b> Appendix</a><ul>
+<li class="chapter" data-level="13.9.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1-1"><i class="fa fa-check"></i><b>13.9.1</b> Example 1</a></li>
+<li class="chapter" data-level="13.9.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2-1"><i class="fa fa-check"></i><b>13.9.2</b> Example 2</a></li>
+<li class="chapter" data-level="13.9.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>13.9.3</b> Example 3</a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-references"><i class="fa fa-check"></i><b>13.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>14</b> Optimal operating point on FROC</a><ul>
+<li class="chapter" data-level="14.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>14.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="14.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>14.2</b> Introduction</a></li>
+<li class="chapter" data-level="14.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>14.3</b> Methods</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="optim-op-point.html"><a href="optim-op-point.html#functions-to-be-maximized"><i class="fa fa-check"></i><b>14.3.1</b> Functions to be maximized</a></li>
+<li class="chapter" data-level="14.3.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>14.3.2</b> Vary lambda</a></li>
+<li class="chapter" data-level="14.3.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>14.3.3</b> Vary nu</a></li>
+<li class="chapter" data-level="14.3.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>14.3.4</b> Vary mu</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>14.4</b> Using the method</a></li>
+<li class="chapter" data-level="14.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>14.5</b> An application</a></li>
+<li class="chapter" data-level="14.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>14.6</b> Discussion</a></li>
+<li class="chapter" data-level="14.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-references"><i class="fa fa-check"></i><b>14.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>REFERENCES</a></li>
+<li class="chapter" data-level="15" data-path="classification-tasks.html"><a href="classification-tasks.html"><i class="fa fa-check"></i><b>15</b> Localization - classification tasks</a><ul>
+<li class="chapter" data-level="15.1" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-how-much-finished"><i class="fa fa-check"></i><b>15.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="15.2" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-intro"><i class="fa fa-check"></i><b>15.2</b> Introduction</a></li>
+<li class="chapter" data-level="15.3" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-abbreviations"><i class="fa fa-check"></i><b>15.3</b> Abbreviations</a></li>
+<li class="chapter" data-level="15.4" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-basic-idea"><i class="fa fa-check"></i><b>15.4</b> History and basic idea</a></li>
+<li class="chapter" data-level="15.5" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1"><i class="fa fa-check"></i><b>15.5</b> First example, File1.xlsx</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1-truth"><i class="fa fa-check"></i><b>15.5.1</b> <code>Truth</code> sheet</a></li>
+<li class="chapter" data-level="15.5.2" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1-tp"><i class="fa fa-check"></i><b>15.5.2</b> <code>TP</code> sheet</a></li>
+<li class="chapter" data-level="15.5.3" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1-fp"><i class="fa fa-check"></i><b>15.5.3</b> <code>FP</code> sheet</a></li>
+<li class="chapter" data-level="15.5.4" data-path="classification-tasks.html"><a href="classification-tasks.html#the-two-ratings-arrays"><i class="fa fa-check"></i><b>15.5.4</b> The two ratings arrays</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example2"><i class="fa fa-check"></i><b>15.6</b> Second example, File2.xlsx</a></li>
+<li class="chapter" data-level="15.7" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example3"><i class="fa fa-check"></i><b>15.7</b> Third example, File3.xlsx</a></li>
+<li class="chapter" data-level="15.8" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example4"><i class="fa fa-check"></i><b>15.8</b> Fourth example, File4.xlsx</a></li>
+<li class="chapter" data-level="15.9" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example5"><i class="fa fa-check"></i><b>15.9</b> Fifth example, File5.xlsx</a></li>
+<li class="chapter" data-level="15.10" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-precautions"><i class="fa fa-check"></i><b>15.10</b> Precautions</a></li>
+<li class="chapter" data-level="15.11" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-discussion"><i class="fa fa-check"></i><b>15.11</b> Discussion</a></li>
+<li class="chapter" data-level="15.12" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks--references"><i class="fa fa-check"></i><b>15.12</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html"><i class="fa fa-check"></i><b>16</b> Split Plot Study Design</a><ul>
+<li class="chapter" data-level="16.1" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html#SplitPlotChapter-how-much-finished"><i class="fa fa-check"></i><b>16.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="16.2" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html#mean-square-rt"><i class="fa fa-check"></i><b>16.2</b> Mean Square R(T)</a></li>
+<li class="chapter" data-level="16.3" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html#SplitPlotChapter-references"><i class="fa fa-check"></i><b>16.3</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The RJafroc Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="froc-vs-wafroc" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> FROC vs. wAFROC</h1>
+<div id="froc-vs-wafroc-how-much-finished" class="section level2">
+<h2><span class="header-section-number">7.1</span> TBA How much finished</h2>
+<p>50%
+Need to replace simulation values with analytical values</p>
+</div>
+<div id="froc-vs-wafroc-intro" class="section level2">
+<h2><span class="header-section-number">7.2</span> Introduction</h2>
+<p>In the medical imaging context the FROC curve, which was introduced in <span class="citation">(Bunch et al. <a href="#ref-bunch1977free" role="doc-biblioref">1977</a>)</span>, has been widely used for evaluating performance in the free-response paradigm, particularly in CAD algorithm development. Typically CAD researchers report sensitivity at a stated value of false positives per image, i.e., they report a <em>pair</em> of values. (TBA) From basic ROC analysis, see Section <a href="#binary-task-model-beam-study"><strong>??</strong></a>, we know that a scalar FOM is preferable to reporting a pair of values. This chapter recommends adoption of the area under the wAFROC as the preferred scalar figure of merit in lieu of sensitivity / false positives per image pairs. operating characteristic in assessing performance in the free-response paradigm, and details simulation-based studies supporting this recommendation.</p>
+</div>
+<div id="froc-vs.-wafroc" class="section level2">
+<h2><span class="header-section-number">7.3</span> FROC vs. wAFROC</h2>
+<p>Recall, from TBA Section (froc-paradigm-preview-rsm), that the RSM is defined by parameters <span class="math inline">\(\mu, \lambda, \nu\)</span> and <span class="math inline">\(\zeta_1\)</span>. This section examines RSM-predicted TBA analytical FROC, wAFROC and ROC panels for two observers denoted R1 and R2. The former could be an algorithmic observer while the latter could be a radiologist. For typical threshold <span class="math inline">\(\zeta_1\)</span> parameters, three types of situations are considered: R2 has moderately better performance than R1, R2 has much better performance than R1 and R2 has slightly better performance than R1. For each type of simulation pairs of FROC, wAFROC and ROC curves are shown, one for each observer. Finally the simulations and panels are repeated for hypothetical R1 and R2 observers who report all suspicious regions, i.e., <span class="math inline">\(\zeta_1 = -\infty\)</span> for each observer. Both R1 and R2 observers share the same <span class="math inline">\(\lambda, \nu\)</span> parameters, and the only difference between them is in the <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\zeta_1\)</span> parameters.</p>
+<div id="moderate-difference-in-performance" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> Moderate difference in performance</h3>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb55-1"><a href="froc-vs-wafroc.html#cb55-1"></a><span class="kw">source</span>(<span class="kw">here</span>(<span class="st">&quot;R/CH13-CadVsRadPlots/CadVsRadPlots.R&quot;</span>))</span>
+<span id="cb55-2"><a href="froc-vs-wafroc.html#cb55-2"></a></span>
+<span id="cb55-3"><a href="froc-vs-wafroc.html#cb55-3"></a>nu &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb55-4"><a href="froc-vs-wafroc.html#cb55-4"></a>lambda &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb55-5"><a href="froc-vs-wafroc.html#cb55-5"></a>K1 &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb55-6"><a href="froc-vs-wafroc.html#cb55-6"></a>K2 &lt;-<span class="st"> </span><span class="dv">700</span></span>
+<span id="cb55-7"><a href="froc-vs-wafroc.html#cb55-7"></a>mu1 &lt;-<span class="st"> </span><span class="fl">1.0</span></span>
+<span id="cb55-8"><a href="froc-vs-wafroc.html#cb55-8"></a>mu2 &lt;-<span class="st"> </span><span class="fl">1.5</span></span>
+<span id="cb55-9"><a href="froc-vs-wafroc.html#cb55-9"></a>zeta1_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">-1</span></span>
+<span id="cb55-10"><a href="froc-vs-wafroc.html#cb55-10"></a>zeta1_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="fl">1.5</span></span>
+<span id="cb55-11"><a href="froc-vs-wafroc.html#cb55-11"></a>Lmax &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb55-12"><a href="froc-vs-wafroc.html#cb55-12"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb55-13"><a href="froc-vs-wafroc.html#cb55-13"></a></span>
+<span id="cb55-14"><a href="froc-vs-wafroc.html#cb55-14"></a>ret &lt;-<span class="st"> </span><span class="kw">do_one_figure</span> (</span>
+<span id="cb55-15"><a href="froc-vs-wafroc.html#cb55-15"></a>  seed, Lmax, mu1, </span>
+<span id="cb55-16"><a href="froc-vs-wafroc.html#cb55-16"></a>  mu2, lambda, nu, zeta1_<span class="dv">1</span>, zeta1_<span class="dv">2</span>, K1, K2)</span>
+<span id="cb55-17"><a href="froc-vs-wafroc.html#cb55-17"></a></span>
+<span id="cb55-18"><a href="froc-vs-wafroc.html#cb55-18"></a>froc_plot_1A &lt;-<span class="st"> </span>ret<span class="op">$</span>froc_plot_A</span>
+<span id="cb55-19"><a href="froc-vs-wafroc.html#cb55-19"></a>wafroc_plot_1B &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_plot_B</span>
+<span id="cb55-20"><a href="froc-vs-wafroc.html#cb55-20"></a>roc_plot_1C &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_plot_C</span>
+<span id="cb55-21"><a href="froc-vs-wafroc.html#cb55-21"></a>froc_plot_1D &lt;-<span class="st"> </span>ret<span class="op">$</span>froc_plot_D</span>
+<span id="cb55-22"><a href="froc-vs-wafroc.html#cb55-22"></a>wafroc_plot_1E &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_plot_E</span>
+<span id="cb55-23"><a href="froc-vs-wafroc.html#cb55-23"></a>roc_plot_1F &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_plot_F</span>
+<span id="cb55-24"><a href="froc-vs-wafroc.html#cb55-24"></a>wafroc_<span class="dv">1</span>_1B &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">1</span>_B</span>
+<span id="cb55-25"><a href="froc-vs-wafroc.html#cb55-25"></a>wafroc_<span class="dv">2</span>_1B &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">2</span>_B</span>
+<span id="cb55-26"><a href="froc-vs-wafroc.html#cb55-26"></a>roc_<span class="dv">1</span>_1C &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">1</span>_C</span>
+<span id="cb55-27"><a href="froc-vs-wafroc.html#cb55-27"></a>roc_<span class="dv">2</span>_1C &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">2</span>_C</span>
+<span id="cb55-28"><a href="froc-vs-wafroc.html#cb55-28"></a>wafroc_<span class="dv">1</span>_1E &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">1</span>_E</span>
+<span id="cb55-29"><a href="froc-vs-wafroc.html#cb55-29"></a>wafroc_<span class="dv">2</span>_1E &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">2</span>_E</span>
+<span id="cb55-30"><a href="froc-vs-wafroc.html#cb55-30"></a>roc_<span class="dv">1</span>_1F &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">1</span>_F</span>
+<span id="cb55-31"><a href="froc-vs-wafroc.html#cb55-31"></a>roc_<span class="dv">2</span>_1F &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">2</span>_F</span></code></pre></div>
+<p>The <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> parameters are defined at lines 3 and 4 of the preceding code: <span class="math inline">\(\lambda = \nu = 1\)</span>. The number of simulated cases is defined, lines 5-6, by <span class="math inline">\(K_1 = 500\)</span> and <span class="math inline">\(K_2 = 700\)</span>. The simulated R1 observer <span class="math inline">\(\mu\)</span> parameter is defined at line 7 by <span class="math inline">\(\mu_{1} = 1\)</span> and that of the simulated R2 observer is defined at line 8 by <span class="math inline">\(\mu_{2} = 1.5\)</span>. Based on these choices one expect R2 to be moderately better than R1. The corresponding threshold parameters are (lines 9 -10) <span class="math inline">\(\zeta_{1} = -1\)</span> for R1 and <span class="math inline">\(\zeta_{1} = 1.5\)</span> for R2. The maximum number of lesions per case is defined at line 11 by <code>Lmax</code> = 2. The actual number of lesions per case is determined determined by random sampling within the helper function <code>do_one_figure()</code> called at lines 14-16. This function returns a large list <code>ret</code>, whose contents are as follows:</p>
+<ul>
+<li><code>ret$froc_plot_A</code>: a pair of FROC panels for the thresholds specified above, a red panel labeled “R: 1” corresponding to R1 and a blue panel labeled “R: 2” corresponding to R2. These are shown in panel A.</li>
+<li><code>ret$wafroc_plot_B</code>: a pair of wAFROC panels, similarly labeled. These are shown in panel B.</li>
+<li><code>ret$roc_plot_C</code>: a pair of ROC panels, similarly labeled. These are shown in panel C.</li>
+<li><code>ret$froc_plot_D</code>: a pair of FROC panels for the both thresholds at <span class="math inline">\(-\infty\)</span>. These are shown in panel D.</li>
+<li><code>ret$froc_plot_E</code>: a pair of wAFROC panels for the both thresholds at <span class="math inline">\(-\infty\)</span>. These are shown in panel E.</li>
+<li><code>ret$froc_plot_F</code>: a pair of ROC panels for the both thresholds at <span class="math inline">\(-\infty\)</span>. These are shown in panel F.</li>
+<li><code>ret$wafroc_1_B</code>: the wAFROC AUC for R1, i.e., the area under the curve labeled “R: 1” in panel B.</li>
+<li><code>ret$wafroc_2_B</code>: the wAFROC AUC for R2, i.e., the area under the curve labeled “R: 2” in panel B.</li>
+<li><code>ret$roc_1_C</code>: the ROC AUC for R1, i.e., the area under the curve labeled “R: 1” in panel C.</li>
+<li><code>ret$roc_2_C</code>: the ROC AUC for R2, i.e., the area under the curve labeled “R: 2” in panel C.</li>
+<li><code>ret$wafroc_1_E</code>: the wAFROC AUC for R1, i.e., the area under the curve labeled “R: 1” in panel E.</li>
+<li><code>ret$wafroc_2_E</code>: the wAFROC AUC for R2, i.e., the area under the curve labeled “R: 2” in panel E.</li>
+<li><code>ret$roc_1_F</code>: the ROC AUC for R1, i.e., the area under the curve labeled “R: 1” in panel F.</li>
+<li><code>ret$roc_2_F</code>: the ROC AUC for R2, i.e., the area under the curve labeled “R: 2” in panel F.</li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:froc-vs-wafroc-plot1"></span>
+<img src="13c-froc-vs-wafroc_files/figure-html/froc-vs-wafroc-plot1-1.png" alt="Plots A and D: FROC curves for the R1 and R2 observers; B and E are corresponding wAFROC curves and C and F are corresponding ROC curves. All curves in this plot are for $\lambda = \nu = 1$. All RAD_1 curves are for $\mu = 1$ and all RAD_2 curves are for $\mu = 1.5$. For panels A, B and C, $\zeta_1 = -1$ for R1 and $\zeta_1 = 1.5$ for R2. For panels D, E and F, $\zeta_1 = -\infty$ for R1 and R2." width="672" />
+<p class="caption">
+FIGURE 7.1: Plots A and D: FROC curves for the R1 and R2 observers; B and E are corresponding wAFROC curves and C and F are corresponding ROC curves. All curves in this plot are for <span class="math inline">\(\lambda = \nu = 1\)</span>. All RAD_1 curves are for <span class="math inline">\(\mu = 1\)</span> and all RAD_2 curves are for <span class="math inline">\(\mu = 1.5\)</span>. For panels A, B and C, <span class="math inline">\(\zeta_1 = -1\)</span> for R1 and <span class="math inline">\(\zeta_1 = 1.5\)</span> for R2. For panels D, E and F, <span class="math inline">\(\zeta_1 = -\infty\)</span> for R1 and R2.
+</p>
+</div>
+<p>The coordinates of the end-point of the R1 FROC in panel A are (0.826, 0.590). Those of the R2 FROC curve in A are (0.049, 0.398). The FROC for the R1 observer extends to much larger NLF values while that for the R2 observer is relatively short and steep. One suspects the R2 observer is performing better than R1: he is better at finding lesions and producing fewer NLs, both of which are desirable characteristics, but he is adopting a too-strict reporting criterion. If he could be induced to relax the threshold and report more NLs, his LLF would exceed that of the R1 observer while still maintaining a lower NLF. However, as this involves a subjective extrapolation, it is not possible to objectively quantify this from the FROC curves. The basic issue is the lack of a common NLF range for the two panels. If a common NLF range is “forced”, for example defined as the common NLF range 0 to 0.0492, where both curves contribute, it would ignore most NLs from the R1 observer.</p>
+<p>Algorithm developers typically quote LLF at a specified NLF. According to the two panels in A, the R2 observer is better if the NLF value is chosen to less than 0.0492 - this is the maximum NLF value for the R2 curve in A - but there is no basis for comparison for larger values of NLF (because the R2 observer does not provide any data beyond the observed end-point). A similar problem was encountered in ROC analysis when comparing a pair of sensitivity-specificity values, where, given differing choices of thresholds, ambiguous results can be obtained, see Section <a href="#binary-task-model-beam-study"><strong>??</strong></a>. Indeed, this was the rationale for using AUC under the ROC curve as an unambiguous measure of performance.</p>
+<p>Plot B shows wAFROC curves for the same datasets whose FROC curves are shown in panel A. <strong>The wAFROC is contained within the unit square, a highly desirable characteristic, which solves the lack of a common NLF range problem with the FROC.</strong> The wAFROC AUC under the R2 observer is visibly greater than that for the R1 observer, even though – due to his higher threshold – his AUC estimate is actually biased downward (because the R2 observer is adopting a high threshold, his <span class="math inline">\(\text{LLF}_{\text{max}}\)</span> is smaller than it would have been with a lower threshold, and consequently the area under the large straight line segment from the uppermost non-trivial operating point to (1,1) is smaller). AUCs under the two wAFROC panels in B are 0.5731 for R1 and 0.6737 for R2.</p>
+<p>Plot C shows ROC curves. Since the curves cross, it is not clear which has the larger AUC. AUCs under the two curves in C are 0.7499 for R1 and 0.7453 for R2, which are close, but here is an example where the ordering given by the wAFROC is opposite to that given by the ROC.</p>
+<p>Plots D, E and F correspond to A, B and C with this important difference: the two threshold parameters are set to <span class="math inline">\(-\infty\)</span>. The coordinates of the end-point of the R1 FROC in panel D are (1.002, 0.605). Those of the R2 FROC in panel D are (0.639, 0.775). The R2 observer has higher LLF at lower NLF, and there can be no doubt that he is better. Panels E and F confirm that R2 is actually the better observer <em>over the entire FPF range</em>. AUCs under the two wAFROC curves in E are 0.5605 for R1 and 0.7780 for R2. AUCs under the two ROC curves in F are 0.7513 for R1 and 0.8826 for R2. These confirm the visual impressions of panels in panels E and F. Notice that each ROC AUC is larger than the corresponding wAFROC AUC. This is because the probability of a lesion localization (case is declared positive <em>and</em> a lesion is correctly localized) is smaller than the probability of a true positive (case is declared positive). In other words, the ROC is everywhere above the wAFROC.</p>
+</div>
+<div id="large-difference-in-performance" class="section level3">
+<h3><span class="header-section-number">7.3.2</span> Large difference in performance</h3>
+<div class="figure"><span style="display:block;" id="fig:froc-vs-wafroc-plot2"></span>
+<img src="13c-froc-vs-wafroc_files/figure-html/froc-vs-wafroc-plot2-1.png" alt="Similar to preceding figure but with the following changes. All RAD_2 curves are for $\mu = 2$ and for panels A, B and C $\zeta_1 = 2$ for R2." width="672" />
+<p class="caption">
+FIGURE 7.2: Similar to preceding figure but with the following changes. All RAD_2 curves are for <span class="math inline">\(\mu = 2\)</span> and for panels A, B and C <span class="math inline">\(\zeta_1 = 2\)</span> for R2.
+</p>
+</div>
+<p>In Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot2">7.2</a> panel A, the R1 parameters are the same as in Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot1">7.1</a>, but the R2 parameters are <span class="math inline">\(\mu_{2} = 2\)</span> and <span class="math inline">\(\zeta_1 = +2\)</span>. Doubling the separation parameter over that of R1 (<span class="math inline">\(\mu_{1} = 1\)</span>) has a huge effect on performance. The end-point coordinates of the FROC for R1 are (0.826, 0.590). The end-point coordinates of the FROC for R2 are (0.015, 0.421). The common NLF region defined by NLF = 0 to NLF = 0.0150 <em>would exclude almost all of the marks made by R1</em>. The wAFROC panels in panel B show the markedly greater performance of R2 over R1 (the AUCs are 0.5731 for R1 and 0.7075 for R2). The inter-reader difference is larger (compared to Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot1">7.1</a> panel B), despite the greater downward bias working against the R2 observer. Panel C shows ROC panels for the two observers. Although the curves cross, it is evident that R2 has the greater AUC. The AUCs are 0.7499 for R1 and 0.7722 for R2.</p>
+<p>Plots D, E and F correspond to A, B and C with the difference that the two threshold parameters are set to <span class="math inline">\(-\infty\)</span>. The coordinates of the end-point of the R1 FROC in panel D are OpPtStr(nlf_1_2D, llf_1_2D)<code>. Those of the R2 FROC in panel D are OpPtStr(nlf_2_2D, llf_2_2D)</code>. The R2 observer has higher LLF at lower NLF, and there can be no doubt that he is better. Panels E and F confirm that R2 is actually the better observer <em>over the entire FPF range</em>. AUCs under the two wAFROC curves in E are 0.5605 for R1 and 0.8720 for R2. AUCs under the two ROC curves in F are 0.7513 for R1 and 0.9343 for R2. These confirm the visual impressions of panels in panels E and F. Notice that each ROC AUC is larger than the corresponding wAFROC AUC.</p>
+</div>
+<div id="small-difference-in-performance-and-identical-thresholds" class="section level3">
+<h3><span class="header-section-number">7.3.3</span> Small difference in performance and identical thresholds</h3>
+<div class="figure"><span style="display:block;" id="fig:froc-vs-wafroc-plot3"></span>
+<img src="13c-froc-vs-wafroc_files/figure-html/froc-vs-wafroc-plot3-1.png" alt="Similar to preceding figure but with the following changes. All RAD_2 curves are for $\mu = 1.1$ and for panels A, B and C, $\zeta_1 = -1$ for R2." width="672" />
+<p class="caption">
+FIGURE 7.3: Similar to preceding figure but with the following changes. All RAD_2 curves are for <span class="math inline">\(\mu = 1.1\)</span> and for panels A, B and C, <span class="math inline">\(\zeta_1 = -1\)</span> for R2.
+</p>
+</div>
+<p>The final example, Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot3">7.3</a> shows that <em>when there is a small difference in performance</em>, there is less ambiguity in using the FROC as a basis for measuring performance. The R1 parameters are the same as in Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot1">7.1</a> but the R2 parameters are <span class="math inline">\(\mu = 1.1\)</span> and <span class="math inline">\(\zeta_1= -1\)</span>. In other words, the <span class="math inline">\(\mu\)</span> parameter is 10% larger and the thresholds are identical. This time there is much more common NLF range overlap in panel A and one is counting most of the marks for the R1 reader. The end-point coordinates of the FROC for R1 are (0.826, 0.590). The end-point coordinates of the FROC for R2 are ((0.746, 0.664). The common NLF region defined by NLF = 0 to NLF = 0.7458 includes almost all of the marks made by R1. The wAFROC panels in panel B show the slight greater performance of R2 over R1 (the AUCs are 0.5731 for R1 and 0.6341 for R2). Panel C shows ROC panels for the two observers. Although the curves cross, it is evident that R2 has the greater AUC. The AUCs are 0.7499 for R1 and 0.7722 for R2.</p>
+<p>Plots D, E and F correspond to A, B and C with the difference that the two threshold parameters are set to <span class="math inline">\(-\infty\)</span>. The coordinates of the end-point of the R1 FROC in panel D are ((1.002, 0.605). Those of the R2 FROC in panel D are ((0.901, 0.678). Panels E and F confirm that R2 is actually the better observer over the entire FPF range. AUCs under the two wAFROC curves in E are 0.5605 for R1 and 0.6238 for R2. AUCs under the two ROC curves in F are 0.7513 for R1 and 0.7857 for R2. These confirm the visual impressions of panels in panels E and F. Notice that each ROC AUC is larger than the corresponding wAFROC AUC.</p>
+</div>
+</div>
+<div id="summary-of-simulations" class="section level2">
+<h2><span class="header-section-number">7.4</span> Summary of simulations</h2>
+<p>The following tables summarize the numerical values from the plots in this chapter. Table <a href="froc-vs-wafroc.html#tab:froc-vs-wafroc-summary-table-rdr1">7.1</a> refers to the R1 observer, and Table <a href="froc-vs-wafroc.html#tab:froc-vs-wafroc-summary-table-rdr2">7.2</a> refers to the R2 observer.</p>
+<div id="summary-of-r1-simulations" class="section level3">
+<h3><span class="header-section-number">7.4.1</span> Summary of R1 simulations</h3>
+<table>
+<caption>
+<span id="tab:froc-vs-wafroc-summary-table-rdr1">TABLE 7.1: </span>Summary of R1 simulations: A refers to panel A, B refers to panel B, etc.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+wAFROC-B
+</th>
+<th style="text-align:left;">
+wAFROC-E
+</th>
+<th style="text-align:left;">
+ROC-C
+</th>
+<th style="text-align:left;">
+ROC-F
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0.5731
+</td>
+<td style="text-align:left;">
+0.5605
+</td>
+<td style="text-align:left;">
+0.7499
+</td>
+<td style="text-align:left;">
+0.7513
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The first column is labeled “wAFROC-B”, meaning the R1 wAFROC AUC in panel B, which are identical for the three figures (one may visually confirm that the red curves in panels A, B ad C in the three figures are identical; likewise for the red curves in panels D, E and F).</li>
+<li>The second column is labeled “wAFROC-E”, meaning the R1 wAFROC AUC in panel E, which are identical for the three figures.</li>
+<li>The third column is labeled “ROC-C”, meaning the R1 ROC AUC in panel C, which are identical for the three figures.</li>
+<li>The fourth column is labeled “ROC-F”, meaning the R1 ROC AUC in panel F, which are identical for the three figures.</li>
+</ul>
+</div>
+<div id="summary-of-r2-simulations" class="section level3">
+<h3><span class="header-section-number">7.4.2</span> Summary of R2 simulations</h3>
+<table>
+<caption>
+<span id="tab:froc-vs-wafroc-summary-table-rdr2">TABLE 7.2: </span>Summary of R2 simulations: Fig refers to the figure number in this chapter, A refers to panel A, B refers to panel B, etc.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Fig
+</th>
+<th style="text-align:left;">
+wAFROC-B
+</th>
+<th style="text-align:left;">
+wAFROC-E
+</th>
+<th style="text-align:left;">
+ROC-C
+</th>
+<th style="text-align:left;">
+ROC-F
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0.6737
+</td>
+<td style="text-align:left;">
+0.778
+</td>
+<td style="text-align:left;">
+0.7453
+</td>
+<td style="text-align:left;">
+0.8826
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0.7075
+</td>
+<td style="text-align:left;">
+0.872
+</td>
+<td style="text-align:left;">
+0.7722
+</td>
+<td style="text-align:left;">
+0.9343
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0.6341
+</td>
+<td style="text-align:left;">
+0.6238
+</td>
+<td style="text-align:left;">
+0.7868
+</td>
+<td style="text-align:left;">
+0.7857
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The first column refers to the figure number, for example, “1” refers to Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot1">7.1</a>, “2” refers to Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot2">7.2</a>, and “3” refers to Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot3">7.3</a>.</li>
+<li>The second column is labeled “wAFROC-B”, meaning the R2 wAFROC AUC corresponding to the blue curve in panel B.</li>
+<li>The third column is labeled “wAFROC-E”, meaning the R2 wAFROC AUC corresponding to the blue curve in panel E.</li>
+<li>The fourth column is labeled “ROC-C”, meaning the R2 ROC AUC corresponding to the blue curve in panel C.</li>
+<li>The fifth column is labeled “ROC-F”, meaning the R2 ROC AUC corresponding to the blue curve in panel F.</li>
+</ul>
+</div>
+<div id="froc-vs-wafroc-comments" class="section level3">
+<h3><span class="header-section-number">7.4.3</span> Comments</h3>
+<ul>
+<li>For the same figure label the R1 panels are identical in the three figures. This is the reason why Table <a href="froc-vs-wafroc.html#tab:froc-vs-wafroc-summary-table-rdr1">7.1</a> has only one row. A <em>fixed</em> R1 dataset is being compared to <em>varying</em> R2 datasets.</li>
+<li>The first R2 dataset, Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot1">7.1</a> A, B or C, might be considered representative of an average radiologist, the second one, Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot2">7.2</a> A, B or C, is a super-expert and the third one, Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot3">7.3</a> A, B or C, is only nominally better than R1.</li>
+<li>Plots D, E and F are for hypothetical R1 and R2 observers that report <em>all</em> suspicious regions. The differences between A and D are minimal for the R1 observer, but marked for the R2 observer. Likewise for the differences between B and E.</li>
+</ul>
+</div>
+</div>
+<div id="froc-vs-wafroc-effect-sizes" class="section level2">
+<h2><span class="header-section-number">7.5</span> Effect size comparison</h2>
+<ul>
+<li>The effect size is defined as the AUC – calculated using either wAFROC or ROC – difference between RDR-2 and RDR-1 for the same figure. For example, for Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot2">7.2</a> and the wAFROC AUC effect size, one takes the difference between the AUCs under the R2 (blue) minus R1 (red) curves in panel B.</li>
+<li>In all three figures the wAFROC effect size (ES) is larger than the corresponding ROC effect size.</li>
+<li>For Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot1">7.1</a> panels B and C:
+<ul>
+<li>The wAFROC effect size is 0.1006,</li>
+<li>The ROC effect size is -0.0047.</li>
+</ul></li>
+<li>For Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot2">7.2</a> panels B and C:
+<ul>
+<li>The wAFROC effect size is 0.1344,</li>
+<li>The ROC effect size is 0.0222.</li>
+</ul></li>
+<li>For Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot3">7.3</a> panels B and C:
+<ul>
+<li>The wAFROC effect size is 0.0610,</li>
+<li>The ROC effect size is 0.0369.</li>
+</ul></li>
+</ul>
+<p>These results are summarized in Table <a href="froc-vs-wafroc.html#tab:froc-vs-wafroc-effect-size-rdr2">7.3</a>.</p>
+<p>Since effect size enters as the <em>square</em> in sample size formulas, wAFROC yields greater statistical power than ROC. The “small difference” example, corresponding to row number 2, is more typical of modality comparison studies where the modalities being compared are only slightly different. In this case the wAFROC effect size is about twice the corresponding ROC value - see chapter on FROC sample size TBA.</p>
+<table>
+<caption>
+<span id="tab:froc-vs-wafroc-effect-size-rdr2">TABLE 7.3: </span>Effect size comparions for R1 simulations: Fig refers to the figure number in this chapter.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Fig
+</th>
+<th style="text-align:left;">
+ES-wAFROC
+</th>
+<th style="text-align:left;">
+ES-ROC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0.1006
+</td>
+<td style="text-align:left;">
+-0.004654
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0.1344
+</td>
+<td style="text-align:left;">
+0.02222
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0.061
+</td>
+<td style="text-align:left;">
+0.03685
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="froc-vs-wafroc-peformance-depends-on-zeta1" class="section level2">
+<h2><span class="header-section-number">7.6</span> Performance depends on <span class="math inline">\(\zeta_1\)</span></h2>
+<p>Consider the wAFROC AUCs for the R2 curves in Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot2">7.2</a> panels B and E. The wAFROC AUC for R2 in panel B is 0.7075 while that for R2 in panel E is 0.8720. The only difference between the simulation parameters for the two curves are <span class="math inline">\(\zeta_1 = 2\)</span> for panel B and <span class="math inline">\(\zeta_1 = -\infty\)</span> for panel E. Clearly wAFROC AUC depends on the value of <span class="math inline">\(\zeta_1\)</span>.</p>
+<p>A similar result applies when considering the ROC curves in Fig. <a href="froc-vs-wafroc.html#fig:froc-vs-wafroc-plot2">7.2</a> panels C and F. The ROC AUC for R2 in panel C is 0.7722 while that for R2 in panel F is 0.9343. Clearly ROC AUC also depends on the value of <span class="math inline">\(\zeta_1\)</span>.</p>
+<p>The reason is that in panels B and C the respective AUCs are depressed due to high value of threshold parameter. The (very good) radiologist is seriously under-reporting and choosing to operate near the origin of a steep wAFROC/ROC curve. It as as if in an ROC study the reader is giving too much importance to specificity and therefore not achieving higher sensitivity.</p>
+<p><em>Since performance depends on threshold, this opens up the possibility of optimizing performance by finding the threshold that maximizes AUC. This is the subject of the next chapter.</em></p>
+</div>
+<div id="froc-vs-wafroc-Discussion" class="section level2">
+<h2><span class="header-section-number">7.7</span> Discussion</h2>
+</div>
+<div id="froc-vs-wafroc-references" class="section level2">
+<h2><span class="header-section-number">7.8</span> References</h2>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-bunch1977free">
+<p>Bunch, Philip C, John F Hamilton, Gary K Sanderson, and Arthur H Simmons. 1977. “A Free Response Approach to the Measurement and Characterization of Radiographic Observer Performance.” In <em>Application of Optical Instrumentation in Medicine Vi</em>, 127:124–35. International Society for Optics; Photonics.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="froc-empirical-examples.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="froc-meanings.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["RJafroc Froc Book.pdf", "RJafroc Froc Book.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

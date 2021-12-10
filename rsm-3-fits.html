@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Three proper ROC fits | The RJafroc Book</title>
+  <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Three proper ROC fits | The RJafroc Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Artificial intelligence and observer performance book based on RJafroc." />
+  <meta name="github-repo" content="dpc10ster/RJafrocFrocBook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Three proper ROC fits | The RJafroc Book" />
+  
+  <meta name="twitter:description" content="Artificial intelligence and observer performance book based on RJafroc." />
+  
+
+<meta name="author" content="Dev P. Chakraborty, PhD" />
+
+
+<meta name="date" content="2021-12-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="rsm-fitting.html"/>
+<link rel="next" href="standalone-cad-radiologists.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">RJafroc documentation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tba-how-much-finished"><i class="fa fa-check"></i>TBA How much finished</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-pdf-file-of-the-book"><i class="fa fa-check"></i>The pdf file of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-html-version-of-the-book"><i class="fa fa-check"></i>The html version of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#a-note-on-the-online-distribution-mechanism-of-the-book"><i class="fa fa-check"></i>A note on the online distribution mechanism of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributing-to-this-book"><i class="fa fa-check"></i>Contributing to this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todos-tba"><i class="fa fa-check"></i>ToDos TBA</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids"><i class="fa fa-check"></i>Coding aids</a></li>
+</ul></li>
+<li class="part"><span><b>FROC paradigm</b></span></li>
+<li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm</a><ul>
+<li class="chapter" data-level="1.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-how-much-finished"><i class="fa fa-check"></i><b>1.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="1.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>1.2</b> Introduction</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#chapter-outline"><i class="fa fa-check"></i><b>1.2.1</b> Chapter outline</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#location-specific-paradigms"><i class="fa fa-check"></i><b>1.3</b> Location specific paradigms</a></li>
+<li class="chapter" data-level="1.4" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-vis-search"><i class="fa fa-check"></i><b>1.4</b> Visual search</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-scoring-the-data"><i class="fa fa-check"></i><b>1.4.1</b> Proximity criterion and scoring the data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#multiple-marks-in-the-same-vicinity"><i class="fa fa-check"></i><b>1.4.2</b> Multiple marks in the same vicinity</a></li>
+<li class="chapter" data-level="1.4.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#historical-context"><i class="fa fa-check"></i><b>1.4.3</b> Historical context</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>1.5</b> The free-response receiver operating characteristic (FROC) plot</a></li>
+<li class="chapter" data-level="1.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>1.6</b> The “solar” analogy</a></li>
+<li class="chapter" data-level="1.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>1.7</b> Discussion and suggestions</a></li>
+<li class="chapter" data-level="1.8" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-references"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>2</b> Visual Search</a><ul>
+<li class="chapter" data-level="2.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-how-much-finished"><i class="fa fa-check"></i><b>2.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="2.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-intro"><i class="fa fa-check"></i><b>2.2</b> Introduction</a></li>
+<li class="chapter" data-level="2.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-grouping-labeling-rois"><i class="fa fa-check"></i><b>2.3</b> Grouping and labeling ROIs</a></li>
+<li class="chapter" data-level="2.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>2.4</b> Recognition vs. detection</a></li>
+<li class="chapter" data-level="2.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>2.5</b> TBA Search vs. classification</a></li>
+<li class="chapter" data-level="2.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>2.6</b> The Kundel - Nodine search model</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>2.6.1</b> Glancing / Global impression</a></li>
+<li class="chapter" data-level="2.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>2.6.2</b> Scanning / Local feature analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="visual-search.html"><a href="visual-search.html#visual-search-Kundel-Nodine-model-CAD"><i class="fa fa-check"></i><b>2.7</b> Kundel-Nodine model and CAD algorithms</a></li>
+<li class="chapter" data-level="2.8" data-path="visual-search.html"><a href="visual-search.html#visual-search-discussion-summary"><i class="fa fa-check"></i><b>2.8</b> TBA Discussion / Summary</a></li>
+<li class="chapter" data-level="2.9" data-path="visual-search.html"><a href="visual-search.html#visual-search-references"><i class="fa fa-check"></i><b>2.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>3</b> The radiological search model</a><ul>
+<li class="chapter" data-level="3.1" data-path="rsm.html"><a href="rsm.html#rsm-how-much-finished"><i class="fa fa-check"></i><b>3.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="3.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
+<li class="chapter" data-level="3.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>3.3</b> The radiological search model</a></li>
+<li class="chapter" data-level="3.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>3.4</b> RSM assumptions</a></li>
+<li class="chapter" data-level="3.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-interpretations"><i class="fa fa-check"></i><b>3.5</b> Physical interpretation of RSM parameters</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>3.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
+<li class="chapter" data-level="3.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-prime-parameter"><i class="fa fa-check"></i><b>3.5.2</b> The <span class="math inline">\(\lambda&#39;\)</span> parameter</a></li>
+<li class="chapter" data-level="3.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>3.5.3</b> The <span class="math inline">\(\nu&#39;\)</span> parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="rsm.html"><a href="rsm.html#rsm-re-parameterization"><i class="fa fa-check"></i><b>3.6</b> Model re-parameterization</a></li>
+<li class="chapter" data-level="3.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>3.7</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="rsm.html"><a href="rsm.html#rsm-references"><i class="fa fa-check"></i><b>3.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rsm-pred.html"><a href="rsm-pred.html"><i class="fa fa-check"></i><b>4</b> ROC curve implications of the RSM</a><ul>
+<li class="chapter" data-level="4.1" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-how-much-finished"><i class="fa fa-check"></i><b>4.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="4.2" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-intro"><i class="fa fa-check"></i><b>4.2</b> TBA Introduction</a></li>
+<li class="chapter" data-level="4.3" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-inferred-roc"><i class="fa fa-check"></i><b>4.3</b> Inferred ROC ratings</a></li>
+<li class="chapter" data-level="4.4" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-end-point"><i class="fa fa-check"></i><b>4.4</b> End-point of the ROC</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-constrained-end-point-abscissa"><i class="fa fa-check"></i><b>4.4.1</b> The abscissa of the ROC end-point</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-constrained-end-point-ordinate"><i class="fa fa-check"></i><b>4.4.2</b> The ordinate of the ROC end-point</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-end-point-variable-number-lesions"><i class="fa fa-check"></i><b>4.4.3</b> Variable number of lesions per case</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve"><i class="fa fa-check"></i><b>4.5</b> ROC curve</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-fpf"><i class="fa fa-check"></i><b>4.5.1</b> Derivation of FPF</a></li>
+<li class="chapter" data-level="4.5.2" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-tpf"><i class="fa fa-check"></i><b>4.5.2</b> Derivation of TPF</a></li>
+<li class="chapter" data-level="4.5.3" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-tpf-varying-lesions"><i class="fa fa-check"></i><b>4.5.3</b> Variable number of lesions per case</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-proper"><i class="fa fa-check"></i><b>4.6</b> Proper ROC curve</a></li>
+<li class="chapter" data-level="4.7" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-pdfs"><i class="fa fa-check"></i><b>4.7</b> ROC decision variable pdfs</a></li>
+<li class="chapter" data-level="4.8" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-auc"><i class="fa fa-check"></i><b>4.8</b> ROC AUC</a></li>
+<li class="chapter" data-level="4.9" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-aucs-zeta1"><i class="fa fa-check"></i><b>4.9</b> <span class="math inline">\(\zeta_1\)</span> dependence of ROC AUC</a></li>
+<li class="chapter" data-level="4.10" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curves"><i class="fa fa-check"></i><b>4.10</b> Example ROC curves</a></li>
+<li class="chapter" data-level="4.11" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-pdf-curves"><i class="fa fa-check"></i><b>4.11</b> Example RSM pdf curves</a></li>
+<li class="chapter" data-level="4.12" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-discussion-summary"><i class="fa fa-check"></i><b>4.12</b> TBA Discussion / Summary</a><ul>
+<li class="chapter" data-level="4.12.1" data-path="rsm-pred.html"><a href="rsm-pred.html#the-wagner-review"><i class="fa fa-check"></i><b>4.12.1</b> The Wagner review</a></li>
+</ul></li>
+<li class="chapter" data-level="4.13" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-appendix1"><i class="fa fa-check"></i><b>4.13</b> Appendix 1: Proof of continuity of slope at the end-point</a></li>
+<li class="chapter" data-level="4.14" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-appendix2"><i class="fa fa-check"></i><b>4.14</b> Appendix 2: Numerical illustration of continuity</a></li>
+<li class="chapter" data-level="4.15" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-references"><i class="fa fa-check"></i><b>4.15</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="froc-empirical.html"><a href="froc-empirical.html"><i class="fa fa-check"></i><b>5</b> Empirical plots</a><ul>
+<li class="chapter" data-level="5.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-how-much-finished"><i class="fa fa-check"></i><b>5.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="5.2" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-intro"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
+<li class="chapter" data-level="5.3" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-mark-rating-pairs"><i class="fa fa-check"></i><b>5.3</b> Mark rating pairs</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="froc-empirical.html"><a href="froc-empirical.html#latent-vs.-actual-marks"><i class="fa fa-check"></i><b>5.3.1</b> Latent vs. actual marks</a></li>
+<li class="chapter" data-level="5.3.2" data-path="froc-empirical.html"><a href="froc-empirical.html#binning-rule"><i class="fa fa-check"></i><b>5.3.2</b> Binning rule</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-notation"><i class="fa fa-check"></i><b>5.4</b> FROC notation</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="froc-empirical.html"><a href="froc-empirical.html#comments-on-table-reftabfroc-empirical-notation"><i class="fa fa-check"></i><b>5.4.1</b> Comments on Table @ref(tab:froc-empirical-notation)</a></li>
+<li class="chapter" data-level="5.4.2" data-path="froc-empirical.html"><a href="froc-empirical.html#discussion-cases-with-zero-latent-nl-marks"><i class="fa fa-check"></i><b>5.4.2</b> Discussion: cases with zero latent NL marks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-froc-plot"><i class="fa fa-check"></i><b>5.5</b> The empirical FROC</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-FROC"><i class="fa fa-check"></i><b>5.5.1</b> Definition</a></li>
+<li class="chapter" data-level="5.5.2" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-origin-trivial-point"><i class="fa fa-check"></i><b>5.5.2</b> The origin, a trivial point</a></li>
+<li class="chapter" data-level="5.5.3" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-end-point"><i class="fa fa-check"></i><b>5.5.3</b> The observed end-point and its semi-constrained property</a></li>
+<li class="chapter" data-level="5.5.4" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-froc-plot-futility-extrapolation"><i class="fa fa-check"></i><b>5.5.4</b> Futility of extrapolation outside the observed end-point</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-ROC"><i class="fa fa-check"></i><b>5.6</b> The inferred ROC plot</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="froc-empirical.html"><a href="froc-empirical.html#inferred-roc-rating"><i class="fa fa-check"></i><b>5.6.1</b> Inferred-ROC rating</a></li>
+<li class="chapter" data-level="5.6.2" data-path="froc-empirical.html"><a href="froc-empirical.html#inferred-fpf"><i class="fa fa-check"></i><b>5.6.2</b> Inferred FPF</a></li>
+<li class="chapter" data-level="5.6.3" data-path="froc-empirical.html"><a href="froc-empirical.html#inferred-tpf"><i class="fa fa-check"></i><b>5.6.3</b> Inferred TPF</a></li>
+<li class="chapter" data-level="5.6.4" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-ROC"><i class="fa fa-check"></i><b>5.6.4</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-AFROC"><i class="fa fa-check"></i><b>5.7</b> The alternative FROC (AFROC) plot</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-AFROC"><i class="fa fa-check"></i><b>5.7.1</b> Definition</a></li>
+<li class="chapter" data-level="5.7.2" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-AFROC-constrained"><i class="fa fa-check"></i><b>5.7.2</b> The constrained observed end-point of the AFROC</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-wAFROC"><i class="fa fa-check"></i><b>5.8</b> The weighted-AFROC (wAFROC) plot</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-wAFROC"><i class="fa fa-check"></i><b>5.8.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-AFROC1"><i class="fa fa-check"></i><b>5.9</b> The AFROC1 plot</a><ul>
+<li class="chapter" data-level="5.9.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-AFROC1"><i class="fa fa-check"></i><b>5.9.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-wAFROC1"><i class="fa fa-check"></i><b>5.10</b> The weighted-AFROC1 (wAFROC1) plot</a><ul>
+<li class="chapter" data-level="5.10.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-wAFROC1"><i class="fa fa-check"></i><b>5.10.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-EFROC"><i class="fa fa-check"></i><b>5.11</b> The EFROC plot</a><ul>
+<li class="chapter" data-level="5.11.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-EFROC"><i class="fa fa-check"></i><b>5.11.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.12" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-Discussion"><i class="fa fa-check"></i><b>5.12</b> Discussion</a></li>
+<li class="chapter" data-level="5.13" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-references"><i class="fa fa-check"></i><b>5.13</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html"><i class="fa fa-check"></i><b>6</b> Empirical plot examples</a><ul>
+<li class="chapter" data-level="6.1" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="6.2" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-intro"><i class="fa fa-check"></i><b>6.2</b> Introduction</a></li>
+<li class="chapter" data-level="6.3" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#raw-frocafrocroc-plots"><i class="fa fa-check"></i><b>6.3</b> Raw FROC/AFROC/ROC plots</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-raw-plots-code1"><i class="fa fa-check"></i><b>6.3.1</b> Code for raw plots</a></li>
+<li class="chapter" data-level="6.3.2" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#explanation-of-the-code"><i class="fa fa-check"></i><b>6.3.2</b> Explanation of the code</a></li>
+<li class="chapter" data-level="6.3.3" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#key-differences-from-the-roc-paradigm"><i class="fa fa-check"></i><b>6.3.3</b> Key differences from the ROC paradigm:</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#the-chance-level-froc-and-afroc"><i class="fa fa-check"></i><b>6.4</b> The chance level FROC and AFROC</a></li>
+<li class="chapter" data-level="6.5" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#location-level-true-negatives"><i class="fa fa-check"></i><b>6.5</b> Location-level “true-negatives”</a></li>
+<li class="chapter" data-level="6.6" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#binned-frocafrocroc-plots"><i class="fa fa-check"></i><b>6.6</b> Binned FROC/AFROC/ROC plots</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#binned-plots-code1"><i class="fa fa-check"></i><b>6.6.1</b> Code for binned plots</a></li>
+<li class="chapter" data-level="6.6.2" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#effect-of-seed-on-binned-plots"><i class="fa fa-check"></i><b>6.6.2</b> Effect of <code>seed</code> on binned plots</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-str-binned-data"><i class="fa fa-check"></i><b>6.7</b> Structure of the binned data</a></li>
+<li class="chapter" data-level="6.8" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-summary"><i class="fa fa-check"></i><b>6.8</b> Summary</a></li>
+<li class="chapter" data-level="6.9" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-Discussion"><i class="fa fa-check"></i><b>6.9</b> Discussion</a></li>
+<li class="chapter" data-level="6.10" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-references"><i class="fa fa-check"></i><b>6.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html"><i class="fa fa-check"></i><b>7</b> FROC vs. wAFROC</a><ul>
+<li class="chapter" data-level="7.1" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="7.2" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-intro"><i class="fa fa-check"></i><b>7.2</b> Introduction</a></li>
+<li class="chapter" data-level="7.3" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs.-wafroc"><i class="fa fa-check"></i><b>7.3</b> FROC vs. wAFROC</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#moderate-difference-in-performance"><i class="fa fa-check"></i><b>7.3.1</b> Moderate difference in performance</a></li>
+<li class="chapter" data-level="7.3.2" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#large-difference-in-performance"><i class="fa fa-check"></i><b>7.3.2</b> Large difference in performance</a></li>
+<li class="chapter" data-level="7.3.3" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#small-difference-in-performance-and-identical-thresholds"><i class="fa fa-check"></i><b>7.3.3</b> Small difference in performance and identical thresholds</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#summary-of-simulations"><i class="fa fa-check"></i><b>7.4</b> Summary of simulations</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#summary-of-r1-simulations"><i class="fa fa-check"></i><b>7.4.1</b> Summary of R1 simulations</a></li>
+<li class="chapter" data-level="7.4.2" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#summary-of-r2-simulations"><i class="fa fa-check"></i><b>7.4.2</b> Summary of R2 simulations</a></li>
+<li class="chapter" data-level="7.4.3" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-comments"><i class="fa fa-check"></i><b>7.4.3</b> Comments</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-effect-sizes"><i class="fa fa-check"></i><b>7.5</b> Effect size comparison</a></li>
+<li class="chapter" data-level="7.6" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-peformance-depends-on-zeta1"><i class="fa fa-check"></i><b>7.6</b> Performance depends on <span class="math inline">\(\zeta_1\)</span></a></li>
+<li class="chapter" data-level="7.7" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-Discussion"><i class="fa fa-check"></i><b>7.7</b> Discussion</a></li>
+<li class="chapter" data-level="7.8" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-references"><i class="fa fa-check"></i><b>7.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="froc-meanings.html"><a href="froc-meanings.html"><i class="fa fa-check"></i><b>8</b> Meanings of FROC figures of merit</a><ul>
+<li class="chapter" data-level="8.1" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="8.2" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-intro"><i class="fa fa-check"></i><b>8.2</b> Introduction</a></li>
+<li class="chapter" data-level="8.3" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-afroc"><i class="fa fa-check"></i><b>8.3</b> Empirical AFROC FOM-statistic</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="froc-meanings.html"><a href="froc-meanings.html#upper-limit-for-afroc-fom-statistic"><i class="fa fa-check"></i><b>8.3.1</b> Upper limit for AFROC FOM-statistic</a></li>
+<li class="chapter" data-level="8.3.2" data-path="froc-meanings.html"><a href="froc-meanings.html#range-of-afroc-fom-statistic"><i class="fa fa-check"></i><b>8.3.2</b> Range of AFROC FOM-statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-wafroc"><i class="fa fa-check"></i><b>8.4</b> Empirical weighted-AFROC FOM-statistic</a></li>
+<li class="chapter" data-level="8.5" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-two-theorems"><i class="fa fa-check"></i><b>8.5</b> Two Theorems</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-two-theorems-1"><i class="fa fa-check"></i><b>8.5.1</b> Theorem 1</a></li>
+<li class="chapter" data-level="8.5.2" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-two-theorems-2"><i class="fa fa-check"></i><b>8.5.2</b> Theorem 2</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-numerical-illustrations"><i class="fa fa-check"></i><b>8.6</b> Numerical illustrations</a></li>
+<li class="chapter" data-level="8.7" data-path="froc-meanings.html"><a href="froc-meanings.html#summary-tables-of-ratings"><i class="fa fa-check"></i><b>8.7</b> Summary tables of ratings</a></li>
+<li class="chapter" data-level="8.8" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-AFROC-plot-first-principles"><i class="fa fa-check"></i><b>8.8</b> AFROC plot from first principles</a></li>
+<li class="chapter" data-level="8.9" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-wAFROC-plot-first-principles"><i class="fa fa-check"></i><b>8.9</b> wAFROC plot from first principles</a></li>
+<li class="chapter" data-level="8.10" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-physical-interpretions"><i class="fa fa-check"></i><b>8.10</b> Physical interpretations</a><ul>
+<li class="chapter" data-level="8.10.1" data-path="froc-meanings.html"><a href="froc-meanings.html#physical-interpretation-of-area-under-afroc"><i class="fa fa-check"></i><b>8.10.1</b> Physical interpretation of area under AFROC</a></li>
+<li class="chapter" data-level="8.10.2" data-path="froc-meanings.html"><a href="froc-meanings.html#physical-interpretation-of-area-under-wafroc"><i class="fa fa-check"></i><b>8.10.2</b> Physical interpretation of area under wAFROC</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-Discussion"><i class="fa fa-check"></i><b>8.11</b> Discussion</a></li>
+<li class="chapter" data-level="8.12" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-references"><i class="fa fa-check"></i><b>8.12</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rsm-sc.html"><a href="rsm-sc.html"><i class="fa fa-check"></i><b>9</b> Search and classification performances</a><ul>
+<li class="chapter" data-level="9.1" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="9.2" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-intro"><i class="fa fa-check"></i><b>9.2</b> Introduction</a></li>
+<li class="chapter" data-level="9.3" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-end-point"><i class="fa fa-check"></i><b>9.3</b> Location of ROC end-point</a></li>
+<li class="chapter" data-level="9.4" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-quantifying"><i class="fa fa-check"></i><b>9.4</b> Quantifying search performance</a></li>
+<li class="chapter" data-level="9.5" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-performance"><i class="fa fa-check"></i><b>9.5</b> Quantifying lesion-classification performance</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-search-classification-2afc-lke"><i class="fa fa-check"></i><b>9.5.1</b> Lesion-classification performance and the 2AFC LKE task</a></li>
+<li class="chapter" data-level="9.5.2" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-search-classification-significance"><i class="fa fa-check"></i><b>9.5.2</b> Significance of measuring search and lesion-classification performance</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-discussion-summary"><i class="fa fa-check"></i><b>9.6</b> Discussion / Summary</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="rsm-sc.html"><a href="rsm-sc.html#the-wagner-review-1"><i class="fa fa-check"></i><b>9.6.1</b> The Wagner review</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-references"><i class="fa fa-check"></i><b>9.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html"><i class="fa fa-check"></i><b>10</b> The FROC should not be used to measure performance</a><ul>
+<li class="chapter" data-level="10.1" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="10.2" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-intro"><i class="fa fa-check"></i><b>10.2</b> Introduction</a></li>
+<li class="chapter" data-level="10.3" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-froc-poor"><i class="fa fa-check"></i><b>10.3</b> The FROC curve is a poor descriptor of search performance</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#clinically-relevant-portion-of-an-operating-characteristic-rsm-goodbye-froc-clinically-relevant"><i class="fa fa-check"></i><b>10.3.1</b> Clinically relevant portion of an operating characteristic #rsm-goodbye-froc-clinically-relevant}</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-discussion-summary"><i class="fa fa-check"></i><b>10.4</b> Discussion / Summary</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#the-wagner-review-2"><i class="fa fa-check"></i><b>10.4.1</b> The Wagner review</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-references"><i class="fa fa-check"></i><b>10.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>11</b> RSM fitting</a><ul>
+<li class="chapter" data-level="11.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="11.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-intro"><i class="fa fa-check"></i><b>11.2</b> Introduction</a></li>
+<li class="chapter" data-level="11.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-likelihood"><i class="fa fa-check"></i><b>11.3</b> FROC likelihood function</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-nls"><i class="fa fa-check"></i><b>11.3.1</b> Contribution of NLs</a></li>
+<li class="chapter" data-level="11.3.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-lls"><i class="fa fa-check"></i><b>11.3.2</b> Contribution of LLs</a></li>
+<li class="chapter" data-level="11.3.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-degeneracy"><i class="fa fa-check"></i><b>11.3.3</b> Degeneracy problems</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-idca"><i class="fa fa-check"></i><b>11.4</b> IDCA Likelihood function</a></li>
+<li class="chapter" data-level="11.5" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-roc-likelihood"><i class="fa fa-check"></i><b>11.5</b> ROC Likelihood function</a></li>
+<li class="chapter" data-level="11.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-implementation"><i class="fa fa-check"></i><b>11.6</b> <code>FitRsmROC</code> implementation</a></li>
+<li class="chapter" data-level="11.7" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example"><i class="fa fa-check"></i><b>11.7</b> <code>FitRsmROC</code> usage example</a></li>
+<li class="chapter" data-level="11.8" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>11.8</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="11.9" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-references"><i class="fa fa-check"></i><b>11.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>12</b> Three proper ROC fits</a><ul>
+<li class="chapter" data-level="12.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-how-much-finished"><i class="fa fa-check"></i><b>12.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="12.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-intro"><i class="fa fa-check"></i><b>12.2</b> Introduction</a></li>
+<li class="chapter" data-level="12.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-applications"><i class="fa fa-check"></i><b>12.3</b> Applications</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-two-datasets"><i class="fa fa-check"></i><b>12.3.1</b> Application to two datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-composite-plots"><i class="fa fa-check"></i><b>12.4</b> Displaying composite plots</a></li>
+<li class="chapter" data-level="12.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>12.5</b> Displaying RSM parameters</a></li>
+<li class="chapter" data-level="12.6" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-cbm-parameters"><i class="fa fa-check"></i><b>12.6</b> Displaying CBM parameters</a></li>
+<li class="chapter" data-level="12.7" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-proproc-parameters"><i class="fa fa-check"></i><b>12.7</b> Displaying PROPROC parameters</a></li>
+<li class="chapter" data-level="12.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>12.8</b> Overview of findings</a><ul>
+<li class="chapter" data-level="12.8.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes"><i class="fa fa-check"></i><b>12.8.1</b> Slopes</a></li>
+<li class="chapter" data-level="12.8.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-confidence-intervals"><i class="fa fa-check"></i><b>12.8.2</b> Confidence intervals</a></li>
+<li class="chapter" data-level="12.8.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes-confidence-intervals-summary"><i class="fa fa-check"></i><b>12.8.3</b> Summary of slopes and confidence intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-discussion-summary"><i class="fa fa-check"></i><b>12.9</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="12.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a></li>
+<li class="chapter" data-level="12.11" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-14-datasets"><i class="fa fa-check"></i><b>12.11</b> Datasets</a></li>
+<li class="chapter" data-level="12.12" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-one-dataset-proproc"><i class="fa fa-check"></i><b>12.12</b> Location of PROPROC files</a></li>
+<li class="chapter" data-level="12.13" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results"><i class="fa fa-check"></i><b>12.13</b> Location of pre-analyzed results</a></li>
+<li class="chapter" data-level="12.14" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-representative-plots-van-dyke"><i class="fa fa-check"></i><b>12.14</b> Plots for Van Dyke dataset</a></li>
+<li class="chapter" data-level="12.15" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-references"><i class="fa fa-check"></i><b>12.15</b> References</a></li>
+</ul></li>
+<li class="part"><span><b>CAD</b></span></li>
+<li class="chapter" data-level="13" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>13</b> Standalone CAD vs. Radiologists</a><ul>
+<li class="chapter" data-level="13.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>13.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="13.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-abstract"><i class="fa fa-check"></i><b>13.2</b> Abstract</a></li>
+<li class="chapter" data-level="13.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-ker-words"><i class="fa fa-check"></i><b>13.3</b> Keywords</a></li>
+<li class="chapter" data-level="13.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>13.4</b> Introduction</a></li>
+<li class="chapter" data-level="13.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>13.5</b> Methods</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>13.5.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
+<li class="chapter" data-level="13.5.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>13.5.2</b> The 1T-RRFC analysis model</a></li>
+<li class="chapter" data-level="13.5.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>13.5.3</b> The 2T-RRRC analysis model</a></li>
+<li class="chapter" data-level="13.5.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-1TRRRC-anlaysis"><i class="fa fa-check"></i><b>13.5.4</b> The 1T-RRRC analysis model</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>13.6</b> Software implementation</a></li>
+<li class="chapter" data-level="13.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>13.7</b> Results</a></li>
+<li class="chapter" data-level="13.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>13.8</b> Discussion</a></li>
+<li class="chapter" data-level="13.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix"><i class="fa fa-check"></i><b>13.9</b> Appendix</a><ul>
+<li class="chapter" data-level="13.9.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1-1"><i class="fa fa-check"></i><b>13.9.1</b> Example 1</a></li>
+<li class="chapter" data-level="13.9.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2-1"><i class="fa fa-check"></i><b>13.9.2</b> Example 2</a></li>
+<li class="chapter" data-level="13.9.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>13.9.3</b> Example 3</a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-references"><i class="fa fa-check"></i><b>13.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>14</b> Optimal operating point on FROC</a><ul>
+<li class="chapter" data-level="14.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>14.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="14.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>14.2</b> Introduction</a></li>
+<li class="chapter" data-level="14.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>14.3</b> Methods</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="optim-op-point.html"><a href="optim-op-point.html#functions-to-be-maximized"><i class="fa fa-check"></i><b>14.3.1</b> Functions to be maximized</a></li>
+<li class="chapter" data-level="14.3.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>14.3.2</b> Vary lambda</a></li>
+<li class="chapter" data-level="14.3.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>14.3.3</b> Vary nu</a></li>
+<li class="chapter" data-level="14.3.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>14.3.4</b> Vary mu</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>14.4</b> Using the method</a></li>
+<li class="chapter" data-level="14.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>14.5</b> An application</a></li>
+<li class="chapter" data-level="14.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>14.6</b> Discussion</a></li>
+<li class="chapter" data-level="14.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-references"><i class="fa fa-check"></i><b>14.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>REFERENCES</a></li>
+<li class="chapter" data-level="15" data-path="classification-tasks.html"><a href="classification-tasks.html"><i class="fa fa-check"></i><b>15</b> Localization - classification tasks</a><ul>
+<li class="chapter" data-level="15.1" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-how-much-finished"><i class="fa fa-check"></i><b>15.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="15.2" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-intro"><i class="fa fa-check"></i><b>15.2</b> Introduction</a></li>
+<li class="chapter" data-level="15.3" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-abbreviations"><i class="fa fa-check"></i><b>15.3</b> Abbreviations</a></li>
+<li class="chapter" data-level="15.4" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-basic-idea"><i class="fa fa-check"></i><b>15.4</b> History and basic idea</a></li>
+<li class="chapter" data-level="15.5" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1"><i class="fa fa-check"></i><b>15.5</b> First example, File1.xlsx</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1-truth"><i class="fa fa-check"></i><b>15.5.1</b> <code>Truth</code> sheet</a></li>
+<li class="chapter" data-level="15.5.2" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1-tp"><i class="fa fa-check"></i><b>15.5.2</b> <code>TP</code> sheet</a></li>
+<li class="chapter" data-level="15.5.3" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1-fp"><i class="fa fa-check"></i><b>15.5.3</b> <code>FP</code> sheet</a></li>
+<li class="chapter" data-level="15.5.4" data-path="classification-tasks.html"><a href="classification-tasks.html#the-two-ratings-arrays"><i class="fa fa-check"></i><b>15.5.4</b> The two ratings arrays</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example2"><i class="fa fa-check"></i><b>15.6</b> Second example, File2.xlsx</a></li>
+<li class="chapter" data-level="15.7" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example3"><i class="fa fa-check"></i><b>15.7</b> Third example, File3.xlsx</a></li>
+<li class="chapter" data-level="15.8" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example4"><i class="fa fa-check"></i><b>15.8</b> Fourth example, File4.xlsx</a></li>
+<li class="chapter" data-level="15.9" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example5"><i class="fa fa-check"></i><b>15.9</b> Fifth example, File5.xlsx</a></li>
+<li class="chapter" data-level="15.10" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-precautions"><i class="fa fa-check"></i><b>15.10</b> Precautions</a></li>
+<li class="chapter" data-level="15.11" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-discussion"><i class="fa fa-check"></i><b>15.11</b> Discussion</a></li>
+<li class="chapter" data-level="15.12" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks--references"><i class="fa fa-check"></i><b>15.12</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html"><i class="fa fa-check"></i><b>16</b> Split Plot Study Design</a><ul>
+<li class="chapter" data-level="16.1" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html#SplitPlotChapter-how-much-finished"><i class="fa fa-check"></i><b>16.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="16.2" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html#mean-square-rt"><i class="fa fa-check"></i><b>16.2</b> Mean Square R(T)</a></li>
+<li class="chapter" data-level="16.3" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html#SplitPlotChapter-references"><i class="fa fa-check"></i><b>16.3</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The RJafroc Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="rsm-3-fits" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Three proper ROC fits</h1>
+<div id="rsm-3-fits-how-much-finished" class="section level2">
+<h2><span class="header-section-number">12.1</span> TBA How much finished</h2>
+<p>75%</p>
+</div>
+<div id="rsm-3-fits-intro" class="section level2">
+<h2><span class="header-section-number">12.2</span> Introduction</h2>
+<p>A proper ROC curve is one whose slope decreases monotonically as the operating point moves up the curve, a consequence of which is that a proper ROC does not display an inappropriate chance line crossing followed by a sharp upward turn, i.e., a “hook”, usually near the (1,1) upper right corner.</p>
+<p>There are three methods for fitting proper curves to ROC datasets:</p>
+<ul>
+<li>The radiological search model (RSM) described in Chapter <a href="rsm-fitting.html#rsm-fitting">11</a>,</li>
+<li>The PROPROC (proper ROC) and CBM (contaminated binormal model) described in TBA Chapter 20.</li>
+</ul>
+<p>This chapter compares these methods for a number of datasets. Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.</p>
+<ul>
+<li>Both RSM and CBM are implemented in <code>RJafroc</code>.</li>
+<li><code>PROPROC</code> is implemented in Windows software<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a> available <a href="https://perception.lab.uiowa.edu/OR-DBM-MRMC-252">here</a>, last accessed 1/4/21.</li>
+</ul>
+</div>
+<div id="rsm-3-fits-applications" class="section level2">
+<h2><span class="header-section-number">12.3</span> Applications</h2>
+<p>The RSM, PROPROC and CBM algorithms were applied to the 14 embedded datasets described in <a href="rsm-3-fits.html#rsm-3-fits-14-datasets">12.11</a>. The datasets have already been analyzed and the location of pre-analyzed results files are in <a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results">12.13</a>.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="rsm-3-fits.html#cb61-1"></a>datasetNames &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;TONY&quot;</span>, <span class="st">&quot;VD&quot;</span>, <span class="st">&quot;FR&quot;</span>, </span>
+<span id="cb61-2"><a href="rsm-3-fits.html#cb61-2"></a>            <span class="st">&quot;FED&quot;</span>, <span class="st">&quot;JT&quot;</span>, <span class="st">&quot;MAG&quot;</span>, </span>
+<span id="cb61-3"><a href="rsm-3-fits.html#cb61-3"></a>            <span class="st">&quot;OPT&quot;</span>, <span class="st">&quot;PEN&quot;</span>, <span class="st">&quot;NICO&quot;</span>,</span>
+<span id="cb61-4"><a href="rsm-3-fits.html#cb61-4"></a>            <span class="st">&quot;RUS&quot;</span>, <span class="st">&quot;DOB1&quot;</span>, <span class="st">&quot;DOB2&quot;</span>, </span>
+<span id="cb61-5"><a href="rsm-3-fits.html#cb61-5"></a>            <span class="st">&quot;DOB3&quot;</span>, <span class="st">&quot;FZR&quot;</span>)</span></code></pre></div>
+<p>In the following we focus on just two ROC datasets, which have been widely used in the literature to illustrate ROC methodological advances, namely the Van Dyke (VD) and the Franken (FR) datasets.</p>
+<div id="rsm-3-fits-two-datasets" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> Application to two datasets</h3>
+<ul>
+<li>The code uses the function <code>Compare3ProperRocFits()</code>.</li>
+<li>The code file is <code>R/compare-3-fits/Compare3ProperRocFits.R</code>.</li>
+<li><code>startIndx</code> is the first <code>index</code> to analyze and <code>endIndx</code> is the last.</li>
+<li>In the current example <code>startIndx = 2</code> and <code>endIndx = 3</code>; i.e., two datasets are analyzed corresponding to <code>datasetNames[2]</code> and <code>datasetNames[3]</code>, i.e., the VD and FR datasets.<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a></li>
+<li><code>reAnalyze</code> is set to <code>FALSE</code> causing pre-analyzed results (to be found in directory <code>R/compare-3-fits/RSM6</code>) to be retrieved. If <code>reAnalyze</code> is <code>TRUE</code> the analysis is repeated, leading to possibly slightly different results (the maximum likelihood parameter-search algorithm has inherent randomness aimed at avoiding finding false local maxima).</li>
+<li>The fitted parameter results are contained in <code>ret$allResults</code> and the <em>composite plots</em> (i.e., 3 combined plots corresponding to the three proper ROC fitting algorithms) are contained in <code>ret$allPlots</code>.</li>
+<li>These are saved to lists <code>plotArr</code> and <code>resultsArr</code>.</li>
+</ul>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="rsm-3-fits.html#cb62-1"></a>startIndx &lt;-<span class="st">  </span><span class="dv">2</span></span>
+<span id="cb62-2"><a href="rsm-3-fits.html#cb62-2"></a>endIndx &lt;-<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb62-3"><a href="rsm-3-fits.html#cb62-3"></a>ret &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames,</span>
+<span id="cb62-4"><a href="rsm-3-fits.html#cb62-4"></a>                             <span class="dt">startIndx =</span> startIndx, </span>
+<span id="cb62-5"><a href="rsm-3-fits.html#cb62-5"></a>                             <span class="dt">endIndx =</span> endIndx, </span>
+<span id="cb62-6"><a href="rsm-3-fits.html#cb62-6"></a>                             <span class="dt">reAnalyze =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb62-7"><a href="rsm-3-fits.html#cb62-7"></a></span>
+<span id="cb62-8"><a href="rsm-3-fits.html#cb62-8"></a>resultsArr &lt;-<span class="st"> </span>plotArr &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), </span>
+<span id="cb62-9"><a href="rsm-3-fits.html#cb62-9"></a>                               <span class="dt">dim =</span> <span class="kw">c</span>(endIndx <span class="op">-</span><span class="st"> </span>startIndx <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb62-10"><a href="rsm-3-fits.html#cb62-10"></a></span>
+<span id="cb62-11"><a href="rsm-3-fits.html#cb62-11"></a><span class="cf">for</span> (f <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(endIndx<span class="op">-</span>startIndx<span class="op">+</span><span class="dv">1</span>)) {</span>
+<span id="cb62-12"><a href="rsm-3-fits.html#cb62-12"></a>  plotArr[[f]] &lt;-<span class="st"> </span>ret<span class="op">$</span>allPlots[[f]]</span>
+<span id="cb62-13"><a href="rsm-3-fits.html#cb62-13"></a>  resultsArr[[f]] &lt;-<span class="st"> </span>ret<span class="op">$</span>allResults[[f]]</span>
+<span id="cb62-14"><a href="rsm-3-fits.html#cb62-14"></a>}</span></code></pre></div>
+<p>We show next how to display the composite plots.</p>
+</div>
+</div>
+<div id="rsm-3-fits-composite-plots" class="section level2">
+<h2><span class="header-section-number">12.4</span> Displaying composite plots</h2>
+<ul>
+<li>The <code>plotArr</code> list contains plots for the two datasets. The Van Dyke plots are in <code>plotArr[[1]]</code> and the Franken in <code>plotArr[[2]]</code>.</li>
+<li>The Van Dyke plots contain <span class="math inline">\(I \times J = 2 \times 5 = 10\)</span> composite plots, and similarly for the Franken dataset (both datasets consist of 2 treatments and 5 readers).</li>
+<li>The following shows how to display the composite plot for the Van Dyke dataset for treatment 1 and reader 2.</li>
+</ul>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="rsm-3-fits.html#cb63-1"></a>plotArr[[<span class="dv">1</span>]][[<span class="dv">1</span>,<span class="dv">2</span>]]</span></code></pre></div>
+<p><img src="19b-rsm-3-fits_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The plot is labeled <strong>D2, i = 1, j = 2</strong>, meaning the second dataset, the first treatment and the second reader. It contains 3 curves:</p>
+<ul>
+<li>The RSM fitted curve is in black. It is the only one with a dotted line connecting the uppermost continuously accessible operating point to (1,1).</li>
+<li>The PROPROC fitted curve is in red.</li>
+<li>The CBM fitted curve is in blue.</li>
+<li>Three operating points from the binned data are shown as well as exact 95% confidence intervals for the lowest and uppermost operating points.</li>
+</ul>
+<p>The following example displays the composite plots for the Franken dataset, treatment 2 and reader 3:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="rsm-3-fits.html#cb64-1"></a>plotArr[[<span class="dv">2</span>]][[<span class="dv">2</span>,<span class="dv">3</span>]]</span></code></pre></div>
+<p><img src="19b-rsm-3-fits_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Shown next is how to display the parameters corresponding to the fitted curves.</p>
+</div>
+<div id="rsm-3-fits-rsm-parameters" class="section level2">
+<h2><span class="header-section-number">12.5</span> Displaying RSM parameters</h2>
+<p>The RSM has parameters: <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span>, <span class="math inline">\(\nu&#39;\)</span> and <span class="math inline">\(\zeta_1\)</span>. The parameters corresponding to the RSM plots are accessed as shown next.</p>
+<ul>
+<li><code>resultsArr[[1]][[2]]$retRsm$mu</code> is the RSM <span class="math inline">\(\mu\)</span> parameter for dataset 1 (i.e., Van Dyke dataset), treatment 1 and reader 2,</li>
+<li><code>resultsArr[[1]][[2]]$retRsm$lambdaP</code> is the corresponding <span class="math inline">\(\lambda&#39;\)</span> parameter, and<br />
+</li>
+<li><code>resultsArr[[1]][[2]]$retRsm$nuP</code> is the corresponding <span class="math inline">\(\nu&#39;\)</span> parameter.</li>
+<li><code>resultsArr[[1]][[2]]$retRsm$zeta1</code> is the corresponding <span class="math inline">\(\zeta_1\)</span> parameter.</li>
+<li>Treatment 2 and reader 1 values would be accessed as
+<code>resultsArr[[1]][[6]]$retRsm$mu</code>, etc.</li>
+<li>More generally the values are accessed as <code>[[f]][[(i-1)*J+j]]</code>, where <code>f</code> is the dataset index, <code>i</code> is the treatment index, <code>j</code> is the reader index and <code>J</code> is the total number of readers.</li>
+<li>For the Van Dyke dataset <code>f = 1</code> and for the Franken dataset <code>f = 2</code>.</li>
+</ul>
+<p>The first example displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="rsm-3-fits.html#cb65-1"></a>f &lt;-<span class="st"> </span><span class="dv">1</span>;i &lt;-<span class="st"> </span><span class="dv">1</span>; j &lt;-<span class="st"> </span><span class="dv">2</span>;J &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb65-2"><a href="rsm-3-fits.html#cb65-2"></a><span class="kw">cat</span>(<span class="st">&quot;RSM parameters, Van Dyke Dataset, treatment 1, reader 2:&quot;</span>,</span>
+<span id="cb65-3"><a href="rsm-3-fits.html#cb65-3"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">mu = &quot;</span>,        resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retRsm<span class="op">$</span>mu,</span>
+<span id="cb65-4"><a href="rsm-3-fits.html#cb65-4"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">lambdaP = &quot;</span>,   resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retRsm<span class="op">$</span>lambdaP,</span>
+<span id="cb65-5"><a href="rsm-3-fits.html#cb65-5"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">nuP = &quot;</span>,       resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retRsm<span class="op">$</span>nuP,</span>
+<span id="cb65-6"><a href="rsm-3-fits.html#cb65-6"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">zeta_1 = &quot;</span>,    <span class="kw">as.numeric</span>(resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retRsm<span class="op">$</span>zetas[<span class="dv">1</span>]),</span>
+<span id="cb65-7"><a href="rsm-3-fits.html#cb65-7"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">AUC = &quot;</span>,       resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retRsm<span class="op">$</span>AUC,</span>
+<span id="cb65-8"><a href="rsm-3-fits.html#cb65-8"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">sigma_AUC = &quot;</span>, <span class="kw">as.numeric</span>(resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retRsm<span class="op">$</span>StdAUC),</span>
+<span id="cb65-9"><a href="rsm-3-fits.html#cb65-9"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">NLLini = &quot;</span>,    resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retRsm<span class="op">$</span>NLLIni,</span>
+<span id="cb65-10"><a href="rsm-3-fits.html#cb65-10"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">NLLfin = &quot;</span>,    resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retRsm<span class="op">$</span>NLLFin)</span></code></pre></div>
+<pre><code>## RSM parameters, Van Dyke Dataset, treatment 1, reader 2: 
+## mu =  2.201413 
+## lambdaP =  0.2569453 
+## nuP =  0.7524016 
+## zeta_1 =  -0.1097901 
+## AUC =  0.8653694 
+## sigma_AUC =  0.04740562 
+## NLLini =  96.48516 
+## NLLfin =  85.86244</code></pre>
+<p>The next example displays RSM parameters for the Franken dataset, treatment 2 and reader 3:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="rsm-3-fits.html#cb67-1"></a>f &lt;-<span class="st"> </span><span class="dv">2</span>;i &lt;-<span class="st"> </span><span class="dv">2</span>; j &lt;-<span class="st"> </span><span class="dv">3</span>;J &lt;-<span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<pre><code>## RSM parameters, Franken dataset, treatment 2, reader 3: 
+## mu =  3.287996 
+## lambdaP =  9.371198 
+## nuP =  0.7186006 
+## zeta_1 =  1.646943 
+## AUC =  0.8234519 
+## sigma_AUC =  0.04054005 
+## NLLini =  128.91 
+## NLLfin =  122.4996</code></pre>
+<p>The first four values are the fitted values for the RSM parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span>, <span class="math inline">\(\nu&#39;\)</span> and <span class="math inline">\(\zeta_1\)</span>. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood.<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a></p>
+</div>
+<div id="rsm-3-fits-cbm-parameters" class="section level2">
+<h2><span class="header-section-number">12.6</span> Displaying CBM parameters</h2>
+<p>CBM has parameters <span class="math inline">\(\mu_{CBM}\)</span>, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\zeta_1\)</span>. The next example displays CBM parameters and AUC etc. for the Van Dyke dataset, treatment 1 and reader 2:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="rsm-3-fits.html#cb69-1"></a>f &lt;-<span class="st"> </span><span class="dv">1</span>;i &lt;-<span class="st"> </span><span class="dv">1</span>; j &lt;-<span class="st"> </span><span class="dv">2</span>;J &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb69-2"><a href="rsm-3-fits.html#cb69-2"></a><span class="kw">cat</span>(<span class="st">&quot;CBM parameters, Van Dyke Dataset, treatment 1, reader 2:&quot;</span>,</span>
+<span id="cb69-3"><a href="rsm-3-fits.html#cb69-3"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">mu = &quot;</span>,         resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retCbm<span class="op">$</span>mu,</span>
+<span id="cb69-4"><a href="rsm-3-fits.html#cb69-4"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">alpha = &quot;</span>,      resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retCbm<span class="op">$</span>alpha,</span>
+<span id="cb69-5"><a href="rsm-3-fits.html#cb69-5"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">zeta_1 = &quot;</span>,     <span class="kw">as.numeric</span>(resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retCbm<span class="op">$</span>zetas[<span class="dv">1</span>]),</span>
+<span id="cb69-6"><a href="rsm-3-fits.html#cb69-6"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">AUC = &quot;</span>,        resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retCbm<span class="op">$</span>AUC,</span>
+<span id="cb69-7"><a href="rsm-3-fits.html#cb69-7"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">sigma_AUC = &quot;</span>,  <span class="kw">as.numeric</span>(resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retCbm<span class="op">$</span>StdAUC),</span>
+<span id="cb69-8"><a href="rsm-3-fits.html#cb69-8"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">NLLini = &quot;</span>,     resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retCbm<span class="op">$</span>NLLIni,</span>
+<span id="cb69-9"><a href="rsm-3-fits.html#cb69-9"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">NLLfin = &quot;</span>,     resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>retCbm<span class="op">$</span>NLLFin)</span></code></pre></div>
+<pre><code>## CBM parameters, Van Dyke Dataset, treatment 1, reader 2: 
+## mu =  2.745791 
+## alpha =  0.7931264 
+## zeta_1 =  1.125028 
+## AUC =  0.8758668 
+## sigma_AUC =  0.03964492 
+## NLLini =  86.23289 
+## NLLfin =  85.88459</code></pre>
+<p>The next example displays CBM parameters for the Franken dataset, treatment 2 and reader 3:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="rsm-3-fits.html#cb71-1"></a>f &lt;-<span class="st"> </span><span class="dv">2</span>;i &lt;-<span class="st"> </span><span class="dv">2</span>; j &lt;-<span class="st"> </span><span class="dv">3</span>;J &lt;-<span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<pre><code>## CBM parameters, Franken dataset, treatment 2, reader 3: 
+## mu =  2.533668 
+## alpha =  0.6892561 
+## zeta_1 =  0.3097191 
+## AUC =  0.8194009 
+## sigma_AUC =  0.03968962 
+## NLLini =  122.6812 
+## NLLfin =  122.5604</code></pre>
+<p>The first three values are the fitted values for the CBM parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\zeta_1\)</span>. The next value is the AUC under the fitted CBM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood.</p>
+</div>
+<div id="rsm-3-fits-proproc-parameters" class="section level2">
+<h2><span class="header-section-number">12.7</span> Displaying PROPROC parameters</h2>
+<p><code>PROPROC</code> displayed parameters are <span class="math inline">\(c\)</span> and <span class="math inline">\(d_a\)</span>. The next example displays PROPROC parameters for the Van Dyke dataset, treatment 1 and reader 2:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="rsm-3-fits.html#cb73-1"></a>f &lt;-<span class="st"> </span><span class="dv">1</span>;i &lt;-<span class="st"> </span><span class="dv">1</span>; j &lt;-<span class="st"> </span><span class="dv">2</span>;J &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb73-2"><a href="rsm-3-fits.html#cb73-2"></a><span class="kw">cat</span>(<span class="st">&quot;PROPROC parameters, Van Dyke Dataset, treatment 1, reader 2:&quot;</span>,</span>
+<span id="cb73-3"><a href="rsm-3-fits.html#cb73-3"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">c = &quot;</span>,     resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>c1,</span>
+<span id="cb73-4"><a href="rsm-3-fits.html#cb73-4"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">d_a = &quot;</span>,   resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>da,</span>
+<span id="cb73-5"><a href="rsm-3-fits.html#cb73-5"></a><span class="st">&quot;</span><span class="ch">\n</span><span class="st">AUC = &quot;</span>,   resultsArr[[f]][[(i<span class="dv">-1</span>)<span class="op">*</span>J<span class="op">+</span>j]]<span class="op">$</span>aucProp)</span></code></pre></div>
+<pre><code>## PROPROC parameters, Van Dyke Dataset, treatment 1, reader 2: 
+## c =  -0.2809004 
+## d_a =  1.731472 
+## AUC =  0.8910714</code></pre>
+<p>The values are identical to those listed for treatment 1 and reader 2 in Fig. <a href="rsm-3-fits.html#fig:rsm-3-fits-proproc-output-van-dyke">12.7</a>. Other statistics, such as standard error of AUC, are not provided by PROPROC software.</p>
+<p>The next example displays PROPROC parameters for the Franken dataset, treatment 2 and reader 3:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="rsm-3-fits.html#cb75-1"></a>f &lt;-<span class="st"> </span><span class="dv">2</span>;i &lt;-<span class="st"> </span><span class="dv">2</span>; j &lt;-<span class="st"> </span><span class="dv">3</span>;J &lt;-<span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<pre><code>## PROPROC parameters, Franken dataset, treatment 2, reader 3: 
+## c =  -0.4420007 
+## d_a =  0.9836615 
+## AUC =  0.8252824</code></pre>
+<p>All 10 composite plots for the Van Dyke dataset are shown in the Appendix to this chapter, <a href="rsm-3-fits.html#rsm-3-fits-representative-plots-van-dyke">12.14</a>.</p>
+<p>The next section provides an overview of the most salient findings from analyzing the datasets.</p>
+</div>
+<div id="rsm-3-fits-overview" class="section level2">
+<h2><span class="header-section-number">12.8</span> Overview of findings</h2>
+<p>With 14 datasets the total number of individual modality-reader combinations is 236: in other words, there are 236 datasets to each of which three algorithms were applied. It is easy to be overwhelmed by the numbers and this section summarizes the most important conclusion: <em>for each dataset, treatment and reader, the three fitting methods are consistent with a single method-independent AUC</em>.</p>
+<p>If the AUCs of the three methods are identical the following relations hold with slopes equal to unity:</p>
+<p><span class="math display" id="eq:rsm-3-fits-slopes-equation1">\[\begin{equation}
+\left. 
+\begin{aligned}
+AUC_{PRO} =&amp; m_{PR} AUC_{PRO}  \\
+AUC_{CBM} =&amp; m_{CR} AUC_{PRO} \\
+m_{PR}    =&amp; 1 \\
+m_{CR}    =&amp; 1
+\end{aligned}
+\right \}
+\tag{12.1}
+\end{equation}\]</span></p>
+<p>The abbreviations are as follows:</p>
+<ul>
+<li>PRO = PROPROC</li>
+<li>PR = PROPROC vs. RSM</li>
+<li>CR = CBM vs. RSM.</li>
+</ul>
+<p>For each dataset the plot of PROPROC AUC vs. RSM AUC should be linear with zero intercept and slope <span class="math inline">\(m_{PR}\)</span>. The reason for the <em>zero intercept</em> is that if one of the AUCs indicates zero performance the other AUC must also be zero. Likewise, chance level performance (AUC = 0.5) must be common to all method of estimating AUC. Finally, perfect performance must be common to all methods. All of these conditions require a zero-intercept linear fit.</p>
+<div id="rsm-3-fits-slopes" class="section level3">
+<h3><span class="header-section-number">12.8.1</span> Slopes</h3>
+<p>Denote PROPROC AUC for dataset <span class="math inline">\(f\)</span>, treatment <span class="math inline">\(i\)</span> and reader <span class="math inline">\(j\)</span> by <span class="math inline">\(\theta^{PRO}_{fij}\)</span>. Likewise, the corresponding RSM and CBM values are denoted by <span class="math inline">\(\theta^{RSM}_{fij}\)</span> and <span class="math inline">\(\theta^{CBM}_{fij}\)</span>, respectively. For a given dataset the slope of the PROPROC values vs. the RSM values is denoted <span class="math inline">\(m_{PR,f}\)</span>. The (grand) average over all datasets is denoted <span class="math inline">\(m^{PR}_\bullet\)</span>. Likewise, the average of the CBM AUC values vs. the RSM value is denoted <span class="math inline">\(m^{CR}_\bullet\)</span>.</p>
+<p>An analysis was conducted to determine the average slopes and a bootstrap analysis was conducted to determine the corresponding confidence intervals.</p>
+<p>The code for calculating the average slopes is in <code>R/compare-3-fits/slopesConvVsRsm.R</code> and that for calculating the bootstrap confidence intervals is in <code>R/compare-3-fits/slopesAucsConvVsRsmCI.R</code>.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="rsm-3-fits.html#cb77-1"></a>ret &lt;-<span class="st"> </span><span class="kw">slopesConvVsRsm</span>(datasetNames)</span>
+<span id="cb77-2"><a href="rsm-3-fits.html#cb77-2"></a>retCI &lt;-<span class="st"> </span><span class="kw">slopesAucsConvVsRsmCI</span>(datasetNames)</span></code></pre></div>
+<p>The call to function <code>slopesConvVsRsm()</code> returns <code>ret</code>, which contains, for each of 14 datasets, two plots and two slopes. For example:</p>
+<ul>
+<li><code>ret$p1[[2]]</code> is the plot of <span class="math inline">\(\theta^{PRO}_{2ij}\)</span> vs. <span class="math inline">\(\theta^{RSM}_{2ij}\)</span> for the Van Dyke dataset.</li>
+<li><code>ret$p2[[2]]</code> is the plot of <span class="math inline">\(\theta^{CBM}_{2ij}\)</span> vs. <span class="math inline">\(\theta^{RSM}_{2ij}\)</span> for the Van Dyke dataset.</li>
+<li><code>ret$m_pro_rsm</code> has two columns, each of length 14, the slopes <span class="math inline">\(m_{PR,f}\)</span> for the datasets (indexed by <code>f</code>) and the corresponding <span class="math inline">\(R^2\)</span> values. The first column is <code>ret$m_pro_rsm[[1]]</code> and the second is <code>ret$m_pro_rsm[[2]]</code>.</li>
+<li><code>ret$m_cbm_rsm</code> has two columns, each of length 14, the slopes <span class="math inline">\(m_{CR,f}\)</span> for the datasets and the corresponding <span class="math inline">\(R^2\)</span> values.</li>
+</ul>
+<p>Likewise,</p>
+<ul>
+<li><code>ret$p1[[3]]</code> is the plot of <span class="math inline">\(\theta^{PRO}_{3ij}\)</span> vs. <span class="math inline">\(\theta^{RSM}_{3ij}\)</span> for the Franken dataset.</li>
+<li><code>ret$p2[[3]]</code> is the plot of <span class="math inline">\(\theta^{CBM}_{3ij}\)</span> vs. <span class="math inline">\(\theta^{RSM}_{3ij}\)</span> for the Franken dataset.</li>
+</ul>
+<p>As examples, <code>ret$p1[[2]]</code> is the plot of <span class="math inline">\(\theta^{PRO}_{2ij}\)</span> vs. <span class="math inline">\(\theta^{RSM}_{2ij}\)</span> for the Van Dyke dataset and <code>ret$p1[[3]]</code> is the plot of <span class="math inline">\(\theta^{CBM}_{2ij}\)</span> vs. <span class="math inline">\(\theta^{RSM}_{2ij}\)</span> for the Van Dyke dataset, shown next. Each plot has the constrained linear fit superposed on the data points; each data point represents a distinct modality-reader combination.</p>
+<div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-2"></span>
+<img src="19b-rsm-3-fits_files/figure-html/rsm-3-fits-plots-2-1.png" alt="Van Dyke dataset: Left plot is PROPROC-AUC vs. RSM-AUC with the superposed constrained linear fit. The number of data points is `nPts` = 10. Right plot is CBM-AUC vs. RSM-AUC." width="672" />
+<p class="caption">
+FIGURE 12.1: Van Dyke dataset: Left plot is PROPROC-AUC vs. RSM-AUC with the superposed constrained linear fit. The number of data points is <code>nPts</code> = 10. Right plot is CBM-AUC vs. RSM-AUC.
+</p>
+</div>
+<p>The next plot shows corresponding plots for the Franken dataset.</p>
+<div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-3"></span>
+<img src="19b-rsm-3-fits_files/figure-html/rsm-3-fits-plots-3-1.png" alt="Similar to previous plot, for Franken dataset." width="672" />
+<p class="caption">
+FIGURE 12.2: Similar to previous plot, for Franken dataset.
+</p>
+</div>
+<p>The average slopes and <span class="math inline">\(R^2\)</span> values (<span class="math inline">\(R^2\)</span> is the fraction of variance explained by the constrained straight line fit) are listed in Table <a href="rsm-3-fits.html#tab:rsm-3-fits-slopes-table1">12.1</a>.</p>
+<p>The slopes and <span class="math inline">\(R^2\)</span> values for the Van Dyke dataset are shown next:</p>
+<pre><code>##        m-PR    R2-PR     m-CR     R2-CR
+## VD 1.006127 0.999773 1.000699 0.9999832</code></pre>
+</div>
+<div id="rsm-3-fits-confidence-intervals" class="section level3">
+<h3><span class="header-section-number">12.8.2</span> Confidence intervals</h3>
+<p>The call to <code>slopesAucsConvVsRsmCI</code> returns <code>retCI</code>, containing the results of the bootstrap analysis (note the bullet symbols <span class="math inline">\(\bullet\)</span> denoting averages over 14 datasets):</p>
+<ul>
+<li><code>retCI$cislopeProRsm</code> confidence interval for <span class="math inline">\(m^{PR}_\bullet\)</span></li>
+<li><code>retCI$cislopeCbmRsm</code> confidence interval for <span class="math inline">\(m^{CR}_\bullet\)</span></li>
+<li><code>retCI$histSlopeProRsm</code> histogram plot for 200 bootstrap values of <span class="math inline">\(m^{PR}_\bullet\)</span></li>
+<li><code>retCI$histSlopeCbmRsm</code> histogram plot for 200 bootstrap values of <span class="math inline">\(m^{CR}_\bullet\)</span></li>
+<li><code>retCI$ciAvgAucRsm</code> confidence interval for 200 bootstrap values of <span class="math inline">\(\theta^{RSM}_\bullet\)</span></li>
+<li><code>retCI$ciAvgAucPro</code> confidence interval for 200 bootstrap values of <span class="math inline">\(\theta^{PRO}_\bullet\)</span></li>
+<li><code>retCI$ciAvgAucCbm</code> confidence interval for 200 bootstrap values of <span class="math inline">\(\theta^{CBM}_\bullet\)</span></li>
+</ul>
+<p>As examples,</p>
+<pre><code>##           m-PR      m-CR
+## 2.5%  1.005092 0.9919886
+## 97.5% 1.012285 0.9966149</code></pre>
+<p>The CI for <span class="math inline">\(m^{PR}_\bullet\)</span> is slightly above unity, while that for <span class="math inline">\(m^{CR}_\bullet\)</span> is slightly below. Shown next is the histogram plot for <span class="math inline">\(m^{PR}_\bullet\)</span> (left plot) and <span class="math inline">\(m^{CR}_\bullet\)</span> (right plot). Quantiles of these histograms were used to compute the confidence intervals cited above.</p>
+<div class="figure"><span style="display:block;" id="fig:rsm-3-fits-histo-slopes"></span>
+<img src="19b-rsm-3-fits_files/figure-html/rsm-3-fits-histo-slopes-1.png" alt="Histograms of slope PROPROC AUC vs. RSM AUC (left) and slope CBM AUC vs. RSM AUC (right)." width="672" />
+<p class="caption">
+FIGURE 12.3: Histograms of slope PROPROC AUC vs. RSM AUC (left) and slope CBM AUC vs. RSM AUC (right).
+</p>
+</div>
+</div>
+<div id="rsm-3-fits-slopes-confidence-intervals-summary" class="section level3">
+<h3><span class="header-section-number">12.8.3</span> Summary of slopes and confidence intervals</h3>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:rsm-3-fits-slopes-table1">TABLE 12.1: </span>Summary of slopes and correlations for the two constrained fits: PROPROC AUC vs. RSM AUC and CBM AUC vs. RSM AUC. The average of each slope equals unity to within 0.6 percent.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(m_{PR}\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(R^2_{PR}\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(m_{CR}\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(R^2_{CR}\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+TONY
+</td>
+<td style="text-align:left;">
+1.0002
+</td>
+<td style="text-align:left;">
+0.9997
+</td>
+<td style="text-align:left;">
+0.9933
+</td>
+<td style="text-align:left;">
+0.9997
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VD
+</td>
+<td style="text-align:left;">
+1.0061
+</td>
+<td style="text-align:left;">
+0.9998
+</td>
+<td style="text-align:left;">
+1.0007
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FR
+</td>
+<td style="text-align:left;">
+0.9995
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0.9977
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FED
+</td>
+<td style="text-align:left;">
+1.0146
+</td>
+<td style="text-align:left;">
+0.9998
+</td>
+<td style="text-align:left;">
+0.9999
+</td>
+<td style="text-align:left;">
+0.9999
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JT
+</td>
+<td style="text-align:left;">
+0.9964
+</td>
+<td style="text-align:left;">
+0.9995
+</td>
+<td style="text-align:left;">
+0.9972
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MAG
+</td>
+<td style="text-align:left;">
+1.036
+</td>
+<td style="text-align:left;">
+0.9983
+</td>
+<td style="text-align:left;">
+0.9953
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OPT
+</td>
+<td style="text-align:left;">
+1.0184
+</td>
+<td style="text-align:left;">
+0.9997
+</td>
+<td style="text-align:left;">
+1.0059
+</td>
+<td style="text-align:left;">
+0.9997
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PEN
+</td>
+<td style="text-align:left;">
+1.0081
+</td>
+<td style="text-align:left;">
+0.9996
+</td>
+<td style="text-align:left;">
+0.9976
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NICO
+</td>
+<td style="text-align:left;">
+0.9843
+</td>
+<td style="text-align:left;">
+0.9998
+</td>
+<td style="text-align:left;">
+0.997
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RUS
+</td>
+<td style="text-align:left;">
+0.9989
+</td>
+<td style="text-align:left;">
+0.9999
+</td>
+<td style="text-align:left;">
+0.9921
+</td>
+<td style="text-align:left;">
+0.9999
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DOB1
+</td>
+<td style="text-align:left;">
+1.0262
+</td>
+<td style="text-align:left;">
+0.9963
+</td>
+<td style="text-align:left;">
+0.9886
+</td>
+<td style="text-align:left;">
+0.9962
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DOB2
+</td>
+<td style="text-align:left;">
+1.0056
+</td>
+<td style="text-align:left;">
+0.9987
+</td>
+<td style="text-align:left;">
+0.971
+</td>
+<td style="text-align:left;">
+0.9978
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DOB3
+</td>
+<td style="text-align:left;">
+1.0211
+</td>
+<td style="text-align:left;">
+0.998
+</td>
+<td style="text-align:left;">
+0.9847
+</td>
+<td style="text-align:left;">
+0.9986
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FZR
+</td>
+<td style="text-align:left;">
+1.0027
+</td>
+<td style="text-align:left;">
+0.9999
+</td>
+<td style="text-align:left;">
+0.9996
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AVG
+</td>
+<td style="text-align:left;">
+1.0084
+</td>
+<td style="text-align:left;">
+0.9992
+</td>
+<td style="text-align:left;">
+0.9943
+</td>
+<td style="text-align:left;">
+0.9994
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CI
+</td>
+<td style="text-align:left;">
+(1.005, 1.012)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+(0.992, 0.997)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<p>Table <a href="rsm-3-fits.html#tab:rsm-3-fits-slopes-table1">12.1</a>: The first column, labeled <span class="math inline">\(m_{PR}\)</span>, shows results of fitting straight lines, constrained to go through the origin, to fitted PROPROC AUC vs. RSM AUC results, for each of the 14 datasets, as labeled. The second column, labeled <span class="math inline">\(R^2_{PR}\)</span>, lists the square of the correlation coefficient for each fit. The third and fourth columns list the corresponding values for the CBM AUC vs. RSM AUC fits. The second last row lists the averages (AVG) and the last row lists the 95 percent confidence intervals (CI) for the average slopes.</p>
+</div>
+</div>
+<div id="rsm-3-fits-discussion-summary" class="section level2">
+<h2><span class="header-section-number">12.9</span> Discussion / Summary</h2>
+<p>Over the years, there have been several attempts at fitting FROC data. Prior to the RSM-based ROC curve approach described in this chapter, all methods were aimed at fitting FROC curves, in the mistaken belief that this approach was using all the data. The earliest was my FROCFIT software TBA 36. This was followed by Swensson’s approach37, subsequently shown to be equivalent to my earlier work, as far as predicting the FROC curve was concerned TBA 11. In the meantime, CAD developers, who relied heavily on the FROC curve to evaluate their algorithms, developed an empirical approach that was subsequently put on a formal basis in the IDCA method12.</p>
+<p>This chapter describes an approach to fitting ROC curves, instead of FROC curves, using the RSM. Fits were described for 14 datasets, comprising 236 distinct treatment-reader combinations. All fits and parameter values are viewable in the online “Supplemental Material” directory corresponding to this chapter. Validity of fit was assessed by the chisquare goodness of fit p-value; unfortunately using adjacent bin combining this could not be calculated in most instances; ongoing research at other ways of validating the fits is underway. PROPROC and CBM were fitted to the same datasets, yielding further validation and insights. One of the insights was the finding that the AUCS were almost identical, with PROPROC yielding the highest value, followed by CBM and closely by the RSM. The PROPROC-AUC / CBM-AUC, vs. RSM-AUC straight-line fits, constrained to go through the origin, had slopes 1.0255 (1.021, 1.030) and 1.0097 (1.006, 1.013), respectively. The <span class="math inline">\(R^2\)</span> values were generally in excess of 0.999, indicative of excellent fits.</p>
+<p>On the face of it, fitting the ROC curve seems to be ignoring much of the data. As an example, the ROC rating on a non-diseased case is the rating of the highest-rated mark on that image, or negative infinity if the case has no marks. If the case has several NL marks, only the highest rated one is used. In fact the highest rated mark contains information about the other marks on the case, namely they were all rated lower. There is a statistical term for this, namely sufficiency38. As an example, the highest of a number of samples from a uniform distribution is a sufficient statistic, i.e., it contains all the information contained in the observed samples. While not quite the same for normally distributed values, neglect of the NLs rated lower is not as bad as might seem at first. A similar argument applies to LLs and NLs on diseased cases. The advantage of fitting to the ROC is that the coupling of NLs and LLs on diseased cases breaks the degeneracy problem described in §18.2.3.</p>
+<p>The reader may wonder why I chose not to fit the wAFROC TBA. After all, it is the recommended figure of merit for FROC studies. While the methods described in this chapter are readily adapted to the wAFROC, they are more susceptible to degeneracy issues. The reason is that the y-axis is defined by LL-events, in other words by the parameters, while the x-axis is defined by the highest rated NL on non-diseased cases, in other words by the parameter. The consequent decoupling of parameters leads to degeneracy of the type described in §18.2.3. This is avoided in ROC fitting because the y-axis is defined by LLs and NLs, in other words all parameters of the RSM are involved. The situation with the wAFROC is not quite as severe as with fitting FROC curves but it does have a problem with degeneracy. There are some ideas on how to improve the fits, perhaps by simultaneously fitting ROC and wAFROC-operating points, which amounts to putting constraints on the parameters, but for now this remains an open research subject. Empirical wAFROC, which is the current method implemented in RJafroc, is expected to have the same issues with variability of thresholds between treatments as the empirical ROC-AUC, as discussed in §5.9. So the fitting problem has to be solved. There is no need to fit the FROC, as it should never be used as a basis of a figure of merit for human observer studies; this is distinct from the severe degeneracy issues encountered with fitting it for human observers.</p>
+<p>The application to a large number (236) of real datasets revealed that PROPROC has serious issues. These were apparently not revealed by the millions of simulations used to validate it39. To quote the cited reference, “The new algorithm never failed to converge and produced good fits for all of the several million datasets on which it was tested”. This is a good illustration of why simulations studies are not a good alternative to the method described in §18.5.1.3. In my experience this is a common misconception in this field, and is discussed further in the following chapter. Fig. 18.5, panels (J), (K) and (L) show that PROPROC, and to a lesser extent CBM, can, under some circumstances, severely overestimate performance. Recommendations regarding usage of PROPROC and CBM are deferred to Chapter 20.</p>
+<p>The current ROC-based effort led to some interesting findings. The near equality of the AUCs predicted by the three proper ROC fitting methods, summarized in Table 18.4, has been noted, which is explained by the fact that proper ROC fitting methods represent different approaches to realizing an ideal observer, and the ideal observer must be unique, §18.6.</p>
+<p>This chapter explores what is termed inter-correlations, between RSM and CBM parameters. Since they have similar physical meanings, the RSM and CBM separation parameters were found to be significantly correlated, = 0.86 (0.76, 0.89), as were the RSM and CBM parameters corresponding to the fraction of lesions that was actually visible, = 0.77 (0.68, 0.82). This type of correspondence between two different models can be interpreted as evidence of mutually reinforcing validity of each of the models.</p>
+<p>The CBM method comes closest to the RSM in terms of yielding meaningful measures, but the fact that it allows the ROC curve to go continuously to (1,1) implies that it is not completely accounting for search performance, §17.8. There are two components to search performance: finding lesions and avoiding non-lesions. The CBM model accounts for finding lesions, but it does not account for avoiding suspicious regions that are non-diseased, an important characteristic of expert radiologists.</p>
+<p>An important finding is the inverse correlation between search performance and lesion-classification performance, which suggest there could be tradeoffs in attempts to optimize them. As a simplistic illustration, a low-resolution gestalt-view of the image1, such as seen by the peripheral viewing mechanism, is expected to make it easier to rapidly spot deviations from the expected normal template described in Chapter 15. However, the observer may not be able to switch effectively between this and the high-resolution viewing mode necessary to correctly classify found suspicious region.</p>
+<p>The main scientific conclusion of this chapter is that search-performance is the primary bottleneck in limiting observer performance. It is unfortunate that search is ignored in the ROC paradigm, usage of which is decreasing, albeit at an agonizingly slow rate. Evidence presented in this chapter should convince researchers to reconsider the focus of their investigations, most of which is currently directed at improving classification performance, which has been shown not to be the bottleneck. Another conclusion is that the three method of fitting ROC data yield almost identical AUCs. Relative to the RSM the PROPROC estimates are about 2.6% larger while CBM estimates are about 1% larger. This was a serendipitous finding that makes sense, in retrospect, but to the best of my knowledge is not known in the research community. PROPROC and to a lesser extent CBM are prone to severely overestimating performance in situations where the operating points are limited to a steep ascending section at the low end of false positive fraction scale. This parallels an earlier comment regarding the FROC, namely measurements derived from the steep part of the curve are unreliable, §17.10.1.</p>
+</div>
+<div id="rsm-3-fits-appendices" class="section level2">
+<h2><span class="header-section-number">12.10</span> Appendices</h2>
+</div>
+<div id="rsm-3-fits-14-datasets" class="section level2">
+<h2><span class="header-section-number">12.11</span> Datasets</h2>
+<p>The datasets are embedded in ther <code>RJafroc</code> package. They can be viewed in the help file of the package, a partial screen-shot of which is shown next.<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rsm-3-fits-datasets"></span>
+<img src="images/compare-3-fits/datasets.png" alt="Partial screen shot of `RJafroc` help file showing the datasets included with the current distribution (v2.0.1)."  />
+<p class="caption">
+FIGURE 12.4: Partial screen shot of <code>RJafroc</code> help file showing the datasets included with the current distribution (v2.0.1).
+</p>
+</div>
+<p>The datasets are identified in the code by dataset<code>dd</code> (where <code>dd</code> is an integer in the range <code>01</code> to <code>14</code>) as follows:</p>
+<ul>
+<li><code>dataset01</code> “TONY” FROC dataset <span class="citation">(Chakraborty and Svahn <a href="#ref-RN2125" role="doc-biblioref">2011</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:2, 1:5, 1:185, 1:3] 3 -Inf 3 -Inf 4 ...
+##  $ LL   : num [1:2, 1:5, 1:89, 1:2] 4 4 3 -Inf 3.5 ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset02</code> “VAN-DYKE” Van Dyke ROC dataset <span class="citation">(Van Dyke et al. <a href="#ref-RN1993" role="doc-biblioref">1993</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:2, 1:5, 1:114, 1] 1 3 2 3 2 2 1 2 3 2 ...
+##  $ LL   : num [1:2, 1:5, 1:45, 1] 5 5 5 5 5 5 5 5 5 5 ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset03</code> “FRANKEN” Franken ROC dataset <span class="citation">(Franken et al. <a href="#ref-RN1995" role="doc-biblioref">1992</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:2, 1:4, 1:100, 1] 3 3 4 3 3 3 4 1 1 3 ...
+##  $ LL   : num [1:2, 1:4, 1:67, 1] 5 5 4 4 5 4 4 5 2 2 ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset04</code> “FEDERICA” Federica Zanca FROC dataset <span class="citation">(Zanca et al. <a href="#ref-RN1882" role="doc-biblioref">2009</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:5, 1:4, 1:200, 1:7] -Inf -Inf 1 -Inf -Inf ...
+##  $ LL   : num [1:5, 1:4, 1:100, 1:3] 4 5 4 5 4 3 5 4 4 3 ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset05</code> “THOMPSON” John Thompson FROC dataset <span class="citation">(Thompson et al. <a href="#ref-RN2368" role="doc-biblioref">2014</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:2, 1:9, 1:92, 1:7] 4 5 -Inf -Inf 8 ...
+##  $ LL   : num [1:2, 1:9, 1:47, 1:3] 5 9 -Inf 10 8 ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset06</code> “MAGNUS” Magnus Bath FROC dataset <span class="citation">(Vikgren et al. <a href="#ref-RN1929" role="doc-biblioref">2008</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:2, 1:4, 1:89, 1:17] 1 -Inf -Inf -Inf 1 ...
+##  $ LL   : num [1:2, 1:4, 1:42, 1:15] -Inf -Inf -Inf -Inf -Inf ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset07</code> “LUCY-WARREN” Lucy Warren FROC dataset <span class="citation">(Warren et al. <a href="#ref-RN2507" role="doc-biblioref">2014</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:5, 1:7, 1:162, 1:4] 1 2 1 2 -Inf ...
+##  $ LL   : num [1:5, 1:7, 1:81, 1:3] 2 -Inf 2 -Inf 1 ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset08</code> “PENEDO” Monica Penedo FROC dataset <span class="citation">(Penedo et al. <a href="#ref-RN1520" role="doc-biblioref">2005</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:5, 1:5, 1:112, 1] 3 2 3 2 3 0 0 4 0 2 ...
+##  $ LL   : num [1:5, 1:5, 1:64, 1] 3 2 4 3 3 3 3 4 4 3 ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset09</code> “NICO-CAD-ROC” Nico Karssemeijer ROC dataset <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1, 1:10, 1:200, 1] 28 0 14 0 16 0 31 0 0 0 ...
+##  $ LL   : num [1, 1:10, 1:80, 1] 29 12 13 10 41 67 61 51 67 0 ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset10</code> “RUSCHIN” Mark Ruschin ROC dataset <span class="citation">(Ruschin et al. <a href="#ref-RN1646" role="doc-biblioref">2007</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:3, 1:8, 1:90, 1] 1 0 0 0 0 0 1 0 0 0 ...
+##  $ LL   : num [1:3, 1:8, 1:40, 1] 2 1 1 2 0 0 0 0 0 3 ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset11</code> “DOBBINS-1” Dobbins I FROC dataset <span class="citation">(Dobbins III et al. <a href="#ref-Dobbins2016MultiInstitutional" role="doc-biblioref">2016</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:4, 1:5, 1:158, 1:4] -Inf -Inf -Inf -Inf -Inf ...
+##  $ LL   : num [1:4, 1:5, 1:115, 1:20] -Inf -Inf -Inf -Inf -Inf ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset12</code> “DOBBINS-2” Dobbins II ROC dataset <span class="citation">(Dobbins III et al. <a href="#ref-Dobbins2016MultiInstitutional" role="doc-biblioref">2016</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:4, 1:5, 1:152, 1] -Inf -Inf -Inf -Inf -Inf ...
+##  $ LL   : num [1:4, 1:5, 1:88, 1] 3 4 4 -Inf -Inf ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset13</code> “DOBBINS-3” Dobbins III FROC dataset <span class="citation">(Dobbins III et al. <a href="#ref-Dobbins2016MultiInstitutional" role="doc-biblioref">2016</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:4, 1:5, 1:158, 1:4] -Inf 3 -Inf 4 5 ...
+##  $ LL   : num [1:4, 1:5, 1:106, 1:15] -Inf -Inf -Inf -Inf -Inf ...
+##  $ LL_IL: logi NA</code></pre>
+<ul>
+<li><code>dataset14</code> “FEDERICA-REAL-ROC” Federica Zanca <em>real</em> ROC dataset <span class="citation">(Zanca et al. <a href="#ref-RN2318" role="doc-biblioref">2012</a>)</span></li>
+</ul>
+<pre><code>## List of 3
+##  $ NL   : num [1:2, 1:4, 1:200, 1] 2 2 2 2 1 3 2 2 3 1 ...
+##  $ LL   : num [1:2, 1:4, 1:100, 1] 6 5 6 4 5 5 5 5 5 4 ...
+##  $ LL_IL: logi NA</code></pre>
+</div>
+<div id="rsm-3-fits-one-dataset-proproc" class="section level2">
+<h2><span class="header-section-number">12.12</span> Location of PROPROC files</h2>
+<p>For each dataset PROPROC parameters were obtained by running the Windows software with PROPROC selected as the curve-fitting method. The results are saved to files that end with <code>proprocnormareapooled.csv</code><a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a> contained in “R/compare-3-fits/MRMCRuns/C/”, where <code>C</code> denotes the name of the dataset (for example, for the Van Dyke dataset, <code>C</code> = “VD”). Examples are shown in the next two screen-shots.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rsm-3-fits-mrmc-runs"></span>
+<img src="images/compare-3-fits/MRMCRuns.png" alt="Screen shot (1 of 2) of `R/compare-3-fits/MRMCRuns` showing the folders containing the results of PROPROC analysis on 14 datasets."  />
+<p class="caption">
+FIGURE 12.5: Screen shot (1 of 2) of <code>R/compare-3-fits/MRMCRuns</code> showing the folders containing the results of PROPROC analysis on 14 datasets.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rsm-3-fits-mrmc-runs-vd"></span>
+<img src="images/compare-3-fits/MRMCRuns-VD.png" alt="Screen shot (2 of 2) of `R/compare-3-fits/MRMCRuns/VD` showing files containing the results of PROPROC analysis for the Van Dyke dataset."  />
+<p class="caption">
+FIGURE 12.6: Screen shot (2 of 2) of <code>R/compare-3-fits/MRMCRuns/VD</code> showing files containing the results of PROPROC analysis for the Van Dyke dataset.
+</p>
+</div>
+<p>The contents of <code>R/compare-3-fits/MRMCRuns/VD/VDproprocnormareapooled.csv</code> are shown next, see Fig. <a href="rsm-3-fits.html#fig:rsm-3-fits-proproc-output-van-dyke">12.7</a>.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a> The PROPROC parameters <span class="math inline">\(c\)</span> and <span class="math inline">\(d_a\)</span> are in the last two columns. The column names are <code>T</code> = treatment; <code>R</code> = reader; <code>return-code</code> = undocumented value, <code>area</code> = PROPROC AUC; <code>numCAT</code> = number of ROC bins; <code>adjPMean</code> = undocumented value; <code>c</code> = <span class="math inline">\(c\)</span> and <code>d_a</code> = <span class="math inline">\(d_a\)</span>, are the PROPROC parameters defined in <span class="citation">(Metz and Pan <a href="#ref-metz1999proper" role="doc-biblioref">1999</a>)</span>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rsm-3-fits-proproc-output-van-dyke"></span>
+<img src="images/compare-3-fits/vanDyke.png" alt="PROPROC output for the Van Dyke ROC data set." width="50%" height="20%" />
+<p class="caption">
+FIGURE 12.7: PROPROC output for the Van Dyke ROC data set.
+</p>
+</div>
+</div>
+<div id="rsm-3-fits-pre-analyzed-results" class="section level2">
+<h2><span class="header-section-number">12.13</span> Location of pre-analyzed results</h2>
+<p>The following screen shot shows the pre-analyzed files created by the function <code>Compare3ProperRocFits()</code> described below. Each file is named <code>allResultsC</code>, where <code>C</code> is the abbreviated name of the dataset (uppercase C denotes one or more uppercase characters; for example, <code>C</code> = <code>VD</code> denotes the Van Dyke dataset.).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rsm-3-fits-all-results-rsm6"></span>
+<img src="images/compare-3-fits/RSM6.png" alt="Screen shot of `R/compare-3-fits/RSM6` showing the results files created by  `Compare3ProperRocFits()` ."  />
+<p class="caption">
+FIGURE 12.8: Screen shot of <code>R/compare-3-fits/RSM6</code> showing the results files created by <code>Compare3ProperRocFits()</code> .
+</p>
+</div>
+</div>
+<div id="rsm-3-fits-representative-plots-van-dyke" class="section level2">
+<h2><span class="header-section-number">12.14</span> Plots for Van Dyke dataset</h2>
+<p>The following plots are arranged in pairs, with the left plot corresponding to treatment 1 and the right to treatment 2.</p>
+<div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-1-1"></span>
+<img src="19b-rsm-3-fits_files/figure-html/rsm-3-fits-plots-1-1-1.png" alt="Composite plots in both treatments for Van Dyke dataset, reader 1." width="672" />
+<p class="caption">
+FIGURE 12.9: Composite plots in both treatments for Van Dyke dataset, reader 1.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-1-2"></span>
+<img src="19b-rsm-3-fits_files/figure-html/rsm-3-fits-plots-1-2-1.png" alt="Composite plots in both treatments for Van Dyke dataset, reader 2. For treatment 2 the RSM and PROPROC fits are indistinguishable." width="672" />
+<p class="caption">
+FIGURE 12.10: Composite plots in both treatments for Van Dyke dataset, reader 2. For treatment 2 the RSM and PROPROC fits are indistinguishable.
+</p>
+</div>
+<p>The RSM parameter values for the treatment 2 plot are: <span class="math inline">\(\mu\)</span> = 5.767237, <span class="math inline">\(\lambda&#39;\)</span> = 2.7212621, <span class="math inline">\(\nu&#39;\)</span> = 0.8021718, <span class="math inline">\(\zeta_1\)</span> = -1.5717303. The corresponding CBM values are <span class="math inline">\(\mu\)</span> = 5.4464738, <span class="math inline">\(\alpha\)</span> = 0.8023609, <span class="math inline">\(\zeta_1\)</span> = -1.4253826. The RSM and CBM <span class="math inline">\(\mu\)</span> parameters are very close and likewise the RSM <span class="math inline">\(\nu&#39;\)</span> and CBM <span class="math inline">\(\alpha\)</span> parameters are very close - this is because they have similar physical meanings, which is investigated later in this chapter TBA. [The CBM does not have a parameter analogous to the RSM <span class="math inline">\(\lambda&#39;\)</span> parameter.]</p>
+<div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-1-3"></span>
+<img src="19b-rsm-3-fits_files/figure-html/rsm-3-fits-plots-1-3-1.png" alt="Composite plots in both treatments for Van Dyke dataset, reader 3." width="672" />
+<p class="caption">
+FIGURE 12.11: Composite plots in both treatments for Van Dyke dataset, reader 3.
+</p>
+</div>
+<p>The RSM parameters for the treatment 1 plot are: <span class="math inline">\(\mu\)</span> = 3.1527627, <span class="math inline">\(\lambda&#39;\)</span> = 9.9986154, <span class="math inline">\(\nu&#39;\)</span> = 0.9899933, <span class="math inline">\(\zeta_1\)</span> = 1.1733988. The corresponding CBM values are <span class="math inline">\(\mu\)</span> = 2.1927712, <span class="math inline">\(\alpha\)</span> = 0.98, <span class="math inline">\(\zeta_1\)</span> = -0.5168848.</p>
+<div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-1-4"></span>
+<img src="19b-rsm-3-fits_files/figure-html/rsm-3-fits-plots-1-4-1.png" alt="Composite plots in both treatments for Van Dyke dataset, reader 4. For treatment 2 the 3 plots are indistinguishable and each one has AUC = 1. The degeneracy is due to all operating points being on the axes of the unit square." width="672" />
+<p class="caption">
+FIGURE 12.12: Composite plots in both treatments for Van Dyke dataset, reader 4. For treatment 2 the 3 plots are indistinguishable and each one has AUC = 1. The degeneracy is due to all operating points being on the axes of the unit square.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-1-5"></span>
+<img src="19b-rsm-3-fits_files/figure-html/rsm-3-fits-plots-1-5-1.png" alt="Composite plots in both treatments for Van Dyke dataset, reader 5." width="672" />
+<p class="caption">
+FIGURE 12.13: Composite plots in both treatments for Van Dyke dataset, reader 5.
+</p>
+</div>
+</div>
+<div id="rsm-3-fits-references" class="section level2">
+<h2><span class="header-section-number">12.15</span> References</h2>
+
+</div>
+</div>
+
+
+
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-RN2125">
+<p>Chakraborty, Dev P., and T. Svahn. 2011. “Estimating the Parameters of a Model of Visual Search from ROC Data: An Alternate Method for Fitting Proper ROC Curves.” Journal Article. <em>Proc. SPIE 7966</em> 7966. <a href="https://doi.org/10.1117/12.878231">https://doi.org/10.1117/12.878231</a>.</p>
+</div>
+<div id="ref-Dobbins2016MultiInstitutional">
+<p>Dobbins III, James T, H Page McAdams, John M Sabol, Dev P Chakraborty, Ella A Kazerooni, Gautham P Reddy, Jenny Vikgren, and Magnus Båth. 2016. “Multi-Institutional Evaluation of Digital Tomosynthesis, Dual-Energy Radiography, and Conventional Chest Radiography for the Detection and Management of Pulmonary Nodules.” Journal Article. <em>Radiology</em> 282 (1): 236–50.</p>
+</div>
+<div id="ref-RN1995">
+<p>Franken, Jr., Edmund A., Kevin S. Berbaum, Susan M. Marley, Wilbur L. Smith, Yutaka Sato, Simon C. S. Kao, and Steven G. Milam. 1992. “Evaluation of a Digital Workstation for Interpreting Neonatal Examinations: A Receiver Operating Characteristic Study.” Journal Article. <em>Investigative Radiology</em> 27 (9): 732–37. <a href="http://journals.lww.com/investigativeradiology/Fulltext/1992/09000/Evaluation_of_a_Digital_Workstation_for.16.aspx">http://journals.lww.com/investigativeradiology/Fulltext/1992/09000/Evaluation_of_a_Digital_Workstation_for.16.aspx</a>.</p>
+</div>
+<div id="ref-hupse2013standalone">
+<p>Hupse, Rianne, Maurice Samulski, Marc Lobbes, Ard Heeten, MechliW Imhof-Tas, David Beijerinck, Ruud Pijnappel, Carla Boetes, and Nico Karssemeijer. 2013. “Standalone Computer-Aided Detection Compared to Radiologists’ Performance for the Detection of Mammographic Masses.” Journal Article. <em>European Radiology</em> 23 (1): 93–100. <a href="https://doi.org/10.1007/s00330-012-2562-7">https://doi.org/10.1007/s00330-012-2562-7</a>.</p>
+</div>
+<div id="ref-metz1999proper">
+<p>Metz, Charles E, and Xiaochuan Pan. 1999. “‘Proper’ Binormal Roc Curves: Theory and Maximum-Likelihood Estimation.” <em>Journal of Mathematical Psychology</em> 43 (1): 1–33.</p>
+</div>
+<div id="ref-RN1520">
+<p>Penedo, Monica, Miguel Souto, Pablo G. Tahoces, Jose M. Carreira, Justo Villalon, Gerardo Porto, Carmen Seoane, et al. 2005. “Free-Response Receiver Operating Characteristic Evaluation of Lossy Jpeg2000 and Object-Based Set Partitioning in Hierarchical Trees Compression of Digitized Mammograms.” Journal Article. <em>Radiology</em> 237 (2): 450–57.</p>
+</div>
+<div id="ref-RN1646">
+<p>Ruschin, Mark., Pontus. Timberg, Magnus. Bath, Bengt. Hemdal, Tony. Svahn, Rob. Saunders, Ehsan. Samei, et al. 2007. “Dose Dependence of Mass and Microcalcification Detection in Digital Mammography: Free Response Human Observer Studies.” Journal Article. <em>Medical Physics</em> 34: 400–407.</p>
+</div>
+<div id="ref-RN2368">
+<p>Thompson, John D, Peter Hogg, David J Manning, Katy Szczepura, and Dev P Chakraborty. 2014. “A Free-Response Evaluation Determining Value in the Computed Tomography Attenuation Correction Image for Revealing Pulmonary Incidental Findings: A Phantom Study.” Journal Article. <em>Academic Radiology</em> 21 (4): 538–45.</p>
+</div>
+<div id="ref-RN1993">
+<p>Van Dyke, C. W., R. D. White, N. A. Obuchowski, M. A. Geisinger, R. J. Lorig, and M. A. Meziane. 1993. “Cine MRI in the Diagnosis of Thoracic Aortic Dissection.” Journal Article. <em>79th RSNA Meetings</em>.</p>
+</div>
+<div id="ref-RN1929">
+<p>Vikgren, Jenny, Sara Zachrisson, Angelica Svalkvist, Ase A. Johnsson, Marianne Boijsen, Agneta Flinck, Susanne Kheddache, and Magnus Bath. 2008. “Comparison of Chest Tomosynthesis and Chest Radiography for Detection of Pulmonary Nodules: Human Observer Study of Clinical Cases.” Journal Article. <em>Radiology</em> 249 (3): 1034–41. <a href="https://doi.org/10.1148/radiol.2492080304">https://doi.org/10.1148/radiol.2492080304</a>.</p>
+</div>
+<div id="ref-RN2507">
+<p>Warren, Lucy M, Rosalind M Given-Wilson, Matthew G Wallis, Julie Cooke, Mark D Halling-Brown, Alistair Mackenzie, Dev P Chakraborty, Hilde Bosmans, David R Dance, and Kenneth C Young. 2014. “The Effect of Image Processing on the Detection of Cancers in Digital Mammography.” Journal Article. <em>American Journal of Roentgenology</em> 203 (2): 387–93.</p>
+</div>
+<div id="ref-RN1882">
+<p>Zanca, Federica, Jurgen Jacobs, Chantal Van Ongeval, Filip Claus, Valerie Celis, Catherine Geniets, Veerle Provost, Herman Pauwels, Guy Marchal, and Hilde Bosmans. 2009. “Evaluation of Clinical Image Processing Algorithms Used in Digital Mammography.” Journal Article. <em>Medical Physics</em> 36 (3): 765–75. <a href="https://doi.org/10.1118/1.3077121">https://doi.org/10.1118/1.3077121</a>.</p>
+</div>
+<div id="ref-RN2318">
+<p>Zanca, F., S. L. Hillis, F. Claus, C. Van Ongeval, V. Celis, V. Provoost, H.-J Yoon, and H. Bosmans. 2012. “Correlation of Free-Response and Receiver-Operating-Characteristic Area-Under-the-Curve Estimates: Results from Independently Conducted FROC/ROC Studies in Mammography.” Journal Article. <em>Med Phys</em> 39 (10): 5917–29.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="29">
+<li id="fn29"><p>OR DBM-MRMC 2.5, Sept. 04, 2014; this version, used in this chapter, is no longer distributed but is available from me upon request.<a href="rsm-3-fits.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<li id="fn30"><p>To analyze all datasets one sets <code>startIndx &lt;-  1</code> and <code>endIndx &lt;-  14</code>.<a href="rsm-3-fits.html#fnref30" class="footnote-back">↩︎</a></p></li>
+<li id="fn31"><p>The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being <em>minimized</em>, the final value is smaller than the initial value.<a href="rsm-3-fits.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<li id="fn32"><p>The raw datasets (Excel files) are in folder <code>R/compare-3-fits/Datasets</code> and file <code>R/compare-3-fits/loadDataFile.R</code> shows the correspondence between <code>datasetNames</code> and a dataset: for example, the Van Dyke dataset corresponds to file <code>VanDykeData.xlsx</code> in the <code>R/compare-3-fits/Datasets</code> folder.<a href="rsm-3-fits.html#fnref32" class="footnote-back">↩︎</a></p></li>
+<li id="fn33"><p>In accordance with R-package policies white-spaces in the original <code>PROPROC</code> output file names have been removed.<a href="rsm-3-fits.html#fnref33" class="footnote-back">↩︎</a></p></li>
+<li id="fn34"><p>The <code>VD.lrc</code> file in this directory is the Van Dyke data formatted for input to OR DBM-MRMC 2.5.<a href="rsm-3-fits.html#fnref34" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rsm-fitting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="standalone-cad-radiologists.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["RJafroc Froc Book.pdf", "RJafroc Froc Book.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

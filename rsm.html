@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 The radiological search model | The RJafroc Book</title>
+  <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 The radiological search model | The RJafroc Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Artificial intelligence and observer performance book based on RJafroc." />
+  <meta name="github-repo" content="dpc10ster/RJafrocFrocBook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 The radiological search model | The RJafroc Book" />
+  
+  <meta name="twitter:description" content="Artificial intelligence and observer performance book based on RJafroc." />
+  
+
+<meta name="author" content="Dev P. Chakraborty, PhD" />
+
+
+<meta name="date" content="2021-12-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="visual-search.html"/>
+<link rel="next" href="rsm-pred.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">RJafroc documentation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tba-how-much-finished"><i class="fa fa-check"></i>TBA How much finished</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-pdf-file-of-the-book"><i class="fa fa-check"></i>The pdf file of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-html-version-of-the-book"><i class="fa fa-check"></i>The html version of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#a-note-on-the-online-distribution-mechanism-of-the-book"><i class="fa fa-check"></i>A note on the online distribution mechanism of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributing-to-this-book"><i class="fa fa-check"></i>Contributing to this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todos-tba"><i class="fa fa-check"></i>ToDos TBA</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids"><i class="fa fa-check"></i>Coding aids</a></li>
+</ul></li>
+<li class="part"><span><b>FROC paradigm</b></span></li>
+<li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm</a><ul>
+<li class="chapter" data-level="1.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-how-much-finished"><i class="fa fa-check"></i><b>1.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="1.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>1.2</b> Introduction</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#chapter-outline"><i class="fa fa-check"></i><b>1.2.1</b> Chapter outline</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#location-specific-paradigms"><i class="fa fa-check"></i><b>1.3</b> Location specific paradigms</a></li>
+<li class="chapter" data-level="1.4" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-vis-search"><i class="fa fa-check"></i><b>1.4</b> Visual search</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-scoring-the-data"><i class="fa fa-check"></i><b>1.4.1</b> Proximity criterion and scoring the data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#multiple-marks-in-the-same-vicinity"><i class="fa fa-check"></i><b>1.4.2</b> Multiple marks in the same vicinity</a></li>
+<li class="chapter" data-level="1.4.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#historical-context"><i class="fa fa-check"></i><b>1.4.3</b> Historical context</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>1.5</b> The free-response receiver operating characteristic (FROC) plot</a></li>
+<li class="chapter" data-level="1.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>1.6</b> The “solar” analogy</a></li>
+<li class="chapter" data-level="1.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>1.7</b> Discussion and suggestions</a></li>
+<li class="chapter" data-level="1.8" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-references"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>2</b> Visual Search</a><ul>
+<li class="chapter" data-level="2.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-how-much-finished"><i class="fa fa-check"></i><b>2.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="2.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-intro"><i class="fa fa-check"></i><b>2.2</b> Introduction</a></li>
+<li class="chapter" data-level="2.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-grouping-labeling-rois"><i class="fa fa-check"></i><b>2.3</b> Grouping and labeling ROIs</a></li>
+<li class="chapter" data-level="2.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>2.4</b> Recognition vs. detection</a></li>
+<li class="chapter" data-level="2.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>2.5</b> TBA Search vs. classification</a></li>
+<li class="chapter" data-level="2.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>2.6</b> The Kundel - Nodine search model</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>2.6.1</b> Glancing / Global impression</a></li>
+<li class="chapter" data-level="2.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>2.6.2</b> Scanning / Local feature analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="visual-search.html"><a href="visual-search.html#visual-search-Kundel-Nodine-model-CAD"><i class="fa fa-check"></i><b>2.7</b> Kundel-Nodine model and CAD algorithms</a></li>
+<li class="chapter" data-level="2.8" data-path="visual-search.html"><a href="visual-search.html#visual-search-discussion-summary"><i class="fa fa-check"></i><b>2.8</b> TBA Discussion / Summary</a></li>
+<li class="chapter" data-level="2.9" data-path="visual-search.html"><a href="visual-search.html#visual-search-references"><i class="fa fa-check"></i><b>2.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>3</b> The radiological search model</a><ul>
+<li class="chapter" data-level="3.1" data-path="rsm.html"><a href="rsm.html#rsm-how-much-finished"><i class="fa fa-check"></i><b>3.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="3.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
+<li class="chapter" data-level="3.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>3.3</b> The radiological search model</a></li>
+<li class="chapter" data-level="3.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>3.4</b> RSM assumptions</a></li>
+<li class="chapter" data-level="3.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-interpretations"><i class="fa fa-check"></i><b>3.5</b> Physical interpretation of RSM parameters</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>3.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
+<li class="chapter" data-level="3.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-prime-parameter"><i class="fa fa-check"></i><b>3.5.2</b> The <span class="math inline">\(\lambda&#39;\)</span> parameter</a></li>
+<li class="chapter" data-level="3.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>3.5.3</b> The <span class="math inline">\(\nu&#39;\)</span> parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="rsm.html"><a href="rsm.html#rsm-re-parameterization"><i class="fa fa-check"></i><b>3.6</b> Model re-parameterization</a></li>
+<li class="chapter" data-level="3.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>3.7</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="rsm.html"><a href="rsm.html#rsm-references"><i class="fa fa-check"></i><b>3.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rsm-pred.html"><a href="rsm-pred.html"><i class="fa fa-check"></i><b>4</b> ROC curve implications of the RSM</a><ul>
+<li class="chapter" data-level="4.1" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-how-much-finished"><i class="fa fa-check"></i><b>4.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="4.2" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-intro"><i class="fa fa-check"></i><b>4.2</b> TBA Introduction</a></li>
+<li class="chapter" data-level="4.3" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-inferred-roc"><i class="fa fa-check"></i><b>4.3</b> Inferred ROC ratings</a></li>
+<li class="chapter" data-level="4.4" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-end-point"><i class="fa fa-check"></i><b>4.4</b> End-point of the ROC</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-constrained-end-point-abscissa"><i class="fa fa-check"></i><b>4.4.1</b> The abscissa of the ROC end-point</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-constrained-end-point-ordinate"><i class="fa fa-check"></i><b>4.4.2</b> The ordinate of the ROC end-point</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-end-point-variable-number-lesions"><i class="fa fa-check"></i><b>4.4.3</b> Variable number of lesions per case</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve"><i class="fa fa-check"></i><b>4.5</b> ROC curve</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-fpf"><i class="fa fa-check"></i><b>4.5.1</b> Derivation of FPF</a></li>
+<li class="chapter" data-level="4.5.2" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-tpf"><i class="fa fa-check"></i><b>4.5.2</b> Derivation of TPF</a></li>
+<li class="chapter" data-level="4.5.3" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-tpf-varying-lesions"><i class="fa fa-check"></i><b>4.5.3</b> Variable number of lesions per case</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-proper"><i class="fa fa-check"></i><b>4.6</b> Proper ROC curve</a></li>
+<li class="chapter" data-level="4.7" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-pdfs"><i class="fa fa-check"></i><b>4.7</b> ROC decision variable pdfs</a></li>
+<li class="chapter" data-level="4.8" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-auc"><i class="fa fa-check"></i><b>4.8</b> ROC AUC</a></li>
+<li class="chapter" data-level="4.9" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curve-aucs-zeta1"><i class="fa fa-check"></i><b>4.9</b> <span class="math inline">\(\zeta_1\)</span> dependence of ROC AUC</a></li>
+<li class="chapter" data-level="4.10" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-roc-curves"><i class="fa fa-check"></i><b>4.10</b> Example ROC curves</a></li>
+<li class="chapter" data-level="4.11" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-pdf-curves"><i class="fa fa-check"></i><b>4.11</b> Example RSM pdf curves</a></li>
+<li class="chapter" data-level="4.12" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-discussion-summary"><i class="fa fa-check"></i><b>4.12</b> TBA Discussion / Summary</a><ul>
+<li class="chapter" data-level="4.12.1" data-path="rsm-pred.html"><a href="rsm-pred.html#the-wagner-review"><i class="fa fa-check"></i><b>4.12.1</b> The Wagner review</a></li>
+</ul></li>
+<li class="chapter" data-level="4.13" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-appendix1"><i class="fa fa-check"></i><b>4.13</b> Appendix 1: Proof of continuity of slope at the end-point</a></li>
+<li class="chapter" data-level="4.14" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-appendix2"><i class="fa fa-check"></i><b>4.14</b> Appendix 2: Numerical illustration of continuity</a></li>
+<li class="chapter" data-level="4.15" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-references"><i class="fa fa-check"></i><b>4.15</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="froc-empirical.html"><a href="froc-empirical.html"><i class="fa fa-check"></i><b>5</b> Empirical plots</a><ul>
+<li class="chapter" data-level="5.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-how-much-finished"><i class="fa fa-check"></i><b>5.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="5.2" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-intro"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
+<li class="chapter" data-level="5.3" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-mark-rating-pairs"><i class="fa fa-check"></i><b>5.3</b> Mark rating pairs</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="froc-empirical.html"><a href="froc-empirical.html#latent-vs.-actual-marks"><i class="fa fa-check"></i><b>5.3.1</b> Latent vs. actual marks</a></li>
+<li class="chapter" data-level="5.3.2" data-path="froc-empirical.html"><a href="froc-empirical.html#binning-rule"><i class="fa fa-check"></i><b>5.3.2</b> Binning rule</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-notation"><i class="fa fa-check"></i><b>5.4</b> FROC notation</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="froc-empirical.html"><a href="froc-empirical.html#comments-on-table-reftabfroc-empirical-notation"><i class="fa fa-check"></i><b>5.4.1</b> Comments on Table @ref(tab:froc-empirical-notation)</a></li>
+<li class="chapter" data-level="5.4.2" data-path="froc-empirical.html"><a href="froc-empirical.html#discussion-cases-with-zero-latent-nl-marks"><i class="fa fa-check"></i><b>5.4.2</b> Discussion: cases with zero latent NL marks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-froc-plot"><i class="fa fa-check"></i><b>5.5</b> The empirical FROC</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-FROC"><i class="fa fa-check"></i><b>5.5.1</b> Definition</a></li>
+<li class="chapter" data-level="5.5.2" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-origin-trivial-point"><i class="fa fa-check"></i><b>5.5.2</b> The origin, a trivial point</a></li>
+<li class="chapter" data-level="5.5.3" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-end-point"><i class="fa fa-check"></i><b>5.5.3</b> The observed end-point and its semi-constrained property</a></li>
+<li class="chapter" data-level="5.5.4" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-froc-plot-futility-extrapolation"><i class="fa fa-check"></i><b>5.5.4</b> Futility of extrapolation outside the observed end-point</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-ROC"><i class="fa fa-check"></i><b>5.6</b> The inferred ROC plot</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="froc-empirical.html"><a href="froc-empirical.html#inferred-roc-rating"><i class="fa fa-check"></i><b>5.6.1</b> Inferred-ROC rating</a></li>
+<li class="chapter" data-level="5.6.2" data-path="froc-empirical.html"><a href="froc-empirical.html#inferred-fpf"><i class="fa fa-check"></i><b>5.6.2</b> Inferred FPF</a></li>
+<li class="chapter" data-level="5.6.3" data-path="froc-empirical.html"><a href="froc-empirical.html#inferred-tpf"><i class="fa fa-check"></i><b>5.6.3</b> Inferred TPF</a></li>
+<li class="chapter" data-level="5.6.4" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-ROC"><i class="fa fa-check"></i><b>5.6.4</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-AFROC"><i class="fa fa-check"></i><b>5.7</b> The alternative FROC (AFROC) plot</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-AFROC"><i class="fa fa-check"></i><b>5.7.1</b> Definition</a></li>
+<li class="chapter" data-level="5.7.2" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-AFROC-constrained"><i class="fa fa-check"></i><b>5.7.2</b> The constrained observed end-point of the AFROC</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-wAFROC"><i class="fa fa-check"></i><b>5.8</b> The weighted-AFROC (wAFROC) plot</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-wAFROC"><i class="fa fa-check"></i><b>5.8.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-AFROC1"><i class="fa fa-check"></i><b>5.9</b> The AFROC1 plot</a><ul>
+<li class="chapter" data-level="5.9.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-AFROC1"><i class="fa fa-check"></i><b>5.9.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-wAFROC1"><i class="fa fa-check"></i><b>5.10</b> The weighted-AFROC1 (wAFROC1) plot</a><ul>
+<li class="chapter" data-level="5.10.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-wAFROC1"><i class="fa fa-check"></i><b>5.10.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-EFROC"><i class="fa fa-check"></i><b>5.11</b> The EFROC plot</a><ul>
+<li class="chapter" data-level="5.11.1" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-definition-auc-EFROC"><i class="fa fa-check"></i><b>5.11.1</b> Definition</a></li>
+</ul></li>
+<li class="chapter" data-level="5.12" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-Discussion"><i class="fa fa-check"></i><b>5.12</b> Discussion</a></li>
+<li class="chapter" data-level="5.13" data-path="froc-empirical.html"><a href="froc-empirical.html#froc-empirical-references"><i class="fa fa-check"></i><b>5.13</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html"><i class="fa fa-check"></i><b>6</b> Empirical plot examples</a><ul>
+<li class="chapter" data-level="6.1" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="6.2" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-intro"><i class="fa fa-check"></i><b>6.2</b> Introduction</a></li>
+<li class="chapter" data-level="6.3" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#raw-frocafrocroc-plots"><i class="fa fa-check"></i><b>6.3</b> Raw FROC/AFROC/ROC plots</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-raw-plots-code1"><i class="fa fa-check"></i><b>6.3.1</b> Code for raw plots</a></li>
+<li class="chapter" data-level="6.3.2" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#explanation-of-the-code"><i class="fa fa-check"></i><b>6.3.2</b> Explanation of the code</a></li>
+<li class="chapter" data-level="6.3.3" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#key-differences-from-the-roc-paradigm"><i class="fa fa-check"></i><b>6.3.3</b> Key differences from the ROC paradigm:</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#the-chance-level-froc-and-afroc"><i class="fa fa-check"></i><b>6.4</b> The chance level FROC and AFROC</a></li>
+<li class="chapter" data-level="6.5" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#location-level-true-negatives"><i class="fa fa-check"></i><b>6.5</b> Location-level “true-negatives”</a></li>
+<li class="chapter" data-level="6.6" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#binned-frocafrocroc-plots"><i class="fa fa-check"></i><b>6.6</b> Binned FROC/AFROC/ROC plots</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#binned-plots-code1"><i class="fa fa-check"></i><b>6.6.1</b> Code for binned plots</a></li>
+<li class="chapter" data-level="6.6.2" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#effect-of-seed-on-binned-plots"><i class="fa fa-check"></i><b>6.6.2</b> Effect of <code>seed</code> on binned plots</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-str-binned-data"><i class="fa fa-check"></i><b>6.7</b> Structure of the binned data</a></li>
+<li class="chapter" data-level="6.8" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-summary"><i class="fa fa-check"></i><b>6.8</b> Summary</a></li>
+<li class="chapter" data-level="6.9" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-Discussion"><i class="fa fa-check"></i><b>6.9</b> Discussion</a></li>
+<li class="chapter" data-level="6.10" data-path="froc-empirical-examples.html"><a href="froc-empirical-examples.html#froc-empirical-examples-references"><i class="fa fa-check"></i><b>6.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html"><i class="fa fa-check"></i><b>7</b> FROC vs. wAFROC</a><ul>
+<li class="chapter" data-level="7.1" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="7.2" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-intro"><i class="fa fa-check"></i><b>7.2</b> Introduction</a></li>
+<li class="chapter" data-level="7.3" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs.-wafroc"><i class="fa fa-check"></i><b>7.3</b> FROC vs. wAFROC</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#moderate-difference-in-performance"><i class="fa fa-check"></i><b>7.3.1</b> Moderate difference in performance</a></li>
+<li class="chapter" data-level="7.3.2" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#large-difference-in-performance"><i class="fa fa-check"></i><b>7.3.2</b> Large difference in performance</a></li>
+<li class="chapter" data-level="7.3.3" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#small-difference-in-performance-and-identical-thresholds"><i class="fa fa-check"></i><b>7.3.3</b> Small difference in performance and identical thresholds</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#summary-of-simulations"><i class="fa fa-check"></i><b>7.4</b> Summary of simulations</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#summary-of-r1-simulations"><i class="fa fa-check"></i><b>7.4.1</b> Summary of R1 simulations</a></li>
+<li class="chapter" data-level="7.4.2" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#summary-of-r2-simulations"><i class="fa fa-check"></i><b>7.4.2</b> Summary of R2 simulations</a></li>
+<li class="chapter" data-level="7.4.3" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-comments"><i class="fa fa-check"></i><b>7.4.3</b> Comments</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-effect-sizes"><i class="fa fa-check"></i><b>7.5</b> Effect size comparison</a></li>
+<li class="chapter" data-level="7.6" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-peformance-depends-on-zeta1"><i class="fa fa-check"></i><b>7.6</b> Performance depends on <span class="math inline">\(\zeta_1\)</span></a></li>
+<li class="chapter" data-level="7.7" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-Discussion"><i class="fa fa-check"></i><b>7.7</b> Discussion</a></li>
+<li class="chapter" data-level="7.8" data-path="froc-vs-wafroc.html"><a href="froc-vs-wafroc.html#froc-vs-wafroc-references"><i class="fa fa-check"></i><b>7.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="froc-meanings.html"><a href="froc-meanings.html"><i class="fa fa-check"></i><b>8</b> Meanings of FROC figures of merit</a><ul>
+<li class="chapter" data-level="8.1" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="8.2" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-intro"><i class="fa fa-check"></i><b>8.2</b> Introduction</a></li>
+<li class="chapter" data-level="8.3" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-afroc"><i class="fa fa-check"></i><b>8.3</b> Empirical AFROC FOM-statistic</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="froc-meanings.html"><a href="froc-meanings.html#upper-limit-for-afroc-fom-statistic"><i class="fa fa-check"></i><b>8.3.1</b> Upper limit for AFROC FOM-statistic</a></li>
+<li class="chapter" data-level="8.3.2" data-path="froc-meanings.html"><a href="froc-meanings.html#range-of-afroc-fom-statistic"><i class="fa fa-check"></i><b>8.3.2</b> Range of AFROC FOM-statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-wafroc"><i class="fa fa-check"></i><b>8.4</b> Empirical weighted-AFROC FOM-statistic</a></li>
+<li class="chapter" data-level="8.5" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-two-theorems"><i class="fa fa-check"></i><b>8.5</b> Two Theorems</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-two-theorems-1"><i class="fa fa-check"></i><b>8.5.1</b> Theorem 1</a></li>
+<li class="chapter" data-level="8.5.2" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-two-theorems-2"><i class="fa fa-check"></i><b>8.5.2</b> Theorem 2</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-numerical-illustrations"><i class="fa fa-check"></i><b>8.6</b> Numerical illustrations</a></li>
+<li class="chapter" data-level="8.7" data-path="froc-meanings.html"><a href="froc-meanings.html#summary-tables-of-ratings"><i class="fa fa-check"></i><b>8.7</b> Summary tables of ratings</a></li>
+<li class="chapter" data-level="8.8" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-AFROC-plot-first-principles"><i class="fa fa-check"></i><b>8.8</b> AFROC plot from first principles</a></li>
+<li class="chapter" data-level="8.9" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-wAFROC-plot-first-principles"><i class="fa fa-check"></i><b>8.9</b> wAFROC plot from first principles</a></li>
+<li class="chapter" data-level="8.10" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-physical-interpretions"><i class="fa fa-check"></i><b>8.10</b> Physical interpretations</a><ul>
+<li class="chapter" data-level="8.10.1" data-path="froc-meanings.html"><a href="froc-meanings.html#physical-interpretation-of-area-under-afroc"><i class="fa fa-check"></i><b>8.10.1</b> Physical interpretation of area under AFROC</a></li>
+<li class="chapter" data-level="8.10.2" data-path="froc-meanings.html"><a href="froc-meanings.html#physical-interpretation-of-area-under-wafroc"><i class="fa fa-check"></i><b>8.10.2</b> Physical interpretation of area under wAFROC</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-Discussion"><i class="fa fa-check"></i><b>8.11</b> Discussion</a></li>
+<li class="chapter" data-level="8.12" data-path="froc-meanings.html"><a href="froc-meanings.html#froc-meanings-references"><i class="fa fa-check"></i><b>8.12</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rsm-sc.html"><a href="rsm-sc.html"><i class="fa fa-check"></i><b>9</b> Search and classification performances</a><ul>
+<li class="chapter" data-level="9.1" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="9.2" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-intro"><i class="fa fa-check"></i><b>9.2</b> Introduction</a></li>
+<li class="chapter" data-level="9.3" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-end-point"><i class="fa fa-check"></i><b>9.3</b> Location of ROC end-point</a></li>
+<li class="chapter" data-level="9.4" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-quantifying"><i class="fa fa-check"></i><b>9.4</b> Quantifying search performance</a></li>
+<li class="chapter" data-level="9.5" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-performance"><i class="fa fa-check"></i><b>9.5</b> Quantifying lesion-classification performance</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-search-classification-2afc-lke"><i class="fa fa-check"></i><b>9.5.1</b> Lesion-classification performance and the 2AFC LKE task</a></li>
+<li class="chapter" data-level="9.5.2" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-search-classification-significance"><i class="fa fa-check"></i><b>9.5.2</b> Significance of measuring search and lesion-classification performance</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-discussion-summary"><i class="fa fa-check"></i><b>9.6</b> Discussion / Summary</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="rsm-sc.html"><a href="rsm-sc.html#the-wagner-review-1"><i class="fa fa-check"></i><b>9.6.1</b> The Wagner review</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-references"><i class="fa fa-check"></i><b>9.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html"><i class="fa fa-check"></i><b>10</b> The FROC should not be used to measure performance</a><ul>
+<li class="chapter" data-level="10.1" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="10.2" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-intro"><i class="fa fa-check"></i><b>10.2</b> Introduction</a></li>
+<li class="chapter" data-level="10.3" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-froc-poor"><i class="fa fa-check"></i><b>10.3</b> The FROC curve is a poor descriptor of search performance</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#clinically-relevant-portion-of-an-operating-characteristic-rsm-goodbye-froc-clinically-relevant"><i class="fa fa-check"></i><b>10.3.1</b> Clinically relevant portion of an operating characteristic #rsm-goodbye-froc-clinically-relevant}</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-discussion-summary"><i class="fa fa-check"></i><b>10.4</b> Discussion / Summary</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#the-wagner-review-2"><i class="fa fa-check"></i><b>10.4.1</b> The Wagner review</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="rsm-goodbye-froc.html"><a href="rsm-goodbye-froc.html#rsm-goodbye-froc-references"><i class="fa fa-check"></i><b>10.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>11</b> RSM fitting</a><ul>
+<li class="chapter" data-level="11.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="11.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-intro"><i class="fa fa-check"></i><b>11.2</b> Introduction</a></li>
+<li class="chapter" data-level="11.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-likelihood"><i class="fa fa-check"></i><b>11.3</b> FROC likelihood function</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-nls"><i class="fa fa-check"></i><b>11.3.1</b> Contribution of NLs</a></li>
+<li class="chapter" data-level="11.3.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-lls"><i class="fa fa-check"></i><b>11.3.2</b> Contribution of LLs</a></li>
+<li class="chapter" data-level="11.3.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-degeneracy"><i class="fa fa-check"></i><b>11.3.3</b> Degeneracy problems</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-idca"><i class="fa fa-check"></i><b>11.4</b> IDCA Likelihood function</a></li>
+<li class="chapter" data-level="11.5" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-roc-likelihood"><i class="fa fa-check"></i><b>11.5</b> ROC Likelihood function</a></li>
+<li class="chapter" data-level="11.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-implementation"><i class="fa fa-check"></i><b>11.6</b> <code>FitRsmROC</code> implementation</a></li>
+<li class="chapter" data-level="11.7" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example"><i class="fa fa-check"></i><b>11.7</b> <code>FitRsmROC</code> usage example</a></li>
+<li class="chapter" data-level="11.8" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>11.8</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="11.9" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-references"><i class="fa fa-check"></i><b>11.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>12</b> Three proper ROC fits</a><ul>
+<li class="chapter" data-level="12.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-how-much-finished"><i class="fa fa-check"></i><b>12.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="12.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-intro"><i class="fa fa-check"></i><b>12.2</b> Introduction</a></li>
+<li class="chapter" data-level="12.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-applications"><i class="fa fa-check"></i><b>12.3</b> Applications</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-two-datasets"><i class="fa fa-check"></i><b>12.3.1</b> Application to two datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-composite-plots"><i class="fa fa-check"></i><b>12.4</b> Displaying composite plots</a></li>
+<li class="chapter" data-level="12.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>12.5</b> Displaying RSM parameters</a></li>
+<li class="chapter" data-level="12.6" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-cbm-parameters"><i class="fa fa-check"></i><b>12.6</b> Displaying CBM parameters</a></li>
+<li class="chapter" data-level="12.7" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-proproc-parameters"><i class="fa fa-check"></i><b>12.7</b> Displaying PROPROC parameters</a></li>
+<li class="chapter" data-level="12.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>12.8</b> Overview of findings</a><ul>
+<li class="chapter" data-level="12.8.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes"><i class="fa fa-check"></i><b>12.8.1</b> Slopes</a></li>
+<li class="chapter" data-level="12.8.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-confidence-intervals"><i class="fa fa-check"></i><b>12.8.2</b> Confidence intervals</a></li>
+<li class="chapter" data-level="12.8.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes-confidence-intervals-summary"><i class="fa fa-check"></i><b>12.8.3</b> Summary of slopes and confidence intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-discussion-summary"><i class="fa fa-check"></i><b>12.9</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="12.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a></li>
+<li class="chapter" data-level="12.11" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-14-datasets"><i class="fa fa-check"></i><b>12.11</b> Datasets</a></li>
+<li class="chapter" data-level="12.12" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-one-dataset-proproc"><i class="fa fa-check"></i><b>12.12</b> Location of PROPROC files</a></li>
+<li class="chapter" data-level="12.13" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results"><i class="fa fa-check"></i><b>12.13</b> Location of pre-analyzed results</a></li>
+<li class="chapter" data-level="12.14" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-representative-plots-van-dyke"><i class="fa fa-check"></i><b>12.14</b> Plots for Van Dyke dataset</a></li>
+<li class="chapter" data-level="12.15" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-references"><i class="fa fa-check"></i><b>12.15</b> References</a></li>
+</ul></li>
+<li class="part"><span><b>CAD</b></span></li>
+<li class="chapter" data-level="13" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>13</b> Standalone CAD vs. Radiologists</a><ul>
+<li class="chapter" data-level="13.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>13.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="13.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-abstract"><i class="fa fa-check"></i><b>13.2</b> Abstract</a></li>
+<li class="chapter" data-level="13.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-ker-words"><i class="fa fa-check"></i><b>13.3</b> Keywords</a></li>
+<li class="chapter" data-level="13.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>13.4</b> Introduction</a></li>
+<li class="chapter" data-level="13.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>13.5</b> Methods</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>13.5.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
+<li class="chapter" data-level="13.5.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>13.5.2</b> The 1T-RRFC analysis model</a></li>
+<li class="chapter" data-level="13.5.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>13.5.3</b> The 2T-RRRC analysis model</a></li>
+<li class="chapter" data-level="13.5.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-1TRRRC-anlaysis"><i class="fa fa-check"></i><b>13.5.4</b> The 1T-RRRC analysis model</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>13.6</b> Software implementation</a></li>
+<li class="chapter" data-level="13.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>13.7</b> Results</a></li>
+<li class="chapter" data-level="13.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>13.8</b> Discussion</a></li>
+<li class="chapter" data-level="13.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix"><i class="fa fa-check"></i><b>13.9</b> Appendix</a><ul>
+<li class="chapter" data-level="13.9.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1-1"><i class="fa fa-check"></i><b>13.9.1</b> Example 1</a></li>
+<li class="chapter" data-level="13.9.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2-1"><i class="fa fa-check"></i><b>13.9.2</b> Example 2</a></li>
+<li class="chapter" data-level="13.9.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>13.9.3</b> Example 3</a></li>
+</ul></li>
+<li class="chapter" data-level="13.10" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-references"><i class="fa fa-check"></i><b>13.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>14</b> Optimal operating point on FROC</a><ul>
+<li class="chapter" data-level="14.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>14.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="14.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>14.2</b> Introduction</a></li>
+<li class="chapter" data-level="14.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>14.3</b> Methods</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="optim-op-point.html"><a href="optim-op-point.html#functions-to-be-maximized"><i class="fa fa-check"></i><b>14.3.1</b> Functions to be maximized</a></li>
+<li class="chapter" data-level="14.3.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>14.3.2</b> Vary lambda</a></li>
+<li class="chapter" data-level="14.3.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>14.3.3</b> Vary nu</a></li>
+<li class="chapter" data-level="14.3.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>14.3.4</b> Vary mu</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>14.4</b> Using the method</a></li>
+<li class="chapter" data-level="14.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>14.5</b> An application</a></li>
+<li class="chapter" data-level="14.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>14.6</b> Discussion</a></li>
+<li class="chapter" data-level="14.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-references"><i class="fa fa-check"></i><b>14.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>REFERENCES</a></li>
+<li class="chapter" data-level="15" data-path="classification-tasks.html"><a href="classification-tasks.html"><i class="fa fa-check"></i><b>15</b> Localization - classification tasks</a><ul>
+<li class="chapter" data-level="15.1" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-how-much-finished"><i class="fa fa-check"></i><b>15.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="15.2" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-intro"><i class="fa fa-check"></i><b>15.2</b> Introduction</a></li>
+<li class="chapter" data-level="15.3" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-abbreviations"><i class="fa fa-check"></i><b>15.3</b> Abbreviations</a></li>
+<li class="chapter" data-level="15.4" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-basic-idea"><i class="fa fa-check"></i><b>15.4</b> History and basic idea</a></li>
+<li class="chapter" data-level="15.5" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1"><i class="fa fa-check"></i><b>15.5</b> First example, File1.xlsx</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1-truth"><i class="fa fa-check"></i><b>15.5.1</b> <code>Truth</code> sheet</a></li>
+<li class="chapter" data-level="15.5.2" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1-tp"><i class="fa fa-check"></i><b>15.5.2</b> <code>TP</code> sheet</a></li>
+<li class="chapter" data-level="15.5.3" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example1-fp"><i class="fa fa-check"></i><b>15.5.3</b> <code>FP</code> sheet</a></li>
+<li class="chapter" data-level="15.5.4" data-path="classification-tasks.html"><a href="classification-tasks.html#the-two-ratings-arrays"><i class="fa fa-check"></i><b>15.5.4</b> The two ratings arrays</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example2"><i class="fa fa-check"></i><b>15.6</b> Second example, File2.xlsx</a></li>
+<li class="chapter" data-level="15.7" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example3"><i class="fa fa-check"></i><b>15.7</b> Third example, File3.xlsx</a></li>
+<li class="chapter" data-level="15.8" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example4"><i class="fa fa-check"></i><b>15.8</b> Fourth example, File4.xlsx</a></li>
+<li class="chapter" data-level="15.9" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-example5"><i class="fa fa-check"></i><b>15.9</b> Fifth example, File5.xlsx</a></li>
+<li class="chapter" data-level="15.10" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-precautions"><i class="fa fa-check"></i><b>15.10</b> Precautions</a></li>
+<li class="chapter" data-level="15.11" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks-discussion"><i class="fa fa-check"></i><b>15.11</b> Discussion</a></li>
+<li class="chapter" data-level="15.12" data-path="classification-tasks.html"><a href="classification-tasks.html#classification-tasks--references"><i class="fa fa-check"></i><b>15.12</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html"><i class="fa fa-check"></i><b>16</b> Split Plot Study Design</a><ul>
+<li class="chapter" data-level="16.1" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html#SplitPlotChapter-how-much-finished"><i class="fa fa-check"></i><b>16.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="16.2" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html#mean-square-rt"><i class="fa fa-check"></i><b>16.2</b> Mean Square R(T)</a></li>
+<li class="chapter" data-level="16.3" data-path="SplitPlotChapter.html"><a href="SplitPlotChapter.html#SplitPlotChapter-references"><i class="fa fa-check"></i><b>16.3</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The RJafroc Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="rsm" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> The radiological search model</h1>
+<div id="rsm-how-much-finished" class="section level2">
+<h2><span class="header-section-number">3.1</span> TBA How much finished</h2>
+<p>70%</p>
+</div>
+<div id="rsm-intro" class="section level2">
+<h2><span class="header-section-number">3.2</span> Introduction</h2>
+<p>Brief accounts of the radiological search model (RSM) were presented earlier in connection with the simulator used to generate FROC data. This chapter describes the model in more detail.</p>
+<p>All models of ROC data <em>not incorporating search</em> involve two fundamental parameters (i.e, not including binning-related threshold parameters). For example, the unequal variance binormal model in Chapter <a href="#binormal-model"><strong>??</strong></a> requires the <span class="math inline">\(a,b\)</span> parameters. Alternative ROC models described in TBA Chapter 20 also require two fundamental parameters.</p>
+<p><em>It turns out that all that is needed to model as seemingly complex a process as visual search, at least to first order, is one additional fundamental parameter</em>. The RSM contains three fundamental parameters: <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span>. However, it is easier to introduce the RSM via <span class="math inline">\(\mu\)</span> and intermediate primed parameters, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span>. The model is then re-parameterized to take into account that <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> must depend on <span class="math inline">\(\mu\)</span> via un-primed parameters <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> <em>which are intrinsic parameters</em>, i.e., independent of <span class="math inline">\(\mu\)</span>.</p>
+<p>The RSM is a model of the FROC paradigm. It accounts for all features characterizing the FROC paradigm, including localization and the random non-negative numbers of NLs and LLs per image.</p>
+</div>
+<div id="rsm-details" class="section level2">
+<h2><span class="header-section-number">3.3</span> The radiological search model</h2>
+<p>The radiological search model (RSM) for the free-response paradigm is a statistical parameterization of the Nodine-Kundel model. It consists of:</p>
+<ul>
+<li><p>A <em>search stage</em> corresponding to the initial glance in the Nodine-Kundel model, in which suspicious regions, i.e., the latent marks, are flagged for subsequent foveal scanning. The total number of latent marks on a case is <span class="math inline">\(\geq 0\)</span>; some cases may have zero latent marks, a fact that will turn out to have important consequences for the shapes of all RSM predicted operating characteristics.</p></li>
+<li><p>A <em>decision stage</em> during which each latent mark is closely examined (via foveal scanning), relevant features are extracted and analyzed and the observer calculates a decision variable or z-sample for each latent mark. The number of z-samples equals the number of latent marks.</p></li>
+<li><p>If the z-sample exceeds a pre-selected minimum reporting threshold the location is marked, i.e., the latent mark is recorded as an actual mark.</p></li>
+<li><p>Latent marks can be either latent NLs (corresponding to non-diseased regions) or latent LLs (corresponding to diseased regions). The number of latent NLs on a case is denoted <span class="math inline">\(l_1\)</span>. The number of latent LLs on a diseased case is denoted <span class="math inline">\(l_2\)</span>. Latent NLs can occur on non-diseased and diseased cases, but latent LLs can only occur on diseased cases. We will initially assume that every diseased case has <span class="math inline">\(L\)</span> actual lesions. Later this will be extended to arbitrary number of lesions per diseased case. Since the number of latent LLs cannot exceed the number of lesions, <span class="math inline">\(0 \leq l_2 \leq L\)</span> . The symbol <span class="math inline">\(l_s\)</span> denotes a location with site-level truth state <span class="math inline">\(s\)</span>, where <span class="math inline">\(s = 1\)</span> for a NL and <span class="math inline">\(s = 2\)</span> for a LL.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p></li>
+</ul>
+</div>
+<div id="rsm-assumptions" class="section level2">
+<h2><span class="header-section-number">3.4</span> RSM assumptions</h2>
+<p><strong>Assumption 1:</strong> The number of latent NLs, <span class="math inline">\(l_1 \geq 0\)</span>, is sampled from the Poisson distribution <span class="math inline">\(\text{Poi}\)</span> with mean <span class="math inline">\(\lambda&#39;\)</span>:</p>
+<p><span class="math display" id="eq:rsm-poisson-sampling">\[\begin{equation} 
+l_1 \sim \text{Poi}\left ( \lambda&#39; \right ) 
+\tag{3.1}
+\end{equation}\]</span></p>
+<p>The probability mass function (pmf) of the Poisson distribution is defined by:</p>
+<p><span class="math display" id="eq:rsm-poisson-pmf">\[\begin{equation} 
+\text{pmf}_{Poi}\left ( l_1, \lambda&#39; \right ) = exp\left ( -\lambda&#39; \right ) \frac{{(\lambda&#39;)^{l_1}}}{(l_1&#39;)!}
+\tag{3.2}
+\end{equation}\]</span></p>
+<p><strong>Assumption 2:</strong> The number of latent LLs, <span class="math inline">\(l_2\)</span>, where <span class="math inline">\(0 \leq l_2 \leq L\)</span>, is sampled from the binomial distribution <span class="math inline">\(\text{Bin}\)</span> with success probability <span class="math inline">\(\nu&#39;\)</span> and trial size <span class="math inline">\(L\)</span>:</p>
+<p><span class="math display" id="eq:rsm-binomial-sampling">\[\begin{equation} 
+l_2 \sim \text{Bin}\left ( L, \nu&#39; \right ) 
+\tag{3.3}
+\end{equation}\]</span></p>
+<p>The pmf of the binomial distribution is defined by:</p>
+<p><span class="math display" id="eq:rsm-binomial-pmf">\[\begin{equation} 
+\text{pmf}_{Bin}\left ( l_2, L, \nu&#39; \right ) = \binom{L}{l_2} \left (\nu&#39;  \right )^{l_2} \left (1-\nu&#39;  \right )^{L-l_2}
+\tag{3.4}
+\end{equation}\]</span></p>
+<p><strong>Assumption 3:</strong> Each latent mark is associated with a z-sample. That for a latent NL is denoted <span class="math inline">\(z_{l_1}\)</span> while that for a latent LL is denoted <span class="math inline">\(z_{l_2}\)</span>. Latent NLs can occur on non-diseased and diseased cases while latent LLs can only occur on diseased cases.</p>
+<p><strong>Assumption 4:</strong> For latent NLs the z-samples are obtained by sampling <span class="math inline">\(N \left ( 0, 1 \right )\)</span>:</p>
+<p><span class="math display" id="eq:rsm-sampling-l1">\[\begin{equation} 
+z_{l_1} \sim N \left ( 0, 1 \right )
+\tag{3.5}
+\end{equation}\]</span></p>
+<p><strong>Assumption 5:</strong> For latent LLs the z-samples are obtained by sampling <span class="math inline">\(N \left ( \mu, 1 \right )\)</span>:</p>
+<p><span class="math display" id="eq:rsm-sampling-l2">\[\begin{equation} 
+z_{l_2} \sim N \left ( \mu, 1 \right )
+\tag{3.6}
+\end{equation}\]</span></p>
+<p>The probability density function <span class="math inline">\(\phi\left ( z | \mu \right )\)</span> of the normal distribution <span class="math inline">\(N \left ( \mu, 1 \right )\)</span> is defined by:</p>
+<p><span class="math display" id="eq:rsm-pdf-phi-mu">\[\begin{equation} 
+\phi\left ( z | \mu \right )=\frac{1}{\sqrt{2\pi}}\exp\left ( -\frac{(z-\mu)^2}{2} \right )
+\tag{3.7}
+\end{equation}\]</span></p>
+<p><strong>Binning rule:</strong> In an FROC study with R ratings, the observer adopts <span class="math inline">\(R\)</span> ordered cutoffs <span class="math inline">\(\zeta_r\)</span>, where <span class="math inline">\(\left ( r = 1, 2, ..., R \right )\)</span>. Defining <span class="math inline">\(\zeta_0 = -\infty\)</span> and <span class="math inline">\(\zeta_{R+1} = \infty\)</span>, then if <span class="math inline">\(\zeta_r \leq z_{l_s} &lt; \zeta_{r+1}\)</span> the corresponding latent site is marked and rated in bin <span class="math inline">\(r\)</span>, and if <span class="math inline">\(z_{l_s} \leq \zeta_1\)</span> the site is not marked.</p>
+<p><strong>Mark location:</strong> The location of the mark is assumed to be at the exact center of the latent site that exceeded a cutoff and an infinitely precise proximity criterion is adopted. Consequently, there is no confusing a mark made because of a latent LL z-sample exceeding the cutoff with one made because of a latent NL z-sample exceeding the cutoff. Therefore, any mark made because of a latent NL z-sample that satisfies <span class="math inline">\(\zeta_r \leq z_{l_1} &lt; \zeta_{r+1}\)</span> will be scored as a non-lesion localization (NL) and rated <span class="math inline">\(r\)</span>. Likewise, any mark made because of a latent LL z-sample that satisfies <span class="math inline">\(\zeta_r \leq z_{l_2} &lt; \zeta_{r+1}\)</span> will be scored as a lesion-localization (LL) and rated <span class="math inline">\(r\)</span>.</p>
+<p><strong>Rating assigned to unmarked sites:</strong> Unmarked LLs are assigned the zero rating: even lesions that were not flagged by the search stage, and therefore do not qualify as latent LLs, are assigned the zero rating. This is because they represent observable events. In contrast, unmarked latent NLs are unobservable events (unlike lesions, there is no a-priori reader-independent list of non-lesion locations; in fact, what constitutes a NL is reader dependent).</p>
+<p>By choosing <span class="math inline">\(R\)</span> large enough, the preceding discrete rating model is applicable to continuous z-samples.</p>
+</div>
+<div id="rsm-parameter-interpretations" class="section level2">
+<h2><span class="header-section-number">3.5</span> Physical interpretation of RSM parameters</h2>
+<p>The parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> have the following meanings:</p>
+<div id="rsm-mu-parameter" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> The <span class="math inline">\(\mu\)</span> parameter</h3>
+<p>The <span class="math inline">\(\mu\)</span> parameter is the lesion contrast-to-noise-ratio, or more accurately, the perceptual signal to noise ratio <em>pSNR</em> introduced in (book) Chapter 12, between latent NLs and latent LLs. It is not the pSNR of the latent LL relative to its immediate surround. For structured backgrounds - as opposed to homogeneous backgrounds - pSNR is determined by the competition for the observer’s foveal attention from other regions, outside the immediate surround, that could be mistaken for lesions.</p>
+<p>The <span class="math inline">\(\mu\)</span> parameter is similar to detectability index <span class="math inline">\(d&#39;\)</span>, which is the separation parameter of two unit normal distributions required to achieve the observed probability of correct choice (PC) in a two alternative forced choice (2AFC) task between cued (i.e., pointed to by toggle-able arrows) NLs and cued LLs. Individually and for each reader one determines the locations of the latent marks using eye-tracking apparatus and then runs a 2AFC study as follows: pairs of images are shown, each with a cued location, one a latent NL and the other a latent LL, where all locations were recorded in prior eye-tracking sessions for the specific radiologist. The radiologist’s task is to pick the image with the latent LL. The probability correct <span class="math inline">\(\text{PC}\)</span> in this task is related to the <span class="math inline">\(d&#39;\)</span> parameter by:</p>
+<p><span class="math display" id="eq:rsm-mu-2afc">\[\begin{equation} 
+\mu = \sqrt{2} \Phi^{-1} \left ( \text{PC} \right )
+\tag{3.8}
+\end{equation}\]</span></p>
+<p>The radiologist on whom the eye-tracking measurements are performed and the one who performs the two alternative forced choice tasks must be the same, as two radiologists may not agree on latent NL marks. A complication in conducting such a study is that because of memory effects a lesion can only be shown once to each reader: clinical images are distinctive - once a radiologist has found a lesion in a clinical image, that event becomes imprinted in long-term memory; one cannot repeatedly compare this lesion to other NLs in the 2AFC task as the radiologist will always pick the remembered lesion.</p>
+</div>
+<div id="rsm-summary-lambda-prime-parameter" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> The <span class="math inline">\(\lambda&#39;\)</span> parameter</h3>
+<p>The <span class="math inline">\(\lambda&#39;\)</span> parameter determines the tendency of the observer to generate latent NLs. The mean number of latent NLs per case is an estimate of <span class="math inline">\(\lambda&#39;\)</span>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<p>Consider two observers, one with <span class="math inline">\(\lambda&#39; = 1\)</span> and the other with <span class="math inline">\(\lambda&#39; = 2\)</span>. While one cannot predict the exact number of latent NLs on any specific case, one can predict the average number of latent NLs on a given case set.</p>
+<p>In the following examples the number of samples has been set to <span class="math inline">\(K_1=100\)</span> (the first argument to <code>rpois()</code>; the second argument is <span class="math inline">\(\lambda&#39;\)</span>).</p>
+<div id="example-1" class="section level4">
+<h4><span class="header-section-number">3.5.2.1</span> Example 1</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rsm.html#cb1-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb1-2"><a href="rsm.html#cb1-2"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb1-3"><a href="rsm.html#cb1-3"></a>samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## mean(samples1) =  1.01</code></pre>
+<pre><code>## samples1[1:10] =  0 1 1 2 0 2 3 1 1 0</code></pre>
+<p>For this observer, <span class="math inline">\(\lambda&#39; = 1\)</span>, the first case generated zero latent NLs, the 2nd and 3rd cases generated one NL each, the third case generated 2 NLs, etc.</p>
+</div>
+<div id="example-2" class="section level4">
+<h4><span class="header-section-number">3.5.2.2</span> Example 2</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="rsm.html#cb4-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb4-2"><a href="rsm.html#cb4-2"></a>samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## mean(samples2) =  2.02</code></pre>
+<pre><code>## samples2[1:10] =  1 1 2 4 1 4 4 2 2 0</code></pre>
+<p>For the second observer <span class="math inline">\(\lambda&#39; = 2\)</span>, the first and second case generated one latent NL each, the third generated two, etc. The average number of latent NL marks per case for the 1<sup>st</sup> observer is 1.01 and that for the 2<sup>nd</sup> one is 2.02.</p>
+</div>
+<div id="confidence-intervals" class="section level4">
+<h4><span class="header-section-number">3.5.2.3</span> Confidence intervals</h4>
+<p>The following code illustrates Poisson sampling and estimation of an exact confidence interval for the mean for 100 samples from two Poisson distributions.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="rsm.html#cb7-1"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb7-2"><a href="rsm.html#cb7-2"></a>lambdaP &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb7-3"><a href="rsm.html#cb7-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">1</span>])</span>
+<span id="cb7-4"><a href="rsm.html#cb7-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">2</span>])</span>
+<span id="cb7-5"><a href="rsm.html#cb7-5"></a></span>
+<span id="cb7-6"><a href="rsm.html#cb7-6"></a>ret11 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples1),K1)</span>
+<span id="cb7-7"><a href="rsm.html#cb7-7"></a>ret21 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples2),K1)</span></code></pre></div>
+<pre><code>## K1 =  100 , lambdaP 1st reader =  1 , lambdaP 2nd reader =  2</code></pre>
+<pre><code>## obs. mean, reader 1 =  1.01</code></pre>
+<pre><code>## obs. mean, reader 2 =  2.02</code></pre>
+<pre><code>## Rdr. 1: 95% CI =  0.8226616 1.227242</code></pre>
+<pre><code>## Rdr. 2: 95% CI =  1.751026 2.318599</code></pre>
+<p>For reader 1 the estimate of the Poisson parameter (the mean parameter of the Poisson distribution is frequently referred to as the Poisson parameter) is 1.01 with 95% confidence interval (0.823, 1.227); for reader 2 the corresponding estimates are 2.02 and (1.751, 2.319). As the number of cases increases, the confidence interval shrinks. For example, with 10000 cases, i.e., 100 times the value in the previous example:</p>
+<pre><code>## K1 =  10000 , lambdaP 1st reader =  1 , lambdaP 2nd reader =  2</code></pre>
+<pre><code>## obs. mean, reader 1 =  1.0055</code></pre>
+<pre><code>## obs. mean, reader 2 =  2.006</code></pre>
+<pre><code>## Rdr. 1: 95% CI =  0.9859414 1.025349</code></pre>
+<pre><code>## Rdr. 2: 95% CI =  1.978335 2.033955</code></pre>
+<p>This time for reader 1, the estimate of the Poisson parameter is 1.01 with 95% confidence interval (0.986, 1.025); for reader 2 the corresponding estimate is 2.01 with 95% confidence interval (1.978, 2.034). The width of the confidence interval is inversely proportional to the square root of the number of cases (the example below is for reader 1):</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="rsm.html#cb18-1"></a>ret11<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret11<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] 0.40458</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="rsm.html#cb20-1"></a>ret12<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret12<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] 0.03940756</code></pre>
+<p>Since the number of cases was increased by a factor of 100, the width decreased by a factor of 10, the square-root of the ratio of the numbers of cases.</p>
+</div>
+</div>
+<div id="rsm-summary-nu-parameter" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> The <span class="math inline">\(\nu&#39;\)</span> parameter</h3>
+<p>The <span class="math inline">\(\nu&#39;\)</span> parameter determines the ability of the observer to find lesions. Assuming the same number of lesions per diseased case, the mean fraction of latent LLs per diseased case is an estimate of <span class="math inline">\(\nu&#39;\)</span>.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> Consider two observers, one with <span class="math inline">\(\nu&#39; = 0.5\)</span> and the other with <span class="math inline">\(\nu&#39; = 0.9\)</span>. Again, while one cannot predict the precise number of latent LLs on any specific diseased case, or which specific lesions will be correctly localized, one can predict the average number of latent LLs per diseased case.</p>
+<p>The following code also uses <span class="math inline">\(K_2 = 100\)</span> samples, the number of diseased cases, each with one lesion.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="rsm.html#cb22-1"></a>K2 &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb22-2"><a href="rsm.html#cb22-2"></a>L &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb22-3"><a href="rsm.html#cb22-3"></a>nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
+<span id="cb22-4"><a href="rsm.html#cb22-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP1)</span>
+<span id="cb22-5"><a href="rsm.html#cb22-5"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP2)</span>
+<span id="cb22-6"><a href="rsm.html#cb22-6"></a></span>
+<span id="cb22-7"><a href="rsm.html#cb22-7"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1),K2<span class="op">*</span>L)</span>
+<span id="cb22-8"><a href="rsm.html#cb22-8"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2),K2<span class="op">*</span>L)</span></code></pre></div>
+<pre><code>## K2 =  100 , nuP 1st reader =  0.5 , nuP 2nd reader =  0.9</code></pre>
+<pre><code>## mean, reader 1 =  0.48</code></pre>
+<pre><code>## mean, reader 2 =  0.94</code></pre>
+<pre><code>## Rdr. 1: 95% CI =  0.3790055 0.5822102</code></pre>
+<pre><code>## Rdr. 2: 95% CI =  0.8739701 0.9776651</code></pre>
+<p>The result shows that for reader 1 the estimate of the binomial success rate parameter is 0.48 with 95% confidence interval (0.38, 0.58). For reader 2 the corresponding estimates are 0.94 and (0.87, 0.98). As the number of diseased cases increases, the confidence interval shrinks in inverse proportion to the square root of cases.</p>
+<p>As a more complicated but clinically realistic example, consider a dataset with 100 cases in all where 97 have one lesion per case, two have two lesions per case and one has three lesions per case (these are typical lesion distributions observed in screening mammography). The code follows:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="rsm.html#cb28-1"></a>K2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">97</span>,<span class="dv">2</span>,<span class="dv">1</span>);Lk &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
+<span id="cb28-2"><a href="rsm.html#cb28-2"></a>samples1 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
+<span id="cb28-3"><a href="rsm.html#cb28-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb28-4"><a href="rsm.html#cb28-4"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
+<span id="cb28-5"><a href="rsm.html#cb28-5"></a>  samples1[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP1)</span>
+<span id="cb28-6"><a href="rsm.html#cb28-6"></a>}</span>
+<span id="cb28-7"><a href="rsm.html#cb28-7"></a></span>
+<span id="cb28-8"><a href="rsm.html#cb28-8"></a>samples2 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
+<span id="cb28-9"><a href="rsm.html#cb28-9"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb28-10"><a href="rsm.html#cb28-10"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
+<span id="cb28-11"><a href="rsm.html#cb28-11"></a>  samples2[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP2)</span>
+<span id="cb28-12"><a href="rsm.html#cb28-12"></a>}</span>
+<span id="cb28-13"><a href="rsm.html#cb28-13"></a></span>
+<span id="cb28-14"><a href="rsm.html#cb28-14"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1[<span class="op">!</span><span class="kw">is.na</span>(samples1)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span>
+<span id="cb28-15"><a href="rsm.html#cb28-15"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2[<span class="op">!</span><span class="kw">is.na</span>(samples2)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span></code></pre></div>
+<pre><code>## K2[1] = 97 , K2[2] = 2 , K2[3] = 1 , nuP1 = 0.5 , nuP2 = 0.9</code></pre>
+<pre><code>## obsvd. mean, reader 1 =  0.4903846</code></pre>
+<pre><code>## obsvd. mean, reader 2 =  0.9326923</code></pre>
+<pre><code>## Rdr. 1: 95% CI =  0.3910217 0.5903092</code></pre>
+<pre><code>## Rdr. 2: 95% CI =  0.8662286 0.9725125</code></pre>
+<p>For reader 1, the estimate of the binomial success probability is 0.490 with 95% confidence interval (0.391, 0.590); for reader 2 the corresponding estimates are 0.933 and (0.866, 0.973).</p>
+</div>
+</div>
+<div id="rsm-re-parameterization" class="section level2">
+<h2><span class="header-section-number">3.6</span> Model re-parameterization</h2>
+<p>While the parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> are physically meaningful a little thought reveals that they cannot be varied independently of each other. Rather, <span class="math inline">\(\mu\)</span> is the <em>intrinsic</em> parameter whose value, together with two other intrinsic parameters <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span>, determine <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span>, respectively. The following is a convenient re-parameterization:<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
+<p><span class="math display" id="eq:rsm-transform">\[\begin{equation}
+\left. 
+\begin{aligned}
+\nu&#39; =&amp; 1 - exp\left ( - \mu \nu \right ) \\
+\lambda&#39; =&amp; \frac{\lambda}{\mu}
+\end{aligned}
+\right \}
+\tag{3.9}
+\end{equation}\]</span></p>
+<p>The inverse transformations are:</p>
+<p><span class="math display" id="eq:rsm-inv-transform">\[\begin{equation}
+\left. 
+\begin{aligned}
+\nu =&amp; - \frac{\ln \left ( 1-\nu&#39; \right )}{\mu}\\
+\lambda =&amp; \mu \lambda&#39; 
+\end{aligned}
+\right \}
+\tag{3.10}
+\end{equation}\]</span></p>
+<p>The parameter limits are as follows: <span class="math inline">\(0 \le \nu&#39; \le 1\)</span>, <span class="math inline">\(\lambda&#39; \ge 0\)</span>, <span class="math inline">\(\mu \ge 0\)</span>, <span class="math inline">\(\lambda \ge 0\)</span> and <span class="math inline">\(\nu \ge 0\)</span>.</p>
+<p>Since it determines <span class="math inline">\(\nu&#39;\)</span>, the <span class="math inline">\(\nu\)</span> parameter can be considered as the intrinsic (i.e., <span class="math inline">\(\mu\)</span>-independent) ability to find lesions; specifically, it is the rate of increase of <span class="math inline">\(\nu&#39;\)</span> with <span class="math inline">\(\mu\)</span> at small <span class="math inline">\(\mu\)</span>:</p>
+<p><span class="math display" id="eq:rsm-nup-limit">\[\begin{equation} 
+\nu = \left (\frac{\partial \nu&#39;}{\partial \mu}  \right )_{\mu = 0}
+\tag{3.11}
+\end{equation}\]</span></p>
+<p>The colloquial term <em>find</em> is used as shorthand for <em>flagged for further inspection by the holistic 1st stage of the search mechanism, thus qualifying as a latent site</em>. In other words, <em>finding</em> a lesion means the lesion was perceived as a suspicious region, which makes it a latent site, independent of whether or not the region was actually marked. Finding refers to the search stage. Marking refers to the decision stage, where the region’s z-sample is determined and compared to a marking threshold.</p>
+<p>According to Eqn. <a href="rsm.html#eq:rsm-transform">(3.9)</a>, as <span class="math inline">\(\mu \rightarrow \infty\)</span>, <span class="math inline">\(\nu&#39; \rightarrow 1\)</span> and conversely, as <span class="math inline">\(\mu \rightarrow 0\)</span>, <span class="math inline">\(\nu&#39; \rightarrow 0\)</span>. The dependence of <span class="math inline">\(\nu&#39;\)</span> on <span class="math inline">\(\mu\)</span> is consistent with the fact that higher contrast lesions are easier to find. An observer without special expertise may find a high contrast lesion. Conversely, lower contrast lesions will be more difficult to find even by expert observers.</p>
+<p>The analogy to finding the sun <a href="froc-paradigm.html#froc-paradigm-solar-analogy">1.6</a> is instructive: objects with very high perceptual SNR are certain to be found.</p>
+<p>According to Eqn. <a href="rsm.html#eq:rsm-transform">(3.9)</a> the value of <span class="math inline">\(\mu\)</span> also determines <span class="math inline">\(\lambda&#39;\)</span>: as <span class="math inline">\(\mu \rightarrow \infty\)</span>, <span class="math inline">\(\lambda&#39; \rightarrow 0\)</span>, and conversely, as <span class="math inline">\(\mu \rightarrow 0\)</span>, <span class="math inline">\(\lambda&#39; \rightarrow \infty\)</span>. Here too the sun analogy is instructive. Since the sun has very high contrast, there is no reason for the observer to searcch for other suspicious regions which have no possibility of resembling the sun. On the other hand, attempting to locate a faint star, possibly hidden by clouds, can generate latent NLs, because the expected small SNR from the faint real star could be comparable to that from a number of regions in the near background.</p>
+<p>The re-parameterization used here is not unique, but is simple and has the right limiting behaviors.</p>
+</div>
+<div id="rsm-discussion-summary" class="section level2">
+<h2><span class="header-section-number">3.7</span> Discussion / Summary</h2>
+<p>This chapter has described a statistical parameterization of the Nodine-Kundel model. The 3-parameter model of search in the context in the medical imaging accommodates key aspects of the process: search, the ability to find lesions while minimizing finding non-lesions, is described by two parameters, specifically, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> . The ability to correctly mark a found lesion (while not marking found non-lesions) is characterized by the third parameter of the model, <span class="math inline">\(\mu\)</span>. While the primed parameters have relatively simple physical meaning, they depend on <span class="math inline">\(\mu\)</span>. Consequently, it is necessary to define them in terms of intrinsic parameters.</p>
+<p>The next chapter explores the predictions of the radiological search model.</p>
+</div>
+<div id="rsm-references" class="section level2">
+<h2><span class="header-section-number">3.8</span> References</h2>
+<ol style="list-style-type: decimal">
+<li>Chakraborty DP. Computer analysis of mammography phantom images (CAMPI): An application to the measurement of microcalcification image quality of directly acquired digital images. Medical Physics. 1997;24(8):1269-1277.</li>
+<li>Chakraborty DP, Eckert MP. Quantitative versus subjective evaluation of mammography accreditation phantom images. Medical Physics. 1995;22(2):133-143.</li>
+<li>Chakraborty DP, Yoon H-J, Mello-Thoms C. Application of threshold-bias independent analysis to eye-tracking and FROC data. Academic Radiology. 2012;In press.</li>
+<li>Chakraborty DP. ROC Curves predicted by a model of visual search. Phys Med Biol. 2006;51:3463–3482.</li>
+<li>Chakraborty DP. A search model and figure of merit for observer data acquired according to the free-response paradigm. Phys Med Biol. 2006;51:3449–3462.</li>
+</ol>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-chakraborty2006search">
+<p>Chakraborty, Dev P. 2006. “A Search Model and Figure of Merit for Observer Data Acquired According to the Free-Response Paradigm.” <em>Physics in Medicine &amp; Biology</em> 51 (14): 3449.</p>
+</div>
+<div id="ref-chakraborty2006roc">
+<p>Chakraborty, DP. 2006. “ROC Curves Predicted by a Model of Visual Search.” <em>Physics in Medicine &amp; Biology</em> 51 (14): 3463.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>In this chapter distributional assumptions are made for the numbers of latent NLs and LLs and the associated z-samples. Since the RSM is a parametric model one does not need the four subscript notation needed to account for case and location dependence, as necessary in the empirical description in Chapter <a href="froc-empirical.html#froc-empirical">5</a>. This allows for a simpler notation, as the reader may have noticed, unencumbered by the 4 subscripts in Table <a href="froc-empirical.html#froc-empirical-notation">5.4</a>.<a href="rsm.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>It can be measured via eye-tracking apparatus. This time it is only necessary to cluster the marks and classify each mark as a latent NL or latent LL according to the adopted acceptance radius. An eye-tracking based estimate would be the total number of latent NLs in the dataset divided by the total number of cases.<a href="rsm.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>It too can be measured via eye-tracking apparatus performed on a radiologist. An eye-tracking based estimate would be the total number of latent LLs in the dataset divided by the total number of lesions.<a href="rsm.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>The need for the first re-parameterization, involving <span class="math inline">\(\nu&#39;\)</span>, was foreseen in the original search model papers <span class="citation">(Dev P Chakraborty <a href="#ref-chakraborty2006search" role="doc-biblioref">2006</a>; DP Chakraborty <a href="#ref-chakraborty2006roc" role="doc-biblioref">2006</a>)</span> but the need for the second re-parameterization (involving <span class="math inline">\(\lambda&#39;\)</span>) was discovered more recently.<a href="rsm.html#fnref11" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="visual-search.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rsm-pred.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["RJafroc Froc Book.pdf", "RJafroc Froc Book.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
