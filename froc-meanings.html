@@ -479,7 +479,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="froc-meanings-intro" class="section level2">
 <h2><span class="header-section-number">8.2</span> Introduction</h2>
 <p>Chapter <a href="froc-empirical.html#froc-empirical">5</a> focused on empirical plots possible with FROC data, for example, the FROC, AFROC, wAFROC and inferred ROC plots. Expressions were given for computing <em>operating points</em> for each plot from z-samples. Because of the ambiguity in ordering the two values associated with each operating points (e.g., sensitivity-specificity pairs in ROC plots), operating points should not be used as figures of merit. Rather one should use <em>area measures</em> derived from operating characteristics. This chapter is devoted to a number of such measures for FROC data.</p>
-<p>A generic empirical area under a plot is denoted <span class="math inline">\(A_{\text{oc}}\)</span>, where the “oc” subscript denotes the applicable operating characteristic. For example, the area under the empirical wAFROC is denoted <span class="math inline">\(A_{\text{wAFROC}}\)</span>. Calculating areas from operating points using planimetry or geometry is tedious at best. <em>Needed are formulas for calculating them directly from ratings.</em> In this sense this chapter is analogous to Chapter <a href="#empirical-auc"><strong>??</strong></a> where it was shown that the area under the empirical ROC plot <span class="math inline">\(A_{\text{ROC}}\)</span> equaled the Wilcoxon statistic calculated directly from the ratings, i.e., the Bamber theorem <span class="citation">(Bamber <a href="#ref-RN2174" role="doc-biblioref">1975</a>)</span>.</p>
+<p>A generic empirical area under a plot is denoted <span class="math inline">\(A_{\text{oc}}\)</span>, where the “oc” subscript denotes the applicable operating characteristic. For example, the area under the empirical wAFROC is denoted <span class="math inline">\(A_{\text{wAFROC}}\)</span>. Calculating areas from operating points using planimetry or geometry is tedious at best. <em>Needed are formulas for calculating them directly from ratings.</em> In this sense this chapter is analogous to Chapter TBA (empirical-auc) where it was shown that the area under the empirical ROC plot <span class="math inline">\(A_{\text{ROC}}\)</span> equaled the Wilcoxon statistic calculated directly from the ratings, i.e., the Bamber theorem <span class="citation">(Bamber <a href="#ref-RN2174" role="doc-biblioref">1975</a>)</span>.</p>
 <p>I make a distinction between <em>empirical AUC under a plot</em>, i.e., an area measure, and a <em>FOM-statistic</em>, generically denoted <span class="math inline">\(\theta\)</span>, that can be computed directly from the ratings. While any function of the ratings is a possible FOM-statistic, whether it is useful depends upon whether it can be related to the area under an operating characteristic. This chapter derives formulas for FOM-statistics <span class="math inline">\(\theta_{\text{oc}}\)</span>, which yield the same values as the areas <span class="math inline">\(A_{\text{oc}}\)</span> under the corresponding empirical operating characteristics. The meanings of these FOM-statistics are discussed <span class="citation">(Chakraborty and Zhai <a href="#ref-RN2484" role="doc-biblioref">2016</a>)</span>.</p>
 <p>Here is the organization of the chapter.</p>
 <ul>
@@ -496,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="froc-meanings-afroc" class="section level2">
 <h2><span class="header-section-number">8.3</span> Empirical AFROC FOM-statistic</h2>
-<p><span class="math inline">\(A_{\text{AFROC}}\)</span> was defined in <a href="froc-empirical.html#froc-empirical-wAFROC">5.8</a> as the area under the empirical AFROC. The corresponding FOM-statistic <span class="math inline">\(\theta_{\text{AFROC}}\)</span> is defined as follows: one calculates the rating of the highest rated NL mark <span class="math inline">\(\text{FP}_{k_1 1}\)</span> on each non-diseased case <span class="math inline">\(k_1 1\)</span> (or <span class="math inline">\(-\infty\)</span> if the case has no NL marks) and compares it to each LL rating using the kernel function <span class="math inline">\(\psi(x,y)\)</span> defined in Eqn. <a href="#eq:empirical-auc-PsiFunction">(<strong>??</strong>)</a>.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> A summation is performed over all cases and all lesions.</p>
+<p><span class="math inline">\(A_{\text{AFROC}}\)</span> was defined in <a href="froc-empirical.html#froc-empirical-wAFROC">5.8</a> as the area under the empirical AFROC. The corresponding FOM-statistic <span class="math inline">\(\theta_{\text{AFROC}}\)</span> is defined as follows: one calculates the rating of the highest rated NL mark <span class="math inline">\(\text{FP}_{k_1 1}\)</span> on each non-diseased case <span class="math inline">\(k_1 1\)</span> (or <span class="math inline">\(-\infty\)</span> if the case has no NL marks) and compares it to each LL rating using the kernel function <span class="math inline">\(\psi(x,y)\)</span> defined in Eqn. TBA (eq:empirical-auc-PsiFunction).<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> A summation is performed over all cases and all lesions.</p>
 <p>The highest rating <span class="math inline">\(\text{FP}_{k_1 1}\)</span> on non-diseased case <span class="math inline">\(k_1 1\)</span> is defined as:</p>
 <span class="math display" id="eq:froc-meanings-R-k1">\[\begin{equation}
 \left.
@@ -589,7 +589,7 @@ FPF_i \equiv FPF \left ( \zeta_i \right ) = \frac{1}{K_1} \sum_{k_1=1}^{K_1} \ma
 \theta_{\text{wAFROC}} = A_{\text{wAFROC}}
 \tag{8.10}
 \end{equation}\]</span>
-<p>This is the FROC counterpart of Bamber’s Wilcoxon vs. empirical ROC area equivalence theorem <span class="citation">(Bamber <a href="#ref-RN2174" role="doc-biblioref">1975</a>)</span>, derived in Section <a href="#empirical-auc-wilcoxon-bamber-theorem"><strong>??</strong></a>.</p>
+<p>This is the FROC counterpart of Bamber’s Wilcoxon vs. empirical ROC area equivalence theorem <span class="citation">(Bamber <a href="#ref-RN2174" role="doc-biblioref">1975</a>)</span>, derived in Section TBA (empirical-auc-wilcoxon-bamber-theorem).</p>
 </div>
 <div id="froc-meanings-two-theorems-2" class="section level3">
 <h3><span class="header-section-number">8.5.2</span> Theorem 2</h3>
@@ -1172,7 +1172,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["RJafroc Froc Book.pdf", "RJafroc Froc Book.epub"],
+"download": ["RJafrocFrocBook.pdf", "RJafrocFrocBook.epub"],
 "search": {
 "engine": "fuse",
 "options": null

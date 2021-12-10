@@ -13,7 +13,7 @@
 
 Brief accounts of the radiological search model (RSM) were presented earlier in connection with the simulator used to generate FROC data. This chapter describes the model in more detail. 
 
-All models of ROC data *not incorporating search* involve two fundamental parameters (i.e, not including binning-related threshold parameters). For example, the unequal variance binormal model in Chapter \@ref(binormal-model) requires the $a,b$ parameters. Alternative ROC models described in TBA Chapter 20 also require two fundamental parameters. 
+All models of ROC data *not incorporating search* involve two fundamental parameters (i.e, not including binning-related threshold parameters). For example, the unequal variance binormal model in Chapter TBA (binormal-model) requires the $a,b$ parameters. Alternative ROC models described in TBA Chapter 20 also require two fundamental parameters. 
 
 *It turns out that all that is needed to model as seemingly complex a process as visual search, at least to first order, is one additional fundamental parameter*. The RSM contains three fundamental parameters: $\mu$, $\lambda$ and $\nu$. However, it is easier to introduce the RSM via $\mu$ and intermediate primed parameters, $\lambda'$ and  $\nu'$. The model is then re-parameterized to take into account that $\lambda'$ and  $\nu'$ must depend on $\mu$ via un-primed parameters $\lambda$ and $\nu$ *which are intrinsic parameters*, i.e., independent of $\mu$.
 
