@@ -23,17 +23,22 @@ knitr::write_bib(c(
 
 
 # Preface {-}
-* This book is currently (as of November 2021) in preparation. 
-* It is intended as an online update to my "physical" book [@chakraborty2017observer]. Since its publication in 2017 the `RJafroc` package, on which the `R` code examples in the book depend, has evolved considerably, causing many of the examples to "break". This also gives me the opportunity to improve on the book and include additional material.
-* The physical book chapters are referred to as *book-chapters*, to distinguish them from the chapters in this online book.
+
+* It is intended as an online update to my "physical" book [@chakraborty2017observer]. 
+* Since its publication in 2017 the `RJafroc` package, on which the `R` code examples in the book depend, has evolved considerably, causing many of the examples to "break". 
+* This also gives me the opportunity to improve on the book and include additional material.
 
 
 
 ## TBA How much finished {-}
 
-10%
+* HMF approximately 30%
+* This book is currently (as of December 2021) in preparation. 
+* Parts labeled TBA and TODOLAST need to be updated on final revision.
+
 
 ## The pdf file of the book {-}
+
 Go [here](https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFrocBook.pdf) and then click on `Download` to get the `RJafrocFrocBook.pdf` file.
 
 
@@ -49,6 +54,7 @@ Go [here](https://dpc10ster.github.io/RJafrocFrocBook/) to view the `html` versi
 * In order to access `GitHub` material one needs to create a (free) `GitHub` account. 
 * Go to [this link](https://github.com) and click on `Sign Up`.
 
+
 ## Structure of the book {-}
 The book is divided into parts as follows:
 
@@ -59,9 +65,13 @@ The book is divided into parts as follows:
 
 
 ## Contributing to this book {-}
+
 I appreciate constructive feedback on this document. To do this raise an `Issue` on the `GitHub` [interface](https://github.com/dpc10ster/RJafrocFrocBook). Click on the `Issues` tab under `dpc10ster/RJafrocFrocBook`, then click on `New issue`. When done this way, contributions from users automatically become part of the `GitHub` documentation/history of the book.
 
+
+
 ## Is this book relevant to you and what are the alternatives? {-}
+
 * Diagnostic imaging system evaluation
 * Detection
 * Detection combined with localization
@@ -70,18 +80,18 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 * CV
 * Alternatives
 
-## ToDos TBA {-}
-* Check Bamber theorem derivation.
-* Parts labeled TBA and TODOLAST need to be updated on final revision.
-* Change third person to first person in references to myself.
+
+
 
 ## Chapters needing heavy edits {-}
+
 * 12-froc.
 * 13-froc-empirical.
 * 13-froc-empirical-examples.
 
 
 ## Shelved vs. removed vs. parked folders needing heavy edits {-}
+
 * replace functions with \text{}; eg. erf and exp in all of document
 * Also for TPF, FPF etc.
 * Temporarily shelved 17c-rsm-evidence.Rmd in removed folder
@@ -89,7 +99,8 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 * parked has dependence of ROC/FROC performance on threshold
 
 
-## Coding aids {-}
+## Coding aids (for me) {-}
+
 * sprintf("%.4f", proper formatting of numbers
 * OpPtStr(, do:
 * kbl(dfA, caption = "....", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1, 3), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
