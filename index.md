@@ -98,6 +98,7 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 
 ## Coding aids (for me) {-}
 
+* weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-froc-empirical1.Rmd which should be 13a-froc-empirical1.Rmd
 * sprintf("%.4f", proper formatting of numbers
 * OpPtStr(, do:
 * kbl(dfA, caption = "....", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1, 3), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 

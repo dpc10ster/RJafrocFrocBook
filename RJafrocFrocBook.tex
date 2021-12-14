@@ -292,6 +292,8 @@ I appreciate constructive feedback on this document. To do this raise an \texttt
 \begin{itemize}
 \tightlist
 \item
+  weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-froc-empirical1.Rmd which should be 13a-froc-empirical1.Rmd
+\item
   sprintf(``\%.4f'', proper formatting of numbers
 \item
   OpPtStr(, do:
@@ -317,12 +319,12 @@ I appreciate constructive feedback on this document. To do this raise an \texttt
 \addcontentsline{toc}{part}{FROC paradigm}
 
 \hypertarget{froc-paradigm}{%
-\chapter{The FROC paradigm}\label{froc-paradigm}}
+\chapter{The FROC paradigm and search}\label{froc-paradigm}}
 
 \hypertarget{froc-paradigm-how-much-finished}{%
 \section{TBA How much finished}\label{froc-paradigm-how-much-finished}}
 
-70\%
+80\%
 
 \hypertarget{froc-paradigm-intro}{%
 \section{Introduction}\label{froc-paradigm-intro}}
@@ -433,16 +435,20 @@ In the medical imaging context, assuming the mark rating pairs have been classif
 \item
   Lesion localization fraction (LLF) is defined as the total number of LLs rated at or above the same threshold rating divided by the total number of lesions.
 \item
-  The FROC plot is defined as that of LLF (ordinate) vs.~NLF as the threshold is varied.
+  The FROC plot is defined as that of LLF (ordinate) vs.~NLF as the threshold is varied. If the points are connected by straight lines the resulting ``curve'' is termed the \emph{empirical FROC curve}.
 \item
   The upper-right most operating point is termed the \emph{observed end-point} and its coordinated are denoted \((\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})\).
 \item
   Unlike the ROC plot which is completely contained in the unit square, the FROC plot is not.
 \end{itemize}
 
-If integer ratings are used for each recorded mark then in a four-rating FROC study at most 4 FROC operating points will result: one corresponding to marks rated 4s; another corresponding to marks rated 4s or 3s; another to the 4s, 3s, or 2s; and finally the 4s, 3s, 2s, or 1s. An R-rating study yields at most R operating points.
+The rating can be any real number, as long as higher values are associated with higher confidence levels.
 
-If continuous ratings are used, the procedure is to start with a very high threshold so that none of the ratings exceed the threshold and then to gradually lower the threshold. Every time the threshold crosses the rating of a mark, or possibly multiple marks, the total count of LLs and NLs exceeding the threshold is divided by the appropriate denominators yielding the `'raw'' FROC plot. For example, when an LL rating just exceeds the threshold, the operating point jumps up by 1/(total number of lesions), and if two LLs simultaneously just exceed the threshold the operating point jumps up by 2/(total number of lesions). If an NL rating just exceeds the threshold, the operating point jumps to the right by 1/(total number of cases). If an LL rating and a NL rating simultaneously just exceed the threshold, the operating point moves diagonally, up by 1/(total number of lesions) and to the right by 1/(total number of cases). The reader should get the general idea by now and recognize that the cumulating procedure is very similar to the manner in which ROC operating points were calculated, the only differences being in the quantities being cumulated and the relevant denominators.
+If \emph{integer ratings} are used for each recorded mark then in a four-rating FROC study at most 4 FROC operating points will result: one corresponding to marks rated 4s; another corresponding to marks rated 4s or 3s; another to the 4s, 3s, or 2s; and finally the 4s, 3s, 2s, or 1s. An R-rating study yields at most R operating points \footnote{I have seen publications that describe a data collection process where the ``1'' rating is used to mean, in effect, that the observer sees nothing to report in the image, i.e., to mean ``let's move on to the next image''. This amounts to wasting a confidence level. The user interface should present an explicit ``next-image'' option and reserve the ``1'' rating to mean the lowest reportable confidence level.}.
+
+If \emph{continuous ratings} are used, the procedure is to start with a very high threshold so that none of the ratings exceed the threshold and then to gradually lower the threshold. Every time the threshold crosses the rating of a mark, or possibly multiple marks, the total count of LLs and NLs exceeding the threshold is divided by the appropriate denominators yielding the `'raw'' FROC plot. For example, when an LL rating just exceeds the threshold, the operating point jumps up by 1/(total number of lesions), and if two LLs simultaneously just exceed the threshold the operating point jumps up by 2/(total number of lesions). If an NL rating just exceeds the threshold, the operating point jumps to the right by 1/(total number of cases). If an LL rating and a NL rating simultaneously just exceed the threshold, the operating point moves diagonally, up by 1/(total number of lesions) and to the right by 1/(total number of cases). The reader should get the general idea by now and recognize that the cumulating procedure is very similar to the manner in which ROC operating points were calculated, the only differences being in the quantities being cumulated and the relevant denominators.
+
+Chapter \ref{froc-empirical} describes the FROC, and other possible operating characteristics, in more detail.
 
 \hypertarget{froc-paradigm-solar-analogy}{%
 \section{The ``solar'' analogy}\label{froc-paradigm-solar-analogy}}
@@ -470,7 +476,7 @@ Now consider a fictitious otherwise earth-like planet where the sun can be at ra
 The implication of this is that a fundamentally different mechanism from that considered in conventional observer performance methodology, namely \emph{search}, is at work.
 
 \begin{quote}
-Search describes the process of \emph{finding} lesions while \emph{not finding} non-lesions.
+Search describes the process of \emph{finding} lesions while \emph{not finding} non-lesions and search performance is the ability to find more lesions while minimizing finding non-lesions.
 \end{quote}
 
 Think of the eye as two cameras: a low-resolution camera (peripheral vision) with a wide field-of-view plus a high-resolution camera (foveal vision) with a narrow field-of-view If one were limited to viewing with the high-resolution camera one would spend so much time steering the high-resolution narrow field-of-view camera from spot-to-spot that one would have a hard time finding the desired stellar object. Having a single high-resolution narrow field of view vision would also have negative evolutionary consequences as one would spend so much time scanning and processing the surroundings with the narrow field of view vision that one would miss dangers or opportunities. Nature has equipped us with essentially two cameras; the first low-resolution camera is able to ``digest'' large areas of the surround and process it rapidly so that if danger (or opportunity) is sensed, then the eye-brain system rapidly steers the second high-resolution camera to the location of the danger (or opportunity). This is Nature's way of optimally using the eye-brain system. For a similar reason astronomical telescopes come with a wide field of view lower magnification ``spotter scope''.
@@ -482,34 +488,599 @@ The analogy is not restricted to the sun, which one might argue is an almost inf
 False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization (LL) or incorrect localizations (NLs). At the time of writing there is a hunt for a new planet, possibly a gas giant , that is much further than even the newly demoted Pluto.
 
 \hypertarget{froc-paradigm-discussion}{%
-\section{TBA Discussion and suggestions}\label{froc-paradigm-discussion}}
+\section{Discussion}\label{froc-paradigm-discussion}}
 
-This chapter has introduced the FROC paradigm, the terminology used to describe it and a common operating characteristic associated with it, namely the FROC. There are several areas of possible confusion to avoid which consider the following suggestions:
+This chapter has served as a general introduction to the location specific paradigms. The FROC paradigm, in particular, is directly related to visual search. The terms lesion-localization (LL) and non-lesion localization (NL) were introduced, to mean locating a true lesion and a false region, respectively. A qualitative definition of search performance was given, namely, the ability to find lesions while not finding non-lesions. This will be quantified in a later chapter. A widely used operating characteristic associated with it, namely the FROC curve, was introduced. A ``solar'' analogy was given that brings out important characteristics of the FROC - in particular its dependence on lesion contrast.
+
+In my experience the FROC paradigm is much misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the paradigm and the FROC curve. These are summarized below:
 
 \begin{itemize}
 \tightlist
 \item
-  Avoid using the term ``lesion-specific'' to describe location-specific paradigms.
+  Loose terminology: using the term ``lesion-specific'' to describe location-specific paradigms.
 \item
-  Avoid using the term ``lesion'' when one means a ``suspicious region'' that may or may not be a true lesion.
+  Loose terminology: using the term ``lesion'' when one means a ``suspicious region'' that may or may not be a true lesion.
 \item
-  Avoid using ROC-specific terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localization, that apply to localized regions of the image. This issue will come up in later chapters.
+  Loose terminology: using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localization, that apply to localized regions of the image.
 \item
-  Avoid using the FROC-1 rating to mean in effect ``I see no signs of disease in this image'', when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
+  Loose terminology: using the FROC-1 rating to mean in effect ``I see no signs of disease in this image'', when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
 \item
-  Do not show FROC curves as reaching the unit ordinate, as this is the exception rather than the rule.
+  Misconception: showing FROC curves as reaching the unit ordinate, as this is the exception rather than the rule.
 \item
-  Do not conceptualize FROC curves as extending to large values to the right.
+  Misconception: believing that FROC curves extend to very large values along the abscissa and all the observer has to do to access this region is to lower their reporting threshold.
 \item
-  Arbitrariness of the proximity criterion and multiple marks in the same region are not clinically important. Interactions with clinicians will allow selection of an appropriate proximity criterion for the task at hand and the multiple mark problem only occurs with algorithmic observers and is readily fixed.
+  Misconception: blaming the FROC paradigm for alleged arbitrariness of the proximity criterion and multiple marks in the same region. These are not clinically important.
 \end{itemize}
 
-Additional points made in this chapter are: There is an inverse correlation between \(\text{LLF}_{\text{max}}\) and \(\text{NLF}_{\text{max}}\), analogous to that been sensitivity and specificity in ROC analysis. The observed end-point \((\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})\) of the FROC curve tends to approach the point (0,1) as the perceptual SNR of the lesions approaches infinity. The solar analogy is relevant to understanding the search task. In search tasks two types of expertise are at work: search and lesion-classification performances, and there exists an expected inverse correlation between them.
-
-The FROC plot is the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset.
+The FROC plot is the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset and associated scalar measures of performance, termed \emph{figures of merit} (FOMs).
 
 \hypertarget{froc-paradigm-references}{%
 \section{References}\label{froc-paradigm-references}}
+
+\hypertarget{froc-empirical}{%
+\chapter{Empirical plots from FROC data}\label{froc-empirical}}
+
+\hypertarget{froc-empirical-how-much-finished}{%
+\section{TBA How much finished}\label{froc-empirical-how-much-finished}}
+
+70\%
+
+\hypertarget{froc-empirical-intro}{%
+\section{Introduction}\label{froc-empirical-intro}}
+
+The previous chapter defined the empirical FROC curve. This chapter introduces mathematical expressions for empirical operating characteristics (FROC and others) possible with FROC data.
+
+Operating characteristics are visual depicters of performance. Scalar quantities derived from operating characteristics can serve as quantitative measures of performance, termed figures of merit (FOMs). This chapter defines the FOM associated with each introduced operating characteristics.
+
+FROC data is defined as consisting of mark-rating pairs. A distinction between latent and actual marks is made followed by a summary of FROC notation applicable to a single modality single reader dataset. This is a key table, which will be used in later chapters.
+
+The observed end-point of an operating characteristic is defined. For the FROC plot it is demonstrated that the observed FROC curve is not contained in the unit square unlike the other operating characteristics which are contained in the unit square.
+
+\hypertarget{froc-empirical-mark-rating-pairs}{%
+\section{Mark rating pairs}\label{froc-empirical-mark-rating-pairs}}
+
+\emph{FROC data consists of mark-rating pairs}. Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as \emph{lesion localization} (LL) if it is sufficiently close to a true lesion, according to the adopted proximity criterion, and otherwise it is recorded as \emph{non-lesion localization} (NL).
+
+\emph{In an FROC study the number of marks on an image is an a-priori unknown modality-reader-case dependent non-negative random integer.} It is incorrect and naive to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don't assign equal attention units to all areas of the image. The best insight into the number of marks per case is obtained from eye-tracking studies \citep{RN1490}, but even here the information is incomplete, as eye-tracking studies can only measure foveal gaze and not lesions found by peripheral vision, and such studies are very difficult to conduct in a clinical setting.
+
+\hypertarget{latent-vs.-actual-marks}{%
+\subsection{Latent vs.~actual marks}\label{latent-vs.-actual-marks}}
+
+To distinguish between suspicious regions that were considered for marking and regions that were actually marked, it is necessary to introduce the distinction between \emph{latent} marks and \emph{actual} marks.
+
+\begin{itemize}
+\tightlist
+\item
+  A \emph{latent} mark is defined as a suspicious region, regardless of whether or not it was marked. A latent mark becomes an \emph{actual} mark if it is marked.
+\item
+  A latent mark is a latent LL if it is close to a true lesion and otherwise it is a latent NL.
+\item
+  A non-diseased case can only have latent NLs. A diseased case can have latent NLs and latent LLs.
+\item
+  If marked, a latent NL is recorded as an actual NL.
+\item
+  If not marked, a latent NL is an \emph{unobservable event}.
+\item
+  In contrast, unmarked lesions are observable events -- one knows (trivially) which lesions were not marked.
+\end{itemize}
+
+\hypertarget{binning-rule}{%
+\subsection{Binning rule}\label{binning-rule}}
+
+Recall that ROC data modeling requires the existence of a \emph{case-dependent} decision variable, or z-sample \(z\), and case-independent decision thresholds \(\zeta_r\), where \(r = 0, 1, ..., R_{ROC}-1\) and \(R_{ROC}\) is the number of ROC study bins \footnote{The subscript is used to make explicit the paradigm used.} and a binning rule that if \(\zeta_r \leq z < \zeta_{r+1}\) the case is rated \(r + 1\). Dummy cutoffs are defined as \(\zeta_0 = -\infty\) and \(\zeta_{R_{ROC}} = \infty\). The z-sample applies to the whole case. To summarize:
+
+\begin{equation}
+\left.
+\begin{aligned}  
+\text{if} \left (\zeta_r \le z < \zeta_{r+1}  \right )\Rightarrow \text {rating} = r+1\\
+r = 0, 1, ..., R_{ROC}-1\\
+\zeta_0 = -\infty\\
+\zeta_{R_{ROC}} = \infty\\
+\end{aligned}
+\right \}
+\label{eq:binning-rule-roc}
+\end{equation}
+
+Analogously, FROC data modeling requires the existence of a \emph{case and location dependent} z-sample for each latent mark and \emph{case and location independent} reporting thresholds \(\zeta_r\), where \(r = 1, ..., R_{FROC}\) and \(R_{FROC}\) is the number of FROC study bins, and the rule that a latent mark is marked and rated \(r\) if \(\zeta_r \leq z < \zeta_{r+1}\). Dummy cutoffs are defined as \(\zeta_0 = -\infty\) and \(\zeta_{R_{FROC}+1} = \infty\). For the same numbers of non-dummy cutoffs, the number of FROC bins is one less than the number of ROC bins. For example, 4 non-dummy cutoffs \(\zeta_1, \zeta_2, \zeta_3, \zeta_4\) can correspond to a 5-rating ROC study or to a 4-rating FROC study. To summarize:
+
+\begin{equation}
+\left.
+\begin{aligned}  
+\text{if} \left (\zeta_r \le z < \zeta_{r+1}  \right )\Rightarrow \text {rating} = r\\
+r = 1, 2, ..., R_{FROC}\\
+\zeta_0 = -\infty\\
+\zeta_{R_{FROC}+1} = \infty\\
+\end{aligned}
+\right \}
+\label{eq:binning-rule-froc}
+\end{equation}
+
+\hypertarget{froc-empirical-notation}{%
+\section{FROC notation}\label{froc-empirical-notation}}
+
+\emph{Clear notation is vital to understanding this paradigm.} The notation needs to account for case and location dependencies of ratings and the distinction between case-level and location-level ground truth. The notation also has to account for cases with no marks.
+
+FROC notation is summarized in Table \ref{tab:froc-empirical-notation}, in which \textbf{all marks are latent marks}. The table is organized into three columns, the first column is the row number, the second column has the symbol(s), and the third column has the meaning(s) of the symbol(s).
+
+\begin{table}
+
+\caption{\label{tab:froc-empirical-notation}FROC notation; all marks refer to latent marks.}
+\centering
+\begin{tabular}[t]{l|l|l}
+\hline
+Row & Symbol & Meaning\\
+\hline
+1 & t & Case-level truth: 1 for non-diseased and 2 for diseased\\
+\hline
+2 & $K_t$ & Number of cases with case-level truth t\\
+\hline
+3 & $k_t t$ & Case $k_t$ in case-level truth t\\
+\hline
+4 & s & Location-level truth: 1 for NL and 2 for LL\\
+\hline
+5 & $l_s s$ & Mark $l_s$ in location-level truth s\\
+\hline
+6 & $N_{k_t t}$ & Number of NLs in case $k_t t$\\
+\hline
+7 & $L_{k_2 2}$ & Number of lesions in case $k_2 2$\\
+\hline
+8 & $z_{k_t t l_1 1}$ & z-sample for case $k_t t$ and mark $l_1 1$\\
+\hline
+9 & $z_{k_2 2 l_2 2}$ & z-sample for case $k_2 2$ and mark $l_2 2$\\
+\hline
+10 & $R_{FROC}$ & Number of FROC bins\\
+\hline
+11 & $\zeta_1$ & Lowest reporting threshold\\
+\hline
+12 & $\zeta_r$ & r = 2, 3, ... the other non-dummy reporting thresholds\\
+\hline
+13 & $\zeta_0, \zeta_{R_{FROC}+1}$ & Dummy thresholds\\
+\hline
+14 & $W_{k_2 l_2}$ & Weight of lesion $l_2 2$ in case $k_2 2$\\
+\hline
+15 & $L_{max}$ & Maximum number of lesions per case in dataset\\
+\hline
+16 & $L_T$ & Total number of lesions in dataset\\
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{comments-on-table-reftabfroc-empirical-notation}{%
+\subsection{Comments on Table \ref{tab:froc-empirical-notation}}\label{comments-on-table-reftabfroc-empirical-notation}}
+
+\begin{itemize}
+\item
+  Row 1: The case-truth index \(t\) refers to the case (or patient), with \(t = 1\) for non-diseased and \(t = 2\) for diseased cases. As a useful mnemonic, \(t\) is for \emph{truth}.
+\item
+  Row 2: \(K_t\) is the number of cases with truth state \(t\); specifically, \(K_1\) is the number of non-diseased cases and \(K_2\) the number of diseased cases.
+\item
+  Row 3: Two indices \(k_t t\) are needed to select case \(k_t\) in truth state \(t\). As a useful mnemonic, \(k\) is for \emph{case}.
+\item
+  Row 4: \(s\) location-level truth state: 1 for non-diseased and 2 for diseased.
+\item
+  Row 5: Similar to row 3, two indices \(l_s s\) are needed to select latent mark \(l_s\) in location-level truth state \(s\). As a useful mnemonic, \(l\) is for \emph{location}.
+\item
+  Row 6: \(N_{k_t t}\) is the total number of latent NL marks in case \(k_t t\).
+\item
+  Row 7: \(L_{k_2 2}\) is the number of lesions in diseased case \(k_2 2\).
+\item
+  Row 8: The z-sample for case \(k_t t\) and NL mark \(l_1 1\) is denoted \(z_{k_t t l_1 1}\). Latent NL marks are possible on non-diseased and diseased cases (both values of \(t\) are allowed). The range of a z-sample is \(-\infty < z_{k_t t l_1 1} < \infty\), provided \(l_1 \neq \varnothing\); otherwise, it is an unobservable event.
+\item
+  Row 9: The z-sample of a latent LL is \(z_{k_2 2 l_2 2}\). Unmarked lesions are observable events and are therefore assigned negative infinity ratings (the null-set notation is unnecessary for them).
+\item
+  Row 10: \(R_{FROC}\) is the number of bins in the FROC study.
+\item
+  Rows 11, 12 and 13: The cutoffs in the FROC study. The lowest threshold is \(\zeta_1\). The other non-dummy thresholds are \(\zeta_r\) where \(r=2,3,...,R_{FROC}\). The dummy thresholds are \(\zeta_0 = -\infty\) and \(\zeta_{R_{FROC}+1} = \infty\).
+\item
+  Row 14: \(W_{k_2 l_2}\) is the weight (i.e., clinical importance) of lesion \(l_2 2\) in diseased case \(k_2 2\). The weights of lesions in a case sum to unity: \(\sum_{l_2 = 1}^{L_{k_2 2}}W_{k_2 l_2} = 1\).
+\item
+  Row 15: \(L_{max}\) is the maximum number of lesions per case in the dataset.
+\item
+  Row 16: \(L_T\) is the total number of lesions in the dataset.
+\end{itemize}
+
+\hypertarget{froc-empirical-indexing-marks}{%
+\subsection{A conceptual and notatonal issue}\label{froc-empirical-indexing-marks}}
+
+An aspect of FROC data, \emph{that there could be cases with no NL marks, no matter how low the reporting threshold}, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold \(\zeta_1\) is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case ``filling up'' with NL marks \footnote{I expected the number of NL marks per image to be limited only by the ratio of image size to lesion size, i.e., larger values for smaller lesions.}. In fact the first model of FROC data \citep{chakraborty1989maximum} predicts that, as the reporting threshold is lowered to \(\zeta_1 = -\infty\), the number of NL marks per case approaches \(\infty\) as does \(\text{NLF}_{max}\). However, observed FROC curves end at a finite value of \(\text{NLF}_{max}\). This is one reason I introduced the radiological search model (RSM) \citep{chakraborty2006search}. I will have much more to say about this in Chapter \ref{rsm}, but for now I state one assumption of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over all cases) is a finite number.
+
+With this background, let us return to the conceptual issue: why does the observer not keep ``filling-up'' the image with NL marks? The answer is that \emph{the observer can only mark regions that have a non-zero chance of being a lesion}. For example, if the actual number of latent NLs on a particular case is 2, then, as the reporting threshold is lowered, the observer will make at most two NL marks. Having exhausted these two regions the observer will not mark any more regions because there are no more regions to be marked - \emph{all other regions in the image have, in the perception of the observer, zero chance of being a lesion}.
+
+The notational issue is how to handle images with no latent NL marks. Basically it involves restricting summations over cases \(k_ t t\) to those cases which have at least one latent NL mark, i.e., \(N_{k_t t} \neq 0\), as in the following:
+
+\begin{itemize}
+\item
+  \(l_1 = \{1, 2, ..., N_{k_t t}\}\) indexes latent NL marks, provided the case has at least one latent NL mark, and otherwise \(N_{k_t t} = 0\) and \(l_1 = \varnothing\), the null set. The possible values of \(l_1\) are \(l_1 = \left \{ \varnothing \right \}\oplus \left \{ 1,2,...N_{k_t t} \right \}\). The null set applies when the case has no latent NL marks and \(\oplus\) is the ``exclusive-or'' symbol (``exclusive-or'' is used in the English sense: ``one or the other, but not neither nor both''). In other words, \(l_1\) can \emph{either} be the null set or take on values \(1,2,...N_{k_t t}\).
+\item
+  Likewise, \(l_2 = \left \{ 1,2,...,L_{k_2 2} \right \}\) indexes latent LL marks. Unmarked LLs are assigned negative infinity ratings. The null set notation is not needed for latent LLs.
+\end{itemize}
+
+\hypertarget{froc-empirical-froc-plot}{%
+\section{The empirical FROC}\label{froc-empirical-froc-plot}}
+
+The FROC was defined, Chapter \ref{froc-paradigm}, as the plot of LLF (along the ordinate) vs.~NLF (along the abscissa).
+
+Using the notation of Table \ref{tab:froc-empirical-notation} and assuming binned data\footnote{This is not a limiting assumption: if the data is continuous, for finite numbers of cases, no ordering information is lost if the number of ratings is chosen large enough. This is analogous to Bamber's theorem in Chapter 05, where a proof, although given for binned data, is applicable to continuous data.}, then, corresponding to the operating point determined by threshold \(\zeta_r\), the FROC abscissa is \(\text{NLF}_r \equiv \text{NLF}\left ( \zeta_r \right )\), the total number of NLs rated \(\geq\) threshold \(\zeta_r\) divided by the total number of cases, and the corresponding ordinate is \(\text{LLF}_r \equiv \text{LLF}\left ( \zeta_r \right )\), the total number of LLs rated \(\geq\) threshold \(\zeta_r\) divided by the total number of lesions:
+
+\begin{equation}
+\text{NLF}_r  = \frac{n\left ( \text{NLs rated} \geq \zeta_r\right )}{n\left ( \text{cases} \right )}
+\label{eq:froc-empirical-NLF1}
+\end{equation}
+
+and
+
+\begin{equation}
+\text{LLF}_r  = \frac{n\left ( \text{LLs rated} \geq \zeta_r\right )}{n\left ( \text{lesions} \right )}
+\label{eq:froc-empirical-LLF1}
+\end{equation}
+
+The observed operating points correspond to the following values of \(r\):
+
+\begin{equation}
+r = 1, 2, ...,R_{FROC} 
+\label{eq:froc-empirical-range-r}
+\end{equation}
+
+Due to the ordering of the thresholds, i.e., \(\zeta_1 < \zeta_2 ... < \zeta_{R_{FROC}}\), higher values of \(r\) correspond to lower operating points. The uppermost operating point, i.e., that defined by \(r = 1\), is referred to the as the \emph{observed end-point}.
+
+Equations \eqref{eq:froc-empirical-NLF1} and \eqref{eq:froc-empirical-LLF1} is are equivalent to:
+
+\begin{equation}
+\text{NLF}_r  = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right )\sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right ) 
+\label{eq:froc-empirical-NLFr}
+\end{equation}
+
+and
+
+\begin{equation}
+\text{LLF}_r  = \frac{1}{L_T} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}} \mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r  \right ) 
+\label{eq:froc-empirical-LLFr}
+\end{equation}
+
+Each indicator function, \(\mathbb{I}()\), yields unity if the argument is true and zero otherwise.
+
+In Eqn. \eqref{eq:froc-empirical-NLFr} \(\mathbb{I} \left ( N_{k_t t} \neq 0 \right )\) ensures that \emph{only cases with at least one latent NL} are counted. Recall that \(N_{k_t t}\) is the total number of latent NLs in case \(k_t t\). The term \(\mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right )\) counts over all NL marks with ratings \(\geq \zeta_r\). The three summations yield the total number of NLs in the dataset with z-samples \(\geq \zeta_r\) and dividing by the total number of cases yields \(\text{NLF}_r\). This equation also shows explicitly that NLs on both non-diseased (\(t=1\)) and diseased (\(t=2\)) cases contribute to NLF.
+
+In Eqn. \eqref{eq:froc-empirical-LLFr} a summation over \(t\) is not needed as only diseased cases contribute to LLF. Analogous to the first indicator function term in Eqn. \eqref{eq:froc-empirical-NLFr}, a term like \(\mathbb{I} \left ( L_{k_2 2} \neq 0 \right )\) would be superfluous since \(L_{k_2 2} > 0\) as each diseased case must have at least one lesion. The term \(\mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r \right )\) counts over all LL marks with ratings \(\geq \zeta_r\). Dividing by \(L_T\), the total number of lesions in the dataset, yields \(\text{LLF}_r\).
+
+\hypertarget{froc-empirical-definition-auc-FROC}{%
+\subsection{Definition}\label{froc-empirical-definition-auc-FROC}}
+
+The empirical FROC plot connects adjacent operating points \(\left (\text{NLF}_r, \text{LLF}_r \right )\), including the origin (0,0) and the observed end-point, with straight lines. The area under this plot is the empirical FROC AUC, denoted \(A_{\text{FROC}}\).
+
+\hypertarget{froc-empirical-origin-trivial-point}{%
+\subsection{The origin, a trivial point}\label{froc-empirical-origin-trivial-point}}
+
+Since \(\zeta_{R_{FROC}+1} = \infty\) according to Eqn. \eqref{eq:froc-empirical-NLFr} and Eqn. \eqref{eq:froc-empirical-LLFr}, \(r = R_{FROC}+1\) yields the trivial operating point (0,0).
+
+\hypertarget{froc-empirical-end-point}{%
+\subsection{The observed end-point and its semi-constrained property}\label{froc-empirical-end-point}}
+
+The abscissa of the observed end-point \(NLF_1\), is defined by:
+
+\begin{equation}
+\text{NLF}_1 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_1 \right ) 
+\label{eq:froc-empirical-NLF11}
+\end{equation}
+
+Since each case could have an arbitrary number of NLs, \(NLF_1\) need not equal unity, except fortuitously.
+
+The ordinate of the observed end-point \(LLF_1\), is defined by:
+
+\begin{equation}
+\left.
+\begin{aligned}
+\text{LLF}_1 =& \frac{ \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}} \mathbb{I} \left ( z_{k_2 2 l_2 2} \geq  \zeta_1  \right ) }{L_T}\\
+\leq& 1
+\end{aligned}
+\right \}
+\label{eq:froc-empirical-LLF1a}
+\end{equation}
+
+The numerator is the total number of lesions that were actually marked. The ratio is the fraction of lesions that are marked, which is \(\leq 1\).
+
+This is the \textbf{semi-constrained property of the observed end-point}, namely, while the observed end-point \emph{ordinate} is constrained to the range (0,1) the corresponding \emph{abscissa} is not so constrained.
+
+\hypertarget{froc-empirical-froc-plot-futility-extrapolation}{%
+\subsection{Futility of extrapolation outside the observed end-point}\label{froc-empirical-froc-plot-futility-extrapolation}}
+
+To understand this consider the expression for \(NLF_0\), i.e., using Eqn. \eqref{eq:froc-empirical-NLFr} with \(r = 0\):
+
+\begin{equation}
+\text{NLF}_0 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq -\infty \right ) 
+\end{equation}
+
+The right hand side of this equation can be separated into two terms, the contribution of latent NLs with z-samples in the range \(z \geq \zeta_1\) and those in the range \(-\infty \leq z < \zeta_1\). The first term yields the abscissa of the observed end-point, Eqn. \eqref{eq:froc-empirical-NLF11}. The 2nd term is:
+
+\begin{equation}
+\left. 
+\begin{aligned} 
+\text{2nd term}=&\left (\frac{1}{K_1+K_2} \right )\sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( -\infty \leq z_{k_t t l_1 1} < \zeta_1 \right )\\
+=&\frac{\text{unknown number}}{K_1+K_2}
+\end{aligned}
+\right \} 
+\label{eq:froc-empirical-NLF0a}
+\end{equation}
+
+It represents the contribution of unmarked NLs, i.e., latent NLs whose z-samples were below \(\zeta_1\). It determines how much further to the right the observer's NLF would have moved, relative to \(NLF_1\), if one could get the observer to lower the reporting criterion to \(-\infty\). \emph{Since the observer may not oblige, this term cannot, in general, be evaluated.} Therefore \(NLF_0\) cannot be evaluated. The basic problem is that \emph{unmarked latent NLs represent unobservable events}.
+
+Turning our attention to \(LLF_0\):
+
+\begin{equation}
+\left.
+\begin{aligned}
+\text{LLF}_0 =& \frac{ \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}} \mathbb{I} \left ( z_{k_2 2 l_2 2} \geq  -\infty  \right ) }{L_T}\\
+=& 1
+\end{aligned}
+\right \}
+\label{eq:froc-empirical-LLF0}
+\end{equation}
+
+Unlike unmarked latent NLs, **unmarked lesions can safely be assigned the \(-\infty\) rating, because an unmarked lesion is an observable event*. The right hand side of Eqn. \eqref{eq:froc-empirical-LLF0} evaluates to unity. However, since the corresponding abscissa \(NLF_0\) is undefined, one cannot plot this point. It follows that one cannot extrapolate outside the observed end-point.
+
+The formalism should not obscure the fact that the futility of extrapolation outside the observed end-point of the FROC is a fairly obvious property: one does not know how far to the right the abscissa of the observed end-point might extend if one could get the observer to report every latent NL.
+
+\hypertarget{froc-empirical-ROC}{%
+\section{The inferred ROC plot}\label{froc-empirical-ROC}}
+
+By adopting a rational rule for converting the zero or more mark-rating data per case to a single rating per case, and commonly the highest rating rule is used \footnote{The highest rating method was used in early FROC modeling in \citep{bunch1977free} and in \citep{swensson1996unified}, the latter in the context of LROC paradigm modeling.}, it is possible to infer ROC data from FROC mark-rating data.
+
+\hypertarget{inferred-roc-rating}{%
+\subsection{Inferred-ROC rating}\label{inferred-roc-rating}}
+
+The rating of the highest rated mark in a case, or \(-\infty\) if the case has no marks, is defined as the inferred-ROC rating for the case. Inferred-ROC ratings on non-diseased cases are referred to as inferred-FP ratings and those on diseased cases as inferred-TP ratings.
+
+When there is little possibility for confusion, the prefix ``inferred'' is suppressed. Using the by now familiar cumulation procedure, FP counts are cumulated to calculate FPF and likewise TP counts are cumulated to calculate TPF.
+
+Definitions:
+
+\begin{itemize}
+\tightlist
+\item
+  \(FPF(\zeta)\) = cumulated inferred FP counts with z-sample \(\geq\) threshold \(\zeta\) divided by total number of non-diseased cases.
+\item
+  \(TPF(\zeta)\) = cumulated inferred TP counts with z-sample \(\geq\) threshold \(\zeta\) divided by total number of diseased cases
+\end{itemize}
+
+Definition of ROC plot:
+
+\begin{itemize}
+\tightlist
+\item
+  The ROC is the plot of inferred \(TPF(\zeta)\) vs.~inferred \(FPF(\zeta)\).
+\item
+  \emph{The plot includes a straight line extension from the observed end-point to (1,1)}.
+\end{itemize}
+
+The mathematical definition of the ROC follows.
+
+\hypertarget{inferred-fpf}{%
+\subsection{Inferred FPF}\label{inferred-fpf}}
+
+The highest z-sample ROC false positive (FP) rating for non-diseased case \(k_1 1\) is defined by:
+
+\begin{equation}
+\left.
+\begin{aligned}
+FP_{k_1 1}=&\max_{l1} \left ( z_{k_1 1 l_1 1 } \mid l_1 \neq \varnothing \right ) \\
+=& -\infty \mid l_1 = \varnothing  
+ \end{aligned}
+\right \}
+\label{eq:froc-empirical-FP}
+\end{equation}
+
+If the case has at least one latent NL mark, then \(l_1 \neq \varnothing\), where \(\varnothing\) is the null set, and the first definition applies. If the case has no latent NL marks, then \(l_1 = \varnothing\), and the second definition applies. \(FP_{k_1 1}\) is the maximum z-sample over all latent marks occurring on non-diseased case \(k_1 1\), or \(-\infty\) if the case has no latent marks (this is allowed because a non-diseased case with no marks is an observable event). The corresponding false positive fraction is defined by:
+
+\begin{equation}
+\text{FPF}_r \equiv \text{FPF} \left ( \zeta_r \right ) = \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq \zeta_r\right )
+\label{eq:froc-empirical-FPF}
+\end{equation}
+
+\hypertarget{inferred-tpf}{%
+\subsection{Inferred TPF}\label{inferred-tpf}}
+
+The inferred true positive (TP) z-sample for diseased case \(k_2 2\) is defined by:
+
+\begin{equation}
+TP_{k_2 2} = \text{max}_{l_1 l_2}\left ( z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2} \mid l_1 \neq \varnothing \right )
+\label{eq:froc-empirical-TP1}
+\end{equation}
+
+or
+
+\begin{equation}
+TP_{k_2 2} = \textstyle\max_{l_2}  \left ( z_{k_2 2 l_2 2} \mid\left ( l_1 = \varnothing \land \left (\textstyle\max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} \neq -\infty  \right )  \right ) \right ) 
+\label{eq:froc-empirical-TP2}
+\end{equation}
+
+or
+
+\begin{equation}
+TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \textstyle\max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} = -\infty  \right )  \right )
+\label{eq:froc-empirical-TP3}
+\end{equation}
+
+Here \(\land\) is the logical AND operator. An explanation is in order. Consider Eqn. \eqref{eq:froc-empirical-TP1}. There are two z-samples inside the \(\text{max}\) operator: \(z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}\). The first z-sample is from a NL on a diseased case, as per the \(l_1 1\) subscripts, while the second is from a LL on the same diseased case, as per the \(l_2 2\) subscripts.
+
+\begin{itemize}
+\item
+  If \(l_1 \neq \varnothing\) then Eqn. \eqref{eq:froc-empirical-TP1} applies, i.e., one takes the maximum over all z-samples, NLs and LLs, whichever is higher, on the diseased case.
+\item
+  If \(l_1 = \varnothing\) and at least one lesion is marked, then Eqn. \eqref{eq:froc-empirical-TP2} applies, i.e., one takes the maximum z-sample over all marked LLs.
+\item
+  If \(l_1 = \varnothing\) and no lesions are marked, then Eqn. \eqref{eq:froc-empirical-TP3} applies; this represents an unmarked diseased case; the \(-\infty\) rating assignment is justified because an unmarked diseased case is an observable event.
+\end{itemize}
+
+The inferred true positive fraction \(\text{TPF}_r\) is defined by:
+
+\begin{equation}
+\text{TPF}_r \equiv \text{TPF}(\zeta_r) = \frac{1}{K_2}\sum_{k_2=1}^{K_2} \mathbb{I}\left ( TP_{k_2 2} \geq \zeta_r \right )
+\label{eq:froc-empirical-TPF}
+\end{equation}
+
+\hypertarget{froc-empirical-definition-auc-ROC}{%
+\subsection{Definition}\label{froc-empirical-definition-auc-ROC}}
+
+The inferred empirical ROC plot connects adjacent points \(\left( \text{FPF}_r, \text{TPF}_r \right )\), including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). Like a real ROC, this plot is constrained to lie within the unit square. The area under this plot is the empirical inferred ROC AUC, denoted \(A_{\text{ROC}}\).
+
+\hypertarget{froc-empirical-AFROC}{%
+\section{The alternative FROC (AFROC) plot}\label{froc-empirical-AFROC}}
+
+\begin{itemize}
+\tightlist
+\item
+  Fig. 4 in \citep{bunch1977free} anticipated another way of visualizing FROC data. I subsequently termed\footnote{The late Prof.~Richard Swensson did not like my choice of the word ``alternative'' in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.} this the \emph{alternative FROC (AFROC)} plot \citep{chakraborty1989maximum}.
+\item
+  The empirical AFROC is defined as the plot of \(\text{LLF}(\zeta_r)\) along the ordinate vs.~\(\text{FPF}(\zeta_r)\) along the abscissa.
+\item
+  \(\text{LLF}_r \equiv \text{LLF}(\zeta_r)\) was defined in Eqn. \eqref{eq:froc-empirical-LLFr}.
+\item
+  \(\text{FPF}_r \equiv \text{FPF}(\zeta_r)\) was defined in Eqn. \eqref{eq:froc-empirical-FPF}.
+\end{itemize}
+
+\hypertarget{froc-empirical-definition-auc-AFROC}{%
+\subsection{Definition}\label{froc-empirical-definition-auc-AFROC}}
+
+The empirical AFROC plot connects adjacent operating points \(\left( \text{FPF}_r, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The area under this plot is the empirical inferred AFROC AUC, denoted \(A_{\text{AFROC}}\).
+
+Key points:
+
+\begin{itemize}
+\tightlist
+\item
+  The ordinates (LLF) of the FROC and AFROC are identical.
+\item
+  The abscissa (FPF) of the ROC and AFROC are identical.
+\item
+  The AFROC is, in this sense, a hybrid plot, incorporating aspects of both ROC and FROC plots.
+\item
+  Unlike the empirical FROC, whose observed end-point has the semi-constrained property, \emph{the AFROC end-point is constrained to within the unit square}, as detailed next.
+\end{itemize}
+
+\hypertarget{froc-empirical-AFROC-constrained}{%
+\subsection{The constrained observed end-point of the AFROC}\label{froc-empirical-AFROC-constrained}}
+
+Since \(\zeta_{R_{FROC}+1} = \infty\), according to Eqn. \eqref{eq:froc-empirical-LLFr} and Eqn. \eqref{eq:froc-empirical-FPF}, \(r = R_{FROC}+1\) yields the trivial operating point (0,0). Likewise, since \(\zeta_0 = -\infty\), \(r = 0\) yields the trivial point (1,1):
+
+\begin{equation}
+\left.
+\begin{aligned} 
+\text{FPF}_{R_{FROC}+1} =& \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq \infty \right )\\
+=& 0\\
+\text{LLF}_{R_{FROC}+1} =& \frac{1}{L_T} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}}\mathbb{I} \left ( LL_{k_2 2 l_2 2} \geq \infty \right )\\
+=& 0
+\end{aligned}
+\right \}
+\label{eq:froc-empirical-FPF-LLF-last}
+\end{equation}
+
+and
+
+\begin{equation}
+\left.
+\begin{aligned} 
+\text{FPF}_0 =& \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq -\infty \right )\\
+=& 1\\
+\text{LLF}_0 =& \frac{1}{L_T} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}}\mathbb{I} \left ( LL_{k_2 2 l_2 2} \geq -\infty \right )\\
+=& 1
+\end{aligned}
+\right \}
+\label{eq:froc-empirical-FPF0-LLF0}
+\end{equation}
+
+Because every non-diseased case is assigned a rating, and is therefore counted, the right hand side of the first equation in \eqref{eq:froc-empirical-FPF0-LLF0} evaluates to unity. This is obvious for marked cases. Since each unmarked case also gets a rating, albeit a \(-\infty\) rating, it is also counted (the argument of the indicator function in Eqn. \eqref{eq:froc-empirical-FPF0-LLF0} is true even when the inferred FP rating is \(-\infty\)).
+
+\hypertarget{froc-empirical-wAFROC}{%
+\section{The weighted-AFROC (wAFROC) plot}\label{froc-empirical-wAFROC}}
+
+The AFROC ordinate defined in Eqn. \eqref{eq:froc-empirical-LLFr} gives equal importance to every lesion in a case. Therefore, a case with more lesions will have more influence on the AFROC (see TBA Chapter 14 for an explicit demonstration of this fact). This is undesirable since each case (i.e., patient) should get equal importance in the analysis -- as with ROC analysis, one wishes to draw conclusions about the population of cases and each case is regarded as an equally valid sample from the population. In particular, one does not want the analysis to be skewed towards cases with greater than the average number of lesions. \footnote{Historical note: I became aware of how serious this issue could be when a researcher contacted me about using FROC methodology for nuclear medicine bone scan images, where the number of lesions on diseased cases can vary from a few to a hundred!}
+
+Another issue is that the AFROC assigns equal \emph{clinical} importance to each lesion in a case. Lesion weights were introduced \citep{RN1385} to allow for the possibility that the clinical importance of finding a lesion might be lesion-dependent \citep{RN1966}. For example, it is possible that a diseased cases has lesions of two types with differing clinical importance; the figure-of-merit should give more credit to finding the more clinically important one. Clinical importance could be defined as the mortality associated with the specific lesion type; these can be obtained from epidemiological studies \citep{desantis2011breast}.
+
+Let \(W_{k_2 l_2} \geq 0\) denote the \emph{weight} (i.e., short for clinical importance) of lesion \(l_2\) in diseased case \(k_2\) (since weights are only applicable to diseased cases one can, without ambiguity, drop the case-level and location-level truth subscripts, i.e., the notation \(W_{k_2 2 l_2 2}\) would be superfluous). For each diseased case \(k_2 2\) the weights are subject to the constraint:
+
+\begin{equation}
+\sum_{l_2 =1 }^{L_{k_2 2}} W_{k_2 l_2} = 1
+\label{eq:froc-empirical-weights-constraint}
+\end{equation}
+
+The constraint assures that the each diseased case exerts equal importance in determining the weighted-AFROC (wAFROC) operating characteristic, regardless of the number of lesions in it (see TBA Chapter 14 for a demonstration of this fact).
+
+The weighted lesion localization fraction \(\text{wLLF}_r\) is defined by \citep{RN2484}:
+
+\begin{equation}
+\text{wLLF}_r \equiv \text{wLLF}\left ( \zeta_r \right ) = \frac{1}{K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_r \right )
+\label{eq:froc-empirical-wLLFr}
+\end{equation}
+
+\hypertarget{froc-empirical-definition-auc-wAFROC}{%
+\subsection{Definition}\label{froc-empirical-definition-auc-wAFROC}}
+
+The empirical wAFROC plot connects adjacent operating points \(\left ( \text{FPF}_r, \text{wLLF}_r \right )\), including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). The area under this plot is the empirical weighted-AFROC AUC, denoted \(A_{\text{wAFROC}}\).
+
+\hypertarget{froc-empirical-AFROC1}{%
+\section{The AFROC1 plot}\label{froc-empirical-AFROC1}}
+
+Historically the AFROC originally used a different definition of FPF, which is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred ``FP'' rating on a \emph{diseased case} as the maximum of all NL ratings on the case, or \(-\infty\) if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a \emph{non-diseased case}. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case \(k_t t\) is {[}the ``1'' superscript below is necessary to distinguish it from Eqn. \eqref{eq:froc-empirical-FP}{]}:
+
+\begin{equation}
+\left.
+\begin{aligned}
+FP_{k_t t}^1 =& \max_{l_1} \left ( z_{k_t t l_1 1 } \mid  l_1 \neq \varnothing \right )\\
+=& -\infty \mid l_1 = \varnothing
+\end{aligned}
+\right \}
+\label{eq:froc-empirical-FP1}
+\end{equation}
+
+\(FP_{k_t t}^1\) is the maximum over all latent NL marks, labeled by the location index \(l_1\), occurring in case \(k_t t\), or \(-\infty\) if \(l_1 = \varnothing\). The corresponding false positive fraction \(FPF_r^1\) is defined by {[}the ``1'' superscript is necessary to distinguish it from Eqn. \eqref{eq:froc-empirical-FPF}{]}:
+
+\begin{equation}
+FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
+\label{eq:froc-empirical-FPF1}
+\end{equation}
+
+Note the subtle differences between Eqn. \eqref{eq:froc-empirical-FPF} and Eqn. \eqref{eq:froc-empirical-FPF1}. The latter counts ``FPs'' on non-diseased and diseased cases while Eqn. \eqref{eq:froc-empirical-FPF} counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to be both a TP and a FP is questionable from both clinical and statistical considerations. However, this operating characteristic can be useful in applications where all or almost all cases are diseased.
+
+\hypertarget{froc-empirical-definition-auc-AFROC1}{%
+\subsection{Definition}\label{froc-empirical-definition-auc-AFROC1}}
+
+The empirical AFROC1 plot connects adjacent operating points \(\left ( FPF_r^1, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 and the AFROC plot is in the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted \(A_{\text{AFROC1}}\).
+
+\hypertarget{froc-empirical-wAFROC1}{%
+\section{The weighted-AFROC1 (wAFROC1) plot}\label{froc-empirical-wAFROC1}}
+
+\hypertarget{froc-empirical-definition-auc-wAFROC1}{%
+\subsection{Definition}\label{froc-empirical-definition-auc-wAFROC1}}
+
+The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points \(\left ( FPF_r^1, \text{wLLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted \(A_{\text{wAFROC1}}\).
+
+\hypertarget{froc-empirical-EFROC}{%
+\section{The EFROC plot}\label{froc-empirical-EFROC}}
+
+An \emph{exponentially transformed FROC} (EFROC) plot has been proposed \citep{RN2366} that, like the AFROC, is contained within the unit square. The EFROC inferred FPF is defined by (this represents another way of inferring ROC data, albeit only FPF, from FROC data):
+
+\begin{equation}
+FPF_r= 1 - \exp\left ( NLF\left ( \zeta_r \right ) \right )
+\label{eq:froc-empirical-EFROC}
+\end{equation}
+
+In other words, one computes \(NLF_r\) using NLs rated \(\geq \zeta_r\) on all cases and then transforms it to \(FPF_r\) using the exponential transformation shown. Note that \(FPF_r\) so defined is in the range (0,1).
+
+\hypertarget{froc-empirical-definition-auc-EFROC}{%
+\subsection{Definition}\label{froc-empirical-definition-auc-EFROC}}
+
+The empirical EFROC plot connects adjacent operating points \(\left ( FPF_r^1, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between it and the AFROC plot is in the x-axis. The area under this plot is the empirical EFROC AUC, denoted \(A_{\text{EFROC}}\).
+
+\(A_{\text{EFROC}}\) has the advantage, compared to \(A_{\text{FROC}}\), of being defined by points contained within the unit square. It has the advantage over the AFROC of using all NL ratings, not just the highest rated ones. In my opinion this is a mixed blessing. The effect on statistical power compared to \(A_{\text{AFROC}}\) has not been studied, but I expect the advantage to be minimal (because the highest rated NL contains more information than a randomly selected NL mark). A disadvantage is that cases with more LLs get more importance in the analysis; this can be corrected by replacing LLF with wLLF, essentially yielding a weighted version of the EFROC AUC. Another disadvantage is that inclusion of NLs on diseased cases causes the EFROC AUC to depend on diseased prevalence. \emph{The EFROC represents the first recognition by someone other than me, of significant limitations of the FROC curve, and that an operating characteristic for FROC data that is completely contained within the unit square is highly desirable.}
+
+\hypertarget{froc-empirical-Discussion}{%
+\section{Discussion}\label{froc-empirical-Discussion}}
+
+TBA This chapter started with the difference between latent and actual marks and the notation to describe FROC data. The notation is used in deriving formulae for FROC, inferred ROC, AFROC, wAFROC, AFROC1, wAFROC1 and EFROC operating characteristics. In each case an area measure was defined. With the exception of the FROC plot, all operating characteristics defined in this chapter are contained in the unit square. Discussion of the preferred operating characteristic is deferred to a subsequent chapter TBA.
+
+\hypertarget{froc-empirical-references}{%
+\section{References}\label{froc-empirical-references}}
 
 \hypertarget{visual-search}{%
 \chapter{Visual Search}\label{visual-search}}
@@ -1799,569 +2370,6 @@ The solid black line is the plot, using multiple precision arithmetic, of slope 
 \item
   Chakraborty DP. A search model and figure of merit for observer data acquired according to the free-response paradigm. Phys Med Biol. 2006;51:3449--3462.
 \end{enumerate}
-
-\hypertarget{froc-empirical}{%
-\chapter{Empirical plots}\label{froc-empirical}}
-
-\hypertarget{froc-empirical-how-much-finished}{%
-\section{TBA How much finished}\label{froc-empirical-how-much-finished}}
-
-70\%
-
-\hypertarget{froc-empirical-intro}{%
-\section{Introduction}\label{froc-empirical-intro}}
-
-Operating characteristics are visual depicters of performance. If properly defined, scalar quantities derived from operating characteristics can serve as quantitative measures of performance, termed figures of merit (FOMs). The previous chapter defined the FROC curve and suggested the area under this curve as a possible FOM. This chapter introduces mathematical expressions for empirical operating characteristics (FROC and others) possible with FROC data and associated FOMs.
-
-A distinction between latent and actual marks is made followed by a summary of FROC notation applicable to a single modality single reader dataset. This is a key table, which will be used in later chapters. Following this, different empirical operating characteristics proposed for FROC data are described. Formulae are given for calculating each empirical operating characteristic.
-
-The observed end-point of an operating characteristic is defined as that operating point achieved by cumulating all the ratings. For the FROC plot it is demonstrated that the observed FROC curve is not contained in the unit square, unlike the other operating characteristics, which are contained in the unit square.
-
-\hypertarget{froc-empirical-mark-rating-pairs}{%
-\section{Mark rating pairs}\label{froc-empirical-mark-rating-pairs}}
-
-\emph{FROC data consists of mark-rating pairs}. Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as \emph{lesion localization} (LL) if it is sufficiently close to a true lesion, according to the adopted proximity criterion, and otherwise it is recorded as \emph{non-lesion localization} (NL).
-
-\emph{In an FROC study the number of marks on an image is an a-priori unknown modality-reader-case dependent non-negative random integer.} It is incorrect to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don't assign equal attention units to all areas of the image. The best insight into the number of marks per case is obtained from eye-tracking studies \citep{RN1490}, but even here the information is incomplete, as eye-tracking studies can only measure foveal gaze and not lesions found by peripheral vision, not to mention that such studies are very difficult to conduct in a clinical setting.
-
-Experts tend to have smaller numbers of NL marks per case than non-experts while maintaining equal or more LL marks per case. As an example, in screening mammography, the number of marks per case (a case is defined as 4-views, two of each breast) that an expert will consider for marking to typically less than three. About 80\% on non-diseased cases have no marks. The reason is that because of the low disease prevalence marking too many cases would result in unacceptably high recall rates.
-
-\hypertarget{latent-vs.-actual-marks}{%
-\subsection{Latent vs.~actual marks}\label{latent-vs.-actual-marks}}
-
-To distinguish between suspicious regions that were considered for marking and regions that were actually marked, it is necessary to introduce the distinction between \emph{latent} marks and \emph{actual} marks.
-
-\begin{itemize}
-\tightlist
-\item
-  A \emph{latent} mark is defined as a suspicious region, regardless of whether or not it was marked. A latent mark becomes an \emph{actual} mark if it is marked.
-\item
-  A latent mark is a latent LL if it is close to a true lesion and otherwise it is a latent NL.
-\item
-  A non-diseased case can only have latent NLs. A diseased case can have latent NLs and latent LLs.
-\item
-  If marked, a latent NL is recorded as an actual NL.
-\item
-  If not marked, a latent NL is an \emph{unobservable event}.
-\item
-  In contrast, unmarked lesions are observable events -- one knows (trivially) which lesions were not marked.
-\end{itemize}
-
-\hypertarget{binning-rule}{%
-\subsection{Binning rule}\label{binning-rule}}
-
-Recall from Section TBA (binary-task-model-z-sample-model) that ROC data modeling requires the existence of a \emph{case-dependent} decision variable, or z-sample \(z\), and case-independent decision thresholds \(\zeta_r\), where \(r = 0, 1, ..., R_{ROC}-1\) and \(R_{ROC}\) is the number of ROC study bins, and the rule that if \(\zeta_r \leq z < \zeta_{r+1}\) the case is rated \(r + 1\). Dummy cutoffs are defined as \(\zeta_0 = -\infty\) and \(\zeta_{R_{ROC}} = \infty\). The z-sample applies to the whole case. To summarize:
-
-\begin{equation}
-\left.
-\begin{aligned}  
-if \left (\zeta_r \le z < \zeta_{r+1}  \right )\Rightarrow \text {rating} = r+1\\
-r = 0, 2, ..., R_{ROC}-1\\
-\zeta_0 = -\infty\\
-\zeta_{R_{ROC}} = \infty\\
-\end{aligned}
-\right \}
-\label{eq:froc-empirical-binning-rule-roc}
-\end{equation}
-
-Analogously, FROC data modeling requires the existence of a \emph{case and location-dependent} z-sample for each latent mark and \emph{case and location-independent} reporting thresholds \(\zeta_r\), where \(r = 1, ..., R_{FROC}\) and \(R_{FROC}\) is the number of FROC study bins, and the rule that a latent mark is marked and rated \(r\) if \(\zeta_r \leq z < \zeta_{r+1}\). Dummy cutoffs are defined as \(\zeta_0 = -\infty\) and \(\zeta_{R_{FROC}+1} = \infty\). For the same numbers of non-dummy cutoffs, the number of FROC bins is one less than the number of ROC bins. For example, 4 non-dummy cutoffs \(\zeta_1, \zeta_2, \zeta_3, \zeta_4\) can correspond to a 5-rating ROC study or to a 4-rating FROC study. To summarize:
-
-\begin{equation}
-\left.
-\begin{aligned}  
-if \left (\zeta_r \le z < \zeta_{r+1}  \right )\Rightarrow \text {rating} = r\\
-r = 1, 2, ..., R_{FROC}\\
-\zeta_0 = -\infty\\
-\zeta_{R_{FROC}+1} = \infty\\
-\end{aligned}
-\right \}
-\label{eq:froc-empirical-binning-rule-froc}
-\end{equation}
-
-\hypertarget{froc-empirical-notation}{%
-\section{FROC notation}\label{froc-empirical-notation}}
-
-\emph{Clear notation is vital to understanding this paradigm.} The notation needs to account for case and location dependencies of ratings and the distinction between case-level and location-level ground truth. For example, a diseased case can have several regions that are non-diseased and a few diseased regions (the lesions). The notation also has to account for cases with no marks.
-
-FROC notation is summarized in Table \ref{tab:froc-empirical-notation}, in which \textbf{all marks are latent marks}. The table is organized into three columns, the first column is the row number, the second column has the symbol(s), and the third column has the meaning(s) of the symbol(s).
-
-\begin{table}
-
-\caption{\label{tab:froc-empirical-notation}FROC notation; all marks refer to latent marks; see comments}
-\centering
-\begin{tabular}[t]{l|l|l}
-\hline
-Row & Symbol & Meaning\\
-\hline
-1 & t & Case-level truth: 1 for non-diseased and 2 for diseased\\
-\hline
-2 & $K_t$ & Number of cases with case-level truth t\\
-\hline
-3 & $k_t t$ & Case $k_t$ in case-level truth t\\
-\hline
-4 & s & Mark-level truth: 1 for NL and 2 for LL\\
-\hline
-5 & $l_s s$ & Mark $l_s$ in mark-level truth s\\
-\hline
-6 & $z_{k_t t l_1 1}$ & z-sample for case $k_t t$ and mark $l_1 1$\\
-\hline
-7 & $z_{k_2 2 l_2 2}$ & z-sample for case $k_2 2$ and mark $l_2 2$\\
-\hline
-8 & $R_{FROC}$ & Number of FROC bins\\
-\hline
-9 & $\zeta_1$ & Lowest reporting threshold\\
-\hline
-10 & $\zeta_r$ & Other non-dummy reporting thresholds\\
-\hline
-11 & $\zeta_0, \zeta_{R_{FROC}+1}$ & Dummy thresholds\\
-\hline
-12 & $N_{k_t t}$ & Number of NLs on case $k_t t$\\
-\hline
-13 & $L_{k_2 2}$ & Number of lesions on case $k_2 2$\\
-\hline
-14 & $W_{k_2 l_2}$ & Weight of lesion $l_2 2$ on case $k_2 2$\\
-\hline
-15 & $L_{max}$ & Maximum number of lesions per case in dataset\\
-\hline
-16 & $L_T$ & Total number of lesions in dataset\\
-\hline
-\end{tabular}
-\end{table}
-
-\hypertarget{comments-on-table-reftabfroc-empirical-notation}{%
-\subsection{Comments on Table \ref{tab:froc-empirical-notation}}\label{comments-on-table-reftabfroc-empirical-notation}}
-
-\begin{itemize}
-\item
-  Row 1: The case-truth index \(t\) refers to the case (or patient), with \(t = 1\) for non-diseased and \(t = 2\) for diseased cases. As a useful mnemonic, \(t\) is for \emph{truth}.
-\item
-  Row 2: \(K_t\) is the number of cases with truth state \(t\); specifically, \(K_1\) is the number of non-diseased cases and \(K_2\) the number of diseased cases.
-\item
-  Row 3: Two indices \(k_t t\) are needed to select case \(k_t\) in truth state \(t\). As a useful mnemonic, \(k\) is for \emph{case}.
-\item
-  Rows 4 and 5: For a similar reason, two indices \(l_s s\) are needed to select latent mark \(l_s\) in location level truth state \(s\), where \(s = 1\) corresponds to a latent NL and \(s = 2\) corresponds to a latent LL. One can think of \(l_s\) as indexing the locations of different latent marks with location-level truth state \(s\). As a useful mnemonic, \(l\) is for \emph{location}.
-
-  \begin{itemize}
-  \item
-    \(l_1 = \{1, 2, ..., N_{k_t t}\}\) indexes latent NL marks, provided the case has at least one NL mark, and otherwise \(N_{k_t t} = 0\) and \(l_1 = \varnothing\), the null set.
-  \item
-    The possible values of \(l_1\) are \(l_1 = \left \{ \varnothing \right \}\oplus \left \{ 1,2,...N_{k_t t} \right \}\). The null set applies when the case has no latent NL marks and \(\oplus\) is the ``exclusive-or'' symbol (``exclusive-or'' is used in the English sense: ``one or the other, but not neither nor both''). In other words, \(l_1\) can \emph{either} be the null set or take on values \(1,2,...N_{k_t t}\).
-  \item
-    Likewise, \(l_2 = \left \{ 1,2,...,L_{k_2 2} \right \}\) indexes latent LL marks. Unmarked LLs are assigned negative infinity ratings. The null set notation is not needed for latent LLs.
-  \end{itemize}
-\item
-  Row 6: The z-sample for case \(k_t t\) and \textbf{latent NL mark} \(l_1 1\) is denoted \(z_{k_t t l_1 1}\). Latent NL marks are possible on non-diseased and diseased cases (both values of \(t\) are allowed). The range of a z-sample is \(-\infty < z_{k_t t l_1 1} < \infty\), provided \(l_1 \neq \varnothing\); otherwise, it is an \emph{unobservable event}.
-\item
-  Row 7: The z-sample of a \textbf{latent LL} is \(z_{k_2 2 l_2 2}\). Unmarked lesions are assigned negative infinity ratings and are observable events. The null-set notation is unnecessary for them.
-\item
-  Row 8: \(R_{FROC}\) is the number of bins in the FROC study.
-\item
-  Rows 9, 10 and 11: The cutoffs in the FROC study. The lowest threshold is \(\zeta_1\). The other non-dummy thresholds are \(\zeta_r\) where \(r=2,3,...,R_{FROC}\). The dummy thresholds are \(\zeta_0 = -\infty\) and \(\zeta_{R_{FROC}+1} = \infty\).
-\item
-  Row 12: \(N_{k_t t}\) is the total number of latent NL marks on case \(k_t t\).
-\item
-  Row 13: \(L_{k_2 2}\) is the number of lesions in diseased case \(k_2 2\).
-\item
-  Row 14: \(W_{k_2 l_2}\) is the weight (i.e., clinical importance) of lesion \(l_2 2\) in diseased case \(k_2 2\). The weights of lesions on a case sum to one: \(\sum_{l_2 = 1}^{L_{k_2 2}}W_{k_2 l_2} = 1\).
-\item
-  Row 15: \(L_{max}\) is the maximum number of lesions per case in the dataset.
-\item
-  Row 16: \(L_T\) is the total number of lesions in the dataset.
-\end{itemize}
-
-\hypertarget{discussion-cases-with-zero-latent-nl-marks}{%
-\subsection{Discussion: cases with zero latent NL marks}\label{discussion-cases-with-zero-latent-nl-marks}}
-
-An aspect of FROC data, \textbf{that there could be cases with no NL marks, no matter how low the reporting threshold}, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold \(\zeta_1\) is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case ``filling up'' with NL marks \footnote{I expected the number of NL marks per image to be limited only by the ratio of image size to lesion size, i.e., larger values for smaller lesions.}. In fact the first modeling of FROC data \citep{chakraborty1989maximum} predicts that, as the reporting threshold is lowered to \(\zeta_1 = -\infty\), the number of NL marks per case approaches \(\infty\). However, observed FROC curves end with a finite value of NLs per case. This mismatch between observation and theory is one reason I introduced the radiological search model (RSM) \citep{chakraborty2006search}. I will have much more to say about this in a subsequent chapter, but for now I state one prediction (actually an assumption) of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the Poisson distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over cases) is a finite number. With this background, let us return to the conceptual issue: why does the observer not keep ``filling-up'' the image with NL marks? The answer is that \textbf{the observer can only mark regions that have a non-zero chance of being a lesion}. For example, if the actual number of latent NLs on a particular case is 2, then, as the reporting threshold is lowered, the observer will make at most two NL marks. Having exhausted these two regions the observer will not mark any more regions because there are no more regions to be marked - \emph{all other regions in the image have, in the perception of the observer, zero chance of being a lesion}.
-
-The notational issue is how to handle images with no latent NL marks. Basically it involves restricting summations over cases \(k_ t t\) to those cases which have at least one latent NL mark, i.e., \(N_{k_t t} \neq 0\). This is illustrated in the next section.
-
-\hypertarget{froc-empirical-froc-plot}{%
-\section{The empirical FROC}\label{froc-empirical-froc-plot}}
-
-The FROC was defined, Chapter \ref{froc-paradigm}, as the plot of LLF (along the ordinate) vs.~NLF (along the abscissa).
-
-Using the notation of Table \ref{tab:froc-empirical-notation} and assuming binned data\footnote{This is not a limiting assumption: if the data is continuous, for finite numbers of cases, no ordering information is lost if the number of ratings is chosen large enough. This is analogous to Bamber's theorem in Chapter 05, where a proof, although given for binned data, is applicable to continuous data.}, then, corresponding to the operating point determined by threshold \(\zeta_r\), the FROC abscissa is \(\text{NLF}_r \equiv \text{NLF}\left ( \zeta_r \right )\), the total number of NLs rated \(\geq\) threshold \(\zeta_r\) divided by the total number of cases, and the corresponding ordinate is \(\text{LLF}_r \equiv \text{LLF}\left ( \zeta_r \right )\), the total number of LLs rated \(\geq\) threshold \(\zeta_r\) divided by the total number of lesions:
-
-\begin{equation}
-\text{NLF}_r  = \frac{n\left ( \text{NLs rated} \geq \zeta_r\right )}{n\left ( \text{cases} \right )}
-\label{eq:froc-empirical-NLF1}
-\end{equation}
-
-and
-
-\begin{equation}
-\text{LLF}_r  = \frac{n\left ( \text{LLs rated} \geq \zeta_r\right )}{n\left ( \text{lesions} \right )}
-\label{eq:froc-empirical-LLF1}
-\end{equation}
-
-The observed operating points correspond to the following values of \(r\):
-
-\begin{equation}
-r = 1, 2, ...,R_{FROC} 
-\label{eq:froc-empirical-range-r}
-\end{equation}
-
-Due to the ordering of the thresholds, i.e., \(\zeta_1 < \zeta_2 ... < \zeta_{R_{FROC}}\), higher values of \(r\) correspond to lower operating points. The uppermost operating point, i.e., that defined by \(r = 1\), is referred to the as the \emph{observed end-point}.
-
-Equations \eqref{eq:froc-empirical-NLF1} and \eqref{eq:froc-empirical-LLF1} is are equivalent to:
-
-\begin{equation}
-\text{NLF}_r  = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right )\sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right ) 
-\label{eq:froc-empirical-NLFr}
-\end{equation}
-
-and
-
-\begin{equation}
-\text{LLF}_r  = \frac{1}{L_T} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}} \mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r  \right ) 
-\label{eq:froc-empirical-LLFr}
-\end{equation}
-
-Each indicator function, \(\mathbb{I}()\), yields unity if the argument is true and zero otherwise.
-
-In Eqn. \eqref{eq:froc-empirical-NLFr} \(\mathbb{I} \left ( N_{k_t t} \neq 0 \right )\) ensures that \textbf{only cases with at least one latent NL} are counted. Recall that \(N_{k_t t}\) is the total number of latent NLs in case \(k_t t\). Not including this term would cause the summation over \(l_1\) to be undefined for cases with zero latent NLs. The term \(\mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right )\) counts over all NL marks with ratings \(\geq \zeta_r\). The three summations yield the total number of NLs in the dataset with z-samples \(\geq \zeta_r\) and dividing by the total number of cases yields \(\text{NLF}_r\). This equation also shows explicitly that NLs on both non-diseased (\(t=1\)) and diseased (\(t=2\)) cases contribute to NLF.
-
-In Eqn. \eqref{eq:froc-empirical-LLFr} a summation over \(t\) is not needed as only diseased cases contribute to LLF. Analogous to the first indicator function term in Eqn. \eqref{eq:froc-empirical-NLFr}, a term like \(\mathbb{I} \left ( L_{k_2 2} \neq 0 \right )\) would be superfluous since \(L_{k_2 2} > 0\), as each diseased case must have at least one lesion. The term \(\mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r \right )\) counts over all LL marks with ratings \(\geq \zeta_r\). Dividing by \(L_T\), the total number of lesions in the dataset, yields \(\text{LLF}_r\).
-
-\hypertarget{froc-empirical-definition-auc-FROC}{%
-\subsection{Definition}\label{froc-empirical-definition-auc-FROC}}
-
-The empirical FROC plot connects adjacent operating points \(\left (\text{NLF}_r, \text{LLF}_r \right )\), including the origin (0,0) and the observed end-point, with straight lines. The area under this plot is the empirical FROC AUC, denoted \(A_{\text{FROC}}\).
-
-\hypertarget{froc-empirical-origin-trivial-point}{%
-\subsection{The origin, a trivial point}\label{froc-empirical-origin-trivial-point}}
-
-Since \(\zeta_{R_{FROC}+1} = \infty\) according to Eqn. \eqref{eq:froc-empirical-NLFr} and Eqn. \eqref{eq:froc-empirical-LLFr}, \(r = R_{FROC}+1\) yields the trivial operating point (0,0).
-
-\hypertarget{froc-empirical-end-point}{%
-\subsection{The observed end-point and its semi-constrained property}\label{froc-empirical-end-point}}
-
-The abscissa of the observed end-point \(NLF_1\), is defined by:
-
-\begin{equation}
-\text{NLF}_1 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_1 \right ) 
-\label{eq:froc-empirical-NLF11}
-\end{equation}
-
-Since each case could have an arbitrary number of NLs, \(NLF_1\) need not equal unity, except fortuitously.
-
-The ordinate of the observed end-point \(LLF_1\), is defined by:
-
-\begin{equation}
-\left.
-\begin{aligned}
-\text{LLF}_1 =& \frac{ \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}} \mathbb{I} \left ( z_{k_2 2 l_2 2} \geq  \zeta_1  \right ) }{L_T}\\
-\leq& 1
-\end{aligned}
-\right \}
-\label{eq:froc-empirical-LLF1a}
-\end{equation}
-
-The numerator is the total number of lesions that were actually marked. The ratio is the fraction of lesions that are marked, which is \(\leq 1\).
-
-This is the \textbf{semi-constrained property of the observed end-point}, namely, while the observed end-point \emph{ordinate} is constrained to the range (0,1) the corresponding \emph{abscissa} is not so constrained.
-
-\hypertarget{froc-empirical-froc-plot-futility-extrapolation}{%
-\subsection{Futility of extrapolation outside the observed end-point}\label{froc-empirical-froc-plot-futility-extrapolation}}
-
-To understand this consider the expression for \(NLF_0\), i.e., using Eqn. \eqref{eq:froc-empirical-NLFr} with \(r = 0\):
-
-\begin{equation}
-\text{NLF}_0 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq -\infty \right ) 
-\end{equation}
-
-The right hand side of this equation can be separated into two terms, the contribution of latent NLs with z-samples in the range \(z \geq \zeta_1\) and those in the range \(-\infty \leq z < \zeta_1\). The first term yields the abscissa of the observed end-point, Eqn. \eqref{eq:froc-empirical-NLF11}. The 2nd term is:
-
-\begin{equation}
-\left. 
-\begin{aligned} 
-\text{2nd term}=&\left (\frac{1}{K_1+K_2} \right )\sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( -\infty \leq z_{k_t t l_1 1} < \zeta_1 \right )\\
-=&\frac{\text{unknown number}}{K_1+K_2}
-\end{aligned}
-\right \} 
-\label{eq:froc-empirical-NLF0a}
-\end{equation}
-
-It represents the contribution of unmarked NLs, i.e., latent NLs whose z-samples were below \(\zeta_1\). It determines how much further to the right the observer's NLF would have moved, relative to \(NLF_1\), if one could get the observer to lower the reporting criterion to \(-\infty\). \textbf{Since the observer may not oblige, this term cannot, in general, be evaluated.} Therefore \(NLF_0\) cannot be evaluated. The basic problem is that \textbf{unmarked latent NLs represent unobservable events}.
-
-Turning our attention to \(LLF_0\):
-
-\begin{equation}
-\left.
-\begin{aligned}
-\text{LLF}_0 =& \frac{ \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}} \mathbb{I} \left ( z_{k_2 2 l_2 2} \geq  -\infty  \right ) }{L_T}\\
-=& 1
-\end{aligned}
-\right \}
-\label{eq:froc-empirical-LLF0}
-\end{equation}
-
-Unlike unmarked latent NLs, \textbf{unmarked lesions can safely be assigned the} \(-\infty\) \textbf{rating, because an unmarked lesion is an observable event}. The right hand side of Eqn. \eqref{eq:froc-empirical-LLF0} evaluates to unity. However, since the corresponding abscissa \(NLF_0\) is undefined, one cannot plot this point. It follows that one cannot extrapolate outside the observed end-point.
-
-The formalism should not obscure the fact that the futility of extrapolation outside the observed end-point of the FROC is a fairly obvious property: one does not know how far to the right the abscissa of the observed end-point might extend if one could get the observer to report every latent NL, no matter how low its z-sample.
-
-\hypertarget{froc-empirical-ROC}{%
-\section{The inferred ROC plot}\label{froc-empirical-ROC}}
-
-By adopting a sensible rule for converting the zero or more mark-rating data per case to a single rating per case, and commonly the highest rating rule is used \footnote{The highest rating method was used in early FROC modeling in \citep{bunch1977free} and in \citep{swensson1996unified}, the latter in the context of LROC paradigm modeling.}, it is possible to infer ROC data from FROC mark-rating data.
-
-\hypertarget{inferred-roc-rating}{%
-\subsection{Inferred-ROC rating}\label{inferred-roc-rating}}
-
-\textbf{The rating of the highest rated mark on a case, or} \(-\infty\) if the case has no marks, is defined as the inferred-ROC rating for the case. Inferred-ROC ratings on non-diseased cases are referred to as inferred-FP ratings and those on diseased cases as inferred-TP ratings.
-
-When there is little possibility for confusion, the prefix ``inferred'' is suppressed. Using the by now familiar cumulation procedure, FP counts are cumulated to calculate FPF and likewise, TP counts are cumulated to calculate TPF.
-
-Definitions:
-
-\begin{itemize}
-\tightlist
-\item
-  \(FPF(\zeta)\) = cumulated inferred FP counts with z-sample \(\geq\) threshold \(\zeta\) divided by total number of non-diseased cases.
-\item
-  \(TPF(\zeta)\) = cumulated inferred TP counts with z-sample \(\geq\) threshold \(\zeta\) divided by total number of diseased cases
-\end{itemize}
-
-Definition of ROC plot:
-
-\begin{itemize}
-\tightlist
-\item
-  The ROC is the plot of inferred \(TPF(\zeta)\) vs.~inferred \(FPF(\zeta)\).
-\item
-  The plot includes a \textbf{straight line extension from the observed end-point to (1,1)}.
-\end{itemize}
-
-The mathematical definition of the ROC follows.
-
-\hypertarget{inferred-fpf}{%
-\subsection{Inferred FPF}\label{inferred-fpf}}
-
-The highest z-sample ROC false positive (FP) rating for non-diseased case \(k_1 1\) is defined by:
-
-\begin{equation}
-\left.
-\begin{aligned}
-FP_{k_1 1}=&\max_{l1} \left ( z_{k_1 1 l_1 1 } \mid l_1 \neq \varnothing \right ) \\
-=& -\infty \mid l_1 = \varnothing  
- \end{aligned}
-\right \}
-\label{eq:froc-empirical-FP}
-\end{equation}
-
-If the case has at least one latent NL mark, then \(l_1 \neq \varnothing\), where \(\varnothing\) is the null set, and the first definition applies. If the case has no latent NL marks, then \(l_1 = \varnothing\), and the second definition applies. \(FP_{k_1 1}\) is the maximum z-sample over all latent marks occurring on non-diseased case \(k_1 1\), or \(-\infty\) if the case has no latent marks. The corresponding false positive fraction is defined by:
-
-\begin{equation}
-\text{FPF}_r \equiv \text{FPF} \left ( \zeta_r \right ) = \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq \zeta_r\right )
-\label{eq:froc-empirical-FPF}
-\end{equation}
-
-\hypertarget{inferred-tpf}{%
-\subsection{Inferred TPF}\label{inferred-tpf}}
-
-The inferred true positive (TP) z-sample for diseased case \(k_2 2\) is defined by:
-
-\begin{equation}
-TP_{k_2 2} = \textstyle\max_{l_1 l_2}\left ( \left (z_{k_2 2 l_1 2} ,z_{k_2 2 l_2 2}  \right ) \mid l_1 \neq \varnothing \right )
-\label{eq:froc-empirical-TP1}
-\end{equation}
-
-or
-
-\begin{equation}
-TP_{k_2 2} = \textstyle\max_{l_2}  \left ( z_{k_2 2 l_2 2}  \right )  \mid\left ( l_1 = \varnothing \land \left (\textstyle\max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} \neq -\infty  \right )  \right )
-\label{eq:froc-empirical-TP2}
-\end{equation}
-
-or
-
-\begin{equation}
-TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \textstyle\max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} = -\infty  \right )  \right )
-\label{eq:froc-empirical-TP3}
-\end{equation}
-
-Here \(\land\) is the logical AND operator.
-
-\begin{itemize}
-\item
-  If \(l_1 \neq \varnothing\) then Eqn. \eqref{eq:froc-empirical-TP1} applies, i.e., one takes the maximum over all ratings, NLs and LLs, whichever is higher, occurring on the diseased case.
-\item
-  If \(l_1 = \varnothing\) and at least one lesion is marked, then Eqn. \eqref{eq:froc-empirical-TP2} applies, i.e., one takes the maximum over all marked LLs.
-\item
-  If \(l_1 = \varnothing\) and no lesions are marked, then Eqn. \eqref{eq:froc-empirical-TP3} applies; this represents an unmarked diseased case; the \(-\infty\) rating assignment is justified because an unmarked diseased case is an observable event.
-\end{itemize}
-
-The inferred true positive fraction \(\text{TPF}_r\) is defined by:
-
-\begin{equation}
-\text{TPF}_r \equiv \text{TPF}(\zeta_r) = \frac{1}{K_2}\sum_{k_2=1}^{K_2} \mathbb{I}\left ( TP_{k_2 2} \geq \zeta_r \right )
-\label{eq:froc-empirical-TPF}
-\end{equation}
-
-\hypertarget{froc-empirical-definition-auc-ROC}{%
-\subsection{Definition}\label{froc-empirical-definition-auc-ROC}}
-
-The inferred empirical ROC plot connects adjacent points \(\left( \text{FPF}_r, \text{TPF}_r \right )\), including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). Like a real ROC, this plot is constrained to lie within the unit square. The area under this plot is the empirical inferred ROC AUC, denoted \(A_{\text{ROC}}\).
-
-\hypertarget{froc-empirical-AFROC}{%
-\section{The alternative FROC (AFROC) plot}\label{froc-empirical-AFROC}}
-
-\begin{itemize}
-\tightlist
-\item
-  Fig. 4 in \citep{bunch1977free} anticipated another way of visualizing FROC data. I subsequently termed\footnote{The late Prof.~Richard Swensson did not like my choice of the word ``alternative'' in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.} this the \emph{alternative FROC (AFROC)} plot \citep{chakraborty1989maximum}.
-\item
-  The empirical AFROC is defined as the plot of \(\text{LLF}(\zeta_r)\) along the ordinate vs.~\(\text{FPF}(\zeta_r)\) along the abscissa.
-\item
-  \(\text{LLF}_r \equiv \text{LLF}(\zeta_r)\) was defined in Eqn. \eqref{eq:froc-empirical-LLFr}.
-\item
-  \(\text{FPF}_r \equiv \text{FPF}(\zeta_r)\) was defined in Eqn. \eqref{eq:froc-empirical-FPF}.
-\end{itemize}
-
-\hypertarget{froc-empirical-definition-auc-AFROC}{%
-\subsection{Definition}\label{froc-empirical-definition-auc-AFROC}}
-
-The empirical AFROC plot connects adjacent operating points \(\left( \text{FPF}_r, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The area under this plot is the empirical inferred AFROC AUC, denoted \(A_{\text{AFROC}}\).
-
-Key points:
-
-\begin{itemize}
-\tightlist
-\item
-  The ordinates LLF of the FROC and AFROC are identical.
-\item
-  The abscissa FPF of the ROC and AFROC are identical.
-\item
-  The AFROC is, in this sense, a hybrid plot, incorporating aspects of both ROC and FROC plots.
-\item
-  Unlike the empirical FROC, whose observed end-point has the semi-constrained property, \textbf{the AFROC end-point is constrained to within the unit square}.
-\end{itemize}
-
-\hypertarget{froc-empirical-AFROC-constrained}{%
-\subsection{The constrained observed end-point of the AFROC}\label{froc-empirical-AFROC-constrained}}
-
-Since \(\zeta_{R_{FROC}+1} = \infty\), according to Eqn. \eqref{eq:froc-empirical-LLFr} and Eqn. \eqref{eq:froc-empirical-FPF}, \(r = R_{FROC}+1\) yields the trivial operating point (0,0). Likewise, since \(\zeta_0 = -\infty\), \(r = 0\) yields the trivial point (1,1):
-
-\begin{equation}
-\left.
-\begin{aligned} 
-\text{FPF}_{R_{FROC}+1} =& \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq \infty \right )\\
-=& 0\\
-\text{LLF}_{R_{FROC}+1} =& \frac{1}{L_T} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}}\mathbb{I} \left ( LL_{k_2 2 l_2 2} \geq \infty \right )\\
-=& 0
-\end{aligned}
-\right \}
-\label{eq:froc-empirical-FPF-LLF-last}
-\end{equation}
-
-and
-
-\begin{equation}
-\left.
-\begin{aligned} 
-\text{FPF}_0 =& \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq -\infty \right )\\
-=& 1\\
-\text{LLF}_0 =& \frac{1}{L_T} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}}\mathbb{I} \left ( LL_{k_2 2 l_2 2} \geq -\infty \right )\\
-=& 1
-\end{aligned}
-\right \}
-\label{eq:froc-empirical-FPF0-LLF0}
-\end{equation}
-
-Because every non-diseased case is assigned a rating, and is therefore counted, the right hand side of the first equation in \eqref{eq:froc-empirical-FPF0-LLF0} evaluates to unity. This is obvious for marked cases. Since each unmarked case also gets a rating, albeit a \(-\infty\) rating, it is also counted (the argument of the indicator function in Eqn. \eqref{eq:froc-empirical-FPF0-LLF0} is true even when the inferred FP rating is \(-\infty\)).
-
-\hypertarget{froc-empirical-wAFROC}{%
-\section{The weighted-AFROC (wAFROC) plot}\label{froc-empirical-wAFROC}}
-
-The AFROC ordinate defined in Eqn. \eqref{eq:froc-empirical-LLFr} gives equal importance to every lesion on a case. Therefore, a case with more lesions will have more influence on the AFROC (see TBA Chapter 14 for an explicit demonstration of this fact). This is undesirable since each case (i.e., patient) should get equal importance in the analysis. As with ROC analysis, one wishes to draw conclusions about the population of cases and each case is regarded as an equally valid sample from the population. In particular, one does not want the analysis to be skewed towards cases with greater than the average number of lesions. \footnote{Historical note: I became aware of how serious this issue could be when a researcher contacted him about using FROC methodology for nuclear medicine bone scan images, where the number of lesions on diseased cases can vary from a few to a hundred!}
-
-Another issue is that the AFROC assigns equal clinical importance to each lesion in a case. Lesion weights were introduced \citep{RN1385} to allow for the possibility that the clinical importance of finding a lesion might be lesion-dependent \citep{RN1966}. For example, it is possible that a diseased cases has lesions of two types with differing clinical importance; the figure-of-merit should give more credit to finding the more clinically important one. Clinical importance could be defined as the mortality associated with the specific lesion type; these can be obtained from epidemiological studies \citep{desantis2011breast}.
-
-Let \(W_{k_2 l_2} \geq 0\) denote the \textbf{weight} (i.e., clinical importance) of lesion \(l_2\) in diseased case \(k_2\) (since weights are only applicable to diseased cases, one can, without ambiguity, drop the case-level and location-level truth subscripts, i.e., the notation \(W_{k_2 2 l_2 2}\) would be superfluous). For each diseased case \(k_2 2\) the weights are subject to the constraint:
-
-\begin{equation}
-\sum_{l_2 =1 }^{L_{k_2 2}} W_{k_2 l_2} = 1
-\label{eq:froc-empirical-weights-constraint}
-\end{equation}
-
-The constraint assures that the each diseased case exerts equal importance in determining the weighted-AFROC (wAFROC) operating characteristic, regardless of the number of lesions in it (see TBA Chapter 14 for a demonstration of this fact).
-
-The weighted lesion localization fraction \(\text{wLLF}_r\) is defined by \citep{RN2484}:
-
-\begin{equation}
-\text{wLLF}_r \equiv \text{wLLF}\left ( \zeta_r \right ) = \frac{1}{K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_r \right )
-\label{eq:froc-empirical-wLLFr}
-\end{equation}
-
-\hypertarget{froc-empirical-definition-auc-wAFROC}{%
-\subsection{Definition}\label{froc-empirical-definition-auc-wAFROC}}
-
-The empirical wAFROC plot connects adjacent operating points \(\left ( \text{FPF}_r, \text{wLLF}_r \right )\), including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). The area under this plot is the empirical weighted-AFROC AUC, denoted \(A_{\text{wAFROC}}\).
-
-\hypertarget{froc-empirical-AFROC1}{%
-\section{The AFROC1 plot}\label{froc-empirical-AFROC1}}
-
-Historically the AFROC originally used a different definition of FPF, which is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred ``FP'' rating on a \emph{diseased case} as the maximum of all NL ratings on the case, or \(-\infty\) if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a \emph{non-diseased case}. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case \(k_t t\) is {[}the ``1'' superscript below is necessary to distinguish it from Eqn. \eqref{eq:froc-empirical-FP}{]}:
-
-\begin{equation}
-\left.
-\begin{aligned}
-FP_{k_t t}^1 =& \max_{l_1} \left ( z_{k_t t l_1 1 } \mid  l_1 \neq \varnothing \right )\\
-=& -\infty \mid l_1 = \varnothing
-\end{aligned}
-\right \}
-\label{eq:froc-empirical-FP1}
-\end{equation}
-
-\(FP_{k_t t}^1\) is the maximum over all latent NL marks, labeled by the location index \(l_1\), occurring on case \(k_t t\), or \(-\infty\) if \(l_1 = \varnothing\). The corresponding false positive fraction \(FPF_r^1\) is defined by {[}the ``1'' superscript is necessary to distinguish it from Eqn. \eqref{eq:froc-empirical-FPF}{]}:
-
-\begin{equation}
-FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
-\label{eq:froc-empirical-FPF1}
-\end{equation}
-
-Note the subtle differences between Eqn. \eqref{eq:froc-empirical-FPF} and Eqn. \eqref{eq:froc-empirical-FPF1}. The latter counts ``FPs'' on non-diseased and diseased cases while Eqn. \eqref{eq:froc-empirical-FPF} counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to be both a TP and a FP is questionable from both clinical and statistical considerations. However, this operating characteristic can be useful in applications where all cases contain lesions, for example lesion localization plus classification tasks (See Chapter TBA).
-
-\hypertarget{froc-empirical-definition-auc-AFROC1}{%
-\subsection{Definition}\label{froc-empirical-definition-auc-AFROC1}}
-
-The empirical AFROC1 plot connects adjacent operating points \(\left ( FPF_r^1, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 and the AFROC plot is in the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted \(A_{\text{AFROC1}}\).
-
-\hypertarget{froc-empirical-wAFROC1}{%
-\section{The weighted-AFROC1 (wAFROC1) plot}\label{froc-empirical-wAFROC1}}
-
-\hypertarget{froc-empirical-definition-auc-wAFROC1}{%
-\subsection{Definition}\label{froc-empirical-definition-auc-wAFROC1}}
-
-The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points \(\left ( FPF_r^1, \text{wLLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted \(A_{\text{wAFROC1}}\).
-
-\hypertarget{froc-empirical-EFROC}{%
-\section{The EFROC plot}\label{froc-empirical-EFROC}}
-
-An \emph{exponentially transformed FROC} (EFROC) plot has been proposed \citep{RN2366} that, like the AFROC, is contained within the unit square. The EFROC inferred FPF is defined by (this represents another way of inferring ROC data, albeit only FPF, from FROC data):
-
-\begin{equation}
-FPF_r= 1 - \exp\left ( NLF\left ( \zeta_r \right ) \right )
-\label{eq:froc-empirical-EFROC}
-\end{equation}
-
-In other words, one computes \(NLF_r\) using NLs rated \(\geq \zeta_r\) on all cases and then transforms it to \(FPF_r\) using the exponential transformation shown. Note that \(FPF_r\) so defined is in the range (0,1).
-
-\hypertarget{froc-empirical-definition-auc-EFROC}{%
-\subsection{Definition}\label{froc-empirical-definition-auc-EFROC}}
-
-The empirical EFROC plot connects adjacent operating points \(\left ( FPF_r^1, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between it and the AFROC plot is in the x-axis. The area under this plot is the empirical EFROC AUC, denoted \(A_{\text{EFROC}}\).
-
-\(A_{\text{EFROC}}\) has the advantage, compared to \(A_{\text{FROC}}\), of being defined by points contained within the unit square. It has the advantage over the AFROC of using all NL ratings, not just the highest rated ones. In my opinion this is a mixed blessing. The effect on statistical power compared to \(A_{\text{AFROC}}\) has not been studied, but I expect the advantage to be minimal (because the highest rated NL contains more information than a randomly selected NL mark). A disadvantage is that cases with more LLs get more importance in the analysis; this can be corrected by replacing LLF with wLLF, essentially yielding a weighted version of the EFROC AUC. Another disadvantage is that inclusion of NLs on diseased cases causes the EFROC AUC to depend on diseased prevalence. \emph{The EFROC represents the first recognition by someone other than me, of significant limitations of the FROC curve, and that an operating characteristic for FROC data that is completely contained within the unit square is highly desirable.}
-
-\hypertarget{froc-empirical-Discussion}{%
-\section{Discussion}\label{froc-empirical-Discussion}}
-
-TBA This chapter started with the difference between latent and actual marks and the notation to describe FROC data. The notation is used in deriving formulae for FROC, inferred ROC, AFROC, wAFROC, AFROC1, wAFROC1 and EFROC operating characteristics. In each case an area measure was defined. With the exception of the FROC plot, all operating characteristics defined in this chapter are contained in the unit square. Discussion of the preferred operating characteristic is deferred to a subsequent chapter TBA.
-
-\hypertarget{froc-empirical-references}{%
-\section{References}\label{froc-empirical-references}}
 
 \hypertarget{froc-empirical-examples}{%
 \chapter{Empirical plot examples}\label{froc-empirical-examples}}
