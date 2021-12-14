@@ -1,6 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
+_bookdown_files/**
 _publish.R
 _book
 _RJafroc_files

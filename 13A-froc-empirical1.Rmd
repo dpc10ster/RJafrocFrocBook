@@ -85,6 +85,7 @@ r = 1, 2, ..., R_{FROC}\\
 (\#eq:froc-empirical-binning-rule-froc)
 \end{equation}
 ```
+
 ## FROC notation {#froc-empirical-notation}
 
 *Clear notation is vital to understanding this paradigm.* The notation needs to account for case and location dependencies of ratings and the distinction between case-level and location-level ground truth. For example, a diseased case can have several regions that are non-diseased and a few diseased regions (the lesions). The notation also has to account for cases with no marks.
