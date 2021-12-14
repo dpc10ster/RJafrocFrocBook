@@ -23,7 +23,6 @@ eq:froc-empirical-weights-constraint
 eq:froc-empirical-wLLFr
 eq:froc-empirical-FP1
 eq:froc-empirical-FPF1
-eq:froc-empirical-EFROC
 fig:visual-search-us-presidents
 fig:visual-search-chest-images
 fig:visual-search-kundel-nodine
@@ -227,8 +226,6 @@ froc-empirical-AFROC1
 froc-empirical-definition-auc-AFROC1
 froc-empirical-wAFROC1
 froc-empirical-definition-auc-wAFROC1
-froc-empirical-EFROC
-froc-empirical-definition-auc-EFROC
 froc-empirical-Discussion
 froc-empirical-references
 visual-search
