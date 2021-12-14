@@ -6,10 +6,10 @@ delete_merged_file: TRUE
 rmd_files: [
   "index.Rmd", 
   "12-froc.Rmd",
+  "13a-froc-empirical1.Rmd",
   "15-visual-search.Rmd",
   "16-rsm.Rmd",
   "17a-rsm-predictions.Rmd",
-  "13a-froc-empirical1.Rmd",
   "13b-froc-empirical2.Rmd",
   "13c-froc-vs-wafroc.Rmd",
   "14-froc-meanings-foms-ocs.Rmd",

@@ -1,6 +1,6 @@
 # (PART\*) FROC paradigm {-}
 
-# The FROC paradigm {#froc-paradigm}
+# The FROC paradigm and search {#froc-paradigm}
 
 
 ```{r setup, include = FALSE}
@@ -17,7 +17,7 @@
 
 
 ## TBA How much finished {#froc-paradigm-how-much-finished}
-70%
+80%
 
 
 
@@ -127,18 +127,21 @@ In the medical imaging context, assuming the mark rating pairs have been classif
 
 -   Lesion localization fraction (LLF) is defined as the total number of LLs rated at or above the same threshold rating divided by the total number of lesions.
 
--   The FROC plot is defined as that of LLF (ordinate) vs. NLF as the threshold is varied. 
+-   The FROC plot is defined as that of LLF (ordinate) vs. NLF as the threshold is varied. If the points are connected by straight lines the resulting "curve" is termed the *empirical FROC curve*. 
 
 -   The upper-right most operating point is termed the *observed end-point* and its coordinated are denoted $(\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})$.
 
 -   Unlike the ROC plot which is completely contained in the unit square, the FROC plot is not.
 
 
-If integer ratings are used for each recorded mark then in a four-rating FROC study at most 4 FROC operating points will result: one corresponding to marks rated 4s; another corresponding to marks rated 4s or 3s; another to the 4s, 3s, or 2s; and finally the 4s, 3s, 2s, or 1s. An R-rating study yields at most R operating points. 
+The rating can be any real number, as long as higher values are associated with higher confidence levels.
 
-If continuous ratings are used, the procedure is to start with a very high threshold so that none of the ratings exceed the threshold and then to gradually lower the threshold. Every time the threshold crosses the rating of a mark, or possibly multiple marks, the total count of LLs and NLs exceeding the threshold is divided by the appropriate denominators yielding the ''raw'' FROC plot. For example, when an LL rating just exceeds the threshold, the operating point jumps up by 1/(total number of lesions), and if two LLs simultaneously just exceed the threshold the operating point jumps up by 2/(total number of lesions). If an NL rating just exceeds the threshold, the operating point jumps to the right by 1/(total number of cases). If an LL rating and a NL rating simultaneously just exceed the threshold, the operating point moves diagonally, up by 1/(total number of lesions) and to the right by 1/(total number of cases). The reader should get the general idea by now and recognize that the cumulating procedure is very similar to the manner in which ROC operating points were calculated, the only differences being in the quantities being cumulated and the relevant denominators.
+If *integer ratings* are used for each recorded mark then in a four-rating FROC study at most 4 FROC operating points will result: one corresponding to marks rated 4s; another corresponding to marks rated 4s or 3s; another to the 4s, 3s, or 2s; and finally the 4s, 3s, 2s, or 1s. An R-rating study yields at most R operating points ^[I have seen publications that describe a data collection process where the "1" rating is used to mean, in effect, that the observer sees nothing to report in the image, i.e., to mean "let's move on to the next image". This amounts to wasting a confidence level. The user interface should present an explicit "next-image" option and reserve the "1" rating to mean the lowest reportable confidence level.]. 
+
+If *continuous ratings* are used, the procedure is to start with a very high threshold so that none of the ratings exceed the threshold and then to gradually lower the threshold. Every time the threshold crosses the rating of a mark, or possibly multiple marks, the total count of LLs and NLs exceeding the threshold is divided by the appropriate denominators yielding the ''raw'' FROC plot. For example, when an LL rating just exceeds the threshold, the operating point jumps up by 1/(total number of lesions), and if two LLs simultaneously just exceed the threshold the operating point jumps up by 2/(total number of lesions). If an NL rating just exceeds the threshold, the operating point jumps to the right by 1/(total number of cases). If an LL rating and a NL rating simultaneously just exceed the threshold, the operating point moves diagonally, up by 1/(total number of lesions) and to the right by 1/(total number of cases). The reader should get the general idea by now and recognize that the cumulating procedure is very similar to the manner in which ROC operating points were calculated, the only differences being in the quantities being cumulated and the relevant denominators.
 
 
+Chapter \@ref(froc-empirical) describes the FROC, and other possible operating characteristics, in more detail. 
 
 ## The "solar" analogy {#froc-paradigm-solar-analogy}
 
@@ -158,7 +161,7 @@ Now consider a fictitious otherwise earth-like planet where the sun can be at ra
 
 The implication of this is that a fundamentally different mechanism from that considered in conventional observer performance methodology, namely *search*, is at work. 
 
-> Search describes the process of *finding* lesions while *not finding* non-lesions. 
+> Search describes the process of *finding* lesions while *not finding* non-lesions and search performance is the ability to find more lesions while minimizing finding non-lesions. 
 
 Think of the eye as two cameras: a low-resolution camera (peripheral vision) with a wide field-of-view plus a high-resolution camera (foveal vision) with a narrow field-of-view If one were limited to viewing with the high-resolution camera one would spend so much time steering the high-resolution narrow field-of-view camera from spot-to-spot that one would have a hard time finding the desired stellar object. Having a single high-resolution narrow field of view vision would also have negative evolutionary consequences as one would spend so much time scanning and processing the surroundings with the narrow field of view vision that one would miss dangers or opportunities. Nature has equipped us with essentially two cameras; the first low-resolution camera is able to "digest" large areas of the surround and process it rapidly so that if danger (or opportunity) is sensed, then the eye-brain system rapidly steers the second high-resolution camera to the location of the danger (or opportunity). This is Nature's way of optimally using the eye-brain system. For a similar reason astronomical telescopes come with a wide field of view lower magnification "spotter scope".
 
@@ -169,20 +172,20 @@ The analogy is not restricted to the sun, which one might argue is an almost inf
 False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization (LL) or incorrect localizations (NLs). At the time of writing there is a hunt for a new planet, possibly a gas giant , that is much further than even the newly demoted Pluto. 
 
 
-## TBA Discussion and suggestions {#froc-paradigm-discussion}
+## Discussion {#froc-paradigm-discussion}
 
-This chapter has introduced the FROC paradigm, the terminology used to describe it and a common operating characteristic associated with it, namely the FROC. There are several areas of possible confusion to avoid which consider the following suggestions:
+This chapter has served as a general introduction to the location specific paradigms. The FROC paradigm, in particular, is directly related to visual search. The terms lesion-localization (LL) and non-lesion localization (NL) were introduced, to mean locating a true lesion and a false region, respectively. A qualitative definition of search performance was given, namely, the ability to find lesions while not finding non-lesions. This will be quantified in a later chapter. A widely used operating characteristic associated with it, namely the FROC curve, was introduced. A "solar" analogy was given that brings out important characteristics of the FROC - in particular its dependence on lesion contrast. 
 
--   Avoid using the term "lesion-specific" to describe location-specific paradigms.
--   Avoid using the term "lesion" when one means a "suspicious region" that may or may not be a true lesion.
--   Avoid using ROC-specific terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localization, that apply to localized regions of the image. This issue will come up in later chapters.
--   Avoid using the FROC-1 rating to mean in effect "I see no signs of disease in this image ", when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
--   Do not show FROC curves as reaching the unit ordinate, as this is the exception rather than the rule.
--   Do not conceptualize FROC curves as extending to large values to the right.
--   Arbitrariness of the proximity criterion and multiple marks in the same region are not clinically important. Interactions with clinicians will allow selection of an appropriate proximity criterion for the task at hand and the multiple mark problem only occurs with algorithmic observers and is readily fixed.
+In my experience the FROC paradigm is much misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the paradigm and the FROC curve. These are summarized below: 
 
-Additional points made in this chapter are: There is an inverse correlation between $\text{LLF}_{\text{max}}$ and $\text{NLF}_{\text{max}}$, analogous to that been sensitivity and specificity in ROC analysis. The observed end-point $(\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})$ of the FROC curve tends to approach the point (0,1) as the perceptual SNR of the lesions approaches infinity. The solar analogy is relevant to understanding the search task. In search tasks two types of expertise are at work: search and lesion-classification performances, and there exists an expected inverse correlation between them.
+-   Loose terminology: using the term "lesion-specific" to describe location-specific paradigms.
+-   Loose terminology: using the term "lesion" when one means a "suspicious region" that may or may not be a true lesion.
+-   Loose terminology: using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localization, that apply to localized regions of the image. 
+-   Loose terminology: using the FROC-1 rating to mean in effect "I see no signs of disease in this image ", when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
+-   Misconception: showing FROC curves as reaching the unit ordinate, as this is the exception rather than the rule.
+-   Misconception: believing that FROC curves extend to very large values along the abscissa and all the observer has to do to access this region is to lower their reporting threshold.
+-   Misconception: blaming the FROC paradigm for alleged arbitrariness of the proximity criterion and multiple marks in the same region. These are not clinically important. 
 
-The FROC plot is the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset.
+The FROC plot is the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset and associated scalar measures of performance, termed *figures of merit* (FOMs).
 
 ## References {#froc-paradigm-references}
