@@ -697,7 +697,7 @@ AUC_{ROC}^{RSM}\left ( \mu, \lambda&#39;, \nu&#39;, \overrightarrow{f_L} \right 
 <div id="rsm-fitting-fitrsmroc-usage-example" class="section level2">
 <h2><span class="header-section-number">11.7</span> <code>FitRsmROC</code> usage example</h2>
 <ul>
-<li>The following example uses the <em>first</em> treatment of the “FED” dataset, <code>dataset04</code>, which is a 5 treatment 4 radiologist FROC dataset acquired by Dr. Federica Zanca et. al. <span class="citation">(Federica Zanca et al. <a href="#ref-RN1882" role="doc-biblioref">2009</a><a href="#ref-RN1882" role="doc-biblioref">b</a>)</span>. The dataset has 5 treatments and 4 readers and 200 cases and was acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using <code>DfBinDataset()</code>. I need to emphasize this point: <strong>if the dataset represents continuous ratings, as with a CAD algorithm, one must bin the dataset to (ideally) about 5-6 bins</strong>. The number of parameters that must be estimated increases with the number of bins (because for each additional bin one needs to estimate an additional cutoff parameter).</li>
+<li>The following example uses the <em>first</em> treatment of the “FED” dataset, <code>dataset04</code>, which is a 5 treatment 4 radiologist FROC dataset acquired by Dr. Federica Zanca et. al. <span class="citation">(Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a>)</span>. The dataset has 5 treatments and 4 readers and 200 cases and was acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using <code>DfBinDataset()</code>. I need to emphasize this point: <strong>if the dataset represents continuous ratings, as with a CAD algorithm, one must bin the dataset to (ideally) about 5-6 bins</strong>. The number of parameters that must be estimated increases with the number of bins (because for each additional bin one needs to estimate an additional cutoff parameter).</li>
 </ul>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="rsm-fitting.html#cb71-1"></a>rocData &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dataset04)</span>
 <span id="cb71-2"><a href="rsm-fitting.html#cb71-2"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">UtilLesionDistr</span>(dataset04)[,<span class="dv">2</span>]</span>
@@ -777,8 +777,8 @@ AUC_{ROC}^{RSM}\left ( \mu, \lambda&#39;, \nu&#39;, \overrightarrow{f_L} \right 
 <div id="ref-RN1652">
 <p>Yoon, H. J., Bin Zheng, B. Sahiner, and Dev P. Chakraborty. 2007. “Evaluating Computer-Aided Detection Algorithms.” Journal Article. <em>Medical Physics</em> 34 (6): 2024–38.</p>
 </div>
-<div id="ref-RN1882">
-<p>Zanca, Federica, Jurgen Jacobs, Chantal Van Ongeval, Filip Claus, Valerie Celis, Catherine Geniets, Veerle Provost, Herman Pauwels, Guy Marchal, and Hilde Bosmans. 2009b. “Evaluation of Clinical Image Processing Algorithms Used in Digital Mammography.” Journal Article. <em>Medical Physics</em> 36 (3): 765–75. <a href="https://doi.org/10.1118/1.3077121">https://doi.org/10.1118/1.3077121</a>.</p>
+<div id="ref-zanca2009evaluation">
+<p>Zanca, Federica, Jurgen Jacobs, Chantal Van Ongeval, Filip Claus, Valerie Celis, Catherine Geniets, Veerle Provost, Herman Pauwels, Guy Marchal, and Hilde Bosmans. 2009. “Evaluation of Clinical Image Processing Algorithms Used in Digital Mammography.” <em>Medical Physics</em> 36 (3): 765–75.</p>
 </div>
 </div>
 <div class="footnotes">

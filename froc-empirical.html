@@ -852,7 +852,7 @@ r = 1, 2, ...,R_{FROC}
 </div>
 <div id="froc-empirical-froc-plot-illustration" class="section level3">
 <h3><span class="header-section-number">2.5.5</span> Illustration with a dataset</h3>
-<p>The following code uses <code>dataset04</code> <span class="citation">(Federica Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a><a href="#ref-zanca2009evaluation" role="doc-biblioref">a</a>)</span> in the <code>RJafroc</code> package to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so in principle one can generate 20 plots. In this example I have selected treatment 1 and reader 1 to produce the plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "FROC")$Plot</code> with different treatments and readers specified.</p>
+<p>The following code uses <code>dataset04</code> <span class="citation">(Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a>)</span> in the <code>RJafroc</code> package to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so in principle one can generate 20 plots. In this example I have selected treatment 1 and reader 1 to produce the plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "FROC")$Plot</code> with different treatments and readers specified.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="froc-empirical.html#cb1-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
 <span id="cb1-2"><a href="froc-empirical.html#cb1-2"></a>  dataset04, </span>
 <span id="cb1-3"><a href="froc-empirical.html#cb1-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>)</span>
@@ -1173,7 +1173,7 @@ FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}
 <p>Swensson, Richard G. 1996. “Unified Measurement of Observer Performance in Detecting and Localizing Target Objects on Images.” <em>Medical Physics</em> 23 (10): 1709–25.</p>
 </div>
 <div id="ref-zanca2009evaluation">
-<p>Zanca, Federica, Jurgen Jacobs, Chantal Van Ongeval, Filip Claus, Valerie Celis, Catherine Geniets, Veerle Provost, Herman Pauwels, Guy Marchal, and Hilde Bosmans. 2009a. “Evaluation of Clinical Image Processing Algorithms Used in Digital Mammography.” <em>Medical Physics</em> 36 (3): 765–75.</p>
+<p>Zanca, Federica, Jurgen Jacobs, Chantal Van Ongeval, Filip Claus, Valerie Celis, Catherine Geniets, Veerle Provost, Herman Pauwels, Guy Marchal, and Hilde Bosmans. 2009. “Evaluation of Clinical Image Processing Algorithms Used in Digital Mammography.” <em>Medical Physics</em> 36 (3): 765–75.</p>
 </div>
 </div>
 <div class="footnotes">
