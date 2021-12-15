@@ -10,18 +10,12 @@ rmd_files: [
   "15-visual-search.Rmd",
   "16-rsm.Rmd",
   "17a-rsm-predictions.Rmd",
-  "13b-froc-empirical2.Rmd",
-  "13c-froc-vs-wafroc.Rmd",
-  "14-froc-meanings-foms-ocs.Rmd",
   "17b-rsm-search-classification.Rmd",
-  "17d-rsm-goodbye-froc.Rmd",
   "19a-rsm-fitting.Rmd",
   "19b-rsm-3-fits.Rmd",
   "20-standalone-cad.Rmd",
   "21-optim-op-point.Rmd",
   "99-references.Rmd",
-  "83-classification-task.Rmd", 
-  "84-split-plot.Rmd",
 ]
 clean: [packages.bib, myRefs.bbl]
 new_session: yes
