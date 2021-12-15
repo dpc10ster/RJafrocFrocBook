@@ -13,19 +13,17 @@ output:
 
 
 ## TBA How much finished {#froc-empirical-how-much-finished}
-70%
+80%
 
 
 
-## Introduction {#froc-empirical-intro}
+## TBA Introduction {#froc-empirical-intro}
 
-The previous chapter defined the empirical FROC curve. This chapter introduces mathematical expressions for empirical operating characteristics (FROC and others) possible with FROC data.
+FROC data consists of mark-rating pairs. A distinction between latent and actual marks is made followed by a summary of FROC notation. This is a key table, which will be used in later chapters. Section \@ref(froc-paradigm-froc-plot) introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data. Operating characteristics are visual depicters of performance. Scalar quantities, typically area measures, derived from operating characteristics, serve as quantitative measures of performance, termed *figures of merit* (FOMs). This chapter defines area measures associated with each described operating characteristic.
 
-Operating characteristics are visual depicters of performance. Scalar quantities derived from operating characteristics can serve as quantitative measures of performance, termed figures of merit (FOMs). This chapter defines the FOM associated with each introduced operating characteristics.
+The observed end-point of an operating characteristic is defined. For the FROC plot it is demonstrated that the observed FROC curve is not contained in the unit square unlike the other operating characteristics which are contained in the unit square. In contrast the other introduced operating characteristics are each contained within the unit square.
 
-FROC data is defined as consisting of mark-rating pairs. A distinction between latent and actual marks is made followed by a summary of FROC notation applicable to a single modality single reader dataset. This is a key table, which will be used in later chapters. 
-
-The observed end-point of an operating characteristic is defined. For the FROC plot it is demonstrated that the observed FROC curve is not contained in the unit square unlike the other operating characteristics which are contained in the unit square.
+An FROC dataset is used to illustrate the different operating characteristics. The correlation between the AUCs vs. ROC AUC is qualitatively examined via plots.   
 
 
 ## Mark rating pairs {#froc-empirical-mark-rating-pairs}
@@ -81,7 +79,7 @@ r = 1, 2, ..., R_{FROC}\\
 \end{equation}
 
 
-## FROC notation {#froc-empirical-notation}
+## Notation {#froc-empirical-notation}
 
 *Clear notation is vital to understanding this paradigm.* The notation needs to account for case and location dependencies of ratings and the distinction between case-level and location-level ground truth. The notation also has to account for cases with no marks.
 
@@ -229,7 +227,7 @@ The notational issue is how to handle images with no latent NL marks. Basically 
 
 ## The empirical FROC {#froc-empirical-froc-plot}
 
-The FROC was defined, Chapter \@ref(froc-paradigm), as the plot of LLF (along the ordinate) vs. NLF (along the abscissa).
+The FROC, Chapter \@ref(froc-paradigm-froc-plot), is the plot of LLF (along the ordinate) vs. NLF (along the abscissa).
 
 Using the notation of Table \@ref(tab:froc-empirical-notation) and assuming binned data[^froc-empirical1-2], then, corresponding to the operating point determined by threshold $\zeta_r$, the FROC abscissa is $\text{NLF}_r \equiv \text{NLF}\left ( \zeta_r \right )$, the total number of NLs rated $\geq$ threshold $\zeta_r$ divided by the total number of cases, and the corresponding ordinate is $\text{LLF}_r \equiv \text{LLF}\left ( \zeta_r \right )$, the total number of LLs rated $\geq$ threshold $\zeta_r$ divided by the total number of lesions:
 
@@ -285,7 +283,7 @@ In Eqn. \@ref(eq:froc-empirical-NLFr) $\mathbb{I} \left ( N_{k_t t} \neq 0 \righ
 
 In Eqn. \@ref(eq:froc-empirical-LLFr) a summation over $t$ is not needed as only diseased cases contribute to LLF. Analogous to the first indicator function term in Eqn. \@ref(eq:froc-empirical-NLFr), a term like $\mathbb{I} \left ( L_{k_2 2} \neq 0 \right )$ would be superfluous since $L_{k_2 2} > 0$ as each diseased case must have at least one lesion. The term $\mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r \right )$ counts over all LL marks with ratings $\geq \zeta_r$. Dividing by $L_T$, the total number of lesions in the dataset, yields $\text{LLF}_r$.
 
-### Definition {#froc-empirical-definition-auc-FROC}
+### Definition empirical plot and AUC {#froc-empirical-definition-empirical-auc-froc}
 
 The empirical FROC plot connects adjacent operating points $\left (\text{NLF}_r, \text{LLF}_r \right )$, including the origin (0,0) and the observed end-point, with straight lines. The area under this plot is the empirical FROC AUC, denoted $A_{\text{FROC}}$.
 
@@ -502,7 +500,7 @@ The inferred true positive fraction $\text{TPF}_r$ is defined by:
 \end{equation}
 
 
-### Definition {#froc-empirical-definition-auc-ROC}
+### Definition empirical plot and AUC {#froc-empirical-definition-empirical-auc-roc}
 
 The inferred empirical ROC plot connects adjacent points $\left( \text{FPF}_r, \text{TPF}_r \right )$, including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). Like a real ROC, this plot is constrained to lie within the unit square. The area under this plot is the empirical inferred ROC AUC, denoted $A_{\text{ROC}}$.
 
@@ -551,7 +549,7 @@ UtilFigureOfMerit(dataset04, FOM = "HrAuc")
 
 [^froc-empirical1-4]: The late Prof. Richard Swensson did not like my choice of the word "alternative" in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.
 
-### Definition {#froc-empirical-definition-auc-AFROC}
+### Definition empirical plot and AUC {#froc-empirical-definition-empirical-auc-afroc}
 
 The empirical AFROC plot connects adjacent operating points $\left( \text{FPF}_r, \text{LLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The area under this plot is the empirical inferred AFROC AUC, denoted $A_{\text{AFROC}}$.
 
@@ -669,7 +667,7 @@ The weighted lesion localization fraction $\text{wLLF}_r$ is defined by [@RN2484
 \end{equation}
 
 
-### Definition {#froc-empirical-definition-auc-wAFROC}
+### Definition empirical plot and AUC {#froc-empirical-definition-empirical-auc-wafroc}
 
 The empirical wAFROC plot connects adjacent operating points $\left ( \text{FPF}_r, \text{wLLF}_r \right )$, including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). The area under this plot is the empirical weighted-AFROC AUC, denoted $A_{\text{wAFROC}}$.
 
@@ -737,7 +735,7 @@ FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}
 
 Note the subtle differences between Eqn. \@ref(eq:froc-empirical-FPF) and Eqn. \@ref(eq:froc-empirical-FPF1). The latter counts "FPs" on non-diseased and diseased cases while Eqn. \@ref(eq:froc-empirical-FPF) counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to be both a TP and a FP is questionable from both clinical and statistical considerations. However, this operating characteristic can be useful in applications where all or almost all cases are diseased.
 
-### Definition {#froc-empirical-definition-auc-AFROC1}
+### Definition empirical plot and AUC {#froc-empirical-definition-empirical-auc-afroc1}
 
 The empirical AFROC1 plot connects adjacent operating points $\left ( FPF_r^1, \text{LLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 and the AFROC plot is in the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted $A_{\text{AFROC1}}$.
 
@@ -782,7 +780,7 @@ UtilFigureOfMerit(dataset04, FOM = "AFROC1")
 
 ## The weighted-AFROC1 (wAFROC1) plot {#froc-empirical-wAFROC1}
 
-### Definition {#froc-empirical-definition-auc-wAFROC1}
+### Definition empirical plot and AUC {#froc-empirical-definition-empirical-auc-wafroc1}
 
 The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points $\left ( FPF_r^1, \text{wLLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted $A_{\text{wAFROC1}}$.
 
@@ -824,14 +822,34 @@ UtilFigureOfMerit(dataset04, FOM = "wAFROC1")
 
 
 
+## Plots of FROC, AFROC and wAFROC AUC vs. ROC AUC {#froc-empirical-plots}
+
+
+Plots of $A_{\text{FROC}}$, $A_{\text{AFROC}}$ and $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$ were generated for the dataset used in the previous illustrations. 
+
+The following is the plot of $A_{\text{FROC}}$ vs. $A_{\text{ROC}}$. There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. $A_{\text{ROC}}$ is assumed to be the gold standard. Note the poor correlation between $A_{\text{FROC}}$ and $A_{\text{ROC}}$. The slope is negative and there is much scatter. 
+
+
+
+
 <img src="13a-froc-empirical1_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 
+Evidently $A_{\text{FROC}}$ does not correlate well with $A_{\text{ROC}}$. The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot rewards an observer who generates more and more NLs while not generating more LLs, i.e., as the operating point moves further to the right along the flat part of the plot. In fact the perfect observer, Section \@ref(froc-paradigm-solar-analogy), whose FROC plot is the vertical line connecting (0,0) and (0,1) has zero $A_{\text{FROC}}$! One can try ot avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is some arbitrarily chosen fixed value -- indeed this procedure has been used by many CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure would be subjective and totally dependent on the algorithm designer. Moreover it would not solve the problem that the perfect observer would still yield $A_{\text{FROC}} = 0$. The perfect observer problem is not academic as the method would fail for any observer with $\text{NLF}_{max} < x$. For such an observer the partial area would be undefined. This would force the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data from the analysis leading to a severe statistical power penalty.
+
+The basic problem is that the FROC plot is unconstrained in the NLF direction. 
+
+
+The following is the plot of $A_{\text{AFROC}}$ vs. $A_{\text{ROC}}$. This time there is a strong positive correlation between the two. The reason is that the AFROC is fully contained in the unit square. An observer who generates more NL marks would in fact yield smaller $A_{\text{AFROC}}$ - this is explained in a later section TBA . 
 
 
 
 <img src="13a-froc-empirical1_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
+
+
+
+The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, there is a strong positive correlation between the two. The wAFROC is also fully contained in the unit square.
 
 
 
