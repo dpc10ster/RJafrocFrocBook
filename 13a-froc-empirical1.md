@@ -13,17 +13,13 @@ output:
 
 
 ## TBA How much finished {#froc-empirical-how-much-finished}
-80%
+90%
 
 
 
 ## TBA Introduction {#froc-empirical-intro}
 
-FROC data consists of mark-rating pairs. A distinction between latent and actual marks is made followed by a summary of FROC notation. This is a key table, which will be used in later chapters. Section \@ref(froc-paradigm-froc-plot) introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data. Operating characteristics are visual depicters of performance. Scalar quantities, typically area measures, derived from operating characteristics, serve as quantitative measures of performance, termed *figures of merit* (FOMs). This chapter defines area measures associated with each described operating characteristic.
-
-The observed end-point of an operating characteristic is defined. For the FROC plot it is demonstrated that the observed FROC curve is not contained in the unit square unlike the other operating characteristics which are contained in the unit square. In contrast the other introduced operating characteristics are each contained within the unit square.
-
-An FROC dataset is used to illustrate the different operating characteristics. The correlation between the AUCs vs. ROC AUC is qualitatively examined via plots.   
+FROC data consists of mark-rating pairs. In this chapter a distinction is made between latent and actual marks. This is followed by a table summarizing FROC notation. This is a key table which will be used in later chapters. Section \@ref(froc-paradigm-froc-plot) introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are *visual* depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are *quantitative* measures of performance, termed *figures of merit* (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square.   
 
 
 ## Mark rating pairs {#froc-empirical-mark-rating-pairs}
@@ -83,7 +79,7 @@ r = 1, 2, ..., R_{FROC}\\
 
 *Clear notation is vital to understanding this paradigm.* The notation needs to account for case and location dependencies of ratings and the distinction between case-level and location-level ground truth. The notation also has to account for cases with no marks.
 
-FROC notation is summarized in Table \@ref(tab:froc-empirical-notation), in which **all marks are latent marks**. The table is organized into three columns, the first column is the row number, the second column has the symbol(s), and the third column has the meaning(s) of the symbol(s).
+FROC notation is summarized in Table \@ref(tab:froc-empirical-notation), in which *marks refer to latent marks*. The table is organized into three columns, the first column is the row number, the second column has the symbol(s), and the third column has the meaning(s) of the symbol(s).
 
 <table>
 <caption>(\#tab:froc-empirical-notation)FROC notation; all marks refer to latent marks.</caption>
@@ -225,7 +221,7 @@ The notational issue is how to handle images with no latent NL marks. Basically 
 * Likewise, $l_2 = \left \{ 1,2,...,L_{k_2 2} \right \}$ indexes latent LL marks. Unmarked LLs are assigned negative infinity ratings. The null set notation is not needed for latent LLs.
 
 
-## The empirical FROC {#froc-empirical-froc-plot}
+## The empirical FROC plot {#froc-empirical-froc-plot}
 
 The FROC, Chapter \@ref(froc-paradigm-froc-plot), is the plot of LLF (along the ordinate) vs. NLF (along the abscissa).
 
@@ -404,13 +400,13 @@ UtilFigureOfMerit(dataset04, FOM = "FROC")
 
 
 
-## The inferred ROC plot {#froc-empirical-ROC}
+## The inferred-ROC plot {#froc-empirical-ROC}
 
-By adopting a rational rule for converting the zero or more mark-rating data per case to a single rating per case, and commonly the highest rating rule is used [^froc-empirical1-3], it is possible to infer ROC data from FROC mark-rating data.
+By adopting a rational rule for converting the mark-rating data per case to a single rating per case, and commonly the highest rating rule is used [^froc-empirical1-3], it is possible to infer ROC data from FROC mark-rating data.
 
 [^froc-empirical1-3]: The highest rating method was used in early FROC modeling in [@bunch1977free] and in [@swensson1996unified], the latter in the context of LROC paradigm modeling.
 
-### Inferred-ROC rating
+### The inferred-ROC rating
 
 The rating of the highest rated mark in a case, or $-\infty$ if the case has no marks, is defined as the inferred-ROC rating for the case. Inferred-ROC ratings on non-diseased cases are referred to as inferred-FP ratings and those on diseased cases as inferred-TP ratings.
 
@@ -426,7 +422,6 @@ Definition of ROC plot:
 -   The ROC is the plot of inferred $TPF(\zeta)$ vs. inferred $FPF(\zeta)$.
 -   *The plot includes a straight line extension from the observed end-point to (1,1)*.
 
-The mathematical definition of the ROC follows.
 
 ### Inferred FPF
 
@@ -520,7 +515,7 @@ print(ret$Plot)
 <img src="13a-froc-empirical1_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 
-Shown next is calculation of the figure of merit for this dataset.
+Shown next is calculation of the figure of merit for this dataset ^[In function `UtilFigureOfMerit` the `FOM` argument has to be set to `HrAuc`, which denotes the highest rating inferred-ROC AUC.].
 
 
 
@@ -551,7 +546,7 @@ UtilFigureOfMerit(dataset04, FOM = "HrAuc")
 
 ### Definition empirical plot and AUC {#froc-empirical-definition-empirical-auc-afroc}
 
-The empirical AFROC plot connects adjacent operating points $\left( \text{FPF}_r, \text{LLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The area under this plot is the empirical inferred AFROC AUC, denoted $A_{\text{AFROC}}$.
+The empirical AFROC plot connects adjacent operating points $\left( \text{FPF}_r, \text{LLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The area under this plot is the empirical AFROC AUC, denoted $A_{\text{AFROC}}$.
 
 Key points:
 
@@ -596,7 +591,7 @@ and
 \end{equation}
 
 
-Because every non-diseased case is assigned a rating, and is therefore counted, the right hand side of the first equation in \@ref(eq:froc-empirical-FPF0-LLF0) evaluates to unity. This is obvious for marked cases. Since each unmarked case also gets a rating, albeit a $-\infty$ rating, it is also counted (the argument of the indicator function in Eqn. \@ref(eq:froc-empirical-FPF0-LLF0) is true even when the inferred FP rating is $-\infty$).
+Because every non-diseased case is assigned a rating, and is therefore counted, the right hand side of the first equation in \@ref(eq:froc-empirical-FPF0-LLF0) evaluates to unity. This is obvious for marked cases. Since each unmarked case also gets a rating, albeit a $-\infty$ rating, it is also counted (the argument of the indicator function in Eqn. \@ref(eq:froc-empirical-FPF0-LLF0) is true even when the inferred-FP rating is $-\infty$).
 
 ### Illustration with a dataset {#froc-empirical-afroc-plot-illustration}
 
@@ -637,7 +632,7 @@ UtilFigureOfMerit(dataset04, FOM = "AFROC")
 
 
 
-## The weighted-AFROC (wAFROC) plot {#froc-empirical-wAFROC}
+## The weighted-AFROC plot (wAFROC) plot {#froc-empirical-wAFROC}
 
 The AFROC ordinate defined in Eqn. \@ref(eq:froc-empirical-LLFr) gives equal importance to every lesion in a case. Therefore, a case with more lesions will have more influence on the AFROC (see TBA Chapter 14 for an explicit demonstration of this fact). This is undesirable since each case (i.e., patient) should get equal importance in the analysis -- as with ROC analysis, one wishes to draw conclusions about the population of cases and each case is regarded as an equally valid sample from the population. In particular, one does not want the analysis to be skewed towards cases with greater than the average number of lesions. [^froc-empirical1-5]
 
@@ -710,7 +705,7 @@ UtilFigureOfMerit(dataset04, FOM = "wAFROC")
 
 ## The AFROC1 plot {#froc-empirical-AFROC1}
 
-Historically the AFROC originally used a different definition of FPF, which is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred "FP" rating on a *diseased case* as the maximum of all NL ratings on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:froc-empirical-FP)]:
+Historically the AFROC originally used a different definition of FPF, which is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-"FP" rating on a *diseased case* as the maximum of all NL ratings on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:froc-empirical-FP)]:
 
 
 \begin{equation}
@@ -822,7 +817,7 @@ UtilFigureOfMerit(dataset04, FOM = "wAFROC1")
 
 
 
-## Plots of FROC, AFROC and wAFROC AUC vs. ROC AUC {#froc-empirical-plots}
+## Plots of FROC, AFROC and wAFROC AUCs vs. ROC AUC {#froc-empirical-plots}
 
 
 Plots of $A_{\text{FROC}}$, $A_{\text{AFROC}}$ and $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$ were generated for the dataset used in the previous illustrations. 
@@ -861,6 +856,8 @@ The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, th
 
 ## TBA Discussion {#froc-empirical-Discussion}
 
-TBA This chapter started with the difference between latent and actual marks and the notation to describe FROC data. The notation is used in deriving formulae for FROC, inferred ROC, AFROC, wAFROC, AFROC1, wAFROC1 and EFROC operating characteristics. In each case an area measure was defined. With the exception of the FROC plot, all operating characteristics defined in this chapter are contained in the unit square. Discussion of the preferred operating characteristic is deferred to a subsequent chapter TBA.
+TBA This chapter started with the difference between latent and actual marks and the notation to describe FROC data. The notation is used in deriving formulae for FROC, inferred-ROC, AFROC, wAFROC, AFROC1, wAFROC1 and EFROC operating characteristics. In each case an area measure was defined. With the exception of the FROC plot, all operating characteristics defined in this chapter are contained in the unit square. Discussion of the preferred operating characteristic is deferred to a subsequent chapter TBA.
+
+FROC data consists of mark-rating pairs. In this chapter a distinction is made between latent and actual marks. This is followed by a table summarizing FROC notation. This is a key table which will be used in later chapters. Section \@ref(froc-paradigm-froc-plot) introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are *visual* depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are *quantitative* measures of performance, termed *figures of merit* (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square. 
 
 ## References {#froc-empirical-references}

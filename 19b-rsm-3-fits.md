@@ -616,7 +616,7 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset04` "FEDERICA" Federica Zanca FROC dataset [@RN1882]
+* `dataset04` "FEDERICA" Federica Zanca FROC dataset [@zanca2009evaluation]
 
 
 ```
