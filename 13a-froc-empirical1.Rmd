@@ -22,21 +22,17 @@ output:
 
 
 ## TBA How much finished {#froc-empirical-how-much-finished}
-70%
+80%
 
 
 
 ## TBA Introduction {#froc-empirical-intro}
 
-The previous chapter defined the empirical FROC curve. This chapter introduces mathematical expressions for empirical operating characteristics (FROC and others) possible with FROC data.
+FROC data consists of mark-rating pairs. A distinction between latent and actual marks is made followed by a summary of FROC notation. This is a key table, which will be used in later chapters. Section \@ref(froc-paradigm-froc-plot) introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data. Operating characteristics are visual depicters of performance. Scalar quantities, typically area measures, derived from operating characteristics, serve as quantitative measures of performance, termed *figures of merit* (FOMs). This chapter defines area measures associated with each described operating characteristic.
 
-Operating characteristics are visual depicters of performance. Scalar quantities derived from operating characteristics can serve as quantitative measures of performance, termed figures of merit (FOMs). This chapter defines the FOM associated with each introduced operating characteristics.
+The observed end-point of an operating characteristic is defined. For the FROC plot it is demonstrated that the observed FROC curve is not contained in the unit square unlike the other operating characteristics which are contained in the unit square. In contrast the other introduced operating characteristics are each contained within the unit square.
 
-FROC data is defined as consisting of mark-rating pairs. A distinction between latent and actual marks is made followed by a summary of FROC notation applicable to a single modality single reader dataset. This is a key table, which will be used in later chapters. 
-
-The observed end-point of an operating characteristic is defined. For the FROC plot it is demonstrated that the observed FROC curve is not contained in the unit square unlike the other operating characteristics which are contained in the unit square.
-
-A FROC dataset is used to illustrate the different operating characteristics and possible with FROC data.  
+An FROC dataset is used to illustrate the different operating characteristics. The correlation between the AUCs vs. ROC AUC is qualitatively examined via plots.   
 
 
 ## Mark rating pairs {#froc-empirical-mark-rating-pairs}
@@ -741,7 +737,7 @@ print(p1)
 ```
 
 
-Evidently $A_{\text{FROC}}$ does not correlate well with $A_{\text{ROC}}$. The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot rewards an observer who generates more and more NLs while not generating more LLs, i.e., as the operating point moves further to the right along the flat part of the plot. In fact the perfect observer, Section \@ref(froc-paradigm-solar-analogy), whose FROC plot is the vertical line connecting (0,0) and (0,1) has zero $A_{\text{FROC}}$! One can try ot avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is some arbitrarily chosen fixed value -- indeed this procedure has been used by many CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure would be subjective and totally dependent on the algorithm designer. Moreover it would not solve the problem that the perfect observer would still yield $A_{\text{FROC}} = 0$. The perfect observer problem is not academic as the method would fail for any observer with $\text{NLF}_{max} \lt x$. For such an observer the partial area would be undefined. This would force the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data from the analysis leading to a severe statistical power penalty.
+Evidently $A_{\text{FROC}}$ does not correlate well with $A_{\text{ROC}}$. The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot rewards an observer who generates more and more NLs while not generating more LLs, i.e., as the operating point moves further to the right along the flat part of the plot. In fact the perfect observer, Section \@ref(froc-paradigm-solar-analogy), whose FROC plot is the vertical line connecting (0,0) and (0,1) has zero $A_{\text{FROC}}$! One can try ot avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is some arbitrarily chosen fixed value -- indeed this procedure has been used by many CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure would be subjective and totally dependent on the algorithm designer. Moreover it would not solve the problem that the perfect observer would still yield $A_{\text{FROC}} = 0$. The perfect observer problem is not academic as the method would fail for any observer with $\text{NLF}_{max} < x$. For such an observer the partial area would be undefined. This would force the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data from the analysis leading to a severe statistical power penalty.
 
 The basic problem is that the FROC plot is unconstrained in the NLF direction. 
 
