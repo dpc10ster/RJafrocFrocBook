@@ -149,7 +149,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>0.0.1</b> formatting</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.0.2</b> tables</a></li>
+<li class="chapter" data-level="0.0.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>0.0.3</b> tinytex problems</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
 <li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
@@ -624,29 +628,29 @@ FIGURE 8.2: Left: AFROC plot; Right: corresponding wAFROC plot.
 </p>
 </div>
 <p>The number of lesions for diseased cases is shown next. Notice that the first two cases have one lesion each and the next two have two lesions each.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="froc-meanings.html#cb69-1"></a>Lk2</span>
-<span id="cb69-2"><a href="froc-meanings.html#cb69-2"></a><span class="co">#&gt; [1] 1 1 2 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="froc-meanings.html#cb70-1"></a>Lk2</span>
+<span id="cb70-2"><a href="froc-meanings.html#cb70-2"></a><span class="co">#&gt; [1] 1 1 2 2</span></span></code></pre></div>
 <p>The ratings are shown next.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="froc-meanings.html#cb70-1"></a>x1 &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(frocData<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,])</span>
-<span id="cb70-2"><a href="froc-meanings.html#cb70-2"></a><span class="kw">colnames</span>(x1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;location1&quot;</span>, <span class="st">&quot;location2&quot;</span>)</span>
-<span id="cb70-3"><a href="froc-meanings.html#cb70-3"></a>x2 &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(frocData<span class="op">$</span>ratings<span class="op">$</span>LL[<span class="dv">1</span>,<span class="dv">1</span>,,])</span>
-<span id="cb70-4"><a href="froc-meanings.html#cb70-4"></a><span class="kw">colnames</span>(x2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;location1&quot;</span>, <span class="st">&quot;location2&quot;</span>)</span>
-<span id="cb70-5"><a href="froc-meanings.html#cb70-5"></a>x1</span>
-<span id="cb70-6"><a href="froc-meanings.html#cb70-6"></a><span class="co">#&gt;    location1 location2</span></span>
-<span id="cb70-7"><a href="froc-meanings.html#cb70-7"></a><span class="co">#&gt; 1       -Inf      -Inf</span></span>
-<span id="cb70-8"><a href="froc-meanings.html#cb70-8"></a><span class="co">#&gt; 2  0.4874291      -Inf</span></span>
-<span id="cb70-9"><a href="froc-meanings.html#cb70-9"></a><span class="co">#&gt; 3  0.7383247 0.5757814</span></span>
-<span id="cb70-10"><a href="froc-meanings.html#cb70-10"></a><span class="co">#&gt; 4 -0.3053884      -Inf</span></span>
-<span id="cb70-11"><a href="froc-meanings.html#cb70-11"></a><span class="co">#&gt; 5  1.5117812      -Inf</span></span>
-<span id="cb70-12"><a href="froc-meanings.html#cb70-12"></a><span class="co">#&gt; 6       -Inf      -Inf</span></span>
-<span id="cb70-13"><a href="froc-meanings.html#cb70-13"></a><span class="co">#&gt; 7       -Inf      -Inf</span></span>
-<span id="cb70-14"><a href="froc-meanings.html#cb70-14"></a><span class="co">#&gt; 8       -Inf      -Inf</span></span>
-<span id="cb70-15"><a href="froc-meanings.html#cb70-15"></a>x2</span>
-<span id="cb70-16"><a href="froc-meanings.html#cb70-16"></a><span class="co">#&gt;    location1 location2</span></span>
-<span id="cb70-17"><a href="froc-meanings.html#cb70-17"></a><span class="co">#&gt; 1  0.8523430      -Inf</span></span>
-<span id="cb70-18"><a href="froc-meanings.html#cb70-18"></a><span class="co">#&gt; 2 -0.2146999      -Inf</span></span>
-<span id="cb70-19"><a href="froc-meanings.html#cb70-19"></a><span class="co">#&gt; 3  1.5884892      -Inf</span></span>
-<span id="cb70-20"><a href="froc-meanings.html#cb70-20"></a><span class="co">#&gt; 4  2.9438362   1.98381</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="froc-meanings.html#cb71-1"></a>x1 &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(frocData<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,])</span>
+<span id="cb71-2"><a href="froc-meanings.html#cb71-2"></a><span class="kw">colnames</span>(x1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;location1&quot;</span>, <span class="st">&quot;location2&quot;</span>)</span>
+<span id="cb71-3"><a href="froc-meanings.html#cb71-3"></a>x2 &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(frocData<span class="op">$</span>ratings<span class="op">$</span>LL[<span class="dv">1</span>,<span class="dv">1</span>,,])</span>
+<span id="cb71-4"><a href="froc-meanings.html#cb71-4"></a><span class="kw">colnames</span>(x2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;location1&quot;</span>, <span class="st">&quot;location2&quot;</span>)</span>
+<span id="cb71-5"><a href="froc-meanings.html#cb71-5"></a>x1</span>
+<span id="cb71-6"><a href="froc-meanings.html#cb71-6"></a><span class="co">#&gt;    location1 location2</span></span>
+<span id="cb71-7"><a href="froc-meanings.html#cb71-7"></a><span class="co">#&gt; 1       -Inf      -Inf</span></span>
+<span id="cb71-8"><a href="froc-meanings.html#cb71-8"></a><span class="co">#&gt; 2  0.4874291      -Inf</span></span>
+<span id="cb71-9"><a href="froc-meanings.html#cb71-9"></a><span class="co">#&gt; 3  0.7383247 0.5757814</span></span>
+<span id="cb71-10"><a href="froc-meanings.html#cb71-10"></a><span class="co">#&gt; 4 -0.3053884      -Inf</span></span>
+<span id="cb71-11"><a href="froc-meanings.html#cb71-11"></a><span class="co">#&gt; 5  1.5117812      -Inf</span></span>
+<span id="cb71-12"><a href="froc-meanings.html#cb71-12"></a><span class="co">#&gt; 6       -Inf      -Inf</span></span>
+<span id="cb71-13"><a href="froc-meanings.html#cb71-13"></a><span class="co">#&gt; 7       -Inf      -Inf</span></span>
+<span id="cb71-14"><a href="froc-meanings.html#cb71-14"></a><span class="co">#&gt; 8       -Inf      -Inf</span></span>
+<span id="cb71-15"><a href="froc-meanings.html#cb71-15"></a>x2</span>
+<span id="cb71-16"><a href="froc-meanings.html#cb71-16"></a><span class="co">#&gt;    location1 location2</span></span>
+<span id="cb71-17"><a href="froc-meanings.html#cb71-17"></a><span class="co">#&gt; 1  0.8523430      -Inf</span></span>
+<span id="cb71-18"><a href="froc-meanings.html#cb71-18"></a><span class="co">#&gt; 2 -0.2146999      -Inf</span></span>
+<span id="cb71-19"><a href="froc-meanings.html#cb71-19"></a><span class="co">#&gt; 3  1.5884892      -Inf</span></span>
+<span id="cb71-20"><a href="froc-meanings.html#cb71-20"></a><span class="co">#&gt; 4  2.9438362   1.98381</span></span></code></pre></div>
 <ul>
 <li>The length of the third dimension of the NL array is eight (4 non-diseased + 4 diseased cases).</li>
 <li>The fifth sequential case corresponds to NLs on the first diseased case, etc.</li>

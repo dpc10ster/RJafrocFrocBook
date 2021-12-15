@@ -149,7 +149,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>0.0.1</b> formatting</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.0.2</b> tables</a></li>
+<li class="chapter" data-level="0.0.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>0.0.3</b> tinytex problems</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
 <li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
@@ -853,20 +857,20 @@ r = 1, 2, ...,R_{FROC}
 <div id="froc-empirical-froc-plot-illustration" class="section level3">
 <h3><span class="header-section-number">2.5.5</span> Illustration with a dataset</h3>
 <p>The following code uses <code>dataset04</code> <span class="citation">(Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a>)</span> in the <code>RJafroc</code> package to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so in principle one can generate 20 plots. In this example I have selected treatment 1 and reader 1 to produce the plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "FROC")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="froc-empirical.html#cb1-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb1-2"><a href="froc-empirical.html#cb1-2"></a>  dataset04, </span>
-<span id="cb1-3"><a href="froc-empirical.html#cb1-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>)</span>
-<span id="cb1-4"><a href="froc-empirical.html#cb1-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="froc-empirical.html#cb2-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb2-2"><a href="froc-empirical.html#cb2-2"></a>  dataset04, </span>
+<span id="cb2-3"><a href="froc-empirical.html#cb2-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>)</span>
+<span id="cb2-4"><a href="froc-empirical.html#cb2-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="13a-froc-empirical1_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rating 5, the next higher one corresponds to marks rated 4 or 5, etc. The FROC plots vary widely but share the common characteristic that the operating points cannot move downward-left as one cumulates lower confidence level marks.</p>
 <p>Shown next is calculation of the figure of merit for this dataset. All 20 values are shown. The value for <code>trt1</code> and <code>rdr1</code> is the area under the FROC plot shown above.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="froc-empirical.html#cb2-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;FROC&quot;</span>)</span>
-<span id="cb2-2"><a href="froc-empirical.html#cb2-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4       rdr5</span></span>
-<span id="cb2-3"><a href="froc-empirical.html#cb2-3"></a><span class="co">#&gt; trt1 0.2361972 0.1085035 0.2268486 0.09922535</span></span>
-<span id="cb2-4"><a href="froc-empirical.html#cb2-4"></a><span class="co">#&gt; trt2 0.2192077 0.2231338 0.4793310 0.18450704</span></span>
-<span id="cb2-5"><a href="froc-empirical.html#cb2-5"></a><span class="co">#&gt; trt3 0.1947359 0.1063028 0.2543662 0.15137324</span></span>
-<span id="cb2-6"><a href="froc-empirical.html#cb2-6"></a><span class="co">#&gt; trt4 0.2198768 0.1307394 0.3293662 0.13882042</span></span>
-<span id="cb2-7"><a href="froc-empirical.html#cb2-7"></a><span class="co">#&gt; trt5 0.1800528 0.1097535 0.3015141 0.16563380</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="froc-empirical.html#cb3-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;FROC&quot;</span>)</span>
+<span id="cb3-2"><a href="froc-empirical.html#cb3-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4       rdr5</span></span>
+<span id="cb3-3"><a href="froc-empirical.html#cb3-3"></a><span class="co">#&gt; trt1 0.2361972 0.1085035 0.2268486 0.09922535</span></span>
+<span id="cb3-4"><a href="froc-empirical.html#cb3-4"></a><span class="co">#&gt; trt2 0.2192077 0.2231338 0.4793310 0.18450704</span></span>
+<span id="cb3-5"><a href="froc-empirical.html#cb3-5"></a><span class="co">#&gt; trt3 0.1947359 0.1063028 0.2543662 0.15137324</span></span>
+<span id="cb3-6"><a href="froc-empirical.html#cb3-6"></a><span class="co">#&gt; trt4 0.2198768 0.1307394 0.3293662 0.13882042</span></span>
+<span id="cb3-7"><a href="froc-empirical.html#cb3-7"></a><span class="co">#&gt; trt5 0.1800528 0.1097535 0.3015141 0.16563380</span></span></code></pre></div>
 </div>
 </div>
 <div id="froc-empirical-ROC" class="section level2">
@@ -942,19 +946,19 @@ TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \textstyle\ma
 <div id="froc-empirical-roc-plot-illustration" class="section level3">
 <h3><span class="header-section-number">2.6.5</span> Illustration with a dataset</h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical ROC plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "ROC")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="froc-empirical.html#cb3-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb3-2"><a href="froc-empirical.html#cb3-2"></a>  dataset04, </span>
-<span id="cb3-3"><a href="froc-empirical.html#cb3-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
-<span id="cb3-4"><a href="froc-empirical.html#cb3-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="froc-empirical.html#cb4-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb4-2"><a href="froc-empirical.html#cb4-2"></a>  dataset04, </span>
+<span id="cb4-3"><a href="froc-empirical.html#cb4-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
+<span id="cb4-4"><a href="froc-empirical.html#cb4-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="13a-froc-empirical1_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Shown next is calculation of the figure of merit for this dataset.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="froc-empirical.html#cb4-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;HrAuc&quot;</span>)</span>
-<span id="cb4-2"><a href="froc-empirical.html#cb4-2"></a><span class="co">#&gt;         rdr1    rdr3    rdr4    rdr5</span></span>
-<span id="cb4-3"><a href="froc-empirical.html#cb4-3"></a><span class="co">#&gt; trt1 0.90425 0.79820 0.81175 0.86645</span></span>
-<span id="cb4-4"><a href="froc-empirical.html#cb4-4"></a><span class="co">#&gt; trt2 0.86425 0.84470 0.82050 0.87160</span></span>
-<span id="cb4-5"><a href="froc-empirical.html#cb4-5"></a><span class="co">#&gt; trt3 0.81295 0.81635 0.75275 0.85730</span></span>
-<span id="cb4-6"><a href="froc-empirical.html#cb4-6"></a><span class="co">#&gt; trt4 0.90235 0.83150 0.78865 0.87980</span></span>
-<span id="cb4-7"><a href="froc-empirical.html#cb4-7"></a><span class="co">#&gt; trt5 0.84140 0.77300 0.77115 0.84800</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="froc-empirical.html#cb5-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;HrAuc&quot;</span>)</span>
+<span id="cb5-2"><a href="froc-empirical.html#cb5-2"></a><span class="co">#&gt;         rdr1    rdr3    rdr4    rdr5</span></span>
+<span id="cb5-3"><a href="froc-empirical.html#cb5-3"></a><span class="co">#&gt; trt1 0.90425 0.79820 0.81175 0.86645</span></span>
+<span id="cb5-4"><a href="froc-empirical.html#cb5-4"></a><span class="co">#&gt; trt2 0.86425 0.84470 0.82050 0.87160</span></span>
+<span id="cb5-5"><a href="froc-empirical.html#cb5-5"></a><span class="co">#&gt; trt3 0.81295 0.81635 0.75275 0.85730</span></span>
+<span id="cb5-6"><a href="froc-empirical.html#cb5-6"></a><span class="co">#&gt; trt4 0.90235 0.83150 0.78865 0.87980</span></span>
+<span id="cb5-7"><a href="froc-empirical.html#cb5-7"></a><span class="co">#&gt; trt5 0.84140 0.77300 0.77115 0.84800</span></span></code></pre></div>
 </div>
 </div>
 <div id="froc-empirical-AFROC" class="section level2">
@@ -1007,19 +1011,19 @@ TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \textstyle\ma
 <div id="froc-empirical-afroc-plot-illustration" class="section level3">
 <h3><span class="header-section-number">2.7.3</span> Illustration with a dataset</h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical AFROC plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="froc-empirical.html#cb5-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb5-2"><a href="froc-empirical.html#cb5-2"></a>  dataset04, </span>
-<span id="cb5-3"><a href="froc-empirical.html#cb5-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC&quot;</span>)</span>
-<span id="cb5-4"><a href="froc-empirical.html#cb5-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="froc-empirical.html#cb6-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb6-2"><a href="froc-empirical.html#cb6-2"></a>  dataset04, </span>
+<span id="cb6-3"><a href="froc-empirical.html#cb6-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC&quot;</span>)</span>
+<span id="cb6-4"><a href="froc-empirical.html#cb6-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="13a-froc-empirical1_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Shown next is calculation of the figure of merit for this dataset.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="froc-empirical.html#cb6-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;AFROC&quot;</span>)</span>
-<span id="cb6-2"><a href="froc-empirical.html#cb6-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
-<span id="cb6-3"><a href="froc-empirical.html#cb6-3"></a><span class="co">#&gt; trt1 0.7427113 0.7104930 0.7003169 0.7909859</span></span>
-<span id="cb6-4"><a href="froc-empirical.html#cb6-4"></a><span class="co">#&gt; trt2 0.7586972 0.7161620 0.7225352 0.7927465</span></span>
-<span id="cb6-5"><a href="froc-empirical.html#cb6-5"></a><span class="co">#&gt; trt3 0.6983451 0.6955282 0.6777817 0.7547535</span></span>
-<span id="cb6-6"><a href="froc-empirical.html#cb6-6"></a><span class="co">#&gt; trt4 0.7817606 0.7234507 0.7132746 0.8136268</span></span>
-<span id="cb6-7"><a href="froc-empirical.html#cb6-7"></a><span class="co">#&gt; trt5 0.7169718 0.6690845 0.6587324 0.7682042</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="froc-empirical.html#cb7-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;AFROC&quot;</span>)</span>
+<span id="cb7-2"><a href="froc-empirical.html#cb7-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
+<span id="cb7-3"><a href="froc-empirical.html#cb7-3"></a><span class="co">#&gt; trt1 0.7427113 0.7104930 0.7003169 0.7909859</span></span>
+<span id="cb7-4"><a href="froc-empirical.html#cb7-4"></a><span class="co">#&gt; trt2 0.7586972 0.7161620 0.7225352 0.7927465</span></span>
+<span id="cb7-5"><a href="froc-empirical.html#cb7-5"></a><span class="co">#&gt; trt3 0.6983451 0.6955282 0.6777817 0.7547535</span></span>
+<span id="cb7-6"><a href="froc-empirical.html#cb7-6"></a><span class="co">#&gt; trt4 0.7817606 0.7234507 0.7132746 0.8136268</span></span>
+<span id="cb7-7"><a href="froc-empirical.html#cb7-7"></a><span class="co">#&gt; trt5 0.7169718 0.6690845 0.6587324 0.7682042</span></span></code></pre></div>
 </div>
 </div>
 <div id="froc-empirical-wAFROC" class="section level2">
@@ -1044,18 +1048,18 @@ TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \textstyle\ma
 <div id="froc-empirical-wafroc-plot-illustration" class="section level3">
 <h3><span class="header-section-number">2.8.2</span> Illustration with a dataset</h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical ROC plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "wAFROC")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="froc-empirical.html#cb7-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb7-2"><a href="froc-empirical.html#cb7-2"></a>  dataset04, <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
-<span id="cb7-3"><a href="froc-empirical.html#cb7-3"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="froc-empirical.html#cb8-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb8-2"><a href="froc-empirical.html#cb8-2"></a>  dataset04, <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
+<span id="cb8-3"><a href="froc-empirical.html#cb8-3"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="13a-froc-empirical1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Shown next is calculation of the figure of merit for this dataset.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="froc-empirical.html#cb8-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
-<span id="cb8-2"><a href="froc-empirical.html#cb8-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
-<span id="cb8-3"><a href="froc-empirical.html#cb8-3"></a><span class="co">#&gt; trt1 0.7792667 0.7248917 0.7036250 0.8050917</span></span>
-<span id="cb8-4"><a href="froc-empirical.html#cb8-4"></a><span class="co">#&gt; trt2 0.7870000 0.7269000 0.7226167 0.8037833</span></span>
-<span id="cb8-5"><a href="froc-empirical.html#cb8-5"></a><span class="co">#&gt; trt3 0.7296917 0.7157583 0.6723083 0.7726583</span></span>
-<span id="cb8-6"><a href="froc-empirical.html#cb8-6"></a><span class="co">#&gt; trt4 0.8101333 0.7431167 0.6943583 0.8294083</span></span>
-<span id="cb8-7"><a href="froc-empirical.html#cb8-7"></a><span class="co">#&gt; trt5 0.7488000 0.6822750 0.6551750 0.7712500</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="froc-empirical.html#cb9-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
+<span id="cb9-2"><a href="froc-empirical.html#cb9-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
+<span id="cb9-3"><a href="froc-empirical.html#cb9-3"></a><span class="co">#&gt; trt1 0.7792667 0.7248917 0.7036250 0.8050917</span></span>
+<span id="cb9-4"><a href="froc-empirical.html#cb9-4"></a><span class="co">#&gt; trt2 0.7870000 0.7269000 0.7226167 0.8037833</span></span>
+<span id="cb9-5"><a href="froc-empirical.html#cb9-5"></a><span class="co">#&gt; trt3 0.7296917 0.7157583 0.6723083 0.7726583</span></span>
+<span id="cb9-6"><a href="froc-empirical.html#cb9-6"></a><span class="co">#&gt; trt4 0.8101333 0.7431167 0.6943583 0.8294083</span></span>
+<span id="cb9-7"><a href="froc-empirical.html#cb9-7"></a><span class="co">#&gt; trt5 0.7488000 0.6822750 0.6551750 0.7712500</span></span></code></pre></div>
 </div>
 </div>
 <div id="froc-empirical-AFROC1" class="section level2">
@@ -1083,19 +1087,19 @@ FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}
 <div id="froc-empirical-afroc1-plot-illustration" class="section level3">
 <h3><span class="header-section-number">2.9.2</span> Illustration with a dataset</h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical ROC plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC1")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="froc-empirical.html#cb9-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb9-2"><a href="froc-empirical.html#cb9-2"></a>  dataset04, </span>
-<span id="cb9-3"><a href="froc-empirical.html#cb9-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC1&quot;</span>)</span>
-<span id="cb9-4"><a href="froc-empirical.html#cb9-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="froc-empirical.html#cb10-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb10-2"><a href="froc-empirical.html#cb10-2"></a>  dataset04, </span>
+<span id="cb10-3"><a href="froc-empirical.html#cb10-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC1&quot;</span>)</span>
+<span id="cb10-4"><a href="froc-empirical.html#cb10-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="13a-froc-empirical1_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Shown next is calculation of the figure of merit for this dataset.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="froc-empirical.html#cb10-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;AFROC1&quot;</span>)</span>
-<span id="cb10-2"><a href="froc-empirical.html#cb10-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
-<span id="cb10-3"><a href="froc-empirical.html#cb10-3"></a><span class="co">#&gt; trt1 0.7744718 0.7157218 0.7229225 0.7913908</span></span>
-<span id="cb10-4"><a href="froc-empirical.html#cb10-4"></a><span class="co">#&gt; trt2 0.7826585 0.7278169 0.7364437 0.7897887</span></span>
-<span id="cb10-5"><a href="froc-empirical.html#cb10-5"></a><span class="co">#&gt; trt3 0.7412852 0.6868310 0.6946303 0.7573415</span></span>
-<span id="cb10-6"><a href="froc-empirical.html#cb10-6"></a><span class="co">#&gt; trt4 0.8087852 0.7346831 0.7343486 0.8155634</span></span>
-<span id="cb10-7"><a href="froc-empirical.html#cb10-7"></a><span class="co">#&gt; trt5 0.7580810 0.6825704 0.6643662 0.7742782</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="froc-empirical.html#cb11-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;AFROC1&quot;</span>)</span>
+<span id="cb11-2"><a href="froc-empirical.html#cb11-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
+<span id="cb11-3"><a href="froc-empirical.html#cb11-3"></a><span class="co">#&gt; trt1 0.7744718 0.7157218 0.7229225 0.7913908</span></span>
+<span id="cb11-4"><a href="froc-empirical.html#cb11-4"></a><span class="co">#&gt; trt2 0.7826585 0.7278169 0.7364437 0.7897887</span></span>
+<span id="cb11-5"><a href="froc-empirical.html#cb11-5"></a><span class="co">#&gt; trt3 0.7412852 0.6868310 0.6946303 0.7573415</span></span>
+<span id="cb11-6"><a href="froc-empirical.html#cb11-6"></a><span class="co">#&gt; trt4 0.8087852 0.7346831 0.7343486 0.8155634</span></span>
+<span id="cb11-7"><a href="froc-empirical.html#cb11-7"></a><span class="co">#&gt; trt5 0.7580810 0.6825704 0.6643662 0.7742782</span></span></code></pre></div>
 </div>
 </div>
 <div id="froc-empirical-wAFROC1" class="section level2">
@@ -1107,19 +1111,19 @@ FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}
 <div id="froc-empirical-wafroc1-plot-illustration" class="section level3">
 <h3><span class="header-section-number">2.10.2</span> Illustration with a dataset</h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical wAFROC plot1. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = wAFROC1")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="froc-empirical.html#cb11-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb11-2"><a href="froc-empirical.html#cb11-2"></a>  dataset04, </span>
-<span id="cb11-3"><a href="froc-empirical.html#cb11-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
-<span id="cb11-4"><a href="froc-empirical.html#cb11-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="froc-empirical.html#cb12-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb12-2"><a href="froc-empirical.html#cb12-2"></a>  dataset04, </span>
+<span id="cb12-3"><a href="froc-empirical.html#cb12-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb12-4"><a href="froc-empirical.html#cb12-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="13a-froc-empirical1_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Shown next is calculation of the figure of merit for this dataset.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="froc-empirical.html#cb12-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
-<span id="cb12-2"><a href="froc-empirical.html#cb12-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
-<span id="cb12-3"><a href="froc-empirical.html#cb12-3"></a><span class="co">#&gt; trt1 0.8068333 0.7298917 0.7262042 0.8058542</span></span>
-<span id="cb12-4"><a href="froc-empirical.html#cb12-4"></a><span class="co">#&gt; trt2 0.8084625 0.7379917 0.7363083 0.8010167</span></span>
-<span id="cb12-5"><a href="froc-empirical.html#cb12-5"></a><span class="co">#&gt; trt3 0.7680875 0.7075583 0.6890208 0.7743875</span></span>
-<span id="cb12-6"><a href="froc-empirical.html#cb12-6"></a><span class="co">#&gt; trt4 0.8348750 0.7533917 0.7160250 0.8308333</span></span>
-<span id="cb12-7"><a href="froc-empirical.html#cb12-7"></a><span class="co">#&gt; trt5 0.7857708 0.6953292 0.6605167 0.7774000</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="froc-empirical.html#cb13-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb13-2"><a href="froc-empirical.html#cb13-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
+<span id="cb13-3"><a href="froc-empirical.html#cb13-3"></a><span class="co">#&gt; trt1 0.8068333 0.7298917 0.7262042 0.8058542</span></span>
+<span id="cb13-4"><a href="froc-empirical.html#cb13-4"></a><span class="co">#&gt; trt2 0.8084625 0.7379917 0.7363083 0.8010167</span></span>
+<span id="cb13-5"><a href="froc-empirical.html#cb13-5"></a><span class="co">#&gt; trt3 0.7680875 0.7075583 0.6890208 0.7743875</span></span>
+<span id="cb13-6"><a href="froc-empirical.html#cb13-6"></a><span class="co">#&gt; trt4 0.8348750 0.7533917 0.7160250 0.8308333</span></span>
+<span id="cb13-7"><a href="froc-empirical.html#cb13-7"></a><span class="co">#&gt; trt5 0.7857708 0.6953292 0.6605167 0.7774000</span></span></code></pre></div>
 </div>
 </div>
 <div id="froc-empirical-plots" class="section level2">

@@ -149,7 +149,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>0.0.1</b> formatting</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.0.2</b> tables</a></li>
+<li class="chapter" data-level="0.0.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>0.0.3</b> tinytex problems</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
 <li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
@@ -559,17 +563,17 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <p>In the following examples the number of samples has been set to <span class="math inline">\(K_1=100\)</span> (the first argument to <code>rpois()</code>; the second argument is <span class="math inline">\(\lambda&#39;\)</span>).</p>
 <div id="example-1" class="section level4">
 <h4><span class="header-section-number">4.5.2.1</span> Example 1</h4>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="rsm.html#cb13-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb13-2"><a href="rsm.html#cb13-2"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb13-3"><a href="rsm.html#cb13-3"></a>samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="rsm.html#cb14-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb14-2"><a href="rsm.html#cb14-2"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb14-3"><a href="rsm.html#cb14-3"></a>samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## mean(samples1) =  1.01</code></pre>
 <pre><code>## samples1[1:10] =  0 1 1 2 0 2 3 1 1 0</code></pre>
 <p>For this observer, <span class="math inline">\(\lambda&#39; = 1\)</span>, the first case generated zero latent NLs, the 2nd and 3rd cases generated one NL each, the third case generated 2 NLs, etc.</p>
 </div>
 <div id="example-2" class="section level4">
 <h4><span class="header-section-number">4.5.2.2</span> Example 2</h4>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="rsm.html#cb16-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb16-2"><a href="rsm.html#cb16-2"></a>samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="rsm.html#cb17-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb17-2"><a href="rsm.html#cb17-2"></a>samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## mean(samples2) =  2.02</code></pre>
 <pre><code>## samples2[1:10] =  1 1 2 4 1 4 4 2 2 0</code></pre>
 <p>For the second observer <span class="math inline">\(\lambda&#39; = 2\)</span>, the first and second case generated one latent NL each, the third generated two, etc. The average number of latent NL marks per case for the 1<sup>st</sup> observer is 1.01 and that for the 2<sup>nd</sup> one is 2.02.</p>
@@ -577,13 +581,13 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <div id="confidence-intervals" class="section level4">
 <h4><span class="header-section-number">4.5.2.3</span> Confidence intervals</h4>
 <p>The following code illustrates Poisson sampling and estimation of an exact confidence interval for the mean for 100 samples from two Poisson distributions.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="rsm.html#cb19-1"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb19-2"><a href="rsm.html#cb19-2"></a>lambdaP &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb19-3"><a href="rsm.html#cb19-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">1</span>])</span>
-<span id="cb19-4"><a href="rsm.html#cb19-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">2</span>])</span>
-<span id="cb19-5"><a href="rsm.html#cb19-5"></a></span>
-<span id="cb19-6"><a href="rsm.html#cb19-6"></a>ret11 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples1),K1)</span>
-<span id="cb19-7"><a href="rsm.html#cb19-7"></a>ret21 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples2),K1)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="rsm.html#cb20-1"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb20-2"><a href="rsm.html#cb20-2"></a>lambdaP &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb20-3"><a href="rsm.html#cb20-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">1</span>])</span>
+<span id="cb20-4"><a href="rsm.html#cb20-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">2</span>])</span>
+<span id="cb20-5"><a href="rsm.html#cb20-5"></a></span>
+<span id="cb20-6"><a href="rsm.html#cb20-6"></a>ret11 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples1),K1)</span>
+<span id="cb20-7"><a href="rsm.html#cb20-7"></a>ret21 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples2),K1)</span></code></pre></div>
 <pre><code>## K1 =  100 , lambdaP 1st reader =  1 , lambdaP 2nd reader =  2</code></pre>
 <pre><code>## obs. mean, reader 1 =  1.01</code></pre>
 <pre><code>## obs. mean, reader 2 =  2.02</code></pre>
@@ -596,9 +600,9 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <pre><code>## Rdr. 1: 95% CI =  0.9859414 1.025349</code></pre>
 <pre><code>## Rdr. 2: 95% CI =  1.978335 2.033955</code></pre>
 <p>This time for reader 1, the estimate of the Poisson parameter is 1.01 with 95% confidence interval (0.986, 1.025); for reader 2 the corresponding estimate is 2.01 with 95% confidence interval (1.978, 2.034). The width of the confidence interval is inversely proportional to the square root of the number of cases (the example below is for reader 1):</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="rsm.html#cb30-1"></a>ret11<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret11<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="rsm.html#cb31-1"></a>ret11<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret11<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 0.40458</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="rsm.html#cb32-1"></a>ret12<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret12<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="rsm.html#cb33-1"></a>ret12<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret12<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 0.03940756</code></pre>
 <p>Since the number of cases was increased by a factor of 100, the width decreased by a factor of 10, the square-root of the ratio of the numbers of cases.</p>
 </div>
@@ -607,14 +611,14 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <h3><span class="header-section-number">4.5.3</span> The <span class="math inline">\(\nu&#39;\)</span> parameter</h3>
 <p>The <span class="math inline">\(\nu&#39;\)</span> parameter determines the ability of the observer to find lesions. Assuming the same number of lesions per diseased case, the mean fraction of latent LLs per diseased case is an estimate of <span class="math inline">\(\nu&#39;\)</span>.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> Consider two observers, one with <span class="math inline">\(\nu&#39; = 0.5\)</span> and the other with <span class="math inline">\(\nu&#39; = 0.9\)</span>. Again, while one cannot predict the precise number of latent LLs on any specific diseased case, or which specific lesions will be correctly localized, one can predict the average number of latent LLs per diseased case.</p>
 <p>The following code also uses <span class="math inline">\(K_2 = 100\)</span> samples, the number of diseased cases, each with one lesion.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="rsm.html#cb34-1"></a>K2 &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb34-2"><a href="rsm.html#cb34-2"></a>L &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb34-3"><a href="rsm.html#cb34-3"></a>nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
-<span id="cb34-4"><a href="rsm.html#cb34-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP1)</span>
-<span id="cb34-5"><a href="rsm.html#cb34-5"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP2)</span>
-<span id="cb34-6"><a href="rsm.html#cb34-6"></a></span>
-<span id="cb34-7"><a href="rsm.html#cb34-7"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1),K2<span class="op">*</span>L)</span>
-<span id="cb34-8"><a href="rsm.html#cb34-8"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2),K2<span class="op">*</span>L)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="rsm.html#cb35-1"></a>K2 &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb35-2"><a href="rsm.html#cb35-2"></a>L &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb35-3"><a href="rsm.html#cb35-3"></a>nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
+<span id="cb35-4"><a href="rsm.html#cb35-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP1)</span>
+<span id="cb35-5"><a href="rsm.html#cb35-5"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP2)</span>
+<span id="cb35-6"><a href="rsm.html#cb35-6"></a></span>
+<span id="cb35-7"><a href="rsm.html#cb35-7"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1),K2<span class="op">*</span>L)</span>
+<span id="cb35-8"><a href="rsm.html#cb35-8"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2),K2<span class="op">*</span>L)</span></code></pre></div>
 <pre><code>## K2 =  100 , nuP 1st reader =  0.5 , nuP 2nd reader =  0.9</code></pre>
 <pre><code>## mean, reader 1 =  0.48</code></pre>
 <pre><code>## mean, reader 2 =  0.94</code></pre>
@@ -622,21 +626,21 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <pre><code>## Rdr. 2: 95% CI =  0.8739701 0.9776651</code></pre>
 <p>The result shows that for reader 1 the estimate of the binomial success rate parameter is 0.48 with 95% confidence interval (0.38, 0.58). For reader 2 the corresponding estimates are 0.94 and (0.87, 0.98). As the number of diseased cases increases, the confidence interval shrinks in inverse proportion to the square root of cases.</p>
 <p>As a more complicated but clinically realistic example, consider a dataset with 100 cases in all where 97 have one lesion per case, two have two lesions per case and one has three lesions per case (these are typical lesion distributions observed in screening mammography). The code follows:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="rsm.html#cb40-1"></a>K2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">97</span>,<span class="dv">2</span>,<span class="dv">1</span>);Lk &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
-<span id="cb40-2"><a href="rsm.html#cb40-2"></a>samples1 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
-<span id="cb40-3"><a href="rsm.html#cb40-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb40-4"><a href="rsm.html#cb40-4"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
-<span id="cb40-5"><a href="rsm.html#cb40-5"></a>  samples1[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP1)</span>
-<span id="cb40-6"><a href="rsm.html#cb40-6"></a>}</span>
-<span id="cb40-7"><a href="rsm.html#cb40-7"></a></span>
-<span id="cb40-8"><a href="rsm.html#cb40-8"></a>samples2 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
-<span id="cb40-9"><a href="rsm.html#cb40-9"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb40-10"><a href="rsm.html#cb40-10"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
-<span id="cb40-11"><a href="rsm.html#cb40-11"></a>  samples2[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP2)</span>
-<span id="cb40-12"><a href="rsm.html#cb40-12"></a>}</span>
-<span id="cb40-13"><a href="rsm.html#cb40-13"></a></span>
-<span id="cb40-14"><a href="rsm.html#cb40-14"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1[<span class="op">!</span><span class="kw">is.na</span>(samples1)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span>
-<span id="cb40-15"><a href="rsm.html#cb40-15"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2[<span class="op">!</span><span class="kw">is.na</span>(samples2)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="rsm.html#cb41-1"></a>K2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">97</span>,<span class="dv">2</span>,<span class="dv">1</span>);Lk &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
+<span id="cb41-2"><a href="rsm.html#cb41-2"></a>samples1 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
+<span id="cb41-3"><a href="rsm.html#cb41-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb41-4"><a href="rsm.html#cb41-4"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
+<span id="cb41-5"><a href="rsm.html#cb41-5"></a>  samples1[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP1)</span>
+<span id="cb41-6"><a href="rsm.html#cb41-6"></a>}</span>
+<span id="cb41-7"><a href="rsm.html#cb41-7"></a></span>
+<span id="cb41-8"><a href="rsm.html#cb41-8"></a>samples2 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
+<span id="cb41-9"><a href="rsm.html#cb41-9"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb41-10"><a href="rsm.html#cb41-10"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
+<span id="cb41-11"><a href="rsm.html#cb41-11"></a>  samples2[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP2)</span>
+<span id="cb41-12"><a href="rsm.html#cb41-12"></a>}</span>
+<span id="cb41-13"><a href="rsm.html#cb41-13"></a></span>
+<span id="cb41-14"><a href="rsm.html#cb41-14"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1[<span class="op">!</span><span class="kw">is.na</span>(samples1)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span>
+<span id="cb41-15"><a href="rsm.html#cb41-15"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2[<span class="op">!</span><span class="kw">is.na</span>(samples2)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span></code></pre></div>
 <pre><code>## K2[1] = 97 , K2[2] = 2 , K2[3] = 1 , nuP1 = 0.5 , nuP2 = 0.9</code></pre>
 <pre><code>## obsvd. mean, reader 1 =  0.4903846</code></pre>
 <pre><code>## obsvd. mean, reader 2 =  0.9326923</code></pre>

@@ -149,7 +149,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>0.0.1</b> formatting</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.0.2</b> tables</a></li>
+<li class="chapter" data-level="0.0.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>0.0.3</b> tinytex problems</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
 <li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
@@ -587,22 +591,22 @@ FIGURE 15.3: FP worksheet for File1.xlsx
 </div>
 <div id="the-two-ratings-arrays" class="section level3">
 <h3><span class="header-section-number">15.5.4</span> The two ratings arrays</h3>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="classification-tasks.html#cb115-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File1.xlsx&quot;</span></span>
-<span id="cb115-2"><a href="classification-tasks.html#cb115-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
-<span id="cb115-3"><a href="classification-tasks.html#cb115-3"></a>x<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
-<span id="cb115-4"><a href="classification-tasks.html#cb115-4"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb115-5"><a href="classification-tasks.html#cb115-5"></a><span class="co">#&gt; [1,]  5.5  1.2 -Inf</span></span>
-<span id="cb115-6"><a href="classification-tasks.html#cb115-6"></a><span class="co">#&gt; [2,]  7.0  2.3  2.1</span></span>
-<span id="cb115-7"><a href="classification-tasks.html#cb115-7"></a><span class="co">#&gt; [3,]  1.4  6.1 -Inf</span></span>
-<span id="cb115-8"><a href="classification-tasks.html#cb115-8"></a>x<span class="op">$</span>ratings<span class="op">$</span>LL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
-<span id="cb115-9"><a href="classification-tasks.html#cb115-9"></a><span class="co">#&gt;      [,1] [,2] [,3] [,4]</span></span>
-<span id="cb115-10"><a href="classification-tasks.html#cb115-10"></a><span class="co">#&gt; [1,]  5.0 -Inf -Inf -Inf</span></span>
-<span id="cb115-11"><a href="classification-tasks.html#cb115-11"></a><span class="co">#&gt; [2,]  6.1  7.1 -Inf  2.3</span></span>
-<span id="cb115-12"><a href="classification-tasks.html#cb115-12"></a><span class="co">#&gt; [3,]  5.7 -Inf -Inf -Inf</span></span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="classification-tasks.html#cb116-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File1.xlsx&quot;</span></span>
+<span id="cb116-2"><a href="classification-tasks.html#cb116-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
+<span id="cb116-3"><a href="classification-tasks.html#cb116-3"></a>x<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
+<span id="cb116-4"><a href="classification-tasks.html#cb116-4"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb116-5"><a href="classification-tasks.html#cb116-5"></a><span class="co">#&gt; [1,]  5.5  1.2 -Inf</span></span>
+<span id="cb116-6"><a href="classification-tasks.html#cb116-6"></a><span class="co">#&gt; [2,]  7.0  2.3  2.1</span></span>
+<span id="cb116-7"><a href="classification-tasks.html#cb116-7"></a><span class="co">#&gt; [3,]  1.4  6.1 -Inf</span></span>
+<span id="cb116-8"><a href="classification-tasks.html#cb116-8"></a>x<span class="op">$</span>ratings<span class="op">$</span>LL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
+<span id="cb116-9"><a href="classification-tasks.html#cb116-9"></a><span class="co">#&gt;      [,1] [,2] [,3] [,4]</span></span>
+<span id="cb116-10"><a href="classification-tasks.html#cb116-10"></a><span class="co">#&gt; [1,]  5.0 -Inf -Inf -Inf</span></span>
+<span id="cb116-11"><a href="classification-tasks.html#cb116-11"></a><span class="co">#&gt; [2,]  6.1  7.1 -Inf  2.3</span></span>
+<span id="cb116-12"><a href="classification-tasks.html#cb116-12"></a><span class="co">#&gt; [3,]  5.7 -Inf -Inf -Inf</span></span></code></pre></div>
 <p>The FOM is shown next:</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="classification-tasks.html#cb116-1"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
-<span id="cb116-2"><a href="classification-tasks.html#cb116-2"></a><span class="co">#&gt;           rdr1</span></span>
-<span id="cb116-3"><a href="classification-tasks.html#cb116-3"></a><span class="co">#&gt; trt1 0.2361111</span></span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="classification-tasks.html#cb117-1"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
+<span id="cb117-2"><a href="classification-tasks.html#cb117-2"></a><span class="co">#&gt;           rdr1</span></span>
+<span id="cb117-3"><a href="classification-tasks.html#cb117-3"></a><span class="co">#&gt; trt1 0.2361111</span></span></code></pre></div>
 </div>
 </div>
 <div id="classification-tasks-example2" class="section level2">
@@ -614,11 +618,11 @@ FIGURE 15.3: FP worksheet for File1.xlsx
 FIGURE 15.4: TP worksheet for File2.xlsx
 </p>
 </div>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="classification-tasks.html#cb117-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File2.xlsx&quot;</span></span>
-<span id="cb117-2"><a href="classification-tasks.html#cb117-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
-<span id="cb117-3"><a href="classification-tasks.html#cb117-3"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
-<span id="cb117-4"><a href="classification-tasks.html#cb117-4"></a><span class="co">#&gt;           rdr1</span></span>
-<span id="cb117-5"><a href="classification-tasks.html#cb117-5"></a><span class="co">#&gt; trt1 0.4583333</span></span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="classification-tasks.html#cb118-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File2.xlsx&quot;</span></span>
+<span id="cb118-2"><a href="classification-tasks.html#cb118-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
+<span id="cb118-3"><a href="classification-tasks.html#cb118-3"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
+<span id="cb118-4"><a href="classification-tasks.html#cb118-4"></a><span class="co">#&gt;           rdr1</span></span>
+<span id="cb118-5"><a href="classification-tasks.html#cb118-5"></a><span class="co">#&gt; trt1 0.4583333</span></span></code></pre></div>
 </div>
 <div id="classification-tasks-example3" class="section level2">
 <h2><span class="header-section-number">15.7</span> Third example, File3.xlsx</h2>
@@ -629,11 +633,11 @@ FIGURE 15.4: TP worksheet for File2.xlsx
 FIGURE 15.5: TP and FP worksheets for File3.xlsx
 </p>
 </div>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="classification-tasks.html#cb118-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File3.xlsx&quot;</span></span>
-<span id="cb118-2"><a href="classification-tasks.html#cb118-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
-<span id="cb118-3"><a href="classification-tasks.html#cb118-3"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
-<span id="cb118-4"><a href="classification-tasks.html#cb118-4"></a><span class="co">#&gt;           rdr1</span></span>
-<span id="cb118-5"><a href="classification-tasks.html#cb118-5"></a><span class="co">#&gt; trt1 0.5277778</span></span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="classification-tasks.html#cb119-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File3.xlsx&quot;</span></span>
+<span id="cb119-2"><a href="classification-tasks.html#cb119-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
+<span id="cb119-3"><a href="classification-tasks.html#cb119-3"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
+<span id="cb119-4"><a href="classification-tasks.html#cb119-4"></a><span class="co">#&gt;           rdr1</span></span>
+<span id="cb119-5"><a href="classification-tasks.html#cb119-5"></a><span class="co">#&gt; trt1 0.5277778</span></span></code></pre></div>
 </div>
 <div id="classification-tasks-example4" class="section level2">
 <h2><span class="header-section-number">15.8</span> Fourth example, File4.xlsx</h2>
@@ -665,11 +669,11 @@ FIGURE 15.8: FP worksheet for File4.xlsx
 <ul>
 <li>Shown next are the three FOMs. Note that they are identical.</li>
 </ul>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="classification-tasks.html#cb119-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File4.xlsx&quot;</span></span>
-<span id="cb119-2"><a href="classification-tasks.html#cb119-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
-<span id="cb119-3"><a href="classification-tasks.html#cb119-3"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
-<span id="cb119-4"><a href="classification-tasks.html#cb119-4"></a><span class="co">#&gt;           rdr1      rdr2      rdr3</span></span>
-<span id="cb119-5"><a href="classification-tasks.html#cb119-5"></a><span class="co">#&gt; trt1 0.5277778 0.5277778 0.5277778</span></span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="classification-tasks.html#cb120-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File4.xlsx&quot;</span></span>
+<span id="cb120-2"><a href="classification-tasks.html#cb120-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
+<span id="cb120-3"><a href="classification-tasks.html#cb120-3"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
+<span id="cb120-4"><a href="classification-tasks.html#cb120-4"></a><span class="co">#&gt;           rdr1      rdr2      rdr3</span></span>
+<span id="cb120-5"><a href="classification-tasks.html#cb120-5"></a><span class="co">#&gt; trt1 0.5277778 0.5277778 0.5277778</span></span></code></pre></div>
 </div>
 <div id="classification-tasks-example5" class="section level2">
 <h2><span class="header-section-number">15.9</span> Fifth example, File5.xlsx</h2>
@@ -680,11 +684,11 @@ FIGURE 15.8: FP worksheet for File4.xlsx
 <li>But file <code>File5.xlsx</code> should give one the general idea of how to extend to several algorithmic readers.</li>
 <li>Note that now the FOMs are not identical.</li>
 </ul>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="classification-tasks.html#cb120-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File5.xlsx&quot;</span></span>
-<span id="cb120-2"><a href="classification-tasks.html#cb120-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
-<span id="cb120-3"><a href="classification-tasks.html#cb120-3"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
-<span id="cb120-4"><a href="classification-tasks.html#cb120-4"></a><span class="co">#&gt;           rdr1      rdr2      rdr3</span></span>
-<span id="cb120-5"><a href="classification-tasks.html#cb120-5"></a><span class="co">#&gt; trt1 0.3611111 0.5555556 0.4444444</span></span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="classification-tasks.html#cb121-1"></a>fileName &lt;-<span class="st"> &quot;R/CH83-ClassificationTask/File5.xlsx&quot;</span></span>
+<span id="cb121-2"><a href="classification-tasks.html#cb121-2"></a>x &lt;-<span class="st"> </span><span class="kw">DfReadDataFile</span>(<span class="dt">fileName =</span> fileName)</span>
+<span id="cb121-3"><a href="classification-tasks.html#cb121-3"></a><span class="kw">print</span>(<span class="kw">UtilFigureOfMerit</span>(x, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>))</span>
+<span id="cb121-4"><a href="classification-tasks.html#cb121-4"></a><span class="co">#&gt;           rdr1      rdr2      rdr3</span></span>
+<span id="cb121-5"><a href="classification-tasks.html#cb121-5"></a><span class="co">#&gt; trt1 0.3611111 0.5555556 0.4444444</span></span></code></pre></div>
 </div>
 <div id="classification-tasks-precautions" class="section level2">
 <h2><span class="header-section-number">15.10</span> Precautions</h2>

@@ -149,7 +149,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>0.0.1</b> formatting</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.0.2</b> tables</a></li>
+<li class="chapter" data-level="0.0.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>0.0.3</b> tinytex problems</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
 <li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
@@ -489,37 +493,37 @@ Need to replace simulation values with analytical values</p>
 <p>Recall, from TBA Section (froc-paradigm-preview-rsm), that the RSM is defined by parameters <span class="math inline">\(\mu, \lambda, \nu\)</span> and <span class="math inline">\(\zeta_1\)</span>. This section examines RSM-predicted TBA analytical FROC, wAFROC and ROC panels for two observers denoted R1 and R2. The former could be an algorithmic observer while the latter could be a radiologist. For typical threshold <span class="math inline">\(\zeta_1\)</span> parameters, three types of situations are considered: R2 has moderately better performance than R1, R2 has much better performance than R1 and R2 has slightly better performance than R1. For each type of simulation pairs of FROC, wAFROC and ROC curves are shown, one for each observer. Finally the simulations and panels are repeated for hypothetical R1 and R2 observers who report all suspicious regions, i.e., <span class="math inline">\(\zeta_1 = -\infty\)</span> for each observer. Both R1 and R2 observers share the same <span class="math inline">\(\lambda, \nu\)</span> parameters, and the only difference between them is in the <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\zeta_1\)</span> parameters.</p>
 <div id="moderate-difference-in-performance" class="section level3">
 <h3><span class="header-section-number">7.3.1</span> Moderate difference in performance</h3>
-<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb67-1"><a href="froc-vs-wafroc.html#cb67-1"></a><span class="kw">source</span>(<span class="kw">here</span>(<span class="st">&quot;R/CH13-CadVsRadPlots/CadVsRadPlots.R&quot;</span>))</span>
-<span id="cb67-2"><a href="froc-vs-wafroc.html#cb67-2"></a></span>
-<span id="cb67-3"><a href="froc-vs-wafroc.html#cb67-3"></a>nu &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb67-4"><a href="froc-vs-wafroc.html#cb67-4"></a>lambda &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb67-5"><a href="froc-vs-wafroc.html#cb67-5"></a>K1 &lt;-<span class="st"> </span><span class="dv">500</span></span>
-<span id="cb67-6"><a href="froc-vs-wafroc.html#cb67-6"></a>K2 &lt;-<span class="st"> </span><span class="dv">700</span></span>
-<span id="cb67-7"><a href="froc-vs-wafroc.html#cb67-7"></a>mu1 &lt;-<span class="st"> </span><span class="fl">1.0</span></span>
-<span id="cb67-8"><a href="froc-vs-wafroc.html#cb67-8"></a>mu2 &lt;-<span class="st"> </span><span class="fl">1.5</span></span>
-<span id="cb67-9"><a href="froc-vs-wafroc.html#cb67-9"></a>zeta1_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">-1</span></span>
-<span id="cb67-10"><a href="froc-vs-wafroc.html#cb67-10"></a>zeta1_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="fl">1.5</span></span>
-<span id="cb67-11"><a href="froc-vs-wafroc.html#cb67-11"></a>Lmax &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb67-12"><a href="froc-vs-wafroc.html#cb67-12"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb67-13"><a href="froc-vs-wafroc.html#cb67-13"></a></span>
-<span id="cb67-14"><a href="froc-vs-wafroc.html#cb67-14"></a>ret &lt;-<span class="st"> </span><span class="kw">do_one_figure</span> (</span>
-<span id="cb67-15"><a href="froc-vs-wafroc.html#cb67-15"></a>  seed, Lmax, mu1, </span>
-<span id="cb67-16"><a href="froc-vs-wafroc.html#cb67-16"></a>  mu2, lambda, nu, zeta1_<span class="dv">1</span>, zeta1_<span class="dv">2</span>, K1, K2)</span>
-<span id="cb67-17"><a href="froc-vs-wafroc.html#cb67-17"></a></span>
-<span id="cb67-18"><a href="froc-vs-wafroc.html#cb67-18"></a>froc_plot_1A &lt;-<span class="st"> </span>ret<span class="op">$</span>froc_plot_A</span>
-<span id="cb67-19"><a href="froc-vs-wafroc.html#cb67-19"></a>wafroc_plot_1B &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_plot_B</span>
-<span id="cb67-20"><a href="froc-vs-wafroc.html#cb67-20"></a>roc_plot_1C &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_plot_C</span>
-<span id="cb67-21"><a href="froc-vs-wafroc.html#cb67-21"></a>froc_plot_1D &lt;-<span class="st"> </span>ret<span class="op">$</span>froc_plot_D</span>
-<span id="cb67-22"><a href="froc-vs-wafroc.html#cb67-22"></a>wafroc_plot_1E &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_plot_E</span>
-<span id="cb67-23"><a href="froc-vs-wafroc.html#cb67-23"></a>roc_plot_1F &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_plot_F</span>
-<span id="cb67-24"><a href="froc-vs-wafroc.html#cb67-24"></a>wafroc_<span class="dv">1</span>_1B &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">1</span>_B</span>
-<span id="cb67-25"><a href="froc-vs-wafroc.html#cb67-25"></a>wafroc_<span class="dv">2</span>_1B &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">2</span>_B</span>
-<span id="cb67-26"><a href="froc-vs-wafroc.html#cb67-26"></a>roc_<span class="dv">1</span>_1C &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">1</span>_C</span>
-<span id="cb67-27"><a href="froc-vs-wafroc.html#cb67-27"></a>roc_<span class="dv">2</span>_1C &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">2</span>_C</span>
-<span id="cb67-28"><a href="froc-vs-wafroc.html#cb67-28"></a>wafroc_<span class="dv">1</span>_1E &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">1</span>_E</span>
-<span id="cb67-29"><a href="froc-vs-wafroc.html#cb67-29"></a>wafroc_<span class="dv">2</span>_1E &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">2</span>_E</span>
-<span id="cb67-30"><a href="froc-vs-wafroc.html#cb67-30"></a>roc_<span class="dv">1</span>_1F &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">1</span>_F</span>
-<span id="cb67-31"><a href="froc-vs-wafroc.html#cb67-31"></a>roc_<span class="dv">2</span>_1F &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">2</span>_F</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb68-1"><a href="froc-vs-wafroc.html#cb68-1"></a><span class="kw">source</span>(<span class="kw">here</span>(<span class="st">&quot;R/CH13-CadVsRadPlots/CadVsRadPlots.R&quot;</span>))</span>
+<span id="cb68-2"><a href="froc-vs-wafroc.html#cb68-2"></a></span>
+<span id="cb68-3"><a href="froc-vs-wafroc.html#cb68-3"></a>nu &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb68-4"><a href="froc-vs-wafroc.html#cb68-4"></a>lambda &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb68-5"><a href="froc-vs-wafroc.html#cb68-5"></a>K1 &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb68-6"><a href="froc-vs-wafroc.html#cb68-6"></a>K2 &lt;-<span class="st"> </span><span class="dv">700</span></span>
+<span id="cb68-7"><a href="froc-vs-wafroc.html#cb68-7"></a>mu1 &lt;-<span class="st"> </span><span class="fl">1.0</span></span>
+<span id="cb68-8"><a href="froc-vs-wafroc.html#cb68-8"></a>mu2 &lt;-<span class="st"> </span><span class="fl">1.5</span></span>
+<span id="cb68-9"><a href="froc-vs-wafroc.html#cb68-9"></a>zeta1_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">-1</span></span>
+<span id="cb68-10"><a href="froc-vs-wafroc.html#cb68-10"></a>zeta1_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="fl">1.5</span></span>
+<span id="cb68-11"><a href="froc-vs-wafroc.html#cb68-11"></a>Lmax &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb68-12"><a href="froc-vs-wafroc.html#cb68-12"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb68-13"><a href="froc-vs-wafroc.html#cb68-13"></a></span>
+<span id="cb68-14"><a href="froc-vs-wafroc.html#cb68-14"></a>ret &lt;-<span class="st"> </span><span class="kw">do_one_figure</span> (</span>
+<span id="cb68-15"><a href="froc-vs-wafroc.html#cb68-15"></a>  seed, Lmax, mu1, </span>
+<span id="cb68-16"><a href="froc-vs-wafroc.html#cb68-16"></a>  mu2, lambda, nu, zeta1_<span class="dv">1</span>, zeta1_<span class="dv">2</span>, K1, K2)</span>
+<span id="cb68-17"><a href="froc-vs-wafroc.html#cb68-17"></a></span>
+<span id="cb68-18"><a href="froc-vs-wafroc.html#cb68-18"></a>froc_plot_1A &lt;-<span class="st"> </span>ret<span class="op">$</span>froc_plot_A</span>
+<span id="cb68-19"><a href="froc-vs-wafroc.html#cb68-19"></a>wafroc_plot_1B &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_plot_B</span>
+<span id="cb68-20"><a href="froc-vs-wafroc.html#cb68-20"></a>roc_plot_1C &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_plot_C</span>
+<span id="cb68-21"><a href="froc-vs-wafroc.html#cb68-21"></a>froc_plot_1D &lt;-<span class="st"> </span>ret<span class="op">$</span>froc_plot_D</span>
+<span id="cb68-22"><a href="froc-vs-wafroc.html#cb68-22"></a>wafroc_plot_1E &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_plot_E</span>
+<span id="cb68-23"><a href="froc-vs-wafroc.html#cb68-23"></a>roc_plot_1F &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_plot_F</span>
+<span id="cb68-24"><a href="froc-vs-wafroc.html#cb68-24"></a>wafroc_<span class="dv">1</span>_1B &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">1</span>_B</span>
+<span id="cb68-25"><a href="froc-vs-wafroc.html#cb68-25"></a>wafroc_<span class="dv">2</span>_1B &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">2</span>_B</span>
+<span id="cb68-26"><a href="froc-vs-wafroc.html#cb68-26"></a>roc_<span class="dv">1</span>_1C &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">1</span>_C</span>
+<span id="cb68-27"><a href="froc-vs-wafroc.html#cb68-27"></a>roc_<span class="dv">2</span>_1C &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">2</span>_C</span>
+<span id="cb68-28"><a href="froc-vs-wafroc.html#cb68-28"></a>wafroc_<span class="dv">1</span>_1E &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">1</span>_E</span>
+<span id="cb68-29"><a href="froc-vs-wafroc.html#cb68-29"></a>wafroc_<span class="dv">2</span>_1E &lt;-<span class="st"> </span>ret<span class="op">$</span>wafroc_<span class="dv">2</span>_E</span>
+<span id="cb68-30"><a href="froc-vs-wafroc.html#cb68-30"></a>roc_<span class="dv">1</span>_1F &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">1</span>_F</span>
+<span id="cb68-31"><a href="froc-vs-wafroc.html#cb68-31"></a>roc_<span class="dv">2</span>_1F &lt;-<span class="st"> </span>ret<span class="op">$</span>roc_<span class="dv">2</span>_F</span></code></pre></div>
 <p>The <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> parameters are defined at lines 3 and 4 of the preceding code: <span class="math inline">\(\lambda = \nu = 1\)</span>. The number of simulated cases is defined, lines 5-6, by <span class="math inline">\(K_1 = 500\)</span> and <span class="math inline">\(K_2 = 700\)</span>. The simulated R1 observer <span class="math inline">\(\mu\)</span> parameter is defined at line 7 by <span class="math inline">\(\mu_{1} = 1\)</span> and that of the simulated R2 observer is defined at line 8 by <span class="math inline">\(\mu_{2} = 1.5\)</span>. Based on these choices one expect R2 to be moderately better than R1. The corresponding threshold parameters are (lines 9 -10) <span class="math inline">\(\zeta_{1} = -1\)</span> for R1 and <span class="math inline">\(\zeta_{1} = 1.5\)</span> for R2. The maximum number of lesions per case is defined at line 11 by <code>Lmax</code> = 2. The actual number of lesions per case is determined determined by random sampling within the helper function <code>do_one_figure()</code> called at lines 14-16. This function returns a large list <code>ret</code>, whose contents are as follows:</p>
 <ul>
 <li><code>ret$froc_plot_A</code>: a pair of FROC panels for the thresholds specified above, a red panel labeled “R: 1” corresponding to R1 and a blue panel labeled “R: 2” corresponding to R2. These are shown in panel A.</li>

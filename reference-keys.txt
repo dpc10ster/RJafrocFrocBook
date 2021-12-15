@@ -185,6 +185,9 @@ fig:File4TP
 fig:File4FP
 eq:MSR-T-Hillis
 eq:MSR-T-Hillis-Modified
+formatting
+tables
+tinytex-problems
 froc-paradigm
 froc-paradigm-how-much-finished
 froc-paradigm-intro

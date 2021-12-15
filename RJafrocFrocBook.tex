@@ -293,10 +293,24 @@ I appreciate constructive feedback on this document. To do this raise an \texttt
 \tightlist
 \item
   weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-froc-empirical1.Rmd which should be 13a-froc-empirical1.Rmd
+\end{itemize}
+
+\hypertarget{formatting}{%
+\subsection{formatting}\label{formatting}}
+
+\begin{itemize}
+\tightlist
 \item
   sprintf(``\%.4f'', proper formatting of numbers
 \item
   OpPtStr(, do:
+\end{itemize}
+
+\hypertarget{tables}{%
+\subsection{tables}\label{tables}}
+
+\begin{itemize}
+\tightlist
 \item
   kbl(dfA, caption = ``\ldots.'', booktabs = TRUE, escape = FALSE) \%\textgreater\% collapse\_rows(columns = c(1, 3), valign = ``middle'') \%\textgreater\% kable\_styling(latex\_options = c(``basic'', ``scale\_down'', ``HOLD\_position''), row\_label\_position = ``c'')
 \item
@@ -312,6 +326,38 @@ I appreciate constructive feedback on this document. To do this raise an \texttt
   In verify\_rstudio\_version() :
   Please install or upgrade Pandoc to at least version 1.17.2; or if you are using RStudio, you can just install RStudio 1.0+.
   Execution halted
+\end{itemize}
+
+\hypertarget{tinytex-problems}{%
+\subsection{tinytex problems}\label{tinytex-problems}}
+
+\begin{itemize}
+\tightlist
+\item
+  dont update in response to messages; breaks everything
+\item
+  DONT DO THIS: When tinytex::install\_tinytex() hangs up try
+\item
+  DONT DO THIS: tinytex::install\_tinytex(repository = ``\url{http://mirrors.tuna.tsinghua.edu.cn/CTAN/}'', version = ``latest'')
+\item
+  Getting very long builds: looping certain commands
+\item
+  First uninstall tinytex then reinstall:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#uninstall_tinytex(force = FALSE, dir = tinytex_root())}
+\CommentTok{#tinytex::install_tinytex()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  get very long build first time with looping certain commands
+\item
+  fixed on subsequent pdf builds
 \end{itemize}
 
 \hypertarget{part-froc-paradigm}{%

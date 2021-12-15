@@ -149,7 +149,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>0.0.1</b> formatting</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.0.2</b> tables</a></li>
+<li class="chapter" data-level="0.0.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>0.0.3</b> tinytex problems</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
 <li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
@@ -489,45 +493,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Raw plots</em> correspond to the actual simulator generated floating-point ratings, prior to any binning operation. If binning is employed the plots are termed <em>binned plots</em>. The FROC plots shown below were generated using the data simulator introduced in Chapter <a href="froc-paradigm.html#froc-paradigm">1</a>. The examples are similar to the population FROC curves shown in that chapter but the emphasis here is on understanding the FROC data structure. To this end smaller numbers of cases, not 20,000 as in the previous chapter, are used. Examples are given using smaller datasets. With a very small dataset, the logic of constructing the plot is more transparent but the operating points are more susceptible to sampling variability. The examples illustrate key points distinguishing the free-response paradigm from ROC. TBA</p>
 <div id="froc-empirical-examples-raw-plots-code1" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Code for raw plots</h3>
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb57-1"><a href="froc-empirical-examples.html#cb57-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb57-2"><a href="froc-empirical-examples.html#cb57-2"></a>mu &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb57-3"><a href="froc-empirical-examples.html#cb57-3"></a>lambda &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb57-4"><a href="froc-empirical-examples.html#cb57-4"></a>nu &lt;-<span class="st"> </span><span class="dv">1</span> </span>
-<span id="cb57-5"><a href="froc-empirical-examples.html#cb57-5"></a>zeta1 &lt;-<span class="st"> </span><span class="dv">-1</span></span>
-<span id="cb57-6"><a href="froc-empirical-examples.html#cb57-6"></a>K1 &lt;-<span class="st"> </span><span class="dv">5</span></span>
-<span id="cb57-7"><a href="froc-empirical-examples.html#cb57-7"></a>K2 &lt;-<span class="st"> </span><span class="dv">7</span> </span>
-<span id="cb57-8"><a href="froc-empirical-examples.html#cb57-8"></a>Lmax &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb57-9"><a href="froc-empirical-examples.html#cb57-9"></a>Lk2 &lt;-<span class="st"> </span><span class="kw">floor</span>(<span class="kw">runif</span>(K2, <span class="dv">1</span>, Lmax <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</span>
-<span id="cb57-10"><a href="froc-empirical-examples.html#cb57-10"></a></span>
-<span id="cb57-11"><a href="froc-empirical-examples.html#cb57-11"></a>frocDataRaw &lt;-<span class="st"> </span><span class="kw">SimulateFrocDataset</span>(</span>
-<span id="cb57-12"><a href="froc-empirical-examples.html#cb57-12"></a>  <span class="dt">mu =</span> mu, </span>
-<span id="cb57-13"><a href="froc-empirical-examples.html#cb57-13"></a>  <span class="dt">lambda =</span> lambda, </span>
-<span id="cb57-14"><a href="froc-empirical-examples.html#cb57-14"></a>  <span class="dt">nu =</span> nu, </span>
-<span id="cb57-15"><a href="froc-empirical-examples.html#cb57-15"></a>  <span class="dt">I =</span> <span class="dv">1</span>,</span>
-<span id="cb57-16"><a href="froc-empirical-examples.html#cb57-16"></a>  <span class="dt">J =</span> <span class="dv">1</span>,</span>
-<span id="cb57-17"><a href="froc-empirical-examples.html#cb57-17"></a>  <span class="dt">K1 =</span> K1, </span>
-<span id="cb57-18"><a href="froc-empirical-examples.html#cb57-18"></a>  <span class="dt">K2 =</span> K2, </span>
-<span id="cb57-19"><a href="froc-empirical-examples.html#cb57-19"></a>  <span class="dt">perCase =</span> Lk2, </span>
-<span id="cb57-20"><a href="froc-empirical-examples.html#cb57-20"></a>  <span class="dt">zeta1 =</span> zeta1,</span>
-<span id="cb57-21"><a href="froc-empirical-examples.html#cb57-21"></a>  <span class="dt">seed =</span> seed</span>
-<span id="cb57-22"><a href="froc-empirical-examples.html#cb57-22"></a>)</span>
-<span id="cb57-23"><a href="froc-empirical-examples.html#cb57-23"></a></span>
-<span id="cb57-24"><a href="froc-empirical-examples.html#cb57-24"></a>p1A &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb57-25"><a href="froc-empirical-examples.html#cb57-25"></a>  <span class="dt">dataset =</span> frocDataRaw, </span>
-<span id="cb57-26"><a href="froc-empirical-examples.html#cb57-26"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>, </span>
-<span id="cb57-27"><a href="froc-empirical-examples.html#cb57-27"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;A&quot;</span>)</span>
-<span id="cb57-28"><a href="froc-empirical-examples.html#cb57-28"></a></span>
-<span id="cb57-29"><a href="froc-empirical-examples.html#cb57-29"></a>p1B &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb57-30"><a href="froc-empirical-examples.html#cb57-30"></a>  <span class="dt">dataset =</span> frocDataRaw, </span>
-<span id="cb57-31"><a href="froc-empirical-examples.html#cb57-31"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC&quot;</span>, </span>
-<span id="cb57-32"><a href="froc-empirical-examples.html#cb57-32"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;B&quot;</span>)</span>
-<span id="cb57-33"><a href="froc-empirical-examples.html#cb57-33"></a></span>
-<span id="cb57-34"><a href="froc-empirical-examples.html#cb57-34"></a>p1C &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb57-35"><a href="froc-empirical-examples.html#cb57-35"></a>  <span class="dt">dataset =</span> frocDataRaw, </span>
-<span id="cb57-36"><a href="froc-empirical-examples.html#cb57-36"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>, </span>
-<span id="cb57-37"><a href="froc-empirical-examples.html#cb57-37"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;C&quot;</span>)</span>
-<span id="cb57-38"><a href="froc-empirical-examples.html#cb57-38"></a></span>
-<span id="cb57-39"><a href="froc-empirical-examples.html#cb57-39"></a>frocDataRaw_<span class="dv">1</span>_<span class="dv">5</span>_<span class="dv">7</span> &lt;-<span class="st"> </span>frocDataRaw <span class="co"># seed 1, K1 = 5, K2 = 7</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb58-1"><a href="froc-empirical-examples.html#cb58-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb58-2"><a href="froc-empirical-examples.html#cb58-2"></a>mu &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb58-3"><a href="froc-empirical-examples.html#cb58-3"></a>lambda &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb58-4"><a href="froc-empirical-examples.html#cb58-4"></a>nu &lt;-<span class="st"> </span><span class="dv">1</span> </span>
+<span id="cb58-5"><a href="froc-empirical-examples.html#cb58-5"></a>zeta1 &lt;-<span class="st"> </span><span class="dv">-1</span></span>
+<span id="cb58-6"><a href="froc-empirical-examples.html#cb58-6"></a>K1 &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb58-7"><a href="froc-empirical-examples.html#cb58-7"></a>K2 &lt;-<span class="st"> </span><span class="dv">7</span> </span>
+<span id="cb58-8"><a href="froc-empirical-examples.html#cb58-8"></a>Lmax &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb58-9"><a href="froc-empirical-examples.html#cb58-9"></a>Lk2 &lt;-<span class="st"> </span><span class="kw">floor</span>(<span class="kw">runif</span>(K2, <span class="dv">1</span>, Lmax <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb58-10"><a href="froc-empirical-examples.html#cb58-10"></a></span>
+<span id="cb58-11"><a href="froc-empirical-examples.html#cb58-11"></a>frocDataRaw &lt;-<span class="st"> </span><span class="kw">SimulateFrocDataset</span>(</span>
+<span id="cb58-12"><a href="froc-empirical-examples.html#cb58-12"></a>  <span class="dt">mu =</span> mu, </span>
+<span id="cb58-13"><a href="froc-empirical-examples.html#cb58-13"></a>  <span class="dt">lambda =</span> lambda, </span>
+<span id="cb58-14"><a href="froc-empirical-examples.html#cb58-14"></a>  <span class="dt">nu =</span> nu, </span>
+<span id="cb58-15"><a href="froc-empirical-examples.html#cb58-15"></a>  <span class="dt">I =</span> <span class="dv">1</span>,</span>
+<span id="cb58-16"><a href="froc-empirical-examples.html#cb58-16"></a>  <span class="dt">J =</span> <span class="dv">1</span>,</span>
+<span id="cb58-17"><a href="froc-empirical-examples.html#cb58-17"></a>  <span class="dt">K1 =</span> K1, </span>
+<span id="cb58-18"><a href="froc-empirical-examples.html#cb58-18"></a>  <span class="dt">K2 =</span> K2, </span>
+<span id="cb58-19"><a href="froc-empirical-examples.html#cb58-19"></a>  <span class="dt">perCase =</span> Lk2, </span>
+<span id="cb58-20"><a href="froc-empirical-examples.html#cb58-20"></a>  <span class="dt">zeta1 =</span> zeta1,</span>
+<span id="cb58-21"><a href="froc-empirical-examples.html#cb58-21"></a>  <span class="dt">seed =</span> seed</span>
+<span id="cb58-22"><a href="froc-empirical-examples.html#cb58-22"></a>)</span>
+<span id="cb58-23"><a href="froc-empirical-examples.html#cb58-23"></a></span>
+<span id="cb58-24"><a href="froc-empirical-examples.html#cb58-24"></a>p1A &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb58-25"><a href="froc-empirical-examples.html#cb58-25"></a>  <span class="dt">dataset =</span> frocDataRaw, </span>
+<span id="cb58-26"><a href="froc-empirical-examples.html#cb58-26"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>, </span>
+<span id="cb58-27"><a href="froc-empirical-examples.html#cb58-27"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;A&quot;</span>)</span>
+<span id="cb58-28"><a href="froc-empirical-examples.html#cb58-28"></a></span>
+<span id="cb58-29"><a href="froc-empirical-examples.html#cb58-29"></a>p1B &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb58-30"><a href="froc-empirical-examples.html#cb58-30"></a>  <span class="dt">dataset =</span> frocDataRaw, </span>
+<span id="cb58-31"><a href="froc-empirical-examples.html#cb58-31"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC&quot;</span>, </span>
+<span id="cb58-32"><a href="froc-empirical-examples.html#cb58-32"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;B&quot;</span>)</span>
+<span id="cb58-33"><a href="froc-empirical-examples.html#cb58-33"></a></span>
+<span id="cb58-34"><a href="froc-empirical-examples.html#cb58-34"></a>p1C &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb58-35"><a href="froc-empirical-examples.html#cb58-35"></a>  <span class="dt">dataset =</span> frocDataRaw, </span>
+<span id="cb58-36"><a href="froc-empirical-examples.html#cb58-36"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>, </span>
+<span id="cb58-37"><a href="froc-empirical-examples.html#cb58-37"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;C&quot;</span>)</span>
+<span id="cb58-38"><a href="froc-empirical-examples.html#cb58-38"></a></span>
+<span id="cb58-39"><a href="froc-empirical-examples.html#cb58-39"></a>frocDataRaw_<span class="dv">1</span>_<span class="dv">5</span>_<span class="dv">7</span> &lt;-<span class="st"> </span>frocDataRaw <span class="co"># seed 1, K1 = 5, K2 = 7</span></span></code></pre></div>
 </div>
 <div id="explanation-of-the-code" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> Explanation of the code</h3>
@@ -536,35 +540,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Line 8 sets the maximum number of lesions per diseased case <code>Lmax</code> = 2. Line 9 randomly samples a uniform distribution to obtain the actual number of lesions per diseased case <code>Lk2</code>. The following code illustrates the process.</p>
 <div id="number-of-lesions-per-diseased-case" class="section level4">
 <h4><span class="header-section-number">6.3.2.1</span> Number of lesions per diseased case</h4>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="froc-empirical-examples.html#cb58-1"></a>Lk2</span>
-<span id="cb58-2"><a href="froc-empirical-examples.html#cb58-2"></a><span class="co">#&gt; [1] 1 1 2 2 1 2 2</span></span>
-<span id="cb58-3"><a href="froc-empirical-examples.html#cb58-3"></a><span class="kw">sum</span>(Lk2)</span>
-<span id="cb58-4"><a href="froc-empirical-examples.html#cb58-4"></a><span class="co">#&gt; [1] 11</span></span>
-<span id="cb58-5"><a href="froc-empirical-examples.html#cb58-5"></a><span class="kw">max</span>(<span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dv">1</span>, Lmax <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)))</span>
-<span id="cb58-6"><a href="froc-empirical-examples.html#cb58-6"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="froc-empirical-examples.html#cb59-1"></a>Lk2</span>
+<span id="cb59-2"><a href="froc-empirical-examples.html#cb59-2"></a><span class="co">#&gt; [1] 1 1 2 2 1 2 2</span></span>
+<span id="cb59-3"><a href="froc-empirical-examples.html#cb59-3"></a><span class="kw">sum</span>(Lk2)</span>
+<span id="cb59-4"><a href="froc-empirical-examples.html#cb59-4"></a><span class="co">#&gt; [1] 11</span></span>
+<span id="cb59-5"><a href="froc-empirical-examples.html#cb59-5"></a><span class="kw">max</span>(<span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dv">1</span>, Lmax <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)))</span>
+<span id="cb59-6"><a href="froc-empirical-examples.html#cb59-6"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
 <p>This shows that the first two diseased cases have one lesion each, the third and fourth have two lesions each, etc. The total number of lesions in the dataset is 11. The last two lines of the code snippet show that, even with a thousand simulations, the number of lesions per diseased case is indeed limited to <code>Lmax</code> = 2.</p>
 </div>
 <div id="froc-empirical-examples-str-dataset" class="section level4">
 <h4><span class="header-section-number">6.3.2.2</span> The structure of the FROC dataset</h4>
 <p>Lines 11-21 uses the function <code>SimulateFrocDataset</code> to simulate the dataset object <code>frocDataRaw</code>. Its structure is examined next:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="froc-empirical-examples.html#cb59-1"></a><span class="kw">str</span>(frocDataRaw)</span>
-<span id="cb59-2"><a href="froc-empirical-examples.html#cb59-2"></a><span class="co">#&gt; List of 3</span></span>
-<span id="cb59-3"><a href="froc-empirical-examples.html#cb59-3"></a><span class="co">#&gt;  $ ratings     :List of 3</span></span>
-<span id="cb59-4"><a href="froc-empirical-examples.html#cb59-4"></a><span class="co">#&gt;   ..$ NL   : num [1, 1, 1:12, 1:3] -Inf 0.487 0.738 0.576 -Inf ...</span></span>
-<span id="cb59-5"><a href="froc-empirical-examples.html#cb59-5"></a><span class="co">#&gt;   ..$ LL   : num [1, 1, 1:7, 1:2] -Inf -Inf -0.238 1.919 -Inf ...</span></span>
-<span id="cb59-6"><a href="froc-empirical-examples.html#cb59-6"></a><span class="co">#&gt;   ..$ LL_IL: logi NA</span></span>
-<span id="cb59-7"><a href="froc-empirical-examples.html#cb59-7"></a><span class="co">#&gt;  $ lesions     :List of 3</span></span>
-<span id="cb59-8"><a href="froc-empirical-examples.html#cb59-8"></a><span class="co">#&gt;   ..$ perCase: num [1:7] 1 1 2 2 1 2 2</span></span>
-<span id="cb59-9"><a href="froc-empirical-examples.html#cb59-9"></a><span class="co">#&gt;   ..$ IDs    : num [1:7, 1:2] 1 1 1 1 1 ...</span></span>
-<span id="cb59-10"><a href="froc-empirical-examples.html#cb59-10"></a><span class="co">#&gt;   ..$ weights: num [1:7, 1:2] 1 1 0.5 0.5 1 ...</span></span>
-<span id="cb59-11"><a href="froc-empirical-examples.html#cb59-11"></a><span class="co">#&gt;  $ descriptions:List of 7</span></span>
-<span id="cb59-12"><a href="froc-empirical-examples.html#cb59-12"></a><span class="co">#&gt;   ..$ fileName     : chr &quot;NA&quot;</span></span>
-<span id="cb59-13"><a href="froc-empirical-examples.html#cb59-13"></a><span class="co">#&gt;   ..$ type         : chr &quot;FROC&quot;</span></span>
-<span id="cb59-14"><a href="froc-empirical-examples.html#cb59-14"></a><span class="co">#&gt;   ..$ name         : logi NA</span></span>
-<span id="cb59-15"><a href="froc-empirical-examples.html#cb59-15"></a><span class="co">#&gt;   ..$ truthTableStr: logi NA</span></span>
-<span id="cb59-16"><a href="froc-empirical-examples.html#cb59-16"></a><span class="co">#&gt;   ..$ design       : chr &quot;FCTRL&quot;</span></span>
-<span id="cb59-17"><a href="froc-empirical-examples.html#cb59-17"></a><span class="co">#&gt;   ..$ modalityID   : chr &quot;1&quot;</span></span>
-<span id="cb59-18"><a href="froc-empirical-examples.html#cb59-18"></a><span class="co">#&gt;   ..$ readerID     : chr &quot;1&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="froc-empirical-examples.html#cb60-1"></a><span class="kw">str</span>(frocDataRaw)</span>
+<span id="cb60-2"><a href="froc-empirical-examples.html#cb60-2"></a><span class="co">#&gt; List of 3</span></span>
+<span id="cb60-3"><a href="froc-empirical-examples.html#cb60-3"></a><span class="co">#&gt;  $ ratings     :List of 3</span></span>
+<span id="cb60-4"><a href="froc-empirical-examples.html#cb60-4"></a><span class="co">#&gt;   ..$ NL   : num [1, 1, 1:12, 1:3] -Inf 0.487 0.738 0.576 -Inf ...</span></span>
+<span id="cb60-5"><a href="froc-empirical-examples.html#cb60-5"></a><span class="co">#&gt;   ..$ LL   : num [1, 1, 1:7, 1:2] -Inf -Inf -0.238 1.919 -Inf ...</span></span>
+<span id="cb60-6"><a href="froc-empirical-examples.html#cb60-6"></a><span class="co">#&gt;   ..$ LL_IL: logi NA</span></span>
+<span id="cb60-7"><a href="froc-empirical-examples.html#cb60-7"></a><span class="co">#&gt;  $ lesions     :List of 3</span></span>
+<span id="cb60-8"><a href="froc-empirical-examples.html#cb60-8"></a><span class="co">#&gt;   ..$ perCase: num [1:7] 1 1 2 2 1 2 2</span></span>
+<span id="cb60-9"><a href="froc-empirical-examples.html#cb60-9"></a><span class="co">#&gt;   ..$ IDs    : num [1:7, 1:2] 1 1 1 1 1 ...</span></span>
+<span id="cb60-10"><a href="froc-empirical-examples.html#cb60-10"></a><span class="co">#&gt;   ..$ weights: num [1:7, 1:2] 1 1 0.5 0.5 1 ...</span></span>
+<span id="cb60-11"><a href="froc-empirical-examples.html#cb60-11"></a><span class="co">#&gt;  $ descriptions:List of 7</span></span>
+<span id="cb60-12"><a href="froc-empirical-examples.html#cb60-12"></a><span class="co">#&gt;   ..$ fileName     : chr &quot;NA&quot;</span></span>
+<span id="cb60-13"><a href="froc-empirical-examples.html#cb60-13"></a><span class="co">#&gt;   ..$ type         : chr &quot;FROC&quot;</span></span>
+<span id="cb60-14"><a href="froc-empirical-examples.html#cb60-14"></a><span class="co">#&gt;   ..$ name         : logi NA</span></span>
+<span id="cb60-15"><a href="froc-empirical-examples.html#cb60-15"></a><span class="co">#&gt;   ..$ truthTableStr: logi NA</span></span>
+<span id="cb60-16"><a href="froc-empirical-examples.html#cb60-16"></a><span class="co">#&gt;   ..$ design       : chr &quot;FCTRL&quot;</span></span>
+<span id="cb60-17"><a href="froc-empirical-examples.html#cb60-17"></a><span class="co">#&gt;   ..$ modalityID   : chr &quot;1&quot;</span></span>
+<span id="cb60-18"><a href="froc-empirical-examples.html#cb60-18"></a><span class="co">#&gt;   ..$ readerID     : chr &quot;1&quot;</span></span></code></pre></div>
 <p>It is seen to consist of three <code>list</code> members: <code>ratings</code>, <code>lesions</code> and <code>descriptions</code>.</p>
 </div>
 <div id="the-structure-of-the-ratings-member" class="section level4">
@@ -573,20 +577,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="the-structure-of-the-nl-member" class="section level4">
 <h4><span class="header-section-number">6.3.2.4</span> The structure of the <code>NL</code> member</h4>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="froc-empirical-examples.html#cb60-1"></a>frocDataRaw<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
-<span id="cb60-2"><a href="froc-empirical-examples.html#cb60-2"></a><span class="co">#&gt;              [,1]       [,2] [,3]</span></span>
-<span id="cb60-3"><a href="froc-empirical-examples.html#cb60-3"></a><span class="co">#&gt;  [1,]        -Inf       -Inf -Inf</span></span>
-<span id="cb60-4"><a href="froc-empirical-examples.html#cb60-4"></a><span class="co">#&gt;  [2,]  0.48742905       -Inf -Inf</span></span>
-<span id="cb60-5"><a href="froc-empirical-examples.html#cb60-5"></a><span class="co">#&gt;  [3,]  0.73832471       -Inf -Inf</span></span>
-<span id="cb60-6"><a href="froc-empirical-examples.html#cb60-6"></a><span class="co">#&gt;  [4,]  0.57578135 -0.3053884 -Inf</span></span>
-<span id="cb60-7"><a href="froc-empirical-examples.html#cb60-7"></a><span class="co">#&gt;  [5,]        -Inf       -Inf -Inf</span></span>
-<span id="cb60-8"><a href="froc-empirical-examples.html#cb60-8"></a><span class="co">#&gt;  [6,]  1.51178117  0.3898432 -Inf</span></span>
-<span id="cb60-9"><a href="froc-empirical-examples.html#cb60-9"></a><span class="co">#&gt;  [7,]  1.12493092 -0.6212406 -Inf</span></span>
-<span id="cb60-10"><a href="froc-empirical-examples.html#cb60-10"></a><span class="co">#&gt;  [8,] -0.04493361       -Inf -Inf</span></span>
-<span id="cb60-11"><a href="froc-empirical-examples.html#cb60-11"></a><span class="co">#&gt;  [9,] -0.01619026       -Inf -Inf</span></span>
-<span id="cb60-12"><a href="froc-empirical-examples.html#cb60-12"></a><span class="co">#&gt; [10,]        -Inf       -Inf -Inf</span></span>
-<span id="cb60-13"><a href="froc-empirical-examples.html#cb60-13"></a><span class="co">#&gt; [11,]        -Inf       -Inf -Inf</span></span>
-<span id="cb60-14"><a href="froc-empirical-examples.html#cb60-14"></a><span class="co">#&gt; [12,]        -Inf       -Inf -Inf</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="froc-empirical-examples.html#cb61-1"></a>frocDataRaw<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
+<span id="cb61-2"><a href="froc-empirical-examples.html#cb61-2"></a><span class="co">#&gt;              [,1]       [,2] [,3]</span></span>
+<span id="cb61-3"><a href="froc-empirical-examples.html#cb61-3"></a><span class="co">#&gt;  [1,]        -Inf       -Inf -Inf</span></span>
+<span id="cb61-4"><a href="froc-empirical-examples.html#cb61-4"></a><span class="co">#&gt;  [2,]  0.48742905       -Inf -Inf</span></span>
+<span id="cb61-5"><a href="froc-empirical-examples.html#cb61-5"></a><span class="co">#&gt;  [3,]  0.73832471       -Inf -Inf</span></span>
+<span id="cb61-6"><a href="froc-empirical-examples.html#cb61-6"></a><span class="co">#&gt;  [4,]  0.57578135 -0.3053884 -Inf</span></span>
+<span id="cb61-7"><a href="froc-empirical-examples.html#cb61-7"></a><span class="co">#&gt;  [5,]        -Inf       -Inf -Inf</span></span>
+<span id="cb61-8"><a href="froc-empirical-examples.html#cb61-8"></a><span class="co">#&gt;  [6,]  1.51178117  0.3898432 -Inf</span></span>
+<span id="cb61-9"><a href="froc-empirical-examples.html#cb61-9"></a><span class="co">#&gt;  [7,]  1.12493092 -0.6212406 -Inf</span></span>
+<span id="cb61-10"><a href="froc-empirical-examples.html#cb61-10"></a><span class="co">#&gt;  [8,] -0.04493361       -Inf -Inf</span></span>
+<span id="cb61-11"><a href="froc-empirical-examples.html#cb61-11"></a><span class="co">#&gt;  [9,] -0.01619026       -Inf -Inf</span></span>
+<span id="cb61-12"><a href="froc-empirical-examples.html#cb61-12"></a><span class="co">#&gt; [10,]        -Inf       -Inf -Inf</span></span>
+<span id="cb61-13"><a href="froc-empirical-examples.html#cb61-13"></a><span class="co">#&gt; [11,]        -Inf       -Inf -Inf</span></span>
+<span id="cb61-14"><a href="froc-empirical-examples.html#cb61-14"></a><span class="co">#&gt; [12,]        -Inf       -Inf -Inf</span></span></code></pre></div>
 <ul>
 <li><p>It is seen to be an array with dimensions [1,1,1:12,1:4].</p></li>
 <li><p>Note that all listed ratings are greater than <span class="math inline">\(\zeta_1 = -1\)</span>. Unmarked locations are assigned the <span class="math inline">\(-\infty\)</span> rating.</p></li>
@@ -597,32 +601,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The third dimension is the total number of cases, <span class="math inline">\(K_1+K_2 = 12\)</span> in this example, because NLs are possible on <em>both</em> non-diseased and diseased cases.</p></li>
 <li><p>The fourth dimension is 4, as the simulator generates, over 12 cases, a maximum of 4 latent NLs per case. This can be demonstrated (see below) by running the preceding code where one temporarily sets <span class="math inline">\(\zeta_1 = -\infty\)</span>, which results in all latent marks being marked: one sees that case 11, the sixth diseased case, actually generates 4 NLs, but one of them, at position 4, has rating equal to -1.237538, which is less than <span class="math inline">\(\zeta_1 = -1\)</span>, and is consequently not marked in the original example, i.e., this location is assigned a rating of <span class="math inline">\(-\infty\)</span>.</p></li>
 </ul>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="froc-empirical-examples.html#cb61-1"></a>frocDataRaw1<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
-<span id="cb61-2"><a href="froc-empirical-examples.html#cb61-2"></a><span class="co">#&gt;              [,1]       [,2]    [,3]</span></span>
-<span id="cb61-3"><a href="froc-empirical-examples.html#cb61-3"></a><span class="co">#&gt;  [1,]        -Inf       -Inf    -Inf</span></span>
-<span id="cb61-4"><a href="froc-empirical-examples.html#cb61-4"></a><span class="co">#&gt;  [2,]  0.48742905       -Inf    -Inf</span></span>
-<span id="cb61-5"><a href="froc-empirical-examples.html#cb61-5"></a><span class="co">#&gt;  [3,]  0.73832471       -Inf    -Inf</span></span>
-<span id="cb61-6"><a href="froc-empirical-examples.html#cb61-6"></a><span class="co">#&gt;  [4,]  0.57578135 -0.3053884    -Inf</span></span>
-<span id="cb61-7"><a href="froc-empirical-examples.html#cb61-7"></a><span class="co">#&gt;  [5,]        -Inf       -Inf    -Inf</span></span>
-<span id="cb61-8"><a href="froc-empirical-examples.html#cb61-8"></a><span class="co">#&gt;  [6,]  1.51178117  0.3898432    -Inf</span></span>
-<span id="cb61-9"><a href="froc-empirical-examples.html#cb61-9"></a><span class="co">#&gt;  [7,]  1.12493092 -0.6212406 -2.2147</span></span>
-<span id="cb61-10"><a href="froc-empirical-examples.html#cb61-10"></a><span class="co">#&gt;  [8,] -0.04493361       -Inf    -Inf</span></span>
-<span id="cb61-11"><a href="froc-empirical-examples.html#cb61-11"></a><span class="co">#&gt;  [9,] -0.01619026       -Inf    -Inf</span></span>
-<span id="cb61-12"><a href="froc-empirical-examples.html#cb61-12"></a><span class="co">#&gt; [10,]        -Inf       -Inf    -Inf</span></span>
-<span id="cb61-13"><a href="froc-empirical-examples.html#cb61-13"></a><span class="co">#&gt; [11,]        -Inf       -Inf    -Inf</span></span>
-<span id="cb61-14"><a href="froc-empirical-examples.html#cb61-14"></a><span class="co">#&gt; [12,]        -Inf       -Inf    -Inf</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="froc-empirical-examples.html#cb62-1"></a>frocDataRaw1<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
+<span id="cb62-2"><a href="froc-empirical-examples.html#cb62-2"></a><span class="co">#&gt;              [,1]       [,2]    [,3]</span></span>
+<span id="cb62-3"><a href="froc-empirical-examples.html#cb62-3"></a><span class="co">#&gt;  [1,]        -Inf       -Inf    -Inf</span></span>
+<span id="cb62-4"><a href="froc-empirical-examples.html#cb62-4"></a><span class="co">#&gt;  [2,]  0.48742905       -Inf    -Inf</span></span>
+<span id="cb62-5"><a href="froc-empirical-examples.html#cb62-5"></a><span class="co">#&gt;  [3,]  0.73832471       -Inf    -Inf</span></span>
+<span id="cb62-6"><a href="froc-empirical-examples.html#cb62-6"></a><span class="co">#&gt;  [4,]  0.57578135 -0.3053884    -Inf</span></span>
+<span id="cb62-7"><a href="froc-empirical-examples.html#cb62-7"></a><span class="co">#&gt;  [5,]        -Inf       -Inf    -Inf</span></span>
+<span id="cb62-8"><a href="froc-empirical-examples.html#cb62-8"></a><span class="co">#&gt;  [6,]  1.51178117  0.3898432    -Inf</span></span>
+<span id="cb62-9"><a href="froc-empirical-examples.html#cb62-9"></a><span class="co">#&gt;  [7,]  1.12493092 -0.6212406 -2.2147</span></span>
+<span id="cb62-10"><a href="froc-empirical-examples.html#cb62-10"></a><span class="co">#&gt;  [8,] -0.04493361       -Inf    -Inf</span></span>
+<span id="cb62-11"><a href="froc-empirical-examples.html#cb62-11"></a><span class="co">#&gt;  [9,] -0.01619026       -Inf    -Inf</span></span>
+<span id="cb62-12"><a href="froc-empirical-examples.html#cb62-12"></a><span class="co">#&gt; [10,]        -Inf       -Inf    -Inf</span></span>
+<span id="cb62-13"><a href="froc-empirical-examples.html#cb62-13"></a><span class="co">#&gt; [11,]        -Inf       -Inf    -Inf</span></span>
+<span id="cb62-14"><a href="froc-empirical-examples.html#cb62-14"></a><span class="co">#&gt; [12,]        -Inf       -Inf    -Inf</span></span></code></pre></div>
 </div>
 <div id="the-structure-of-the-ll-member" class="section level4">
 <h4><span class="header-section-number">6.3.2.5</span> The structure of the <code>LL</code> member</h4>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="froc-empirical-examples.html#cb62-1"></a>frocDataRaw<span class="op">$</span>ratings<span class="op">$</span>LL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
-<span id="cb62-2"><a href="froc-empirical-examples.html#cb62-2"></a><span class="co">#&gt;            [,1]      [,2]</span></span>
-<span id="cb62-3"><a href="froc-empirical-examples.html#cb62-3"></a><span class="co">#&gt; [1,]       -Inf      -Inf</span></span>
-<span id="cb62-4"><a href="froc-empirical-examples.html#cb62-4"></a><span class="co">#&gt; [2,]       -Inf      -Inf</span></span>
-<span id="cb62-5"><a href="froc-empirical-examples.html#cb62-5"></a><span class="co">#&gt; [3,] -0.2375384      -Inf</span></span>
-<span id="cb62-6"><a href="froc-empirical-examples.html#cb62-6"></a><span class="co">#&gt; [4,]  1.9189774      -Inf</span></span>
-<span id="cb62-7"><a href="froc-empirical-examples.html#cb62-7"></a><span class="co">#&gt; [5,]       -Inf      -Inf</span></span>
-<span id="cb62-8"><a href="froc-empirical-examples.html#cb62-8"></a><span class="co">#&gt; [6,]  1.0745650      -Inf</span></span>
-<span id="cb62-9"><a href="froc-empirical-examples.html#cb62-9"></a><span class="co">#&gt; [7,]  1.5036080 0.9428932</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="froc-empirical-examples.html#cb63-1"></a>frocDataRaw<span class="op">$</span>ratings<span class="op">$</span>LL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
+<span id="cb63-2"><a href="froc-empirical-examples.html#cb63-2"></a><span class="co">#&gt;            [,1]      [,2]</span></span>
+<span id="cb63-3"><a href="froc-empirical-examples.html#cb63-3"></a><span class="co">#&gt; [1,]       -Inf      -Inf</span></span>
+<span id="cb63-4"><a href="froc-empirical-examples.html#cb63-4"></a><span class="co">#&gt; [2,]       -Inf      -Inf</span></span>
+<span id="cb63-5"><a href="froc-empirical-examples.html#cb63-5"></a><span class="co">#&gt; [3,] -0.2375384      -Inf</span></span>
+<span id="cb63-6"><a href="froc-empirical-examples.html#cb63-6"></a><span class="co">#&gt; [4,]  1.9189774      -Inf</span></span>
+<span id="cb63-7"><a href="froc-empirical-examples.html#cb63-7"></a><span class="co">#&gt; [5,]       -Inf      -Inf</span></span>
+<span id="cb63-8"><a href="froc-empirical-examples.html#cb63-8"></a><span class="co">#&gt; [6,]  1.0745650      -Inf</span></span>
+<span id="cb63-9"><a href="froc-empirical-examples.html#cb63-9"></a><span class="co">#&gt; [7,]  1.5036080 0.9428932</span></span></code></pre></div>
 <ul>
 <li><p>It is seen to be an array with dimensions <code>[1,1,1:7,1:2]</code>.</p></li>
 <li><p>The first dimension corresponds to the number of modalities, one in this example, the second dimension corresponds to the number of readers, also one in this example.</p></li>
@@ -634,15 +638,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Case 7, the seventh diseased case, has two <code>LL</code> marks rated 1.503608, 0.9428932 and zero locations with <span class="math inline">\(-\infty\)</span>.</p></li>
 <li><p>The following output shows that setting <span class="math inline">\(\zeta_1 = -\infty\)</span> does not reveal any more latent LLs.</p></li>
 </ul>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="froc-empirical-examples.html#cb63-1"></a>frocDataRaw1<span class="op">$</span>ratings<span class="op">$</span>LL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
-<span id="cb63-2"><a href="froc-empirical-examples.html#cb63-2"></a><span class="co">#&gt;            [,1]      [,2]</span></span>
-<span id="cb63-3"><a href="froc-empirical-examples.html#cb63-3"></a><span class="co">#&gt; [1,]       -Inf      -Inf</span></span>
-<span id="cb63-4"><a href="froc-empirical-examples.html#cb63-4"></a><span class="co">#&gt; [2,]       -Inf      -Inf</span></span>
-<span id="cb63-5"><a href="froc-empirical-examples.html#cb63-5"></a><span class="co">#&gt; [3,] -0.2375384      -Inf</span></span>
-<span id="cb63-6"><a href="froc-empirical-examples.html#cb63-6"></a><span class="co">#&gt; [4,]  1.9189774      -Inf</span></span>
-<span id="cb63-7"><a href="froc-empirical-examples.html#cb63-7"></a><span class="co">#&gt; [5,]       -Inf      -Inf</span></span>
-<span id="cb63-8"><a href="froc-empirical-examples.html#cb63-8"></a><span class="co">#&gt; [6,]  1.0745650      -Inf</span></span>
-<span id="cb63-9"><a href="froc-empirical-examples.html#cb63-9"></a><span class="co">#&gt; [7,]  1.5036080 0.9428932</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="froc-empirical-examples.html#cb64-1"></a>frocDataRaw1<span class="op">$</span>ratings<span class="op">$</span>LL[<span class="dv">1</span>,<span class="dv">1</span>,,]</span>
+<span id="cb64-2"><a href="froc-empirical-examples.html#cb64-2"></a><span class="co">#&gt;            [,1]      [,2]</span></span>
+<span id="cb64-3"><a href="froc-empirical-examples.html#cb64-3"></a><span class="co">#&gt; [1,]       -Inf      -Inf</span></span>
+<span id="cb64-4"><a href="froc-empirical-examples.html#cb64-4"></a><span class="co">#&gt; [2,]       -Inf      -Inf</span></span>
+<span id="cb64-5"><a href="froc-empirical-examples.html#cb64-5"></a><span class="co">#&gt; [3,] -0.2375384      -Inf</span></span>
+<span id="cb64-6"><a href="froc-empirical-examples.html#cb64-6"></a><span class="co">#&gt; [4,]  1.9189774      -Inf</span></span>
+<span id="cb64-7"><a href="froc-empirical-examples.html#cb64-7"></a><span class="co">#&gt; [5,]       -Inf      -Inf</span></span>
+<span id="cb64-8"><a href="froc-empirical-examples.html#cb64-8"></a><span class="co">#&gt; [6,]  1.0745650      -Inf</span></span>
+<span id="cb64-9"><a href="froc-empirical-examples.html#cb64-9"></a><span class="co">#&gt; [7,]  1.5036080 0.9428932</span></span></code></pre></div>
 <ul>
 <li><p>Lines 23 - 25 use the <code>PlotEmpiricalOperatingCharacteristics</code> function to calculate the FROC plot <code>ggplot</code> object, which is saved to <code>p1A</code>. Note the argument <code>opChType = "FROC"</code>, for the desired FROC plot.</p></li>
 <li><p>Lines 28 - 31 use the <code>PlotEmpiricalOperatingCharacteristics</code> function to calculate the AFROC plot object, which is saved to <code>p1B</code>. Note the argument <code>opChType = "AFROC"</code>.</p></li>
@@ -716,46 +720,46 @@ FIGURE 6.3: Plot A is the near guessing observer’s FROC and plot B is the corr
 <p>In the preceding example, continuous ratings data was available and data binning was not employed. Shown next is the code for generating the plots when the data is binned.</p>
 <div id="binned-plots-code1" class="section level3">
 <h3><span class="header-section-number">6.6.1</span> Code for binned plots</h3>
-<div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb64-1"><a href="froc-empirical-examples.html#cb64-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb64-2"><a href="froc-empirical-examples.html#cb64-2"></a>mu &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb64-3"><a href="froc-empirical-examples.html#cb64-3"></a>zeta1 &lt;-<span class="st"> </span><span class="dv">-1</span></span>
-<span id="cb64-4"><a href="froc-empirical-examples.html#cb64-4"></a>K1 &lt;-<span class="st"> </span><span class="dv">5</span></span>
-<span id="cb64-5"><a href="froc-empirical-examples.html#cb64-5"></a>K2 &lt;-<span class="st"> </span><span class="dv">7</span> </span>
-<span id="cb64-6"><a href="froc-empirical-examples.html#cb64-6"></a>Lmax &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb64-7"><a href="froc-empirical-examples.html#cb64-7"></a>Lk2 &lt;-<span class="st"> </span><span class="kw">floor</span>(<span class="kw">runif</span>(K2, <span class="dv">1</span>, Lmax <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</span>
-<span id="cb64-8"><a href="froc-empirical-examples.html#cb64-8"></a></span>
-<span id="cb64-9"><a href="froc-empirical-examples.html#cb64-9"></a>frocDataRaw &lt;-<span class="st"> </span><span class="kw">SimulateFrocDataset</span>(</span>
-<span id="cb64-10"><a href="froc-empirical-examples.html#cb64-10"></a>  <span class="dt">mu =</span> mu, </span>
-<span id="cb64-11"><a href="froc-empirical-examples.html#cb64-11"></a>  <span class="dt">lambda =</span> lambda, </span>
-<span id="cb64-12"><a href="froc-empirical-examples.html#cb64-12"></a>  <span class="dt">nu =</span> nu, </span>
-<span id="cb64-13"><a href="froc-empirical-examples.html#cb64-13"></a>  <span class="dt">I =</span> <span class="dv">1</span>,</span>
-<span id="cb64-14"><a href="froc-empirical-examples.html#cb64-14"></a>  <span class="dt">J =</span> <span class="dv">1</span>,</span>
-<span id="cb64-15"><a href="froc-empirical-examples.html#cb64-15"></a>  <span class="dt">K1 =</span> K1, </span>
-<span id="cb64-16"><a href="froc-empirical-examples.html#cb64-16"></a>  <span class="dt">K2 =</span> K2, </span>
-<span id="cb64-17"><a href="froc-empirical-examples.html#cb64-17"></a>  <span class="dt">perCase =</span> Lk2, </span>
-<span id="cb64-18"><a href="froc-empirical-examples.html#cb64-18"></a>  <span class="dt">zeta1 =</span> zeta1,</span>
-<span id="cb64-19"><a href="froc-empirical-examples.html#cb64-19"></a>  <span class="dt">seed =</span> seed</span>
-<span id="cb64-20"><a href="froc-empirical-examples.html#cb64-20"></a>)</span>
-<span id="cb64-21"><a href="froc-empirical-examples.html#cb64-21"></a></span>
-<span id="cb64-22"><a href="froc-empirical-examples.html#cb64-22"></a>frocDataBinned &lt;-<span class="st"> </span><span class="kw">DfBinDataset</span>(</span>
-<span id="cb64-23"><a href="froc-empirical-examples.html#cb64-23"></a>  frocDataRaw,</span>
-<span id="cb64-24"><a href="froc-empirical-examples.html#cb64-24"></a>  <span class="dt">desiredNumBins =</span> <span class="dv">5</span>,</span>
-<span id="cb64-25"><a href="froc-empirical-examples.html#cb64-25"></a>  <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>)</span>
-<span id="cb64-26"><a href="froc-empirical-examples.html#cb64-26"></a></span>
-<span id="cb64-27"><a href="froc-empirical-examples.html#cb64-27"></a>p4A &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb64-28"><a href="froc-empirical-examples.html#cb64-28"></a>  <span class="dt">dataset =</span> frocDataBinned, </span>
-<span id="cb64-29"><a href="froc-empirical-examples.html#cb64-29"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>, </span>
-<span id="cb64-30"><a href="froc-empirical-examples.html#cb64-30"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;A&quot;</span>)</span>
-<span id="cb64-31"><a href="froc-empirical-examples.html#cb64-31"></a></span>
-<span id="cb64-32"><a href="froc-empirical-examples.html#cb64-32"></a>p4B &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb64-33"><a href="froc-empirical-examples.html#cb64-33"></a>  <span class="dt">dataset =</span> frocDataBinned, </span>
-<span id="cb64-34"><a href="froc-empirical-examples.html#cb64-34"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC&quot;</span>, </span>
-<span id="cb64-35"><a href="froc-empirical-examples.html#cb64-35"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;B&quot;</span>)</span>
-<span id="cb64-36"><a href="froc-empirical-examples.html#cb64-36"></a></span>
-<span id="cb64-37"><a href="froc-empirical-examples.html#cb64-37"></a>p4C &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb64-38"><a href="froc-empirical-examples.html#cb64-38"></a>  <span class="dt">dataset =</span> frocDataBinned, </span>
-<span id="cb64-39"><a href="froc-empirical-examples.html#cb64-39"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>, </span>
-<span id="cb64-40"><a href="froc-empirical-examples.html#cb64-40"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;C&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb65-1"><a href="froc-empirical-examples.html#cb65-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb65-2"><a href="froc-empirical-examples.html#cb65-2"></a>mu &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb65-3"><a href="froc-empirical-examples.html#cb65-3"></a>zeta1 &lt;-<span class="st"> </span><span class="dv">-1</span></span>
+<span id="cb65-4"><a href="froc-empirical-examples.html#cb65-4"></a>K1 &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb65-5"><a href="froc-empirical-examples.html#cb65-5"></a>K2 &lt;-<span class="st"> </span><span class="dv">7</span> </span>
+<span id="cb65-6"><a href="froc-empirical-examples.html#cb65-6"></a>Lmax &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb65-7"><a href="froc-empirical-examples.html#cb65-7"></a>Lk2 &lt;-<span class="st"> </span><span class="kw">floor</span>(<span class="kw">runif</span>(K2, <span class="dv">1</span>, Lmax <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb65-8"><a href="froc-empirical-examples.html#cb65-8"></a></span>
+<span id="cb65-9"><a href="froc-empirical-examples.html#cb65-9"></a>frocDataRaw &lt;-<span class="st"> </span><span class="kw">SimulateFrocDataset</span>(</span>
+<span id="cb65-10"><a href="froc-empirical-examples.html#cb65-10"></a>  <span class="dt">mu =</span> mu, </span>
+<span id="cb65-11"><a href="froc-empirical-examples.html#cb65-11"></a>  <span class="dt">lambda =</span> lambda, </span>
+<span id="cb65-12"><a href="froc-empirical-examples.html#cb65-12"></a>  <span class="dt">nu =</span> nu, </span>
+<span id="cb65-13"><a href="froc-empirical-examples.html#cb65-13"></a>  <span class="dt">I =</span> <span class="dv">1</span>,</span>
+<span id="cb65-14"><a href="froc-empirical-examples.html#cb65-14"></a>  <span class="dt">J =</span> <span class="dv">1</span>,</span>
+<span id="cb65-15"><a href="froc-empirical-examples.html#cb65-15"></a>  <span class="dt">K1 =</span> K1, </span>
+<span id="cb65-16"><a href="froc-empirical-examples.html#cb65-16"></a>  <span class="dt">K2 =</span> K2, </span>
+<span id="cb65-17"><a href="froc-empirical-examples.html#cb65-17"></a>  <span class="dt">perCase =</span> Lk2, </span>
+<span id="cb65-18"><a href="froc-empirical-examples.html#cb65-18"></a>  <span class="dt">zeta1 =</span> zeta1,</span>
+<span id="cb65-19"><a href="froc-empirical-examples.html#cb65-19"></a>  <span class="dt">seed =</span> seed</span>
+<span id="cb65-20"><a href="froc-empirical-examples.html#cb65-20"></a>)</span>
+<span id="cb65-21"><a href="froc-empirical-examples.html#cb65-21"></a></span>
+<span id="cb65-22"><a href="froc-empirical-examples.html#cb65-22"></a>frocDataBinned &lt;-<span class="st"> </span><span class="kw">DfBinDataset</span>(</span>
+<span id="cb65-23"><a href="froc-empirical-examples.html#cb65-23"></a>  frocDataRaw,</span>
+<span id="cb65-24"><a href="froc-empirical-examples.html#cb65-24"></a>  <span class="dt">desiredNumBins =</span> <span class="dv">5</span>,</span>
+<span id="cb65-25"><a href="froc-empirical-examples.html#cb65-25"></a>  <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>)</span>
+<span id="cb65-26"><a href="froc-empirical-examples.html#cb65-26"></a></span>
+<span id="cb65-27"><a href="froc-empirical-examples.html#cb65-27"></a>p4A &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb65-28"><a href="froc-empirical-examples.html#cb65-28"></a>  <span class="dt">dataset =</span> frocDataBinned, </span>
+<span id="cb65-29"><a href="froc-empirical-examples.html#cb65-29"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>, </span>
+<span id="cb65-30"><a href="froc-empirical-examples.html#cb65-30"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;A&quot;</span>)</span>
+<span id="cb65-31"><a href="froc-empirical-examples.html#cb65-31"></a></span>
+<span id="cb65-32"><a href="froc-empirical-examples.html#cb65-32"></a>p4B &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb65-33"><a href="froc-empirical-examples.html#cb65-33"></a>  <span class="dt">dataset =</span> frocDataBinned, </span>
+<span id="cb65-34"><a href="froc-empirical-examples.html#cb65-34"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC&quot;</span>, </span>
+<span id="cb65-35"><a href="froc-empirical-examples.html#cb65-35"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;B&quot;</span>)</span>
+<span id="cb65-36"><a href="froc-empirical-examples.html#cb65-36"></a></span>
+<span id="cb65-37"><a href="froc-empirical-examples.html#cb65-37"></a>p4C &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb65-38"><a href="froc-empirical-examples.html#cb65-38"></a>  <span class="dt">dataset =</span> frocDataBinned, </span>
+<span id="cb65-39"><a href="froc-empirical-examples.html#cb65-39"></a>  <span class="dt">trts=</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>, </span>
+<span id="cb65-40"><a href="froc-empirical-examples.html#cb65-40"></a>  <span class="dt">legend.position =</span> <span class="st">&quot;NULL&quot;</span>)<span class="op">$</span>Plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;C&quot;</span>)</span></code></pre></div>
 <p>This is similar to the code for the raw plots except that at lines 21-24 we have used the function <code>DfBinDataset</code> to bin the raw data <code>frocDataRaw</code> and the binned data is saved to <code>frocDataBinned</code>, which is used in the subsequent plotting routines. Note the arguments <code>desiredNumBins</code> and <code>opChType</code>. The binning function needs to know the desired number of bins (set to 5 in this example) and the operating characteristic that the binning is aimed at (here set to “FROC”).</p>
 <div class="figure"><span style="display:block;" id="fig:froc-afroc-roc-binned-seed1"></span>
 <img src="13b-froc-empirical2_files/figure-html/froc-afroc-roc-binned-seed1-1.png" alt="Binned FROC, AFROC and ROC plots with seed = 1: Plots A, B, C are for $K_1 = 5$ and $K_2 = 7$ cases while plots D, E, F are for $K_1 = 50$ and $K_2 = 70$ cases" width="672" />
@@ -777,14 +781,14 @@ FIGURE 6.5: Binned FROC, AFROC and ROC plots with seed = 2: Plots A, B, C are fo
 </div>
 <div id="froc-empirical-examples-str-binned-data" class="section level2">
 <h2><span class="header-section-number">6.7</span> Structure of the binned data</h2>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="froc-empirical-examples.html#cb65-1"></a><span class="kw">str</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>NL)</span>
-<span id="cb65-2"><a href="froc-empirical-examples.html#cb65-2"></a><span class="co">#&gt;  num [1, 1, 1:120, 1:4] -Inf 4 2 3 -Inf ...</span></span>
-<span id="cb65-3"><a href="froc-empirical-examples.html#cb65-3"></a><span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>NL)</span>
-<span id="cb65-4"><a href="froc-empirical-examples.html#cb65-4"></a><span class="co">#&gt; </span></span>
-<span id="cb65-5"><a href="froc-empirical-examples.html#cb65-5"></a><span class="co">#&gt; -Inf    1    2    3    4 </span></span>
-<span id="cb65-6"><a href="froc-empirical-examples.html#cb65-6"></a><span class="co">#&gt;  376   35   30   23   16</span></span>
-<span id="cb65-7"><a href="froc-empirical-examples.html#cb65-7"></a><span class="kw">sum</span>(<span class="kw">as.numeric</span>(<span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>NL)))</span>
-<span id="cb65-8"><a href="froc-empirical-examples.html#cb65-8"></a><span class="co">#&gt; [1] 480</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="froc-empirical-examples.html#cb66-1"></a><span class="kw">str</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>NL)</span>
+<span id="cb66-2"><a href="froc-empirical-examples.html#cb66-2"></a><span class="co">#&gt;  num [1, 1, 1:120, 1:4] -Inf 4 2 3 -Inf ...</span></span>
+<span id="cb66-3"><a href="froc-empirical-examples.html#cb66-3"></a><span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>NL)</span>
+<span id="cb66-4"><a href="froc-empirical-examples.html#cb66-4"></a><span class="co">#&gt; </span></span>
+<span id="cb66-5"><a href="froc-empirical-examples.html#cb66-5"></a><span class="co">#&gt; -Inf    1    2    3    4 </span></span>
+<span id="cb66-6"><a href="froc-empirical-examples.html#cb66-6"></a><span class="co">#&gt;  376   35   30   23   16</span></span>
+<span id="cb66-7"><a href="froc-empirical-examples.html#cb66-7"></a><span class="kw">sum</span>(<span class="kw">as.numeric</span>(<span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>NL)))</span>
+<span id="cb66-8"><a href="froc-empirical-examples.html#cb66-8"></a><span class="co">#&gt; [1] 480</span></span></code></pre></div>
 <ul>
 <li>The <code>table()</code> function converts an array into a counts table.</li>
 <li>There are 120 x 4 = 480 elements in the <code>NL</code> array to be “tabled”.</li>
@@ -793,18 +797,18 @@ FIGURE 6.5: Binned FROC, AFROC and ROC plots with seed = 2: Plots A, B, C are fo
 </li>
 <li>Because of the unknown number of negative-infinity paddings, one does not know how many of the 378 <em>observed</em> negative-infinities are <em>actually</em> latent NLs. The <em>actual</em> number of latent NLs could be considerably smaller - and the number of <em>marked</em> NLs even smaller - as this is determined by those latent NLs whose z-samples <span class="math inline">\(\geq \zeta_1\)</span>. Notice that in the special case <span class="math inline">\(\zeta_1 = -\infty\)</span> the observer marks all latent NL, in which case the observed count equal the actual count.</li>
 </ul>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="froc-empirical-examples.html#cb66-1"></a><span class="kw">str</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>LL)</span>
-<span id="cb66-2"><a href="froc-empirical-examples.html#cb66-2"></a><span class="co">#&gt;  num [1, 1, 1:70, 1:2] 3 4 4 4 3 ...</span></span>
-<span id="cb66-3"><a href="froc-empirical-examples.html#cb66-3"></a><span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>LL)</span>
-<span id="cb66-4"><a href="froc-empirical-examples.html#cb66-4"></a><span class="co">#&gt; </span></span>
-<span id="cb66-5"><a href="froc-empirical-examples.html#cb66-5"></a><span class="co">#&gt; -Inf    1    2    3    4    5 </span></span>
-<span id="cb66-6"><a href="froc-empirical-examples.html#cb66-6"></a><span class="co">#&gt;   79    5   10   17   24    5</span></span>
-<span id="cb66-7"><a href="froc-empirical-examples.html#cb66-7"></a><span class="kw">sum</span>(<span class="kw">as.numeric</span>(<span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>LL)))</span>
-<span id="cb66-8"><a href="froc-empirical-examples.html#cb66-8"></a><span class="co">#&gt; [1] 140</span></span>
-<span id="cb66-9"><a href="froc-empirical-examples.html#cb66-9"></a><span class="kw">sum</span>(Lk2Seed1)</span>
-<span id="cb66-10"><a href="froc-empirical-examples.html#cb66-10"></a><span class="co">#&gt; [1] 104</span></span>
-<span id="cb66-11"><a href="froc-empirical-examples.html#cb66-11"></a><span class="kw">sum</span>(Lk2Seed1) <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">as.vector</span>(<span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>LL))[<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>])</span>
-<span id="cb66-12"><a href="froc-empirical-examples.html#cb66-12"></a><span class="co">#&gt; [1] 43</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="froc-empirical-examples.html#cb67-1"></a><span class="kw">str</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>LL)</span>
+<span id="cb67-2"><a href="froc-empirical-examples.html#cb67-2"></a><span class="co">#&gt;  num [1, 1, 1:70, 1:2] 3 4 4 4 3 ...</span></span>
+<span id="cb67-3"><a href="froc-empirical-examples.html#cb67-3"></a><span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>LL)</span>
+<span id="cb67-4"><a href="froc-empirical-examples.html#cb67-4"></a><span class="co">#&gt; </span></span>
+<span id="cb67-5"><a href="froc-empirical-examples.html#cb67-5"></a><span class="co">#&gt; -Inf    1    2    3    4    5 </span></span>
+<span id="cb67-6"><a href="froc-empirical-examples.html#cb67-6"></a><span class="co">#&gt;   79    5   10   17   24    5</span></span>
+<span id="cb67-7"><a href="froc-empirical-examples.html#cb67-7"></a><span class="kw">sum</span>(<span class="kw">as.numeric</span>(<span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>LL)))</span>
+<span id="cb67-8"><a href="froc-empirical-examples.html#cb67-8"></a><span class="co">#&gt; [1] 140</span></span>
+<span id="cb67-9"><a href="froc-empirical-examples.html#cb67-9"></a><span class="kw">sum</span>(Lk2Seed1)</span>
+<span id="cb67-10"><a href="froc-empirical-examples.html#cb67-10"></a><span class="co">#&gt; [1] 104</span></span>
+<span id="cb67-11"><a href="froc-empirical-examples.html#cb67-11"></a><span class="kw">sum</span>(Lk2Seed1) <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">as.vector</span>(<span class="kw">table</span>(frocDataBinnedSeed1<span class="op">$</span>ratings<span class="op">$</span>LL))[<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>])</span>
+<span id="cb67-12"><a href="froc-empirical-examples.html#cb67-12"></a><span class="co">#&gt; [1] 43</span></span></code></pre></div>
 <ul>
 <li>The <code>LL</code> array contains 70 x 2 = 140 values to be “tabled”.</li>
 <li>From the output one sees that there are 78 entries in the <code>LL</code> array that equal <span class="math inline">\(-\infty\)</span>, 10 entries that equal 1, 5 entries that equal 2, 8 entries that equal 3, 35 entries that equal 4, and 4 entries that equal 5. These sum to 140, the product of the lengths of the third and fourth dimensions of the <code>LL</code> array.</li>

@@ -149,7 +149,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>0.0.1</b> formatting</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.0.2</b> tables</a></li>
+<li class="chapter" data-level="0.0.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>0.0.3</b> tinytex problems</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
 <li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
@@ -598,11 +602,11 @@ FPF(zeta, lambda);   </code></pre>
 \tag{5.10}
 \end{equation}\]</span></p>
 <p>The software implementation follows:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="rsm-pred.html#cb47-1"></a><span class="co"># lambdaP is the physical lambda&#39; parameter</span></span>
-<span id="cb47-2"><a href="rsm-pred.html#cb47-2"></a>FPF &lt;-<span class="st"> </span><span class="cf">function</span> (zeta, lambdaP) {</span>
-<span id="cb47-3"><a href="rsm-pred.html#cb47-3"></a>  x =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambdaP <span class="op">*</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span>zeta))</span>
-<span id="cb47-4"><a href="rsm-pred.html#cb47-4"></a>  <span class="kw">return</span>(x)</span>
-<span id="cb47-5"><a href="rsm-pred.html#cb47-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="rsm-pred.html#cb48-1"></a><span class="co"># lambdaP is the physical lambda&#39; parameter</span></span>
+<span id="cb48-2"><a href="rsm-pred.html#cb48-2"></a>FPF &lt;-<span class="st"> </span><span class="cf">function</span> (zeta, lambdaP) {</span>
+<span id="cb48-3"><a href="rsm-pred.html#cb48-3"></a>  x =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambdaP <span class="op">*</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span>zeta))</span>
+<span id="cb48-4"><a href="rsm-pred.html#cb48-4"></a>  <span class="kw">return</span>(x)</span>
+<span id="cb48-5"><a href="rsm-pred.html#cb48-5"></a>}</span></code></pre></div>
 <p>Because <span class="math inline">\(\Phi\)</span> ranges from 0 to 1, <span class="math inline">\(\text{FPF}\left (\zeta , \lambda&#39;\right )\)</span> ranges from 0 to <span class="math inline">\(\text{exp} \left ( -\lambda&#39; \right )\)</span>.</p>
 </div>
 <div id="rsm-pred-roc-curve-tpf" class="section level3">
@@ -647,17 +651,17 @@ FPF(zeta, lambda);   </code></pre>
 \end{equation}\]</span></p>
 <p>The expression for FPF, Eqn. <a href="rsm-pred.html#eq:rsm-pred-fpf">(5.10)</a>, is unaffected.</p>
 <p>The software implementation follows:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="rsm-pred.html#cb48-1"></a><span class="co"># lambdaP is the physical lambda&#39; parameter</span></span>
-<span id="cb48-2"><a href="rsm-pred.html#cb48-2"></a><span class="co"># nuP is the physical nu&#39; parameter</span></span>
-<span id="cb48-3"><a href="rsm-pred.html#cb48-3"></a><span class="co"># lesDistr is the lesion distributin vector f_L</span></span>
-<span id="cb48-4"><a href="rsm-pred.html#cb48-4"></a>TPF &lt;-<span class="st"> </span><span class="cf">function</span> (zeta, mu, lambdaP, nuP, lesDistr){</span>
-<span id="cb48-5"><a href="rsm-pred.html#cb48-5"></a>  Lmax &lt;-<span class="st"> </span><span class="kw">length</span>(lesDistr)</span>
-<span id="cb48-6"><a href="rsm-pred.html#cb48-6"></a>  x &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb48-7"><a href="rsm-pred.html#cb48-7"></a>  <span class="cf">for</span> (L <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>Lmax ) {</span>
-<span id="cb48-8"><a href="rsm-pred.html#cb48-8"></a>    x &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambdaP <span class="op">*</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span>zeta)) <span class="op">*</span><span class="st"> </span>lesDistr[L] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>nuP <span class="op">*</span><span class="st"> </span><span class="kw">pnorm</span>(mu <span class="op">-</span><span class="st"> </span>zeta))<span class="op">^</span>L</span>
-<span id="cb48-9"><a href="rsm-pred.html#cb48-9"></a>  }</span>
-<span id="cb48-10"><a href="rsm-pred.html#cb48-10"></a>  <span class="kw">return</span>(x)</span>
-<span id="cb48-11"><a href="rsm-pred.html#cb48-11"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="rsm-pred.html#cb49-1"></a><span class="co"># lambdaP is the physical lambda&#39; parameter</span></span>
+<span id="cb49-2"><a href="rsm-pred.html#cb49-2"></a><span class="co"># nuP is the physical nu&#39; parameter</span></span>
+<span id="cb49-3"><a href="rsm-pred.html#cb49-3"></a><span class="co"># lesDistr is the lesion distributin vector f_L</span></span>
+<span id="cb49-4"><a href="rsm-pred.html#cb49-4"></a>TPF &lt;-<span class="st"> </span><span class="cf">function</span> (zeta, mu, lambdaP, nuP, lesDistr){</span>
+<span id="cb49-5"><a href="rsm-pred.html#cb49-5"></a>  Lmax &lt;-<span class="st"> </span><span class="kw">length</span>(lesDistr)</span>
+<span id="cb49-6"><a href="rsm-pred.html#cb49-6"></a>  x &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb49-7"><a href="rsm-pred.html#cb49-7"></a>  <span class="cf">for</span> (L <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>Lmax ) {</span>
+<span id="cb49-8"><a href="rsm-pred.html#cb49-8"></a>    x &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambdaP <span class="op">*</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span>zeta)) <span class="op">*</span><span class="st"> </span>lesDistr[L] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>nuP <span class="op">*</span><span class="st"> </span><span class="kw">pnorm</span>(mu <span class="op">-</span><span class="st"> </span>zeta))<span class="op">^</span>L</span>
+<span id="cb49-9"><a href="rsm-pred.html#cb49-9"></a>  }</span>
+<span id="cb49-10"><a href="rsm-pred.html#cb49-10"></a>  <span class="kw">return</span>(x)</span>
+<span id="cb49-11"><a href="rsm-pred.html#cb49-11"></a>}</span></code></pre></div>
 </div>
 </div>
 <div id="rsm-pred-roc-curve-proper" class="section level2">
@@ -737,16 +741,16 @@ FIGURE 5.1: Help page for <code>RJafroc</code> function <code>UtilAnalyticalAucs
 </div>
 <p>The arguments to <code>UtilAnalyticalAucsRSM()</code> are the intrinsic RSM parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\zeta_1\)</span>. The default value of <span class="math inline">\(\zeta_1\)</span> is <span class="math inline">\(\zeta_1 = -\infty\)</span>. The remaining arguments <code>lesDistr</code> and <code>relWeights</code> are not RSM parameters per se, rather they specify the lesion-richness of the diseased cases and the relative lesion weights (not needed for computing ROC AUC). The dimensions of <code>lesDistr</code> and <code>relWeights</code> are each equal to the maximum number of lesions per case <span class="math inline">\(L_{max}\)</span>. In the following code <span class="math inline">\(L_{max} = 3\)</span> and <code>lesDistr &lt;- c(0.5, 0.3, 0.2)</code>, meaning 50 percent of diseased cases have one lesion per case, 30 percent have two lesions and 20 percent have three lesions.</p>
 <p>The function returns a list containing the AUCs under the ROC and other operating characteristics.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="rsm-pred.html#cb49-1"></a>mu &lt;-<span class="st"> </span><span class="dv">1</span>; lambda &lt;-<span class="st"> </span><span class="dv">1</span>; nu &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb49-2"><a href="rsm-pred.html#cb49-2"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>) <span class="co"># implies L_max = 3</span></span>
-<span id="cb49-3"><a href="rsm-pred.html#cb49-3"></a>aucs &lt;-<span class="st"> </span><span class="kw">UtilAnalyticalAucsRSM</span>(<span class="dt">mu =</span> mu, </span>
-<span id="cb49-4"><a href="rsm-pred.html#cb49-4"></a>                              <span class="dt">lambda =</span> lambda, </span>
-<span id="cb49-5"><a href="rsm-pred.html#cb49-5"></a>                              <span class="dt">nu =</span> nu, </span>
-<span id="cb49-6"><a href="rsm-pred.html#cb49-6"></a>                              <span class="dt">lesDistr =</span> lesDistr)</span>
-<span id="cb49-7"><a href="rsm-pred.html#cb49-7"></a><span class="kw">cat</span>(<span class="st">&quot;mu = &quot;</span>, mu, </span>
-<span id="cb49-8"><a href="rsm-pred.html#cb49-8"></a><span class="st">&quot;, lambda = &quot;</span>, lambda, </span>
-<span id="cb49-9"><a href="rsm-pred.html#cb49-9"></a><span class="st">&quot;, nu = &quot;</span>, nu,  </span>
-<span id="cb49-10"><a href="rsm-pred.html#cb49-10"></a><span class="st">&quot;, AUC ROC = &quot;</span>, aucs<span class="op">$</span>aucROC, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="rsm-pred.html#cb50-1"></a>mu &lt;-<span class="st"> </span><span class="dv">1</span>; lambda &lt;-<span class="st"> </span><span class="dv">1</span>; nu &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb50-2"><a href="rsm-pred.html#cb50-2"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>) <span class="co"># implies L_max = 3</span></span>
+<span id="cb50-3"><a href="rsm-pred.html#cb50-3"></a>aucs &lt;-<span class="st"> </span><span class="kw">UtilAnalyticalAucsRSM</span>(<span class="dt">mu =</span> mu, </span>
+<span id="cb50-4"><a href="rsm-pred.html#cb50-4"></a>                              <span class="dt">lambda =</span> lambda, </span>
+<span id="cb50-5"><a href="rsm-pred.html#cb50-5"></a>                              <span class="dt">nu =</span> nu, </span>
+<span id="cb50-6"><a href="rsm-pred.html#cb50-6"></a>                              <span class="dt">lesDistr =</span> lesDistr)</span>
+<span id="cb50-7"><a href="rsm-pred.html#cb50-7"></a><span class="kw">cat</span>(<span class="st">&quot;mu = &quot;</span>, mu, </span>
+<span id="cb50-8"><a href="rsm-pred.html#cb50-8"></a><span class="st">&quot;, lambda = &quot;</span>, lambda, </span>
+<span id="cb50-9"><a href="rsm-pred.html#cb50-9"></a><span class="st">&quot;, nu = &quot;</span>, nu,  </span>
+<span id="cb50-10"><a href="rsm-pred.html#cb50-10"></a><span class="st">&quot;, AUC ROC = &quot;</span>, aucs<span class="op">$</span>aucROC, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## mu =  1 , lambda =  1 , nu =  1 , AUC ROC =  0.7802109</code></pre>
 <p>Experimenting with different parameter combinations reveals the following behavior for ROC AUC.</p>
 <ul>
@@ -775,16 +779,16 @@ FIGURE 5.3: Help page for <code>RJafroc</code> function <code>PlotRsmOperatingCh
 </p>
 </div>
 <p>The dependence is demonstrated next for two values: <span class="math inline">\(zeta_1 = -10\)</span> and <span class="math inline">\(zeta_1 = 1\)</span>. The common parameter values are <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\lambda = 1\)</span>, <span class="math inline">\(\nu = 1\)</span>, as shown in the following code-chunk.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="rsm-pred.html#cb51-1"></a>roc &lt;-<span class="st"> </span><span class="kw">PlotRsmOperatingCharacteristics</span>(</span>
-<span id="cb51-2"><a href="rsm-pred.html#cb51-2"></a>     <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),</span>
-<span id="cb51-3"><a href="rsm-pred.html#cb51-3"></a>     <span class="dt">lambda =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),</span>
-<span id="cb51-4"><a href="rsm-pred.html#cb51-4"></a>     <span class="dt">nu =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),</span>
-<span id="cb51-5"><a href="rsm-pred.html#cb51-5"></a>     <span class="dt">zeta1 =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">1</span>),</span>
-<span id="cb51-6"><a href="rsm-pred.html#cb51-6"></a>     <span class="dt">lesDistr =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>),</span>
-<span id="cb51-7"><a href="rsm-pred.html#cb51-7"></a>     <span class="dt">relWeights =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>),</span>
-<span id="cb51-8"><a href="rsm-pred.html#cb51-8"></a>     <span class="dt">OpChType =</span> <span class="st">&quot;ROC&quot;</span>,</span>
-<span id="cb51-9"><a href="rsm-pred.html#cb51-9"></a>     <span class="dt">legendPosition =</span> <span class="st">&quot;null&quot;</span></span>
-<span id="cb51-10"><a href="rsm-pred.html#cb51-10"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="rsm-pred.html#cb52-1"></a>roc &lt;-<span class="st"> </span><span class="kw">PlotRsmOperatingCharacteristics</span>(</span>
+<span id="cb52-2"><a href="rsm-pred.html#cb52-2"></a>     <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb52-3"><a href="rsm-pred.html#cb52-3"></a>     <span class="dt">lambda =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),</span>
+<span id="cb52-4"><a href="rsm-pred.html#cb52-4"></a>     <span class="dt">nu =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),</span>
+<span id="cb52-5"><a href="rsm-pred.html#cb52-5"></a>     <span class="dt">zeta1 =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">1</span>),</span>
+<span id="cb52-6"><a href="rsm-pred.html#cb52-6"></a>     <span class="dt">lesDistr =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>),</span>
+<span id="cb52-7"><a href="rsm-pred.html#cb52-7"></a>     <span class="dt">relWeights =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>),</span>
+<span id="cb52-8"><a href="rsm-pred.html#cb52-8"></a>     <span class="dt">OpChType =</span> <span class="st">&quot;ROC&quot;</span>,</span>
+<span id="cb52-9"><a href="rsm-pred.html#cb52-9"></a>     <span class="dt">legendPosition =</span> <span class="st">&quot;null&quot;</span></span>
+<span id="cb52-10"><a href="rsm-pred.html#cb52-10"></a>)</span></code></pre></div>
 <p>Clearly the red curve has higher AUC. The specific values are 0.9386603 for the red curve and 0.9031788 for the green curve.</p>
 <div class="figure"><span style="display:block;" id="fig:rsm-pred-roc-zeta1"></span>
 <img src="17a-rsm-predictions_files/figure-html/rsm-pred-roc-zeta1-1.png" alt="ROC curves for two values of $\zeta_1$: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. The red curve corresponds to $\zeta_1 = -10$ and the blue curve to $\zeta_1 = 1$." width="672" />
@@ -915,25 +919,25 @@ h =&amp; 1-\sum_{L=1}^{L_{max}}f_L \text{exp} \left ( -\lambda&#39; \Phi\left ( 
 <div id="rsm-pred-appendix2" class="section level2">
 <h2><span class="header-section-number">5.14</span> Appendix 2: Numerical illustration of continuity</h2>
 <p>The code in this section examines the slope of the ROC curve as one approaches the end-point <span class="math inline">\(\zeta_1 = -\infty\)</span>. The RSM parameter values are <span class="math inline">\(\mu = 0.5\)</span>, <span class="math inline">\(\lambda = 0.1\)</span> and <span class="math inline">\(\nu = 0.8\)</span>, and twenty percent of the diseased cases have one lesion and 80 percent have 2 lesions, i.e. <code>lesDistr</code> -&gt; c(0.2, 0.8).</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="rsm-pred.html#cb52-1"></a>mu &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb52-2"><a href="rsm-pred.html#cb52-2"></a>lambda &lt;-<span class="st"> </span><span class="fl">0.1</span></span>
-<span id="cb52-3"><a href="rsm-pred.html#cb52-3"></a>nu &lt;-<span class="st"> </span><span class="fl">0.8</span></span>
-<span id="cb52-4"><a href="rsm-pred.html#cb52-4"></a>lambdaP &lt;-<span class="st"> </span>lambda <span class="op">/</span><span class="st"> </span>mu</span>
-<span id="cb52-5"><a href="rsm-pred.html#cb52-5"></a>nuP &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>mu <span class="op">*</span><span class="st"> </span>nu)</span>
-<span id="cb52-6"><a href="rsm-pred.html#cb52-6"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="rsm-pred.html#cb53-1"></a>mu &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb53-2"><a href="rsm-pred.html#cb53-2"></a>lambda &lt;-<span class="st"> </span><span class="fl">0.1</span></span>
+<span id="cb53-3"><a href="rsm-pred.html#cb53-3"></a>nu &lt;-<span class="st"> </span><span class="fl">0.8</span></span>
+<span id="cb53-4"><a href="rsm-pred.html#cb53-4"></a>lambdaP &lt;-<span class="st"> </span>lambda <span class="op">/</span><span class="st"> </span>mu</span>
+<span id="cb53-5"><a href="rsm-pred.html#cb53-5"></a>nuP &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>mu <span class="op">*</span><span class="st"> </span>nu)</span>
+<span id="cb53-6"><a href="rsm-pred.html#cb53-6"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>)</span></code></pre></div>
 <p>One calculates the coordinates of the end-point and the slope of the line connecting it to (1,1).</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="rsm-pred.html#cb53-1"></a>maxFPF &lt;-<span class="st"> </span><span class="kw">FPF</span> (<span class="op">-</span><span class="ot">Inf</span>, lambdaP)</span>
-<span id="cb53-2"><a href="rsm-pred.html#cb53-2"></a>maxTPF &lt;-<span class="st"> </span><span class="kw">TPF</span> (<span class="op">-</span><span class="ot">Inf</span>, mu, lambdaP, nuP, lesDistr)</span>
-<span id="cb53-3"><a href="rsm-pred.html#cb53-3"></a>mStLine &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>maxTPF) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>maxFPF)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="rsm-pred.html#cb54-1"></a>maxFPF &lt;-<span class="st"> </span><span class="kw">FPF</span> (<span class="op">-</span><span class="ot">Inf</span>, lambdaP)</span>
+<span id="cb54-2"><a href="rsm-pred.html#cb54-2"></a>maxTPF &lt;-<span class="st"> </span><span class="kw">TPF</span> (<span class="op">-</span><span class="ot">Inf</span>, mu, lambdaP, nuP, lesDistr)</span>
+<span id="cb54-3"><a href="rsm-pred.html#cb54-3"></a>mStLine &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>maxTPF) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>maxFPF)</span></code></pre></div>
 <p>The end-point coordinates are (0.1812692, 0.5959341) and the slope is 0.4935272. Next one calculates and displays the ROC curve.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="rsm-pred.html#cb54-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotRsmOperatingCharacteristics</span>(</span>
-<span id="cb54-2"><a href="rsm-pred.html#cb54-2"></a>  mu,</span>
-<span id="cb54-3"><a href="rsm-pred.html#cb54-3"></a>  lambda,</span>
-<span id="cb54-4"><a href="rsm-pred.html#cb54-4"></a>  nu,</span>
-<span id="cb54-5"><a href="rsm-pred.html#cb54-5"></a>  <span class="dt">zeta1 =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="co"># fixed: this function used to break for -Inf</span></span>
-<span id="cb54-6"><a href="rsm-pred.html#cb54-6"></a>  <span class="dt">OpChType =</span> <span class="st">&quot;ROC&quot;</span>,</span>
-<span id="cb54-7"><a href="rsm-pred.html#cb54-7"></a>  <span class="dt">lesDistr =</span> lesDistr</span>
-<span id="cb54-8"><a href="rsm-pred.html#cb54-8"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="rsm-pred.html#cb55-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotRsmOperatingCharacteristics</span>(</span>
+<span id="cb55-2"><a href="rsm-pred.html#cb55-2"></a>  mu,</span>
+<span id="cb55-3"><a href="rsm-pred.html#cb55-3"></a>  lambda,</span>
+<span id="cb55-4"><a href="rsm-pred.html#cb55-4"></a>  nu,</span>
+<span id="cb55-5"><a href="rsm-pred.html#cb55-5"></a>  <span class="dt">zeta1 =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="co"># fixed: this function used to break for -Inf</span></span>
+<span id="cb55-6"><a href="rsm-pred.html#cb55-6"></a>  <span class="dt">OpChType =</span> <span class="st">&quot;ROC&quot;</span>,</span>
+<span id="cb55-7"><a href="rsm-pred.html#cb55-7"></a>  <span class="dt">lesDistr =</span> lesDistr</span>
+<span id="cb55-8"><a href="rsm-pred.html#cb55-8"></a>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:rsm-pred-roc-plot"></span>
 <img src="17a-rsm-predictions_files/figure-html/rsm-pred-roc-plot-1.png" alt="ROC curve for selected RSM parameters. The slope of the dashed line is 0.4935272. " width="672" />
 <p class="caption">
@@ -941,45 +945,45 @@ FIGURE 5.7: ROC curve for selected RSM parameters. The slope of the dashed line 
 </p>
 </div>
 <p>At first sight the slope appeared to me to be discontinuous at the end-point<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> but this is not true. In fact the slope decreases as one approaches the end-point, and in the limit equals that of the dashed line. This is demonstrated by the next code section which creates a finely-spaced <span class="math inline">\(\zeta\)</span> array ranging from -3 to -20. These are the points at which the slope is numerically calculated. Two types of calculations were performed - one using standard <code>R</code> double precision arithmetic and one using multiple precision arithmetic. The R-package <code>Rmpfr</code> was used for the latter. For example, the line <code>zeta_mpr -&gt; mpfr(zeta, 2000)</code> generates a 2000-bit representation of <span class="math inline">\(\zeta\)</span>. All subsequent computations using <code>zeta_mpr</code> uses multiple precision arithmetic. The computed slopes are saved in two arrays, <code>y1</code>, the standard precision arithmetic slope and <code>y2</code>, the multiple precision arithmetic slope.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="rsm-pred.html#cb55-1"></a>zeta_arr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">-5</span>, <span class="fl">-0.2</span>), <span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">-20</span>, <span class="fl">-0.5</span>))</span>
-<span id="cb55-2"><a href="rsm-pred.html#cb55-2"></a>y1 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="kw">length</span>(zeta_arr))</span>
-<span id="cb55-3"><a href="rsm-pred.html#cb55-3"></a>y2 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="kw">length</span>(zeta_arr))</span>
-<span id="cb55-4"><a href="rsm-pred.html#cb55-4"></a>i &lt;-<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb55-5"><a href="rsm-pred.html#cb55-5"></a><span class="cf">for</span> (zeta <span class="cf">in</span> zeta_arr) {</span>
-<span id="cb55-6"><a href="rsm-pred.html#cb55-6"></a>  i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb55-7"><a href="rsm-pred.html#cb55-7"></a>  <span class="co"># normal precision arithmetic</span></span>
-<span id="cb55-8"><a href="rsm-pred.html#cb55-8"></a>  zeta2 &lt;-<span class="st"> </span>zeta <span class="op">+</span><span class="st"> </span><span class="fl">1e-6</span></span>
-<span id="cb55-9"><a href="rsm-pred.html#cb55-9"></a>  delta_FPF &lt;-<span class="st"> </span><span class="kw">FPF</span> (zeta, lambdaP) <span class="op">-</span><span class="st"> </span><span class="kw">FPF</span> (zeta2, lambdaP)</span>
-<span id="cb55-10"><a href="rsm-pred.html#cb55-10"></a>  delta_TPF &lt;-<span class="st"> </span><span class="kw">TPF</span> (zeta, mu, lambdaP, nuP, lesDistr) <span class="op">-</span><span class="st"> </span></span>
-<span id="cb55-11"><a href="rsm-pred.html#cb55-11"></a><span class="st">    </span><span class="kw">TPF</span> (zeta2, mu, lambdaP, nuP, lesDistr)</span>
-<span id="cb55-12"><a href="rsm-pred.html#cb55-12"></a>  mAnal &lt;-<span class="st"> </span>delta_TPF <span class="op">/</span><span class="st"> </span>delta_FPF</span>
-<span id="cb55-13"><a href="rsm-pred.html#cb55-13"></a>  y1[i] &lt;-<span class="st"> </span>mAnal</span>
-<span id="cb55-14"><a href="rsm-pred.html#cb55-14"></a>  <span class="co"># end normal precision arithmetic</span></span>
-<span id="cb55-15"><a href="rsm-pred.html#cb55-15"></a>  </span>
-<span id="cb55-16"><a href="rsm-pred.html#cb55-16"></a>  <span class="co"># multiple precision arithmetic</span></span>
-<span id="cb55-17"><a href="rsm-pred.html#cb55-17"></a>  zeta_mpr &lt;-<span class="st"> </span><span class="kw">mpfr</span>(zeta, <span class="dv">2000</span>) <span class="co"># 2000 digit precision</span></span>
-<span id="cb55-18"><a href="rsm-pred.html#cb55-18"></a>  zeta2_mpr &lt;-<span class="st"> </span>zeta_mpr <span class="op">+</span><span class="st"> </span><span class="fl">1e-12</span> <span class="co"># small increment</span></span>
-<span id="cb55-19"><a href="rsm-pred.html#cb55-19"></a>  delta_FPF &lt;-<span class="st"> </span><span class="kw">FPF</span> (zeta_mpr, lambdaP) <span class="op">-</span><span class="st"> </span><span class="kw">FPF</span> (zeta2_mpr, lambdaP)</span>
-<span id="cb55-20"><a href="rsm-pred.html#cb55-20"></a>  delta_TPF &lt;-<span class="st"> </span><span class="kw">TPF</span> (zeta_mpr, mu, lambdaP, nuP, lesDistr) <span class="op">-</span><span class="st"> </span></span>
-<span id="cb55-21"><a href="rsm-pred.html#cb55-21"></a><span class="st">    </span><span class="kw">TPF</span> (zeta2_mpr, mu, lambdaP, nuP, lesDistr)</span>
-<span id="cb55-22"><a href="rsm-pred.html#cb55-22"></a>  mAnalRmpfr &lt;-<span class="st"> </span>delta_TPF <span class="op">/</span><span class="st"> </span>delta_FPF</span>
-<span id="cb55-23"><a href="rsm-pred.html#cb55-23"></a>  temp &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(mAnalRmpfr)</span>
-<span id="cb55-24"><a href="rsm-pred.html#cb55-24"></a>  <span class="cf">if</span> (<span class="kw">is.nan</span>(temp)){</span>
-<span id="cb55-25"><a href="rsm-pred.html#cb55-25"></a>    y2[i] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
-<span id="cb55-26"><a href="rsm-pred.html#cb55-26"></a>  } <span class="cf">else</span> y2[i] &lt;-<span class="st"> </span>temp </span>
-<span id="cb55-27"><a href="rsm-pred.html#cb55-27"></a>  <span class="co"># end multiple precision arithmetic</span></span>
-<span id="cb55-28"><a href="rsm-pred.html#cb55-28"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="rsm-pred.html#cb56-1"></a>zeta_arr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">-5</span>, <span class="fl">-0.2</span>), <span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">-20</span>, <span class="fl">-0.5</span>))</span>
+<span id="cb56-2"><a href="rsm-pred.html#cb56-2"></a>y1 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="kw">length</span>(zeta_arr))</span>
+<span id="cb56-3"><a href="rsm-pred.html#cb56-3"></a>y2 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">0</span>, <span class="kw">length</span>(zeta_arr))</span>
+<span id="cb56-4"><a href="rsm-pred.html#cb56-4"></a>i &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb56-5"><a href="rsm-pred.html#cb56-5"></a><span class="cf">for</span> (zeta <span class="cf">in</span> zeta_arr) {</span>
+<span id="cb56-6"><a href="rsm-pred.html#cb56-6"></a>  i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb56-7"><a href="rsm-pred.html#cb56-7"></a>  <span class="co"># normal precision arithmetic</span></span>
+<span id="cb56-8"><a href="rsm-pred.html#cb56-8"></a>  zeta2 &lt;-<span class="st"> </span>zeta <span class="op">+</span><span class="st"> </span><span class="fl">1e-6</span></span>
+<span id="cb56-9"><a href="rsm-pred.html#cb56-9"></a>  delta_FPF &lt;-<span class="st"> </span><span class="kw">FPF</span> (zeta, lambdaP) <span class="op">-</span><span class="st"> </span><span class="kw">FPF</span> (zeta2, lambdaP)</span>
+<span id="cb56-10"><a href="rsm-pred.html#cb56-10"></a>  delta_TPF &lt;-<span class="st"> </span><span class="kw">TPF</span> (zeta, mu, lambdaP, nuP, lesDistr) <span class="op">-</span><span class="st"> </span></span>
+<span id="cb56-11"><a href="rsm-pred.html#cb56-11"></a><span class="st">    </span><span class="kw">TPF</span> (zeta2, mu, lambdaP, nuP, lesDistr)</span>
+<span id="cb56-12"><a href="rsm-pred.html#cb56-12"></a>  mAnal &lt;-<span class="st"> </span>delta_TPF <span class="op">/</span><span class="st"> </span>delta_FPF</span>
+<span id="cb56-13"><a href="rsm-pred.html#cb56-13"></a>  y1[i] &lt;-<span class="st"> </span>mAnal</span>
+<span id="cb56-14"><a href="rsm-pred.html#cb56-14"></a>  <span class="co"># end normal precision arithmetic</span></span>
+<span id="cb56-15"><a href="rsm-pred.html#cb56-15"></a>  </span>
+<span id="cb56-16"><a href="rsm-pred.html#cb56-16"></a>  <span class="co"># multiple precision arithmetic</span></span>
+<span id="cb56-17"><a href="rsm-pred.html#cb56-17"></a>  zeta_mpr &lt;-<span class="st"> </span><span class="kw">mpfr</span>(zeta, <span class="dv">2000</span>) <span class="co"># 2000 digit precision</span></span>
+<span id="cb56-18"><a href="rsm-pred.html#cb56-18"></a>  zeta2_mpr &lt;-<span class="st"> </span>zeta_mpr <span class="op">+</span><span class="st"> </span><span class="fl">1e-12</span> <span class="co"># small increment</span></span>
+<span id="cb56-19"><a href="rsm-pred.html#cb56-19"></a>  delta_FPF &lt;-<span class="st"> </span><span class="kw">FPF</span> (zeta_mpr, lambdaP) <span class="op">-</span><span class="st"> </span><span class="kw">FPF</span> (zeta2_mpr, lambdaP)</span>
+<span id="cb56-20"><a href="rsm-pred.html#cb56-20"></a>  delta_TPF &lt;-<span class="st"> </span><span class="kw">TPF</span> (zeta_mpr, mu, lambdaP, nuP, lesDistr) <span class="op">-</span><span class="st"> </span></span>
+<span id="cb56-21"><a href="rsm-pred.html#cb56-21"></a><span class="st">    </span><span class="kw">TPF</span> (zeta2_mpr, mu, lambdaP, nuP, lesDistr)</span>
+<span id="cb56-22"><a href="rsm-pred.html#cb56-22"></a>  mAnalRmpfr &lt;-<span class="st"> </span>delta_TPF <span class="op">/</span><span class="st"> </span>delta_FPF</span>
+<span id="cb56-23"><a href="rsm-pred.html#cb56-23"></a>  temp &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(mAnalRmpfr)</span>
+<span id="cb56-24"><a href="rsm-pred.html#cb56-24"></a>  <span class="cf">if</span> (<span class="kw">is.nan</span>(temp)){</span>
+<span id="cb56-25"><a href="rsm-pred.html#cb56-25"></a>    y2[i] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb56-26"><a href="rsm-pred.html#cb56-26"></a>  } <span class="cf">else</span> y2[i] &lt;-<span class="st"> </span>temp </span>
+<span id="cb56-27"><a href="rsm-pred.html#cb56-27"></a>  <span class="co"># end multiple precision arithmetic</span></span>
+<span id="cb56-28"><a href="rsm-pred.html#cb56-28"></a>}</span></code></pre></div>
 <p>The next code section displays 3 plots.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="rsm-pred.html#cb56-1"></a>m1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">z =</span> zeta_arr, <span class="dt">m =</span> y1)</span>
-<span id="cb56-2"><a href="rsm-pred.html#cb56-2"></a>m2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">z =</span> zeta_arr, <span class="dt">m =</span> y2)</span>
-<span id="cb56-3"><a href="rsm-pred.html#cb56-3"></a>plots &lt;-<span class="st"> </span><span class="kw">ggplot</span>(</span>
-<span id="cb56-4"><a href="rsm-pred.html#cb56-4"></a>  <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> z, <span class="dt">y =</span> m)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb56-5"><a href="rsm-pred.html#cb56-5"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> m1, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb56-6"><a href="rsm-pred.html#cb56-6"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> m2) <span class="op">+</span></span>
-<span id="cb56-7"><a href="rsm-pred.html#cb56-7"></a><span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="op">-</span><span class="dv">15</span>, <span class="dv">-3</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb56-8"><a href="rsm-pred.html#cb56-8"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> mStLine, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,<span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb56-9"><a href="rsm-pred.html#cb56-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;zeta&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="dt">label =</span> <span class="st">&quot;slopes&quot;</span>)</span>
-<span id="cb56-10"><a href="rsm-pred.html#cb56-10"></a><span class="kw">suppressWarnings</span>(<span class="kw">print</span>(plots))</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="rsm-pred.html#cb57-1"></a>m1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">z =</span> zeta_arr, <span class="dt">m =</span> y1)</span>
+<span id="cb57-2"><a href="rsm-pred.html#cb57-2"></a>m2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">z =</span> zeta_arr, <span class="dt">m =</span> y2)</span>
+<span id="cb57-3"><a href="rsm-pred.html#cb57-3"></a>plots &lt;-<span class="st"> </span><span class="kw">ggplot</span>(</span>
+<span id="cb57-4"><a href="rsm-pred.html#cb57-4"></a>  <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> z, <span class="dt">y =</span> m)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb57-5"><a href="rsm-pred.html#cb57-5"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> m1, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb57-6"><a href="rsm-pred.html#cb57-6"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> m2) <span class="op">+</span></span>
+<span id="cb57-7"><a href="rsm-pred.html#cb57-7"></a><span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="op">-</span><span class="dv">15</span>, <span class="dv">-3</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb57-8"><a href="rsm-pred.html#cb57-8"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> mStLine, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,<span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb57-9"><a href="rsm-pred.html#cb57-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;zeta&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="dt">label =</span> <span class="st">&quot;slopes&quot;</span>)</span>
+<span id="cb57-10"><a href="rsm-pred.html#cb57-10"></a><span class="kw">suppressWarnings</span>(<span class="kw">print</span>(plots))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:rsm-pred-plots1"></span>
 <img src="17a-rsm-predictions_files/figure-html/rsm-pred-plots1-1.png" alt="Horizontal dashed red line: the value of `mStLine`, the slope of the straight line connecting the ROC end-point to (1,1). Dashed blue line: slope using double precision arithmetic. Solid black line: slope using multiple precision arithmetic - this curve approaches the limiting value `mStLine`." width="672" />
 <p class="caption">

@@ -149,7 +149,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i>Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapters-needing-heavy-edits"><i class="fa fa-check"></i>Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i>Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#coding-aids-for-me"><i class="fa fa-check"></i>Coding aids (for me)</a><ul>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>0.0.1</b> formatting</a></li>
+<li class="chapter" data-level="0.0.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>0.0.2</b> tables</a></li>
+<li class="chapter" data-level="0.0.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>0.0.3</b> tinytex problems</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
 <li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
@@ -562,8 +566,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Coding aids (for me)</h2>
 <ul>
 <li>weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-froc-empirical1.Rmd which should be 13a-froc-empirical1.Rmd</li>
+</ul>
+<div id="formatting" class="section level3">
+<h3><span class="header-section-number">0.0.1</span> formatting</h3>
+<ul>
 <li>sprintf(“%.4f”, proper formatting of numbers</li>
 <li>OpPtStr(, do:</li>
+</ul>
+</div>
+<div id="tables" class="section level3">
+<h3><span class="header-section-number">0.0.2</span> tables</h3>
+<ul>
 <li>kbl(dfA, caption = “….”, booktabs = TRUE, escape = FALSE) %&gt;% collapse_rows(columns = c(1, 3), valign = “middle”) %&gt;% kable_styling(latex_options = c(“basic”, “scale_down”, “HOLD_position”), row_label_position = “c”)</li>
 <li>```{r, attr.source = “.numberLines”}</li>
 <li>kbl(x12, caption = “Summary of optimization results using wAFROC-AUC.”, booktabs = TRUE, escape = FALSE) %&gt;% collapse_rows(columns = c(1), valign = “middle”) %&gt;% kable_styling(latex_options = c(“basic”, “scale_down”, “HOLD_position”), row_label_position = “c”)</li>
@@ -575,7 +588,24 @@ In verify_rstudio_version() :
 Please install or upgrade Pandoc to at least version 1.17.2; or if you are using RStudio, you can just install RStudio 1.0+.
 Execution halted</li>
 </ul>
+</div>
+<div id="tinytex-problems" class="section level3">
+<h3><span class="header-section-number">0.0.3</span> tinytex problems</h3>
+<ul>
+<li>dont update in response to messages; breaks everything</li>
+<li>DONT DO THIS: When tinytex::install_tinytex() hangs up try</li>
+<li>DONT DO THIS: tinytex::install_tinytex(repository = “<a href="http://mirrors.tuna.tsinghua.edu.cn/CTAN/" class="uri">http://mirrors.tuna.tsinghua.edu.cn/CTAN/</a>”, version = “latest”)</li>
+<li>Getting very long builds: looping certain commands</li>
+<li>First uninstall tinytex then reinstall:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="co">#uninstall_tinytex(force = FALSE, dir = tinytex_root())</span></span>
+<span id="cb1-2"><a href="index.html#cb1-2"></a><span class="co">#tinytex::install_tinytex()</span></span></code></pre></div>
+<ul>
+<li>get very long build first time with looping certain commands</li>
+<li>fixed on subsequent pdf builds</li>
+</ul>
 
+</div>
 </div>
 </div>
 
