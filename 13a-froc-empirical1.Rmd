@@ -308,6 +308,35 @@ Unlike unmarked latent NLs, **unmarked lesions can safely be assigned the $-\inf
 
 The formalism should not obscure the fact that the futility of extrapolation outside the observed end-point of the FROC is a fairly obvious property: one does not know how far to the right the abscissa of the observed end-point might extend if one could get the observer to report every latent NL.
 
+### Illustration with a dataset {#froc-empirical-froc-plot-illustration}
+
+The following code uses `dataset04` [@zanca2009evaluation] in the `RJafroc` package to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so in principle one can generate 20 plots. In this example I have selected treatment 1 and reader 1 to produce the plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "FROC")$Plot` with different treatments and readers specified.
+
+
+```{r, echo=TRUE}
+ret <- PlotEmpiricalOperatingCharacteristics(
+  dataset04, 
+  trts = 1, rdrs = 1, opChType = "FROC")
+print(ret$Plot)
+```
+
+
+The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rating 5, the next higher one corresponds to marks rated 4 or 5, etc. The FROC plots vary widely but share the common characteristic that the operating points cannot move downward-left as one cumulates lower confidence level marks. 
+
+
+Shown next is calculation of the figure of merit for this dataset. All 20 values are shown. The value for `trt1` and `rdr1` is the area under the FROC plot shown above.
+
+
+```{r, echo=TRUE}
+UtilFigureOfMerit(dataset04, FOM = "FROC")
+```
+
+
+```{r, echo=FALSE}
+auc_froc <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "FROC")))
+```
+
+
 ## The inferred ROC plot {#froc-empirical-ROC}
 
 By adopting a rational rule for converting the zero or more mark-rating data per case to a single rating per case, and commonly the highest rating rule is used [^froc-empirical1-3], it is possible to infer ROC data from FROC mark-rating data.
@@ -408,6 +437,34 @@ The inferred true positive fraction $\text{TPF}_r$ is defined by:
 
 The inferred empirical ROC plot connects adjacent points $\left( \text{FPF}_r, \text{TPF}_r \right )$, including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). Like a real ROC, this plot is constrained to lie within the unit square. The area under this plot is the empirical inferred ROC AUC, denoted $A_{\text{ROC}}$.
 
+### Illustration with a dataset {#froc-empirical-roc-plot-illustration}
+
+The following code uses `dataset04` to illustrate an empirical ROC plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "ROC")$Plot` with different treatments and readers specified.
+
+
+```{r, echo=TRUE}
+ret <- PlotEmpiricalOperatingCharacteristics(
+  dataset04, 
+  trts = 1, rdrs = 1, opChType = "ROC")
+print(ret$Plot)
+```
+
+
+Shown next is calculation of the figure of merit for this dataset.
+
+
+```{r, echo=TRUE}
+UtilFigureOfMerit(dataset04, FOM = "HrAuc")
+```
+
+
+
+```{r, echo=FALSE}
+auc_HrAuc <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "HrAuc")))
+```
+
+
+
 ## The alternative FROC (AFROC) plot {#froc-empirical-AFROC}
 
 -   Fig. 4 in [@bunch1977free] anticipated another way of visualizing FROC data. I subsequently termed[^froc-empirical1-4] this the *alternative FROC (AFROC)* plot [@chakraborty1989maximum].
@@ -466,6 +523,37 @@ and
 
 Because every non-diseased case is assigned a rating, and is therefore counted, the right hand side of the first equation in \@ref(eq:froc-empirical-FPF0-LLF0) evaluates to unity. This is obvious for marked cases. Since each unmarked case also gets a rating, albeit a $-\infty$ rating, it is also counted (the argument of the indicator function in Eqn. \@ref(eq:froc-empirical-FPF0-LLF0) is true even when the inferred FP rating is $-\infty$).
 
+### Illustration with a dataset {#froc-empirical-afroc-plot-illustration}
+
+The following code uses `dataset04` to illustrate an empirical AFROC plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC")$Plot` with different treatments and readers specified.
+
+
+```{r, echo=TRUE}
+ret <- PlotEmpiricalOperatingCharacteristics(
+  dataset04, 
+  trts = 1, rdrs = 1, opChType = "AFROC")
+print(ret$Plot)
+```
+
+
+
+Shown next is calculation of the figure of merit for this dataset.
+
+
+```{r, echo=TRUE}
+UtilFigureOfMerit(dataset04, FOM = "AFROC")
+```
+
+
+
+
+```{r, echo=FALSE}
+auc_afroc <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "AFROC")))
+```
+
+
+
+
 ## The weighted-AFROC (wAFROC) plot {#froc-empirical-wAFROC}
 
 The AFROC ordinate defined in Eqn. \@ref(eq:froc-empirical-LLFr) gives equal importance to every lesion in a case. Therefore, a case with more lesions will have more influence on the AFROC (see TBA Chapter 14 for an explicit demonstration of this fact). This is undesirable since each case (i.e., patient) should get equal importance in the analysis -- as with ROC analysis, one wishes to draw conclusions about the population of cases and each case is regarded as an equally valid sample from the population. In particular, one does not want the analysis to be skewed towards cases with greater than the average number of lesions. [^froc-empirical1-5]
@@ -500,6 +588,35 @@ The weighted lesion localization fraction $\text{wLLF}_r$ is defined by [@RN2484
 
 The empirical wAFROC plot connects adjacent operating points $\left ( \text{FPF}_r, \text{wLLF}_r \right )$, including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). The area under this plot is the empirical weighted-AFROC AUC, denoted $A_{\text{wAFROC}}$.
 
+
+### Illustration with a dataset {#froc-empirical-wafroc-plot-illustration}
+
+The following code uses `dataset04` to illustrate an empirical ROC plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "wAFROC")$Plot` with different treatments and readers specified.
+
+
+```{r, echo=TRUE}
+ret <- PlotEmpiricalOperatingCharacteristics(
+  dataset04, trts = 1, rdrs = 1, opChType = "wAFROC")
+print(ret$Plot)
+```
+
+
+Shown next is calculation of the figure of merit for this dataset.
+
+
+```{r, echo=TRUE}
+UtilFigureOfMerit(dataset04, FOM = "wAFROC")
+```
+
+
+
+```{r, echo=FALSE}
+auc_wafroc <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "wAFROC")))
+```
+
+
+
+
 ## The AFROC1 plot {#froc-empirical-AFROC1}
 
 Historically the AFROC originally used a different definition of FPF, which is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred "FP" rating on a *diseased case* as the maximum of all NL ratings on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:froc-empirical-FP)]:
@@ -531,11 +648,122 @@ Note the subtle differences between Eqn. \@ref(eq:froc-empirical-FPF) and Eqn. \
 
 The empirical AFROC1 plot connects adjacent operating points $\left ( FPF_r^1, \text{LLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 and the AFROC plot is in the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted $A_{\text{AFROC1}}$.
 
+### Illustration with a dataset {#froc-empirical-afroc1-plot-illustration}
+
+The following code uses `dataset04` to illustrate an empirical ROC plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC1")$Plot` with different treatments and readers specified.
+
+
+```{r, echo=TRUE}
+ret <- PlotEmpiricalOperatingCharacteristics(
+  dataset04, 
+  trts = 1, rdrs = 1, opChType = "AFROC1")
+print(ret$Plot)
+```
+
+
+
+Shown next is calculation of the figure of merit for this dataset.
+
+
+```{r, echo=TRUE}
+UtilFigureOfMerit(dataset04, FOM = "AFROC1")
+```
+
+
+
+
+```{r, echo=FALSE}
+auc_afroc1 <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "AFROC1")))
+```
+
+
+
+
 ## The weighted-AFROC1 (wAFROC1) plot {#froc-empirical-wAFROC1}
 
 ### Definition {#froc-empirical-definition-auc-wAFROC1}
 
 The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points $\left ( FPF_r^1, \text{wLLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted $A_{\text{wAFROC1}}$.
+
+
+### Illustration with a dataset {#froc-empirical-wafroc1-plot-illustration}
+
+The following code uses `dataset04` to illustrate an empirical wAFROC plot1. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = wAFROC1")$Plot` with different treatments and readers specified.
+
+
+```{r, echo=TRUE}
+ret <- PlotEmpiricalOperatingCharacteristics(
+  dataset04, 
+  trts = 1, rdrs = 1, opChType = "wAFROC1")
+print(ret$Plot)
+```
+
+
+Shown next is calculation of the figure of merit for this dataset.
+
+
+```{r, echo=TRUE}
+UtilFigureOfMerit(dataset04, FOM = "wAFROC1")
+```
+
+
+
+
+```{r, echo=FALSE}
+auc_wafroc1 <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "wAFROC1")))
+```
+
+
+
+```{r, echo=FALSE}
+df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
+                 auc_froc = as.vector(auc_froc))
+p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_froc)) +
+  geom_smooth(method = "lm", 
+              se = FALSE, color = "black", formula = y ~ x) +
+  geom_point() + 
+  scale_x_continuous(limits = c(0.75, 0.92)) +
+  scale_y_continuous(limits = c(0, 0.5)) +
+  labs(title = "froc vs. roc") 
+print(p1)
+```
+
+
+
+
+
+```{r, echo=FALSE}
+df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
+                 auc_afroc = as.vector(auc_afroc))
+p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_afroc)) +
+  geom_smooth(method = "lm", 
+              se = FALSE, color = "black", formula = y ~ x) +
+  geom_point() + 
+  scale_x_continuous(limits = c(0.75, 0.92)) +
+  scale_y_continuous(limits = c(0.6, 0.85)) +
+  labs(title = "afroc vs. roc") 
+print(p1)
+```
+
+
+
+
+
+```{r, echo=FALSE}
+df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
+                 auc_wafroc = as.vector(auc_wafroc))
+p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_wafroc)) +
+  geom_smooth(method = "lm", 
+              se = FALSE, color = "black", formula = y ~ x) +
+  geom_point() + 
+  scale_x_continuous(limits = c(0.75, 0.92)) +
+  scale_y_continuous(limits = c(0.6, 0.85)) +
+  labs(title = "wafroc vs. roc") 
+print(p1)
+```
+
+
+
 
 ## TBA Discussion {#froc-empirical-Discussion}
 
