@@ -104,8 +104,13 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 ## Coding aids (for me) {-}
 
 * weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-froc-empirical1.Rmd which should be 13a-froc-empirical1.Rmd
+
+### formatting
 * sprintf("%.4f", proper formatting of numbers
 * OpPtStr(, do:
+
+### tables
+
 * kbl(dfA, caption = "....", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1, 3), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 * ```{r, attr.source = ".numberLines"}
 * kbl(x12, caption = "Summary of optimization results using wAFROC-AUC.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
@@ -117,4 +122,17 @@ In verify_rstudio_version() :
 Please install or upgrade Pandoc to at least version 1.17.2; or if you are using RStudio, you can just install RStudio 1.0+.
 Execution halted
 
+### tinytex problems
+
+* dont update in response to messages; breaks everything
+* DONT DO THIS: When tinytex::install_tinytex() hangs up try
+* DONT DO THIS: tinytex::install_tinytex(repository = "http://mirrors.tuna.tsinghua.edu.cn/CTAN/", version = "latest")
+* Getting very long builds: looping certain commands
+* First uninstall tinytex then reinstall:
+``` {r}
+#uninstall_tinytex(force = FALSE, dir = tinytex_root())
+#tinytex::install_tinytex()
+```
+* get very long build first time with looping certain commands
+* fixed on subsequent pdf builds
 
