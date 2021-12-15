@@ -479,7 +479,7 @@ str(dataset03$ratings)
 ```
 
 
-* `dataset04` "FEDERICA" Federica Zanca FROC dataset [@RN1882]
+* `dataset04` "FEDERICA" Federica Zanca FROC dataset [@zanca2009evaluation]
 
 ```{r, echo=FALSE}
 str(dataset04$ratings)
