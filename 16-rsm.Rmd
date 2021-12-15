@@ -1,3 +1,5 @@
+# (PART\*) The radiological search model (RSM) {-}
+
 # The radiological search model {#rsm}
 
 
@@ -13,8 +15,6 @@ library(exactci)
 
 
 ## Introduction {#rsm-intro}
-
-Brief accounts of the radiological search model (RSM) were presented earlier in connection with the simulator used to generate FROC data. This chapter describes the model in more detail. 
 
 All models of ROC data *not incorporating search* involve two fundamental parameters (i.e, not including binning-related threshold parameters). For example, the unequal variance binormal model in Chapter TBA (binormal-model) requires the $a,b$ parameters. Alternative ROC models described in TBA Chapter 20 also require two fundamental parameters. 
 
