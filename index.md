@@ -1,7 +1,7 @@
 --- 
 title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
-date: "2021-12-15"
+date: "2021-12-18"
 site: bookdown::bookdown_site
 output: 
    bookdown::pdf_document: default
@@ -106,6 +106,7 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 
 ### tables
 
+* https://github.com/haozhu233/kableExtra/issues/624
 * kbl(dfA, caption = "....", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1, 3), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 * ```{r, attr.source = ".numberLines"}
 * kbl(x12, caption = "Summary of optimization results using wAFROC-AUC.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
