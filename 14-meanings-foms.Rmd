@@ -234,7 +234,7 @@ p <- ggplot(wAFROC_Points, aes(x = FPF, y = wLLF) ) + geom_polygon(data = shade1
                                     gp = gpar(fontsize = 8)), 
                     xmin = 0.87, xmax = 0.87, 
                     ymin = 0.47, ymax = 0.47) +
-  geom_segment(aes(x = 0.85, y = 0.5, xend = 0.75, yend = 0.6), arrow = arrow(angle = 20, length = unit(0.5, "cm"))) + 
+  geom_segment(aes(x = 0.85, y = 0.5, xend = 0.75, yend = 0.1), arrow = arrow(angle = 20, length = unit(0.5, "cm"))) + 
   annotation_custom(grob = textGrob(bquote(italic(wLLF[i + "1"])),
                                     gp = gpar(fontsize = 8)), 
                     xmin = zeta1_x - 0.15, xmax = zeta1_x - 0.05, 
@@ -320,31 +320,25 @@ According to Eqn. \@ref(eq:froc-meanings-A0), $A_0$ increases as $\text{FPF}_1$ 
 
 ## Numerical illustrations {#froc-meanings-numerical-illustrations}
 
-The wAFROC and AFROC concepts are perhaps best illustrated with a numerical simulation-based illustration with very few cases. 
+The wAFROC and AFROC concepts are perhaps best illustrated with a numerical example with very few cases. 
 
-Parameters of the simulation are $\mu = 2$, $\lambda = 1$, $\nu = 1$, $\zeta_1 = -1$ and $L_{max} = 2$. One simulates a dataset consisting of $K_1 = 4$ non-diseased cases and $K_2 = 4$ diseased cases. The first two diseased cases have one lesion each, and the remaining two have two lesions each.
+The dataset consists of $K_1 = 4$ non-diseased and $K_2 = 4$ diseased cases. The first two diseased cases have one lesion each, and the remaining two have two lesions each.
 
 
 ```{r froc-meanings-numerical, echo = FALSE, cache=F}
-K1 <- 4;K2 <- 4
-seed <- 1;set.seed(seed)
-L_max <- 2;Lk2 <- ceiling(runif(K2) * L_max)
-mu <- 2;lambda <- 1;nu <- 1 ;zeta1 <- -1
-frocData <- SimulateFrocDataset(
-  mu = mu,
-  lambda = lambda,
-  nu = nu,
-  zeta1 = zeta1,
-  I = 1,
-  J = 1,
-  K1 = K1,
-  K2 = K2,
-  perCase = Lk2)
+NL <- array(c(-Inf, 0.5,  0.7, -0.3, 1.5, -Inf, 
+              -Inf, -Inf, -Inf, -Inf, 0.6, -Inf, 
+              -Inf, -Inf, -Inf, -Inf), dim = c(8,2))
+LL <- array(c(0.9, -0.2,  1.6, 3, -Inf, -Inf, -Inf, 2), dim = c(4,2))
 
+frocData <- Df2RJafrocDataset(NL, LL, perCase = c(1,1,2,2))
+frocData$lesions$weights[3,] <- c(0.1, 0.9)
+frocData$lesions$weights[4,] <- c(0.9, 0.1)
+
+K1 <- 4
+K2 <- 4
 FP <- apply(frocData$ratings$NL, 3, max)
 FP <- FP[1:K1]
-frocData$lesions$weights[3, ] <- c(0.6, 0.4)
-frocData$lesions$weights[4, ] <- c(0.4, 0.6)
 
 p1 <- PlotEmpiricalOperatingCharacteristics(
   frocData,trts = 1, 
@@ -371,124 +365,20 @@ Shown in Fig. \@ref(fig:plots-p1-p2) are the AFROC and wAFROC plots with operati
 grid.arrange(p1, p2, ncol = 2)
 ```
 
-The number of lesions for diseased cases is shown next. Notice that the first two cases have one lesion each and the next two have two lesions each.
-
-```{r}
-Lk2
-```
-
-The ratings are shown next.
-
-```{r}
-x1 <- as.data.frame(frocData$ratings$NL[1,1,,])
-colnames(x1) <- c("location1", "location2")
-x2 <- as.data.frame(frocData$ratings$LL[1,1,,])
-colnames(x2) <- c("location1", "location2")
-x1
-x2
-```
-
-* The length of the third dimension of the NL array is eight (4 non-diseased + 4 diseased cases). 
-* The fifth sequential case corresponds to NLs on the first diseased case, etc.
-* The first non-diseased case has no latent marks.
-* The second non-diseased case has one latent mark rated `r frocData$ratings$NL[1,1,2,1]`.
-* The third non-diseased case has two latent marks rated `r frocData$ratings$NL[1,1,3,1]` and `r frocData$ratings$NL[1,1,3,2]`.
-* The fourth non-diseased case has one latent mark rated `r frocData$ratings$NL[1,1,4,1]`.
-* The first diseased case has one latent NL mark rated `r frocData$ratings$NL[1,1,5,1]`.
-* The remaining diseased case have no latent NL marks.
-
-## Summary tables of ratings
-
-Table \@ref(tab:froc-meanings-table-non-diseased) shows the layout of mark-rating pairs on *non-diseased* cases, illustrating FP ratings, corresponding to the green circles in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc). [UM denotes an unmarked location and blank cells denote unrealized z-samples.]
-
-* Because non-diseased cases have no lesions, all z-samples listed in this table are for NLs. 
-* The first column lists the case numbers. 
-* The column labeled $k_t t l_s s$ lists the case-location indexing subscripts. 
-* The column labeled $z_{k_t t l_s s}$ lists the corresponding z-samples, when realized, and otherwise the cells are blank. 
-* The column labeled $FP_{k_t t}$ lists the FP rating for each non-diseased case, which is the highest of all realized z-samples on the case or $-\infty$ if none are realized.
-* Column 5: the labels **A** - **H** correspond to the operating points shown in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc) and Fig. \@ref(fig:froc-meanings-afroc-wafroc). 
 
 
-```{r froc-meanings-table-non-diseased, echo=FALSE}
-ndTable = array(dim = c(8,5))
-ndTable[1,]  <- c("1", "1111", "$-\\infty$", "$-\\infty$", "")
-ndTable[2,]  <- c("1", "1121", "$-\\infty$", "$-\\infty$", "")
-ndTable[3,]  <- c("2", "2111", "0.487",  "", "")
-ndTable[4,]  <- c("2", "2121", "$-\\infty$",  "0.487", "F")
-ndTable[5,]  <- c("3", "3111", "0.738",  "", "")
-ndTable[6,]  <- c("3", "3121", "0.576",  "0.738", "E")
-ndTable[7,]  <- c("4", "4111", "-0.305", "", "")
-ndTable[8,]  <- c("4", "4121", "$-\\infty$",  "-0.305", "H")
-df <- as.data.frame(ndTable)
-colnames(df) <- c("", "$k_t t l_s s$", "$z_{k_t t l_s s}$", "$FP_{k_t t}$", "$\\text{Label}$")
-knitr::kable(df, caption = "Layout of mark-rating  pairs on non-diseased cases.", escape = FALSE) %>% collapse_rows(columns = c(1,3,4), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
-```
+## AFROC plot first principles {#froc-meanings-AFROC-plot-first-principles}
 
+The following example is based on the same data involving 8 cases that were used to generate Table `\@ref(tab:froc-meanings-table-non-diseased)` and Table `\@ref(tab:froc-meanings-table-diseased)`. It involves use of a "one-dimensional" depiction of the ratings described next.
 
-Table \@ref(tab:froc-meanings-table-diseased) shows the layout of mark-rating pairs on *diseased* cases, illustrating LL ratings, corresponding to the red circles in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc). [UM denotes an unmarked location and blank cells denote unrealized z-samples.]
-
-* Because diseased cases can have NLs and LLs, both are shown in this table. 
-* The first column lists the case numbers. 
-* The second column lists the number of lesions present. 
-* Columns 3 and 4 illustrate NL indexing and z-samples. 
-* Columns 5 and 6 illustrate LL indexing and z-samples. 
-* Column 7 lists the lesion weights. 
-* Column 8: the labels **A** - **H** correspond to the operating points shown in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc) and Fig. \@ref(fig:froc-meanings-afroc-wafroc). 
-
-
-```{r froc-meanings-table-diseased, echo=FALSE}
-disTable = array(dim = c(8,8))
-disTable[1,]  <- c("1", "1", "1211", "1.512", "1212", "0.852",  "1", "D")
-disTable[2,]  <- c("1", "1", "1221", "", "1222", "", "", "")
-disTable[3,]  <- c("2", "1", "2211", "", "2212", "-0.215", "1", "G")
-disTable[4,]  <- c("2", "1", "2221", "", "2222", "", "",  "")
-
-disTable[5,]  <- c("3", "2", "3211", "", "3212", "1.588", "0.6", "C")
-disTable[6,]  <- c("3", "2", "3221", "", "3222", "", "0.4", "UM")
-disTable[7,]  <- c("4", "2", "4211", "", "4212", "2.944", "0.4", "A")
-disTable[8,]  <- c("4", "2", "4221", "", "4222", "1.984", "0.6", "B")
-df <- as.data.frame(disTable)
-colnames(df) <- c("",
-                  "$L_{k_2}$",
-                  "$k_t t l_s s$", 
-                  "$z_{k_t t l_s s}$", 
-                  "$k_t t l_s s$", 
-                  "$z_{k_t t l_s s}$", 
-                  "$\\text{weights}$",
-                  "$\\text{Label}$")
-knitr::kable(df, caption = "Layout of mark-rating pairs on diseased cases; UM denotes an unmarked lesion.", escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c")
-```
-
-## AFROC plot from first principles {#froc-meanings-AFROC-plot-first-principles}
-
-The following example is based on the same data involving 8 cases that were used to generate Table \@ref(tab:froc-meanings-table-non-diseased) and Table \@ref(tab:froc-meanings-table-diseased). It involves use of a linear or "one-dimensional" depiction of the ratings described next.
-
-In Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc), plot A, FPs and LLs, represented by green and red circles, respectively, are shown ordered, from left to right, with higher z-samples to the right, henceforth referred to as a *linear plot*. Each circle is labeled using the $k_t t l_s s$ notation. For example, the right-most red circle corresponds to the LL z-sample originating from the first lesion in the fourth diseased case, i.e., $z_{4212}$. Consistent with the three unique values in the fourth column of Table \@ref(tab:froc-meanings-table-non-diseased), there are three green circles (FPs) [^froc-meanings-foms-ocs-2]. Likewise, consistent with the five unique values in the sixth column of Table \@ref(tab:froc-meanings-table-diseased), there are five red circles (LLs) [^froc-meanings-foms-ocs-3].
+In Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc), plot A, FPs and LLs, represented by green and red circles, respectively, are shown ordered, from left to right, with higher z-samples to the right, henceforth referred to as a *linear plot*. Each circle is labeled using the $k_t t l_s s$ notation. For example, the right-most red circle corresponds to the LL z-sample originating from the first lesion in the fourth diseased case, i.e., $z_{4212}$. Consistent with the three unique values in the fourth column of Table `\@ref(tab:froc-meanings-table-non-diseased)`, there are three green circles (FPs) [^froc-meanings-foms-ocs-2]. Likewise, consistent with the five unique values in the sixth column of Table `\@ref(tab:froc-meanings-table-diseased)`, there are five red circles (LLs) [^froc-meanings-foms-ocs-3].
 
 [^froc-meanings-foms-ocs-2]: Not counting $FP_{11}$, which occurs at $z = -\infty$, representing the first non-diseased case with no marks.
 
 [^froc-meanings-foms-ocs-3]: Not counting $z_{3222} = -\infty$ representing the unmarked second lesion on the third diseased case.
 
 ```{r linearPlotAFROC, echo = FALSE, cache=F}
-K1 <- 4;K2 <- 4
-seed <- 1;set.seed(seed)
-maxLL <- 2;Lk2 <- ceiling(runif(K2) * maxLL)
-mu <- 2;lambda <- 1;nu <- 1 ;zeta1 <- -1
-frocDataRaw <- SimulateFrocDataset(
-  mu = mu,
-  lambda = lambda,
-  nu = nu,
-  zeta1 = zeta1,
-  I = 1,
-  J = 1,
-  K1 = K1,
-  K2 = K2,
-  perCase = Lk2)
-
-maxNL <- dim(frocDataRaw$ratings$NL)[4]
-FP <- apply(frocDataRaw$ratings$NL, 3, max)
-FP <- FP[1:K1]
-LL <- frocDataRaw$ratings$LL[(frocDataRaw$lesions$weights != -Inf)]
+LL <- frocData$ratings$LL[(frocData$lesions$weights != -Inf)]
 ratings <- c(FP,	LL)
 truth <- c(rep(0, length(FP)), rep(1, length(LL)))
 weight <- rep(1, length(ratings))
@@ -499,7 +389,7 @@ ret$ratings[ret$ratings == -Inf] <- -0.9
 z_text <- data.frame(x = 3.5, y = -0.09, label = "z")
 
 linearPlotAFROC <- ggplot(data = ret) + ggtitle ("A") + 
-  geom_point(aes(x = ratings, y = pos, color = factor(truth)), size = 8) + 
+  geom_point(aes(x = ratings, y = pos, color = factor(truth)), size = 6) + 
   scale_color_manual(values = c("green", "red")) + 
   scale_size_manual(values = c(2, 3, 4, 5) + 3) + 
   theme_bw() + 
@@ -575,25 +465,8 @@ linearPlotAFROC$layout$clip[linearPlotAFROC$layout$name=="panel"] <- "off"
 
 
 ```{r linearPlotwAFROC, echo=FALSE, cache=FALSE}
-# K1 <- 4;K2 <- 4
-# seed <- 1;set.seed(seed)
-# maxLL <- 2;Lk2 <- ceiling(runif(K2) * maxLL) 
-# mu <- 2;lambda <- 1;nu <- 1 ;zeta1 <- -1
-# frocDataRaw <- SimulateFrocDataset(
-#   mu = mu, 
-#   lambda = lambda, 
-#   nu = nu, 
-#   zeta1 = zeta1,
-#   I = 1,
-#   J = 1,
-#   K1 = K1, 
-#   K2 = K2, 
-#   perCase = Lk2)
 
-maxNL <- dim(frocDataRaw$ratings$NL)[4]
-FP <- apply(frocDataRaw$ratings$NL, 3, max)
-FP <- FP[1:K1]
-LL <- frocDataRaw$ratings$LL[(frocDataRaw$lesions$weights != -Inf)]
+LL <- frocData$ratings$LL[(frocData$lesions$weights != -Inf)]
 ratings <- c(FP,	LL)
 truth <- c(rep(0, length(FP)), rep(1, length(LL)))
 weight <- rep(1, length(ratings))
@@ -603,9 +476,9 @@ ret <- data.frame(ratings = ratings, truth = truth, weight = weight, pos = pos)
 ret$ratings[ret$ratings == -Inf] <- -0.9
 z_text <- data.frame(x = 3.5, y = -0.09, label = "z")
 
-frocDataRaw$lesions$weights[3, ] <- c(0.6, 0.4)
-frocDataRaw$lesions$weights[4, ] <- c(0.4, 0.6)
-weight <- c(rep(1, length(FP)), frocDataRaw$lesions$weights[frocDataRaw$lesions$weights != -Inf])
+frocData$lesions$weights[3, ] <- c(0.1, 0.9)
+frocData$lesions$weights[4, ] <- c(0.9, 0.1)
+weight <- c(rep(1, length(FP)), frocData$lesions$weights[frocData$lesions$weights != -Inf])
 ret <- data.frame(ratings = ratings, truth = truth, weight = weight, pos = pos)
 ret$ratings[ret$ratings == -Inf] <- -0.9
 z_text <- data.frame(x = 3.5, y = -0.09, label = "z")
@@ -613,9 +486,11 @@ z_text <- data.frame(x = 3.5, y = -0.09, label = "z")
 linearPlotwAFROC <- ggplot(data = ret) + ggtitle("B") + 
   geom_point(aes(x = ratings, y = pos, color = factor(truth), size = factor(weight))) + 
   scale_color_manual(values = c("green", "red")) +
-  scale_size_manual(values = c(3, 4, 5) + 3) + 
+  scale_size_manual(values = c(3, 1, 4) + 2) + 
   theme_bw() + 
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), legend.position="none") + 
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.border = element_blank(), legend.position="none") + 
   scale_y_continuous(name = "", breaks = NULL) + scale_x_continuous(name = "", breaks = NULL) + 
   geom_segment(aes(x = -1, y = -0.05, xend = 3.4, yend = -0.05), arrow = arrow(length = unit(0.3, "cm")), size = 1) +
   geom_text(data = z_text, aes(x = x, y = y, label = label), vjust = -0.5, hjust = 1, size = 5) + 
@@ -655,7 +530,7 @@ linearPlotwAFROC <- ggplot(data = ret) + ggtitle("B") +
                                     gp = gpar(fontsize = 8)), 
                     xmin = -0.68, xmax = -0.68, 
                     ymin = -0.29, ymax = -0.29) +
-  annotation_custom(grob = textGrob(bquote(W[32]==0.4),
+  annotation_custom(grob = textGrob(bquote(W[32]==0.1),
                                     gp = gpar(fontsize = 8)), 
                     xmin = -0.68, xmax = -0.68, 
                     ymin = -0.36, ymax = -0.36) +
@@ -682,7 +557,7 @@ linearPlotwAFROC <- ggplot(data = ret) + ggtitle("B") +
                                     gp = gpar(fontsize = 8)), 
                     xmin = 1.43, xmax = 1.43, 
                     ymin = -0.29, ymax = -0.29) +
-  annotation_custom(grob = textGrob(bquote(W[31]==0.6),
+  annotation_custom(grob = textGrob(bquote(W[31]==0.9),
                                     gp = gpar(fontsize = 8)), 
                     xmin = 1.43, xmax = 1.43, 
                     ymin = -0.36, ymax = -0.36) +
@@ -691,7 +566,7 @@ linearPlotwAFROC <- ggplot(data = ret) + ggtitle("B") +
                                     gp = gpar(fontsize = 8)), 
                     xmin = 2.12, xmax = 2.12, 
                     ymin = -0.29, ymax = -0.29) +
-  annotation_custom(grob = textGrob(bquote(W[42]==0.6),
+  annotation_custom(grob = textGrob(bquote(W[42]==0.9),
                                     gp = gpar(fontsize = 8)), 
                     xmin = 2.12, xmax = 2.12, 
                     ymin = -0.36, ymax = -0.36) +
@@ -700,7 +575,7 @@ linearPlotwAFROC <- ggplot(data = ret) + ggtitle("B") +
                                     gp = gpar(fontsize = 8)), 
                     xmin = 2.78, xmax = 2.78, 
                     ymin = -0.29, ymax = -0.29) +
-  annotation_custom(grob = textGrob(bquote(W[41]==0.4),
+  annotation_custom(grob = textGrob(bquote(W[41]==0.1),
                                     gp = gpar(fontsize = 8)), 
                     xmin = 2.78, xmax = 2.78, 
                     ymin = -0.36, ymax = -0.36)
@@ -708,7 +583,7 @@ linearPlotwAFROC <- ggplotGrob(linearPlotwAFROC)
 linearPlotwAFROC$layout$clip[linearPlotwAFROC$layout$name=="panel"] <- "off"
 ```
 
-```{r froc-meanings-linear-plot-afroc-wafroc, fig.cap="Plot A (illustrating generation of the AFROC): a one-dimensional depiction of the data in Table \\@ref(tab:froc-meanings-table-non-diseased) and Table \\@ref(tab:froc-meanings-table-diseased), showing z-samples used for plotting the AFROC; the red circles correspond to lesion localizations (LLs) and the green to false positives (FPs). Plot B (illustrating generation of the wAFROC): Data in same tables but this time including the weights, for plotting the weighted-AFROC plot; the sizes of the red circles code the lesions weights; the weights are shown below each z-sample.", fig.show='hold', echo=FALSE}
+```{r froc-meanings-linear-plot-afroc-wafroc, fig.cap="Plot A (illustrating generation of the AFROC): a one-dimensional depiction of the data in Table `\\@ref(tab:froc-meanings-table-non-diseased)` and Table `\\@ref(tab:froc-meanings-table-diseased)`, showing z-samples used for plotting the AFROC; the red circles correspond to lesion localizations (LLs) and the green to false positives (FPs). Plot B (illustrating generation of the wAFROC): Data in same tables but this time including the weights, for plotting the weighted-AFROC plot; the sizes of the red circles code the lesions weights; the weights are shown below each z-sample.", fig.show='hold', echo=FALSE}
 grid.arrange(linearPlotAFROC, linearPlotwAFROC, nrow = 2)
 ```
 
@@ -720,29 +595,11 @@ As each LL is crossed, the operating point moves up by:
 
 $$\sum_{k_2=1}^{K_2}L_{k_2}=\frac{1}{6}$$
 
-Since it has one lesion, crossing the z-sample for the first case would result in an upward movement of 1/6, and likewise for the second case. Since the third case contains two lesions, crossing the corresponding z-samples would result in a net upward movement of the operating point by 1/3. *This behavior shows explicitly that the non-weighted method gives greater importance to diseased cases with more lesions, i.e., such case make a greater contribution to AUC.* The jumps from lesions in the same case need not be contiguous -- they could be distributed, with intervening jumps from lesions on other cases, but eventually the jumps will occur and contribute to the net upward movement. As an example, the jumps due to the two lesions on the fourth diseased case are contiguous: see points A and B, in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc). However, the jumps due to the two lesions on the third diseased case are not contiguous: the first lesion gives the point C, but the unmarked lesion on this case, indicated by "UM" in Table \@ref(tab:froc-meanings-table-diseased), eventually contributes when the operating point moves diagonally from point H to (1,1).
+Since it has one lesion, crossing the z-sample for the first case would result in an upward movement of 1/6, and likewise for the second case. Since the third case contains two lesions, crossing the corresponding z-samples would result in a net upward movement of the operating point by 1/3. *This behavior shows explicitly that the non-weighted method gives greater importance to diseased cases with more lesions, i.e., such case make a greater contribution to AUC.* The jumps from lesions in the same case need not be contiguous -- they could be distributed, with intervening jumps from lesions on other cases, but eventually the jumps will occur and contribute to the net upward movement. As an example, the jumps due to the two lesions on the fourth diseased case are contiguous: see points A and B, in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc). However, the jumps due to the two lesions on the third diseased case are not contiguous: the first lesion gives the point C, but the unmarked lesion on this case, indicated by "UM" in Table `\@ref(tab:froc-meanings-table-diseased)`, eventually contributes when the operating point moves diagonally from point H to (1,1).
 
 
 ```{r afrocPlot, echo=FALSE, cache=F}
-# K1 <- 4;K2 <- 4
-# seed <- 1;set.seed(seed)
-# maxLL <- 2;Lk2 <- ceiling(runif(K2) * maxLL) 
-# mu <- 2;lambda <- 1;nu <- 1 ;zeta1 <- -1
-# frocDataRaw <- SimulateFrocDataset(
-#   mu = mu, 
-#   lambda = lambda, 
-#   nu = nu, 
-#   zeta1 = zeta1,
-#   I = 1,
-#   J = 1,
-#   K1 = K1, 
-#   K2 = K2, 
-#   perCase = Lk2)
-
-maxNL <- dim(frocDataRaw$ratings$NL)[4]
-FP <- apply(frocDataRaw$ratings$NL, 3, max)
-FP <- FP[1:K1]
-LL <- frocDataRaw$ratings$LL[(frocDataRaw$lesions$weights != -Inf)]
+LL <- frocData$ratings$LL[(frocData$lesions$weights != -Inf)]
 ratings <- c(FP,	LL)
 truth <- c(rep(0, length(FP)), rep(1, length(LL)))
 weight <- rep(1, length(ratings))
@@ -752,9 +609,9 @@ ret <- data.frame(ratings = ratings, truth = truth, weight = weight, pos = pos)
 ret$ratings[ret$ratings == -Inf] <- -0.9
 z_text <- data.frame(x = 3.5, y = -0.09, label = "z")
 
-frocDataRaw$lesions$weights[3, ] <- c(0.6, 0.4)
-frocDataRaw$lesions$weights[4, ] <- c(0.4, 0.6)
-weight <- c(rep(1, length(FP)), frocDataRaw$lesions$weights[frocDataRaw$lesions$weights != -Inf])
+frocData$lesions$weights[3, ] <- c(0.9, 0.1)
+frocData$lesions$weights[4, ] <- c(0.1, 0.9)
+weight <- c(rep(1, length(FP)), frocData$lesions$weights[frocData$lesions$weights != -Inf])
 ret <- data.frame(ratings = ratings, truth = truth, weight = weight, pos = pos)
 ret$ratings[ret$ratings == -Inf] <- -0.9
 z_text <- data.frame(x = 3.5, y = -0.09, label = "z")
@@ -843,25 +700,8 @@ afrocPlot$layout$clip[afrocPlot$layout$name=="panel"] <- "off"
 
 
 ```{r wafrocPlot, echo = FALSE, cache=F}
-# K1 <- 4;K2 <- 4
-# seed <- 1;set.seed(seed)
-# maxLL <- 2;Lk2 <- ceiling(runif(K2) * maxLL) 
-# mu <- 2;lambda <- 1;nu <- 1 ;zeta1 <- -1
-# frocDataRaw <- SimulateFrocDataset(
-#   mu = mu, 
-#   lambda = lambda, 
-#   nu = nu, 
-#   zeta1 = zeta1,
-#   I = 1,
-#   J = 1,
-#   K1 = K1, 
-#   K2 = K2, 
-#   perCase = Lk2)
-
-maxNL <- dim(frocDataRaw$ratings$NL)[4]
-FP <- apply(frocDataRaw$ratings$NL, 3, max)
 FP <- FP[1:K1]
-LL <- frocDataRaw$ratings$LL[(frocDataRaw$lesions$weights != -Inf)]
+LL <- frocData$ratings$LL[(frocData$lesions$weights != -Inf)]
 ratings <- c(FP,	LL)
 truth <- c(rep(0, length(FP)), rep(1, length(LL)))
 weight <- rep(1, length(ratings))
@@ -871,9 +711,9 @@ ret <- data.frame(ratings = ratings, truth = truth, weight = weight, pos = pos)
 ret$ratings[ret$ratings == -Inf] <- -0.9
 z_text <- data.frame(x = 3.5, y = -0.09, label = "z")
 
-frocDataRaw$lesions$weights[3, ] <- c(0.6, 0.4)
-frocDataRaw$lesions$weights[4, ] <- c(0.4, 0.6)
-weight <- c(rep(1, length(FP)), frocDataRaw$lesions$weights[frocDataRaw$lesions$weights != -Inf])
+frocData$lesions$weights[3, ] <- c(0.1, 0.9)
+frocData$lesions$weights[4, ] <- c(0.9, 0.1)
+weight <- c(rep(1, length(FP)), frocData$lesions$weights[frocData$lesions$weights != -Inf])
 ret <- data.frame(ratings = ratings, truth = truth, weight = weight, pos = pos)
 ret$ratings[ret$ratings == -Inf] <- -0.9
 z_text <- data.frame(x = 3.5, y = -0.09, label = "z")
@@ -994,19 +834,19 @@ wafrocPlot$layout$clip[wafrocPlot$layout$name=="panel"] <- "off"
 ```
 
 
-```{r froc-meanings-afroc-wafroc, fig.cap="Plot A: The empirical AFROC plot for the data shown in Table \\@ref(tab:froc-meanings-table-non-diseased) and Table \\@ref(tab:froc-meanings-table-diseased). The labels correspond to the last columns of the tables. The corresponding one-dimensional depiction is plot A in Fig. \\@ref(fig:froc-meanings-linear-plot-afroc-wafroc). The area under the empirical plot is 0.7708. Plot B: The empirical weighted-AFROC (wAFROC) plot for the data shown in Table \\@ref(tab:froc-meanings-table-non-diseased) and Table \\@ref(tab:froc-meanings-table-diseased). The corresponding one-dimensional plot is plot B in Fig. \\@ref(fig:froc-meanings-linear-plot-afroc-wafroc). The area under the wAFROC is 0.7875. ", fig.show='hold', echo=FALSE}
+```{r froc-meanings-afroc-wafroc, fig.cap="Plot A: The empirical AFROC plot for the data shown in Table `\\@ref(tab:froc-meanings-table-non-diseased`) and Table `\\@ref(tab:froc-meanings-table-diseased)`. The labels correspond to the last columns of the tables. The corresponding one-dimensional depiction is plot A in Fig. \\@ref(fig:froc-meanings-linear-plot-afroc-wafroc). The area under the empirical plot is 0.7708. Plot B: The empirical weighted-AFROC (wAFROC) plot for the data shown in Table `\\@ref(tab:froc-meanings-table-non-diseased)` and Table `\\@ref(tab:froc-meanings-table-diseased)`. The corresponding one-dimensional plot is plot B in Fig. \\@ref(fig:froc-meanings-linear-plot-afroc-wafroc). The area under the wAFROC is 0.7875. ", fig.show='hold', echo=FALSE}
 grid.arrange(afrocPlot, wafrocPlot, ncol = 2)
 ```
 
 ## wAFROC plot from first principles {#froc-meanings-wAFROC-plot-first-principles}
 
-Plot B in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc), which is the wAFROC analog of plot A in the same figure, is a one-dimensional depiction of the data in Table \@ref(tab:froc-meanings-table-non-diseased) and Table \@ref(tab:froc-meanings-table-diseased), but this time the lesion weights, shown in Table \@ref(tab:froc-meanings-table-diseased), are incorporated, as indicated by varying the *size* of each red circle (in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc) plot A, all red circles were of the same size). In addition, each lesion is labeled with its rating and weight. 
+Plot B in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc), which is the wAFROC analog of plot A in the same figure, is a one-dimensional depiction of the data in Table `\@ref(tab:froc-meanings-table-non-diseased)` and Table `\@ref(tab:froc-meanings-table-diseased)`, but this time the lesion weights, shown in Table `\@ref(tab:froc-meanings-table-diseased)`, are incorporated, as indicated by varying the *size* of each red circle (in Fig. \@ref(fig:froc-meanings-linear-plot-afroc-wafroc) plot A, all red circles were of the same size). In addition, each lesion is labeled with its rating and weight. 
 
 Moving a virtual threshold continuously to the left generates the wAFROC plot, Fig. \@ref(fig:froc-meanings-afroc-wafroc) plot B. The movement of the operating point in response to crossing FPs is the same as before. However, as each LL is crossed the operating point moves up by an amount that depends on the lesion weight:
 
 $$\frac{W_{k_2 l_2}}{K_2} = \frac{W_{k_2 l_2}}{4}$$
 
-Since the first two diseased cases have one lesion each (i.e., unit weights), crossing the corresponding z-samples results in upward jumps of 0.25, Fig. \@ref(fig:froc-meanings-afroc-wafroc) plot B -- compare the jumps C to D and from F to G. According to the weights in Fig. 14.4, crossing the z-sample of the first lesion in the third diseased case, results in an upward jump of 0.6/4. That from the second lesion in the same case results in an upward jump of 0.4/4, for a net upward jump of the third case of 0.25, the same as for each of the first two diseased cases. Likewise crossing the z-samples of the two lesions in the 4th disease case results in upward jump of 0.4/4 = 0.1 (compare the jump from O to A), for the 1st lesion and 0.6/4 = 0.15 (compare the jump from B to C), for the 2nd lesion, for a net upward jump of 1/4, which is the same as for each of the first three diseased cases. *This shows explicitly that the weighting method gives each diseased case the same importance, regardless of the number of lesions in it, a property not shared by the area under the AFROC.*
+Since the first two diseased cases have one lesion each (i.e., unit weights), crossing the corresponding z-samples results in upward jumps of 0.25, Fig. \@ref(fig:froc-meanings-afroc-wafroc) plot B -- compare the jumps C to D and from F to G. According to the weights in Fig. 14.4, crossing the z-sample of the first lesion in the third diseased case, results in an upward jump of 0.1/4. That from the second lesion in the same case results in an upward jump of 0.9/4, for a net upward jump of the third case of 0.25, the same as for each of the first two diseased cases. Likewise crossing the z-samples of the two lesions in the 4th disease case results in upward jump of 0.9/4 = 0.1 (compare the jump from O to A), for the 1st lesion and 0.1/4 = 0.15 (compare the jump from B to C), for the 2nd lesion, for a net upward jump of 1/4, which is the same as for each of the first three diseased cases. *This shows explicitly that the weighting method gives each diseased case the same importance, regardless of the number of lesions in it, a property not shared by the area under the AFROC.*
 
 
 ## Physical interpretations {#froc-meanings-physical-interpretions}
@@ -1021,7 +861,7 @@ The area under the AFROC has the following physical interpretation: it is the fr
 
 ### Physical interpretation of area under wAFROC
 
-The area under the wAFROC has the following physical interpretation: it is the lesion-weight adjusted fraction of diseased cases vs. non-diseased case comparisons where LL z-samples are equal (counting as half a comparison times the weight of the lesion in question) or greater (counting as a full comparison times the weight of the lesion) than FP z-samples. Note that there are still 24 LL vs. FP comparisons but the counting proceeds differently. The fourth diseased case contributes 0.4 x 4 + 0.6 x 4, i.e., 4 (compared to 8 in the preceding example). The third diseased case contributes 0.6 x 4 + 0.4 x 0.5, i.e., 2.6 (compared to 4.5 in the preceding example). The second diseased case contributes 1 x 2 = 2 (compared to 2 in the preceding example), and the first diseased case contributes 1 x 4 = 4 (compared to 4 in the preceding example). Summing these values and dividing by 16 (the total number of diseased cases vs. non-diseased cases comparisons) one gets 12.6/16 = 0.7875, which is the area under the wAFROC, §14.5.1. In probabilistic terms:
+The area under the wAFROC has the following physical interpretation: it is the lesion-weight adjusted fraction of diseased cases vs. non-diseased case comparisons where LL z-samples are equal (counting as half a comparison times the weight of the lesion in question) or greater (counting as a full comparison times the weight of the lesion) than FP z-samples. Note that there are still 24 LL vs. FP comparisons but the counting proceeds differently. The fourth diseased case contributes 0.9 x 4 + 0.1 x 4, i.e., 4 (compared to 8 in the preceding example). The third diseased case contributes 0.1 x 4 + 0.9 x 0.5, i.e., 2.6 (compared to 4.5 in the preceding example). The second diseased case contributes 1 x 2 = 2 (compared to 2 in the preceding example), and the first diseased case contributes 1 x 4 = 4 (compared to 4 in the preceding example). Summing these values and dividing by 16 (the total number of diseased cases vs. non-diseased cases comparisons) one gets 12.6/16 = 0.7875, which is the area under the wAFROC, §14.5.1. In probabilistic terms:
 
 *The area under the weighted-AFROC is the lesion-weight adjusted probability that a lesion is rated higher than any mark on a non-diseased case.*
 
