@@ -136,6 +136,7 @@ The empirical weighted-AFROC plot and lesion weights were defined in SectionTBA 
 (\#eq:froc-meanings-theta-wafroc)
 \end{equation}
 ```
+
 The weights obey the constraint:
 
 ```{=tex}
@@ -146,12 +147,13 @@ The weights obey the constraint:
 ```
 This ensures, as will be shown shortly, that each diseased case contributes equally to the FOM, regardless of how many lesions are in it. In the special case of one lesion per diseased case, $\theta_{wAFROC}$ and $\theta_{\text{wAFROC}}$ are identical. For equally weighted lesions,
 
-```{=tex}
+
 \begin{equation} 
 W_{k_2 l_2} = \frac{1}{L_{k_2}}
 (\#eq:froc-meanings-theta-equal-weights)
 \end{equation}
-```
+
+
 For example, for equally weighted lesions and a case with three lesions, each weight equals one-third (1/3) [^froc-meanings-foms-ocs-1].
 
 [^froc-meanings-foms-ocs-1]: The `RJafroc` function `DfReadDataFile()` checks that the weights sum to unity to a precision of about 5 decimal places. The easy way to assign equal weights to all lesions on a diseased case is to set the corresponding `lesionWeights` field in the Excel file `Truth` worksheet to zeroes.
@@ -322,10 +324,10 @@ According to Eqn. \@ref(eq:froc-meanings-A0), $A_0$ increases as $\text{FPF}_1$ 
 
 The wAFROC and AFROC concepts are perhaps best illustrated with a numerical example with very few cases. 
 
-The dataset consists of $K_1 = 4$ non-diseased and $K_2 = 4$ diseased cases. The first two diseased cases have one lesion each, and the remaining two have two lesions each.
+The dataset consists of $K_1 = 4$ non-diseased and $K_2 = 4$ diseased cases. The first two diseased cases have one lesion each, and the remaining two have two lesions each. 
 
 
-```{r froc-meanings-numerical, echo = FALSE, cache=F}
+```{r froc-meanings-numerical, echo = F, cache=F}
 NL <- array(c(-Inf, 0.5,  0.7, -0.3, 1.5, -Inf, 
               -Inf, -Inf, -Inf, -Inf, 0.6, -Inf, 
               -Inf, -Inf, -Inf, -Inf), dim = c(8,2))
@@ -340,29 +342,157 @@ K2 <- 4
 FP <- apply(frocData$ratings$NL, 3, max)
 FP <- FP[1:K1]
 
-p1 <- PlotEmpiricalOperatingCharacteristics(
+afrocPlot <- PlotEmpiricalOperatingCharacteristics(
   frocData,trts = 1, 
   rdrs = 1, 
   opChType = "AFROC", 
   legend.position = "NULL")
-p1 <- p1$Plot + ggtitle("A")
+afrocPlot <- afrocPlot$Plot + ggtitle("A")
 
-p2 <- PlotEmpiricalOperatingCharacteristics(
+wafrocPlot <- PlotEmpiricalOperatingCharacteristics(
   frocData,
   trts = 1, 
   rdrs = 1, 
   opChType = "wAFROC", 
   legend.position = "NULL")
-p2 <- p2$Plot + ggtitle("B")
+wafrocPlot <- wafrocPlot$Plot + ggtitle("B")
 
-cat("AFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "AFROC")),"\n")
+FPF <- afrocPlot$data$genAbscissa
+LLF <- afrocPlot$data$genOrdinate
+wLLF <- wafrocPlot$data$genOrdinate
+```
+
+
+Shown next is the `NL` ratings array. The array has 8 rows, corresponding to the total number of cases, and 2 columns, corresponding to the maximum number of NLs per case (notice there are two entries for case #3). The negative infinities represent unmarked locations. 
+
+
+```{r, echo=FALSE}
+cat("\nNL ratings:")
+NL
+```
+
+
+Shown next is the `FP` ratings array. Since FPs are only possible on non-diseased cases, this is a length 4 row-vector. Each value is the maximum of the two `NL` ratings for the corresponding non-diseased case. As an example, for case #3 the maximum of the two `NL` values is 0.7.   
+
+
+```{r, echo=FALSE}
+cat("\nFP ratings:")
+FP
+```
+
+
+Show next is the sorted `FP` ratings. 
+
+```{r, echo=FALSE}
+sort(FP)
+```
+
+
+The sorting makes it easy to construct the `FPF` values, shown next.
+
+
+```{r, echo=FALSE}
+cat("\nFPF values:")
+for (i in 1:length(FPF)) {
+  cat(sprintf (" %.3f", FPF[i]))
+}
+cat("\n")
+```
+
+
+The first non-zero `FPF` value is 0.25, which occurs when the sliding threshold is lowered past the highest `FP` value, namely 0.7. The 0.25 comes from 1 `FP` case divided by 4 non-diseased cases. The next `FPF` value is 0.5, which occurs when the sliding threshold is lowered past the next-highest `FP` value, namely 0.5. The 0.5 comes from 2 divided by 4. The next `FPF` value is 0.75 and the last `FPF` value is unity.
+
+
+Shown next is the `LL` ratings array:
+
+
+```{r, echo=FALSE}
+cat("\nLL ratings:")
+LL
+```
+
+
+Show next is the sorted `LL` ratings. 
+
+
+```{r, echo=FALSE}
+sort(LL)
+```
+
+
+The sorting makes it easy to construct the `LLF` values, shown next.
+
+
+```{r, echo=FALSE}
+cat("\nLLF values:")
+for (i in 1:length(LLF)) {
+  cat(sprintf (" %.3f", LLF[i]))
+}
+cat("\n")
+```
+
+
+
+The first non-zero `LLF` value is 0.167, which occurs when the sliding threshold is lowered past the highest `LL` value, namely 3. The 0.167 comes from 1 LL divided by 6 lesions. The next `LLF` value is 0.333, which occurs when the sliding threshold is lowered past the next-highest `LL` value, namely 2 (2/6 = 0.333). The next `LLF` value is 0.5, which occurs when the sliding threshold is lowered past 1.6 (3/6 = 0.5), and so on.
+
+Show next is the lesion weights array:
+
+
+
+```{r, echo=FALSE}
+cat("\nlesion weights:")
+frocData$lesions$weights
+```
+
+
+Since the first two diseased cases have one lesion each, the [1,1] and [2,1] elements of the the weight array are each equal to unity and the [1,2] and [2,2] elements are each equal to negative infinity, which is being used as a missing value. For diseased case #3 the first lesion has weight 0.1 while the second lesion has weight 0.9 (the weights must sum to unity). For diseased case #4 the weights are reversed. 
+
+The sorted `LL` ratings array and the weights are used to construct the `wLLF` values shown next.
+
+
+```{r, echo=FALSE}
+cat("\nwLLF values:")
+for (i in 1:length(LLF)) {
+  cat(sprintf (" %.3f", wLLF[i]))
+}
+cat("\n")
+```
+
+
+The first non-zero `wLLF` value is 0.225, which occurs when the sliding threshold is lowered past the highest `LL` value, namely 3. Since this comes from the first lesion on diseased case #4, whose weight is 0.9, the corresponding incremental vertical jump is 1 divided by 4 (*sic*) times 0.9. Notice that we are dividing by 4, the total number of diseased cases, not 6 as in the `LLF` example.   
+
+The next `wLLF` value is 0.25, which occurs when the sliding threshold is lowered past the next-highest `LL` value, namely 2, which comes from the 2nd lesion on the fourth diseased case with weight 0.1. The incremental jump in `wLLF` is 1 divided by 4 times 0.1, which is 0.025. The net `wLLF` value corresponding to these two lesions is $1/4*0.9 + 1/4*0.1 = 1/4 = 0.25$. The two lesions on diseased case #4 contribute 0.25 in `wLLF` increment. In contrast, they contribute $2/6 = 0.333$ in `LLF` increment, showing explicitly that the AFROC gives greater importance to diseased cases with more lesions while the wAFROC does not.
+
+The next `wLLF` value is 0.275, which occurs when the sliding threshold is lowered past 1.6, which ratings comes from the first lesion on diseased case #3, with weight 0.1, $1/4*0.9 + 1/4*0.1 + 1/4*0.1 = 0.275$, and so on. 
+
+The reader should complete these hand-calculations to reproduce all of the `wLLF` values shown above.
+
+These values can be used to numerically calculate the AUCs under the AFROC and wAFROC.
+
+```{r}
+afroc_auc <- 0.5 * 0.667 + 0.25 * 0.833 + 
+  0.833 * 0.25 +  (1 - 0.833) * 0.25 /2
+
+wafroc_auc <- 0.5 * 0.525 + 0.25 * 0.775 + 
+  0.775 * 0.25 +  (1 - 0.775) * 0.25 /2
+
+afroc_auc
+wafroc_auc
+```
+
+
+```{r, echo=FALSE}
+cat("\nAFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "AFROC")),"\n")
 cat("wAFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "wAFROC")),"\n")
 ```
 
-Shown in Fig. \@ref(fig:plots-p1-p2) are the AFROC and wAFROC plots with operating points.
 
-```{r plots-p1-p2, fig.cap="Left: AFROC plot; Right: corresponding wAFROC plot.", fig.show='hold', echo=FALSE}
-grid.arrange(p1, p2, ncol = 2)
+
+
+Shown in Fig. \@ref(fig:plots-afrocPlot-wafrocPlot) are the AFROC and wAFROC plots with operating points.
+
+```{r plots-afrocPlot-wafrocPlot, fig.cap="Left: AFROC plot; Right: corresponding wAFROC plot.", fig.show='hold', echo=FALSE}
+grid.arrange(afrocPlot, wafrocPlot, ncol = 2)
 ```
 
 
