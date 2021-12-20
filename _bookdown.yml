@@ -5,6 +5,7 @@ output_dir: docs
 delete_merged_file: TRUE
 rmd_files: [
   "index.Rmd", 
+  "03-froc-empirical.Rmd",
   "14-meanings-foms.Rmd", 
   "99-references.Rmd",
 ]
