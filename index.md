@@ -1,7 +1,7 @@
 --- 
 title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
-date: "2021-12-18"
+date: "2021-12-20"
 site: bookdown::bookdown_site
 output: 
    bookdown::pdf_document: default
@@ -32,6 +32,8 @@ description: "Artificial intelligence and observer performance book based on RJa
 * HMF approximately 30%
 * This book is currently (as of December 2021) in preparation. 
 * Parts labeled TBA and TODOLAST need to be updated on final revision.
+* Un-comment links like `\@ref(froc-paradigm-solar-analogy)` etc. Search for `\@ref
+
 
 
 ## The pdf file of the book {-}
