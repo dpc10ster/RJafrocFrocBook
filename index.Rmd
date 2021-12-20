@@ -37,6 +37,8 @@ knitr::write_bib(c(
 * HMF approximately 30%
 * This book is currently (as of December 2021) in preparation. 
 * Parts labeled TBA and TODOLAST need to be updated on final revision.
+* Un-comment links like `\@ref(froc-paradigm-solar-analogy)` etc. Search for `\@ref
+
 
 
 ## The pdf file of the book {-}
