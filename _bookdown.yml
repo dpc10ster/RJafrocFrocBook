@@ -5,8 +5,17 @@ output_dir: docs
 delete_merged_file: TRUE
 rmd_files: [
   "index.Rmd", 
+  "02-froc.Rmd",
   "03-froc-empirical.Rmd",
-  "14-meanings-foms.Rmd", 
+  "04-computing-foms.Rmd", 
+  "05-visual-search.Rmd",
+  "16-rsm.Rmd",
+  "17a-rsm-predictions.Rmd",
+  "17b-rsm-search-classification.Rmd",
+  "19a-rsm-fitting.Rmd",
+  "19b-rsm-3-fits.Rmd",
+  "20-standalone-cad.Rmd",
+  "21-optim-op-point.Rmd",
   "99-references.Rmd",
 ]
 clean: [packages.bib, myRefs.bbl]
