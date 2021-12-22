@@ -1,4 +1,4 @@
-# Empirical plot examples {#froc-empirical-examples}
+# Empirical plot examples {#empirical-examples}
 
 
 ```{r setup, include = FALSE}
@@ -14,13 +14,13 @@
 
 
 
-## TBA How much finished {#froc-empirical-examples-how-much-finished}
+## TBA How much finished {#empirical-examples-how-much-finished}
 50%
 
 
 
 
-## Introduction {#froc-empirical-examples-intro}
+## Introduction {#empirical-examples-intro}
 
 The previous chapter introduced definitions and formulae for the various operating characteristics possible with FROC data. This chapter illustrates these definitions with numerical values and plots. The RSM simulator, introduced in TBA Section (froc-paradigm-preview-rsm), is used to generate FROC datasets under controlled conditions. Structure of the FROC dataset. TBA.
 
@@ -30,7 +30,7 @@ The starting point is the FROC plot.
 
 *Raw plots* correspond to the actual simulator generated floating-point ratings, prior to any binning operation. If binning is employed the plots are termed *binned plots*. The FROC plots shown below were generated using the data simulator introduced in Chapter \@ref(froc-paradigm). The examples are similar to the population FROC curves shown in that chapter but the emphasis here is on understanding the FROC data structure. To this end smaller numbers of cases, not 20,000 as in the previous chapter, are used. Examples are given using smaller datasets. With a very small dataset, the logic of constructing the plot is more transparent but the operating points are more susceptible to sampling variability. The examples illustrate key points distinguishing the free-response paradigm from ROC. TBA
 
-### Code for raw plots {#froc-empirical-examples-raw-plots-code1}
+### Code for raw plots {#empirical-examples-raw-plots-code1}
 
 ```{r, attr.source = ".numberLines"}
 seed <- 1;set.seed(seed)
@@ -92,7 +92,7 @@ max(floor(runif(1000, 1, Lmax + 1)))
 
 This shows that the first two diseased cases have one lesion each, the third and fourth have two lesions each, etc. The total number of lesions in the dataset is 11. The last two lines of the code snippet show that, even with a thousand simulations, the number of lesions per diseased case is indeed limited to `Lmax` = 2.
 
-#### The structure of the FROC dataset {#froc-empirical-examples-str-dataset}
+#### The structure of the FROC dataset {#empirical-examples-str-dataset}
 
 Lines 11-21 uses the function `SimulateFrocDataset` to simulate the dataset object `frocDataRaw`. Its structure is examined next:
 
@@ -596,7 +596,7 @@ p5F <- PlotEmpiricalOperatingCharacteristics(
 grid.arrange(p5A,p5B,p5C,p5D,p5E,p5F,nrow = 2, ncol=3)
 ```
 
-## Structure of the binned data {#froc-empirical-examples-str-binned-data}
+## Structure of the binned data {#empirical-examples-str-binned-data}
 
 ```{r}
 str(frocDataBinnedSeed1$ratings$NL)
@@ -625,12 +625,12 @@ sum(Lk2Seed1) - sum(as.vector(table(frocDataBinnedSeed1$ratings$LL))[2:6])
 -   Summing the `LL` counts in bins 1 through 5 (corresponding to table columns 2-6, since column 1 applies to the negative-infinities) and subtracting from the total number of lesions one gets: 104 -- (10+5+8+35+4) = 104 -- 62 = 42, see last line of above code output.
 -   Therefore, the number of unmarked lesions is 42. The listed value (78) is an overestimate because it includes the $-\infty$ counts from the fourth dimension negative-infinity "padding" of the `LL` array.
 
-## Summary {#froc-empirical-examples-summary}
+## Summary {#empirical-examples-summary}
 
 The preceding detailed example illustrates a key point: *The total number of latent `NL`s in the dataset is generally unknown to the data analyst, unlike the total number of latent `LL`s, which is known*. The only exception to this rule is if $\zeta_1 = -\infty$, in which case the observer marks all latent `NL` (and `LL`) sites.
 
-## Discussion {#froc-empirical-examples-Discussion}
+## Discussion {#empirical-examples-Discussion}
 
 TBA
 
-## References {#froc-empirical-examples-references}
+## References {#empirical-examples-references}

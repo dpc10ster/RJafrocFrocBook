@@ -141,7 +141,7 @@ If *integer ratings* are used for each recorded mark then in a four-rating FROC 
 If *continuous ratings* are used, the procedure is to start with a very high threshold so that none of the ratings exceed the threshold and then to gradually lower the threshold. Every time the threshold crosses the rating of a mark, or possibly multiple marks, the total count of LLs and NLs exceeding the threshold is divided by the appropriate denominators yielding the ''raw'' FROC plot. For example, when an LL rating just exceeds the threshold, the operating point jumps up by 1/(total number of lesions), and if two LLs simultaneously just exceed the threshold the operating point jumps up by 2/(total number of lesions). If an NL rating just exceeds the threshold, the operating point jumps to the right by 1/(total number of cases). If an LL rating and a NL rating simultaneously just exceed the threshold, the operating point moves diagonally, up by 1/(total number of lesions) and to the right by 1/(total number of cases). The reader should get the general idea by now and recognize that the cumulating procedure is very similar to the manner in which ROC operating points were calculated, the only differences being in the quantities being cumulated and the relevant denominators.
 
 
-Chapter \@ref(froc-empirical) describes the FROC, and other possible operating characteristics, in more detail. 
+Chapter \@ref(empirical) describes the FROC, and other possible operating characteristics, in more detail. 
 
 ## The "solar" analogy {#froc-paradigm-solar-analogy}
 

@@ -30,7 +30,7 @@ library(pBrackets)
 
 ## TBA Introduction {#computing-aucs-intro}
 
-Chapter `\@ref(froc-empirical)` introduced several empirical operating characteristic plots from FROC data. Expressions were given for computing *operating points* for each such plot from z-samples. The areas or AUCs under these plots were also defined. 
+Chapter `\@ref(empirical)` introduced several empirical operating characteristic plots from FROC data. Expressions were given for computing *operating points* for each such plot from z-samples. The areas or AUCs under these plots were also defined. 
 
 Calculating areas from operating points using planimetry or geometry is tedious at best. This chapter defines formulae for calculating the AUCs directly from the z-samples or ratings. These expressions are analogous to computing the Wilcoxon statistic for ROC ratings data since it is known [@RN2174] that this statistic equals the AUC under the empirical ROC plot.
 
@@ -53,7 +53,7 @@ Here is the organization of the chapter.
 $\text{A}_{AFROC}$ is the area under the empirical AFROC. It can be computed from the z-samples as follows.
 
 
-The highest rating $\text{FP}_{k_1 1}$ on non-diseased case $k_1 1$ was defined in Section \@ref(eq:froc-empirical-FP). The function $\psi\left ( x,  y \right )$ was defined (see chapter TBA on empirical AUC in `RJafrocRocBook`) by:
+The highest rating $\text{FP}_{k_1 1}$ on non-diseased case $k_1 1$ was defined in Section \@ref(eq:empirical-FP). The function $\psi\left ( x,  y \right )$ was defined (see chapter TBA on empirical AUC in `RJafrocRocBook`) by:
 
 
 \begin{equation}
@@ -91,7 +91,7 @@ The range $0 \leq \text{A}_{AFROC} \leq 1$ is one reason why the "chance diagona
 
 ## Computing empirical wAFROC AUC {#computing-aucs-wafroc}
 
-The empirical weighted-AFROC plot and lesion weights were defined in Section TBA `\@ref(froc-empirical-wAFROC)`. The corresponding AUC can be computed [@RN1385] by including the lesion weights $W_{k_2 l_2}$ inside the summations (but outside the kernel function):
+The empirical weighted-AFROC plot and lesion weights were defined in Section TBA `\@ref(empirical-wAFROC)`. The corresponding AUC can be computed [@RN1385] by including the lesion weights $W_{k_2 l_2}$ inside the summations (but outside the kernel function):
 
 \begin{equation}
 \begin{aligned} 

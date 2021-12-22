@@ -6,7 +6,7 @@ delete_merged_file: TRUE
 rmd_files: [
   "index.Rmd", 
   "02-froc.Rmd",
-  "03-froc-empirical.Rmd",
+  "03-empirical.Rmd",
   "14-meanings-foms.Rmd", 
   "04-visual-search.Rmd",
   "16-rsm.Rmd",
