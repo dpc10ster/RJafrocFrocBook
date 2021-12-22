@@ -1,7 +1,7 @@
 --- 
 title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
-date: "2021-12-20"
+date: "2021-12-22"
 site: bookdown::bookdown_site
 output: 
    bookdown::pdf_document: default
@@ -85,8 +85,8 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 ## Chapters needing heavy edits {-}
 
 * 12-froc.
-* 13-froc-empirical.
-* 13-froc-empirical-examples.
+* 13-empirical.
+* 13-empirical-examples.
 
 
 ## Shelved vs. removed vs. parked folders needing heavy edits {-}
@@ -100,7 +100,7 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 
 ## Coding aids (for me) {-}
 
-* weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-froc-empirical1.Rmd which should be 13a-froc-empirical1.Rmd
+* weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-empirical1.Rmd which should be 13a-empirical1.Rmd
 
 ### formatting
 * sprintf("%.4f", proper formatting of numbers
