@@ -1300,12 +1300,45 @@ According to Eqn. \@ref(eq:empirical-A0), $A_0$ increases as $\text{FPF}_1$ decr
 
 \begin{equation}
 \begin{aligned}
-\text{A}_{FROC} =& \frac{1}{\left ( K_1 + K2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
-&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \psi\left ( z_{k_11l_11},z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \psi\left ( z_{k_2'2l_11},z_{k_22l_22} \right )
+\text{A}_{FROC} =& \frac{1}{\left ( K_1+K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
+&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \psi\left ( z_{k_11l_11}',z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \psi\left ( z_{k_2'2l_11}',z_{k_22l_22} \right )
 \right]
 \end{aligned}
 (\#eq:empirical-computational-froc)
 \end{equation}
+
+
+$z_{k_11l_11}'$ denotes a *finite* NL z-sample. This notation is used to eliminate the negative infinities due to unmarked NLs which are not observable events. This notation is not needed for LLs since unmarked LLs are observable events. The first double summation inside the square bracket compares, using the $\psi$ function, all finite NL ratings on *non-diseased* cases with all lesion ratings on diseased case $k_22$. The second double summation compares all finite NL ratings on *diseased cases* with all lesion ratings on diseased case $k_22$. The double summation outside the square bracket sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
+
+The formula can be simplified by making two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings, including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
+
+The following example uses the same 8-case FROC dataset used earlier. This time the FROC plot is shown and the AUC is calculated two ways: using geometry and using the formula (implemented in `RJafroc` function `UtilFigureOfMerit`).
+
+
+```{r empirical-numerical2, echo = T, cache=F}
+frocPlot <- PlotEmpiricalOperatingCharacteristics(
+  frocData,trts = 1, 
+  rdrs = 1, 
+  opChType = "FROC", 
+  legend.position = "NULL")
+print(frocPlot$Plot)
+
+NLF <- frocPlot$Points$genAbscissa
+LLF <- frocPlot$Points$genOrdinate
+
+NLF
+LLF
+
+auc_geom <- LLF[5]*NLF[5] + LLF[9]*(NLF[9]-NLF[5]) + LLF[11]*(NLF[11]-NLF[9]) 
+auc_formula <- as.numeric(UtilFigureOfMerit(frocData, FOM = "FROC"))
+```
+
+
+```{r, echo=F}
+cat("\nGeometry yields FROC AUC = ", auc_geom,"\n")
+cat(  "Formula yields  FROC AUC = ", auc_formula,"\n")
+```
+
 
 ### ROC
 
@@ -1341,21 +1374,25 @@ According to Eqn. \@ref(eq:empirical-A0), $A_0$ increases as $\text{FPF}_1$ decr
 
 ### AFROC1
 
+
 \begin{equation}
 \begin{aligned}
 \text{A}_{AFROC1} =& \frac{1}{\left (K_1 +K2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
-& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )  \right ]
+& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_22l_11}'  \right ),z_{k_22l_22} \right )  \right ]
 \end{aligned}
 (\#eq:empirical-computational-afroc1)
 \end{equation}
 
 
+
+
 ### wAFROC1
+
 
 \begin{equation}
 \begin{aligned}
 \text{A}_{wAFROC1} =& \frac{1}{\left (K_1 + K2 \right )K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\\
-& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )  \right ]
+& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_2'2l_11}  \right ),z_{k_22l_22} \right )  \right ]
 \end{aligned}
 (\#eq:empirical-computational-wafroc1)
 \end{equation}
