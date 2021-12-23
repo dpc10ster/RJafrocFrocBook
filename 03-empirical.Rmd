@@ -1315,7 +1315,7 @@ The formula can be simplified by making two arrays, the first containing all fin
 The following example uses the same 8-case FROC dataset used earlier. This time the FROC plot is shown and the AUC is calculated two ways: using geometry and using the formula (implemented in `RJafroc` function `UtilFigureOfMerit`).
 
 
-```{r empirical-numerical2, echo = T, cache=F}
+```{r empirical-numerical2, echo = F, cache=F}
 frocPlot <- PlotEmpiricalOperatingCharacteristics(
   frocData,trts = 1, 
   rdrs = 1, 
@@ -1325,9 +1325,6 @@ print(frocPlot$Plot)
 
 NLF <- frocPlot$Points$genAbscissa
 LLF <- frocPlot$Points$genOrdinate
-
-NLF
-LLF
 
 auc_geom <- LLF[5]*NLF[5] + LLF[9]*(NLF[9]-NLF[5]) + LLF[11]*(NLF[11]-NLF[9]) 
 auc_formula <- as.numeric(UtilFigureOfMerit(frocData, FOM = "FROC"))
@@ -1377,12 +1374,27 @@ cat(  "Formula yields  FROC AUC = ", auc_formula,"\n")
 
 \begin{equation}
 \begin{aligned}
-\text{A}_{AFROC1} =& \frac{1}{\left (K_1 +K2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
+\text{A}_{AFROC1} =& \frac{1}{\left (K_1 +K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
 & \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_22l_11}'  \right ),z_{k_22l_22} \right )  \right ]
 \end{aligned}
 (\#eq:empirical-computational-afroc1)
 \end{equation}
 
+
+
+In the second term inside the square brackets, notice the need to distinguish between the two indices for diseased cases $z_{k_22l_11}'$ and $z_{k_22l_22}$. 
+
+A check of normalization is obtained by assuming all NL ratings are less than any LL rating, in which case the terms inside the square brackets reduce to $K_1+K_2$ and $\text{A}_{AFROC1}$ is seen to be unity:
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC1} =& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} 1 \\
+=& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}L_{k_2 2} \\
+=& 1
+\end{aligned}
+(\#eq:empirical-computational-afroc1a)
+\end{equation}
 
 
 
@@ -1391,7 +1403,7 @@ cat(  "Formula yields  FROC AUC = ", auc_formula,"\n")
 
 \begin{equation}
 \begin{aligned}
-\text{A}_{wAFROC1} =& \frac{1}{\left (K_1 + K2 \right )K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\\
+\text{A}_{wAFROC1} =& \frac{1}{\left (K_1 + K_2 \right )K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\\
 & \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_2'2l_11}  \right ),z_{k_22l_22} \right )  \right ]
 \end{aligned}
 (\#eq:empirical-computational-wafroc1)
