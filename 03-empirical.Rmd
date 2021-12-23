@@ -1089,12 +1089,12 @@ The operating point labeled $i$ has coordinates $\left ( \text{FPF}_i, \text{wLL
 
 TBA The area $A_{\text{wAFROC}}$ under the empirical wAFROC plot equals the weighted-AFROC FOM-statistic $\theta_{\text{wAFROC}}$ defined by Eqn.` \@ref(eq:empirical-theta-wafroc)`:
 
-```{=tex}
+
 \begin{equation}
 \theta_{\text{wAFROC}} = A_{\text{wAFROC}}
 (\#eq:empirical-theorem1)
 \end{equation}
-```
+
 
 
 The area $A_i$ of the leftmost shaded trapezoid in Fig. \@ref(fig:empirical-theorems) is:
@@ -1291,6 +1291,74 @@ According to Eqn. \@ref(eq:empirical-A0), $A_0$ increases as $\text{FPF}_1$ decr
 * Each unmarked non-diseased case represents a perfect decision.
 * For a perfect observer whose operating characteristic is the vertical line from (0,0) to (0,1) followed by the horizontal line from (0,1) to (1,1), *the area under the straight-line extension comprises the entire AUC*. Excluding it would yield zero AUC for a perfect observer, which is obviously incorrect. 
 * Stated equivalently, for the perfect observer $\text{FPF}_1 = 0$ and $\text{wLLF}_1 = 1$ and then, according to Eqn. \@ref(eq:empirical-A0), the area under the straight line extension is $A_0 = 1$.
+
+
+
+## Appendix 2: Summary of computational formulae {#empirical-summary-computational}
+
+### FROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{FROC} =& \frac{1}{\left ( K_1 + K2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
+&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \psi\left ( z_{k_11l_11},z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \psi\left ( z_{k_2'2l_11},z_{k_22l_22} \right )
+\right]
+\end{aligned}
+(\#eq:empirical-computational-froc)
+\end{equation}
+
+### ROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{ROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2} \psi\left ( \max_{l_1}\left (z_{k_11l_11} \right ), \max_{l_1l_2}\left (z_{k_22l_11}, z_{k_22l_22}  \right ) \right )
+\end{aligned}
+(\#eq:empirical-computational-roc)
+\end{equation}
+
+
+
+
+### AFROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC} = \frac{1}{K_1\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
+\end{aligned}
+(\#eq:empirical-computational-afroc)
+\end{equation}
+
+
+### wAFROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{wAFROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
+\end{aligned}
+(\#eq:empirical-computational-wafroc)
+\end{equation}
+
+
+### AFROC1
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC1} =& \frac{1}{\left (K_1 +K2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
+& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )  \right ]
+\end{aligned}
+(\#eq:empirical-computational-afroc1)
+\end{equation}
+
+
+### wAFROC1
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{wAFROC1} =& \frac{1}{\left (K_1 + K2 \right )K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\\
+& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )  \right ]
+\end{aligned}
+(\#eq:empirical-computational-wafroc1)
+\end{equation}
 
 
 
