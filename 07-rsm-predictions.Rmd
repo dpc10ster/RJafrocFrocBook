@@ -95,7 +95,7 @@ Defining $f_L$  the fraction of diseased cases with $L$ lesions and $L_{max}$ th
 By restricting attention to the set of diseased cases with $L$ lesions each, Eqn. \@ref(eq:rsm-pred-tpf-max) for $\text{TPF}_{max}$ applies. Since TPF is a probability and probabilities of independent processes add it follows that:
 
 \begin{equation}
-\text{TPF}_{max} \left ( \mu, \lambda', \nu', \overrightarrow{f_L} \right ) = \sum_{L=1}^{L{max}}  f_L \text{TPF}_{max} \left ( \mu, \lambda', \nu', L \right )
+\text{TPF}_{max} \left ( \mu, \lambda', \nu', L \right ) = 1 - \sum_{L=1}^{L_{max}}f_L\text{exp} \left ( - \lambda' \right ) \left ( 1 - \nu' \right )^L
 (\#eq:rsm-pred-tpf-max-fl1)
 \end{equation}
 
