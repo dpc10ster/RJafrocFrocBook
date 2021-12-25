@@ -40,9 +40,9 @@ From the previous chapter the coordinates of the end-point are given by:
 
 ## Quantifying search performance {#rsm-sc-quantifying}
 
-Qualitatively, search performance is the ability to find lesions while not finding non-lesions. To arrive at a quantitative definition of search performance one examines the location of the ROC end-point. 
+Qualitatively, search performance is the ability to find lesions while not finding non-lesions. To arrive at a quantitative definition of search performance consider the location of the ROC end-point. 
 
-In Fig. \@ref(fig:rsm-sc-performance-from-roc-curve), plot (a) is a typical ROC curve predicted by models that do not account for search performance. The end-point is at (1,1), the filled circle, i.e., by adopting a sufficiently low reporting threshold the observer can continuously move the operating point to (1,1). 
+In Fig. \@ref(fig:rsm-sc-performance-from-roc-curve), plot (a) is a typical ROC curve predicted by models that do not account for search. The end-point is at (1,1), the filled circle, i.e., by adopting a sufficiently low reporting threshold the observer can continuously move the operating point to (1,1). 
 
 
 ```{r rsm-sc-performance-from-roc-curve, fig.cap="Relation of search performance to the end-point of the ROC curve. Plot (a) is for conventional ROC models while plot (b) is for the RSM.", echo = FALSE}
@@ -100,12 +100,11 @@ if (fpfMax < 0.99){
 
 The curve labeled (b) is a typical RSM-predicted ROC curve. The end-point is down-left shifted relative to (1,1), the filled square. The observer cannot move the operating point continuously to (1,1). *The location of the end-point, in particular how far it is from (1,1), measures search performance.* Higher search performance is characterized by the end-point moving upwards and to the left, in the limit to (0,1), corresponding to perfect search performance. 
 
+
 **Definition**: The perpendicular distance, $d_S$, from the end-point to the chance diagonal, plot (c), multiplied by $\sqrt{2}$, is a quantitative measure of search performance $S$.  
 
 
-Consider the case $\lambda' = 0$ and $\nu' = 1$. The end-point is (0,1). The perpendicular distance from (0,1) to the chance diagonal is $\frac{1}{\sqrt{2}}$, which multiplied by $\sqrt{2}$ yields unity. This observer has perfect search performance, i.e.,  $S$ = 1. Since no NLs are found and all lesions are found, the observer never makes a mistake. One cannot improve over perfection: Indeed, with perfect search performance there is no need for the observer to use the decision variable z-sample information - the observer simply marks all suspiciuos regions found by search. 
-
-Using geometry and Eqn. \@ref(eq:rsm-sc-FPF-TPF-max), it follows that: 
+Using [geometry](https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_an_equation) and Eqn. \@ref(eq:rsm-sc-FPF-TPF-max), it follows that: 
 
 
 \begin{equation} 
@@ -122,11 +121,14 @@ S=\exp\left ( -\lambda' \right )\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu'  
 (\#eq:rsm-sc-search-performance)
 \end{equation}
 
-Eqn. \@ref(eq:rsm-sc-search-performance) shows search performance is the product of two terms: the probability $\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu'  \right )^L  \right )$ of finding at least one lesion times the probability $\exp\left ( -\lambda' \right )$ of not finding non-lesions. This puts into a mathematical form the qualitative definition of search performance as the ability to find lesions while avoiding finding non-lesions. 
+Eqn. \@ref(eq:rsm-sc-search-performance) shows search performance is the product of two terms: the probability $\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu'  \right )^L  \right )$ of finding at least one lesion times the probability $\exp\left ( -\lambda' \right )$ of not finding non-lesions. This puts into mathematical form the qualitative definition of search performance as the ability to find lesions while avoiding finding non-lesions. 
+
+
+Example: consider $\lambda' = 0$ and $\nu' = 1$. The end-point is (0,1). The perpendicular distance from (0,1) to the chance diagonal is $\frac{1}{\sqrt{2}}$, which multiplied by $\sqrt{2}$ yields $S = 1$. The same value is obtained using Eqn. \@ref(eq:rsm-sc-search-performance). Since no NLs are found and all lesions are found, the observer never makes a mistake. One cannot improve over perfect performance: the observer simply marks all suspiciuos regions found by search regardless of their z-samples. 
 
 
 ## Quantifying lesion-classification performance {#rsm-sc-performance}
-Lesion-classification performance $C$ measures the ability, having found a suspicious region, to correctly classify it as a lesion, i.e., mark the location of the lesion resulting in a LL event. It is distinct from case-classification performance ROC $AUC$. The latter is a measure of the ability to distinguish between diseased and non-diseased cases. Lesion-classification performance is a measure of the ability to distinguish between diseased and non-diseased regions, i.e., between latent NLs and latent LLs. $C$ is determined by the $\mu$ parameter and is defined by the implied ROC-area of two unit variance normal distributions separated by $\mu$. 
+Lesion-classification performance $C$ measures the ability, having found a suspicious region, to correctly classify it as a lesion, i.e., mark the location of the lesion resulting in a LL event. It is distinct from *case-classification* performance, ROC AUC, which measures the ability to distinguish between diseased and non-diseased cases. In contrast *lesion-classification* performance is a measure of the ability to distinguish between diseased and non-diseased regions, i.e., between latent NLs and latent LLs. Lesion-classification performance $C$ is determined by the $\mu$ parameter of the RSM and is defined by the implied ROC-area of two unit variance normal distributions separated by $\mu$. 
 
 
 \begin{equation}
@@ -145,9 +147,9 @@ It should be obvious that lesion-classification performance is similar to what i
 ### Significance of measuring search and lesion-classification performance {#rsm-sc-search-classification-significance}
 The ability to quantify search and lesion-classification performance from a single paradigm (ROC) study is highly significant, going well-beyond modeling the ROC curve. ROC-AUC measures how well an observer is able to separate two groups of patients, a group of diseased patients from a group of non-diseased patients. While important, it does not inform us about how the observer goes about doing this and what is limiting the observer's performance.
 
-In contrast, the search and lesion-classification measures described above can be used as a "diagnostic aid" in determining what is limiting performance. If search performance is poor, it indicates that the observer needs to be trained on many *non-diseased* cases to learn the variants of non-diseased anatomy and learn not to confuse them for lesions. On the other hand, if lesion-classification performance is poor, then one needs to train the observer using images where the location of a possible lesion is cued, and the observer's task is to determine if the cued location is a real lesion. In breast CAD since the designer level ROC curve goes almost all the way to (1,1) implying poor search performance. Therefore more research is needed on improving CAD's search performance. In contrast lesion-classification performance could actually be quite good, because CAD has access to the pixel values and the ability to apply complex algorithms to properly classify lesions as benign or malignant.
+In contrast, the search and lesion-classification measures described above can be used as an optimization-aid in determining what is limiting performance. If search performance $S$ is poor it indicates that the observer needs to be trained on more *non-diseased* cases to learn the variants of non-diseased anatomy so as not to confuse them for lesions. On the other hand, if lesion-classification performance $$ is poor, then one needs to train the observer using images where the location of a possible lesion is cued, and the observer's task is to determine if the cued location is a real lesion. In breast CAD since the designer level ROC curve goes almost all the way to (1,1) implying poor search performance. Therefore more research is needed on improving CAD's search performance. In contrast lCAD's esion-classification performance could actually be quite good, because CAD has access to the pixel values and the ability to apply complex algorithms to properly classify lesions as benign or malignant.
 
-Of course, before one can realize these benefits, one needs a way of estimating the end-point shown in TBA Fig. 17.6 plot (b). The observer will generally not report every suspicious region, so this is a non-trivial issue. , TBA Chapter 19 describes RSM based curve fitting which determines all parameters of the RSM, thereby determining the location of the end-point TBA. 
+To realize these benefits one needs a way of estimating the ROC end-point shown. TBA Chapter 19 describes RSM based curve fitting which determines all parameters of the RSM, thereby determining the location of the end-point TBA. 
 
 ## Discussion / Summary {#rsm-sc-discussion-summary}
 

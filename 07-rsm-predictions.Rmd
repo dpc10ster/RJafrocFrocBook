@@ -100,7 +100,7 @@ By restricting attention to the set of diseased cases with $L$ lesions each, Eqn
 \end{equation}
 
 
-In other words the ordinate of the end-point is a weighted summation of $\text{TPF}_{max} \left ( \mu, \lambda', \nu', L \right )$ over the lesion distribution vector $\overrightarrow{f_L}$. 
+The ordinate of the end-point is a weighted summation of $\text{TPF}_{max} \left ( \mu, \lambda', \nu', L \right )$ over the lesion distribution vector $\overrightarrow{f_L}$. 
 
 The expression for $\text{FPF}_{max}$ is unaffected.
 
@@ -182,7 +182,7 @@ Using this transformation yields the following simpler expression for FPF:
 
 
 \begin{equation}
-\text{FPF}\left (\zeta , \lambda'\right ) = 1 - \text{exp}\left ( -\lambda' \Phi\left ( -\zeta \right )  \right ) 
+\text{FPF}\left (\zeta , \lambda'\right ) = 1 - \text{exp}\left ( -\lambda' \Phi\left ( -\zeta \right )  \right )
 (\#eq:rsm-pred-fpf)
 \end{equation}
 
@@ -256,8 +256,9 @@ To extend the results to varying numbers of lesions per diseased case, one avera
 (\#eq:rsm-pred-tpf)
 \end{equation}
 
-The expression for FPF, Eqn. \@ref(eq:rsm-pred-fpf), is unaffected.
+Since $\Phi \left ( -\zeta \right )$ tends to unity as $\zeta_1 \rightarrow -\infty$, this expression reduces to Eqn. \@ref(eq:rsm-pred-tpf-max-fl1) for the ROC end-point.
 
+The expression for FPF, Eqn. \@ref(eq:rsm-pred-fpf), is unaffected. 
 
 The software implementation follows:
 
@@ -266,7 +267,7 @@ The software implementation follows:
 ```{r}
 # lambdaP is the physical lambda' parameter
 # nuP is the physical nu' parameter
-# lesDistr is the lesion distributin vector f_L
+# lesDistr is the lesion distribution vector f_L
 TPF <- function (zeta, mu, lambdaP, nuP, lesDistr){
   Lmax <- length(lesDistr)
   x <- 1
