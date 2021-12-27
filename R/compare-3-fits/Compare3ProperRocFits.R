@@ -73,6 +73,7 @@ Compare3ProperRocFits <- function(datasetNames,
   da <- matrix(data = proprocRet$d_a, nrow = length(unique(proprocRet$T)), 
                ncol = length(unique(proprocRet$R)), byrow = TRUE)
 
+  ## retrieve prenanalyzed results
   retFileName <- paste0("R/compare-3-fits/RSM6/", "allResults", fileName)
   
   if (!all(isBinnedDataset(rocData))){
@@ -128,7 +129,7 @@ Compare3ProperRocFits <- function(datasetNames,
         empOp <- UtilBinCountsOpPts(binnedRocData, trt = i, rdr = j)
         fpf <- empOp$fpf; tpf <- empOp$tpf
         compPlot_ij[[i,j]] <- gpfPlotRsmPropCbm(
-          fileName, x$retRsm$mu, x$retRsm$lambdaP, x$retRsm$nuP, 
+          f, x$retRsm$mu, x$retRsm$lambdaP, x$retRsm$nuP, 
           lesDistr, c1[i, j], da[i, j],
           x$retCbm$mu, x$retCbm$alpha,
           fpf, tpf, i, j, K1, K2, c(1, length(fpf)))
@@ -141,14 +142,14 @@ Compare3ProperRocFits <- function(datasetNames,
   
   return(list(
     allPlots = compPlot_ij,
-    allResults = allResults_ij
-    #allBinnedDatasets <- binnedRocData
+    allResults = allResults_ij,
+    allDatasets = binnedRocData
   ))
 }
 
 
 
-gpfPlotRsmPropCbm <- function(fileName, mu, lambdaP, nuP, lesDistr, c1, da, 
+gpfPlotRsmPropCbm <- function(f, mu, lambdaP, nuP, lesDistr, c1, da, 
                               muCbm, alpha, fpf, tpf, i, j, K1, K2, ciIndx) {
   
   ret_P <- gpfPropRocOperatingCharacteristic(c1,da)
@@ -169,7 +170,7 @@ gpfPlotRsmPropCbm <- function(fileName, mu, lambdaP, nuP, lesDistr, c1, da,
   plotOp <- data.frame(FPF = fpf, TPF = tpf)
   plotOp <- as.data.frame(plotOp)
   
-  ij <- paste0("D", fileName, ", i = ", i, ", j = ", j)
+  ij <- paste0("D", f, ", i = ", i, ", j = ", j)
   Model <- NULL # to get around R CMD CHK throwing a Note
   FPF <- fpf
   TPF <- tpf

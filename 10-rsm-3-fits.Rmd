@@ -88,20 +88,20 @@ for (i in 1:2) {
 
 * The `plotArr` list contains plots for the two datasets. The Van Dyke plots are in `plotArr[[1]]` and the Franken in `plotArr[[2]]`. 
 * Both Van Dyke and Franken datasets contain $I \times J = 2 \times 5 = 10$ composite plots. 
-* The following shows how to display the composite plot for the Van Dyke dataset for treatment 2 and reader 2. 
+* The following shows how to display the composite plot for the Van Dyke dataset for treatment 1 and reader 2. 
 
 
 ```{r}
-plotArr[[1]][[2,2]]
+plotArr[[1]][[1,2]]
 ```
 
 
-The plot is labeled **D2, i = 2, j = 2**, meaning the second dataset, the second treatment and the second reader. It contains 3 curves:
+The plot is labeled `D2, i = 1, j = 2`, meaning the second dataset, the second treatment and the second reader. It contains 3 curves:
 
 * The RSM fitted curve is in black. 
 * The PROPROC fitted curve is in red. 
 * The CBM fitted curve is in blue. 
-* Three operating points from the binned data are shown as well as exact 95% confidence intervals for the lowest and uppermost operating points. 
+* Three operating points from the binned data are shown as well as 95% confidence intervals for the lowest and uppermost operating points. 
 
 
 ## Displaying RSM parameters {#rsm-3-fits-rsm-parameters}
@@ -117,11 +117,11 @@ The RSM has parameters: $\mu$, $\lambda'$, $\nu'$ and $\zeta_1$. The parameters 
 * More generally the values are accessed as `[[f]][[i,j]]`, where `f` is the dataset index, `i` is the treatment index and `j` is the reader index. 
 * For the Van Dyke dataset `f = 1` and for the Franken dataset `f = 2`.
 
-The first example displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:
+The following displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:
 
 
-```{r}
-f <- 1;i <- 1; j <- 2;J <- 5
+```{r, echo=FALSE}
+f <- 1;i <- 1; j <- 2
 cat("RSM parameters, Van Dyke Dataset, treatment 1, reader 2:",
 "\nmu = ",        resultsArr[[f]][[i,j]]$retRsm$mu,
 "\nlambdaP = ",   resultsArr[[f]][[i,j]]$retRsm$lambdaP,
@@ -134,11 +134,14 @@ cat("RSM parameters, Van Dyke Dataset, treatment 1, reader 2:",
 ```
 
 
-The next example displays RSM parameters for the Franken dataset, treatment 2 and reader 3:
+The first four values are the fitted values for the RSM parameters $\mu$, $\lambda'$, $\nu'$ and $\zeta_1$. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood ^[The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being *minimized*, the final value is smaller than the initial value.].  
+
+
+Displayed next are RSM parameters for the Franken dataset, treatment 2 and reader 3:
 
 
 ```{r}
-f <- 2;i <- 2; j <- 3;J <- 5
+f <- 2;i <- 2; j <- 3
 ```
 
 
@@ -156,16 +159,26 @@ cat("RSM parameters, Franken dataset, treatment 2, reader 3:",
 ```
 
 
-The first four values are the fitted values for the RSM parameters $\mu$, $\lambda'$, $\nu'$ and $\zeta_1$. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood ^[The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being *minimized*, the final value is smaller than the initial value.].  
-
 
 ## Displaying CBM parameters {#rsm-3-fits-cbm-parameters}
 
-CBM has parameters $\mu_{CBM}$, $\alpha$ and $\zeta_1$. The next example displays CBM parameters and AUC etc. for the Van Dyke dataset, treatment 1 and reader 2:
+CBM has parameters $\mu_{CBM}$, $\alpha$ and $\zeta_1$.
+
+The RSM has parameters: $\mu$, $\lambda'$, $\nu'$ and $\zeta_1$. The parameters corresponding to the RSM plots are accessed as shown next. 
+
+* `resultsArr[[f]][[i,j]]$retCbm$mu` is the CBM $\mu$ parameter, 
+* `resultsArr[[f]][[i,j]]$retCbm$alpha` is the CBM $\alpha$ parameter, and  
+* `as.numeric(resultsArr[[f]][[i,j]]$retCbm$zetas[1])` is the CBM $\zeta_1$ parameter, the threshold corresponding to the highest non-trivial operating point, 
+* `resultsArr[[f]][[i,j]]$retCbm$AUC` is the CBM AUC, 
+* `as.numeric(resultsArr[[f]][[i,j]]$retCbm$StdAUC)` is the standard deviation of the CBM AUC,
+* `resultsArr[[f]][[i,j]]$retCbm$NLLIni` is the initial negative log-likelihood value,
+* `rresultsArr[[f]][[i,j]]$retCbm$NLLFin)` is the final negative log-likelihood value,
+
+The next example displays CBM parameters and AUC etc. for the Van Dyke dataset, treatment 1 and reader 2:
 
 
-```{r}
-f <- 1;i <- 1; j <- 2;J <- 5
+```{r, echo=FALSE}
+f <- 1;i <- 1; j <- 2
 cat("CBM parameters, Van Dyke Dataset, treatment 1, reader 2:",
 "\nmu = ",         resultsArr[[f]][[i,j]]$retCbm$mu,
 "\nalpha = ",      resultsArr[[f]][[i,j]]$retCbm$alpha,
@@ -174,15 +187,14 @@ cat("CBM parameters, Van Dyke Dataset, treatment 1, reader 2:",
 "\nsigma_AUC = ",  as.numeric(resultsArr[[f]][[i,j]]$retCbm$StdAUC),
 "\nNLLini = ",     resultsArr[[f]][[i,j]]$retCbm$NLLIni,
 "\nNLLfin = ",     resultsArr[[f]][[i,j]]$retCbm$NLLFin)
-
 ```
 
 
 The next example displays CBM parameters for the Franken dataset, treatment 2 and reader 3:
 
 
-```{r}
-f <- 2;i <- 2; j <- 3;J <- 5
+```{r, echo=FALSE}
+f <- 2;i <- 2; j <- 3
 ```
 
 
