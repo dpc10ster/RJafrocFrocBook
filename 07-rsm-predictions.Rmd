@@ -462,7 +462,7 @@ grid.arrange(roc$ROCPlot)
 
 
 
-A consequence of the $\zeta_1$ dependence is that if one uses ROC AUC as the measure of performance, the optimal threshold is $\zeta_1 = -\infty$. In particular, a CAD algorithm that generates FROC data should show all generated marks to the radiologist. This is not the strategy adopted by any CAD designer that I am aware of. I will address this issue, i.e., what is the optimal value of the reporting threshold, in Chapter \@ref(optim-op-point).
+A consequence of the $\zeta_1$ dependence is that if one uses ROC AUC as the measure of performance, the optimal threshold is $\zeta_1 = -\infty$. In particular, a CAD algorithm that generates FROC data should show all generated marks to the radiologist. This is not the strategy adopted by any CAD designer that I am aware of. I will address this issue, i.e., what is the optimal value of the reporting threshold, in Chapter `\@ref(optim-op-point)`.
 
 
 

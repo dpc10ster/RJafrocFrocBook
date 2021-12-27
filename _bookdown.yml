@@ -14,7 +14,6 @@ rmd_files: [
   "09-rsm-fitting.Rmd",
   "10-rsm-3-fits.Rmd",
   "20-standalone-cad.Rmd",
-  "21-optim-op-point.Rmd",
   "99-references.Rmd",
 ]
 clean: [packages.bib, myRefs.bbl]
