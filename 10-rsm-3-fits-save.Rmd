@@ -14,6 +14,7 @@ library(here)
 library(foreach)
 library(doRNG)
 library(doParallel)
+
 ```
 
 
@@ -70,16 +71,19 @@ source(here("R/compare-3-fits/Compare3ProperRocFits.R"))
 
 
 ```{r rsm-3-fits-code-f2, echo=TRUE, cache=FALSE}
+startIndx <-  2
+endIndx <- 3
+ret <- Compare3ProperRocFits(datasetNames,
+                             startIndx = startIndx, 
+                             endIndx = endIndx, 
+                             reAnalyze = FALSE)
 
-ret <- array(list(), dim = 2)
-ret[[1]] <- Compare3ProperRocFits(datasetNames, 2)
-ret[[2]] <- Compare3ProperRocFits(datasetNames, 3)
+resultsArr <- plotArr <- array(list(), 
+                               dim = c(endIndx - startIndx + 1))
 
-resultsArr <- plotArr <- array(list(), dim = 2)
-
-for (i in 1:2) {
-  plotArr[[i]] <- ret[[i]]$allPlots
-  resultsArr[[i]] <- ret[[i]]$allResults
+for (f in 1:(endIndx-startIndx+1)) {
+  plotArr[[f]] <- ret$allPlots[[f]]
+  resultsArr[[f]] <- ret$allResults[[f]]
 }
 ```
 
@@ -101,23 +105,34 @@ plotArr[[1]][[2,2]]
 
 The plot is labeled **D2, i = 2, j = 2**, meaning the second dataset, the second treatment and the second reader. It contains 3 curves:
 
-* The RSM fitted curve is in black. 
+* TBA This is incorrect. The RSM fitted curve is in black. It is the only one with a dotted line connecting the uppermost continuously accessible operating point to (1,1).
 * The PROPROC fitted curve is in red. 
 * The CBM fitted curve is in blue. 
 * Three operating points from the binned data are shown as well as exact 95% confidence intervals for the lowest and uppermost operating points. 
+
+The following example displays the composite plots for the Van Dyke dataset, treatment 2 and reader 2:
+
+```{r}
+
+plotArr[[1]][[2,2]]
+
+```
+
+
+Shown next is how to display the parameters corresponding to the fitted curves.
 
 
 ## Displaying RSM parameters {#rsm-3-fits-rsm-parameters}
 
 The RSM has parameters: $\mu$, $\lambda'$, $\nu'$ and $\zeta_1$. The parameters corresponding to the RSM plots are accessed as shown next. 
 
-* `resultsArr[[1]][[1,2]]$retRsm$mu` is the RSM $\mu$ parameter for the Van Dyke dataset for treatment 1 and reader 2, 
-* `resultsArr[[1]][[1,2]]$retRsm$lambdaP` is the corresponding $\lambda'$ parameter, and  
-* `resultsArr[[1]][[1,2]]$retRsm$nuP` is the corresponding $\nu'$ parameter. 
-* `resultsArr[[1]][[1,2]]$retRsm$zeta1` is the corresponding $\zeta_1$ parameter. 
+* `resultsArr[[1]][[2]]$retRsm$mu` is the RSM $\mu$ parameter for dataset 1 (i.e., Van Dyke dataset), treatment 1 and reader 2, 
+* `resultsArr[[1]][[2]]$retRsm$lambdaP` is the corresponding $\lambda'$ parameter, and  
+* `resultsArr[[1]][[2]]$retRsm$nuP` is the corresponding $\nu'$ parameter. 
+* `resultsArr[[1]][[2]]$retRsm$zeta1` is the corresponding $\zeta_1$ parameter. 
 * Treatment 2 and reader 1 values would be accessed as 
-`resultsArr[[1]][[2,1]]$retRsm$mu`, etc.
-* More generally the values are accessed as `[[f]][[i,j]]`, where `f` is the dataset index, `i` is the treatment index and `j` is the reader index. 
+`resultsArr[[1]][[6]]$retRsm$mu`, etc.
+* More generally the values are accessed as `[[f]][[(i-1)*J+j]]`, where `f` is the dataset index, `i` is the treatment index, `j` is the reader index and `J` is the total number of readers. 
 * For the Van Dyke dataset `f = 1` and for the Franken dataset `f = 2`.
 
 The first example displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:
@@ -126,14 +141,14 @@ The first example displays RSM parameters for the Van Dyke dataset, treatment 1 
 ```{r}
 f <- 1;i <- 1; j <- 2;J <- 5
 cat("RSM parameters, Van Dyke Dataset, treatment 1, reader 2:",
-"\nmu = ",        resultsArr[[f]][[i,j]]$retRsm$mu,
-"\nlambdaP = ",   resultsArr[[f]][[i,j]]$retRsm$lambdaP,
-"\nnuP = ",       resultsArr[[f]][[i,j]]$retRsm$nuP,
-"\nzeta_1 = ",    as.numeric(resultsArr[[f]][[i,j]]$retRsm$zetas[1]),
-"\nAUC = ",       resultsArr[[f]][[i,j]]$retRsm$AUC,
-"\nsigma_AUC = ", as.numeric(resultsArr[[f]][[i,j]]$retRsm$StdAUC),
-"\nNLLini = ",    resultsArr[[f]][[i,j]]$retRsm$NLLIni,
-"\nNLLfin = ",    resultsArr[[f]][[i,j]]$retRsm$NLLFin)
+"\nmu = ",        resultsArr[[f]][[(i-1)*J+j]]$retRsm$mu,
+"\nlambdaP = ",   resultsArr[[f]][[(i-1)*J+j]]$retRsm$lambdaP,
+"\nnuP = ",       resultsArr[[f]][[(i-1)*J+j]]$retRsm$nuP,
+"\nzeta_1 = ",    as.numeric(resultsArr[[f]][[(i-1)*J+j]]$retRsm$zetas[1]),
+"\nAUC = ",       resultsArr[[f]][[(i-1)*J+j]]$retRsm$AUC,
+"\nsigma_AUC = ", as.numeric(resultsArr[[f]][[(i-1)*J+j]]$retRsm$StdAUC),
+"\nNLLini = ",    resultsArr[[f]][[(i-1)*J+j]]$retRsm$NLLIni,
+"\nNLLfin = ",    resultsArr[[f]][[(i-1)*J+j]]$retRsm$NLLFin)
 ```
 
 
@@ -148,14 +163,14 @@ f <- 2;i <- 2; j <- 3;J <- 5
 
 ```{r, echo=FALSE}
 cat("RSM parameters, Franken dataset, treatment 2, reader 3:",
-"\nmu = ", resultsArr[[f]][[i,j]]$retRsm$mu,
-"\nlambdaP = ", resultsArr[[f]][[i,j]]$retRsm$lambdaP,
-"\nnuP = ", resultsArr[[f]][[i,j]]$retRsm$nuP,
-"\nzeta_1 = ", as.numeric(resultsArr[[f]][[i,j]]$retRsm$zetas[1]),
-"\nAUC = ", resultsArr[[f]][[i,j]]$retRsm$AUC,
-"\nsigma_AUC = ", as.numeric(resultsArr[[f]][[i,j]]$retRsm$StdAUC),
-"\nNLLini = ", resultsArr[[f]][[i,j]]$retRsm$NLLIni,
-"\nNLLfin = ", resultsArr[[f]][[i,j]]$retRsm$NLLFin)
+"\nmu = ", resultsArr[[f]][[(i-1)*J+j]]$retRsm$mu,
+"\nlambdaP = ", resultsArr[[f]][[(i-1)*J+j]]$retRsm$lambdaP,
+"\nnuP = ", resultsArr[[f]][[(i-1)*J+j]]$retRsm$nuP,
+"\nzeta_1 = ", as.numeric(resultsArr[[f]][[(i-1)*J+j]]$retRsm$zetas[1]),
+"\nAUC = ", resultsArr[[f]][[(i-1)*J+j]]$retRsm$AUC,
+"\nsigma_AUC = ", as.numeric(resultsArr[[f]][[(i-1)*J+j]]$retRsm$StdAUC),
+"\nNLLini = ", resultsArr[[f]][[(i-1)*J+j]]$retRsm$NLLIni,
+"\nNLLfin = ", resultsArr[[f]][[(i-1)*J+j]]$retRsm$NLLFin)
 ```
 
 
@@ -170,13 +185,13 @@ CBM has parameters $\mu_{CBM}$, $\alpha$ and $\zeta_1$. The next example display
 ```{r}
 f <- 1;i <- 1; j <- 2;J <- 5
 cat("CBM parameters, Van Dyke Dataset, treatment 1, reader 2:",
-"\nmu = ",         resultsArr[[f]][[i,j]]$retCbm$mu,
-"\nalpha = ",      resultsArr[[f]][[i,j]]$retCbm$alpha,
-"\nzeta_1 = ",     as.numeric(resultsArr[[f]][[i,j]]$retCbm$zetas[1]),
-"\nAUC = ",        resultsArr[[f]][[i,j]]$retCbm$AUC,
-"\nsigma_AUC = ",  as.numeric(resultsArr[[f]][[i,j]]$retCbm$StdAUC),
-"\nNLLini = ",     resultsArr[[f]][[i,j]]$retCbm$NLLIni,
-"\nNLLfin = ",     resultsArr[[f]][[i,j]]$retCbm$NLLFin)
+"\nmu = ",         resultsArr[[f]][[(i-1)*J+j]]$retCbm$mu,
+"\nalpha = ",      resultsArr[[f]][[(i-1)*J+j]]$retCbm$alpha,
+"\nzeta_1 = ",     as.numeric(resultsArr[[f]][[(i-1)*J+j]]$retCbm$zetas[1]),
+"\nAUC = ",        resultsArr[[f]][[(i-1)*J+j]]$retCbm$AUC,
+"\nsigma_AUC = ",  as.numeric(resultsArr[[f]][[(i-1)*J+j]]$retCbm$StdAUC),
+"\nNLLini = ",     resultsArr[[f]][[(i-1)*J+j]]$retCbm$NLLIni,
+"\nNLLfin = ",     resultsArr[[f]][[(i-1)*J+j]]$retCbm$NLLFin)
 
 ```
 
@@ -191,13 +206,13 @@ f <- 2;i <- 2; j <- 3;J <- 5
 
 ```{r, echo=FALSE}
 cat("CBM parameters, Franken dataset, treatment 2, reader 3:",
-"\nmu = ",         resultsArr[[f]][[i,j]]$retCbm$mu,
-"\nalpha = ",      resultsArr[[f]][[i,j]]$retCbm$alpha,
-"\nzeta_1 = ",     as.numeric(resultsArr[[f]][[i,j]]$retCbm$zetas[1]),
-"\nAUC = ",        resultsArr[[f]][[i,j]]$retCbm$AUC,
-"\nsigma_AUC = ",  as.numeric(resultsArr[[f]][[i,j]]$retCbm$StdAUC),
-"\nNLLini = ",     resultsArr[[f]][[i,j]]$retCbm$NLLIni,
-"\nNLLfin = ",     resultsArr[[f]][[i,j]]$retCbm$NLLFin)
+"\nmu = ",         resultsArr[[f]][[(i-1)*J+j]]$retCbm$mu,
+"\nalpha = ",      resultsArr[[f]][[(i-1)*J+j]]$retCbm$alpha,
+"\nzeta_1 = ",     as.numeric(resultsArr[[f]][[(i-1)*J+j]]$retCbm$zetas[1]),
+"\nAUC = ",        resultsArr[[f]][[(i-1)*J+j]]$retCbm$AUC,
+"\nsigma_AUC = ",  as.numeric(resultsArr[[f]][[(i-1)*J+j]]$retCbm$StdAUC),
+"\nNLLini = ",     resultsArr[[f]][[(i-1)*J+j]]$retCbm$NLLIni,
+"\nNLLfin = ",     resultsArr[[f]][[(i-1)*J+j]]$retCbm$NLLFin)
 ```
 
 
@@ -212,9 +227,9 @@ The first three values are the fitted values for the CBM parameters $\mu$, $\alp
 ```{r}
 f <- 1;i <- 1; j <- 2;J <- 5
 cat("PROPROC parameters, Van Dyke Dataset, treatment 1, reader 2:",
-"\nc = ",     resultsArr[[f]][[i,j]]$c1,
-"\nd_a = ",   resultsArr[[f]][[i,j]]$da,
-"\nAUC = ",   resultsArr[[f]][[i,j]]$aucProp)
+"\nc = ",     resultsArr[[f]][[(i-1)*J+j]]$c1,
+"\nd_a = ",   resultsArr[[f]][[(i-1)*J+j]]$da,
+"\nAUC = ",   resultsArr[[f]][[(i-1)*J+j]]$aucProp)
 ```
 
 
@@ -230,9 +245,9 @@ f <- 2;i <- 2; j <- 3;J <- 5
 
 ```{r, echo=FALSE}
 cat("PROPROC parameters, Franken dataset, treatment 2, reader 3:",
-"\nc = ", resultsArr[[f]][[i,j]]$c1,
-"\nd_a = ", resultsArr[[f]][[i,j]]$da,
-"\nAUC = ", resultsArr[[f]][[i,j]]$aucProp)
+"\nc = ", resultsArr[[f]][[(i-1)*J+j]]$c1,
+"\nd_a = ", resultsArr[[f]][[(i-1)*J+j]]$da,
+"\nAUC = ", resultsArr[[f]][[(i-1)*J+j]]$aucProp)
 ```
 
 

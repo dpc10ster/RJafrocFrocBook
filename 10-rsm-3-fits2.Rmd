@@ -11,9 +11,6 @@ library(gridExtra)
 library(grid)
 library(binom)
 library(here)
-library(foreach)
-library(doRNG)
-library(doParallel)
 ```
 
 

@@ -123,7 +123,8 @@ The return value `ret` is a `list` with the following elements:
 
 ## `FitRsmROC` usage example {#rsm-fitting-fitrsmroc-usage-example}
 
-* The following example uses the *first* treatment of the "FED" dataset, `dataset04`, which is a 5 treatment 4 radiologist FROC dataset acquired by Dr. Federica Zanca et. al. [@zanca2009evaluation]. The dataset has 5 treatments and 4 readers and 200 cases and was acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using `DfBinDataset()`. I need to emphasize this point: *if the dataset represents continuous ratings, as with a CAD algorithm, one must bin the dataset to (ideally) about 5-6 bins*. The number of parameters that must be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.
+* The following example uses the *first* treatment in `dataset04`; this is a 5 treatment 4 radiologist FROC dataset [@zanca2009evaluation] consisting of 200 cases acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using `DfBinDataset()`. The number of parameters to be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.
+
 
 ```{r}
 rocData <- DfFroc2Roc(dataset04)
@@ -131,7 +132,7 @@ lesDistr <- UtilLesionDistr(dataset04)[,2]
 ret <- FitRsmRoc(rocData, lesDistr = lesDistr)
 ```
 
-The lesion distribution vector is `r lesDistr`. This means that fraction `r lesDistr[1]` of abnormal cases contain one lesion each, fraction `r lesDistr[2]` contain two lesions each and fraction `r lesDistr[3]` contain three lesions each. The fitting algorithm needs to know the distribution of lesions per case, as the fitted curve depends on this distribution. For example, all else being equal, if all abnormal cases contain one lesion, the ROC curve will be lower than if all abnormal cases contain three lesions. With increased number of lesions per case TPF increases, as there is greater chance that at least one the lesions will be marked.  
+The lesion distribution vector is `r lesDistr`. This means that fraction `r lesDistr[1]` of each diseased case contains one lesion, fraction `r lesDistr[2]` contains two lesions and fraction `r lesDistr[3]` contains three lesions. Since the fitted curve depends on the lesion distribution the fitting function needs to know this distribution. ^[For example, all else being equal, if each diseased case contains one lesion the ROC curve will be lower than if each diseased case contains three lesions.]   
 
 The fitted parameter values are as follows (all cutoffs excepting $\zeta_1$, the chi-square statistic - `NA` for this dataset - and the covariance matrix, are not shown):
 
@@ -145,7 +146,13 @@ The fitted parameter values are as follows (all cutoffs excepting $\zeta_1$, the
 * $\text{NLLFin}$ = `r round(ret$NLLFin,2)`
 
 
-The relatively large separation parameter $\mu$ implies good lesion-classification performance. The large $\lambda'$ parameter implies poor search performance. On the average the observer generates `r round(ret$lambdaP,2)` latent NL marks per image. However, because of the relatively large value of $\zeta_1$, i.e., `r round(ret$zetas[1],2)`, only fraction `r round(pnorm(-ret$zetas[1]),3)` of these are actually marked, resulting in `r round(ret$lambdaP*pnorm(-ret$zetas[1]),2)` actual marks per image. The fitting program decreased the negative of the log-likelihood function from `r round(ret$NLLIni,2)` to `r round(ret$NLLFin,2)`. A decrease in negative log-likelihood is equivalent to an increase in the likelihood, which is as expected, as the function maximizes the log-likelihood. Because the RSM contains 3 parameters, which is one more that conventionql ROC models, the chisquare goodness of fit statistic usually cannot be calculated, except for large datasets - the criterion of 5 counts in each bin for true positives and false positives is usually hard to meet.
+The relatively large separation parameter $\mu$ implies good lesion-classification performance. The large $\lambda'$ parameter implies poor search performance. On the average the observer generates `r round(ret$lambdaP,2)` latent NL marks per image. However, because of the relatively large value of $\zeta_1$, i.e., `r round(ret$zetas[1],2)`, only fraction `r round(pnorm(-ret$zetas[1]),3)` of these are actually marked, resulting in `r round(ret$lambdaP*pnorm(-ret$zetas[1]),2)` actual marks per image. Search performance depends on the numbers of latent marks, i.e., $\lambda'$ and $\nu'$, not the actual numbers of marks. 
+
+
+The fitting program decreased the negative of the log-likelihood function from `r round(ret$NLLIni,2)` to `r round(ret$NLLFin,2)`. A decrease in negative log-likelihood is equivalent to an increase in the likelihood, which is as expected, as the function maximizes the log-likelihood. 
+
+
+Because the RSM contains 3 parameters, which is one more that conventionql ROC models, the chisquare goodness of fit statistic usually cannot be calculated, except for large datasets - the criterion of 5 counts in each bin for true positives and false positives is usually hard to meet.
 
 
 Shown next is the fitted plot. Error bars (exact 95% confidence intervals) are shown for the lowest and highest operating points.
@@ -156,7 +163,7 @@ print(ret$fittedPlot)
 ```
 
 
-The fitted ROC curve is proper: it's slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. The area under the proper ROC is `r round(ret$AUC,3)` which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.
+The fitted ROC curve is proper: it's slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is `r round(ret$AUC,3)` which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.
 
 
 ## TBA Discussion / Summary {#rsm-fitting-discussion-summary}
