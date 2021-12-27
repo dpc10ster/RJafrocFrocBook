@@ -22,22 +22,23 @@ library(doParallel)
 
 
 ## Introduction {#rsm-3-fits-intro}
+
 A proper ROC curve is one whose slope decreases monotonically as the operating point moves up the curve, a consequence of which is that a proper ROC does not display an inappropriate chance line crossing followed by a sharp upward turn, i.e., a "hook", usually near the (1,1) upper right corner. 
 
 There are three methods for fitting proper curves to ROC datasets: 
 
 * The radiological search model (RSM) described in Chapter \@ref(rsm-fitting), 
-* The PROPROC (proper ROC) and CBM (contaminated binormal model) described in TBA Chapter 20. 
+* The PROPROC (proper ROC) model described in TBA Chapter 20. 
+* The CBM (contaminated binormal model) described in TBA Chapter 20. 
 
-This chapter compares these methods for a number of datasets. Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.
+This chapter compares these methods by fitting the to 14 multiple-treatment multiple-reader datasets described in Chapter \@ref(datasets). ^[Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.]
 
-* Both RSM and CBM are implemented in `RJafroc`. 
-* `PROPROC` is implemented in Windows software ^[OR DBM-MRMC 2.5, Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.] available [here](https://perception.lab.uiowa.edu/OR-DBM-MRMC-252), last accessed 1/4/21.
+Both RSM and CBM are implemented in `RJafroc`. `PROPROC` is implemented in Windows software ^[OR DBM-MRMC 2.5, Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.] available [here](https://perception.lab.uiowa.edu/OR-DBM-MRMC-252), last accessed 1/4/21.
 
 
 ## Applications {#rsm-3-fits-applications}
 
-The RSM, PROPROC and CBM algorithms were applied to the 14 embedded datasets described in \@ref(rsm-3-fits-14-datasets). The datasets have already been analyzed and the location of pre-analyzed results files are in \@ref(rsm-3-fits-pre-analyzed-results).
+The RSM, PROPROC and CBM algorithms were applied to the 14 datasets described in Chapter \@ref(datasets). The analyzed results file locations are shown in Section \@ref(rsm-3-fits-pre-analyzed-results).
 
 
 ```{r, echo = TRUE}
@@ -55,15 +56,6 @@ In the following we focus on just two ROC datasets, which have been widely used 
 
 ### Application to two datasets {#rsm-3-fits-two-datasets}
 
-* The code uses the function `Compare3ProperRocFits()`. 
-* The code file is `R/compare-3-fits/Compare3ProperRocFits.R`. 
-* `startIndx` is the  first `index` to analyze and `endIndx` is the last. 
-* In the current example `startIndx = 2` and `endIndx = 3`; i.e., two datasets are analyzed corresponding to `datasetNames[2]` and `datasetNames[3]`, i.e., the `r datasetNames[2]` and `r datasetNames[3]` datasets. ^[To analyze all datasets one sets `startIndx <-  1` and `endIndx <-  14`.] 
-* `reAnalyze` is set to `FALSE` causing pre-analyzed results (to be found in directory `R/compare-3-fits/RSM6`) to be retrieved. If `reAnalyze` is `TRUE` the analysis is repeated, leading to possibly slightly different results (the maximum likelihood parameter-search algorithm has inherent randomness aimed at avoiding finding false local maxima). 
-* The fitted parameter results are contained in `ret$allResults` and the *composite plots* (i.e., 3 combined plots corresponding to the three proper ROC fitting algorithms) are contained in `ret$allPlots`. 
-* These are saved to lists `plotArr` and `resultsArr`. 
-
-
 ```{r rsm-3-fits-code, echo=FALSE}
 source(here("R/compare-3-fits/Compare3ProperRocFits.R"))
 ```
@@ -72,8 +64,9 @@ source(here("R/compare-3-fits/Compare3ProperRocFits.R"))
 ```{r rsm-3-fits-code-f2, echo=TRUE, cache=FALSE}
 
 ret <- array(list(), dim = 2)
-ret[[1]] <- Compare3ProperRocFits(datasetNames, 2)
-ret[[2]] <- Compare3ProperRocFits(datasetNames, 3)
+
+ret[[1]] <- Compare3ProperRocFits(datasetNames, 2) # VD dataset
+ret[[2]] <- Compare3ProperRocFits(datasetNames, 3) # FR dataset
 
 resultsArr <- plotArr <- array(list(), dim = 2)
 
@@ -84,7 +77,11 @@ for (i in 1:2) {
 ```
 
 
-We show next how to display the composite plots.
+* The examples use the function `Compare3ProperRocFits()`. 
+* The code file is `R/compare-3-fits/Compare3ProperRocFits.R`. 
+* In the current example two datasets are analyzed, `datasetNames[2]` and `datasetNames[3]`, i.e., the `r datasetNames[2]` and `r datasetNames[3]` datasets.  
+* The fitted parameter results are contained in `ret$allResults` and the *composite plots* (i.e., 3 combined plots corresponding to the three proper ROC fitting algorithms) are contained in `ret$allPlots`. 
+* These are saved to lists `plotArr` and `resultsArr`. 
 
 
 ## Displaying composite plots {#rsm-3-fits-composite-plots}
@@ -430,120 +427,8 @@ The main scientific conclusion of this chapter is that search-performance is the
 
 
 ## Appendices {#rsm-3-fits-appendices}
-## Datasets {#rsm-3-fits-14-datasets}
 
-The datasets are embedded in ther `RJafroc` package. They can be viewed in the help file of the package, a partial screen-shot of which is shown next ^[The raw datasets (Excel files) are in folder `R/compare-3-fits/Datasets` and file `R/compare-3-fits/loadDataFile.R` shows the correspondence between `datasetNames` and a dataset: for example, the Van Dyke dataset corresponds to file `VanDykeData.xlsx` in the `R/compare-3-fits/Datasets` folder.].
-
-
-```{r rsm-3-fits-datasets, echo=FALSE,fig.cap="Partial screen shot of `RJafroc` help file showing the datasets included with the current distribution (v2.0.1).",fig.show='hold',fig.align='center'}
-knitr::include_graphics("images/compare-3-fits/datasets.png")
-``` 
-
-
-The datasets are identified in the code by dataset`dd` (where `dd` is an integer in the range `01` to `14`) as follows:
-
-* `dataset01` "TONY" FROC dataset [@RN2125]
-
-```{r, echo=FALSE}
-str(dataset01$ratings)
-```
-
-
-* `dataset02` "VAN-DYKE" Van Dyke ROC dataset [@RN1993]
-
-```{r, echo=FALSE}
-str(dataset02$ratings)
-```
-
-
-* `dataset03` "FRANKEN" Franken ROC dataset [@RN1995]
-
-```{r, echo=FALSE}
-str(dataset03$ratings)
-```
-
-
-* `dataset04` "FEDERICA" Federica Zanca FROC dataset [@zanca2009evaluation]
-
-```{r, echo=FALSE}
-str(dataset04$ratings)
-```
-
-
-* `dataset05` "THOMPSON" John Thompson FROC dataset [@RN2368]
-
-```{r, echo=FALSE}
-str(dataset05$ratings)
-```
-
-
-
-* `dataset06` "MAGNUS" Magnus Bath FROC dataset [@RN1929]
-
-```{r, echo=FALSE}
-str(dataset06$ratings)
-```
-
-
-* `dataset07` "LUCY-WARREN" Lucy Warren FROC dataset [@RN2507]
-
-```{r, echo=FALSE}
-str(dataset07$ratings)
-```
-
-
-* `dataset08` "PENEDO" Monica Penedo FROC dataset [@RN1520]
-
-```{r, echo=FALSE}
-str(dataset08$ratings)
-```
-
-
-* `dataset09` "NICO-CAD-ROC" Nico Karssemeijer ROC dataset [@hupse2013standalone]
-
-```{r, echo=FALSE}
-str(dataset09$ratings)
-```
-
-
-* `dataset10` "RUSCHIN" Mark Ruschin ROC dataset [@RN1646]
-
-```{r, echo=FALSE}
-str(dataset10$ratings)
-```
-
-
-* `dataset11` "DOBBINS-1" Dobbins I FROC dataset [@Dobbins2016MultiInstitutional]
-
-```{r, echo=FALSE}
-str(dataset11$ratings)
-```
-
-
-* `dataset12`  "DOBBINS-2" Dobbins II ROC dataset [@Dobbins2016MultiInstitutional]
-
-```{r, echo=FALSE}
-str(dataset12$ratings)
-```
-
-
-
-* `dataset13` "DOBBINS-3" Dobbins III FROC dataset [@Dobbins2016MultiInstitutional]
-
-```{r, echo=FALSE}
-str(dataset13$ratings)
-```
-
-
-* `dataset14` "FEDERICA-REAL-ROC" Federica Zanca *real* ROC dataset [@RN2318]
-
-```{r, echo=FALSE}
-str(dataset14$ratings)
-```
-
-
-
-## Location of PROPROC files {#rsm-3-fits-one-dataset-proproc}
+### Location of PROPROC files {#rsm-3-fits-one-dataset-proproc}
 
 For each dataset PROPROC parameters were obtained by running the Windows software with PROPROC selected as the curve-fitting method. The results are saved to files that end with `proprocnormareapooled.csv` ^[In accordance with R-package policies white-spaces in the original `PROPROC` output file names have been removed.] contained in "R/compare-3-fits/MRMCRuns/C/", where `C` denotes the name of the dataset (for example, for the Van Dyke dataset, `C` = "VD"). Examples are shown in the next two screen-shots.
 
@@ -568,7 +453,7 @@ knitr::include_graphics("images/compare-3-fits/vanDyke.png")
 
 
 
-## Location of pre-analyzed results {#rsm-3-fits-pre-analyzed-results}
+### Location of pre-analyzed results {#rsm-3-fits-pre-analyzed-results}
 
 The following screen shot shows the pre-analyzed files created by the function `Compare3ProperRocFits()` described below. Each file is named `allResultsC`, where `C` is the abbreviated name of the dataset (uppercase C denotes one or more uppercase characters; for example, `C` = `VD` denotes the Van Dyke dataset.).
 
@@ -576,7 +461,7 @@ The following screen shot shows the pre-analyzed files created by the function `
 knitr::include_graphics("images/compare-3-fits/RSM6.png")
 ``` 
 
-## Plots for Van Dyke dataset {#rsm-3-fits-representative-plots-van-dyke}
+### Plots for Van Dyke dataset {#rsm-3-fits-representative-plots-van-dyke}
 
 The following plots are arranged in pairs, with the left plot corresponding to treatment 1 and the right to treatment 2. 
 
@@ -658,5 +543,4 @@ grid.arrange(gA,gB, ncol=2, widths = c(1,1),
 
 
 ## References {#rsm-3-fits-references}
-
 

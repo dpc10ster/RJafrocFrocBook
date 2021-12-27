@@ -1,0 +1,129 @@
+# (PART\*) DATASETS {-}
+
+
+# Datasets {#datasets}
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RJafroc)
+library(ggplot2)
+```
+
+
+## Datasets {#datasets-datasets}
+
+The datasets are embedded in the `RJafroc` package. They can be viewed in the help file of the package, a partial screen-shot of which is shown next. 
+
+
+```{r datasets-datasets, echo=FALSE,fig.cap="Partial screen shot of `RJafroc` help file showing the datasets included with the current distribution (v2.0.1).",fig.show='hold',fig.align='center'}
+knitr::include_graphics("images/compare-3-fits/datasets.png")
+``` 
+
+
+The datasets are identified in the code by dataset`dd` (where `dd` is an integer in the range `01` to `14`) as follows:
+
+* `dataset01` "TONY" FROC dataset [@RN2125]
+
+```{r, echo=FALSE}
+str(dataset01$ratings)
+```
+
+
+* `dataset02` "VAN-DYKE" Van Dyke ROC dataset [@RN1993]
+
+```{r, echo=FALSE}
+str(dataset02$ratings)
+```
+
+
+* `dataset03` "FRANKEN" Franken ROC dataset [@RN1995]
+
+```{r, echo=FALSE}
+str(dataset03$ratings)
+```
+
+
+* `dataset04` "FEDERICA" Federica Zanca FROC dataset [@zanca2009evaluation]
+
+```{r, echo=FALSE}
+str(dataset04$ratings)
+```
+
+
+* `dataset05` "THOMPSON" John Thompson FROC dataset [@RN2368]
+
+```{r, echo=FALSE}
+str(dataset05$ratings)
+```
+
+
+
+* `dataset06` "MAGNUS" Magnus Bath FROC dataset [@RN1929]
+
+```{r, echo=FALSE}
+str(dataset06$ratings)
+```
+
+
+* `dataset07` "LUCY-WARREN" Lucy Warren FROC dataset [@RN2507]
+
+```{r, echo=FALSE}
+str(dataset07$ratings)
+```
+
+
+* `dataset08` "PENEDO" Monica Penedo FROC dataset [@RN1520]
+
+```{r, echo=FALSE}
+str(dataset08$ratings)
+```
+
+
+* `dataset09` "NICO-CAD-ROC" Nico Karssemeijer ROC dataset [@hupse2013standalone]
+
+```{r, echo=FALSE}
+str(dataset09$ratings)
+```
+
+
+* `dataset10` "RUSCHIN" Mark Ruschin ROC dataset [@RN1646]
+
+```{r, echo=FALSE}
+str(dataset10$ratings)
+```
+
+
+* `dataset11` "DOBBINS-1" Dobbins I FROC dataset [@Dobbins2016MultiInstitutional]
+
+```{r, echo=FALSE}
+str(dataset11$ratings)
+```
+
+
+* `dataset12`  "DOBBINS-2" Dobbins II ROC dataset [@Dobbins2016MultiInstitutional]
+
+```{r, echo=FALSE}
+str(dataset12$ratings)
+```
+
+
+
+* `dataset13` "DOBBINS-3" Dobbins III FROC dataset [@Dobbins2016MultiInstitutional]
+
+```{r, echo=FALSE}
+str(dataset13$ratings)
+```
+
+
+* `dataset14` "FEDERICA-REAL-ROC" Federica Zanca *real* ROC dataset [@RN2318]
+
+```{r, echo=FALSE}
+str(dataset14$ratings)
+```
+
+
+
+## References {#datasets-references}
+
+
