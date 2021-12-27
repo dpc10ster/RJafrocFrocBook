@@ -1064,12 +1064,12 @@ The operating point labeled $i$ has coordinates $\left ( \text{FPF}_i, \text{wLL
 
 TBA The area $A_{\text{wAFROC}}$ under the empirical wAFROC plot equals the weighted-AFROC FOM-statistic $\theta_{\text{wAFROC}}$ defined by Eqn.` \@ref(eq:empirical-theta-wafroc)`:
 
-```{=tex}
+
 \begin{equation}
 \theta_{\text{wAFROC}} = A_{\text{wAFROC}}
 (\#eq:empirical-theorem1)
 \end{equation}
-```
+
 
 
 The area $A_i$ of the leftmost shaded trapezoid in Fig. \@ref(fig:empirical-theorems) is:
@@ -1266,6 +1266,119 @@ According to Eqn. \@ref(eq:empirical-A0), $A_0$ increases as $\text{FPF}_1$ decr
 * Each unmarked non-diseased case represents a perfect decision.
 * For a perfect observer whose operating characteristic is the vertical line from (0,0) to (0,1) followed by the horizontal line from (0,1) to (1,1), *the area under the straight-line extension comprises the entire AUC*. Excluding it would yield zero AUC for a perfect observer, which is obviously incorrect. 
 * Stated equivalently, for the perfect observer $\text{FPF}_1 = 0$ and $\text{wLLF}_1 = 1$ and then, according to Eqn. \@ref(eq:empirical-A0), the area under the straight line extension is $A_0 = 1$.
+
+
+
+## Appendix 2: Summary of computational formulae {#empirical-summary-computational}
+
+### FROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{FROC} =& \frac{1}{\left ( K_1+K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
+&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \psi\left ( z_{k_11l_11}',z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \psi\left ( z_{k_2'2l_11}',z_{k_22l_22} \right )
+\right]
+\end{aligned}
+(\#eq:empirical-computational-froc)
+\end{equation}
+
+
+$z_{k_11l_11}'$ denotes a *finite* NL z-sample. This notation is used to eliminate the negative infinities due to unmarked NLs which are not observable events. This notation is not needed for LLs since unmarked LLs are observable events. The first double summation inside the square bracket compares, using the $\psi$ function, all finite NL ratings on *non-diseased* cases with all lesion ratings on diseased case $k_22$. The second double summation compares all finite NL ratings on *diseased cases* with all lesion ratings on diseased case $k_22$. The double summation outside the square bracket sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
+
+The formula can be simplified by making two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings, including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
+
+The following example uses the same 8-case FROC dataset used earlier. This time the FROC plot is shown and the AUC is calculated two ways: using geometry and using the formula (implemented in `RJafroc` function `UtilFigureOfMerit`).
+
+
+<img src="03-empirical_files/figure-html/empirical-numerical2-1.png" width="672" />
+
+
+
+```
+#> 
+#> Geometry yields FROC AUC =  0.4166667
+#> Formula yields  FROC AUC =  0.4166667
+```
+
+
+### ROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{ROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2} \psi\left ( \max_{l_1}\left (z_{k_11l_11} \right ), \max_{l_1l_2}\left (z_{k_22l_11}, z_{k_22l_22}  \right ) \right )
+\end{aligned}
+(\#eq:empirical-computational-roc)
+\end{equation}
+
+
+
+
+### AFROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC} = \frac{1}{K_1\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
+\end{aligned}
+(\#eq:empirical-computational-afroc)
+\end{equation}
+
+
+### wAFROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{wAFROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
+\end{aligned}
+(\#eq:empirical-computational-wafroc)
+\end{equation}
+
+
+The FOM-statistic $\text{A}_{AFROC}$ achieves its highest value, unity, if and only if every lesion is rated higher than any mark on non-diseased cases, for then the $\psi$ function always yields unity, and the summations yield unity. If, on the other hand, every lesion is rated lower than every mark on every non-diseased case, the $\psi$ function always yields zero, and the FOM-statistic is zero. Therefore, $0 \leq \text{A}_{AFROC} \leq 1$.
+This shows that $\text{A}_{AFROC}$ behaves like a probability but its range is *twice* that of $\text{A}_{ROC}$; recall that $0.5 \leq \text{A}_{ROC} \leq 1$ (assuming the observer has equal or better than random performance and the observer does not have the direction of the rating scale accidentally reversed). This has the consequence that treatment related differences between $\text{A}_{AFROC}$ (i.e., effect sizes) are larger relative to the corresponding ROC effect sizes (just as temperature differences in the Fahrenheit scale are larger than the same differences expressed in the Celsius scale). This has important implications for FROC sample size estimation, see `RJafrocQuickStart` Chapter TBA.
+
+
+The range $0 \leq \text{A}_{AFROC} \leq 1$ is one reason why the "chance diagonal" of the AFROC, corresponding to $\text{A}_{AFROC} = 0.5$, does *not* reflect chance-level performance. $\text{A}_{AFROC} = 0.5$ is actually reasonable performance, being exactly in the middle of the allowed range. An example of this was given in TBA §13.4.2.2 for the case of an expert radiologist who does not mark any cases.
+
+
+### AFROC1
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC1} =& \frac{1}{\left (K_1 +K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
+& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_22l_11}'  \right ),z_{k_22l_22} \right )  \right ]
+\end{aligned}
+(\#eq:empirical-computational-afroc1)
+\end{equation}
+
+
+
+In the second term inside the square brackets, notice the need to distinguish between the two indices for diseased cases $z_{k_22l_11}'$ and $z_{k_22l_22}$. 
+
+A check of normalization is obtained by assuming all NL ratings are less than any LL rating, in which case the terms inside the square brackets reduce to $K_1+K_2$ and $\text{A}_{AFROC1}$ is seen to be unity:
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC1} =& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} 1 \\
+=& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}L_{k_2 2} \\
+=& 1
+\end{aligned}
+(\#eq:empirical-computational-afroc1a)
+\end{equation}
+
+
+
+### wAFROC1
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{wAFROC1} =& \frac{1}{\left (K_1 + K_2 \right )K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\\
+& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_2'2l_11}  \right ),z_{k_22l_22} \right )  \right ]
+\end{aligned}
+(\#eq:empirical-computational-wafroc1)
+\end{equation}
 
 
 
