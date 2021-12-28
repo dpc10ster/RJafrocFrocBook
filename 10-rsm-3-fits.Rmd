@@ -405,6 +405,7 @@ grid.arrange(p1,p2, ncol=2, widths = c(1,1),
 x <- cbind(ret$m_pro_rsm, ret$m_cbm_rsm)
 x <- rbind(x, apply(x,2, mean))
 x  <- round(x, digits = 4)
+x <- rbind(x[1:14, ], rep("\n", 4), x[15:nrow(x), ])
 z1 <- format(retCI$cislopeProRsm, digits = 4)
 z2 <- format(retCI$cislopeCbmRsm, digits = 3)
 x <- rbind(x, 
@@ -412,7 +413,7 @@ x <- rbind(x,
              NA,
              paste0("(", z2[1], ", ", z2[2], ")"), # for seed = 1
              NA))
-row.names(x) <- c(datasetNames, "AVG", "CI")
+row.names(x) <- c(datasetNames, "\n", "AVG", "CI")
 colnames(x) <- c("$\\text{m}_{PR}$", "$R^2_{PR}$", "$\\text{m}_{CR}$", "$R^2_{CR}$")
 ```
 
