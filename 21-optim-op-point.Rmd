@@ -93,8 +93,8 @@ wAFROC <- function (
   relWeights) {
   x <- UtilAnalyticalAucsRSM(
     mu, 
-    lambdaP, 
-    nuP, 
+    lambdaP = lambdaP, 
+    nuP = nuP, 
     zeta1, 
     lesDistr, 
     relWeights)$aucwAFROC
@@ -398,8 +398,8 @@ for (y in 1:2) {
       fomMaxArr[y,i] <- -x$objective  # safe to use objective here
       rocAucArr[y,i] <- UtilAnalyticalAucsRSM(
         mu, 
-        lambdaP, 
-        nuP, 
+        lambdaP = lambdaP, 
+        nuP = nuP, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucROC
@@ -421,15 +421,15 @@ for (y in 1:2) {
       zetaOptArr[y,i] <- x$minimum
       fomMaxArr[y,i] <- UtilAnalyticalAucsRSM(
         mu, 
-        lambdaP, 
-        nuP, 
+        lambdaP = lambdaP, 
+        nuP = nuP, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucwAFROC
       rocAucArr[y,i] <- UtilAnalyticalAucsRSM(
         mu, 
-        lambdaP, 
-        nuP, 
+        lambdaP = lambdaP, 
+        nuP = nuP, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucROC
@@ -481,6 +481,9 @@ froc <- array(list(), dim = c(2))
 for (y in 1:2) {
   froc[[y]] <- ggplot2::ggplot()
   for ( i in 1:length(nuArr)) {
+    x <- UtilIntrinsic2PhysicalRSM(mu, lambda = lambda, nu = nuArr[i])
+    lambdaP <- x$lambdaP
+    nuP <- x$nuP
     z <- seq(-5,zetaOptArr[y,i]+5,0.1)
     xFROC <- RSM_xFROC(z, lambdaP)
     yFROC <- RSM_yFROC(z, mu, nuP) 
@@ -570,8 +573,8 @@ for (y in 1:2) {
       fomMaxArr[y,i] <- -x$objective  # safe to use objective here
       rocAucArr[y,i] <- UtilAnalyticalAucsRSM(
         muArr[i], 
-        lambdaP, 
-        nuP, 
+        lambdaP = lambdaP, 
+        nuP = nuP, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucROC
@@ -586,22 +589,22 @@ for (y in 1:2) {
       x <- optimize(Youden, 
                     interval = c(-5,5), 
                     muArr[i], 
-                    lambda, 
-                    nu, 
+                    lambdaP, 
+                    nuP, 
                     lesDistr, 
                     relWeights)
       zetaOptArr[y,i] <- x$minimum
       fomMaxArr[y,i] <- UtilAnalyticalAucsRSM(
         muArr[i], 
-        lambda, 
-        nu, 
+        lambdaP = lambdaP, 
+        nuP = nuP, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucwAFROC
       rocAucArr[y,i] <- UtilAnalyticalAucsRSM(
         muArr[i], 
-        lambda, 
-        nu, 
+        lambdaP = lambdaP, 
+        nuP = nuP, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucROC
@@ -656,6 +659,9 @@ froc <- array(list(), dim = c(2))
 for (y in 1:2) {
   froc[[y]] <- ggplot2::ggplot()
   for ( i in 1:length(muArr)) {
+    x <- UtilIntrinsic2PhysicalRSM(muArr[i], lambda = lambda, nu)
+    lambdaP <- x$lambdaP
+    nuP <- x$nuP
     z <- seq(-5,zetaOptArr[y,i]+5,0.1)
     xFROC <- RSM_xFROC(z, lambdaP)
     yFROC <- RSM_yFROC(z, muArr[i], nuP) 
@@ -761,16 +767,16 @@ for (y in 1:2) {
     x <- optimize(wAFROC, 
                   interval = c(-5,5), 
                   mu, 
-                  lambda, 
-                  nu, 
+                  lambdaP, 
+                  nuP, 
                   lesDistr, 
                   relWeights)
     zetaOptArr[y] <- x$minimum
     fomMaxArr[y] <- -x$objective  # safe to use objective here
     rocAucArr[y] <- UtilAnalyticalAucsRSM(
       mu, 
-      lambda, 
-      nu, 
+      lambdaP = lambdaP, 
+      nuP = nuP, 
       zeta1 = x$minimum, 
       lesDistr, 
       relWeights)$aucROC
@@ -792,15 +798,15 @@ for (y in 1:2) {
     zetaOptArr[y] <- x$minimum
     fomMaxArr[y] <- UtilAnalyticalAucsRSM(
       mu, 
-      lambda, 
-      nu, 
+      lambdaP = lambdaP, 
+      nuP = nuP, 
       zeta1 = x$minimum, 
       lesDistr, 
       relWeights)$aucwAFROC
     rocAucArr[y] <- UtilAnalyticalAucsRSM(
       mu, 
-      lambda, 
-      nu, 
+      lambdaP = lambdaP, 
+      nuP = nuP, 
       zeta1 = x$minimum, 
       lesDistr, 
       relWeights)$aucROC
