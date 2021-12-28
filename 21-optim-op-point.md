@@ -66,14 +66,15 @@ The functions to be maximized, `wAFROC` and `Youden`, are defined next:
 wAFROC <- function (
   zeta1, 
   mu, 
-  lambda, 
-  nu, 
+  lambdaP, 
+  nuP, 
   lesDistr, 
   relWeights) {
   x <- UtilAnalyticalAucsRSM(
     mu, 
-    lambda, 
-    nu, zeta1, 
+    lambdaP = lambdaP, 
+    nuP = nuP, 
+    zeta1, 
     lesDistr, 
     relWeights)$aucwAFROC
   # return negative of aucwAFROC 
@@ -86,8 +87,8 @@ wAFROC <- function (
 Youden <- function (
   zeta1, 
   mu, 
-  lambda, 
-  nu, 
+  lambdaP, 
+  nuP, 
   lesDistr, 
   relWeights) {
   # add sensitivity and specificity 
@@ -95,10 +96,10 @@ Youden <- function (
   x <- RSM_yROC(
     zeta1, 
     mu, 
-    lambda, 
-    nu, 
+    lambdaP, 
+    nuP, 
     lesDistr) + 
-    (1 - RSM_xROC(zeta1, lambda/mu)) - 1
+    (1 - RSM_xROC(zeta1, lambdaP)) - 1
   # return negative of Youden-index 
   # (as optimize finds minimum of function)
   return(-x)
@@ -134,60 +135,61 @@ lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 for (y in 1:2) {
   for (i in 1:length(lambdaArr)) {
+    x <- UtilIntrinsic2PhysicalRSM(mu, lambda = lambdaArr[i], nu)
+    lambdaP <- x$lambdaP
+    nuP <- x$nuP
     if (y == 1) {
       x <- optimize(wAFROC, 
                     interval = c(-5,5), 
                     mu, 
-                    lambdaArr[i], 
-                    nu, 
+                    lambdaP = lambdaP, 
+                    nuP = nuP, 
                     lesDistr, 
                     relWeights)
       zetaOptArr[y,i] <- x$minimum
       fomMaxArr[y,i] <- -x$objective # safe to use objective here
       rocAucArr[y,i] <- UtilAnalyticalAucsRSM(
         mu, 
-        lambdaArr[i], 
-        nu, 
+        lambdaP = lambdaP, 
+        nuP = nuP, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucROC
       nlfOptArr[y,i] <- RSM_xFROC(
         z = x$minimum, 
-        mu, 
-        lambda = lambdaArr[i])
+        lambdaP = lambdaP)
       llfOptArr[y,i] <- RSM_yFROC(
         z = x$minimum, 
         mu, 
-        nu)
+        nuP = nuP)
     } else if (y == 2) {
       x <- optimize(Youden, 
                     interval = c(-5,5), 
                     mu, 
-                    lambdaArr[i], 
-                    nu, 
+                    lambdaP, 
+                    nuP, 
                     lesDistr, 
                     relWeights)
       zetaOptArr[y,i] <- x$minimum
       fomMaxArr[y,i] <- UtilAnalyticalAucsRSM(
         mu, 
-        lambdaArr[i], 
-        nu, 
+        lambdaP = lambdaP, 
+        nuP = nuP, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucwAFROC
       rocAucArr[y,i] <- UtilAnalyticalAucsRSM(
         mu, 
-        lambdaArr[i], 
-        nu, 
+        lambdaP = lambdaP, 
+        nuP = nuP, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucROC
       nlfOptArr[y,i] <- RSM_xFROC(
         z = x$minimum, 
-        mu, 
-        lambda = lambdaArr[i])
+        lambdaP = lambdaP)
       llfOptArr[y,i] <- RSM_yFROC(
-        z = x$minimum, mu, nu)
+        z = x$minimum, mu, nuP)
     } else stop("incorrect y")
   }
 }
@@ -728,10 +730,10 @@ Table \@ref(tab:optim-op-point-table4) summarizes the results.
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:left;"> 18.680 </td>
-   <td style="text-align:left;"> 1.982 </td>
-   <td style="text-align:left;"> 0.770 </td>
-   <td style="text-align:left;"> 0.798 </td>
-   <td style="text-align:left;"> (0.161, 0.627) </td>
+   <td style="text-align:left;"> 2.298 </td>
+   <td style="text-align:left;"> 0.748 </td>
+   <td style="text-align:left;"> 0.764 </td>
+   <td style="text-align:left;"> (0.073, 0.543) </td>
   </tr>
 </tbody>
 </table>
