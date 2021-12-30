@@ -58,37 +58,29 @@ This chapter describes an analytic method for finding the optimal reporting thre
 
 ## Methods {#optim-op-point-methods}
 
-Terminology: 
-Non-lesion localizations = NLs, i.e., location level "false positives".
-Lesion localizations = LLs, i.e., location level "true positives".
-Latent marks = perceived suspicious regions that are not necessarily marked.
+The ROC, FROC and wAFROC curves are completely defined by the RSM (radiological search model) parameters: $\lambda$, $\nu$, $\mu$ and $\zeta_1$, which have the following meanings:
 
-The ROC, FROC and wAFROC curves are completely defined by the radiological search model (RSM) parameters, $\lambda$, $\nu$, $\mu$ and $\zeta_1$, which have the following meanings:
+* The $\mu$ parameter is the perceptual signal to noise ratio of lesions measured under location-known-exactly conditions. Higher values of $\mu$ lead to increased overall performance of the algorithm.
 
-* The $\mu$ parameter, $\mu \ge 0$, is the perceptual signal to noise ratio of lesions. Higher values of $\mu$ lead to increased separation of two unit variance normal distributions determining the ratings of NLs and LL. As $\mu$ increases performance of the algorithm increases.
+* The intrinsic (i.e., $\mu$ independent) $\lambda$ parameter determines the number of non-lesion localizations, NLs, per case (location level "false positives"). Lower values lead to fewer NL marks per case and increased algorithm performance. It is related to the physical $\lambda'$ parameter by $\lambda' = \lambda/\mu$. The physical parameter $\lambda'$ equals the mean of the assumed Poisson distribution of NLs per case.
 
-* The $\lambda$ parameter, $\lambda \ge 0$, determines the mean number of latent NLs per case. Lower values lead to fewer latent NL marks per case and increased algorithm performance. 
+* The intrinsic $\nu$ parameter determines the probability of lesion localizations, LLs, (location level "true positives"). Higher values lead to more LL marks. It is related to the physical $\nu'$ parameter by $\nu' = 1 - \exp(-\mu \nu)$. The physical parameter $\nu'$ equals the success probability of the assumed binomial distribution of LLs per case.
 
-* The $\nu$ parameter, $0 \le \nu \le 1$, determines the probability of latent LLs. Higher values of $\nu$ lead to more latent LL marks.  
-
-* The $\zeta_1$ parameter determines if a suspicious region found by the algorithm is actually marked (if the z-sample exceeds $\zeta_1$ the latent mark becomes an actual mark). Higher values correspond to more stringent reporting criteria. The higher the value of $\zeta_1$ the fewer the numbers of reported marks. 
-
-* The objective is, given value of the other paramters, to optimize $\zeta_1$.  
+* The $\zeta_1$ parameter determines if a suspicious region found by the algorithm is actually marked. The higher this value, the fewer the reported marks. The objective is to optimize $\zeta_1$. 
 
 
-In the TBA following sections each of the first three parameters is varied in turn and the corresponding optimal $\zeta_$ determined by maximizing one of two figures of merit (FOMs), namely, the wAFROC-AUC and the Youden-index. The value maximizing wAFROC-AUC is denoted $\zeta_{1;1\mu \lambda \nu}$ and the value maximizing the Youden-index is denoted $\zeta_{;2\mu \lambda \nu}$. 
+In the following sections each of the first three parameters is varied in turn and the corresponding optimal $\zeta_1$ determined by maximizing one of two figures of merit (FOMs), namely, the wAFROC-AUC and the Youden-index. 
 
 
-### Figures of merit to be maximized
-The wAFROC figure of merit is implemented in the `RJafroc` function `UtilAnalyticalAucsRSM`. It was assumed that half of the diseased cases contain one lesion and the rest contain two lesions and the lesions are assigned equal weights (i.e., clinical importance).
-
-The Youden-index is defined as the sum of sensitivity and specificity minus 1. Sensitivity is implemented in function `RSM_yROC` and specificity is `(1 - RSM_xROC)`. 
+### Functions to be maximized
+The wAFROC figure of merit is calculated by the `RJafroc` functions `UtilAnalyticalAucsRSM`. The Youden-index is defined as the sum of sensitivity and specificity minus 1. Sensitivity is computed by `RSM_yROC` and specificity by `(1 - RSM_xROC)`. The RSM arguments, some of which are passed to the functions, are $\mu$, $\lambda'$, $\nu'$, `lesDistr` and `relWeights.` The last two specify the number of lesions per case and their weights (clinical importance). The code in this chapter assumes half of the diseased cases contain one lesion and the rest contain two lesions and the lesions are equally weighted.
 
 
-```{r foms_2be_maximized, echo=FALSE, attr.source = ".numberLines"}
+
+```{r functions_2be_maximized, echo=FALSE, attr.source = ".numberLines"}
 
 wAFROC <- function (
-  zeta1, mu, lambdaP1, nuP, 
+  zeta1, mu, lambdaP1, nuP1, 
   lesDistr, 
   relWeights) {
   # return negative of aucwAFROC 
@@ -96,7 +88,7 @@ wAFROC <- function (
   return(-UtilAnalyticalAucsRSM(
     mu, 
     lambdaP = lambdaP1, 
-    nuP = nuP, 
+    nuP = nuP1, 
     zeta1, 
     lesDistr, 
     relWeights)$aucwAFROC)
@@ -108,7 +100,7 @@ Youden <- function (
   zeta1, 
   mu, 
   lambdaP1, 
-  nuP, 
+  nuP1, 
   lesDistr, 
   relWeights) {
   # add sensitivity and specificity 
@@ -117,7 +109,7 @@ Youden <- function (
     zeta1, 
     mu, 
     lambdaP1, 
-    nuP, 
+    nuP1, 
     lesDistr) + 
     (1 - RSM_xROC(zeta1, lambdaP1)) - 1
   # return negative of Youden-index 
@@ -130,41 +122,39 @@ Youden <- function (
 
 ### Vary lambda  {#optim-op-point-vary-lambda}
 
-For $\mu = 2$ and $\nu = 1$ optimizations were performed for $\lambda = 1, 2, 5, 10$. The following quantities were calculated:
+For $\mu = 2$ and $\nu = 1$, wAFROC-AUC and Youden-index based optimizations were performed for $\lambda' = 1, 2, 5, 10$. The following quantities were calculated:
 
-* $\zeta_{1;1\mu \lambda \nu}$, the optimal thresholds for wAFROC based optimizations and $\zeta_{1;2\mu \lambda \nu}$ for Youden-index based optimizations;
-* $\text{wAFROC} \left (1\mu \lambda \nu \right )$, the optimal value of the wAFROC-AUC for wAFROC based optimizations; 
-* $\text{wAFROC} \left (2\mu \lambda \nu \right )$, the optimal value of the wAFROC-AUC for Youden-index based optimizations. For consistency we always report wAFROC-AUC even when the optimized quantity is the Youden-index;
-* $\text{ROC} \left (1\mu \lambda \nu \right )$, the AUCs under the ROC curves for wAFROC based optimizations;   
-* $\text{ROC} \left (2\mu \lambda \nu \right )$, the AUCs under the ROC curves for Youden-index based optimizations;   
-* $\text{NLF} \left (1\mu \lambda \nu \right )$ and $\text{LLF} \left (1\mu \lambda \nu \right )$: the coordinates of the optimal operating points on the FROC curve for wAFROC based optimizations;   
-* $\text{NLF} \left (2\mu \lambda \nu \right )$ and $\text{LLF} \left (2\mu \lambda \nu \right )$: the coordinates of the optimal operating points on the FROC curve for Youden-index based optimizations.   
+* `zetaOptArr`, a [2,4] array, the optimal thresholds $\zeta_1$; the first index corresponds to wAFROC-based or Youden-index based optimizations. The second index corresponds to the 4 values of $\lambda$.
+* `wAfrocArr`, a [2,4] array, the wAFROC-AUC values using either wAFROC-based or Youden-index based optimizations. For consistency we always report wAFROC-AUC even when the optimized quantity is the Youden-index;
+* `rocArr`, a [2,4] array, the AUCs under the ROC curves corresponding to wAFROC-based or Youden-index based optimizations;   
+* `nlfOptArr`, a [2,4] array, the abscissae of the optimal reporting points on the FROC curve corresponding to wAFROC-based or Youden-index based optimizations;   
+* `llfOptArr`, a [2,4] array, the ordinates of the optimal reporting points on the FROC curve corresponding to wAFROC-based or Youden-index based optimizations.   
 
 
-Table \@ref(tab:optim-op-point-table1) summarizes these results. The column labeled "FOM" shows the quantity being maximized, "lambda" corresponds to the 4 values of $\lambda$, "zeta1" is the optimal value of $\zeta_1$ that maximizes FOM, "wAFROC" is the wAFROC-AUC, "ROC" is the AUC under the ROC curve, i.e., ROC-AUC, and "OptOpPt" is the optimal operating point on the FROC curve. 
+Table \@ref(tab:optim-op-point-table1) summarizes the results. The column labeled "FOM" shows the quantity being maximized, "lambda" corresponds to the 4 values of $\lambda$, "zeta1" is the optimal value of $\zeta_1$ that maximizes FOM, "wAFROC" is the wAFROC-AUC, "ROC" is the AUC under the ROC curve, i.e., ROC-AUC, and "OptOpPt" is the optimal operating point on the FROC curve. 
 
 
 
 ```{r optim-op-point-computations-lambda, cache = FALSE, echo=FALSE, attr.source = ".numberLines"}
 mu <- 2
-nuP <- 0.9
-lambdaPArr <- c(1, 2, 5,10)
-wAfrocArr <- array(dim = c(2,length(lambdaPArr)))
-zetaOptArr <- array(dim = c(2,length(lambdaPArr)))
-rocArr <- array(dim = c(2,length(lambdaPArr)))
-nlfOptArr <- array(dim = c(2,length(lambdaPArr)))
-llfOptArr <- array(dim = c(2,length(lambdaPArr)))
+nuP1 <- 1
+lambdaP1Arr <- c(1, 2, 5,10)
+wAfrocArr <- array(dim = c(2,length(lambdaP1Arr)))
+zetaOptArr <- array(dim = c(2,length(lambdaP1Arr)))
+rocArr <- array(dim = c(2,length(lambdaP1Arr)))
+nlfOptArr <- array(dim = c(2,length(lambdaP1Arr)))
+llfOptArr <- array(dim = c(2,length(lambdaP1Arr)))
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 for (y in 1:2) {
-  for (i in 1:length(lambdaPArr)) {
-    lambdaP1 <- lambdaPArr[i]
+  for (i in 1:length(lambdaP1Arr)) {
+    lambdaP1 <- lambdaP1Arr[i]
     if (y == 1) {
       x <- optimize(wAFROC, 
                     interval = c(-5,5), 
                     mu, 
                     lambdaP = lambdaP1, 
-                    nuP = nuP, 
+                    nuP = nuP1, 
                     lesDistr, 
                     relWeights)
       zetaOptArr[y,i] <- x$minimum
@@ -172,7 +162,7 @@ for (y in 1:2) {
       rocArr[y,i] <- UtilAnalyticalAucsRSM(
         mu, 
         lambdaP = lambdaP1, 
-        nuP = nuP, 
+        nuP = nuP1, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucROC
@@ -182,27 +172,27 @@ for (y in 1:2) {
       llfOptArr[y,i] <- RSM_yFROC(
         z = x$minimum, 
         mu, 
-        nuP = nuP)
+        nuP = nuP1)
     } else if (y == 2) {
       x <- optimize(Youden, 
                     interval = c(-5,5), 
                     mu, 
                     lambdaP1, 
-                    nuP, 
+                    nuP1, 
                     lesDistr, 
                     relWeights)
       zetaOptArr[y,i] <- x$minimum
       wAfrocArr[y,i] <- UtilAnalyticalAucsRSM(
         mu, 
         lambdaP = lambdaP1, 
-        nuP = nuP, 
+        nuP = nuP1, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucwAFROC
       rocArr[y,i] <- UtilAnalyticalAucsRSM(
         mu, 
         lambdaP = lambdaP1, 
-        nuP = nuP, 
+        nuP = nuP1, 
         zeta1 = x$minimum, 
         lesDistr, 
         relWeights)$aucROC
@@ -210,7 +200,7 @@ for (y in 1:2) {
         z = x$minimum, 
         lambdaP = lambdaP1)
       llfOptArr[y,i] <- RSM_yFROC(
-        z = x$minimum, mu, nuP)
+        z = x$minimum, mu, nuP1)
     } else stop("incorrect y")
   }
 }
@@ -221,20 +211,19 @@ for (y in 1:2) {
 
 
 ```{r optim-op-point-table1-contents, echo=FALSE}
-x1 <- cbind(rep("wAFROC",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[1,]), wAFROC = simplePrint(wAfrocArr[1,]), ROC = simplePrint(rocArr[1,]), OptOpPt = OpPtStr(nlfOptArr[1,], llfOptArr[1,]))
-x2 <- cbind(rep("Youden",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[2,]), wAFROC = simplePrint(wAfrocArr[2,]), ROC = simplePrint(rocArr[2,]), OptOpPt = OpPtStr(nlfOptArr[2,], llfOptArr[2,]))
+x1 <- cbind(rep("wAFROC",4), lambda = lambdaP1Arr, zeta1 = simplePrint(zetaOptArr[1,]), wAFROC = simplePrint(wAfrocArr[1,]), ROC = simplePrint(rocArr[1,]), OptOpPt = OpPtStr(nlfOptArr[1,], llfOptArr[1,]))
+x2 <- cbind(rep("Youden",4), lambda = lambdaP1Arr, zeta1 = simplePrint(zetaOptArr[2,]), wAFROC = simplePrint(wAfrocArr[2,]), ROC = simplePrint(rocArr[2,]), OptOpPt = OpPtStr(nlfOptArr[2,], llfOptArr[2,]))
 x12 <- as.data.frame(rbind(x1,x2))
-colnames(x12) <- c("FOM", "$\\lambda$", "$\\zeta_1$", "wAFROC", "ROC", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
+colnames(x12) <- c("FOM", "lambda", "zeta1", "wAFROC", "ROC", "OptOpPt")
 ```
 
 
 
 ```{r optim-op-point-table1, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for $\\mu = 2$, $\\nu = 0.9$ and 4 values of $\\lambda$. The wAFROC column always displays wAFROC-AUC, even though the optimized quantity may the Youden-index, as in the last four rows.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for $\\mu = 2$, $\\nu = 1$ and different values of $\\lambda$. The wAFROC column always displays wAFROC-AUC, even though the optimized quantity may the Youden-index, as in the last four rows.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
-The ROC-AUCs are reported as a check of the less familar wAFROC-AUC figure of merit. It can be confirmed that the ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC based optimizations yield higher AUC values than the Youden-index based optimizations. The advantage of wAFROC-AUC over Youden-index based optimizations as measured by the differences between the corresponding wAFROC-AUCs decreases with increasing $\lambda$: `r simplePrint(wAfrocArr[1,] - wAfrocArr[2,])`, where the successive values correspond to $\lambda = 1, 2, 5, 10$. The differences between the corresponding ROC-AUCs is relatively constant: `r simplePrint(rocArr[1,] - rocArr[2,])`.  
 
 For the wAFROC-AUC based optimizations (first four rows of table), as $\lambda$ increases:
 
@@ -242,7 +231,7 @@ For the wAFROC-AUC based optimizations (first four rows of table), as $\lambda$ 
 * wAFROC-AUC decreases;
 * ROC-AUC decreases;
 * The optimal operating point moves to lower LLF values, i.e., lower values of location-level "sensitivity".
-*   
+* The advantage of wAFROC-AUC over Youden-index based optimizations, as measured by the differences between the corresponding wAFROC-AUCs, decreases with increasing $\lambda$: `wAfrocArr[1,] - wAfrocArr[2,]` = `r simplePrint(wAfrocArr[1,] - wAfrocArr[2,])`, where the successive values correspond to $\lambda = 1, 5, 10, 15$.   
 
 The $\lambda'$ Poisson parameter controls the average number of perceived NLs per case. For example, for $\mu = 2$ and $\lambda = 1$, the average number is $\lambda' = \lambda /\mu = 0.5$, i.e., an average of one perceived NL every two non-diseased case. With increasing numbers of NLs per case it is necessary to increase the reporting threshold (i.e., adopt a stricter reporting criteria) and LLF consequently decreases. Also, overall CAD/AI performance, regardless of how it is measured (i.e., wAFROC-AUC or ROC-AUC), decreases.   
 
@@ -289,10 +278,10 @@ scaled_froc <- array(list(), dim = 2)
 for (y in 1:2) {
   i <- 1 # no need to generate scaled FROC 4 times
   z <- seq(-5,zetaOptArr[y,i]+5,0.1)
-  lambdaP <- lambdaPArr[i]
+  lambdaP1 <- lambdaP1Arr[i] / mu
   # scale x-axis to range (0,1) by dividing by lambdaP1
-  xFROC <- RSM_xFROC(z, lambdaP) / lambdaP
-  yFROC <- RSM_yFROC(z, mu, nuP)
+  xFROC <- RSM_xFROC(z, lambdaP1) / lambdaP1
+  yFROC <- RSM_yFROC(z, mu, nuP1)
   df_scaled_froc <- data.frame(
     NLF_scaled = xFROC, 
     LLF = yFROC)
@@ -302,12 +291,12 @@ for (y in 1:2) {
     geom_line() +
     scale_x_continuous(limits = c(0,1)) + 
     scale_y_continuous(limits = c(0,1))
-  for ( i in 1:length(lambdaPArr)) {
-    lambdaP <- lambdaPArr[i]
+  for ( i in 1:length(lambdaP1Arr)) {
+    lambdaP1 <- lambdaP1Arr[i] / mu
     # scale NLF value by dividing 
     # by lambdaP1 to match scaling of x-axis
     optPt <- data.frame(
-      NLF_scaled = nlfOptArr[y,i] / lambdaP, 
+      NLF_scaled = nlfOptArr[y,i] / lambdaP1, 
       LLF = llfOptArr[y,i])
     scaled_froc[[y]] <- scaled_froc[[y]] + 
       geom_point(data = optPt, color = i)
@@ -318,21 +307,21 @@ for (y in 1:2) {
 
 
 
-```{r optim-op-point-vary-lambda, fig.cap="Left panel: maximized wAFROC AUC was used to find optimal $\\zeta_1$. Right panel: maximized Youden-index was used to find optimal $\\zeta_1$. Dot colors: black is $\\lambda' = 1$, red is $\\lambda' = 2$, green is $\\lambda' = 5$ and blue is $\\lambda' = 10$.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-lambda, fig.cap="Left panel: maximized wAFROC AUC was used to find optimal $\\zeta_1$. Right panel: maximized Youden-index was used to find optimal $\\zeta_1$. Dot colors: black is $\\lambda = 1$, red is $\\lambda = 5$, green is $\\lambda = 10$ and blue is $\\lambda = 15$.", fig.show='hold', echo=FALSE}
 grid.arrange(scaled_froc[[1]], scaled_froc[[2]], ncol = 2)
 ```
 
 
 The left panel in \@ref(fig:optim-op-point-vary-lambda) shows the optimal operating points when wAFROC-AUC is maximized. The 4 operating points are color coded as follows:
 
-* The black dot corresponds to $\lambda' = 1$. The true FROC is identical to that shown.  
-* The red dot corresponds to $\lambda' = 2$. The true FROC is obtained by *magnifying* that shown, including the red dot, along the x-axis by a factor of 2.   
-* The green dot corresponds to $\lambda' = 5$. The true FROC is obtained by *magnifying* along the x-axis by a factor of 5.  
-* The blue dot corresponds to $\lambda' = 10$. The true FROC is obtained by *magnifying* along the x-axis by a factor of 10.  
+* The black dot corresponds to $\lambda = 1$, i.e., $\lambda' = 1/2 = 0.5$. In other words, the true FROC is obtained by *shrinking* the plot shown, including the superposed black dot, along the x-axis by a factor of 2.  
+* The red dot corresponds to $\lambda' = 2.5$. In other words, the true FROC is obtained by *magnifying* that shown, including the red dot, along the x-axis by a factor of 2.5.   
+* The green dot corresponds to $\lambda' = 5$. 
+* The blue dot corresponds to $\lambda' = 7.5$.  
 
-These plots illustrate the previous comments, namely, as $\lambda$ increases, the optimal operating point moves *down* the scaled curve corresponding to adoption of progressively more stringent reporting thresholds.
+These plots illustrate the previous comments, namely, as $\lambda$ increases, *the optimal operating point moves down the scaled curve*.
 
-The right panel shows the optimal operating point when the Youden-index is maximized. It has the same general features as the previous example but, taken as a whole, the group of four operating points in the right panel are below-left those in the left panel, representing higher values of optimal $\zeta_1$, i.e., a more stringent reporting criteria. As seen in Table \@ref(tab:optim-op-point-table1) the overly strict criteria resulting from using Youden-index based optimizations, lead to lower true performance: i.e., lower wAFROC-AUC and lower ROC-AUC. It also yields lower values of LLF, i.e., fewer correctly localized lesions.
+The right panel shows the optimal operating point when the Youden-index is maximized. It shows the same general features as the previous example but the group of four operating points in the right panel are below-left those in the left panel, representing higher values of optimal $\zeta_1$, i.e., a more stringent criteria. As seen in the preceding table the overly strict criteria, using Youden-index based optimization, leads to lower true performance: i.e., lower wAFROC-AUC and lower ROC-AUC, and lower LLF.
 
 
 The FROC curve does not represent true performance. To visualize true performance one compares wAFROC curves.    
@@ -340,9 +329,9 @@ The FROC curve does not represent true performance. To visualize true performanc
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaPArr[1], nuP = nuP)
-lambda <- x$lambda
-nu <- x$nu
+x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP1Arr[1], nuP = nuP1)
+lambda <- x$lambdaP
+nu <- x$nuP
 wafroc <- PlotRsmOperatingCharacteristics(
      c(mu,mu),
      c(lambda,lambda),
