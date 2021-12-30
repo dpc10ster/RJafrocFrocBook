@@ -234,7 +234,7 @@ kbl(x12, caption = "Summary of optimization results for $\\mu = 2$, $\\nu = 0.9$
 ```
 
 
-The ROC-AUCs are reported as a check of the less familar wAFROC-AUC figure of merit. It can be confirmed that the ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC based optimizations yield higher AUC values than the Youden-index based optimizations. The advantage of wAFROC-AUC over Youden-index based optimizations as measured by the differences between the corresponding wAFROC-AUCs decreases with increasing $\lambda$: `r simplePrint(wAfrocArr[1,] - wAfrocArr[2,])`, where the successive values correspond to $\lambda = 1, 2, 5, 10$. The differences between the corresponding ROC-AUCs is relatively constant: `r simplePrint(rocArr[1,] - rocArr[2,])`.  
+The ROC-AUCs are reported as a check of the less familar wAFROC-AUC figure of merit. It can be confirmed that the ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC based optimizations yield higher AUC values than the Youden-index based optimizations.   
 
 For the wAFROC-AUC based optimizations (first four rows of table), as $\lambda$ increases:
 
