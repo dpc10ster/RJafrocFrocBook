@@ -74,7 +74,7 @@ Background on the radiological search model (RSM) is provided in Chapter \@ref(r
 * The $\zeta_1$ parameter determines if a suspicious region found by the algorithm is actually marked (if the z-sample exceeds $\zeta_1$ the latent mark becomes an actual mark). Higher values correspond to more stringent reporting criteria and fewer reported marks. Performance, as measured by wAFROC-AUC or the Youden-index, peaks at an optimal value of $\zeta_1$. The purpose of this chapter is to investigate this effect, i.e., given values of the other RSM parameters and the figure of merit to be optimized (i.e., wAFROC-AUC or the Youden-index), to determine the optimal value of $\zeta_1$.  
 
 
-TBA (lay out rationale for following material) In the following sections each of the first three parameters is varied in turn and the corresponding optimal $\zeta_1$ determined by maximizing one of two figures of merit (FOMs), namely, the wAFROC-AUC and the Youden-index. The value maximizing wAFROC-AUC is denoted $\zeta_{1;1\mu \lambda \nu}$ and the value maximizing the Youden-index is denoted $\zeta_{2;\mu \lambda \nu}$. 
+TBA (lay out rationale for following material) In the following sections each of the first three parameters is varied in turn and the corresponding optimal $\zeta_1$ determined by maximizing one of two figures of merit (FOMs), namely, the wAFROC-AUC and the Youden-index. The value maximizing wAFROC-AUC is denoted $\zeta_{1;1\mu \lambda \nu}$ and that maximizing the Youden-index is denoted $\zeta_{2;\mu \lambda \nu}$. 
 
 
 ## Figures of merit to be maximized
@@ -130,13 +130,13 @@ Youden <- function (
 
 For $\mu = 2$ and $\nu = 0.9$ optimizations were performed for $\lambda = 1, 2, 5, 10$. The following quantities were calculated:
 
-* $\zeta_{1;1\mu \lambda \nu}$, the optimal thresholds for wAFROC based optimizations and $\zeta_{1;2\mu \lambda \nu}$ for Youden-index based optimizations;
-* $\text{wAFROC} \left (1\mu \lambda \nu \right )$, the optimal value of the wAFROC-AUC for wAFROC based optimizations; 
-* $\text{wAFROC} \left (2\mu \lambda \nu \right )$, the optimal value of the wAFROC-AUC for Youden-index based optimizations. For consistency we always report wAFROC-AUC even when the optimized quantity is the Youden-index;
-* $\text{ROC} \left (1\mu \lambda \nu \right )$, the AUCs under the ROC curves for wAFROC based optimizations;   
-* $\text{ROC} \left (2\mu \lambda \nu \right )$, the AUCs under the ROC curves for Youden-index based optimizations;   
-* $\text{NLF} \left (1\mu \lambda \nu \right )$ and $\text{LLF} \left (1\mu \lambda \nu \right )$: the coordinates of the optimal operating points on the FROC curve for wAFROC based optimizations;   
-* $\text{NLF} \left (2\mu \lambda \nu \right )$ and $\text{LLF} \left (2\mu \lambda \nu \right )$: the coordinates of the optimal operating points on the FROC curve for Youden-index based optimizations.   
+* $\zeta_{1;1\mu \lambda \nu}$, the optimal thresholds for wAFROC optimizations and $\zeta_{1;2\mu \lambda \nu}$ for Youden-index optimizations;
+* $\text{wAFROC} \left (1\mu \lambda \nu \right )$, the optimal value of the wAFROC-AUC for wAFROC optimizations; 
+* $\text{wAFROC} \left (2\mu \lambda \nu \right )$, the optimal value of the wAFROC-AUC for Youden-index optimizations. For consistency we always report wAFROC-AUC even when the optimized quantity is the Youden-index;
+* $\text{ROC} \left (1\mu \lambda \nu \right )$, the AUCs under the ROC curves for wAFROC optimizations;   
+* $\text{ROC} \left (2\mu \lambda \nu \right )$, the AUCs under the ROC curves for Youden-index optimizations;   
+* $\text{NLF} \left (1\mu \lambda \nu \right )$ and $\text{LLF} \left (1\mu \lambda \nu \right )$: the coordinates of the optimal operating points on the FROC curve for wAFROC optimizations;   
+* $\text{NLF} \left (2\mu \lambda \nu \right )$ and $\text{LLF} \left (2\mu \lambda \nu \right )$: the coordinates of the optimal operating points on the FROC curve for Youden-index optimizations.   
 
 
 Table \@ref(tab:optim-op-point-table-vary-lambda) summarizes these results. The column labeled FOM shows the quantity being maximized, $\lambda$ corresponds to the 4 values of $\lambda$, $\zeta_1$ is the optimal value of $\zeta_1$ that maximizes the chosen figure of merit. All quantities in columns 3 through 6 are functions of $x\mu \lambda \nu$, where x = 1 for wAFROC and x = 2 for Youden-index. The column labeled wAFROC is the AUC under the wAFROC curve, the column labeled ROC is the AUC under the ROC curve, and $\left( \text{NLF}, \text{LLF}\right)$ is the optimal operating point on the FROC curve. 
@@ -237,9 +237,9 @@ The $\lambda$ parameter controls the average number of perceived NLs per case. F
 
 With larger $\lambda$ overall optimized performance is expected to be lower as confirmed by the corresponding wAFROC-AUC and ROC-AUC values. This is due to two reinforcing effects: performance goes down with increasing numbers of NLs per case and performance goes down with increasing reporting threshold. 
 
-While these effects are also true for the Youden-index based optimizations, the optimal thresholds are collectively higher than the corresponding wAFROC based optimizations, especially for the lower values of $\lambda$: $\zeta_{1;2,\mu, \lambda = 1, \nu}$ = `r simplePrint(zetaOptArr[2,1])` and $\zeta_{1;2,\mu, \lambda = 10, \nu}$ = `r simplePrint(zetaOptArr[2,4])`. This results in lower wAFROC-AUC and ROC-AUC values when using Youden-index based optimizations.
+For the Youden-index optimizations the optimal thresholds are collectively higher than the corresponding wAFROC optimizations, especially for the lower values of $\lambda$: $\zeta_{1;2,\mu, \lambda = 1, \nu}$ = `r simplePrint(zetaOptArr[2,1])` and $\zeta_{1;2,\mu, \lambda = 10, \nu}$ = `r simplePrint(zetaOptArr[2,4])`. This results in lower wAFROC-AUC and ROC-AUC values when using Youden-index optimizations.
 
-The ROC-AUCs are reported as a check of the less familar wAFROC-AUC figure of merit. It is evident that the ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC based optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index based optimizations.   
+The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.   
 
 
 ### Illustrative FROC plots
@@ -277,7 +277,7 @@ for (i in 1:4) {
 
 
 
-```{r optim-op-point-vary-lambda-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\lambda$. The black dot is when maximized wAFROC AUC was used to find the optimal operating point and red dot is when maximized Youden-index was used.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-lambda-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\lambda$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -286,7 +286,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 TBA These plots illustrate the previous comments, namely, as $\lambda$ increases, the optimal operating point moves *down* the scaled curve corresponding to adoption of progressively more stringent reporting thresholds.
 
-TBA The right panel shows the optimal operating point when the Youden-index is maximized. It has the same general features as the previous example but, taken as a whole, the group of four operating points in the right panel are below-left those in the left panel, representing higher values of optimal $\zeta_1$, i.e., more stringent reporting criteria. As seen in Table \@ref(tab:optim-op-point-table-vary-lambda) the overly strict criteria resulting from using Youden-index based optimizations, lead to lower true performance: i.e., lower wAFROC-AUC and lower ROC-AUC. It also yields lower values of $\text{LLF}$, i.e., fewer correctly localized lesions.
+TBA The right panel shows the optimal operating point when the Youden-index is maximized. It has the same general features as the previous example but, taken as a whole, the group of four operating points in the right panel are below-left those in the left panel, representing higher values of optimal $\zeta_1$, i.e., more stringent reporting criteria. As seen in Table \@ref(tab:optim-op-point-table-vary-lambda) the overly strict criteria resulting from using Youden-index optimizations, lead to lower true performance: i.e., lower wAFROC-AUC and lower ROC-AUC. It also yields lower values of $\text{LLF}$, i.e., fewer correctly localized lesions.
 
 
 ### Illustrative wAFROC plots
@@ -360,7 +360,7 @@ for (i in 1:4) {
 
 
 
-TBA ROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC.  The two ROC-AUCs are 0.929 and 0.899, respectively.
+TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC.  The two ROC-AUCs are 0.929 and 0.899, respectively.
 
 
 
@@ -479,9 +479,8 @@ The $\lambda$ parameter controls the average number of perceived NLs per case. F
 
 With larger $\lambda$ overall optimized performance is expected to be lower as confirmed by the corresponding wAFROC-AUC and ROC-AUC values. This is due to two reinforcing effects: performance goes down with increasing numbers of NLs per case and performance goes down with increasing reporting threshold. 
 
-While these effects are also true for the Youden-index based optimizations, the optimal thresholds are collectively higher than the corresponding wAFROC based optimizations, especially for the lower values of $\lambda$: $\zeta_{1;2,\mu, \lambda = 1, \nu}$ = `r simplePrint(zetaOptArr[2,1])` and $\zeta_{1;2,\mu, \lambda = 10, \nu}$ = `r simplePrint(zetaOptArr[2,4])`. This results in lower wAFROC-AUC and ROC-AUC values when using Youden-index based optimizations.
+While these effects are also true for the Youden-index optimizations, the optimal thresholds are collectively higher than the corresponding wAFROC optimizations, especially for the lower values of $\lambda$: $\zeta_{1;2,\mu, \lambda = 1, \nu}$ = `r simplePrint(zetaOptArr[2,1])` and $\zeta_{1;2,\mu, \lambda = 10, \nu}$ = `r simplePrint(zetaOptArr[2,4])`. This results in lower wAFROC-AUC and ROC-AUC values when using Youden-index optimizations.
 
-The ROC-AUCs are reported as a check of the less familar wAFROC-AUC figure of merit. It is evident that the ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC based optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index based optimizations.   
 
 
 ### Illustrative FROC plots
@@ -520,7 +519,7 @@ for (i in 1:4) {
 
 
 
-```{r optim-op-point-vary-nu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot is when maximized wAFROC AUC was used to find the optimal operating point and red dot is when maximized Youden-index was used.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-nu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -558,7 +557,7 @@ for (i in 1:4) {
 
 
 
-TBA wAFROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC.  The two wAFROC-AUCs are 0.880 and 0.856, respectively.
+TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC.  The two wAFROC-AUCs are 0.880 and 0.856, respectively.
 
 
 
@@ -600,7 +599,7 @@ for (i in 1:4) {
 
 
 
-TBA ROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. TBA The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC.  The two ROC-AUCs are 0.929 and 0.899, respectively.
+TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. TBA The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC.  The two ROC-AUCs are 0.929 and 0.899, respectively.
 
 
 
@@ -715,14 +714,7 @@ kbl(x12, caption = "Summary of optimization results for $\\lambda = 1$, $\\nu = 
 ```
 
 
-The $\lambda$ parameter controls the average number of perceived NLs per case. For $\lambda = 1$ there is, on average, one perceived NL for every non-diseased case and the optimal wAFROC-based threshold is $\zeta_{1;1,\mu, \lambda = 1, \nu}$ = `r simplePrint(zetaOptArr[1,1])`. For $\lambda = 10$ there are ten perceived NLs for every non-diseased case and the optimal wAFROC-based threshold is $\zeta_{1;1,\mu, \lambda = 10, \nu}$ = `r simplePrint(zetaOptArr[1,4])`. The increase in $\zeta_1$ effect should be familiar to CAD/AI algorithm designers: with increasing numbers of NLs per case it is necessary to increase the reporting threshold (i.e., adopt a stricter reporting criteria). Also, overall CAD/AI performance decreases, regardless of how it is measured (i.e., wAFROC-AUC or ROC-AUC) and the optimal operating point on the FROC, $\left( \text{NLF}, \text{LLF}\right)$, moves down the curve.   
-
-
-With larger $\lambda$ overall optimized performance is expected to be lower as confirmed by the corresponding wAFROC-AUC and ROC-AUC values. This is due to two reinforcing effects: performance goes down with increasing numbers of NLs per case and performance goes down with increasing reporting threshold. 
-
-While these effects are also true for the Youden-index based optimizations, the optimal thresholds are collectively higher than the corresponding wAFROC based optimizations, especially for the lower values of $\lambda$: $\zeta_{1;2,\mu, \lambda = 1, \nu}$ = `r simplePrint(zetaOptArr[2,1])` and $\zeta_{1;2,\mu, \lambda = 10, \nu}$ = `r simplePrint(zetaOptArr[2,4])`. This results in lower wAFROC-AUC and ROC-AUC values when using Youden-index based optimizations.
-
-The ROC-AUCs are reported as a check of the less familar wAFROC-AUC figure of merit. It is evident that the ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC based optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index based optimizations.   
+TBA
 
 
 ### Illustrative FROC plots
@@ -760,7 +752,7 @@ for (i in 1:4) {
 
 
 
-```{r optim-op-point-vary-mu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\mu$. The black dot is when maximized wAFROC AUC was used to find the optimal operating point and red dot is when maximized Youden-index was used.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-mu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\mu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -799,7 +791,7 @@ for (i in 1:4) {
 
 
 
-TBA wAFROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC.  The two wAFROC-AUCs are 0.880 and 0.856, respectively.
+TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC.  The two wAFROC-AUCs are 0.880 and 0.856, respectively.
 
 
 
@@ -842,7 +834,7 @@ for (i in 1:4) {
 
 
 
-TBA ROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. TBA The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC.  The two ROC-AUCs are 0.929 and 0.899, respectively.
+TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to $\mu = 2$, $\nu = 1$ and $\lambda = 1$. TBA The optimal reporting theshold $\zeta_1$ is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC.  The two ROC-AUCs are 0.929 and 0.899, respectively.
 
 
 
