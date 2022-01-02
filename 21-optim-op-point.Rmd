@@ -185,8 +185,8 @@ for (y in 1:2) {
       x <- optimize(Youden, 
                     interval = c(-5,5), 
                     mu, 
-                    lambdaP, 
-                    nuP, 
+                    lambdaP = lambdaP, 
+                    nuP = nuP, 
                     lesDistr, 
                     relWeights)
       zetaOptArr[y,i] <- x$minimum
@@ -255,7 +255,7 @@ One could display 8 FROC plots, each corresponding to a row of the preceding tab
 \text{LLF}\left ( \zeta, \mu, \nu \right ) =& \nu \Phi \left ( \mu - \zeta \right ) 
 \end{aligned}
 \right \}
-(\#eq:rsm-froc-predictions)
+(\#eq:rsm-froc-predictions1)
 \end{equation}
 
 
@@ -280,32 +280,27 @@ Since the $\Phi$ function ranges from one to unity, the *four FROC curves for di
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-scaled_froc <- array(list(), dim = 2)
-for (y in 1:2) {
-  i <- 1 # no need to generate scaled FROC 4 times
-  z <- seq(-5,zetaOptArr[y,i]+5,0.1)
+plotArr <- array(list(), dim = 4)
+for (i in 1:4) {
+  z <- seq(-5,mu+5,0.1)
   lambdaP <- lambdaPArr[i]
-  # scale x-axis to range (0,1) by dividing by lambdaP
-  xFROC <- RSM_xFROC(z, lambdaP) / lambdaP
+  xFROC <- RSM_xFROC(z, lambdaP)
   yFROC <- RSM_yFROC(z, mu, nuP)
-  df_scaled_froc <- data.frame(
-    NLF_scaled = xFROC, 
+  df_froc <- data.frame(
+    NLF = xFROC, 
     LLF = yFROC)
-  scaled_froc[[y]] <- ggplot2::ggplot(
-    df_scaled_froc, 
-    aes(x = NLF_scaled, y = LLF)) + 
+  plotArr[[i]] <- ggplot2::ggplot(
+    df_froc, 
+    aes(x = NLF, y = LLF)) + 
     geom_line() +
-    scale_x_continuous(limits = c(0,1)) + 
+    scale_x_continuous(limits = c(0,lambdaPArr[i])) + 
     scale_y_continuous(limits = c(0,1))
-  for ( i in 1:length(lambdaPArr)) {
-    lambdaP <- lambdaPArr[i]
-    # scale \text{NLF} value by dividing 
-    # by lambdaP to match scaling of x-axis
+  for (y in 1:2) {
     optPt <- data.frame(
-      NLF_scaled = nlfOptArr[y,i] / lambdaP, 
+      NLF = nlfOptArr[y,i], 
       LLF = llfOptArr[y,i])
-    scaled_froc[[y]] <- scaled_froc[[y]] + 
-      geom_point(data = optPt, color = i)
+    plotArr[[i]] <- plotArr[[i]] + 
+      geom_point(data = optPt, color = y)
   }
 }
 ```
@@ -313,9 +308,11 @@ for (y in 1:2) {
 
 
 
-```{r optim-op-point-vary-lambda-froc, fig.cap="Scaled FROC plots for varying $\\lambda$. Left panel: maximized wAFROC AUC was used to find optimal $\\zeta_1$. Right panel: maximized Youden-index was used to find optimal $\\zeta_1$. Dot colors: black is $\\lambda = 1$, red is $\\lambda = 2$, green is $\\lambda = 5$ and blue is $\\lambda = 10$.", fig.show='hold', echo=FALSE}
-grid.arrange(scaled_froc[[1]], scaled_froc[[2]], ncol = 2)
+```{r optim-op-point-vary-lambda-froc, fig.cap="Scaled FROC plots for varying $\\mu$. Left panel: maximized wAFROC AUC was used to find optimal $\\zeta_1$. Right panel: maximized Youden-index was used to find optimal $\\zeta_1$. Dot colors: black is $\\nu = 0.6$, red is $\\nu = 0.7$, green is $\\nu = 0.8$ and blue is $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
+
+
 
 
 The left panel in \@ref(fig:optim-op-point-vary-lambda-froc) shows the optimal operating points when wAFROC-AUC is maximized. The 4 operating points are color coded as follows:
@@ -337,26 +334,29 @@ To visualize true performance one compares wAFROC curves.
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaPArr[1], nuP = nuP)
-lambda <- x$lambda
-nu <- x$nu
-wafroc <- PlotRsmOperatingCharacteristics(
-     c(mu,mu),
-     c(lambda,lambda),
-     c(nu,nu),
-     c(zetaOptArr[1,1], zetaOptArr[2,1]),
-     lesDistr,
-     relWeights,
-     OpChType = "wAFROC",
-     legendPosition = "null"
-)$wAFROCPlot
+plotArr <- array(list(), dim = 4)
+for (i in 1:4) {
+  x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaPArr[i], nuP = nuP)
+  lambda <- x$lambda
+  nu <- x$nu
+  plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+    c(mu,mu),
+    c(lambda,lambda),
+    c(nu,nu),
+    c(zetaOptArr[1,i], zetaOptArr[2,i]),
+    lesDistr,
+    relWeights,
+    OpChType = "wAFROC",
+    legendPosition = "null"
+  )$wAFROCPlot
+}
 ```
 
 
 
 
 ```{r optim-op-point-vary-lambda-wafroc, fig.cap="wAFROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\\mu = 2$, $\\nu = 1$ and $\\lambda = 1$. The optimal reporting theshold $\\zeta_1$ is determined by the selected FOM. The green-red curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC.  The two wAFROC-AUCs are 0.880 and 0.856, respectively.", fig.show='hold', echo=FALSE}
-grid.arrange(wafroc)
+grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
 
@@ -372,26 +372,29 @@ To confirm true performance one compares ROC curves.
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaPArr[1], nuP = nuP)
-lambda <- x$lambda
-nu <- x$nu
-roc <- PlotRsmOperatingCharacteristics(
-     c(mu,mu),
-     c(lambda,lambda),
-     c(nu,nu),
-     c(zetaOptArr[1,1], zetaOptArr[2,1]),
-     lesDistr,
-     relWeights,
-     OpChType = "ROC",
-     legendPosition = "null"
-)$ROCPlot
+plotArr <- array(list(), dim = 4)
+for (i in 1:4) {
+  x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaPArr[i], nuP = nuP)
+  lambda <- x$lambda
+  nu <- x$nu
+  plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+    c(mu,mu),
+    c(lambda,lambda),
+    c(nu,nu),
+    c(zetaOptArr[1,i], zetaOptArr[2,i]),
+    lesDistr,
+    relWeights,
+    OpChType = "ROC",
+    legendPosition = "null"
+  )$ROCPlot
+}
 ```
 
 
 
 
 ```{r optim-op-point-vary-lambda-roc, fig.cap="ROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\\mu = 2$, $\\nu = 1$ and $\\lambda = 1$. The optimal reporting theshold $\\zeta_1$ is determined by the selected FOM. The green-red curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC.  The two ROC-AUCs are 0.929 and 0.899, respectively.", fig.show='hold', echo=FALSE}
-grid.arrange(roc)
+grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
 
@@ -422,17 +425,17 @@ Table \@ref(tab:optim-op-point-table-vary-nu) summarizes these results. The colu
 ```{r optim-op-point-computations-nu, cache = FALSE, echo=FALSE, attr.source = ".numberLines"}
 mu <- 2
 lambdaP <- 1
-muArr <- c(0.6, 0.7, 0.8, 0.9)
-wAfrocArr <- array(dim = c(2,length(muArr)))
-zetaOptArr <- array(dim = c(2,length(muArr)))
-rocArr <- array(dim = c(2,length(muArr)))
-nlfOptArr <- array(dim = c(2,length(muArr)))
-llfOptArr <- array(dim = c(2,length(muArr)))
+nuPArr <- c(0.6, 0.7, 0.8, 0.9)
+wAfrocArr <- array(dim = c(2,length(nuPArr)))
+zetaOptArr <- array(dim = c(2,length(nuPArr)))
+rocArr <- array(dim = c(2,length(nuPArr)))
+nlfOptArr <- array(dim = c(2,length(nuPArr)))
+llfOptArr <- array(dim = c(2,length(nuPArr)))
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 for (y in 1:2) {
-  for (i in 1:length(muArr)) {
-    nuP <- muArr[i]
+  for (i in 1:length(nuPArr)) {
+    nuP <- nuPArr[i]
     if (y == 1) {
       x <- optimize(wAFROC, 
                     interval = c(-5,5), 
@@ -461,8 +464,8 @@ for (y in 1:2) {
       x <- optimize(Youden, 
                     interval = c(-5,5), 
                     mu, 
-                    lambdaP, 
-                    nuP, 
+                    lambdaP = lambdaP, 
+                    nuP = nuP, 
                     lesDistr, 
                     relWeights)
       zetaOptArr[y,i] <- x$minimum
@@ -495,8 +498,8 @@ for (y in 1:2) {
 
 
 ```{r optim-op-point-table-vary-nu-contents, echo=FALSE}
-x1 <- cbind(rep("wAFROC",4), nu = muArr, zeta1 = simplePrint(zetaOptArr[1,]), wAFROC = simplePrint(wAfrocArr[1,]), ROC = simplePrint(rocArr[1,]), OptOpPt = OpPtStr(nlfOptArr[1,], llfOptArr[1,]))
-x2 <- cbind(rep("Youden",4), nu = muArr, zeta1 = simplePrint(zetaOptArr[2,]), wAFROC = simplePrint(wAfrocArr[2,]), ROC = simplePrint(rocArr[2,]), OptOpPt = OpPtStr(nlfOptArr[2,], llfOptArr[2,]))
+x1 <- cbind(rep("wAFROC",4), nu = nuPArr, zeta1 = simplePrint(zetaOptArr[1,]), wAFROC = simplePrint(wAfrocArr[1,]), ROC = simplePrint(rocArr[1,]), OptOpPt = OpPtStr(nlfOptArr[1,], llfOptArr[1,]))
+x2 <- cbind(rep("Youden",4), nu = nuPArr, zeta1 = simplePrint(zetaOptArr[2,]), wAFROC = simplePrint(wAfrocArr[2,]), ROC = simplePrint(rocArr[2,]), OptOpPt = OpPtStr(nlfOptArr[2,], llfOptArr[2,]))
 x12 <- as.data.frame(rbind(x1,x2))
 colnames(x12) <- c("FOM", "$\\nu$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\text{ROC}$", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
 ```
@@ -541,32 +544,27 @@ Since the $\Phi$ function ranges from one to unity, the *four FROC curves for di
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-scaled_froc <- array(list(), dim = 2)
-for (y in 1:2) {
-  i <- 1 # no need to generate scaled FROC 4 times
-  z <- seq(-5,zetaOptArr[y,i]+5,0.1)
-  nuP <- muArr[i]
-  xFROC <- RSM_xFROC(z, lambdaP) 
-  # scale y-axis to range (0,1) by dividing by nuP
-  yFROC <- RSM_yFROC(z, mu, nuP) / nuP
-  df_scaled_froc <- data.frame(
+plotArr <- array(list(), dim = 4)
+for (i in 1:4) {
+  z <- seq(-5,mu+5,0.1)
+  nuP <- nuPArr[i]
+  xFROC <- RSM_xFROC(z, lambdaP)
+  yFROC <- RSM_yFROC(z, mu, nuP)
+  df_froc <- data.frame(
     NLF = xFROC, 
-    LLF_scaled = yFROC)
-  scaled_froc[[y]] <- ggplot2::ggplot(
-    df_scaled_froc, 
-    aes(x = NLF, y = LLF_scaled)) + 
+    LLF = yFROC)
+  plotArr[[i]] <- ggplot2::ggplot(
+    df_froc, 
+    aes(x = NLF, y = LLF)) + 
     geom_line() +
-    scale_x_continuous(limits = c(0,1)) + 
+    scale_x_continuous(limits = c(0,lambdaPArr[i])) + 
     scale_y_continuous(limits = c(0,1))
-  for ( i in 1:length(muArr)) {
-    nuP <- muArr[i]
-    # scale LLF value by dividing 
-    # by nuP to match scaling of y-axis
+  for (y in 1:2) {
     optPt <- data.frame(
       NLF = nlfOptArr[y,i], 
-      LLF_scaled = llfOptArr[y,i] / nuP)
-    scaled_froc[[y]] <- scaled_froc[[y]] + 
-      geom_point(data = optPt, color = i)
+      LLF = llfOptArr[y,i])
+    plotArr[[i]] <- plotArr[[i]] + 
+      geom_point(data = optPt, color = y)
   }
 }
 ```
@@ -574,9 +572,10 @@ for (y in 1:2) {
 
 
 
-```{r optim-op-point-vary-nu-froc, fig.cap="Scaled FROC plots for varying $\\nu$. Left panel: maximized wAFROC AUC was used to find optimal $\\zeta_1$. Right panel: maximized Youden-index was used to find optimal $\\zeta_1$. Dot colors: black is $\\nu = 0.6$, red is $\\nu = 0.7$, green is $\\nu = 0.8$ and blue is $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
-grid.arrange(scaled_froc[[1]], scaled_froc[[2]], ncol = 2)
+```{r optim-op-point-vary-nu-froc, fig.cap="Scaled FROC plots for varying $\\mu$. Left panel: maximized wAFROC AUC was used to find optimal $\\zeta_1$. Right panel: maximized Youden-index was used to find optimal $\\zeta_1$. Dot colors: black is $\\nu = 0.6$, red is $\\nu = 0.7$, green is $\\nu = 0.8$ and blue is $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
+
 
 
 The left panel in \@ref(fig:optim-op-point-vary-nu-froc) shows the optimal operating points when wAFROC-AUC is maximized. The 4 operating points are color coded as follows:
@@ -598,26 +597,29 @@ To visualize true performance one compares wAFROC curves.
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = muArr[4])
-lambda <- x$lambda
-nu <- x$nu
-wafroc <- PlotRsmOperatingCharacteristics(
-     c(mu,mu),
-     c(lambda,lambda),
-     c(nu,nu),
-     c(zetaOptArr[1,1], zetaOptArr[2,1]),
-     lesDistr,
-     relWeights,
-     OpChType = "wAFROC",
-     legendPosition = "null"
-)$wAFROCPlot
+plotArr <- array(list(), dim = 4)
+for (i in 1:4) {
+  x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuPArr[i])
+  lambda <- x$lambda
+  nu <- x$nu
+  plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+    c(mu,mu),
+    c(lambda,lambda),
+    c(nu,nu),
+    c(zetaOptArr[1,i], zetaOptArr[2,i]),
+    lesDistr,
+    relWeights,
+    OpChType = "wAFROC",
+    legendPosition = "null"
+  )$wAFROCPlot
+}
 ```
 
 
 
 
 ```{r optim-op-point-vary-nu-wafroc, fig.cap="wAFROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\\mu = 2$, $\\nu = 1$ and $\\lambda = 1$. The optimal reporting theshold $\\zeta_1$ is determined by the selected FOM. The green-red curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC.  The two wAFROC-AUCs are 0.880 and 0.856, respectively.", fig.show='hold', echo=FALSE}
-grid.arrange(wafroc)
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
 
@@ -633,26 +635,29 @@ To confirm true performance one compares ROC curves.
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = muArr[4])
-lambda <- x$lambda
-nu <- x$nu
-roc <- PlotRsmOperatingCharacteristics(
-     c(mu,mu),
-     c(lambda,lambda),
-     c(nu,nu),
-     c(zetaOptArr[1,1], zetaOptArr[2,1]),
-     lesDistr,
-     relWeights,
-     OpChType = "ROC",
-     legendPosition = "null"
-)$ROCPlot
+plotArr <- array(list(), dim = 4)
+for (i in 1:4) {
+  x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuPArr[i])
+  lambda <- x$lambda
+  nu <- x$nu
+  plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+    c(mu,mu),
+    c(lambda,lambda),
+    c(nu,nu),
+    c(zetaOptArr[1,i], zetaOptArr[2,i]),
+    lesDistr,
+    relWeights,
+    OpChType = "ROC",
+    legendPosition = "null"
+  )$ROCPlot
+}
 ```
 
 
 
 
 ```{r optim-op-point-vary-nu-roc, fig.cap="ROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\\mu = 2$, $\\nu = 1$ and $\\lambda = 1$. TBA The optimal reporting theshold $\\zeta_1$ is determined by the selected FOM. The green-red curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC.  The two ROC-AUCs are 0.929 and 0.899, respectively.", fig.show='hold', echo=FALSE}
-grid.arrange(roc)
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
 
@@ -673,8 +678,8 @@ Table \@ref(tab:optim-op-point-table-vary-mu) summarizes these results. The colu
 
 
 ```{r optim-op-point-computations-mu, cache = FALSE, echo=FALSE, attr.source = ".numberLines"}
-lambdaP <- 1
-nu <- 0.5
+lambdaP <- 5
+nuP <- 0.9
 muArr <- c(1, 2, 3, 4)
 wAfrocArr <- array(dim = c(2,length(muArr)))
 zetaOptArr <- array(dim = c(2,length(muArr)))
@@ -714,8 +719,8 @@ for (y in 1:2) {
       x <- optimize(Youden, 
                     interval = c(-5,5), 
                     mu, 
-                    lambdaP, 
-                    nuP, 
+                    lambdaP = lambdaP, 
+                    nuP = nuP, 
                     lesDistr, 
                     relWeights)
       zetaOptArr[y,i] <- x$minimum
@@ -788,38 +793,33 @@ Since the $\Phi$ function ranges from one to unity, the *four FROC curves for di
 \text{LLF}\left ( \zeta, \mu, \nu \right ) =& \nu \text{LLF} \left ( \zeta, \mu, \nu = 1 \right ) 
 \end{aligned}
 \right \}
-(\#eq:rsm-froc-predictions3)
+(\#eq:rsm-froc-predictions4)
 \end{equation}
 
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-scaled_froc <- array(list(), dim = 2)
-for (y in 1:2) {
-  i <- 1 # no need to generate scaled FROC 4 times
-  z <- seq(-5,zetaOptArr[y,i]+5,0.1)
+plotArr <- array(list(), dim = 4)
+for (i in 1:4) {
+  z <- seq(-5,muArr[i]+5,0.1)
   mu <- muArr[i]
-  xFROC <- RSM_xFROC(z, lambdaP) 
-  # scale y-axis to range (0,1) by dividing by nuP
-  yFROC <- RSM_yFROC(z, mu, nuP) / nuP
-  df_scaled_froc <- data.frame(
+  xFROC <- RSM_xFROC(z, lambdaP)
+  yFROC <- RSM_yFROC(z, mu, nuP)
+  df_froc <- data.frame(
     NLF = xFROC, 
-    LLF_scaled = yFROC)
-  scaled_froc[[y]] <- ggplot2::ggplot(
-    df_scaled_froc, 
-    aes(x = NLF, y = LLF_scaled)) + 
+    LLF = yFROC)
+  plotArr[[i]] <- ggplot2::ggplot(
+    df_froc, 
+    aes(x = NLF, y = LLF)) + 
     geom_line() +
     scale_x_continuous(limits = c(0,1)) + 
     scale_y_continuous(limits = c(0,1))
-  for ( i in 1:length(muArr)) {
-    mu <- muArr[i]
-    # scale LLF value by dividing 
-    # by nuP to match scaling of y-axis
+  for (y in 1:2) {
     optPt <- data.frame(
       NLF = nlfOptArr[y,i], 
-      LLF_scaled = llfOptArr[y,i] / nuP)
-    scaled_froc[[y]] <- scaled_froc[[y]] + 
-      geom_point(data = optPt, color = i)
+      LLF = llfOptArr[y,i])
+    plotArr[[i]] <- plotArr[[i]] + 
+      geom_point(data = optPt, color = y)
   }
 }
 ```
@@ -828,7 +828,7 @@ for (y in 1:2) {
 
 
 ```{r optim-op-point-vary-mu-froc, fig.cap="Scaled FROC plots for varying $\\mu$. Left panel: maximized wAFROC AUC was used to find optimal $\\zeta_1$. Right panel: maximized Youden-index was used to find optimal $\\zeta_1$. Dot colors: black is $\\nu = 0.6$, red is $\\nu = 0.7$, green is $\\nu = 0.8$ and blue is $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
-grid.arrange(scaled_froc[[1]], scaled_froc[[2]], ncol = 2)
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
 
@@ -851,26 +851,29 @@ To visualize true performance one compares wAFROC curves.
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-x <- UtilPhysical2IntrinsicRSM(mu = muArr[4], lambdaP = lambdaP, nuP = nuP)
-lambda <- x$lambda
-nu <- x$nu
-wafroc <- PlotRsmOperatingCharacteristics(
-     c(mu,mu),
-     c(lambda,lambda),
-     c(nu,nu),
-     c(zetaOptArr[1,1], zetaOptArr[2,1]),
-     lesDistr,
-     relWeights,
-     OpChType = "wAFROC",
-     legendPosition = "null"
-)$wAFROCPlot
+plotArr <- array(list(), dim = 4)
+for (i in 1:4) {
+  x <- UtilPhysical2IntrinsicRSM(muArr[i], lambdaP = lambdaP, nuP = nuP)
+  lambda <- x$lambda
+  nu <- x$nu
+  plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+    c(mu,mu),
+    c(lambda,lambda),
+    c(nu,nu),
+    c(zetaOptArr[1,i], zetaOptArr[2,i]),
+    lesDistr,
+    relWeights,
+    OpChType = "wAFROC",
+    legendPosition = "null"
+  )$wAFROCPlot
+}
 ```
 
 
 
 
 ```{r optim-op-point-vary-mu-wafroc, fig.cap="wAFROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\\mu = 2$, $\\nu = 1$ and $\\lambda = 1$. The optimal reporting theshold $\\zeta_1$ is determined by the selected FOM. The green-red curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC.  The two wAFROC-AUCs are 0.880 and 0.856, respectively.", fig.show='hold', echo=FALSE}
-grid.arrange(wafroc)
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
 
@@ -886,26 +889,29 @@ To confirm true performance one compares ROC curves.
 
 
 ```{r, attr.source = ".numberLines", echo=FALSE}
-x <- UtilPhysical2IntrinsicRSM(mu = muArr[4], lambdaP = lambdaP, nuP = nuP)
-lambda <- x$lambda
-nu <- x$nu
-roc <- PlotRsmOperatingCharacteristics(
-     c(mu,mu),
-     c(lambda,lambda),
-     c(nu,nu),
-     c(zetaOptArr[1,1], zetaOptArr[2,1]),
-     lesDistr,
-     relWeights,
-     OpChType = "ROC",
-     legendPosition = "null"
-)$ROCPlot
+plotArr <- array(list(), dim = 4)
+for (i in 1:4) {
+  x <- UtilPhysical2IntrinsicRSM(muArr[i], lambdaP = lambdaP, nuP = nuP)
+  lambda <- x$lambda
+  nu <- x$nu
+  plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+    c(mu,mu),
+    c(lambda,lambda),
+    c(nu,nu),
+    c(zetaOptArr[1,i], zetaOptArr[2,i]),
+    lesDistr,
+    relWeights,
+    OpChType = "ROC",
+    legendPosition = "null"
+  )$ROCPlot
+}
 ```
 
 
 
 
 ```{r optim-op-point-vary-mu-roc, fig.cap="ROC curves for wAFROC-AUC and Youden-index based optimizations: both curves correspond to $\\mu = 2$, $\\nu = 1$ and $\\lambda = 1$. TBA The optimal reporting theshold $\\zeta_1$ is determined by the selected FOM. The green-red curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC.  The two ROC-AUCs are 0.929 and 0.899, respectively.", fig.show='hold', echo=FALSE}
-grid.arrange(roc)
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
 
