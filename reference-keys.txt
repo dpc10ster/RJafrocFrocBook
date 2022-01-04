@@ -349,11 +349,11 @@ optim-op-point
 optim-op-point-how-much-finished
 optim-op-point-intro
 optim-op-point-methods
-figures-of-merit-to-be-maximized
 optim-op-point-vary-lambda
 illustrative-froc-plots
 illustrative-wafroc-plots
 illustrative-roc-plots
+optim-op-point-discussion
 optim-op-point-vary-nu
 illustrative-froc-plots-1
 illustrative-wafroc-plots-1
