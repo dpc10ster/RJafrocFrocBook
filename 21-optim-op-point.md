@@ -331,7 +331,7 @@ Table \@ref(tab:optim-op-point-table4) summarizes the results.
 </table>
 
 
-The dataset is characterized by a relatively large $\lambda$ parameter and yet the results are consistent with the simulation results cited above. The wAFROC-AUC based optimization yields larger figures of merit, as measured by wAFROC-AUC, ROC-AUC or LLF. 
+The wAFROC-AUC based optimization yields slightly larger figure of merit as measured by wAFROC-AUC, see Fig. \@ref(fig:optim-op-point-application-wafroc) and larger figure of merit as measured by ROC-AUC, see Fig. \@ref(fig:optim-op-point-application-roc).  
 
 
 
