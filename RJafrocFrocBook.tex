@@ -4839,7 +4839,7 @@ Non-lesion localizations = NLs, i.e., location level ``false positives''.
 Lesion localizations = LLs, i.e., location level ``true positives''.
 Latent marks = perceived suspicious regions that are not necessarily marked.
 
-Background on the radiological search model (RSM) is provided in Chapter \ref{rsm}. The model predicts ROC, FROC and wAFROC curves: these are completely defined by the four RSM parameters -- \(\lambda, \nu, \mu, \zeta_1\) -- with the following meanings:
+Background on the radiological search model (RSM) is provided in Chapter \ref{rsm}. The model predicts ROC, FROC and wAFROC curves (see Appendix 1): these are completely defined by the four RSM parameters -- \(\lambda, \nu, \mu, \zeta_1\) -- with the following meanings:
 
 \begin{itemize}
 \item
@@ -5003,7 +5003,7 @@ Assume that one has designed an algorithmic observer that has been optimized wit
 \hypertarget{optim-op-point-application}{%
 \section{A CAD application}\label{optim-op-point-application}}
 
-The standalone CAD LROC dataset described in \citep{hupse2013standalone} was used to create the quasi-FROC ROC-AUC equivalent dataset embedded in \texttt{RJafroc} as object \texttt{datasetCadSimuFroc}. In the following code the first reader for this dataset, corresponding to CAD, is extracted using \texttt{DfExtractDataset} (the other readers, corresponding to radiologists who interpreted the same cases, are not used here). The function \texttt{DfFroc2Roc} converts this to an ROC dataset. The function \texttt{DfBinDataset} bins the data to about 7 bins. One lesion per abnormal case is assumed: \texttt{lesDistr\ =\ c(1)}. \texttt{FitRsmRoc} fits the binned ROC dataset to the radiological search model RSM. Object \texttt{fit} contains all necessary parameters required to perform the optimizations described in previous sections. In the following code line 2 extracts the CAD dataset. The next line converts it to an ROC dataset. The next line bins the dataset. Since diseased cases have only one lesion, the following line sets \texttt{lesDist} accordingly. The line \texttt{fit\ \textless{}-\ FitRsmRoc(dsCadRocBinned,\ lesDistr)} fits the dataset to the RSM.
+The standalone CAD LROC dataset described in \citep{hupse2013standalone} was used to create the quasi-FROC ROC-AUC equivalent dataset embedded in \texttt{RJafroc} as object \texttt{datasetCadSimuFroc}. In the following code the first reader for this dataset, corresponding to CAD, is extracted using \texttt{DfExtractDataset} (the other reader data, corresponding to radiologists who interpreted the same cases, are not used here). The function \texttt{DfFroc2Roc} converts this to an ROC dataset. The function \texttt{DfBinDataset} bins the data to about 7 bins. Each diseased case contains one lesion: \texttt{lesDistr\ =\ c(1)}. \texttt{FitRsmRoc} fits the binned ROC dataset to the radiological search model (RSM). Object \texttt{fit} contains the RSM parameters required to perform the optimizations described in previous sections.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5012,6 +5012,7 @@ The standalone CAD LROC dataset described in \citep{hupse2013standalone} was use
 \NormalTok{dsCadRoc <-}\StringTok{ }\KeywordTok{DfFroc2Roc}\NormalTok{(dsCad)}
 \NormalTok{dsCadRocBinned <-}\StringTok{ }\KeywordTok{DfBinDataset}\NormalTok{(dsCadRoc, }\DataTypeTok{opChType =} \StringTok{"ROC"}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \NormalTok{fit <-}\StringTok{ }\KeywordTok{FitRsmRoc}\NormalTok{(dsCadRocBinned, lesDistr)}
 \KeywordTok{cat}\NormalTok{(}\StringTok{"fitted values: mu = "}\NormalTok{, fit}\OperatorTok{$}\NormalTok{mu, }
     \StringTok{", lambda = "}\NormalTok{, fit}\OperatorTok{$}\NormalTok{lambdaP, }
@@ -5070,8 +5071,35 @@ In Table \ref{tab:optim-op-point-table-vary-lambda} the \(\lambda\) parameter co
 
 The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.
 
+\hypertarget{optim-op-point-rsm-expressions}{%
+\section{Appendix 1: RSM predictions}\label{optim-op-point-rsm-expressions}}
+
+The ROC abscissa is calculated using:
+
+\begin{equation}
+\text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
+\label{eq:optim-op-rsm-pred-fpf}
+\end{equation}
+
+The ROC ordinate is calculated using:
+
+\begin{equation}
+\left.
+\begin{aligned}
+& \text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
+& 1 - \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right ) 
+\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L 
+\end{aligned}
+\right \}
+\label{eq:optim-op-rsm-pred-tpf}
+\end{equation}
+
+The wAFROC abscissa is identical to the ROC abscissa.
+
+The wAFROC ordinate is calculated using:
+
 \hypertarget{optim-op-point-vary-nu}{%
-\section{\texorpdfstring{Appendix 1: Varying \(\nu\) optimizations}{Appendix 1: Varying \textbackslash nu optimizations}}\label{optim-op-point-vary-nu}}
+\section{\texorpdfstring{Appendix 2: Varying \(\nu\) optimizations}{Appendix 2: Varying \textbackslash nu optimizations}}\label{optim-op-point-vary-nu}}
 
 For \(\mu = 2\) and \(\lambda = 1\) optimizations were performed for \(\nu = 0.6, 0.7, 0.8, 0.9\).
 
@@ -5080,6 +5108,8 @@ For \(\mu = 2\) and \(\lambda = 1\) optimizations were performed for \(\nu = 0.6
 \NormalTok{mu <-}\StringTok{ }\DecValTok{2}
 \NormalTok{lambdaP <-}\StringTok{ }\DecValTok{1}
 \NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\FloatTok{0.9}\NormalTok{)}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
+\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5094,29 +5124,24 @@ Table \ref{tab:optim-op-point-table-vary-nu} summarizes the results.
 \toprule
 FOM & $\nu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \text{LLF}\right)$\\
 \midrule
- & 0.6 & 0.888 & 0.701 & 0.743 & (0.187, 0.520)\\
+ & 0.6 & 0.888 & 0.701 & 0.804 & (0.187, 0.520)\\
 \cmidrule{2-6}
- & 0.7 & 0.674 & 0.751 & 0.793 & (0.250, 0.635)\\
+ & 0.7 & 0.674 & 0.751 & 0.851 & (0.250, 0.635)\\
 \cmidrule{2-6}
- & 0.8 & 0.407 & 0.805 & 0.843 & (0.342, 0.756)\\
+ & 0.8 & 0.407 & 0.805 & 0.893 & (0.342, 0.756)\\
 \cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 0.9 & -0.007 & 0.864 & 0.892 & (0.503, 0.880)\\
+\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 0.9 & -0.007 & 0.864 & 0.929 & (0.503, 0.880)\\
 \cmidrule{1-6}
- & 0.6 & 0.924 & 0.701 & 0.741 & (0.178, 0.515)\\
+ & 0.6 & 1.022 & 0.700 & 0.797 & (0.153, 0.502)\\
 \cmidrule{2-6}
- & 0.7 & 0.924 & 0.748 & 0.782 & (0.178, 0.601)\\
+ & 0.7 & 1.044 & 0.745 & 0.835 & (0.148, 0.581)\\
 \cmidrule{2-6}
- & 0.8 & 0.924 & 0.795 & 0.822 & (0.178, 0.687)\\
+ & 0.8 & 1.069 & 0.788 & 0.868 & (0.143, 0.659)\\
 \cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 0.9 & 0.924 & 0.843 & 0.862 & (0.178, 0.773)\\
+\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 0.9 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
 \bottomrule
 \end{tabular}}
 \end{table}
-
-\hypertarget{illustrative-froc-plots}{%
-\subsection{Illustrative FROC plots}\label{illustrative-froc-plots}}
-
-TBA
 
 \begin{figure}
 \centering
@@ -5126,40 +5151,40 @@ TBA
 
 TBA These plots illustrate the previous comments, namely, as \(\lambda\) increases, the optimal operating point moves \emph{down} the scaled curve corresponding to adoption of progressively more stringent reporting thresholds.
 
-\hypertarget{illustrative-wafroc-plots}{%
-\subsection{Illustrative wAFROC plots}\label{illustrative-wafroc-plots}}
-
-To visualize true performance one compares wAFROC curves.
-
 TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to \(\mu = 2\), \(\nu = 1\) and \(\lambda = 1\). The optimal reporting theshold \(\zeta_1\) is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC. The two wAFROC-AUCs are 0.880 and 0.856, respectively.
 
 \begin{figure}
 \centering
 \includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-vary-nu-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-nu-wafroc}wAFROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.}
+\caption{\label{fig:optim-op-point-vary-nu-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
 \end{figure}
 
-The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-nu}, namely \(\zeta_1\) = 0.888 for the green-red-red-dashed curve and \(\zeta_1\) = 0.924 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
-
-\hypertarget{illustrative-roc-plots}{%
-\subsection{Illustrative ROC plots}\label{illustrative-roc-plots}}
-
-To confirm true performance one compares ROC curves.
+The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-nu}, namely \(\zeta_1\) = 0.888 for the green-red-red-dashed curve and \(\zeta_1\) = 1.022 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to \(\mu = 2\), \(\nu = 1\) and \(\lambda = 1\). TBA The optimal reporting theshold \(\zeta_1\) is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC. The two ROC-AUCs are 0.929 and 0.899, respectively.
 
 \begin{figure}
 \centering
 \includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-vary-nu-roc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-nu-roc}ROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.}
+\caption{\label{fig:optim-op-point-vary-nu-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
 \end{figure}
 
 The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-nu}. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 \hypertarget{optim-op-point-vary-mu}{%
-\section{\texorpdfstring{Appendix 2: Varying \(\mu\) optimizations}{Appendix 2: Varying \textbackslash mu optimizations}}\label{optim-op-point-vary-mu}}
+\section{\texorpdfstring{Appendix 3: Varying \(\mu\) optimizations}{Appendix 3: Varying \textbackslash mu optimizations}}\label{optim-op-point-vary-mu}}
 
 For \(\lambda = 1\) and \(\nu = 0.9\) optimizations were performed for \(\mu = 1, 2, 3, 4\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lambdaP <-}\StringTok{ }\DecValTok{1}
+\NormalTok{nuP <-}\StringTok{ }\FloatTok{0.9}
+\NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
+\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 Table \ref{tab:optim-op-point-table-vary-mu} summarizes these results.
 
@@ -5172,29 +5197,24 @@ Table \ref{tab:optim-op-point-table-vary-mu} summarizes these results.
 \toprule
 FOM & $\mu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \text{LLF}\right)$\\
 \midrule
- & 1 & -1.663 & 0.745 & 0.806 & (0.952, 0.897)\\
+ & 1 & -1.663 & 0.745 & 0.850 & (0.952, 0.897)\\
 \cmidrule{2-6}
- & 2 & -0.007 & 0.864 & 0.892 & (0.503, 0.880)\\
+ & 2 & -0.007 & 0.864 & 0.929 & (0.503, 0.880)\\
 \cmidrule{2-6}
- & 3 & 0.808 & 0.922 & 0.933 & (0.210, 0.887)\\
+ & 3 & 0.808 & 0.922 & 0.961 & (0.210, 0.887)\\
 \cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 4 & 1.463 & 0.942 & 0.946 & (0.072, 0.895)\\
+\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 4 & 1.463 & 0.942 & 0.970 & (0.072, 0.895)\\
 \cmidrule{1-6}
- & 1 & 0.245 & 0.717 & 0.775 & (0.403, 0.697)\\
+ & 1 & 0.462 & 0.704 & 0.815 & (0.322, 0.634)\\
 \cmidrule{2-6}
- & 2 & 0.924 & 0.843 & 0.862 & (0.178, 0.773)\\
+ & 2 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
 \cmidrule{2-6}
- & 3 & 1.478 & 0.910 & 0.916 & (0.070, 0.842)\\
+ & 3 & 1.629 & 0.903 & 0.945 & (0.052, 0.823)\\
 \cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 4 & 1.994 & 0.938 & 0.939 & (0.023, 0.880)\\
+\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 4 & 2.124 & 0.935 & 0.964 & (0.017, 0.873)\\
 \bottomrule
 \end{tabular}}
 \end{table}
-
-TBA
-
-\hypertarget{illustrative-froc-plots-1}{%
-\subsection{Illustrative FROC plots}\label{illustrative-froc-plots-1}}
 
 TBA
 
@@ -5206,65 +5226,25 @@ TBA
 
 TBA These plots illustrate the previous comments, namely, as \(\lambda\) increases, the optimal operating point moves \emph{down} the scaled curve corresponding to adoption of progressively more stringent reporting thresholds.
 
-\hypertarget{illustrative-wafroc-plots-1}{%
-\subsection{Illustrative wAFROC plots}\label{illustrative-wafroc-plots-1}}
-
-To visualize true performance one compares wAFROC curves.
-
 TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to \(\mu = 2\), \(\nu = 1\) and \(\lambda = 1\). The optimal reporting theshold \(\zeta_1\) is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC. The two wAFROC-AUCs are 0.880 and 0.856, respectively.
 
 \begin{figure}
 \centering
 \includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-vary-mu-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-mu-wafroc}wAFROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.}
+\caption{\label{fig:optim-op-point-vary-mu-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
 \end{figure}
 
-The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-mu}, namely \(\zeta_1\) = -1.663 for the green-red-red-dashed curve and \(\zeta_1\) = 0.245 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
-
-\hypertarget{illustrative-roc-plots-1}{%
-\subsection{Illustrative ROC plots}\label{illustrative-roc-plots-1}}
-
-To confirm true performance one compares ROC curves.
+The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-mu}, namely \(\zeta_1\) = -1.663 for the green-red-red-dashed curve and \(\zeta_1\) = 0.462 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to \(\mu = 2\), \(\nu = 1\) and \(\lambda = 1\). TBA The optimal reporting theshold \(\zeta_1\) is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC. The two ROC-AUCs are 0.929 and 0.899, respectively.
 
 \begin{figure}
 \centering
 \includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-vary-mu-roc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-mu-roc}ROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.}
+\caption{\label{fig:optim-op-point-vary-mu-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
 \end{figure}
 
 The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-mu}. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
-
-\hypertarget{appendix-3-rsm-expression-for-youden-index}{%
-\section{Appendix 3: RSM expression for Youden-index}\label{appendix-3-rsm-expression-for-youden-index}}
-
-\begin{equation}
-\text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
-\label{eq:optim-op-rsm-pred-fpf}
-\end{equation}
-
-\begin{equation}
-\left.
-\begin{aligned}
-& \text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
-& 1 - \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right ) 
-\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu' \Phi \left ( \mu -\zeta \right ) \right )^L 
-\end{aligned}
-\right \}
-\label{eq:optim-op-rsm-pred-tpf}
-\end{equation}
-
-\begin{equation}
-\left.
-\begin{aligned}
-& \text{Youden}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
-& \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right ) \left (1 -  
-\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L  \right ) \\
-\end{aligned}
-\right \}
-\label{eq:optim-op-rsm-pred-youden}
-\end{equation}
 
 \hypertarget{optim-op-point-references}{%
 \section{References}\label{optim-op-point-references}}

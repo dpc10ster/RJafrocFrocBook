@@ -367,17 +367,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>10.5</b> Using the method</a></li>
 <li class="chapter" data-level="10.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>10.6</b> A CAD application</a></li>
 <li class="chapter" data-level="10.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>10.7</b> Discussion</a></li>
-<li class="chapter" data-level="10.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>10.8</b> Appendix 1: Varying <span class="math inline">\(\nu\)</span> optimizations</a><ul>
-<li class="chapter" data-level="10.8.1" data-path="optim-op-point.html"><a href="optim-op-point.html#illustrative-froc-plots"><i class="fa fa-check"></i><b>10.8.1</b> Illustrative FROC plots</a></li>
-<li class="chapter" data-level="10.8.2" data-path="optim-op-point.html"><a href="optim-op-point.html#illustrative-wafroc-plots"><i class="fa fa-check"></i><b>10.8.2</b> Illustrative wAFROC plots</a></li>
-<li class="chapter" data-level="10.8.3" data-path="optim-op-point.html"><a href="optim-op-point.html#illustrative-roc-plots"><i class="fa fa-check"></i><b>10.8.3</b> Illustrative ROC plots</a></li>
-</ul></li>
-<li class="chapter" data-level="10.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>10.9</b> Appendix 2: Varying <span class="math inline">\(\mu\)</span> optimizations</a><ul>
-<li class="chapter" data-level="10.9.1" data-path="optim-op-point.html"><a href="optim-op-point.html#illustrative-froc-plots-1"><i class="fa fa-check"></i><b>10.9.1</b> Illustrative FROC plots</a></li>
-<li class="chapter" data-level="10.9.2" data-path="optim-op-point.html"><a href="optim-op-point.html#illustrative-wafroc-plots-1"><i class="fa fa-check"></i><b>10.9.2</b> Illustrative wAFROC plots</a></li>
-<li class="chapter" data-level="10.9.3" data-path="optim-op-point.html"><a href="optim-op-point.html#illustrative-roc-plots-1"><i class="fa fa-check"></i><b>10.9.3</b> Illustrative ROC plots</a></li>
-</ul></li>
-<li class="chapter" data-level="10.10" data-path="optim-op-point.html"><a href="optim-op-point.html#appendix-3-rsm-expression-for-youden-index"><i class="fa fa-check"></i><b>10.10</b> Appendix 3: RSM expression for Youden-index</a></li>
+<li class="chapter" data-level="10.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-rsm-expressions"><i class="fa fa-check"></i><b>10.8</b> Appendix 1: RSM predictions</a></li>
+<li class="chapter" data-level="10.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>10.9</b> Appendix 2: Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
+<li class="chapter" data-level="10.10" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>10.10</b> Appendix 3: Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
 <li class="chapter" data-level="10.11" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-references"><i class="fa fa-check"></i><b>10.11</b> References</a></li>
 </ul></li>
 <li class="part"><span><b>DATASETS</b></span></li>
@@ -426,7 +418,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Non-lesion localizations = NLs, i.e., location level “false positives”.
 Lesion localizations = LLs, i.e., location level “true positives”.
 Latent marks = perceived suspicious regions that are not necessarily marked.</p>
-<p>Background on the radiological search model (RSM) is provided in Chapter <a href="rsm.html#rsm">4</a>. The model predicts ROC, FROC and wAFROC curves: these are completely defined by the four RSM parameters – <span class="math inline">\(\lambda, \nu, \mu, \zeta_1\)</span> – with the following meanings:</p>
+<p>Background on the radiological search model (RSM) is provided in Chapter <a href="rsm.html#rsm">4</a>. The model predicts ROC, FROC and wAFROC curves (see Appendix 1): these are completely defined by the four RSM parameters – <span class="math inline">\(\lambda, \nu, \mu, \zeta_1\)</span> – with the following meanings:</p>
 <ul>
 <li><p>The <span class="math inline">\(\mu\)</span> parameter, <span class="math inline">\(\mu \ge 0\)</span>, is the perceptual signal-to-noise-ratio of lesions. Higher values of <span class="math inline">\(\mu\)</span> lead to increased separation of two unit variance normal distributions determining the ratings of perceived NLs and LL. As <span class="math inline">\(\mu\)</span> increases performance of the algorithm increases.</p></li>
 <li><p>The <span class="math inline">\(\lambda\)</span> parameter, <span class="math inline">\(\lambda \ge 0\)</span>, determines the mean number of latent NLs per case. Higher values lead to more latent NL marks per case and decreased performance.</p></li>
@@ -700,17 +692,18 @@ FIGURE 10.4: In the region above the dot the proper curve is above the dotted li
 </div>
 <div id="optim-op-point-application" class="section level2">
 <h2><span class="header-section-number">10.6</span> A CAD application</h2>
-<p>The standalone CAD LROC dataset described in <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>)</span> was used to create the quasi-FROC ROC-AUC equivalent dataset embedded in <code>RJafroc</code> as object <code>datasetCadSimuFroc</code>. In the following code the first reader for this dataset, corresponding to CAD, is extracted using <code>DfExtractDataset</code> (the other readers, corresponding to radiologists who interpreted the same cases, are not used here). The function <code>DfFroc2Roc</code> converts this to an ROC dataset. The function <code>DfBinDataset</code> bins the data to about 7 bins. One lesion per abnormal case is assumed: <code>lesDistr = c(1)</code>. <code>FitRsmRoc</code> fits the binned ROC dataset to the radiological search model RSM. Object <code>fit</code> contains all necessary parameters required to perform the optimizations described in previous sections. In the following code line 2 extracts the CAD dataset. The next line converts it to an ROC dataset. The next line bins the dataset. Since diseased cases have only one lesion, the following line sets <code>lesDist</code> accordingly. The line <code>fit &lt;- FitRsmRoc(dsCadRocBinned, lesDistr)</code> fits the dataset to the RSM.</p>
+<p>The standalone CAD LROC dataset described in <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>)</span> was used to create the quasi-FROC ROC-AUC equivalent dataset embedded in <code>RJafroc</code> as object <code>datasetCadSimuFroc</code>. In the following code the first reader for this dataset, corresponding to CAD, is extracted using <code>DfExtractDataset</code> (the other reader data, corresponding to radiologists who interpreted the same cases, are not used here). The function <code>DfFroc2Roc</code> converts this to an ROC dataset. The function <code>DfBinDataset</code> bins the data to about 7 bins. Each diseased case contains one lesion: <code>lesDistr = c(1)</code>. <code>FitRsmRoc</code> fits the binned ROC dataset to the radiological search model (RSM). Object <code>fit</code> contains the RSM parameters required to perform the optimizations described in previous sections.</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="optim-op-point.html#cb89-1"></a>ds &lt;-<span class="st"> </span>datasetCadSimuFroc</span>
 <span id="cb89-2"><a href="optim-op-point.html#cb89-2"></a>dsCad &lt;-<span class="st"> </span><span class="kw">DfExtractDataset</span>(ds, <span class="dt">rdrs =</span> <span class="dv">1</span>)</span>
 <span id="cb89-3"><a href="optim-op-point.html#cb89-3"></a>dsCadRoc &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dsCad)</span>
 <span id="cb89-4"><a href="optim-op-point.html#cb89-4"></a>dsCadRocBinned &lt;-<span class="st"> </span><span class="kw">DfBinDataset</span>(dsCadRoc, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
 <span id="cb89-5"><a href="optim-op-point.html#cb89-5"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb89-6"><a href="optim-op-point.html#cb89-6"></a>fit &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(dsCadRocBinned, lesDistr)</span>
-<span id="cb89-7"><a href="optim-op-point.html#cb89-7"></a><span class="kw">cat</span>(<span class="st">&quot;fitted values: mu = &quot;</span>, fit<span class="op">$</span>mu, </span>
-<span id="cb89-8"><a href="optim-op-point.html#cb89-8"></a>    <span class="st">&quot;, lambda = &quot;</span>, fit<span class="op">$</span>lambdaP, </span>
-<span id="cb89-9"><a href="optim-op-point.html#cb89-9"></a>    <span class="st">&quot;, nu = &quot;</span>, fit<span class="op">$</span>nuP, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb89-10"><a href="optim-op-point.html#cb89-10"></a><span class="co">#&gt; fitted values: mu =  2.755784 , lambda =  6.778332 , nu =  0.8033886</span></span></code></pre></div>
+<span id="cb89-6"><a href="optim-op-point.html#cb89-6"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb89-7"><a href="optim-op-point.html#cb89-7"></a>fit &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(dsCadRocBinned, lesDistr)</span>
+<span id="cb89-8"><a href="optim-op-point.html#cb89-8"></a><span class="kw">cat</span>(<span class="st">&quot;fitted values: mu = &quot;</span>, fit<span class="op">$</span>mu, </span>
+<span id="cb89-9"><a href="optim-op-point.html#cb89-9"></a>    <span class="st">&quot;, lambda = &quot;</span>, fit<span class="op">$</span>lambdaP, </span>
+<span id="cb89-10"><a href="optim-op-point.html#cb89-10"></a>    <span class="st">&quot;, nu = &quot;</span>, fit<span class="op">$</span>nuP, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb89-11"><a href="optim-op-point.html#cb89-11"></a><span class="co">#&gt; fitted values: mu =  2.755784 , lambda =  6.778332 , nu =  0.8033886</span></span></code></pre></div>
 <p>TBA: check the following code; even better reduce it to a function.</p>
 <p>Table <a href="optim-op-point.html#tab:optim-op-point-table4">10.2</a> summarizes the results.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -808,12 +801,35 @@ FIGURE 10.7: The color coding is as in previous figures. The two ROC-AUCs are 0.
 <p>In Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-lambda">10.1</a> the <span class="math inline">\(\lambda\)</span> parameter controls the average number of perceived NLs per case. For <span class="math inline">\(\lambda = 1\)</span> there is, on average, one perceived NL for every non-diseased case and the optimal wAFROC-based threshold is <span class="math inline">\(\zeta_{1;1,\mu, \lambda = 1, \nu}\)</span> = -0.007. For <span class="math inline">\(\lambda = 10\)</span> there are ten perceived NLs for every non-diseased case and the optimal wAFROC-based threshold is <span class="math inline">\(\zeta_{1;1,\mu, \lambda = 10, \nu}\)</span> = 1.856. The increase in <span class="math inline">\(\zeta_1\)</span> should make sense to CAD/AI algorithm designers: with increasing numbers of NLs per case it is necessary to increase the reporting threshold (i.e., adopt a stricter criteria) if only because otherwise the reader would be subjected to 10 times the number of NLs/case for the same number of LLs/case.</p>
 <p>The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.</p>
 </div>
+<div id="optim-op-point-rsm-expressions" class="section level2">
+<h2><span class="header-section-number">10.8</span> Appendix 1: RSM predictions</h2>
+<p>The ROC abscissa is calculated using:</p>
+<p><span class="math display" id="eq:optim-op-rsm-pred-fpf">\[\begin{equation}
+\text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
+\tag{10.1}
+\end{equation}\]</span></p>
+<p>The ROC ordinate is calculated using:</p>
+<p><span class="math display" id="eq:optim-op-rsm-pred-tpf">\[\begin{equation}
+\left.
+\begin{aligned}
+&amp; \text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
+&amp; 1 - \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right ) 
+\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L 
+\end{aligned}
+\right \}
+\tag{10.2}
+\end{equation}\]</span></p>
+<p>The wAFROC abscissa is identical to the ROC abscissa.</p>
+<p>The wAFROC ordinate is calculated using:</p>
+</div>
 <div id="optim-op-point-vary-nu" class="section level2">
-<h2><span class="header-section-number">10.8</span> Appendix 1: Varying <span class="math inline">\(\nu\)</span> optimizations</h2>
+<h2><span class="header-section-number">10.9</span> Appendix 2: Varying <span class="math inline">\(\nu\)</span> optimizations</h2>
 <p>For <span class="math inline">\(\mu = 2\)</span> and <span class="math inline">\(\lambda = 1\)</span> optimizations were performed for <span class="math inline">\(\nu = 0.6, 0.7, 0.8, 0.9\)</span>.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="optim-op-point.html#cb90-1"></a>mu &lt;-<span class="st"> </span><span class="dv">2</span></span>
 <span id="cb90-2"><a href="optim-op-point.html#cb90-2"></a>lambdaP &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb90-3"><a href="optim-op-point.html#cb90-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span></code></pre></div>
+<span id="cb90-3"><a href="optim-op-point.html#cb90-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
+<span id="cb90-4"><a href="optim-op-point.html#cb90-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span>
+<span id="cb90-5"><a href="optim-op-point.html#cb90-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code></pre></div>
 <p>Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-nu">10.3</a> summarizes the results.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -856,7 +872,7 @@ wAFROC
 0.701
 </td>
 <td style="text-align:left;">
-0.743
+0.804
 </td>
 <td style="text-align:left;">
 (0.187, 0.520)
@@ -876,7 +892,7 @@ wAFROC
 0.751
 </td>
 <td style="text-align:left;">
-0.793
+0.851
 </td>
 <td style="text-align:left;">
 (0.250, 0.635)
@@ -896,7 +912,7 @@ wAFROC
 0.805
 </td>
 <td style="text-align:left;">
-0.843
+0.893
 </td>
 <td style="text-align:left;">
 (0.342, 0.756)
@@ -916,7 +932,7 @@ wAFROC
 0.864
 </td>
 <td style="text-align:left;">
-0.892
+0.929
 </td>
 <td style="text-align:left;">
 (0.503, 0.880)
@@ -930,16 +946,16 @@ Youden
 0.6
 </td>
 <td style="text-align:left;">
-0.924
+1.022
 </td>
 <td style="text-align:left;">
-0.701
+0.700
 </td>
 <td style="text-align:left;">
-0.741
+0.797
 </td>
 <td style="text-align:left;">
-(0.178, 0.515)
+(0.153, 0.502)
 </td>
 </tr>
 <tr>
@@ -950,16 +966,16 @@ Youden
 0.7
 </td>
 <td style="text-align:left;">
-0.924
+1.044
 </td>
 <td style="text-align:left;">
-0.748
+0.745
 </td>
 <td style="text-align:left;">
-0.782
+0.835
 </td>
 <td style="text-align:left;">
-(0.178, 0.601)
+(0.148, 0.581)
 </td>
 </tr>
 <tr>
@@ -970,16 +986,16 @@ Youden
 0.8
 </td>
 <td style="text-align:left;">
-0.924
+1.069
 </td>
 <td style="text-align:left;">
-0.795
+0.788
 </td>
 <td style="text-align:left;">
-0.822
+0.868
 </td>
 <td style="text-align:left;">
-(0.178, 0.687)
+(0.143, 0.659)
 </td>
 </tr>
 <tr>
@@ -990,23 +1006,20 @@ Youden
 0.9
 </td>
 <td style="text-align:left;">
-0.924
+1.095
 </td>
 <td style="text-align:left;">
-0.843
+0.831
 </td>
 <td style="text-align:left;">
-0.862
+0.899
 </td>
 <td style="text-align:left;">
-(0.178, 0.773)
+(0.137, 0.735)
 </td>
 </tr>
 </tbody>
 </table>
-<div id="illustrative-froc-plots" class="section level3">
-<h3><span class="header-section-number">10.8.1</span> Illustrative FROC plots</h3>
-<p>TBA</p>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-nu-froc"></span>
 <img src="21-optim-op-point_files/figure-html/optim-op-point-vary-nu-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
 <p class="caption">
@@ -1014,35 +1027,31 @@ FIGURE 10.8: FROC plots with superimposed operating points for varying <span cla
 </p>
 </div>
 <p>TBA These plots illustrate the previous comments, namely, as <span class="math inline">\(\lambda\)</span> increases, the optimal operating point moves <em>down</em> the scaled curve corresponding to adoption of progressively more stringent reporting thresholds.</p>
-</div>
-<div id="illustrative-wafroc-plots" class="section level3">
-<h3><span class="header-section-number">10.8.2</span> Illustrative wAFROC plots</h3>
-<p>To visualize true performance one compares wAFROC curves.</p>
 <p>TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\nu = 1\)</span> and <span class="math inline">\(\lambda = 1\)</span>. The optimal reporting theshold <span class="math inline">\(\zeta_1\)</span> is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC. The two wAFROC-AUCs are 0.880 and 0.856, respectively.</p>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-nu-wafroc"></span>
-<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-nu-wafroc-1.png" alt="wAFROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization." width="672" />
+<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-nu-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">
-FIGURE 10.9: wAFROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.
+FIGURE 10.9: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
 </p>
 </div>
-<p>The continuous section of each curve ends at the optimal threshold listed in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-nu">10.3</a>, namely <span class="math inline">\(\zeta_1\)</span> = 0.888 for the green-red-red-dashed curve and <span class="math inline">\(\zeta_1\)</span> = 0.924 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.</p>
-</div>
-<div id="illustrative-roc-plots" class="section level3">
-<h3><span class="header-section-number">10.8.3</span> Illustrative ROC plots</h3>
-<p>To confirm true performance one compares ROC curves.</p>
+<p>The continuous section of each curve ends at the optimal threshold listed in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-nu">10.3</a>, namely <span class="math inline">\(\zeta_1\)</span> = 0.888 for the green-red-red-dashed curve and <span class="math inline">\(\zeta_1\)</span> = 1.022 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.</p>
 <p>TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\nu = 1\)</span> and <span class="math inline">\(\lambda = 1\)</span>. TBA The optimal reporting theshold <span class="math inline">\(\zeta_1\)</span> is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC. The two ROC-AUCs are 0.929 and 0.899, respectively.</p>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-nu-roc"></span>
-<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-nu-roc-1.png" alt="ROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization." width="672" />
+<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-nu-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">
-FIGURE 10.10: ROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.
+FIGURE 10.10: ROC plots for the two optimization methods. The color coding is as in previous figures.
 </p>
 </div>
 <p>The continuous section of each curve ends at the optimal threshold listed in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-nu">10.3</a>. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.</p>
 </div>
-</div>
 <div id="optim-op-point-vary-mu" class="section level2">
-<h2><span class="header-section-number">10.9</span> Appendix 2: Varying <span class="math inline">\(\mu\)</span> optimizations</h2>
+<h2><span class="header-section-number">10.10</span> Appendix 3: Varying <span class="math inline">\(\mu\)</span> optimizations</h2>
 <p>For <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\nu = 0.9\)</span> optimizations were performed for <span class="math inline">\(\mu = 1, 2, 3, 4\)</span>.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="optim-op-point.html#cb91-1"></a>lambdaP &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb91-2"><a href="optim-op-point.html#cb91-2"></a>nuP &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
+<span id="cb91-3"><a href="optim-op-point.html#cb91-3"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb91-4"><a href="optim-op-point.html#cb91-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span>
+<span id="cb91-5"><a href="optim-op-point.html#cb91-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code></pre></div>
 <p>Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-mu">10.4</a> summarizes these results.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -1085,7 +1094,7 @@ wAFROC
 0.745
 </td>
 <td style="text-align:left;">
-0.806
+0.850
 </td>
 <td style="text-align:left;">
 (0.952, 0.897)
@@ -1105,7 +1114,7 @@ wAFROC
 0.864
 </td>
 <td style="text-align:left;">
-0.892
+0.929
 </td>
 <td style="text-align:left;">
 (0.503, 0.880)
@@ -1125,7 +1134,7 @@ wAFROC
 0.922
 </td>
 <td style="text-align:left;">
-0.933
+0.961
 </td>
 <td style="text-align:left;">
 (0.210, 0.887)
@@ -1145,7 +1154,7 @@ wAFROC
 0.942
 </td>
 <td style="text-align:left;">
-0.946
+0.970
 </td>
 <td style="text-align:left;">
 (0.072, 0.895)
@@ -1159,16 +1168,16 @@ Youden
 1
 </td>
 <td style="text-align:left;">
-0.245
+0.462
 </td>
 <td style="text-align:left;">
-0.717
+0.704
 </td>
 <td style="text-align:left;">
-0.775
+0.815
 </td>
 <td style="text-align:left;">
-(0.403, 0.697)
+(0.322, 0.634)
 </td>
 </tr>
 <tr>
@@ -1179,16 +1188,16 @@ Youden
 2
 </td>
 <td style="text-align:left;">
-0.924
+1.095
 </td>
 <td style="text-align:left;">
-0.843
+0.831
 </td>
 <td style="text-align:left;">
-0.862
+0.899
 </td>
 <td style="text-align:left;">
-(0.178, 0.773)
+(0.137, 0.735)
 </td>
 </tr>
 <tr>
@@ -1199,16 +1208,16 @@ Youden
 3
 </td>
 <td style="text-align:left;">
-1.478
+1.629
 </td>
 <td style="text-align:left;">
-0.910
+0.903
 </td>
 <td style="text-align:left;">
-0.916
+0.945
 </td>
 <td style="text-align:left;">
-(0.070, 0.842)
+(0.052, 0.823)
 </td>
 </tr>
 <tr>
@@ -1219,23 +1228,20 @@ Youden
 4
 </td>
 <td style="text-align:left;">
-1.994
+2.124
 </td>
 <td style="text-align:left;">
-0.938
+0.935
 </td>
 <td style="text-align:left;">
-0.939
+0.964
 </td>
 <td style="text-align:left;">
-(0.023, 0.880)
+(0.017, 0.873)
 </td>
 </tr>
 </tbody>
 </table>
-<p>TBA</p>
-<div id="illustrative-froc-plots-1" class="section level3">
-<h3><span class="header-section-number">10.9.1</span> Illustrative FROC plots</h3>
 <p>TBA</p>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-mu-froc"></span>
 <img src="21-optim-op-point_files/figure-html/optim-op-point-vary-mu-froc-1.png" alt="FROC plots with superimposed operating points for varying $\mu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
@@ -1244,58 +1250,22 @@ FIGURE 10.11: FROC plots with superimposed operating points for varying <span cl
 </p>
 </div>
 <p>TBA These plots illustrate the previous comments, namely, as <span class="math inline">\(\lambda\)</span> increases, the optimal operating point moves <em>down</em> the scaled curve corresponding to adoption of progressively more stringent reporting thresholds.</p>
-</div>
-<div id="illustrative-wafroc-plots-1" class="section level3">
-<h3><span class="header-section-number">10.9.2</span> Illustrative wAFROC plots</h3>
-<p>To visualize true performance one compares wAFROC curves.</p>
 <p>TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\nu = 1\)</span> and <span class="math inline">\(\lambda = 1\)</span>. The optimal reporting theshold <span class="math inline">\(\zeta_1\)</span> is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the wAFROC. The two wAFROC-AUCs are 0.880 and 0.856, respectively.</p>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-mu-wafroc"></span>
-<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-mu-wafroc-1.png" alt="wAFROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization." width="672" />
+<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-mu-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">
-FIGURE 10.12: wAFROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.
+FIGURE 10.12: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
 </p>
 </div>
-<p>The continuous section of each curve ends at the optimal threshold listed in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-mu">10.4</a>, namely <span class="math inline">\(\zeta_1\)</span> = -1.663 for the green-red-red-dashed curve and <span class="math inline">\(\zeta_1\)</span> = 0.245 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.</p>
-</div>
-<div id="illustrative-roc-plots-1" class="section level3">
-<h3><span class="header-section-number">10.9.3</span> Illustrative ROC plots</h3>
-<p>To confirm true performance one compares ROC curves.</p>
+<p>The continuous section of each curve ends at the optimal threshold listed in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-mu">10.4</a>, namely <span class="math inline">\(\zeta_1\)</span> = -1.663 for the green-red-red-dashed curve and <span class="math inline">\(\zeta_1\)</span> = 0.462 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.</p>
 <p>TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves correspond to <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\nu = 1\)</span> and <span class="math inline">\(\lambda = 1\)</span>. TBA The optimal reporting theshold <span class="math inline">\(\zeta_1\)</span> is determined by the selected FOM. The green-red-red-dashed curve corresponds to FOM = wAFROC-AUC and the green curve corresponds to FOM = Youden-index. The stricter reporting threshold found by the Youden-index based method sacrifices a considerable amount of area under the ROC. The two ROC-AUCs are 0.929 and 0.899, respectively.</p>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-mu-roc"></span>
-<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-mu-roc-1.png" alt="ROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization." width="672" />
+<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-mu-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">
-FIGURE 10.13: ROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.
+FIGURE 10.13: ROC plots for the two optimization methods. The color coding is as in previous figures.
 </p>
 </div>
 <p>The continuous section of each curve ends at the optimal threshold listed in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-mu">10.4</a>. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.</p>
-</div>
-</div>
-<div id="appendix-3-rsm-expression-for-youden-index" class="section level2">
-<h2><span class="header-section-number">10.10</span> Appendix 3: RSM expression for Youden-index</h2>
-<p><span class="math display" id="eq:optim-op-rsm-pred-fpf">\[\begin{equation}
-\text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
-\tag{10.1}
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:optim-op-rsm-pred-tpf">\[\begin{equation}
-\left.
-\begin{aligned}
-&amp; \text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
-&amp; 1 - \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right ) 
-\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu&#39; \Phi \left ( \mu -\zeta \right ) \right )^L 
-\end{aligned}
-\right \}
-\tag{10.2}
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:optim-op-rsm-pred-youden">\[\begin{equation}
-\left.
-\begin{aligned}
-&amp; \text{Youden}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
-&amp; \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right ) \left (1 -  
-\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L  \right ) \\
-\end{aligned}
-\right \}
-\tag{10.3}
-\end{equation}\]</span></p>
 </div>
 <div id="optim-op-point-references" class="section level2">
 <h2><span class="header-section-number">10.11</span> References</h2>
