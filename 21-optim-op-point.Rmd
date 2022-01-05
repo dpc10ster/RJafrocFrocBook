@@ -103,10 +103,7 @@ wAFROC <- function (
 
 
 Youden <- function (
-  zeta1, 
-  mu, 
-  lambdaP, 
-  nuP, 
+  zeta1, mu, lambdaP, nuP, 
   lesDistr) {
   # add sensitivity and specificity 
   # and subtract 1, i.e., Youden's index
