@@ -159,6 +159,7 @@ tab:optim-op-point-table-vary-lambda
 fig:optim-op-point-vary-lambda-froc
 fig:optim-op-point-vary-lambda-wafroc
 fig:optim-op-point-vary-lambda-roc
+fig:binormal-model-threshold-dependence-2
 tab:optim-op-point-table4
 fig:optim-op-point-application-froc
 fig:optim-op-point-application-wafroc
@@ -171,6 +172,9 @@ tab:optim-op-point-table-vary-mu
 fig:optim-op-point-vary-mu-froc
 fig:optim-op-point-vary-mu-wafroc
 fig:optim-op-point-vary-mu-roc
+eq:optim-op-rsm-pred-fpf
+eq:optim-op-rsm-pred-tpf
+eq:optim-op-rsm-pred-youden
 fig:datasets-datasets
 formatting
 tables
@@ -365,6 +369,7 @@ optim-op-point-vary-mu
 illustrative-froc-plots-1
 illustrative-wafroc-plots-1
 illustrative-roc-plots-1
+appendix-3-rsm-expression-for-youden-index
 optim-op-point-references
 datasets
 datasets-datasets
