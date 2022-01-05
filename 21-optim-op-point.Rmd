@@ -515,7 +515,7 @@ for (y in 1:2) {
 Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimposed optimal operating points. 
 
 
-```{r optim-op-point-application-froc, fig.cap="FROC plots with superposed operating points. Black dot is using wAFROC optimization and red dot is using Youden-index.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-application-froc, fig.cap="FROC plots with superposed optimal operating points. Black dot is using wAFROC optimization and red dot is using Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(froc)
 ```
 
