@@ -64,7 +64,7 @@ Non-lesion localizations = NLs, i.e., location level "false positives".
 Lesion localizations = LLs, i.e., location level "true positives".
 Latent marks = perceived suspicious regions that are not necessarily marked.
 
-Background on the radiological search model (RSM) is provided in Chapter \@ref(rsm). The model predicts ROC, FROC and wAFROC curves: these are completely defined by the four RSM parameters -- $\lambda, \nu, \mu, \zeta_1$ -- with the following meanings:
+Background on the radiological search model (RSM) is provided in Chapter \@ref(rsm). The model predicts ROC, FROC and wAFROC curves (see Appendix 1): these are completely defined by the four RSM parameters -- $\lambda, \nu, \mu, \zeta_1$ -- with the following meanings:
 
 * The $\mu$ parameter, $\mu \ge 0$, is the perceptual signal-to-noise-ratio of lesions. Higher values of $\mu$ lead to increased separation of two unit variance normal distributions determining the ratings of perceived NLs and LL. As $\mu$ increases performance of the algorithm increases.
 
@@ -83,7 +83,7 @@ The wAFROC figure of merit is implemented in the `RJafroc` function `UtilAnalyti
 The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function `RSM_yROC` and specificity is `(1 - RSM_xROC)`. 
 
 
-```{r foms_2be_maximized, echo=FALSE, attr.source = ".numberLines"}
+```{r foms_2be_maximized, echo=FALSE}
 
 wAFROC <- function (
   zeta1, mu, lambdaP, nuP, 
@@ -91,33 +91,19 @@ wAFROC <- function (
   relWeights) {
   # return negative of aucwAFROC 
   # (as optimize finds minimum of function)
-  return(-UtilAnalyticalAucsRSM(
-    mu, 
-    lambdaP = lambdaP, 
-    nuP = nuP, 
-    zeta1, 
-    lesDistr, 
-    relWeights)$aucwAFROC)
+  return(-UtilAnalyticalAucsRSM(mu, lambdaP = lambdaP, nuP = nuP, zeta1, lesDistr, relWeights)$aucwAFROC)
   
 }
 
 
-Youden <- function (
-  zeta1, mu, lambdaP, nuP, 
-  lesDistr) {
+Youden <- function (zeta1, mu, lambdaP, nuP, lesDistr) {
   # add sensitivity and specificity 
   # and subtract 1, i.e., Youden's index
-  x <- RSM_yROC(
-    zeta1, 
-    mu, 
-    lambdaP, 
-    nuP, 
-    lesDistr) + 
+  x <- RSM_yROC(zeta1, mu, lambdaP, nuP, lesDistr) + 
     (1 - RSM_xROC(zeta1, lambdaP)) - 1
   # return negative of Youden-index 
   # (as optimize finds minimum of function)
   return(-x)
-  
 }
 ```
 
@@ -157,7 +143,7 @@ Table \@ref(tab:optim-op-point-table-vary-lambda) summarizes the results. The co
 
 
 
-```{r cache = FALSE, echo=FALSE, attr.source = ".numberLines"}
+```{r cache = FALSE, echo=FALSE}
 wAfrocArr <- array(dim = c(2,length(lambdaPArr)))
 zetaOptArr <- array(dim = c(2,length(lambdaPArr)))
 rocArr <- array(dim = c(2,length(lambdaPArr)))
@@ -267,7 +253,7 @@ The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lamb
 
  
 
-```{r, attr.source = ".numberLines", echo=FALSE}
+```{r, echo=FALSE}
 plotArr <- array(list(), dim = 4)
 for (i in 1:4) {
   z <- seq(-5,mu+5,0.1)
@@ -304,7 +290,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-```{r, attr.source = ".numberLines", echo=FALSE}
+```{r, echo=FALSE}
 plotArr <- array(list(), dim = 4)
 for (i in 1:4) {
   x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaPArr[i], nuP = nuP)
@@ -342,7 +328,7 @@ grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], nrow = 2, ncol
 
 
 
-```{r, attr.source = ".numberLines", echo=FALSE}
+```{r, echo=FALSE}
 plotArr <- array(list(), dim = 4)
 for (i in 1:4) {
   x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaPArr[i], nuP = nuP)
@@ -413,7 +399,7 @@ Assume that one has designed an algorithmic observer that has been optimized wit
 
 ## A CAD application {#optim-op-point-application}
 
-The standalone CAD LROC dataset described in [@hupse2013standalone] was used to create the quasi-FROC ROC-AUC equivalent dataset embedded in `RJafroc` as object `datasetCadSimuFroc`. In the following code the first reader for this dataset, corresponding to CAD, is extracted using `DfExtractDataset` (the other readers, corresponding to radiologists who interpreted the same cases, are not used here). The function `DfFroc2Roc` converts this to an ROC dataset. The function `DfBinDataset` bins the data to about 7 bins. One lesion per abnormal case is assumed: `lesDistr = c(1)`. `FitRsmRoc` fits the binned ROC dataset to the radiological search model RSM. Object `fit` contains all necessary parameters required to perform the optimizations described in previous sections. In the following code line 2 extracts the CAD dataset. The next line converts it to an ROC dataset. The next line bins the dataset. Since diseased cases have only one lesion, the following line sets `lesDist` accordingly. The line `fit <- FitRsmRoc(dsCadRocBinned, lesDistr)` fits the dataset to the RSM. 
+The standalone CAD LROC dataset described in [@hupse2013standalone] was used to create the quasi-FROC ROC-AUC equivalent dataset embedded in `RJafroc` as object `datasetCadSimuFroc`. In the following code the first reader for this dataset, corresponding to CAD, is extracted using `DfExtractDataset` (the other reader data, corresponding to radiologists who interpreted the same cases, are not used here). The function `DfFroc2Roc` converts this to an ROC dataset. The function `DfBinDataset` bins the data to about 7 bins. Each diseased case contains one lesion: `lesDistr = c(1)`. `FitRsmRoc` fits the binned ROC dataset to the radiological search model (RSM). Object `fit` contains the RSM parameters required to perform the optimizations described in previous sections.  
 
 ```{r}
 ds <- datasetCadSimuFroc
@@ -421,6 +407,7 @@ dsCad <- DfExtractDataset(ds, rdrs = 1)
 dsCadRoc <- DfFroc2Roc(dsCad)
 dsCadRocBinned <- DfBinDataset(dsCadRoc, opChType = "ROC")
 lesDistr <- c(1)
+relWeights <- c(1)
 fit <- FitRsmRoc(dsCadRocBinned, lesDistr)
 cat("fitted values: mu = ", fit$mu, 
     ", lambda = ", fit$lambdaP, 
@@ -444,7 +431,6 @@ zetaOptArr1 <- array(dim = c(2))
 rocAucArr <- array(dim = c(2))
 nlfOptArr <- array(dim = c(2))
 llfOptArr <- array(dim = c(2))
-relWeights <- c(1)
 for (y in 1:2) {
   if (y == 1) {
     x <- optimize(wAFROC, 
@@ -602,7 +588,38 @@ In Table \@ref(tab:optim-op-point-table-vary-lambda) the $\lambda$ parameter con
 The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.   
 
 
-## Appendix 1: Varying $\nu$ optimizations{#optim-op-point-vary-nu}
+## Appendix 1: RSM predicted expressions for ROC coordinates{#optim-op-point-rsm-expressions}
+
+The ROC abscissa is calculated using:
+
+\begin{equation}
+\text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
+(\#eq:optim-op-rsm-pred-fpf)
+\end{equation}
+
+
+The ROC ordinate is calculated using:
+
+
+\begin{equation}
+\left.
+\begin{aligned}
+& \text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
+& 1 - \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right ) 
+\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L 
+\end{aligned}
+\right \}
+(\#eq:optim-op-rsm-pred-tpf)
+\end{equation}
+
+
+The wAFROC abscissa is identical to the ROC abscissa.
+
+The wAFROC ordinate is calculated using:
+
+
+
+## Appendix 2: Varying $\nu$ optimizations{#optim-op-point-vary-nu}
 
 For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7, 0.8, 0.9$. 
 
@@ -610,13 +627,17 @@ For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7
 mu <- 2
 lambdaP <- 1
 nuPArr <- c(0.6, 0.7, 0.8, 0.9)
+lesDistr <- c(0.5,0.5)
+relWeights <- c(0.5,0.5)
 ```
+
+
 
 Table \@ref(tab:optim-op-point-table-vary-nu) summarizes the results.
 
 
 
-```{r cache = FALSE, echo=FALSE, attr.source = ".numberLines"}
+```{r cache = FALSE, echo=FALSE}
 wAfrocArr <- array(dim = c(2,length(nuPArr)))
 zetaOptArr <- array(dim = c(2,length(nuPArr)))
 rocArr <- array(dim = c(2,length(nuPArr)))
@@ -701,13 +722,7 @@ kbl(x12, caption = "Summary of optimization results for $\\mu = 2$, $\\lambda = 
 
 
 
-### Illustrative FROC plots
-
-TBA
-
-
-
-```{r, attr.source = ".numberLines", echo=FALSE}
+```{r, echo=FALSE}
 plotArr <- array(list(), dim = 4)
 for (i in 1:4) {
   z <- seq(-5,mu+5,0.1)
@@ -747,13 +762,7 @@ TBA These plots illustrate the previous comments, namely, as $\lambda$ increases
 
 
 
-### Illustrative wAFROC plots
-
-To visualize true performance one compares wAFROC curves.    
-
-
-
-```{r, attr.source = ".numberLines", echo=FALSE}
+```{r, echo=FALSE}
 plotArr <- array(list(), dim = 4)
 for (i in 1:4) {
   x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuPArr[i])
@@ -779,7 +788,7 @@ TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves cor
 
 
 
-```{r optim-op-point-vary-nu-wafroc, fig.cap="wAFROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-nu-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -789,13 +798,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 
-### Illustrative ROC plots
-
-To confirm true performance one compares ROC curves.    
-
-
-
-```{r, attr.source = ".numberLines", echo=FALSE}
+```{r, echo=FALSE}
 plotArr <- array(list(), dim = 4)
 for (i in 1:4) {
   x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuPArr[i])
@@ -822,7 +825,7 @@ TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves corres
 
 
 
-```{r optim-op-point-vary-nu-roc, fig.cap="ROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-nu-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -831,19 +834,25 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 
-
-
-
-## Appendix 2: Varying $\mu$ optimizations{#optim-op-point-vary-mu}
+## Appendix 3: Varying $\mu$ optimizations{#optim-op-point-vary-mu}
 
 For $\lambda = 1$ and $\nu = 0.9$ optimizations were performed for $\mu = 1, 2, 3, 4$. 
+
+```{r}
+lambdaP <- 1
+nuP <- 0.9
+muArr <- c(1, 2, 3, 4)
+lesDistr <- c(0.5,0.5)
+relWeights <- c(0.5,0.5)
+```
+
 
 
 Table \@ref(tab:optim-op-point-table-vary-mu) summarizes these results. 
 
 
 
-```{r cache = FALSE, echo=FALSE, attr.source = ".numberLines"}
+```{r cache = FALSE, echo=FALSE}
 lambdaP <- 1
 nuP <- 0.9
 muArr <- c(1, 2, 3, 4)
@@ -932,12 +941,8 @@ kbl(x12, caption = "Summary of optimization results for $\\lambda = 1$, $\\nu = 
 TBA
 
 
-### Illustrative FROC plots
 
-TBA
-
-
-```{r, attr.source = ".numberLines", echo=FALSE}
+```{r, echo=FALSE}
 plotArr <- array(list(), dim = 4)
 for (i in 1:4) {
   z <- seq(-5,muArr[i]+5,0.1)
@@ -976,13 +981,8 @@ TBA These plots illustrate the previous comments, namely, as $\lambda$ increases
 
 
 
-### Illustrative wAFROC plots
 
-To visualize true performance one compares wAFROC curves.    
-
-
-
-```{r, attr.source = ".numberLines", echo=FALSE}
+```{r, echo=FALSE}
 plotArr <- array(list(), dim = 4)
 for (i in 1:4) {
   mu <- muArr[i]
@@ -1010,7 +1010,7 @@ TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves cor
 
 
 
-```{r optim-op-point-vary-mu-wafroc, fig.cap="wAFROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-mu-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -1019,14 +1019,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 
-
-### Illustrative ROC plots
-
-To confirm true performance one compares ROC curves.    
-
-
-
-```{r, attr.source = ".numberLines", echo=FALSE}
+```{r, echo=FALSE}
 plotArr <- array(list(), dim = 4)
 for (i in 1:4) {
   mu <- muArr[i]
@@ -1054,7 +1047,7 @@ TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves corres
 
 
 
-```{r optim-op-point-vary-mu-roc, fig.cap="ROC plots for the two optimization methods: the green-red-red-dashed curve corresponds to wAFROC-AUC optimization and the green-green curve corresponds to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-mu-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -1062,39 +1055,6 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 The continuous section of each curve ends at the optimal threshold listed in Table \@ref(tab:optim-op-point-table-vary-mu). The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 
-
-
-
-
-## Appendix 3: RSM expression for Youden-index
-
-\begin{equation}
-\text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
-(\#eq:optim-op-rsm-pred-fpf)
-\end{equation}
-
-\begin{equation}
-\left.
-\begin{aligned}
-& \text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
-& 1 - \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right ) 
-\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu' \Phi \left ( \mu -\zeta \right ) \right )^L 
-\end{aligned}
-\right \}
-(\#eq:optim-op-rsm-pred-tpf)
-\end{equation}
-
-
-\begin{equation}
-\left.
-\begin{aligned}
-& \text{Youden}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
-& \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right ) \left (1 -  
-\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L  \right ) \\
-\end{aligned}
-\right \}
-(\#eq:optim-op-rsm-pred-youden)
-\end{equation}
 
 
 
