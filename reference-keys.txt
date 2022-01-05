@@ -159,6 +159,10 @@ tab:optim-op-point-table-vary-lambda
 fig:optim-op-point-vary-lambda-froc
 fig:optim-op-point-vary-lambda-wafroc
 fig:optim-op-point-vary-lambda-roc
+tab:optim-op-point-table4
+fig:optim-op-point-application-froc
+fig:optim-op-point-application-wafroc
+fig:optim-op-point-application-roc
 tab:optim-op-point-table-vary-nu
 fig:optim-op-point-vary-nu-froc
 fig:optim-op-point-vary-nu-wafroc
@@ -350,6 +354,8 @@ optim-op-point-how-much-finished
 optim-op-point-intro
 optim-op-point-methods
 optim-op-point-vary-lambda
+optim-op-point-how-to-use-method
+optim-op-point-application
 optim-op-point-discussion
 optim-op-point-vary-nu
 illustrative-froc-plots

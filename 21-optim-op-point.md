@@ -17,7 +17,7 @@ output:
 
 
 ## TBA How much finished {#optim-op-point-how-much-finished}
-80%
+90%
 
 Discussion and Intro need more work; coding is done
 
@@ -262,6 +262,111 @@ What happens if ROC AUC is maximized?
 
 
 
+## Using the method {#optim-op-point-how-to-use-method}
+Assume that one has designed an algorithmic observer that has been optimized with respect to all other parameters except the reporting threshold. At this point the algorithm reports every suspicious region, no matter how low the malignancy index. The mark-rating pairs are entered into a `RJafroc` format Excel input file. The next step is to read the data file -- `DfReadDataFile()` -- convert it to an ROC dataset -- `DfFroc2Roc()` -- and then perform a radiological search model (RSM) fit to the dataset using function `FitRsmRoc()`. This yields the necessary $\lambda, \mu, \nu$ parameters. These values are used to perform the computations described in the embedded code in this chapter, see for example Section \@ref(optim-op-point-vary-lambda). This determines the optimal reporting threshold. The RSM parameter values and the reporting threshold determine the optimal reporting point on the FROC curve. The designer sets the algorithm to only report marks with confidence levels exceeding this threshold. 
+
+
+
+
+## An application {#optim-op-point-application}
+
+The standalone CAD LROC dataset described in [@hupse2013standalone] was used to create the quasi-FROC ROC-AUC equivalent dataset embedded in `RJafroc` as object `datasetCadSimuFroc`. In the following code the first reader for this dataset, corresponding to CAD, is extracted using `DfExtractDataset` (the other readers, corresponding to radiologists who interpreted the same cases, are not used here). The function `DfFroc2Roc` converts this to an ROC dataset. The function `DfBinDataset` bins the data to about 7 bins. One lesion per abnormal case is assumed: `lesDistr = c(1)`. `FitRsmRoc` fits the binned ROC dataset to the radiological search model RSM. Object `fit` contains all necessary parameters required to perform the optimizations described in previous sections. In the following code line 2 extracts the CAD dataset. The next line converts it to an ROC dataset. The next line bins the dataset. Since diseased cases have only one lesion, the following line sets `lesDist` accordingly. The line `fit <- FitRsmRoc(dsCadRocBinned, lesDistr)` fits the dataset to the RSM. 
+
+
+```r
+ds <- datasetCadSimuFroc
+dsCad <- DfExtractDataset(ds, rdrs = 1)
+dsCadRoc <- DfFroc2Roc(dsCad)
+dsCadRocBinned <- DfBinDataset(dsCadRoc, opChType = "ROC")
+lesDistr <- c(1)
+fit <- FitRsmRoc(dsCadRocBinned, lesDistr)
+cat("fitted values: mu = ", fit$mu, 
+    ", lambda = ", fit$lambdaP, 
+    ", nu = ", fit$nuP, "\n")
+#> fitted values: mu =  2.755784 , lambda =  6.778332 , nu =  0.8033886
+```
+
+
+TBA: check the following code; even better reduce it to a function.
+
+
+
+
+
+Table \@ref(tab:optim-op-point-table4) summarizes the results.
+
+
+
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:optim-op-point-table4)Summary of optimization results for example FROC dataset. The wAFROC column always displays wAFROC-AUC, even though the optimized quantity may the Youden-index, as in the last four rows.</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> FOM </th>
+   <th style="text-align:left;"> $\lambda$ </th>
+   <th style="text-align:left;"> $\zeta_1$ </th>
+   <th style="text-align:left;"> $\text{wAFROC}$ </th>
+   <th style="text-align:left;"> $\text{ROC}$ </th>
+   <th style="text-align:left;"> $\left( \text{NLF}, \text{LLF}\right)$ </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:left;"> 6.778 </td>
+   <td style="text-align:left;"> 1.739 </td>
+   <td style="text-align:left;"> 0.774 </td>
+   <td style="text-align:left;"> 0.815 </td>
+   <td style="text-align:left;"> (0.278, 0.679) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:left;"> 6.778 </td>
+   <td style="text-align:left;"> 1.982 </td>
+   <td style="text-align:left;"> 0.770 </td>
+   <td style="text-align:left;"> 0.798 </td>
+   <td style="text-align:left;"> (0.161, 0.627) </td>
+  </tr>
+</tbody>
+</table>
+
+
+The dataset is characterized by a relatively large $\lambda$ parameter and yet the results are consistent with the simulation results cited above. The wAFROC-AUC based optimization yields larger figures of merit, as measured by wAFROC-AUC, ROC-AUC or LLF. 
+
+
+
+
+
+
+
+Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimposed optimal operating points. 
+
+
+<div class="figure">
+<img src="21-optim-op-point_files/figure-html/optim-op-point-application-froc-1.png" alt="FROC plots with superposed operating points. Black dot is using wAFROC optimization and red dot is using Youden-index." width="672" />
+<p class="caption">(\#fig:optim-op-point-application-froc)FROC plots with superposed operating points. Black dot is using wAFROC optimization and red dot is using Youden-index.</p>
+</div>
+
+
+
+
+
+<div class="figure">
+<img src="21-optim-op-point_files/figure-html/optim-op-point-application-wafroc-1.png" alt="The color coding is as in previous figures. The two wAFROC-AUCs are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization)." width="672" />
+<p class="caption">(\#fig:optim-op-point-application-wafroc)The color coding is as in previous figures. The two wAFROC-AUCs are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization).</p>
+</div>
+
+
+
+
+
+
+<div class="figure">
+<img src="21-optim-op-point_files/figure-html/optim-op-point-application-roc-1.png" alt="The color coding is as in previous figures. The two ROC-AUCs are 0.815 (wAFROC-AUC optimization) and 0.798 (Youden-index optimization)." width="672" />
+<p class="caption">(\#fig:optim-op-point-application-roc)The color coding is as in previous figures. The two ROC-AUCs are 0.815 (wAFROC-AUC optimization) and 0.798 (Youden-index optimization).</p>
+</div>
+
+
 ## Discussion {#optim-op-point-discussion}
 
 In Table \@ref(tab:optim-op-point-table-vary-lambda) the $\lambda$ parameter controls the average number of perceived NLs per case. For $\lambda = 1$ there is, on average, one perceived NL for every non-diseased case and the optimal wAFROC-based threshold is $\zeta_{1;1,\mu, \lambda = 1, \nu}$ = -0.007. For $\lambda = 10$ there are ten perceived NLs for every non-diseased case and the optimal wAFROC-based threshold is $\zeta_{1;1,\mu, \lambda = 10, \nu}$ = 1.856. The increase in $\zeta_1$ should make sense to CAD/AI algorithm designers: with increasing numbers of NLs per case it is necessary to increase the reporting threshold (i.e., adopt a stricter criteria) if only because otherwise the reader would be subjected to 10 times the number of NLs/case for the same number of LLs/case. 
@@ -306,7 +411,7 @@ Table \@ref(tab:optim-op-point-table-vary-nu) summarizes these results. The colu
    <td style="text-align:left;"> 0.6 </td>
    <td style="text-align:left;"> 0.888 </td>
    <td style="text-align:left;"> 0.701 </td>
-   <td style="text-align:left;"> 0.804 </td>
+   <td style="text-align:left;"> 0.743 </td>
    <td style="text-align:left;"> (0.187, 0.520) </td>
   </tr>
   <tr>
@@ -314,7 +419,7 @@ Table \@ref(tab:optim-op-point-table-vary-nu) summarizes these results. The colu
    <td style="text-align:left;"> 0.7 </td>
    <td style="text-align:left;"> 0.674 </td>
    <td style="text-align:left;"> 0.751 </td>
-   <td style="text-align:left;"> 0.851 </td>
+   <td style="text-align:left;"> 0.793 </td>
    <td style="text-align:left;"> (0.250, 0.635) </td>
   </tr>
   <tr>
@@ -322,7 +427,7 @@ Table \@ref(tab:optim-op-point-table-vary-nu) summarizes these results. The colu
    <td style="text-align:left;"> 0.8 </td>
    <td style="text-align:left;"> 0.407 </td>
    <td style="text-align:left;"> 0.805 </td>
-   <td style="text-align:left;"> 0.893 </td>
+   <td style="text-align:left;"> 0.843 </td>
    <td style="text-align:left;"> (0.342, 0.756) </td>
   </tr>
   <tr>
@@ -330,40 +435,40 @@ Table \@ref(tab:optim-op-point-table-vary-nu) summarizes these results. The colu
    <td style="text-align:left;"> 0.9 </td>
    <td style="text-align:left;"> -0.007 </td>
    <td style="text-align:left;"> 0.864 </td>
-   <td style="text-align:left;"> 0.929 </td>
+   <td style="text-align:left;"> 0.892 </td>
    <td style="text-align:left;"> (0.503, 0.880) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:left;"> 0.6 </td>
-   <td style="text-align:left;"> 1.022 </td>
-   <td style="text-align:left;"> 0.700 </td>
-   <td style="text-align:left;"> 0.797 </td>
-   <td style="text-align:left;"> (0.153, 0.502) </td>
+   <td style="text-align:left;"> 0.924 </td>
+   <td style="text-align:left;"> 0.701 </td>
+   <td style="text-align:left;"> 0.741 </td>
+   <td style="text-align:left;"> (0.178, 0.515) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:left;"> 0.7 </td>
-   <td style="text-align:left;"> 1.044 </td>
-   <td style="text-align:left;"> 0.745 </td>
-   <td style="text-align:left;"> 0.835 </td>
-   <td style="text-align:left;"> (0.148, 0.581) </td>
+   <td style="text-align:left;"> 0.924 </td>
+   <td style="text-align:left;"> 0.748 </td>
+   <td style="text-align:left;"> 0.782 </td>
+   <td style="text-align:left;"> (0.178, 0.601) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:left;"> 0.8 </td>
-   <td style="text-align:left;"> 1.069 </td>
-   <td style="text-align:left;"> 0.788 </td>
-   <td style="text-align:left;"> 0.868 </td>
-   <td style="text-align:left;"> (0.143, 0.659) </td>
+   <td style="text-align:left;"> 0.924 </td>
+   <td style="text-align:left;"> 0.795 </td>
+   <td style="text-align:left;"> 0.822 </td>
+   <td style="text-align:left;"> (0.178, 0.687) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:left;"> 0.9 </td>
-   <td style="text-align:left;"> 1.095 </td>
-   <td style="text-align:left;"> 0.831 </td>
-   <td style="text-align:left;"> 0.899 </td>
-   <td style="text-align:left;"> (0.137, 0.735) </td>
+   <td style="text-align:left;"> 0.924 </td>
+   <td style="text-align:left;"> 0.843 </td>
+   <td style="text-align:left;"> 0.862 </td>
+   <td style="text-align:left;"> (0.178, 0.773) </td>
   </tr>
 </tbody>
 </table>
@@ -374,7 +479,7 @@ The $\lambda$ parameter controls the average number of perceived NLs per case. F
 
 With larger $\lambda$ overall optimized performance is expected to be lower as confirmed by the corresponding wAFROC-AUC and ROC-AUC values. This is due to two reinforcing effects: performance goes down with increasing numbers of NLs per case and performance goes down with increasing reporting threshold. 
 
-While these effects are also true for the Youden-index optimizations, the optimal thresholds are collectively higher than the corresponding wAFROC optimizations, especially for the lower values of $\lambda$: $\zeta_{1;2,\mu, \lambda = 1, \nu}$ = 1.022 and $\zeta_{1;2,\mu, \lambda = 10, \nu}$ = 1.095. This results in lower wAFROC-AUC and ROC-AUC values when using Youden-index optimizations.
+While these effects are also true for the Youden-index optimizations, the optimal thresholds are collectively higher than the corresponding wAFROC optimizations, especially for the lower values of $\lambda$: $\zeta_{1;2,\mu, \lambda = 1, \nu}$ = 0.924 and $\zeta_{1;2,\mu, \lambda = 10, \nu}$ = 0.924. This results in lower wAFROC-AUC and ROC-AUC values when using Youden-index optimizations.
 
 
 
@@ -420,7 +525,7 @@ TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves cor
 </div>
 
 
-The continuous section of each curve ends at the optimal threshold listed in Table \@ref(tab:optim-op-point-table-vary-nu), namely $\zeta_1$ = 0.888 for the green-red-red-dashed curve and $\zeta_1$ = 1.022 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
+The continuous section of each curve ends at the optimal threshold listed in Table \@ref(tab:optim-op-point-table-vary-nu), namely $\zeta_1$ = 0.888 for the green-red-red-dashed curve and $\zeta_1$ = 0.924 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 
 
@@ -490,7 +595,7 @@ Table \@ref(tab:optim-op-point-table-vary-mu) summarizes these results.
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> -1.663 </td>
    <td style="text-align:left;"> 0.745 </td>
-   <td style="text-align:left;"> 0.850 </td>
+   <td style="text-align:left;"> 0.806 </td>
    <td style="text-align:left;"> (0.952, 0.897) </td>
   </tr>
   <tr>
@@ -498,7 +603,7 @@ Table \@ref(tab:optim-op-point-table-vary-mu) summarizes these results.
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> -0.007 </td>
    <td style="text-align:left;"> 0.864 </td>
-   <td style="text-align:left;"> 0.929 </td>
+   <td style="text-align:left;"> 0.892 </td>
    <td style="text-align:left;"> (0.503, 0.880) </td>
   </tr>
   <tr>
@@ -506,7 +611,7 @@ Table \@ref(tab:optim-op-point-table-vary-mu) summarizes these results.
    <td style="text-align:left;"> 3 </td>
    <td style="text-align:left;"> 0.808 </td>
    <td style="text-align:left;"> 0.922 </td>
-   <td style="text-align:left;"> 0.961 </td>
+   <td style="text-align:left;"> 0.933 </td>
    <td style="text-align:left;"> (0.210, 0.887) </td>
   </tr>
   <tr>
@@ -514,40 +619,40 @@ Table \@ref(tab:optim-op-point-table-vary-mu) summarizes these results.
    <td style="text-align:left;"> 4 </td>
    <td style="text-align:left;"> 1.463 </td>
    <td style="text-align:left;"> 0.942 </td>
-   <td style="text-align:left;"> 0.970 </td>
+   <td style="text-align:left;"> 0.946 </td>
    <td style="text-align:left;"> (0.072, 0.895) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 0.462 </td>
-   <td style="text-align:left;"> 0.704 </td>
-   <td style="text-align:left;"> 0.815 </td>
-   <td style="text-align:left;"> (0.322, 0.634) </td>
+   <td style="text-align:left;"> 0.245 </td>
+   <td style="text-align:left;"> 0.717 </td>
+   <td style="text-align:left;"> 0.775 </td>
+   <td style="text-align:left;"> (0.403, 0.697) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> 1.095 </td>
-   <td style="text-align:left;"> 0.831 </td>
-   <td style="text-align:left;"> 0.899 </td>
-   <td style="text-align:left;"> (0.137, 0.735) </td>
+   <td style="text-align:left;"> 0.924 </td>
+   <td style="text-align:left;"> 0.843 </td>
+   <td style="text-align:left;"> 0.862 </td>
+   <td style="text-align:left;"> (0.178, 0.773) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 1.629 </td>
-   <td style="text-align:left;"> 0.903 </td>
-   <td style="text-align:left;"> 0.945 </td>
-   <td style="text-align:left;"> (0.052, 0.823) </td>
+   <td style="text-align:left;"> 1.478 </td>
+   <td style="text-align:left;"> 0.910 </td>
+   <td style="text-align:left;"> 0.916 </td>
+   <td style="text-align:left;"> (0.070, 0.842) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:left;"> 4 </td>
-   <td style="text-align:left;"> 2.124 </td>
-   <td style="text-align:left;"> 0.935 </td>
-   <td style="text-align:left;"> 0.964 </td>
-   <td style="text-align:left;"> (0.017, 0.873) </td>
+   <td style="text-align:left;"> 1.994 </td>
+   <td style="text-align:left;"> 0.938 </td>
+   <td style="text-align:left;"> 0.939 </td>
+   <td style="text-align:left;"> (0.023, 0.880) </td>
   </tr>
 </tbody>
 </table>
@@ -597,7 +702,7 @@ TBA wAFROC curves for wAFROC-AUC and Youden-index optimizations: both curves cor
 </div>
 
 
-The continuous section of each curve ends at the optimal threshold listed in Table \@ref(tab:optim-op-point-table-vary-mu), namely $\zeta_1$ = -1.663 for the green-red-red-dashed curve and $\zeta_1$ = 0.462 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
+The continuous section of each curve ends at the optimal threshold listed in Table \@ref(tab:optim-op-point-table-vary-mu), namely $\zeta_1$ = -1.663 for the green-red-red-dashed curve and $\zeta_1$ = 0.245 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 
 
