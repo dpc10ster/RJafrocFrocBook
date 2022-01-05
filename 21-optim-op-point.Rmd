@@ -588,7 +588,7 @@ In Table \@ref(tab:optim-op-point-table-vary-lambda) the $\lambda$ parameter con
 The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.   
 
 
-## Appendix 1: RSM predicted expressions for ROC coordinates{#optim-op-point-rsm-expressions}
+## Appendix 1: RSM predictions {#optim-op-point-rsm-expressions}
 
 The ROC abscissa is calculated using:
 
