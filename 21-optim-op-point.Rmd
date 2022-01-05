@@ -39,7 +39,7 @@ simplePrint <- function(x) {
 
 
 ## TBA How much finished {#optim-op-point-how-much-finished}
-80%
+90%
 
 Discussion and Intro need more work; coding is done
 
@@ -372,6 +372,197 @@ Summarize vary nu and vary mu
 What happens if ROC AUC is maximized?
 
 
+
+
+## Using the method {#optim-op-point-how-to-use-method}
+Assume that one has designed an algorithmic observer that has been optimized with respect to all other parameters except the reporting threshold. At this point the algorithm reports every suspicious region, no matter how low the malignancy index. The mark-rating pairs are entered into a `RJafroc` format Excel input file. The next step is to read the data file -- `DfReadDataFile()` -- convert it to an ROC dataset -- `DfFroc2Roc()` -- and then perform a radiological search model (RSM) fit to the dataset using function `FitRsmRoc()`. This yields the necessary $\lambda, \mu, \nu$ parameters. These values are used to perform the computations described in the embedded code in this chapter, see for example Section \@ref(optim-op-point-vary-lambda). This determines the optimal reporting threshold. The RSM parameter values and the reporting threshold determine the optimal reporting point on the FROC curve. The designer sets the algorithm to only report marks with confidence levels exceeding this threshold. 
+
+
+
+
+## An application {#optim-op-point-application}
+
+The standalone CAD LROC dataset described in [@hupse2013standalone] was used to create the quasi-FROC ROC-AUC equivalent dataset embedded in `RJafroc` as object `datasetCadSimuFroc`. In the following code the first reader for this dataset, corresponding to CAD, is extracted using `DfExtractDataset` (the other readers, corresponding to radiologists who interpreted the same cases, are not used here). The function `DfFroc2Roc` converts this to an ROC dataset. The function `DfBinDataset` bins the data to about 7 bins. One lesion per abnormal case is assumed: `lesDistr = c(1)`. `FitRsmRoc` fits the binned ROC dataset to the radiological search model RSM. Object `fit` contains all necessary parameters required to perform the optimizations described in previous sections. In the following code line 2 extracts the CAD dataset. The next line converts it to an ROC dataset. The next line bins the dataset. Since diseased cases have only one lesion, the following line sets `lesDist` accordingly. The line `fit <- FitRsmRoc(dsCadRocBinned, lesDistr)` fits the dataset to the RSM. 
+
+```{r}
+ds <- datasetCadSimuFroc
+dsCad <- DfExtractDataset(ds, rdrs = 1)
+dsCadRoc <- DfFroc2Roc(dsCad)
+dsCadRocBinned <- DfBinDataset(dsCadRoc, opChType = "ROC")
+lesDistr <- c(1)
+fit <- FitRsmRoc(dsCadRocBinned, lesDistr)
+cat("fitted values: mu = ", fit$mu, 
+    ", lambda = ", fit$lambdaP, 
+    ", nu = ", fit$nuP, "\n")
+```
+
+
+TBA: check the following code; even better reduce it to a function.
+
+
+```{r optim-op-point-computations-application, cache = FALSE, echo=FALSE}
+mu <- fit$mu
+lambdaP <- fit$lambdaP
+nuP <- fit$nuP
+x <- UtilPhysical2IntrinsicRSM(mu, lambdaP, nuP)
+lambda <- x$lambda
+nu <- x$nu
+
+wafrocArr <- array(dim = c(2))
+zetaOptArr1 <- array(dim = c(2))
+rocAucArr <- array(dim = c(2))
+nlfOptArr <- array(dim = c(2))
+llfOptArr <- array(dim = c(2))
+relWeights <- c(1)
+for (y in 1:2) {
+  if (y == 1) {
+    x <- optimize(wAFROC, 
+                  interval = c(-5,5), 
+                  mu, 
+                  lambdaP = lambdaP, 
+                  nuP = nuP, 
+                  lesDistr, 
+                  relWeights)
+    zetaOptArr1[y] <- x$minimum
+    wafrocArr[y] <- -x$objective  # safe to use objective here
+    rocAucArr[y] <- UtilAnalyticalAucsRSM(
+      mu, 
+      lambdaP = lambdaP, 
+      nuP = nuP, 
+      zeta1 = x$minimum, 
+      lesDistr, 
+      relWeights)$aucROC
+    nlfOptArr[y] <- RSM_xFROC(
+      z = x$minimum, 
+      lambdaP = lambdaP)
+    llfOptArr[y] <- RSM_yFROC(
+      z = x$minimum, 
+      mu, 
+      nuP)
+  } else if (y == 2) {
+    x <- optimize(Youden, 
+                  interval = c(-5,5), 
+                  mu, 
+                  lambdaP = lambdaP, 
+                  nuP = nuP, 
+                  lesDistr, 
+                  relWeights)
+    zetaOptArr1[y] <- x$minimum
+    wafrocArr[y] <- UtilAnalyticalAucsRSM(
+      mu, 
+      lambdaP = lambdaP, 
+      nuP = nuP, 
+      zeta1 = x$minimum, 
+      lesDistr, 
+      relWeights)$aucwAFROC
+    rocAucArr[y] <- UtilAnalyticalAucsRSM(
+      mu, 
+      lambdaP = lambdaP, 
+      nuP = nuP, 
+      zeta1 = x$minimum, 
+      lesDistr, 
+      relWeights)$aucROC
+    nlfOptArr[y] <- RSM_xFROC(
+      z = x$minimum, 
+      lambdaP = lambdaP)
+    llfOptArr[y] <- RSM_yFROC(
+      z = x$minimum, mu, nuP)
+  } else stop("incorrect y")
+}
+```
+
+
+Table \@ref(tab:optim-op-point-table4) summarizes the results.
+
+```{r optim-op-point-table4-contents, echo=FALSE}
+x1 <- cbind("wAFROC", lambda = simplePrint(lambdaP), zeta1 = simplePrint(zetaOptArr1[1]), wAFROC = simplePrint(wafrocArr[1]), ROC = simplePrint(rocAucArr[1]), OptOpPt = OpPtStr(nlfOptArr[1], llfOptArr[1]))
+x2 <- cbind("Youden", lambda = simplePrint(lambdaP), zeta1 = simplePrint(zetaOptArr1[2]), wAFROC = simplePrint(wafrocArr[2]), ROC = simplePrint(rocAucArr[2]), OptOpPt = OpPtStr(nlfOptArr[2], llfOptArr[2]))
+x12 <- as.data.frame(rbind(x1,x2))
+colnames(x12) <- c("FOM", "$\\lambda$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\text{ROC}$", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
+```
+
+
+```{r optim-op-point-table4, echo=FALSE}
+kbl(x12, caption = "Summary of optimization results for example FROC dataset. The wAFROC column always displays wAFROC-AUC, even though the optimized quantity may the Youden-index, as in the last four rows.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(2), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+```
+
+
+The dataset is characterized by a relatively large $\lambda$ parameter and yet the results are consistent with the simulation results cited above. The wAFROC-AUC based optimization yields larger figures of merit, as measured by wAFROC-AUC, ROC-AUC or LLF. 
+
+
+
+```{r, echo=FALSE}
+froc <- ggplot2::ggplot()
+z <- seq(-5,zetaOptArr1[1]+5,0.1)
+xFROC <- RSM_xFROC(z, lambdaP)
+yFROC <- RSM_yFROC(z, mu, nuP) 
+df_froc <- data.frame(NLF = xFROC, LLF = yFROC)
+froc <- froc + geom_line(data = df_froc, aes(x = NLF, y = LLF)) +
+  scale_y_continuous(limits = c(0,1)) + scale_x_continuous(limits = c(0,lambdaP))
+for (y in 1:2) {
+  optPt <- data.frame(
+    NLF = nlfOptArr[y], 
+    LLF = llfOptArr[y]) 
+  froc <- froc + 
+    geom_point(data = optPt, 
+               aes(x = NLF, y = LLF),  
+               color = y)
+}
+```
+
+
+
+Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimposed optimal operating points. 
+
+
+```{r optim-op-point-application-froc, fig.cap="FROC plots with superposed operating points. Black dot is using wAFROC optimization and red dot is using Youden-index.", fig.show='hold', echo=FALSE}
+grid.arrange(froc)
+```
+
+
+```{r, echo=FALSE}
+x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
+lambda <- x$lambda
+nu <- x$nu
+wafroc <- PlotRsmOperatingCharacteristics(
+  c(mu,mu),
+  c(lambda,lambda),
+  c(nu,nu),
+  c(zetaOptArr1[1], zetaOptArr1[2]),
+  lesDistr,
+  relWeights,
+  OpChType = "wAFROC",
+  legendPosition = "null"
+)$wAFROCPlot
+```
+
+
+```{r optim-op-point-application-wafroc, fig.cap="The color coding is as in previous figures. The two wAFROC-AUCs are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization).", fig.show='hold', echo=FALSE}
+grid.arrange(wafroc)
+```
+
+
+
+```{r, echo=FALSE}
+x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
+lambda <- x$lambda
+nu <- x$nu
+roc <- PlotRsmOperatingCharacteristics(
+  c(mu,mu),
+  c(lambda,lambda),
+  c(nu,nu),
+  c(zetaOptArr1[1], zetaOptArr1[2]),
+  lesDistr,
+  relWeights,
+  OpChType = "ROC",
+  legendPosition = "null"
+)$ROCPlot
+```
+
+
+```{r optim-op-point-application-roc, fig.cap="The color coding is as in previous figures. The two ROC-AUCs are 0.815 (wAFROC-AUC optimization) and 0.798 (Youden-index optimization).", fig.show='hold', echo=FALSE}
+grid.arrange(roc)
+```
 
 
 ## Discussion {#optim-op-point-discussion}
