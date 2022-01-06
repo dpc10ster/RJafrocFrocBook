@@ -78,7 +78,7 @@ Background on the radiological search model (RSM) is provided in Chapter \@ref(r
 TBA (lay out rationale for following material) In the following sections each of the first three parameters is varied in turn and the corresponding optimal $\zeta_1$ determined by maximizing one of two figures of merit (FOMs), namely, the wAFROC-AUC and the Youden-index. The value maximizing wAFROC-AUC is denoted $\zeta_{1} \left ( 1, \mu, \lambda, \nu \right )$ and that maximizing the Youden-index is denoted $\zeta_{1} \left ( 2, \mu, \lambda, \nu \right )$. 
 
 
-The wAFROC figure of merit is implemented in the `RJafroc` function `UtilAnalyticalAucsRSM`. 
+The wAFROC figure of merit is implemented in the `RJafroc` function `UtilAnalyticalAucsRSM`. It is calculated as described in Eqn. \@ref(eq:rsm-pred-wllf).
 
 The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function `RSM_yROC` and specificity is `(1 - RSM_xROC)`. 
 
@@ -588,45 +588,7 @@ In Table \@ref(tab:optim-op-point-table-vary-lambda) the $\lambda$ parameter con
 The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.   
 
 
-## Appendix 1: RSM predictions {#optim-op-point-rsm-expressions}
-
-The ROC abscissa is calculated using:
-
-\begin{equation}
-\text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
-(\#eq:optim-op-rsm-pred-fpf)
-\end{equation}
-
-
-The ROC ordinate is calculated using:
-
-
-\begin{equation}
-\left.
-\begin{aligned}
-& \text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
-& 1 - \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right ) 
-\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L 
-\end{aligned}
-\right \}
-(\#eq:optim-op-rsm-pred-tpf)
-\end{equation}
-
-
-The wAFROC abscissa is identical to the ROC abscissa.
-
-The wAFROC ordinate is calculated using:
-
-The pmf of the binomial distribution is defined by:
-
-\begin{equation} 
-\text{pmf}_{Bin}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
-(\#eq:optim-op-binomial-pmf)
-\end{equation}
-
-
-
-## Appendix 2: Varying $\nu$ optimizations{#optim-op-point-vary-nu}
+## Appendix 1: Varying $\nu$ optimizations{#optim-op-point-vary-nu}
 
 For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7, 0.8, 0.9$. 
 
@@ -841,7 +803,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 
-## Appendix 3: Varying $\mu$ optimizations{#optim-op-point-vary-mu}
+## Appendix 2: Varying $\mu$ optimizations{#optim-op-point-vary-mu}
 
 For $\lambda = 1$ and $\nu = 0.9$ optimizations were performed for $\mu = 1, 2, 3, 4$. 
 
