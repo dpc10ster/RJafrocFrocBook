@@ -617,6 +617,13 @@ The wAFROC abscissa is identical to the ROC abscissa.
 
 The wAFROC ordinate is calculated using:
 
+The pmf of the binomial distribution is defined by:
+
+\begin{equation} 
+\text{pmf}_{Bin}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
+(\#eq:optim-op-binomial-pmf)
+\end{equation}
+
 
 
 ## Appendix 2: Varying $\nu$ optimizations{#optim-op-point-vary-nu}
