@@ -474,9 +474,9 @@ LL_{ROC} \left ( \mu, \lambda&#39;, \nu&#39;, \overrightarrow{f_L} \right )= \su
 <ul>
 <li>The following example uses the <em>first</em> treatment in <code>dataset04</code>; this is a 5 treatment 4 radiologist FROC dataset <span class="citation">(Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a>)</span> consisting of 200 cases acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using <code>DfBinDataset()</code>. The number of parameters to be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.</li>
 </ul>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="rsm-fitting.html#cb71-1"></a>rocData &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dataset04)</span>
-<span id="cb71-2"><a href="rsm-fitting.html#cb71-2"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">UtilLesionDistr</span>(dataset04)[,<span class="dv">2</span>]</span>
-<span id="cb71-3"><a href="rsm-fitting.html#cb71-3"></a>ret &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(rocData, <span class="dt">lesDistr =</span> lesDistr)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="rsm-fitting.html#cb74-1"></a>rocData &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dataset04)</span>
+<span id="cb74-2"><a href="rsm-fitting.html#cb74-2"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">UtilLesionDistr</span>(dataset04)[,<span class="dv">2</span>]</span>
+<span id="cb74-3"><a href="rsm-fitting.html#cb74-3"></a>ret &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(rocData, <span class="dt">lesDistr =</span> lesDistr)</span></code></pre></div>
 <p>The lesion distribution vector is 0.69, 0.2, 0.11. This means that fraction 0.69 of each diseased case contains one lesion, fraction 0.2 contains two lesions and fraction 0.11 contains three lesions. Since the fitted curve depends on the lesion distribution the fitting function needs to know this distribution.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a></p>
 <p>The fitted parameter values are as follows (all cutoffs excepting <span class="math inline">\(\zeta_1\)</span>, the chi-square statistic - <code>NA</code> for this dataset - and the covariance matrix, are not shown):</p>
 <ul>

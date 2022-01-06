@@ -3046,12 +3046,16 @@ The wAFROC ordinate is calculated using:
     On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.1818182, 0.2727273, 0.09090909, 0.4545455.
   \end{itemize}
 \item
-  It is important to label the lesions so that the correct weights are used. This is done using the \texttt{lesionID} field in the Excel input file. For example, \texttt{lesionID\ =\ 3} for the lowest weighted lesion in this example (the one with relative weight 0.1). Since \(\mathbf{W}\) is independent of cases, the characteristics (which determine clinical outcome) of \texttt{lesionID\ =\ 1} on cases with one lesion or on cases with 4 lesions are assumed to be identical.
-\item
-  \(\text{pmf}_{Bin}\left ( l, L, \nu \right )\) is the probability mass function of the binomial distribution with success probability \(\nu\) and trial size L, defined in Eqn. \eqref{eq:rsm-binomial-pmf}.
-\item
-  The function \texttt{UtilLesionWeightsDistr} calculates the matrix given \texttt{relWeights}. For this example:
+  The function \texttt{UtilLesionWeightsDistr} calculates the matrix given \texttt{relWeights}. For example:
 \end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{relWeights =}\StringTok{  }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{L_max <-}\StringTok{ }\DecValTok{4}
+\KeywordTok{UtilLesionWeightsDistr}\NormalTok{(L_max, }\DataTypeTok{relWeights =}\NormalTok{ relWeights)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 ##           [,1]      [,2]       [,3]      [,4]
@@ -3063,10 +3067,30 @@ The wAFROC ordinate is calculated using:
 
 \begin{itemize}
 \item
-  \(\text{W}_{Ll}\) is the weight of lesion l in cases with L lesions; for the above example \(\text{W}_{42} = 0.2727273\)
+  It is important to label the lesions so that the correct weights are used. This is done using the \texttt{lesionID} field in the Excel input file. For example, \texttt{lesionID\ =\ 3} for the lowest weighted lesion in this example (the one with relative weight 0.1). Since \(\mathbf{W}\) is independent of cases, the characteristics (which determine clinical outcome) of \texttt{lesionID\ =\ 1} on cases with one lesion or on cases with 4 lesions are assumed to be identical.
 \item
-  The wAFROC-AUC is obtained by numerically integrating the wAFROC curve defined by Eqn. \eqref{eq:rsm-pred-fpf} and Eqn. \eqref{eq:rsm-pred-wllf}.
+  \(\text{pmf}_{Bin}\left ( l, L, \nu \right )\) is the probability mass function (pmf) of the binomial distribution with success probability \(\nu\) and trial size \(L\), defined in Eqn. \eqref{eq:rsm-binomial-pmf}. \(\text{W}_{Ll}\) is the weight of lesion \(l\) in cases with \(L\) lesions; for example \(\text{W}_{42} = 0.2727273\).
+\item
+  The wAFROC-AUC is obtained by numerically integrating the wAFROC curve defined by Eqn. \eqref{eq:rsm-pred-fpf} and Eqn. \eqref{eq:rsm-pred-wllf} which is implemented in \texttt{UtilAnalyticalAucsRSM}.
+\item
+  To generate equal weights set \texttt{relWeights\ =\ 0}, as in following code:
 \end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{relWeights =}\StringTok{  }\DecValTok{0}
+\NormalTok{L_max <-}\StringTok{ }\DecValTok{4}
+\KeywordTok{UtilLesionWeightsDistr}\NormalTok{(L_max, }\DataTypeTok{relWeights =}\NormalTok{ relWeights)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           [,1]      [,2]      [,3] [,4]
+## [1,] 1.0000000      -Inf      -Inf -Inf
+## [2,] 0.5000000 0.5000000      -Inf -Inf
+## [3,] 0.3333333 0.3333333 0.3333333 -Inf
+## [4,] 0.2500000 0.2500000 0.2500000 0.25
+\end{verbatim}
 
 \hypertarget{rsm-pred-references}{%
 \section{References}\label{rsm-pred-references}}
