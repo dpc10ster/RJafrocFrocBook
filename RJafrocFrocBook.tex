@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-01-05}
+\date{2022-01-06}
 
 \begin{document}
 \maketitle
@@ -2743,7 +2743,7 @@ Clearly the red curve has higher AUC. The specific values are 0.9386603 for the 
 \caption{\label{fig:rsm-pred-roc-zeta1}ROC curves for two values of \(\zeta_1\): both curves correspond to \(\mu = 2\), \(\nu = 1\) and \(\lambda = 1\). The red curve corresponds to \(\zeta_1 = -10\) and the blue curve to \(\zeta_1 = 1\).}
 \end{figure}
 
-A consequence of the \(\zeta_1\) dependence is that if one uses ROC AUC as the measure of performance, the optimal threshold is \(\zeta_1 = -\infty\). In particular, a CAD algorithm that generates FROC data should show all generated marks to the radiologist. This is not the strategy adopted by any CAD designer that I am aware of. I will address this issue, i.e., what is the optimal value of the reporting threshold, in Chapter \texttt{\textbackslash{}@ref(optim-op-point)}.
+A consequence of the \(\zeta_1\) dependence is that if one uses ROC AUC as the measure of performance, the optimal threshold is \(\zeta_1 = -\infty\). In particular, a CAD algorithm that generates FROC data should show all generated marks to the radiologist, which is clearly incorrect and is not adopted by any CAD designer. Selecting the optimal value of the reporting threshold is addressed in Chapter \ref{optim-op-point}.
 
 \hypertarget{rsm-pred-roc-curves}{%
 \section{Example ROC curves}\label{rsm-pred-roc-curves}}
@@ -3013,6 +3013,60 @@ The next code section displays 3 plots.
 \end{figure}
 
 The solid black line is the plot, using multiple precision arithmetic, of slope of the ROC curve vs.~\(\zeta\). The dashed blue line is the slope using standard precision arithmetic. The horizontal dashed red line is the slope of the straight line connecting the end-point to (1,1), i.e., 0.4935272. Standard precision arithmetic breaks down below \(\zeta \approx -6\) rapidly falling to illegal values \texttt{Nan} (above \(\zeta \approx -5\) there is little difference between standard and multiple precision). The multiple precision curve approaches the slope of the straight line as \(\zeta\) approaches -20. This confirms numerically the continuity of the slope of the ROC at the end-point.
+
+\hypertarget{rsm-pred-wafroc-curve}{%
+\section{Appendix 3: wAFROC curve}\label{rsm-pred-wafroc-curve}}
+
+The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \eqref{eq:rsm-pred-fpf} applies.
+
+The wAFROC ordinate is calculated using:
+
+\begin{equation} 
+\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta_1 \right )\sum_{L=1}^{L_{max}} f_L \sum_{l=1}^{L} \text{W}_{Ll} \, l \, \text{pmf}_{Bin}\left ( l, L, \nu \right )
+\label{eq:rsm-pred-wllf}
+\end{equation}
+
+\begin{itemize}
+\item
+  \(\overrightarrow{f_L}\) is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted \texttt{lesDistr}. For example, the array \texttt{lesDistr\ =\ c(0.1,\ 0.4,\ 0.4,\ 0.1)} defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions.
+\item
+  \(L_{max}\) is the maximum number of lesions per case in the dataset. In the preceding example \(L_{max} = 4\).
+\item
+  \(\mathbf{W}\) is the (lower triangular) square matrix with \(L_{max}\) rows and columns containing the weights, where each row sums to unity. The relative lesion weights are denoted in the code \texttt{relWeights}. For example, \texttt{relWeights\ =\ \ c(0.2,\ 0.3,\ 0.1,\ 0.5)} whose meaning is as follows:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    On cases with one lesion the lesion weight is unity.
+  \item
+    On cases with two lesions the relative weights are 0.2 and 0.3. Since these do not add up to unity, the actual weights are 0.4 and 0.6.
+  \item
+    On cases with three lesions the relative weights are 0.2, 0.3 and 0.1. The actual weights are 1/3, 1/2 and 1/6.
+  \item
+    On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.1818182, 0.2727273, 0.09090909, 0.4545455.
+  \end{itemize}
+\item
+  It is important to label the lesions so that the correct weights are used. This is done using the \texttt{lesionID} field in the Excel input file. For example, \texttt{lesionID\ =\ 3} for the lowest weighted lesion in this example (the one with relative weight 0.1). Since \(\mathbf{W}\) is independent of cases, the characteristics (which determine clinical outcome) of \texttt{lesionID\ =\ 1} on cases with one lesion or on cases with 4 lesions are assumed to be identical.
+\item
+  \(\text{pmf}_{Bin}\left ( l, L, \nu \right )\) is the probability mass function of the binomial distribution with success probability \(\nu\) and trial size L, defined in Eqn. \eqref{eq:rsm-binomial-pmf}.
+\item
+  The function \texttt{UtilLesionWeightsDistr} calculates the matrix given \texttt{relWeights}. For this example:
+\end{itemize}
+
+\begin{verbatim}
+##           [,1]      [,2]       [,3]      [,4]
+## [1,] 1.0000000      -Inf       -Inf      -Inf
+## [2,] 0.4000000 0.6000000       -Inf      -Inf
+## [3,] 0.3333333 0.5000000 0.16666667      -Inf
+## [4,] 0.1818182 0.2727273 0.09090909 0.4545455
+\end{verbatim}
+
+\begin{itemize}
+\item
+  \(\text{W}_{Ll}\) is the weight of lesion l in cases with L lesions; for the above example \(\text{W}_{42} = 0.2727273\)
+\item
+  The wAFROC-AUC is obtained by numerically integrating the wAFROC curve defined by Eqn. \eqref{eq:rsm-pred-fpf} and Eqn. \eqref{eq:rsm-pred-wllf}.
+\end{itemize}
 
 \hypertarget{rsm-pred-references}{%
 \section{References}\label{rsm-pred-references}}
@@ -4854,7 +4908,7 @@ Background on the radiological search model (RSM) is provided in Chapter \ref{rs
 
 TBA (lay out rationale for following material) In the following sections each of the first three parameters is varied in turn and the corresponding optimal \(\zeta_1\) determined by maximizing one of two figures of merit (FOMs), namely, the wAFROC-AUC and the Youden-index. The value maximizing wAFROC-AUC is denoted \(\zeta_{1} \left ( 1, \mu, \lambda, \nu \right )\) and that maximizing the Youden-index is denoted \(\zeta_{1} \left ( 2, \mu, \lambda, \nu \right )\).
 
-The wAFROC figure of merit is implemented in the \texttt{RJafroc} function \texttt{UtilAnalyticalAucsRSM}.
+The wAFROC figure of merit is implemented in the \texttt{RJafroc} function \texttt{UtilAnalyticalAucsRSM}. It is calculated using Eqn. \eqref{eq:rsm-pred-wllf}.
 
 The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function \texttt{RSM\_yROC} and specificity is \texttt{(1\ -\ RSM\_xROC)}.
 
@@ -5071,35 +5125,8 @@ In Table \ref{tab:optim-op-point-table-vary-lambda} the \(\lambda\) parameter co
 
 The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.
 
-\hypertarget{optim-op-point-rsm-expressions}{%
-\section{Appendix 1: RSM predictions}\label{optim-op-point-rsm-expressions}}
-
-The ROC abscissa is calculated using:
-
-\begin{equation}
-\text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
-\label{eq:optim-op-rsm-pred-fpf}
-\end{equation}
-
-The ROC ordinate is calculated using:
-
-\begin{equation}
-\left.
-\begin{aligned}
-& \text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
-& 1 - \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right ) 
-\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L 
-\end{aligned}
-\right \}
-\label{eq:optim-op-rsm-pred-tpf}
-\end{equation}
-
-The wAFROC abscissa is identical to the ROC abscissa.
-
-The wAFROC ordinate is calculated using:
-
 \hypertarget{optim-op-point-vary-nu}{%
-\section{\texorpdfstring{Appendix 2: Varying \(\nu\) optimizations}{Appendix 2: Varying \textbackslash nu optimizations}}\label{optim-op-point-vary-nu}}
+\section{\texorpdfstring{Appendix 1: Varying \(\nu\) optimizations}{Appendix 1: Varying \textbackslash nu optimizations}}\label{optim-op-point-vary-nu}}
 
 For \(\mu = 2\) and \(\lambda = 1\) optimizations were performed for \(\nu = 0.6, 0.7, 0.8, 0.9\).
 
@@ -5172,7 +5199,7 @@ TBA ROC curves for wAFROC-AUC and Youden-index optimizations: both curves corres
 The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-nu}. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 \hypertarget{optim-op-point-vary-mu}{%
-\section{\texorpdfstring{Appendix 3: Varying \(\mu\) optimizations}{Appendix 3: Varying \textbackslash mu optimizations}}\label{optim-op-point-vary-mu}}
+\section{\texorpdfstring{Appendix 2: Varying \(\mu\) optimizations}{Appendix 2: Varying \textbackslash mu optimizations}}\label{optim-op-point-vary-mu}}
 
 For \(\lambda = 1\) and \(\nu = 0.9\) optimizations were performed for \(\mu = 1, 2, 3, 4\).
 

@@ -95,6 +95,7 @@ eq:rsm-pred-slope-eq5
 eq:rsm-pred-slope-eq6
 fig:rsm-pred-roc-plot
 fig:rsm-pred-plots1
+eq:rsm-pred-wllf
 eq:rsm-sc-FPF-TPF-max
 fig:rsm-sc-performance-from-roc-curve
 eq:rsm-sc-perp-distance
@@ -164,8 +165,6 @@ tab:optim-op-point-table4
 fig:optim-op-point-application-froc
 fig:optim-op-point-application-wafroc
 fig:optim-op-point-application-roc
-eq:optim-op-rsm-pred-fpf
-eq:optim-op-rsm-pred-tpf
 tab:optim-op-point-table-vary-nu
 fig:optim-op-point-vary-nu-froc
 fig:optim-op-point-vary-nu-wafroc
@@ -288,6 +287,7 @@ rsm-pred-discussion-summary
 the-wagner-review
 rsm-pred-appendix1
 rsm-pred-appendix2
+rsm-pred-wafroc-curve
 rsm-pred-references
 rsm-sc
 rsm-sc-how-much-finished
@@ -360,7 +360,6 @@ optim-op-point-vary-lambda
 optim-op-point-how-to-use-method
 optim-op-point-application
 optim-op-point-discussion
-optim-op-point-rsm-expressions
 optim-op-point-vary-nu
 optim-op-point-vary-mu
 optim-op-point-references

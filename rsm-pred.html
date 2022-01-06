@@ -24,7 +24,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-01-05" />
+<meta name="date" content="2022-01-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -285,7 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.13" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-appendix1"><i class="fa fa-check"></i><b>5.13</b> Appendix 1: Proof of continuity of slope at the end-point</a></li>
 <li class="chapter" data-level="5.14" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-appendix2"><i class="fa fa-check"></i><b>5.14</b> Appendix 2: Numerical illustration of continuity</a></li>
-<li class="chapter" data-level="5.15" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-references"><i class="fa fa-check"></i><b>5.15</b> References</a></li>
+<li class="chapter" data-level="5.15" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-wafroc-curve"><i class="fa fa-check"></i><b>5.15</b> Appendix 3: wAFROC curve</a></li>
+<li class="chapter" data-level="5.16" data-path="rsm-pred.html"><a href="rsm-pred.html#rsm-pred-references"><i class="fa fa-check"></i><b>5.16</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="rsm-sc.html"><a href="rsm-sc.html"><i class="fa fa-check"></i><b>6</b> Search and classification performances</a><ul>
 <li class="chapter" data-level="6.1" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> TBA How much finished</a></li>
@@ -367,10 +368,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>10.5</b> Using the method</a></li>
 <li class="chapter" data-level="10.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>10.6</b> A CAD application</a></li>
 <li class="chapter" data-level="10.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>10.7</b> Discussion</a></li>
-<li class="chapter" data-level="10.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-rsm-expressions"><i class="fa fa-check"></i><b>10.8</b> Appendix 1: RSM predictions</a></li>
-<li class="chapter" data-level="10.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>10.9</b> Appendix 2: Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
-<li class="chapter" data-level="10.10" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>10.10</b> Appendix 3: Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
-<li class="chapter" data-level="10.11" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-references"><i class="fa fa-check"></i><b>10.11</b> References</a></li>
+<li class="chapter" data-level="10.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>10.8</b> Appendix 1: Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
+<li class="chapter" data-level="10.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>10.9</b> Appendix 2: Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
+<li class="chapter" data-level="10.10" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-references"><i class="fa fa-check"></i><b>10.10</b> References</a></li>
 </ul></li>
 <li class="part"><span><b>DATASETS</b></span></li>
 <li class="chapter" data-level="11" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>11</b> Datasets</a><ul>
@@ -718,7 +718,7 @@ FIGURE 5.3: Help page for <code>RJafroc</code> function <code>PlotRsmOperatingCh
 FIGURE 5.4: ROC curves for two values of <span class="math inline">\(\zeta_1\)</span>: both curves correspond to <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\nu = 1\)</span> and <span class="math inline">\(\lambda = 1\)</span>. The red curve corresponds to <span class="math inline">\(\zeta_1 = -10\)</span> and the blue curve to <span class="math inline">\(\zeta_1 = 1\)</span>.
 </p>
 </div>
-<p>A consequence of the <span class="math inline">\(\zeta_1\)</span> dependence is that if one uses ROC AUC as the measure of performance, the optimal threshold is <span class="math inline">\(\zeta_1 = -\infty\)</span>. In particular, a CAD algorithm that generates FROC data should show all generated marks to the radiologist. This is not the strategy adopted by any CAD designer that I am aware of. I will address this issue, i.e., what is the optimal value of the reporting threshold, in Chapter <code>\@ref(optim-op-point)</code>.</p>
+<p>A consequence of the <span class="math inline">\(\zeta_1\)</span> dependence is that if one uses ROC AUC as the measure of performance, the optimal threshold is <span class="math inline">\(\zeta_1 = -\infty\)</span>. In particular, a CAD algorithm that generates FROC data should show all generated marks to the radiologist, which is clearly incorrect and is not adopted by any CAD designer. Selecting the optimal value of the reporting threshold is addressed in Chapter <a href="optim-op-point.html#optim-op-point">10</a>.</p>
 </div>
 <div id="rsm-pred-roc-curves" class="section level2">
 <h2><span class="header-section-number">5.10</span> Example ROC curves</h2>
@@ -914,8 +914,40 @@ FIGURE 5.8: Horizontal dashed red line: the value of <code>mStLine</code>, the s
 </div>
 <p>The solid black line is the plot, using multiple precision arithmetic, of slope of the ROC curve vs. <span class="math inline">\(\zeta\)</span>. The dashed blue line is the slope using standard precision arithmetic. The horizontal dashed red line is the slope of the straight line connecting the end-point to (1,1), i.e., 0.4935272. Standard precision arithmetic breaks down below <span class="math inline">\(\zeta \approx -6\)</span> rapidly falling to illegal values <code>Nan</code> (above <span class="math inline">\(\zeta \approx -5\)</span> there is little difference between standard and multiple precision). The multiple precision curve approaches the slope of the straight line as <span class="math inline">\(\zeta\)</span> approaches -20. This confirms numerically the continuity of the slope of the ROC at the end-point.</p>
 </div>
+<div id="rsm-pred-wafroc-curve" class="section level2">
+<h2><span class="header-section-number">5.15</span> Appendix 3: wAFROC curve</h2>
+<p>The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. <a href="rsm-pred.html#eq:rsm-pred-fpf">(5.10)</a> applies.</p>
+<p>The wAFROC ordinate is calculated using:</p>
+<p><span class="math display" id="eq:rsm-pred-wllf">\[\begin{equation} 
+\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta_1 \right )\sum_{L=1}^{L_{max}} f_L \sum_{l=1}^{L} \text{W}_{Ll} \, l \, \text{pmf}_{Bin}\left ( l, L, \nu \right )
+\tag{5.26}
+\end{equation}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\overrightarrow{f_L}\)</span> is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted <code>lesDistr</code>. For example, the array <code>lesDistr = c(0.1, 0.4, 0.4, 0.1)</code> defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions.</p></li>
+<li><p><span class="math inline">\(L_{max}\)</span> is the maximum number of lesions per case in the dataset. In the preceding example <span class="math inline">\(L_{max} = 4\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathbf{W}\)</span> is the (lower triangular) square matrix with <span class="math inline">\(L_{max}\)</span> rows and columns containing the weights, where each row sums to unity. The relative lesion weights are denoted in the code <code>relWeights</code>. For example, <code>relWeights =  c(0.2, 0.3, 0.1, 0.5)</code> whose meaning is as follows:</p>
+<ul>
+<li>On cases with one lesion the lesion weight is unity.</li>
+<li>On cases with two lesions the relative weights are 0.2 and 0.3. Since these do not add up to unity, the actual weights are 0.4 and 0.6.</li>
+<li>On cases with three lesions the relative weights are 0.2, 0.3 and 0.1. The actual weights are 1/3, 1/2 and 1/6.</li>
+<li>On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.1818182, 0.2727273, 0.09090909, 0.4545455.</li>
+</ul></li>
+<li><p>It is important to label the lesions so that the correct weights are used. This is done using the <code>lesionID</code> field in the Excel input file. For example, <code>lesionID = 3</code> for the lowest weighted lesion in this example (the one with relative weight 0.1). Since <span class="math inline">\(\mathbf{W}\)</span> is independent of cases, the characteristics (which determine clinical outcome) of <code>lesionID = 1</code> on cases with one lesion or on cases with 4 lesions are assumed to be identical.</p></li>
+<li><p><span class="math inline">\(\text{pmf}_{Bin}\left ( l, L, \nu \right )\)</span> is the probability mass function of the binomial distribution with success probability <span class="math inline">\(\nu\)</span> and trial size L, defined in Eqn. <a href="rsm.html#eq:rsm-binomial-pmf">(4.4)</a>.</p></li>
+<li><p>The function <code>UtilLesionWeightsDistr</code> calculates the matrix given <code>relWeights</code>. For this example:</p></li>
+</ul>
+<pre><code>##           [,1]      [,2]       [,3]      [,4]
+## [1,] 1.0000000      -Inf       -Inf      -Inf
+## [2,] 0.4000000 0.6000000       -Inf      -Inf
+## [3,] 0.3333333 0.5000000 0.16666667      -Inf
+## [4,] 0.1818182 0.2727273 0.09090909 0.4545455</code></pre>
+<ul>
+<li><p><span class="math inline">\(\text{W}_{Ll}\)</span> is the weight of lesion l in cases with L lesions; for the above example <span class="math inline">\(\text{W}_{42} = 0.2727273\)</span></p></li>
+<li><p>The wAFROC-AUC is obtained by numerically integrating the wAFROC curve defined by Eqn. <a href="rsm-pred.html#eq:rsm-pred-fpf">(5.10)</a> and Eqn. <a href="rsm-pred.html#eq:rsm-pred-wllf">(5.26)</a>.</p></li>
+</ul>
+</div>
 <div id="rsm-pred-references" class="section level2">
-<h2><span class="header-section-number">5.15</span> References</h2>
+<h2><span class="header-section-number">5.16</span> References</h2>
 <ol style="list-style-type: decimal">
 <li>Chakraborty DP. Computer analysis of mammography phantom images (CAMPI): An application to the measurement of microcalcification image quality of directly acquired digital images. Medical Physics. 1997;24(8):1269-1277.</li>
 <li>Chakraborty DP, Eckert MP. Quantitative versus subjective evaluation of mammography accreditation phantom images. Medical Physics. 1995;22(2):133-143.</li>

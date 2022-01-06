@@ -466,7 +466,7 @@ Clearly the red curve has higher AUC. The specific values are 0.9386603 for the 
 
 
 
-A consequence of the $\zeta_1$ dependence is that if one uses ROC AUC as the measure of performance, the optimal threshold is $\zeta_1 = -\infty$. In particular, a CAD algorithm that generates FROC data should show all generated marks to the radiologist. This is not the strategy adopted by any CAD designer that I am aware of. I will address this issue, i.e., what is the optimal value of the reporting threshold, in Chapter `\@ref(optim-op-point)`.
+A consequence of the $\zeta_1$ dependence is that if one uses ROC AUC as the measure of performance, the optimal threshold is $\zeta_1 = -\infty$. In particular, a CAD algorithm that generates FROC data should show all generated marks to the radiologist, which is clearly incorrect and is not adopted by any CAD designer. Selecting the optimal value of the reporting threshold is addressed in Chapter \@ref(optim-op-point).
 
 
 
@@ -761,6 +761,52 @@ suppressWarnings(print(plots))
 
 
 The solid black line is the plot, using multiple precision arithmetic, of slope of the ROC curve vs. $\zeta$. The dashed blue line is the slope using standard precision arithmetic. The horizontal dashed red line is the slope of the straight line connecting the end-point to (1,1), i.e., 0.4935272. Standard precision arithmetic breaks down below $\zeta \approx -6$ rapidly falling to illegal values `Nan` (above $\zeta \approx -5$ there is little difference between standard and multiple precision). The multiple precision curve approaches the slope of the straight line as $\zeta$ approaches -20. This confirms numerically the continuity of the slope of the ROC at the end-point.  
+
+## Appendix 3: wAFROC curve{#rsm-pred-wafroc-curve}
+
+The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pred-fpf) applies.
+
+
+The wAFROC ordinate is calculated using:
+
+
+\begin{equation} 
+\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta_1 \right )\sum_{L=1}^{L_{max}} f_L \sum_{l=1}^{L} \text{W}_{Ll} \, l \, \text{pmf}_{Bin}\left ( l, L, \nu \right )
+(\#eq:rsm-pred-wllf)
+\end{equation}
+
+
+* $\overrightarrow{f_L}$ is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted `lesDistr`. For example, the array `lesDistr = c(0.1, 0.4, 0.4, 0.1)`  defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions. 
+
+* $L_{max}$ is the maximum number of lesions per case in the dataset. In the preceding example $L_{max} = 4$.
+
+* $\mathbf{W}$ is the (lower triangular) square matrix with $L_{max}$ rows and columns containing the weights, where each row sums to unity. The relative lesion weights are denoted in the code `relWeights`. For example, `relWeights =  c(0.2, 0.3, 0.1, 0.5)` whose meaning is as follows:
+
+    + On cases with one lesion the lesion weight is unity.
+    + On cases with two lesions the relative weights are 0.2 and 0.3. Since these do not add up to unity, the actual weights are 0.4 and 0.6. 
+    + On cases with three lesions the relative weights are 0.2, 0.3 and 0.1. The actual weights are 1/3, 1/2 and 1/6.
+    + On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.1818182, 0.2727273, 0.09090909, 0.4545455.
+    
+* It is important to label the lesions so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the lowest weighted lesion in this example (the one with relative weight 0.1). Since $\mathbf{W}$ is independent of cases, the characteristics (which determine clinical outcome) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. 
+
+* $\text{pmf}_{Bin}\left ( l, L, \nu \right )$ is the probability mass function of the binomial distribution with success probability $\nu$ and trial size L, defined in Eqn. \@ref(eq:rsm-binomial-pmf). 
+
+* The function `UtilLesionWeightsDistr` calculates the matrix given `relWeights`. For this example:
+
+
+```
+##           [,1]      [,2]       [,3]      [,4]
+## [1,] 1.0000000      -Inf       -Inf      -Inf
+## [2,] 0.4000000 0.6000000       -Inf      -Inf
+## [3,] 0.3333333 0.5000000 0.16666667      -Inf
+## [4,] 0.1818182 0.2727273 0.09090909 0.4545455
+```
+
+* $\text{W}_{Ll}$ is the weight of lesion l in cases with L lesions; for the above example $\text{W}_{42} = 0.2727273$
+
+* The wAFROC-AUC is obtained by numerically integrating the wAFROC curve defined by Eqn. \@ref(eq:rsm-pred-fpf) and Eqn. \@ref(eq:rsm-pred-wllf).
+
+
 
 ## References {#rsm-pred-references}
 1.	Chakraborty DP. Computer analysis of mammography phantom images (CAMPI): An application to the measurement of microcalcification image quality of directly acquired digital images. Medical Physics. 1997;24(8):1269-1277.
