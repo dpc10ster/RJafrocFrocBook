@@ -810,7 +810,7 @@ UtilLesionWeightsDistr(L_max, relWeights = relWeights)[,-1]
 ```
 
 
-* It is important to label the lesions so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the lowest weighted lesion in this example (the one with relative weight 0.1). Since $\mathbf{W}$ is independent of cases, the characteristics (which determine clinical outcome) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. 
+* It is important to label the lesions so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the one with relative weight 0.1. Since $\mathbf{W}$ is independent of cases, the lesion characteristics (which determine clinical outcome) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix $\mathbf{W}$. 
 
 
 * $\text{pmf}_{Bin}\left ( l, L, \nu \right )$ is the probability mass function (pmf) of the binomial distribution with success probability $\nu$ and trial size $L$, defined in Eqn. \@ref(eq:rsm-binomial-pmf). $\text{W}_{Ll}$ is the weight of lesion $l$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.2727273$. 
