@@ -357,6 +357,7 @@ optim-op-point-how-much-finished
 optim-op-point-intro
 optim-op-point-methods
 optim-op-point-vary-lambda
+optim-op-point-vary-nu-mu
 optim-op-point-how-to-use-method
 optim-op-point-application
 optim-op-point-discussion
