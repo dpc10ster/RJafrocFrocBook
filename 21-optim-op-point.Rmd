@@ -1180,4 +1180,7 @@ kbl(x12, caption = "Summary of optimization results for $\\mu = 2$, $\\nu = 0.9$
 * Mean ROC-AUC, wAFROC optimization = `r simplePrint(mean(rocArr[1,,,]))`.
 * Mean ROC-AUC, Youden optimization = `r simplePrint(mean(rocArr[2,,,]))`.
 
+* Mean (Se, Sp) wAFROC optimization = (`r simplePrint(mean(fpfOptArr[1,,,]))`, `r simplePrint(1-mean(tpfOptArr[1,,,]))`).
+* Mean (Se, Sp) Youden optimization = (`r simplePrint(mean(fpfOptArr[2,,,]))`, `r simplePrint(1-mean(tpfOptArr[2,,,]))`).
+
 ## References {#optim-op-point-references}
