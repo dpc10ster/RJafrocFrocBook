@@ -1066,20 +1066,20 @@ relWeights <- c(0.5, 0.5)
 
 
 ```{r cache = FALSE, echo=FALSE}
-wAfrocArr <- array(dim = c(2,length(muArr), length(nuPArr), length(lambdaPArr)))
-zetaOptArr <- array(dim = c(2,length(muArr), length(nuPArr), length(lambdaPArr)))
-rocArr <- array(dim = c(2,length(muArr), length(nuPArr), length(lambdaPArr)))
-fpfOptArr <- array(dim = c(2,length(muArr), length(nuPArr), length(lambdaPArr)))
-tpfOptArr <- array(dim = c(2,length(muArr), length(nuPArr), length(lambdaPArr)))
-nlfOptArr <- array(dim = c(2,length(muArr), length(nuPArr), length(lambdaPArr)))
-llfOptArr <- array(dim = c(2,length(muArr), length(nuPArr), length(lambdaPArr)))
+wAfrocArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
+zetaOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
+rocArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
+fpfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
+tpfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
+nlfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
+llfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
 for (i1 in 1:length(muArr)) {
-  for (i2 in 1:length(nuPArr)) {
-    for (i3 in 1:length(lambdaPArr)) {
+  for (i2 in 1:length(lambdaPArr)) {
+    for (i3 in 1:length(nuPArr)) {
+      mu <- muArr[i1]
+      lambdaP <- lambdaPArr[i2]
+      nuP <- nuPArr[i3]
       for (y in 1:2) {
-        mu <- muArr[i1]
-        nuP <- nuPArr[i2]
-        lambdaP <- lambdaPArr[i3]
         if (y == 1) {
           x <- optimize(wAFROC, 
                         interval = c(-5,5), 
@@ -1161,16 +1161,15 @@ for (i1 in 1:length(muArr)) {
 
 
 ```{r optim-op-point-table-vary-all-contents, echo=FALSE}
-x1 <- cbind(FOM = rep("wAFROC",64), mu = muArr, lambda = lambdaPArr, nu = nuPArr, AUC = simplePrint(rocArr[1,,,]), Sp = simplePrint(1-fpfOptArr[1,,,]), Se = simplePrint(tpfOptArr[1,,,]))
-x2 <- cbind(rep("Youden",64), mu = muArr, lambda = lambdaPArr, nu = nuPArr, AUC = simplePrint(rocArr[2,,,]), Sp = simplePrint(1-fpfOptArr[2,,,]), Se = simplePrint(tpfOptArr[2,,,]))
-x12 <- as.data.frame(rbind(x1,x2))
-colnames(x12) <- c("FOM", "$\\mu$", "$\\lambda$", "$\\nu$", "ROC-AUC", "Sp", "Se")
+x1 <- expand.grid(FOM = c("wAFROC", "Youden"), mu = muArr, lambda = lambdaPArr, nu = nuPArr)
+x1 <- cbind(x1, wAFROC = simplePrint(wAfrocArr), AUC = simplePrint(rocArr), Sp = simplePrint(1-fpfOptArr), Se = simplePrint(tpfOptArr))
+colnames(x1) <- c("FOM", "$\\mu$", "$\\lambda$", "$\\nu$", "wAFROC", "ROC", "Sp", "Se")
 ```
 
 
 
 ```{r optim-op-point-table-vary-all, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for $\\mu = 2$, $\\nu = 0.9$ and 4 values of $\\lambda$. FOM = figure of merit, Sp = specificity and Se = sensitivity", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x1, caption = "Summary of optimizations for 128 all combinations of 4-levels of $\\mu$, 4-levels of $\\lambda$ and 4-levels of $\\nu$. FOM = figure of merit, Sp = specificity and Se = sensitivity", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
@@ -1180,7 +1179,10 @@ kbl(x12, caption = "Summary of optimization results for $\\mu = 2$, $\\nu = 0.9$
 * Mean ROC-AUC, wAFROC optimization = `r simplePrint(mean(rocArr[1,,,]))`.
 * Mean ROC-AUC, Youden optimization = `r simplePrint(mean(rocArr[2,,,]))`.
 
-* Mean (Se, Sp) wAFROC optimization = (`r simplePrint(mean(fpfOptArr[1,,,]))`, `r simplePrint(1-mean(tpfOptArr[1,,,]))`).
-* Mean (Se, Sp) Youden optimization = (`r simplePrint(mean(fpfOptArr[2,,,]))`, `r simplePrint(1-mean(tpfOptArr[2,,,]))`).
+* Mean (Sp, Se) wAFROC optimization = (`r simplePrint(1-mean(fpfOptArr[1,,,]))`, `r simplePrint(mean(tpfOptArr[1,,,]))`).
+* Mean (Sp, Se) Youden optimization = (`r simplePrint(1-mean(fpfOptArr[2,,,]))`, `r simplePrint(mean(tpfOptArr[2,,,]))`).
+
+* Mean (nlf, llf) wAFROC optimization = (`r simplePrint(mean(nlfOptArr[1,,,]))`, `r simplePrint(mean(llfOptArr[1,,,]))`).
+* Mean (nlf, llf) Youden optimization = (`r simplePrint(mean(nlfOptArr[2,,,]))`, `r simplePrint(mean(llfOptArr[2,,,]))`).
 
 ## References {#optim-op-point-references}
