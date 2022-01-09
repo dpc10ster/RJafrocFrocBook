@@ -1962,7 +1962,4 @@ relWeights <- c(0.5, 0.5)
 * Mean ROC-AUC, wAFROC optimization = 0.807.
 * Mean ROC-AUC, Youden optimization = 0.811.
 
-* Mean (Se, Sp) wAFROC optimization = (0.180, 0.300).
-* Mean (Se, Sp) Youden optimization = (0.165, 0.261).
-
 ## References {#optim-op-point-references}
