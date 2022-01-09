@@ -1061,6 +1061,12 @@ nuPArr <- c(0.6,0.7,0.8,0.9)
 lambdaPArr <- c(1, 2, 5, 10)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
+
+muArr <- c(2,3)
+nuPArr <- c(0.8,0.9)
+lambdaPArr <- c(1, 2)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
 ```
 
 
@@ -1173,11 +1179,8 @@ kbl(x1, caption = "Summary of optimizations for 128 all combinations of 4-levels
 ```
 
 
-* Mean wAFROC-AUC, wAFROC optimization = `r simplePrint(mean(wAfrocArr[1,,,]))`.
-* Mean wAFROC-AUC, Youden optimization = `r simplePrint(mean(wAfrocArr[2,,,]))`.
-
-* Mean ROC-AUC, wAFROC optimization = `r simplePrint(mean(rocArr[1,,,]))`.
-* Mean ROC-AUC, Youden optimization = `r simplePrint(mean(rocArr[2,,,]))`.
+* Mean wAFROC-AUC, (wAFROC, Youden) optimization = (`r simplePrint(mean(wAfrocArr[1,,,]))`, `r simplePrint(mean(wAfrocArr[2,,,]))`).
+* Mean ROC-AUC, (wAFROC, Youden) optimization = (`r simplePrint(mean(rocArr[1,,,]))`, `r simplePrint(mean(rocArr[2,,,]))`).
 
 * Mean (Sp, Se) wAFROC optimization = (`r simplePrint(1-mean(fpfOptArr[1,,,]))`, `r simplePrint(mean(tpfOptArr[1,,,]))`).
 * Mean (Sp, Se) Youden optimization = (`r simplePrint(1-mean(fpfOptArr[2,,,]))`, `r simplePrint(mean(tpfOptArr[2,,,]))`).
