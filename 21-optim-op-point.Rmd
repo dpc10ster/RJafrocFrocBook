@@ -1056,15 +1056,15 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 ```{r}
-muArr <- c(1,2,3,4)
-nuPArr <- c(0.6,0.7,0.8,0.9)
-lambdaPArr <- c(1, 2, 5, 10)
-lesDistr <- c(0.5, 0.5)
-relWeights <- c(0.5, 0.5)
+# muArr <- c(1,2,3,4)
+# nuPArr <- c(0.6,0.7,0.8,0.9)
+# lambdaPArr <- c(1, 2, 5, 10)
+# lesDistr <- c(0.5, 0.5)
+# relWeights <- c(0.5, 0.5)
 
-muArr <- c(2,3)
-nuPArr <- c(0.8,0.9)
-lambdaPArr <- c(1, 2)
+muArr <- c(1,5)
+nuPArr <- c(0.1,0.999)
+lambdaPArr <- c(1, 10)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -1175,7 +1175,7 @@ colnames(x1) <- c("FOM", "$\\mu$", "$\\lambda$", "$\\nu$", "wAFROC", "ROC", "Sp"
 
 
 ```{r optim-op-point-table-vary-all, echo=FALSE}
-kbl(x1, caption = "Summary of optimizations for 128 all combinations of 4-levels of $\\mu$, 4-levels of $\\lambda$ and 4-levels of $\\nu$. FOM = figure of merit, Sp = specificity and Se = sensitivity", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x1, caption = "Summary of optimizations for combinations of 2-levels of $\\mu$, 2-levels of $\\lambda$ and 2-levels of $\\nu$. FOM = figure of merit, Sp = specificity and Se = sensitivity", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
@@ -1187,5 +1187,134 @@ kbl(x1, caption = "Summary of optimizations for 128 all combinations of 4-levels
 
 * Mean (nlf, llf) wAFROC optimization = (`r simplePrint(mean(nlfOptArr[1,,,]))`, `r simplePrint(mean(llfOptArr[1,,,]))`).
 * Mean (nlf, llf) Youden optimization = (`r simplePrint(mean(nlfOptArr[2,,,]))`, `r simplePrint(mean(llfOptArr[2,,,]))`).
+
+
+
+```{r, echo=FALSE}
+plotArr <- array(list(), dim = 8)
+i <- 1
+for (i1 in 1:length(muArr)) {
+  for (i2 in 1:length(lambdaPArr)) {
+    for (i3 in 1:length(nuPArr)) {
+      mu <- muArr[i1]
+      lambdaP <- lambdaPArr[i2]
+      nuP <- nuPArr[i3]
+      z <- seq(-5,mu+5,0.1)
+      xFROC <- RSM_xFROC(z, lambdaP)
+      yFROC <- RSM_yFROC(z, mu, nuP)
+      df_froc <- data.frame(
+        NLF = xFROC, 
+        LLF = yFROC)
+      plotArr[[i]] <- ggplot2::ggplot(
+        df_froc, 
+        aes(x = NLF, y = LLF)) + 
+        geom_line() +
+        scale_x_continuous(limits = c(0,lambdaP)) + 
+        scale_y_continuous(limits = c(0,1)) +
+        ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
+      for (y in 1:2) {
+        optPt <- data.frame(
+          NLF = nlfOptArr[y,i1,i2,i3], 
+          LLF = llfOptArr[y,i1,i2,i3])
+        plotArr[[i]] <- plotArr[[i]] + 
+          geom_point(data = optPt, color = y) 
+      }
+      i <- i + 1
+    }
+  }
+}
+```
+
+
+
+
+```{r optim-op-point-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
+```
+
+
+
+```{r, echo=FALSE}
+plotArr <- array(list(), dim = 8)
+i <- 1
+for (i1 in 1:length(muArr)) {
+  for (i2 in 1:length(lambdaPArr)) {
+    for (i3 in 1:length(nuPArr)) {
+      mu <- muArr[i1]
+      lambdaP <- lambdaPArr[i2]
+      nuP <- nuPArr[i3]
+      x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
+      lambda <- x$lambda
+      nu <- x$nu
+      plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+        c(mu,mu),
+        c(lambda,lambda),
+        c(nu,nu),
+        c(zetaOptArr[1,i1,i2,i3], zetaOptArr[2,i1,i2,i3]),
+        lesDistr,
+        relWeights,
+        OpChType = "wAFROC",
+        legendPosition = "null"
+      )$wAFROCPlot +
+        ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
+      i <- i + 1
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+```{r optim-op-point-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
+```
+
+
+
+
+
+```{r, echo=FALSE}
+plotArr <- array(list(), dim = 8)
+i <- 1
+for (i1 in 1:length(muArr)) {
+  for (i2 in 1:length(lambdaPArr)) {
+    for (i3 in 1:length(nuPArr)) {
+      mu <- muArr[i1]
+      lambdaP <- lambdaPArr[i2]
+      nuP <- nuPArr[i3]
+      x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
+      lambda <- x$lambda
+      nu <- x$nu
+      plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+        c(mu,mu),
+        c(lambda,lambda),
+        c(nu,nu),
+        c(zetaOptArr[1,i1,i2,i3], zetaOptArr[2,i1,i2,i3]),
+        lesDistr,
+        relWeights,
+        OpChType = "ROC",
+        legendPosition = "null"
+      )$ROCPlot +
+        ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
+      i <- i + 1
+    }
+  }
+}
+```
+
+
+
+
+
+```{r optim-op-point-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
+```
 
 ## References {#optim-op-point-references}
