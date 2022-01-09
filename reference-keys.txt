@@ -173,6 +173,7 @@ tab:optim-op-point-table-vary-mu
 fig:optim-op-point-vary-mu-froc
 fig:optim-op-point-vary-mu-wafroc
 fig:optim-op-point-vary-mu-roc
+tab:optim-op-point-table-vary-all
 fig:datasets-datasets
 formatting
 tables
@@ -363,6 +364,7 @@ optim-op-point-application
 optim-op-point-discussion
 optim-op-point-vary-nu
 optim-op-point-vary-mu
+optim-op-point-on-roc
 optim-op-point-references
 datasets
 datasets-datasets
