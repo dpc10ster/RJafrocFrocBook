@@ -273,6 +273,56 @@ TPF <- function (zeta, mu, lambdaP, nuP, lesDistr){
 ```
 
 
+Two first principle calculations are shown next and compared to the values yielded by the function `RSM_yROC`:
+
+
+```r
+zeta_1 <- 1
+mu <- 2
+lambdaP <- 1
+nuP <- 0.9
+lesDistr <- c(0.5,0.5)
+
+1-exp(-lambdaP*pnorm(-zeta_1))*(lesDistr[1]*(1-nuP*pnorm(mu-zeta_1))+lesDistr[2]*(1-nuP*pnorm(mu-zeta_1))^2)
+```
+
+```
+## [1] 0.8712655
+```
+
+```r
+RSM_yROC(zeta_1,mu,lambdaP,nuP, lesDistr = lesDistr)
+```
+
+```
+## [1] 0.8712655
+```
+
+```r
+cat("\n")
+```
+
+```r
+zeta_1 <- 0
+mu <- 1
+lambdaP <- 2
+nuP <- 0.5
+lesDistr <- c(0.1,0.9)
+1-exp(-lambdaP*pnorm(-zeta_1))*(lesDistr[1]*(1-nuP*pnorm(mu-zeta_1))+lesDistr[2]*(1-nuP*pnorm(mu-zeta_1))^2)
+```
+
+```
+## [1] 0.8675666
+```
+
+```r
+RSM_yROC(zeta_1,mu,lambdaP,nuP, lesDistr = lesDistr)
+```
+
+```
+## [1] 0.8675666
+```
+
 
 ## Proper ROC curve {#rsm-pred-roc-curve-proper}
 

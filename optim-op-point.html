@@ -433,11 +433,11 @@ Latent marks = perceived suspicious regions that are not necessarily marked.</p>
 <div id="optim-op-point-vary-lambda" class="section level2">
 <h2><span class="header-section-number">10.4</span> Varying <span class="math inline">\(\lambda\)</span> optimizations</h2>
 <p>In the following <span class="math inline">\(f\)</span> is used as an abbreviation, with <span class="math inline">\(f = 1\)</span> denoting the wAFROC-AUC figure of merit and <span class="math inline">\(f = 2\)</span> denoting the Youden-index.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="optim-op-point.html#cb92-1"></a>mu &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb92-2"><a href="optim-op-point.html#cb92-2"></a>nuP &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
-<span id="cb92-3"><a href="optim-op-point.html#cb92-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
-<span id="cb92-4"><a href="optim-op-point.html#cb92-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb92-5"><a href="optim-op-point.html#cb92-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="optim-op-point.html#cb101-1"></a>mu &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb101-2"><a href="optim-op-point.html#cb101-2"></a>nuP &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
+<span id="cb101-3"><a href="optim-op-point.html#cb101-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb101-4"><a href="optim-op-point.html#cb101-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb101-5"><a href="optim-op-point.html#cb101-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <p>For <span class="math inline">\(\mu = 2\)</span> and <span class="math inline">\(\nu = 0.9\)</span> both wAFROC-AUC and Youden-index optimizations were performed for <span class="math inline">\(\lambda = 1, 2, 5, 10\)</span>. It is assumed that half of the diseased cases contain one lesion, the rest contain two lesions, and the lesions are assigned equal weights (i.e., equal clinical importance).</p>
 <p>The following quantities were calculated:</p>
 <ol style="list-style-type: decimal">
@@ -699,20 +699,20 @@ FIGURE 10.4: In the region above the dot the proper curve is above the dotted li
 <div id="optim-op-point-application" class="section level2">
 <h2><span class="header-section-number">10.7</span> A CAD application</h2>
 <p>The standalone CAD LROC dataset described in <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>)</span> was used to create the quasi-FROC ROC-AUC equivalent dataset embedded in <code>RJafroc</code> as object <code>datasetCadSimuFroc</code>. In the following code the first reader for this dataset, corresponding to CAD, is extracted using <code>DfExtractDataset</code> (the other reader data, corresponding to radiologists who interpreted the same cases, are not used here). The function <code>DfFroc2Roc</code> converts this to an ROC dataset. The function <code>DfBinDataset</code> bins the data to about 7 bins. Each diseased case contains one lesion: <code>lesDistr = c(1)</code>. <code>FitRsmRoc</code> fits the binned ROC dataset to the radiological search model (RSM). Object <code>fit</code> contains the RSM parameters required to perform the optimizations described in previous sections.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="optim-op-point.html#cb93-1"></a>ds &lt;-<span class="st"> </span>datasetCadSimuFroc</span>
-<span id="cb93-2"><a href="optim-op-point.html#cb93-2"></a>dsCad &lt;-<span class="st"> </span><span class="kw">DfExtractDataset</span>(ds, <span class="dt">rdrs =</span> <span class="dv">1</span>)</span>
-<span id="cb93-3"><a href="optim-op-point.html#cb93-3"></a>dsCadRoc &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dsCad)</span>
-<span id="cb93-4"><a href="optim-op-point.html#cb93-4"></a>dsCadRocBinned &lt;-<span class="st"> </span><span class="kw">DfBinDataset</span>(dsCadRoc, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
-<span id="cb93-5"><a href="optim-op-point.html#cb93-5"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb93-6"><a href="optim-op-point.html#cb93-6"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb93-7"><a href="optim-op-point.html#cb93-7"></a>fit &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(dsCadRocBinned, lesDistr)</span>
-<span id="cb93-8"><a href="optim-op-point.html#cb93-8"></a><span class="kw">cat</span>(<span class="st">&quot;fitted values: </span><span class="ch">\n</span><span class="st">mu = &quot;</span>, fit<span class="op">$</span>mu, </span>
-<span id="cb93-9"><a href="optim-op-point.html#cb93-9"></a>    <span class="st">&quot;</span><span class="ch">\n</span><span class="st">lambda = &quot;</span>, fit<span class="op">$</span>lambdaP, </span>
-<span id="cb93-10"><a href="optim-op-point.html#cb93-10"></a>    <span class="st">&quot;</span><span class="ch">\n</span><span class="st">nu = &quot;</span>, fit<span class="op">$</span>nuP, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb93-11"><a href="optim-op-point.html#cb93-11"></a><span class="co">#&gt; fitted values: </span></span>
-<span id="cb93-12"><a href="optim-op-point.html#cb93-12"></a><span class="co">#&gt; mu =  2.755784 </span></span>
-<span id="cb93-13"><a href="optim-op-point.html#cb93-13"></a><span class="co">#&gt; lambda =  6.778332 </span></span>
-<span id="cb93-14"><a href="optim-op-point.html#cb93-14"></a><span class="co">#&gt; nu =  0.8033886</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="optim-op-point.html#cb102-1"></a>ds &lt;-<span class="st"> </span>datasetCadSimuFroc</span>
+<span id="cb102-2"><a href="optim-op-point.html#cb102-2"></a>dsCad &lt;-<span class="st"> </span><span class="kw">DfExtractDataset</span>(ds, <span class="dt">rdrs =</span> <span class="dv">1</span>)</span>
+<span id="cb102-3"><a href="optim-op-point.html#cb102-3"></a>dsCadRoc &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dsCad)</span>
+<span id="cb102-4"><a href="optim-op-point.html#cb102-4"></a>dsCadRocBinned &lt;-<span class="st"> </span><span class="kw">DfBinDataset</span>(dsCadRoc, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
+<span id="cb102-5"><a href="optim-op-point.html#cb102-5"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb102-6"><a href="optim-op-point.html#cb102-6"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb102-7"><a href="optim-op-point.html#cb102-7"></a>fit &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(dsCadRocBinned, lesDistr)</span>
+<span id="cb102-8"><a href="optim-op-point.html#cb102-8"></a><span class="kw">cat</span>(<span class="st">&quot;fitted values: </span><span class="ch">\n</span><span class="st">mu = &quot;</span>, fit<span class="op">$</span>mu, </span>
+<span id="cb102-9"><a href="optim-op-point.html#cb102-9"></a>    <span class="st">&quot;</span><span class="ch">\n</span><span class="st">lambda = &quot;</span>, fit<span class="op">$</span>lambdaP, </span>
+<span id="cb102-10"><a href="optim-op-point.html#cb102-10"></a>    <span class="st">&quot;</span><span class="ch">\n</span><span class="st">nu = &quot;</span>, fit<span class="op">$</span>nuP, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb102-11"><a href="optim-op-point.html#cb102-11"></a><span class="co">#&gt; fitted values: </span></span>
+<span id="cb102-12"><a href="optim-op-point.html#cb102-12"></a><span class="co">#&gt; mu =  2.755784 </span></span>
+<span id="cb102-13"><a href="optim-op-point.html#cb102-13"></a><span class="co">#&gt; lambda =  6.778332 </span></span>
+<span id="cb102-14"><a href="optim-op-point.html#cb102-14"></a><span class="co">#&gt; nu =  0.8033886</span></span></code></pre></div>
 <p>Table <a href="optim-op-point.html#tab:optim-op-point-table4">10.2</a> summarizes the results.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -812,11 +812,11 @@ FIGURE 10.7: The color coding is as in previous figures. The two ROC-AUCs are 0.
 <div id="optim-op-point-vary-nu" class="section level2">
 <h2><span class="header-section-number">10.9</span> Appendix 1: Varying <span class="math inline">\(\nu\)</span> optimizations</h2>
 <p>For <span class="math inline">\(\mu = 2\)</span> and <span class="math inline">\(\lambda = 1\)</span> optimizations were performed for <span class="math inline">\(\nu = 0.6, 0.7, 0.8, 0.9\)</span>.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="optim-op-point.html#cb94-1"></a>mu &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb94-2"><a href="optim-op-point.html#cb94-2"></a>lambdaP &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb94-3"><a href="optim-op-point.html#cb94-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
-<span id="cb94-4"><a href="optim-op-point.html#cb94-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span>
-<span id="cb94-5"><a href="optim-op-point.html#cb94-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="optim-op-point.html#cb103-1"></a>mu &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb103-2"><a href="optim-op-point.html#cb103-2"></a>lambdaP &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb103-3"><a href="optim-op-point.html#cb103-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
+<span id="cb103-4"><a href="optim-op-point.html#cb103-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span>
+<span id="cb103-5"><a href="optim-op-point.html#cb103-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:optim-op-point-table-vary-nu">TABLE 10.3: </span>Summary of optimization results for <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\lambda = 1\)</span> and 4 values of <span class="math inline">\(\nu\)</span>.
@@ -1049,11 +1049,11 @@ FIGURE 10.10: ROC plots for the two optimization methods. The color coding is as
 <div id="optim-op-point-vary-mu" class="section level2">
 <h2><span class="header-section-number">10.10</span> Appendix 2: Varying <span class="math inline">\(\mu\)</span> optimizations</h2>
 <p>For <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\nu = 0.9\)</span> optimizations were performed for <span class="math inline">\(\mu = 1, 2, 3, 4\)</span>.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="optim-op-point.html#cb95-1"></a>lambdaP &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb95-2"><a href="optim-op-point.html#cb95-2"></a>nuP &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
-<span id="cb95-3"><a href="optim-op-point.html#cb95-3"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb95-4"><a href="optim-op-point.html#cb95-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span>
-<span id="cb95-5"><a href="optim-op-point.html#cb95-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="optim-op-point.html#cb104-1"></a>lambdaP &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb104-2"><a href="optim-op-point.html#cb104-2"></a>nuP &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
+<span id="cb104-3"><a href="optim-op-point.html#cb104-3"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb104-4"><a href="optim-op-point.html#cb104-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span>
+<span id="cb104-5"><a href="optim-op-point.html#cb104-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:optim-op-point-table-vary-mu">TABLE 10.4: </span>Summary of optimization results for <span class="math inline">\(\lambda = 1\)</span>, <span class="math inline">\(\nu = 0.9\)</span> and 4 values of <span class="math inline">\(\mu\)</span>.
@@ -1273,11 +1273,11 @@ FIGURE 10.13: ROC plots for the two optimization methods. The color coding is as
 </div>
 <div id="optim-op-point-on-roc" class="section level2">
 <h2><span class="header-section-number">10.11</span> Appendix 3: Operating point on ROC</h2>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="optim-op-point.html#cb96-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
-<span id="cb96-2"><a href="optim-op-point.html#cb96-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>,<span class="fl">0.7</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>)</span>
-<span id="cb96-3"><a href="optim-op-point.html#cb96-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
-<span id="cb96-4"><a href="optim-op-point.html#cb96-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb96-5"><a href="optim-op-point.html#cb96-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="optim-op-point.html#cb105-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb105-2"><a href="optim-op-point.html#cb105-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>,<span class="fl">0.7</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>)</span>
+<span id="cb105-3"><a href="optim-op-point.html#cb105-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb105-4"><a href="optim-op-point.html#cb105-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb105-5"><a href="optim-op-point.html#cb105-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:optim-op-point-table-vary-all">TABLE 10.5: </span>Summary of optimization results for <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\nu = 0.9\)</span> and 4 values of <span class="math inline">\(\lambda\)</span>. FOM = figure of merit, Sp = specificity and Se = sensitivity
@@ -4259,6 +4259,8 @@ Youden
 <li><p>Mean wAFROC-AUC, Youden optimization = 0.711.</p></li>
 <li><p>Mean ROC-AUC, wAFROC optimization = 0.807.</p></li>
 <li><p>Mean ROC-AUC, Youden optimization = 0.811.</p></li>
+<li><p>Mean (Se, Sp) wAFROC optimization = (0.180, 0.300).</p></li>
+<li><p>Mean (Se, Sp) Youden optimization = (0.165, 0.261).</p></li>
 </ul>
 </div>
 <div id="optim-op-point-references" class="section level2">

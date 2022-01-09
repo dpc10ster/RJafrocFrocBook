@@ -421,24 +421,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="rsm-3-fits-applications" class="section level2">
 <h2><span class="header-section-number">8.3</span> Application to two datasets</h2>
 <p>The RSM, PROPROC and CBM algorithms were applied to the 14 datasets described in Chapter <a href="datasets.html#datasets">11</a>.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="rsm-3-fits.html#cb75-1"></a>datasetNames &lt;-<span class="st">  </span></span>
-<span id="cb75-2"><a href="rsm-3-fits.html#cb75-2"></a><span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;TONY&quot;</span>, <span class="st">&quot;VD&quot;</span>, <span class="st">&quot;FR&quot;</span>, </span>
-<span id="cb75-3"><a href="rsm-3-fits.html#cb75-3"></a>  <span class="st">&quot;FED&quot;</span>, <span class="st">&quot;JT&quot;</span>, <span class="st">&quot;MAG&quot;</span>, </span>
-<span id="cb75-4"><a href="rsm-3-fits.html#cb75-4"></a>  <span class="st">&quot;OPT&quot;</span>, <span class="st">&quot;PEN&quot;</span>, <span class="st">&quot;NICO&quot;</span>,</span>
-<span id="cb75-5"><a href="rsm-3-fits.html#cb75-5"></a>  <span class="st">&quot;RUS&quot;</span>, <span class="st">&quot;DOB1&quot;</span>, <span class="st">&quot;DOB2&quot;</span>, </span>
-<span id="cb75-6"><a href="rsm-3-fits.html#cb75-6"></a>  <span class="st">&quot;DOB3&quot;</span>, <span class="st">&quot;FZR&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="rsm-3-fits.html#cb84-1"></a>datasetNames &lt;-<span class="st">  </span></span>
+<span id="cb84-2"><a href="rsm-3-fits.html#cb84-2"></a><span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;TONY&quot;</span>, <span class="st">&quot;VD&quot;</span>, <span class="st">&quot;FR&quot;</span>, </span>
+<span id="cb84-3"><a href="rsm-3-fits.html#cb84-3"></a>  <span class="st">&quot;FED&quot;</span>, <span class="st">&quot;JT&quot;</span>, <span class="st">&quot;MAG&quot;</span>, </span>
+<span id="cb84-4"><a href="rsm-3-fits.html#cb84-4"></a>  <span class="st">&quot;OPT&quot;</span>, <span class="st">&quot;PEN&quot;</span>, <span class="st">&quot;NICO&quot;</span>,</span>
+<span id="cb84-5"><a href="rsm-3-fits.html#cb84-5"></a>  <span class="st">&quot;RUS&quot;</span>, <span class="st">&quot;DOB1&quot;</span>, <span class="st">&quot;DOB2&quot;</span>, </span>
+<span id="cb84-6"><a href="rsm-3-fits.html#cb84-6"></a>  <span class="st">&quot;DOB3&quot;</span>, <span class="st">&quot;FZR&quot;</span>)</span></code></pre></div>
 <p>In the following we focus on just two ROC datasets which have been widely used in the literature to illustrate ROC methodological advances, namely the Van Dyke (VD) and the Franken (FR) datasets.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="rsm-3-fits.html#cb76-1"></a>results &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
-<span id="cb76-2"><a href="rsm-3-fits.html#cb76-2"></a></span>
-<span id="cb76-3"><a href="rsm-3-fits.html#cb76-3"></a>results[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">2</span>) <span class="co"># VD dataset</span></span>
-<span id="cb76-4"><a href="rsm-3-fits.html#cb76-4"></a>results[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">3</span>) <span class="co"># FR dataset</span></span>
-<span id="cb76-5"><a href="rsm-3-fits.html#cb76-5"></a></span>
-<span id="cb76-6"><a href="rsm-3-fits.html#cb76-6"></a>resultsArr &lt;-<span class="st"> </span>plotArr &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
-<span id="cb76-7"><a href="rsm-3-fits.html#cb76-7"></a></span>
-<span id="cb76-8"><a href="rsm-3-fits.html#cb76-8"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) {</span>
-<span id="cb76-9"><a href="rsm-3-fits.html#cb76-9"></a>  plotArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allPlots</span>
-<span id="cb76-10"><a href="rsm-3-fits.html#cb76-10"></a>  resultsArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allResults</span>
-<span id="cb76-11"><a href="rsm-3-fits.html#cb76-11"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="rsm-3-fits.html#cb85-1"></a>results &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
+<span id="cb85-2"><a href="rsm-3-fits.html#cb85-2"></a></span>
+<span id="cb85-3"><a href="rsm-3-fits.html#cb85-3"></a>results[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">2</span>) <span class="co"># VD dataset</span></span>
+<span id="cb85-4"><a href="rsm-3-fits.html#cb85-4"></a>results[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">3</span>) <span class="co"># FR dataset</span></span>
+<span id="cb85-5"><a href="rsm-3-fits.html#cb85-5"></a></span>
+<span id="cb85-6"><a href="rsm-3-fits.html#cb85-6"></a>resultsArr &lt;-<span class="st"> </span>plotArr &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
+<span id="cb85-7"><a href="rsm-3-fits.html#cb85-7"></a></span>
+<span id="cb85-8"><a href="rsm-3-fits.html#cb85-8"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) {</span>
+<span id="cb85-9"><a href="rsm-3-fits.html#cb85-9"></a>  plotArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allPlots</span>
+<span id="cb85-10"><a href="rsm-3-fits.html#cb85-10"></a>  resultsArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allResults</span>
+<span id="cb85-11"><a href="rsm-3-fits.html#cb85-11"></a>}</span></code></pre></div>
 <ul>
 <li>The supporting code is in the function <code>Compare3ProperRocFits()</code> located at <code>R/compare-3-fits/Compare3ProperRocFits.R</code>.</li>
 <li>The analyzed results file locations are shown in Section <a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results">8.10.2</a>.</li>
@@ -453,7 +453,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The Franken dataset contains <span class="math inline">\(I \times J = 2 \times 4 = 8\)</span> composite plots.</li>
 <li>The following shows how to display the composite plot for the Van Dyke dataset for treatment 1 and reader 2.</li>
 </ul>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="rsm-3-fits.html#cb77-1"></a>plotArr[[<span class="dv">1</span>]][[<span class="dv">1</span>,<span class="dv">2</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="rsm-3-fits.html#cb86-1"></a>plotArr[[<span class="dv">1</span>]][[<span class="dv">1</span>,<span class="dv">2</span>]]</span></code></pre></div>
 <p><img src="10-rsm-3-fits_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>The plot is labeled <code>D2, i = 1, j = 2</code>, meaning the second dataset in the <code>datasetNames</code> array, i.e., <code>datasetNames[2]</code>, the second treatment and the second reader. It contains 3 plots:</p>
 <ul>
@@ -587,8 +587,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>An analysis was conducted to determine the average slopes and bootstrap confidence intervals.</p>
 <p>The code for calculating the average slopes is in <code>R/compare-3-fits/slopesConvVsRsm.R</code> and that for the bootstrap confidence intervals is in <code>R/compare-3-fits/slopesAucsConvVsRsmCI.R</code>.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="rsm-3-fits.html#cb84-1"></a>slopes &lt;-<span class="st"> </span><span class="kw">slopesConvVsRsm</span>(datasetNames)</span>
-<span id="cb84-2"><a href="rsm-3-fits.html#cb84-2"></a>slopeCI &lt;-<span class="st"> </span><span class="kw">slopesAucsConvVsRsmCI</span>(datasetNames)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="rsm-3-fits.html#cb93-1"></a>slopes &lt;-<span class="st"> </span><span class="kw">slopesConvVsRsm</span>(datasetNames)</span>
+<span id="cb93-2"><a href="rsm-3-fits.html#cb93-2"></a>slopeCI &lt;-<span class="st"> </span><span class="kw">slopesAucsConvVsRsmCI</span>(datasetNames)</span></code></pre></div>
 <p>The call to function <code>slopesConvVsRsm()</code> returns <code>slopes</code>, which contains, for each of 14 datasets, four <code>lists</code>: two plots and two slopes. For example:</p>
 <ul>
 <li>PRO vs. RSM: <code>slopes$p1[[2]]</code> is the plot of <span class="math inline">\(\text{AUC}^{PRO}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span> for all treatments and readers in the Van Dyke dataset. The plot for dataset <span class="math inline">\(f, f = 1, 2, ...14\)</span> is accessed as <code>slopes$p1[[f]]</code> which yields the plot of <span class="math inline">\(\text{AUC}^{PRO}_{f \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{f \bullet \bullet}\)</span>.</li>

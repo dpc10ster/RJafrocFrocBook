@@ -2554,6 +2554,65 @@ The software implementation follows:
 \end{Highlighting}
 \end{Shaded}
 
+Two first principle calculations are shown next and compared to the values yielded by the function \texttt{RSM\_yROC}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zeta_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\DecValTok{1}
+\NormalTok{mu <-}\StringTok{ }\DecValTok{2}
+\NormalTok{lambdaP <-}\StringTok{ }\DecValTok{1}
+\NormalTok{nuP <-}\StringTok{ }\FloatTok{0.9}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
+
+\DecValTok{1}\OperatorTok{-}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{lambdaP}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(}\OperatorTok{-}\NormalTok{zeta_}\DecValTok{1}\NormalTok{))}\OperatorTok{*}\NormalTok{(lesDistr[}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{nuP}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(mu}\OperatorTok{-}\NormalTok{zeta_}\DecValTok{1}\NormalTok{))}\OperatorTok{+}\NormalTok{lesDistr[}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{nuP}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(mu}\OperatorTok{-}\NormalTok{zeta_}\DecValTok{1}\NormalTok{))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8712655
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{RSM_yROC}\NormalTok{(zeta_}\DecValTok{1}\NormalTok{,mu,lambdaP,nuP, }\DataTypeTok{lesDistr =}\NormalTok{ lesDistr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8712655
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zeta_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\DecValTok{0}
+\NormalTok{mu <-}\StringTok{ }\DecValTok{1}
+\NormalTok{lambdaP <-}\StringTok{ }\DecValTok{2}
+\NormalTok{nuP <-}\StringTok{ }\FloatTok{0.5}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.9}\NormalTok{)}
+\DecValTok{1}\OperatorTok{-}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{lambdaP}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(}\OperatorTok{-}\NormalTok{zeta_}\DecValTok{1}\NormalTok{))}\OperatorTok{*}\NormalTok{(lesDistr[}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{nuP}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(mu}\OperatorTok{-}\NormalTok{zeta_}\DecValTok{1}\NormalTok{))}\OperatorTok{+}\NormalTok{lesDistr[}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{nuP}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(mu}\OperatorTok{-}\NormalTok{zeta_}\DecValTok{1}\NormalTok{))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8675666
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{RSM_yROC}\NormalTok{(zeta_}\DecValTok{1}\NormalTok{,mu,lambdaP,nuP, }\DataTypeTok{lesDistr =}\NormalTok{ lesDistr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8675666
+\end{verbatim}
+
 \hypertarget{rsm-pred-roc-curve-proper}{%
 \section{Proper ROC curve}\label{rsm-pred-roc-curve-proper}}
 
@@ -5525,6 +5584,10 @@ Youden & 4 & 10 & 0.9 & 0.944 & 0.963 & 0.896\\
   Mean ROC-AUC, wAFROC optimization = 0.807.
 \item
   Mean ROC-AUC, Youden optimization = 0.811.
+\item
+  Mean (Se, Sp) wAFROC optimization = (0.180, 0.300).
+\item
+  Mean (Se, Sp) Youden optimization = (0.165, 0.261).
 \end{itemize}
 
 \hypertarget{optim-op-point-references}{%
