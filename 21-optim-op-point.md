@@ -19,7 +19,7 @@ output:
 ## TBA How much finished {#optim-op-point-how-much-finished}
 95%
 
-Discussion needs more work; coding is done
+Discussion needs more work
 
 
 ## Introduction {#optim-op-point-intro}
@@ -209,7 +209,7 @@ Inspection of this table reveals the following effects:
     + These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-lambda-wafroc).
 
 
-The third effect is illustrated by the FROC plots with superimposed operating points for varying $\lambda$ shown in Fig. \@ref(fig:optim-op-point-vary-lambda-froc). The black dots correspond to $f = 1$ and the red dots correspond to $f = 2$. The black dots are consistently above the red dots and the separation of the dots is greatest for $\lambda = 1$ and smallest for $\lambda = 10$. The last statement will be generalized later to the following: *the difference in optimal thresholds found by the two optimization methods is greatest for intermediate levels of performance and smallest for very poor or very good performance.*  
+The third effect is illustrated by the FROC plots with superimposed operating points for varying $\lambda$ shown in Fig. \@ref(fig:optim-op-point-vary-lambda-froc). The black dots correspond to $f = 1$ and the red dots correspond to $f = 2$. The black dots are consistently above the red dots and the separation of the dots is greatest for $\lambda = 1$ and smallest for $\lambda = 10$.  
 
 The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lambda, \nu \right )$ with increasing $\lambda$, which is part of the first effect (the black dots move to smaller ordinates, as do the red dots). However, the accompanying change in $\text{NLF} \left ( f, \mu, \lambda, \nu \right )$ rules out, based on the FROC, an unambiguous determination of the direction of the change in overall performance. 
 
@@ -283,13 +283,15 @@ Since the ROC curves show a similar dependence as the wAFROC curves one may wond
 
 ## Varying $\nu$ and $\mu$ optimizations{#optim-op-point-vary-nu-mu}
 
-Results of varying $\nu$ are in Appendix 1 \@ref(optim-op-point-vary-nu). Table \@ref(tab:optim-op-point-table-vary-nu) summarizes the results. FROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-froc), wAFROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-wafroc) and ROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-roc). The results are similar to those described previously for varying $\lambda$ but, since unlike increasing $\lambda$ increasing $\nu$ has the opposite effect, namely increasing performance, the directions of the effects are reversed. Another difference is that the Youden-index based optimal threshold is almost independent of $\nu$. The main result, that wAFROC optimization yields lower reporting theshold and higher performance than Youden-index optimization, remains unchanged and the difference between the two methods decreases as performance decreases.
+Results of varying $\nu$ are in Appendix \@ref(optim-op-point-vary-nu). Table \@ref(tab:optim-op-point-table-vary-nu) summarizes the results. FROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-froc), wAFROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-wafroc) and ROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-roc). The results are similar to those described previously for varying $\lambda$ but, since unlike increasing $\lambda$ increasing $\nu$ has the opposite effect, namely increasing performance, the directions of the effects are reversed. Another difference is that the Youden-index based optimal threshold is almost independent of $\nu$. The main result, that wAFROC optimization yields lower reporting theshold and higher performance than Youden-index optimization, remains unchanged and the difference between the two methods decreases as performance decreases.
 
 
-Results of varying $\mu$ are in Appendix 2 \@ref(optim-op-point-vary-mu). Table \@ref(tab:optim-op-point-table-vary-mu) summarizes the results. FROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-froc), wAFROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-wafroc) and ROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-roc). The results are similar to those described previously for varying $\lambda$ but, since unlike increasing $\lambda$ increasing $\mu$ has the opposite effect, namely increasing performance, the directions of the effects are reversed. The main result, that wAFROC optimization yields lower reporting theshold and higher performance than Youden-index optimization, remains unchanged. This example illustrates that the difference in wAFROC and ROC AUCs between the two methods decreases as performance increases.
+Results of varying $\mu$ are in Appendix \@ref(optim-op-point-vary-mu). Table \@ref(tab:optim-op-point-table-vary-mu) summarizes the results. FROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-froc), wAFROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-wafroc) and ROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-roc). The results are similar to those described previously for varying $\lambda$ but, since unlike increasing $\lambda$ increasing $\mu$ has the opposite effect, namely increasing performance, the directions of the effects are reversed. The main result, that wAFROC optimization yields lower reporting theshold and higher performance than Youden-index optimization, remains unchanged. This example illustrates that the difference in wAFROC and ROC AUCs between the two methods decreases as performance increases.
 
 
-Summarizing, regardless of how performance is changed, wAFROC optimization yields lower reporting theshold and higher performance than Youden-index optimization. The difference between the two methods is large for intermediate values of performance, e.g., ROC-AUC, but decreases for either very poor (ROC-AUC below ~ 0.7) or very good  (ROC-AUC above ~ 0.95).
+Limiting situations covering very high and very low performances when $\mu$, $\lambda$ and $\nu$ are varied individually are described in Appendix \@ref(optim-op-point-limiting-situations). For very high performance both methods yield near identical results. For very low performance the Youden-index method does better, yielding higher ROC-AUCs. In this limit the wAFROC method gives undue importance to maximizing specificity while sacrificing sensitivity. 
+
+
 
 
 
@@ -402,14 +404,14 @@ Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimpo
 </div>
 
 
-## Discussion {#optim-op-point-discussion}
+## TBA Discussion {#optim-op-point-discussion}
 
 In Table \@ref(tab:optim-op-point-table-vary-lambda) the $\lambda$ parameter controls the average number of perceived NLs per case. For $\lambda = 1$ there is, on average, one perceived NL for every non-diseased case and the optimal wAFROC-based threshold is $\zeta_{1;1,\mu, \lambda = 1, \nu}$ = -0.007. For $\lambda = 10$ there are ten perceived NLs for every non-diseased case and the optimal wAFROC-based threshold is $\zeta_{1;1,\mu, \lambda = 10, \nu}$ = 1.856. The increase in $\zeta_1$ should make sense to CAD algorithm designers: with increasing numbers of NLs per case it is necessary to increase the reporting threshold (i.e., adopt a stricter criteria) if only because otherwise the reader would be subjected to 10 times the number of NLs/case for the same number of LLs/case. 
 
 The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.   
 
 
-## Appendix 1: Varying $\nu$ optimizations{#optim-op-point-vary-nu}
+## Appendix: varying $\nu$ optimizations{#optim-op-point-vary-nu}
 
 For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7, 0.8, 0.9$. 
 
@@ -586,7 +588,7 @@ The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lamb
 
 
 
-## Appendix 2: Varying $\mu$ optimizations{#optim-op-point-vary-mu}
+## Appendix: varying $\mu$ optimizations{#optim-op-point-vary-mu}
 
 For $\lambda = 1$ and $\nu = 0.9$ optimizations were performed for $\mu = 1, 2, 3, 4$. 
 
@@ -762,7 +764,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 
-## Appendix 3: Limiting situations {#tba-optim-op-point-limiting-situations}
+## Appendix: limiting situations {#optim-op-point-limiting-situations}
 
 ### High performance vary mu {#optim-op-point-high-performance-vary-mu}
 

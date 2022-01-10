@@ -387,7 +387,7 @@ optim-op-point-application
 optim-op-point-discussion
 optim-op-point-vary-nu
 optim-op-point-vary-mu
-tba-optim-op-point-limiting-situations
+optim-op-point-limiting-situations
 optim-op-point-high-performance-vary-mu
 optim-op-point-low-performance-vary-mu
 optim-op-point-high-performance-vary-lambda
