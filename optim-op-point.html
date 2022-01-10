@@ -24,7 +24,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-01-09" />
+<meta name="date" content="2022-01-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -371,7 +371,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>10.8</b> Discussion</a></li>
 <li class="chapter" data-level="10.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>10.9</b> Appendix 1: Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
 <li class="chapter" data-level="10.10" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>10.10</b> Appendix 2: Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
-<li class="chapter" data-level="10.11" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-on-roc"><i class="fa fa-check"></i><b>10.11</b> Appendix 3: Operating point on ROC</a></li>
+<li class="chapter" data-level="10.11" data-path="optim-op-point.html"><a href="optim-op-point.html#tba-optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>10.11</b> Appendix 3: Limiting situations</a><ul>
+<li class="chapter" data-level="10.11.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-high-performance-vary-mu"><i class="fa fa-check"></i><b>10.11.1</b> High performance vary mu</a></li>
+<li class="chapter" data-level="10.11.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-low-performance-vary-mu"><i class="fa fa-check"></i><b>10.11.2</b> Low performance vary mu</a></li>
+<li class="chapter" data-level="10.11.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-high-performance-vary-lambda"><i class="fa fa-check"></i><b>10.11.3</b> High performance vary lambda</a></li>
+<li class="chapter" data-level="10.11.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-low-performance-vary-lambda"><i class="fa fa-check"></i><b>10.11.4</b> Low performance vary lambda</a></li>
+<li class="chapter" data-level="10.11.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-high-performance-vary-nu"><i class="fa fa-check"></i><b>10.11.5</b> High performance vary nu</a></li>
+<li class="chapter" data-level="10.11.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-low-performance-vary-nu"><i class="fa fa-check"></i><b>10.11.6</b> Low performance vary nu</a></li>
+</ul></li>
 <li class="chapter" data-level="10.12" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-references"><i class="fa fa-check"></i><b>10.12</b> References</a></li>
 </ul></li>
 <li class="part"><span><b>DATASETS</b></span></li>
@@ -1271,22 +1278,18 @@ FIGURE 10.13: ROC plots for the two optimization methods. The color coding is as
 </div>
 <p>The continuous section of each curve ends at the optimal threshold listed in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-mu">10.4</a>. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.</p>
 </div>
-<div id="optim-op-point-on-roc" class="section level2">
-<h2><span class="header-section-number">10.11</span> Appendix 3: Operating point on ROC</h2>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="optim-op-point.html#cb105-1"></a><span class="co"># muArr &lt;- c(1,2,3,4)</span></span>
-<span id="cb105-2"><a href="optim-op-point.html#cb105-2"></a><span class="co"># nuPArr &lt;- c(0.6,0.7,0.8,0.9)</span></span>
-<span id="cb105-3"><a href="optim-op-point.html#cb105-3"></a><span class="co"># lambdaPArr &lt;- c(1, 2, 5, 10)</span></span>
-<span id="cb105-4"><a href="optim-op-point.html#cb105-4"></a><span class="co"># lesDistr &lt;- c(0.5, 0.5)</span></span>
-<span id="cb105-5"><a href="optim-op-point.html#cb105-5"></a><span class="co"># relWeights &lt;- c(0.5, 0.5)</span></span>
-<span id="cb105-6"><a href="optim-op-point.html#cb105-6"></a></span>
-<span id="cb105-7"><a href="optim-op-point.html#cb105-7"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>)</span>
-<span id="cb105-8"><a href="optim-op-point.html#cb105-8"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>,<span class="fl">0.999</span>)</span>
-<span id="cb105-9"><a href="optim-op-point.html#cb105-9"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span>
-<span id="cb105-10"><a href="optim-op-point.html#cb105-10"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb105-11"><a href="optim-op-point.html#cb105-11"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div id="tba-optim-op-point-limiting-situations" class="section level2">
+<h2><span class="header-section-number">10.11</span> Appendix 3: Limiting situations</h2>
+<div id="optim-op-point-high-performance-vary-mu" class="section level3">
+<h3><span class="header-section-number">10.11.1</span> High performance vary mu</h3>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="optim-op-point.html#cb105-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb105-2"><a href="optim-op-point.html#cb105-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
+<span id="cb105-3"><a href="optim-op-point.html#cb105-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb105-4"><a href="optim-op-point.html#cb105-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb105-5"><a href="optim-op-point.html#cb105-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:optim-op-point-table-vary-all">TABLE 10.5: </span>Summary of optimizations for combinations of 2-levels of <span class="math inline">\(\mu\)</span>, 2-levels of <span class="math inline">\(\lambda\)</span> and 2-levels of <span class="math inline">\(\nu\)</span>. FOM = figure of merit, Sp = specificity and Se = sensitivity
+<span id="tab:optim-op-point-high-performance-vary-mu-table-vary-all">TABLE 10.5: </span>Summary of optimizations for combinations of levels of <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> parameters. FOM = figure of merit, <span class="math inline">\(\zeta_1\)</span> = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.
 </caption>
 <thead>
 <tr>
@@ -1301,6 +1304,9 @@ FOM
 </th>
 <th style="text-align:right;">
 <span class="math inline">\(\nu\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\zeta_1\)</span>
 </th>
 <th style="text-align:left;">
 wAFROC
@@ -1328,7 +1334,306 @@ wAFROC
 1
 </td>
 <td style="text-align:right;">
-0.100
+0.9
+</td>
+<td style="text-align:left;">
+-1.663
+</td>
+<td style="text-align:left;">
+0.745
+</td>
+<td style="text-align:left;">
+0.850
+</td>
+<td style="text-align:left;">
+0.386
+</td>
+<td style="text-align:left;">
+0.978
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+0.462
+</td>
+<td style="text-align:left;">
+0.704
+</td>
+<td style="text-align:left;">
+0.815
+</td>
+<td style="text-align:left;">
+0.725
+</td>
+<td style="text-align:left;">
+0.819
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+-0.007
+</td>
+<td style="text-align:left;">
+0.864
+</td>
+<td style="text-align:left;">
+0.929
+</td>
+<td style="text-align:left;">
+0.605
+</td>
+<td style="text-align:left;">
+0.959
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+1.095
+</td>
+<td style="text-align:left;">
+0.831
+</td>
+<td style="text-align:left;">
+0.899
+</td>
+<td style="text-align:left;">
+0.872
+</td>
+<td style="text-align:left;">
+0.854
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+0.808
+</td>
+<td style="text-align:left;">
+0.922
+</td>
+<td style="text-align:left;">
+0.961
+</td>
+<td style="text-align:left;">
+0.811
+</td>
+<td style="text-align:left;">
+0.949
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+1.629
+</td>
+<td style="text-align:left;">
+0.903
+</td>
+<td style="text-align:left;">
+0.945
+</td>
+<td style="text-align:left;">
+0.950
+</td>
+<td style="text-align:left;">
+0.901
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+2.063
+</td>
+<td style="text-align:left;">
+0.948
+</td>
+<td style="text-align:left;">
+0.972
+</td>
+<td style="text-align:left;">
+0.981
+</td>
+<td style="text-align:left;">
+0.945
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+2.608
+</td>
+<td style="text-align:left;">
+0.946
+</td>
+<td style="text-align:left;">
+0.970
+</td>
+<td style="text-align:left;">
+0.995
+</td>
+<td style="text-align:left;">
+0.941
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-mu-vary-all-froc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-mu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
+<p class="caption">
+FIGURE 10.14: FROC plots with superimposed operating points for varying <span class="math inline">\(\nu\)</span>. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-mu-vary-all-wafroc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-mu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.15: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-mu-vary-all-roc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-mu-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.16: ROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+</div>
+<div id="optim-op-point-low-performance-vary-mu" class="section level3">
+<h3><span class="header-section-number">10.11.2</span> Low performance vary mu</h3>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="optim-op-point.html#cb106-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb106-2"><a href="optim-op-point.html#cb106-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>)</span>
+<span id="cb106-3"><a href="optim-op-point.html#cb106-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb106-4"><a href="optim-op-point.html#cb106-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb106-5"><a href="optim-op-point.html#cb106-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:optim-op-point-low-performance-vary-mu-table-vary-all">TABLE 10.6: </span>Summary of optimizations for combinations of levels of <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> parameters. FOM = figure of merit, <span class="math inline">\(\zeta_1\)</span> = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+FOM
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\mu\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\lambda\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\nu\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\zeta_1\)</span>
+</th>
+<th style="text-align:left;">
+wAFROC
+</th>
+<th style="text-align:left;">
+ROC
+</th>
+<th style="text-align:left;">
+Sp
+</th>
+<th style="text-align:left;">
+Se
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+2.799
 </td>
 <td style="text-align:left;">
 0.501
@@ -1354,7 +1659,10 @@ Youden
 1
 </td>
 <td style="text-align:right;">
-0.100
+0.1
+</td>
+<td style="text-align:left;">
+0.264
 </td>
 <td style="text-align:left;">
 0.379
@@ -1374,13 +1682,132 @@ Youden
 wAFROC
 </td>
 <td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+2.128
+</td>
+<td style="text-align:left;">
+0.514
+</td>
+<td style="text-align:left;">
+0.533
+</td>
+<td style="text-align:left;">
+0.983
+</td>
+<td style="text-align:left;">
+0.082
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+0.937
+</td>
+<td style="text-align:left;">
+0.467
+</td>
+<td style="text-align:left;">
+0.559
+</td>
+<td style="text-align:left;">
+0.840
+</td>
+<td style="text-align:left;">
+0.265
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+2.241
+</td>
+<td style="text-align:left;">
+0.533
+</td>
+<td style="text-align:left;">
+0.556
+</td>
+<td style="text-align:left;">
+0.988
+</td>
+<td style="text-align:left;">
+0.124
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+1.488
+</td>
+<td style="text-align:left;">
+0.516
+</td>
+<td style="text-align:left;">
+0.567
+</td>
+<td style="text-align:left;">
+0.934
+</td>
+<td style="text-align:left;">
+0.193
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
 5
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.100
+0.1
+</td>
+<td style="text-align:left;">
+2.940
 </td>
 <td style="text-align:left;">
 0.548
@@ -1406,7 +1833,10 @@ Youden
 1
 </td>
 <td style="text-align:right;">
-0.100
+0.1
+</td>
+<td style="text-align:left;">
+2.506
 </td>
 <td style="text-align:left;">
 0.547
@@ -1421,6 +1851,540 @@ Youden
 0.149
 </td>
 </tr>
+</tbody>
+</table>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-mu-vary-all-froc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-mu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
+<p class="caption">
+FIGURE 10.17: FROC plots with superimposed operating points for varying <span class="math inline">\(\nu\)</span>. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-mu-vary-all-wafroc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-mu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.18: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-mu-vary-all-roc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-mu-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.19: ROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+</div>
+<div id="optim-op-point-high-performance-vary-lambda" class="section level3">
+<h3><span class="header-section-number">10.11.3</span> High performance vary lambda</h3>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="optim-op-point.html#cb107-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>)</span>
+<span id="cb107-2"><a href="optim-op-point.html#cb107-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
+<span id="cb107-3"><a href="optim-op-point.html#cb107-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">10</span>)</span>
+<span id="cb107-4"><a href="optim-op-point.html#cb107-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb107-5"><a href="optim-op-point.html#cb107-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:optim-op-point-high-performance-vary-lambda-table-vary-all">TABLE 10.7: </span>Summary of optimizations for combinations of levels of <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> parameters. FOM = figure of merit, <span class="math inline">\(\zeta_1\)</span> = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+FOM
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\mu\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\lambda\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\nu\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\zeta_1\)</span>
+</th>
+<th style="text-align:left;">
+wAFROC
+</th>
+<th style="text-align:left;">
+ROC
+</th>
+<th style="text-align:left;">
+Sp
+</th>
+<th style="text-align:left;">
+Se
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+0.808
+</td>
+<td style="text-align:left;">
+0.922
+</td>
+<td style="text-align:left;">
+0.961
+</td>
+<td style="text-align:left;">
+0.811
+</td>
+<td style="text-align:left;">
+0.949
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+1.629
+</td>
+<td style="text-align:left;">
+0.903
+</td>
+<td style="text-align:left;">
+0.945
+</td>
+<td style="text-align:left;">
+0.950
+</td>
+<td style="text-align:left;">
+0.901
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+1.071
+</td>
+<td style="text-align:left;">
+0.905
+</td>
+<td style="text-align:left;">
+0.953
+</td>
+<td style="text-align:left;">
+0.753
+</td>
+<td style="text-align:left;">
+0.947
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+1.835
+</td>
+<td style="text-align:left;">
+0.882
+</td>
+<td style="text-align:left;">
+0.931
+</td>
+<td style="text-align:left;">
+0.936
+</td>
+<td style="text-align:left;">
+0.881
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+1.449
+</td>
+<td style="text-align:left;">
+0.871
+</td>
+<td style="text-align:left;">
+0.936
+</td>
+<td style="text-align:left;">
+0.692
+</td>
+<td style="text-align:left;">
+0.938
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+2.099
+</td>
+<td style="text-align:left;">
+0.847
+</td>
+<td style="text-align:left;">
+0.908
+</td>
+<td style="text-align:left;">
+0.914
+</td>
+<td style="text-align:left;">
+0.846
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+1.761
+</td>
+<td style="text-align:left;">
+0.835
+</td>
+<td style="text-align:left;">
+0.916
+</td>
+<td style="text-align:left;">
+0.676
+</td>
+<td style="text-align:left;">
+0.920
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+2.293
+</td>
+<td style="text-align:left;">
+0.814
+</td>
+<td style="text-align:left;">
+0.886
+</td>
+<td style="text-align:left;">
+0.896
+</td>
+<td style="text-align:left;">
+0.814
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-lambda-vary-all-froc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-lambda-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
+<p class="caption">
+FIGURE 10.20: FROC plots with superimposed operating points for varying <span class="math inline">\(\nu\)</span>. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-lambda-vary-all-wafroc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-lambda-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.21: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-lambda-vary-all-roc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-lambda-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.22: ROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+</div>
+<div id="optim-op-point-low-performance-vary-lambda" class="section level3">
+<h3><span class="header-section-number">10.11.4</span> Low performance vary lambda</h3>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="optim-op-point.html#cb108-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb108-2"><a href="optim-op-point.html#cb108-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.7</span>)</span>
+<span id="cb108-3"><a href="optim-op-point.html#cb108-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb108-4"><a href="optim-op-point.html#cb108-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb108-5"><a href="optim-op-point.html#cb108-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:optim-op-point-low-performance-vary-lambda-table-vary-all">TABLE 10.8: </span>Summary of optimizations for combinations of levels of <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> parameters. FOM = figure of merit, <span class="math inline">\(\zeta_1\)</span> = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+FOM
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\mu\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\lambda\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\nu\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\zeta_1\)</span>
+</th>
+<th style="text-align:left;">
+wAFROC
+</th>
+<th style="text-align:left;">
+ROC
+</th>
+<th style="text-align:left;">
+Sp
+</th>
+<th style="text-align:left;">
+Se
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:left;">
+-0.054
+</td>
+<td style="text-align:left;">
+0.633
+</td>
+<td style="text-align:left;">
+0.780
+</td>
+<td style="text-align:left;">
+0.594
+</td>
+<td style="text-align:left;">
+0.833
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:left;">
+0.405
+</td>
+<td style="text-align:left;">
+0.629
+</td>
+<td style="text-align:left;">
+0.761
+</td>
+<td style="text-align:left;">
+0.710
+</td>
+<td style="text-align:left;">
+0.739
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:left;">
+1.202
+</td>
+<td style="text-align:left;">
+0.551
+</td>
+<td style="text-align:left;">
+0.671
+</td>
+<td style="text-align:left;">
+0.795
+</td>
+<td style="text-align:left;">
+0.521
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:left;">
+0.809
+</td>
+<td style="text-align:left;">
+0.547
+</td>
+<td style="text-align:left;">
+0.704
+</td>
+<td style="text-align:left;">
+0.658
+</td>
+<td style="text-align:left;">
+0.686
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:left;">
+2.409
+</td>
+<td style="text-align:left;">
+0.508
+</td>
+<td style="text-align:left;">
+0.540
+</td>
+<td style="text-align:left;">
+0.961
+</td>
+<td style="text-align:left;">
+0.118
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:left;">
+1.276
+</td>
+<td style="text-align:left;">
+0.448
+</td>
+<td style="text-align:left;">
+0.636
+</td>
+<td style="text-align:left;">
+0.604
+</td>
+<td style="text-align:left;">
+0.622
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 wAFROC
@@ -1432,19 +2396,22 @@ wAFROC
 10
 </td>
 <td style="text-align:right;">
-0.100
+0.7
 </td>
 <td style="text-align:left;">
-0.500
+3.148
 </td>
 <td style="text-align:left;">
-0.500
+0.501
 </td>
 <td style="text-align:left;">
-1.000
+0.508
 </td>
 <td style="text-align:left;">
-0.000
+0.992
+</td>
+<td style="text-align:left;">
+0.025
 </td>
 </tr>
 <tr>
@@ -1458,16 +2425,437 @@ Youden
 10
 </td>
 <td style="text-align:right;">
-0.100
+0.7
 </td>
 <td style="text-align:left;">
-0.292
+1.591
 </td>
 <td style="text-align:left;">
-0.514
+0.389
 </td>
 <td style="text-align:left;">
-0.554
+0.594
+</td>
+<td style="text-align:left;">
+0.572
+</td>
+<td style="text-align:left;">
+0.583
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-lambda-vary-all-froc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-lambda-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
+<p class="caption">
+FIGURE 10.23: FROC plots with superimposed operating points for varying <span class="math inline">\(\nu\)</span>. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-lambda-vary-all-wafroc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-lambda-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.24: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-lambda-vary-all-roc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-lambda-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.25: ROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+</div>
+<div id="optim-op-point-high-performance-vary-nu" class="section level3">
+<h3><span class="header-section-number">10.11.5</span> High performance vary nu</h3>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="optim-op-point.html#cb109-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>)</span>
+<span id="cb109-2"><a href="optim-op-point.html#cb109-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb109-3"><a href="optim-op-point.html#cb109-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
+<span id="cb109-4"><a href="optim-op-point.html#cb109-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb109-5"><a href="optim-op-point.html#cb109-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:optim-op-point-high-performance-vary-nu-table-vary-all">TABLE 10.9: </span>Summary of optimizations for combinations of levels of <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> parameters. FOM = figure of merit, <span class="math inline">\(\zeta_1\)</span> = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+FOM
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\mu\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\lambda\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\nu\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\zeta_1\)</span>
+</th>
+<th style="text-align:left;">
+wAFROC
+</th>
+<th style="text-align:left;">
+ROC
+</th>
+<th style="text-align:left;">
+Sp
+</th>
+<th style="text-align:left;">
+Se
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+2.778
+</td>
+<td style="text-align:left;">
+0.598
+</td>
+<td style="text-align:left;">
+0.638
+</td>
+<td style="text-align:left;">
+0.997
+</td>
+<td style="text-align:left;">
+0.279
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+2.513
+</td>
+<td style="text-align:left;">
+0.597
+</td>
+<td style="text-align:left;">
+0.639
+</td>
+<td style="text-align:left;">
+0.994
+</td>
+<td style="text-align:left;">
+0.283
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:left;">
+2.501
+</td>
+<td style="text-align:left;">
+0.747
+</td>
+<td style="text-align:left;">
+0.811
+</td>
+<td style="text-align:left;">
+0.994
+</td>
+<td style="text-align:left;">
+0.624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:left;">
+2.543
+</td>
+<td style="text-align:left;">
+0.747
+</td>
+<td style="text-align:left;">
+0.811
+</td>
+<td style="text-align:left;">
+0.995
+</td>
+<td style="text-align:left;">
+0.624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:left;">
+2.332
+</td>
+<td style="text-align:left;">
+0.847
+</td>
+<td style="text-align:left;">
+0.901
+</td>
+<td style="text-align:left;">
+0.990
+</td>
+<td style="text-align:left;">
+0.805
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:left;">
+2.570
+</td>
+<td style="text-align:left;">
+0.847
+</td>
+<td style="text-align:left;">
+0.900
+</td>
+<td style="text-align:left;">
+0.995
+</td>
+<td style="text-align:left;">
+0.802
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+2.063
+</td>
+<td style="text-align:left;">
+0.948
+</td>
+<td style="text-align:left;">
+0.972
+</td>
+<td style="text-align:left;">
+0.981
+</td>
+<td style="text-align:left;">
+0.945
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:left;">
+2.608
+</td>
+<td style="text-align:left;">
+0.946
+</td>
+<td style="text-align:left;">
+0.970
+</td>
+<td style="text-align:left;">
+0.995
+</td>
+<td style="text-align:left;">
+0.941
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-nu-vary-all-froc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-nu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
+<p class="caption">
+FIGURE 10.26: FROC plots with superimposed operating points for varying <span class="math inline">\(\nu\)</span>. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-nu-vary-all-wafroc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-nu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.27: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-nu-vary-all-roc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-nu-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<p class="caption">
+FIGURE 10.28: ROC plots for the two optimization methods. The color coding is as in previous figures.
+</p>
+</div>
+</div>
+<div id="optim-op-point-low-performance-vary-nu" class="section level3">
+<h3><span class="header-section-number">10.11.6</span> Low performance vary nu</h3>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="optim-op-point.html#cb110-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb110-2"><a href="optim-op-point.html#cb110-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb110-3"><a href="optim-op-point.html#cb110-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
+<span id="cb110-4"><a href="optim-op-point.html#cb110-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb110-5"><a href="optim-op-point.html#cb110-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:optim-op-point-low-performance-vary-nu-table-vary-all">TABLE 10.10: </span>Summary of optimizations for combinations of levels of <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> parameters. FOM = figure of merit, <span class="math inline">\(\zeta_1\)</span> = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+FOM
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\mu\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\lambda\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\nu\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\zeta_1\)</span>
+</th>
+<th style="text-align:left;">
+wAFROC
+</th>
+<th style="text-align:left;">
+ROC
+</th>
+<th style="text-align:left;">
+Sp
+</th>
+<th style="text-align:left;">
+Se
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+wAFROC
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+2.081
+</td>
+<td style="text-align:left;">
+0.505
+</td>
+<td style="text-align:left;">
+0.520
+</td>
+<td style="text-align:left;">
+0.981
+</td>
+<td style="text-align:left;">
+0.059
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Youden
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+0.284
+</td>
+<td style="text-align:left;">
+0.423
+</td>
+<td style="text-align:left;">
+0.587
+</td>
+<td style="text-align:left;">
+0.678
 </td>
 <td style="text-align:left;">
 0.469
@@ -1478,25 +2866,28 @@ Youden
 wAFROC
 </td>
 <td style="text-align:right;">
-5
+1
 </td>
 <td style="text-align:right;">
-10
+1
 </td>
 <td style="text-align:right;">
-0.100
+0.5
 </td>
 <td style="text-align:left;">
-0.546
+0.871
 </td>
 <td style="text-align:left;">
-0.569
+0.557
 </td>
 <td style="text-align:left;">
-0.997
+0.666
 </td>
 <td style="text-align:left;">
-0.140
+0.825
+</td>
+<td style="text-align:left;">
+0.485
 </td>
 </tr>
 <tr>
@@ -1504,25 +2895,28 @@ wAFROC
 Youden
 </td>
 <td style="text-align:right;">
-5
+1
 </td>
 <td style="text-align:right;">
-10
+1
 </td>
 <td style="text-align:right;">
-0.100
+0.5
 </td>
 <td style="text-align:left;">
-0.542
+0.353
 </td>
 <td style="text-align:left;">
-0.571
+0.550
 </td>
 <td style="text-align:left;">
-0.985
+0.699
 </td>
 <td style="text-align:left;">
-0.155
+0.696
+</td>
+<td style="text-align:left;">
+0.643
 </td>
 </tr>
 <tr>
@@ -1536,19 +2930,22 @@ wAFROC
 1
 </td>
 <td style="text-align:right;">
-0.999
+0.7
 </td>
 <td style="text-align:left;">
-0.807
+-0.054
 </td>
 <td style="text-align:left;">
-0.875
+0.633
 </td>
 <td style="text-align:left;">
-0.368
+0.780
 </td>
 <td style="text-align:left;">
-1.000
+0.594
+</td>
+<td style="text-align:left;">
+0.833
 </td>
 </tr>
 <tr>
@@ -1562,72 +2959,23 @@ Youden
 1
 </td>
 <td style="text-align:right;">
-0.999
+0.7
+</td>
+<td style="text-align:left;">
+0.405
+</td>
+<td style="text-align:left;">
+0.629
+</td>
+<td style="text-align:left;">
+0.761
+</td>
+<td style="text-align:left;">
+0.710
 </td>
 <td style="text-align:left;">
 0.739
 </td>
-<td style="text-align:left;">
-0.838
-</td>
-<td style="text-align:left;">
-0.733
-</td>
-<td style="text-align:left;">
-0.853
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-wAFROC
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0.999
-</td>
-<td style="text-align:left;">
-0.999
-</td>
-<td style="text-align:left;">
-1.000
-</td>
-<td style="text-align:left;">
-0.878
-</td>
-<td style="text-align:left;">
-1.000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Youden
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0.999
-</td>
-<td style="text-align:left;">
-0.995
-</td>
-<td style="text-align:left;">
-0.997
-</td>
-<td style="text-align:left;">
-0.996
-</td>
-<td style="text-align:left;">
-0.995
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -1637,22 +2985,25 @@ wAFROC
 1
 </td>
 <td style="text-align:right;">
-10
+1
 </td>
 <td style="text-align:right;">
-0.999
+0.9
 </td>
 <td style="text-align:left;">
-0.505
+-1.663
 </td>
 <td style="text-align:left;">
-0.528
+0.745
 </td>
 <td style="text-align:left;">
-0.972
+0.850
 </td>
 <td style="text-align:left;">
-0.084
+0.386
+</td>
+<td style="text-align:left;">
+0.978
 </td>
 </tr>
 <tr>
@@ -1663,103 +3014,47 @@ Youden
 1
 </td>
 <td style="text-align:right;">
-10
+1
 </td>
 <td style="text-align:right;">
-0.999
+0.9
 </td>
 <td style="text-align:left;">
-0.435
+0.462
 </td>
 <td style="text-align:left;">
-0.630
+0.704
 </td>
 <td style="text-align:left;">
-0.582
+0.815
 </td>
 <td style="text-align:left;">
-0.634
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-wAFROC
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-0.999
+0.725
 </td>
 <td style="text-align:left;">
-0.997
-</td>
-<td style="text-align:left;">
-0.999
-</td>
-<td style="text-align:left;">
-0.607
-</td>
-<td style="text-align:left;">
-1.000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Youden
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-0.999
-</td>
-<td style="text-align:left;">
-0.985
-</td>
-<td style="text-align:left;">
-0.992
-</td>
-<td style="text-align:left;">
-0.990
-</td>
-<td style="text-align:left;">
-0.985
+0.819
 </td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li><p>Mean wAFROC-AUC, (wAFROC, Youden) optimization = (0.675, 0.614).</p></li>
-<li><p>Mean ROC-AUC, (wAFROC, Youden) optimization = (0.693, 0.708).</p></li>
-<li><p>Mean (Sp, Se) wAFROC optimization = (0.852, 0.422).</p></li>
-<li><p>Mean (Sp, Se) Youden optimization = (0.813, 0.580).</p></li>
-<li><p>Mean (nlf, llf) wAFROC optimization = (0.208, 0.404).</p></li>
-<li><p>Mean (nlf, llf) Youden optimization = (0.234, 0.404).</p></li>
-</ul>
-<div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-all-froc"></span>
-<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" /><img src="21-optim-op-point_files/figure-html/optim-op-point-vary-all-froc-2.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-nu-vary-all-froc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-nu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
 <p class="caption">
-FIGURE 10.14: FROC plots with superimposed operating points for varying <span class="math inline">\(\nu\)</span>. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.
+FIGURE 10.29: FROC plots with superimposed operating points for varying <span class="math inline">\(\nu\)</span>. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-all-wafroc"></span>
-<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" /><img src="21-optim-op-point_files/figure-html/optim-op-point-vary-all-wafroc-2.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-nu-vary-all-wafroc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-nu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">
-FIGURE 10.15: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
+FIGURE 10.30: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-all-roc"></span>
-<img src="21-optim-op-point_files/figure-html/optim-op-point-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" /><img src="21-optim-op-point_files/figure-html/optim-op-point-vary-all-roc-2.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
+<div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-nu-vary-all-roc"></span>
+<img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-nu-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">
-FIGURE 10.16: ROC plots for the two optimization methods. The color coding is as in previous figures.
+FIGURE 10.31: ROC plots for the two optimization methods. The color coding is as in previous figures.
 </p>
+</div>
 </div>
 </div>
 <div id="optim-op-point-references" class="section level2">
