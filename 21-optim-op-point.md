@@ -16,6 +16,35 @@ output:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## TBA How much finished {#optim-op-point-how-much-finished}
 95%
 
@@ -58,23 +87,29 @@ In the following sections each of the first three parameters is varied in turn a
 The wAFROC figure of merit is implemented in the `RJafroc` function `UtilAnalyticalAucsRSM`. It is calculated using Eqn. \@ref(eq:rsm-pred-wllf). The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function `RSM_yROC` and specificity is the complement of `RSM_xROC`. 
 
 
-
-
-
 ## Varying $\lambda$ optimizations{#optim-op-point-vary-lambda}
 
-In the following $f$ is used as an abbreviation, with $f = 1$ denoting the wAFROC-AUC figure of merit and $f = 2$ denoting the Youden-index.
+In the following $f$ is used as an abbreviation with $f = 1$ denoting the wAFROC-AUC figure of merit and $f = 2$ denoting the Youden-index.
+
+
+
 
 
 
 
 ```r
-mu <- 2
-nuP <- 0.9
+muArr <- c(2)
 lambdaPArr <- c(1, 2, 5, 10)
+nuPArr <- c(0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
+
+
+
+
+
+
 
 
 
@@ -94,7 +129,6 @@ The following quantities were calculated:
 
 
 Table \@ref(tab:optim-op-point-table-vary-lambda) summarizes the results. The column labeled FOM shows the quantity being maximized (wAFROC-AUC or the Youden-index), the column labeled $\lambda$ lists the 4 values of $\lambda$, $\zeta_1$ is the optimal value of $\zeta_1$ that maximizes the chosen figure of merit. The column labeled wAFROC is the AUC under the wAFROC curve, the column labeled ROC is the AUC under the ROC curve, and $\left( \text{NLF}, \text{LLF}\right)$ is the operating point on the FROC curve corresponding to the value of $\zeta_1$ in the third column. All quantities in columns 3 through 6 are functions of $f, \mu, \lambda, \nu$. 
-
 
 
 
@@ -219,12 +253,10 @@ The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lamb
 
 
 
-
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-vary-lambda-froc-1.png" alt="FROC plots with superimposed operating points for varying $\lambda$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
 <p class="caption">(\#fig:optim-op-point-vary-lambda-froc)FROC plots with superimposed operating points for varying $\lambda$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.</p>
 </div>
-
 
 
 
@@ -244,7 +276,6 @@ The transition from continuous to dashed is determined by the value of $\zeta_1$
 <img src="21-optim-op-point_files/figure-html/optim-op-point-vary-lambda-wafroc-1.png" alt="wAFROC plots for the two optimization methods: the green red red-dashed curve curve corresponds to wAFROC-AUC optimization and the green green-dashed curve corresponds to Youden-index optimization. For all except the highest value of $\lambda$ the wAFROC optimizations yield greater performance than do the Youden-index based optimizations." width="672" />
 <p class="caption">(\#fig:optim-op-point-vary-lambda-wafroc)wAFROC plots for the two optimization methods: the green red red-dashed curve curve corresponds to wAFROC-AUC optimization and the green green-dashed curve corresponds to Youden-index optimization. For all except the highest value of $\lambda$ the wAFROC optimizations yield greater performance than do the Youden-index based optimizations.</p>
 </div>
-
 
 
 
@@ -406,23 +437,29 @@ Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimpo
 
 ## TBA Discussion {#optim-op-point-discussion}
 
-In Table \@ref(tab:optim-op-point-table-vary-lambda) the $\lambda$ parameter controls the average number of perceived NLs per case. For $\lambda = 1$ there is, on average, one perceived NL for every non-diseased case and the optimal wAFROC-based threshold is $\zeta_{1;1,\mu, \lambda = 1, \nu}$ = -0.007. For $\lambda = 10$ there are ten perceived NLs for every non-diseased case and the optimal wAFROC-based threshold is $\zeta_{1;1,\mu, \lambda = 10, \nu}$ = 1.856. The increase in $\zeta_1$ should make sense to CAD algorithm designers: with increasing numbers of NLs per case it is necessary to increase the reporting threshold (i.e., adopt a stricter criteria) if only because otherwise the reader would be subjected to 10 times the number of NLs/case for the same number of LLs/case. 
+Removed to file
+
 
 The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.   
 
 
-## Appendix: varying $\nu$ optimizations{#optim-op-point-vary-nu}
+## Appendix I: Varying $\nu$ optimizations{#optim-op-point-vary-nu}
 
 For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7, 0.8, 0.9$. 
 
 
+
+
+
 ```r
-mu <- 2
-lambdaP <- 1
+muArr <- c(2)
+lambdaPArr <- c(1)
 nuPArr <- c(0.6, 0.7, 0.8, 0.9)
-lesDistr <- c(0.5,0.5)
-relWeights <- c(0.5,0.5)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
 ```
+
+
 
 
 
@@ -441,7 +478,7 @@ relWeights <- c(0.5,0.5)
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
-   <th style="text-align:left;"> $\nu$ </th>
+   <th style="text-align:left;"> $\lambda$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
    <th style="text-align:left;"> $\text{wAFROC}$ </th>
    <th style="text-align:left;"> $\text{ROC}$ </th>
@@ -451,7 +488,7 @@ relWeights <- c(0.5,0.5)
 <tbody>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 0.6 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 0.888 </td>
    <td style="text-align:left;"> 0.701 </td>
    <td style="text-align:left;"> 0.804 </td>
@@ -459,7 +496,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 0.7 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 0.674 </td>
    <td style="text-align:left;"> 0.751 </td>
    <td style="text-align:left;"> 0.851 </td>
@@ -467,7 +504,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 0.8 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 0.407 </td>
    <td style="text-align:left;"> 0.805 </td>
    <td style="text-align:left;"> 0.893 </td>
@@ -475,7 +512,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 0.9 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> -0.007 </td>
    <td style="text-align:left;"> 0.864 </td>
    <td style="text-align:left;"> 0.929 </td>
@@ -483,7 +520,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 0.6 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 1.022 </td>
    <td style="text-align:left;"> 0.700 </td>
    <td style="text-align:left;"> 0.797 </td>
@@ -491,7 +528,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 0.7 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 1.044 </td>
    <td style="text-align:left;"> 0.745 </td>
    <td style="text-align:left;"> 0.835 </td>
@@ -499,7 +536,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 0.8 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 1.069 </td>
    <td style="text-align:left;"> 0.788 </td>
    <td style="text-align:left;"> 0.868 </td>
@@ -507,7 +544,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 0.9 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 1.095 </td>
    <td style="text-align:left;"> 0.831 </td>
    <td style="text-align:left;"> 0.899 </td>
@@ -542,8 +579,9 @@ The third effect is illustrated by the FROC plots with superimposed operating po
 
 The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lambda, \nu \right )$ with increasing $\nu$ (the black dots move to larger ordinates, as do the red dots). However, the accompanying change in $\text{NLF} \left ( f, \mu, \lambda, \nu \right )$ rules out an FROC curve based unambiguous determination of the direction of the change in overall performance. 
 
- 
 
+
+ 
 
 
 
@@ -557,6 +595,7 @@ The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lamb
 
 
 
+ 
 
 
 
@@ -579,6 +618,8 @@ The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lamb
 
 
 
+
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-vary-nu-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">(\#fig:optim-op-point-vary-nu-roc)ROC plots for the two optimization methods. The color coding is as in previous figures.</p>
@@ -588,18 +629,23 @@ The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lamb
 
 
 
-## Appendix: varying $\mu$ optimizations{#optim-op-point-vary-mu}
+## Appendix II: Varying $\mu$ optimizations{#optim-op-point-vary-mu}
 
 For $\lambda = 1$ and $\nu = 0.9$ optimizations were performed for $\mu = 1, 2, 3, 4$. 
 
 
+
+
 ```r
-lambdaP <- 1
-nuP <- 0.9
 muArr <- c(1, 2, 3, 4)
-lesDistr <- c(0.5,0.5)
-relWeights <- c(0.5,0.5)
+lambdaPArr <- 1
+nuPArr <- 0.9
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
 ```
+
+
+
 
 
 
@@ -620,7 +666,7 @@ relWeights <- c(0.5,0.5)
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
-   <th style="text-align:left;"> $\mu$ </th>
+   <th style="text-align:left;"> $\lambda$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
    <th style="text-align:left;"> $\text{wAFROC}$ </th>
    <th style="text-align:left;"> $\text{ROC}$ </th>
@@ -638,7 +684,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> -0.007 </td>
    <td style="text-align:left;"> 0.864 </td>
    <td style="text-align:left;"> 0.929 </td>
@@ -646,7 +692,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 0.808 </td>
    <td style="text-align:left;"> 0.922 </td>
    <td style="text-align:left;"> 0.961 </td>
@@ -654,7 +700,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 1.463 </td>
    <td style="text-align:left;"> 0.942 </td>
    <td style="text-align:left;"> 0.970 </td>
@@ -670,7 +716,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 1.095 </td>
    <td style="text-align:left;"> 0.831 </td>
    <td style="text-align:left;"> 0.899 </td>
@@ -678,7 +724,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 1.629 </td>
    <td style="text-align:left;"> 0.903 </td>
    <td style="text-align:left;"> 0.945 </td>
@@ -686,7 +732,7 @@ relWeights <- c(0.5,0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 2.124 </td>
    <td style="text-align:left;"> 0.935 </td>
    <td style="text-align:left;"> 0.964 </td>
@@ -732,14 +778,15 @@ Table \@ref(tab:optim-op-point-table-vary-mu) summarizes the results.
 
 
 
-
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-vary-mu-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">(\#fig:optim-op-point-vary-mu-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures.</p>
 </div>
 
 
-The continuous section of each curve ends at the optimal threshold listed in Table \@ref(tab:optim-op-point-table-vary-mu), namely $\zeta_1$ = -1.663 for the green-red-red-dashed curve and $\zeta_1$ = 0.462 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
+TBA Need to add back from removed 977
+
+
 
 
 
@@ -763,8 +810,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 
-
-## Appendix: limiting situations {#optim-op-point-limiting-situations}
+## Appendix III: Limiting situations {#optim-op-point-limiting-situations}
 
 ### High performance vary mu {#optim-op-point-high-performance-vary-mu}
 
@@ -777,7 +823,6 @@ lambdaPArr <- c(1)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
-
 
 
 
@@ -904,6 +949,10 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
+
+
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-mu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
 <p class="caption">(\#fig:optim-op-point-high-performance-vary-mu-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.</p>
@@ -934,6 +983,7 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-mu-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">(\#fig:optim-op-point-high-performance-vary-mu-vary-all-roc)ROC plots for the two optimization methods. The color coding is as in previous figures.</p>
@@ -951,6 +1001,8 @@ lambdaPArr <- c(1)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
+
+
 
 
 
@@ -1078,6 +1130,9 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
+
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-mu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
 <p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.</p>
@@ -1093,13 +1148,12 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-mu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures.</p>
 </div>
-
-
-
 
 
 
@@ -1127,6 +1181,9 @@ lambdaPArr <- c(1,2,5,10)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
+
+
+
 
 
 
@@ -1283,8 +1340,6 @@ relWeights <- c(0.5, 0.5)
 
 
 
-
-
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-lambda-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">(\#fig:optim-op-point-high-performance-vary-lambda-vary-all-roc)ROC plots for the two optimization methods. The color coding is as in previous figures.</p>
@@ -1302,6 +1357,8 @@ lambdaPArr <- c(1, 2, 5, 10)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
+
+
 
 
 
@@ -1430,7 +1487,6 @@ relWeights <- c(0.5, 0.5)
 
 
 
-
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-lambda-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
 <p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.</p>
@@ -1446,12 +1502,11 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-lambda-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures.</p>
 </div>
-
-
 
 
 
@@ -1479,6 +1534,8 @@ nuPArr <- c(0.2, 0.5, 0.7, 0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
+
+
 
 
 
@@ -1606,6 +1663,8 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-nu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
 <p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.</p>
@@ -1621,11 +1680,11 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-high-performance-vary-nu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures.</p>
 </div>
-
 
 
 
@@ -1653,6 +1712,8 @@ nuPArr <- c(0.2, 0.5, 0.7, 0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
+
+
 
 
 
@@ -1780,6 +1841,7 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-nu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization." width="672" />
 <p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.</p>
@@ -1795,12 +1857,11 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
 <div class="figure">
 <img src="21-optim-op-point_files/figure-html/optim-op-point-low-performance-vary-nu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures.</p>
 </div>
-
-
 
 
 

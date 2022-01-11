@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-01-10}
+\date{2022-01-11}
 
 \begin{document}
 \maketitle
@@ -4996,13 +4996,13 @@ The wAFROC figure of merit is implemented in the \texttt{RJafroc} function \text
 \hypertarget{optim-op-point-vary-lambda}{%
 \section{\texorpdfstring{Varying \(\lambda\) optimizations}{Varying \textbackslash lambda optimizations}}\label{optim-op-point-vary-lambda}}
 
-In the following \(f\) is used as an abbreviation, with \(f = 1\) denoting the wAFROC-AUC figure of merit and \(f = 2\) denoting the Youden-index.
+In the following \(f\) is used as an abbreviation with \(f = 1\) denoting the wAFROC-AUC figure of merit and \(f = 2\) denoting the Youden-index.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mu <-}\StringTok{ }\DecValTok{2}
-\NormalTok{nuP <-}\StringTok{ }\FloatTok{0.9}
+\NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{)}
 \NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.9}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -5210,22 +5210,22 @@ Fig. \ref{fig:optim-op-point-application-froc} shows FROC curves with superimpos
 \hypertarget{optim-op-point-discussion}{%
 \section{TBA Discussion}\label{optim-op-point-discussion}}
 
-In Table \ref{tab:optim-op-point-table-vary-lambda} the \(\lambda\) parameter controls the average number of perceived NLs per case. For \(\lambda = 1\) there is, on average, one perceived NL for every non-diseased case and the optimal wAFROC-based threshold is \(\zeta_{1;1,\mu, \lambda = 1, \nu}\) = -0.007. For \(\lambda = 10\) there are ten perceived NLs for every non-diseased case and the optimal wAFROC-based threshold is \(\zeta_{1;1,\mu, \lambda = 10, \nu}\) = 1.856. The increase in \(\zeta_1\) should make sense to CAD algorithm designers: with increasing numbers of NLs per case it is necessary to increase the reporting threshold (i.e., adopt a stricter criteria) if only because otherwise the reader would be subjected to 10 times the number of NLs/case for the same number of LLs/case.
+Removed to file
 
 The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.
 
 \hypertarget{optim-op-point-vary-nu}{%
-\section{\texorpdfstring{Appendix: varying \(\nu\) optimizations}{Appendix: varying \textbackslash nu optimizations}}\label{optim-op-point-vary-nu}}
+\section{\texorpdfstring{Appendix I: Varying \(\nu\) optimizations}{Appendix I: Varying \textbackslash nu optimizations}}\label{optim-op-point-vary-nu}}
 
 For \(\mu = 2\) and \(\lambda = 1\) optimizations were performed for \(\nu = 0.6, 0.7, 0.8, 0.9\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mu <-}\StringTok{ }\DecValTok{2}
-\NormalTok{lambdaP <-}\StringTok{ }\DecValTok{1}
+\NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\FloatTok{0.9}\NormalTok{)}
-\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
-\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5236,23 +5236,23 @@ For \(\mu = 2\) and \(\lambda = 1\) optimizations were performed for \(\nu = 0.6
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{llllll}
 \toprule
-FOM & $\nu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \text{LLF}\right)$\\
+FOM & $\lambda$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \text{LLF}\right)$\\
 \midrule
- & 0.6 & 0.888 & 0.701 & 0.804 & (0.187, 0.520)\\
+ & 1 & 0.888 & 0.701 & 0.804 & (0.187, 0.520)\\
 \cmidrule{2-6}
- & 0.7 & 0.674 & 0.751 & 0.851 & (0.250, 0.635)\\
+ & 1 & 0.674 & 0.751 & 0.851 & (0.250, 0.635)\\
 \cmidrule{2-6}
- & 0.8 & 0.407 & 0.805 & 0.893 & (0.342, 0.756)\\
+ & 1 & 0.407 & 0.805 & 0.893 & (0.342, 0.756)\\
 \cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 0.9 & -0.007 & 0.864 & 0.929 & (0.503, 0.880)\\
+\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 1 & -0.007 & 0.864 & 0.929 & (0.503, 0.880)\\
 \cmidrule{1-6}
- & 0.6 & 1.022 & 0.700 & 0.797 & (0.153, 0.502)\\
+ & 1 & 1.022 & 0.700 & 0.797 & (0.153, 0.502)\\
 \cmidrule{2-6}
- & 0.7 & 1.044 & 0.745 & 0.835 & (0.148, 0.581)\\
+ & 1 & 1.044 & 0.745 & 0.835 & (0.148, 0.581)\\
 \cmidrule{2-6}
- & 0.8 & 1.069 & 0.788 & 0.868 & (0.143, 0.659)\\
+ & 1 & 1.069 & 0.788 & 0.868 & (0.143, 0.659)\\
 \cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 0.9 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
+\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 1 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -5318,17 +5318,17 @@ The FROC plots also illustrate the decrease in \(\text{LLF} \left ( f, \mu, \lam
 \end{figure}
 
 \hypertarget{optim-op-point-vary-mu}{%
-\section{\texorpdfstring{Appendix: varying \(\mu\) optimizations}{Appendix: varying \textbackslash mu optimizations}}\label{optim-op-point-vary-mu}}
+\section{\texorpdfstring{Appendix II: Varying \(\mu\) optimizations}{Appendix II: Varying \textbackslash mu optimizations}}\label{optim-op-point-vary-mu}}
 
 For \(\lambda = 1\) and \(\nu = 0.9\) optimizations were performed for \(\mu = 1, 2, 3, 4\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lambdaP <-}\StringTok{ }\DecValTok{1}
-\NormalTok{nuP <-}\StringTok{ }\FloatTok{0.9}
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
-\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
-\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
+\NormalTok{lambdaPArr <-}\StringTok{ }\DecValTok{1}
+\NormalTok{nuPArr <-}\StringTok{ }\FloatTok{0.9}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5339,23 +5339,23 @@ For \(\lambda = 1\) and \(\nu = 0.9\) optimizations were performed for \(\mu = 1
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{llllll}
 \toprule
-FOM & $\mu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \text{LLF}\right)$\\
+FOM & $\lambda$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \text{LLF}\right)$\\
 \midrule
  & 1 & -1.663 & 0.745 & 0.850 & (0.952, 0.897)\\
 \cmidrule{2-6}
- & 2 & -0.007 & 0.864 & 0.929 & (0.503, 0.880)\\
+ & 1 & -0.007 & 0.864 & 0.929 & (0.503, 0.880)\\
 \cmidrule{2-6}
- & 3 & 0.808 & 0.922 & 0.961 & (0.210, 0.887)\\
+ & 1 & 0.808 & 0.922 & 0.961 & (0.210, 0.887)\\
 \cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 4 & 1.463 & 0.942 & 0.970 & (0.072, 0.895)\\
+\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 1 & 1.463 & 0.942 & 0.970 & (0.072, 0.895)\\
 \cmidrule{1-6}
  & 1 & 0.462 & 0.704 & 0.815 & (0.322, 0.634)\\
 \cmidrule{2-6}
- & 2 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
+ & 1 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
 \cmidrule{2-6}
- & 3 & 1.629 & 0.903 & 0.945 & (0.052, 0.823)\\
+ & 1 & 1.629 & 0.903 & 0.945 & (0.052, 0.823)\\
 \cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 4 & 2.124 & 0.935 & 0.964 & (0.017, 0.873)\\
+\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 1 & 2.124 & 0.935 & 0.964 & (0.017, 0.873)\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -5386,7 +5386,7 @@ Table \ref{tab:optim-op-point-table-vary-mu} summarizes the results.
 \caption{\label{fig:optim-op-point-vary-mu-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
 \end{figure}
 
-The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-mu}, namely \(\zeta_1\) = -1.663 for the green-red-red-dashed curve and \(\zeta_1\) = 0.462 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
+TBA Need to add back from removed 977
 
 \begin{figure}
 \centering
@@ -5397,7 +5397,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-mu}. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 \hypertarget{optim-op-point-limiting-situations}{%
-\section{Appendix: limiting situations}\label{optim-op-point-limiting-situations}}
+\section{Appendix III: Limiting situations}\label{optim-op-point-limiting-situations}}
 
 \hypertarget{optim-op-point-high-performance-vary-mu}{%
 \subsection{High performance vary mu}\label{optim-op-point-high-performance-vary-mu}}

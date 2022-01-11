@@ -24,7 +24,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-01-10" />
+<meta name="date" content="2022-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -369,9 +369,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>10.6</b> Using the method</a></li>
 <li class="chapter" data-level="10.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>10.7</b> A CAD application</a></li>
 <li class="chapter" data-level="10.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>10.8</b> TBA Discussion</a></li>
-<li class="chapter" data-level="10.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>10.9</b> Appendix: varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
-<li class="chapter" data-level="10.10" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>10.10</b> Appendix: varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
-<li class="chapter" data-level="10.11" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>10.11</b> Appendix: limiting situations</a><ul>
+<li class="chapter" data-level="10.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>10.9</b> Appendix I: Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
+<li class="chapter" data-level="10.10" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>10.10</b> Appendix II: Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
+<li class="chapter" data-level="10.11" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>10.11</b> Appendix III: Limiting situations</a><ul>
 <li class="chapter" data-level="10.11.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-high-performance-vary-mu"><i class="fa fa-check"></i><b>10.11.1</b> High performance vary mu</a></li>
 <li class="chapter" data-level="10.11.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-low-performance-vary-mu"><i class="fa fa-check"></i><b>10.11.2</b> Low performance vary mu</a></li>
 <li class="chapter" data-level="10.11.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-high-performance-vary-lambda"><i class="fa fa-check"></i><b>10.11.3</b> High performance vary lambda</a></li>
@@ -439,10 +439,10 @@ Latent marks = perceived suspicious regions that are not necessarily marked.</p>
 </div>
 <div id="optim-op-point-vary-lambda" class="section level2">
 <h2><span class="header-section-number">10.4</span> Varying <span class="math inline">\(\lambda\)</span> optimizations</h2>
-<p>In the following <span class="math inline">\(f\)</span> is used as an abbreviation, with <span class="math inline">\(f = 1\)</span> denoting the wAFROC-AUC figure of merit and <span class="math inline">\(f = 2\)</span> denoting the Youden-index.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="optim-op-point.html#cb101-1"></a>mu &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb101-2"><a href="optim-op-point.html#cb101-2"></a>nuP &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
-<span id="cb101-3"><a href="optim-op-point.html#cb101-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<p>In the following <span class="math inline">\(f\)</span> is used as an abbreviation with <span class="math inline">\(f = 1\)</span> denoting the wAFROC-AUC figure of merit and <span class="math inline">\(f = 2\)</span> denoting the Youden-index.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="optim-op-point.html#cb101-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>)</span>
+<span id="cb101-2"><a href="optim-op-point.html#cb101-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb101-3"><a href="optim-op-point.html#cb101-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
 <span id="cb101-4"><a href="optim-op-point.html#cb101-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
 <span id="cb101-5"><a href="optim-op-point.html#cb101-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <p>For <span class="math inline">\(\mu = 2\)</span> and <span class="math inline">\(\nu = 0.9\)</span> both wAFROC-AUC and Youden-index optimizations were performed for <span class="math inline">\(\lambda = 1, 2, 5, 10\)</span>. It is assumed that half of the diseased cases contain one lesion, the rest contain two lesions, and the lesions are assigned equal weights (i.e., equal clinical importance).</p>
@@ -813,17 +813,17 @@ FIGURE 10.7: The color coding is as in previous figures. The two ROC-AUCs are 0.
 </div>
 <div id="optim-op-point-discussion" class="section level2">
 <h2><span class="header-section-number">10.8</span> TBA Discussion</h2>
-<p>In Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-lambda">10.1</a> the <span class="math inline">\(\lambda\)</span> parameter controls the average number of perceived NLs per case. For <span class="math inline">\(\lambda = 1\)</span> there is, on average, one perceived NL for every non-diseased case and the optimal wAFROC-based threshold is <span class="math inline">\(\zeta_{1;1,\mu, \lambda = 1, \nu}\)</span> = -0.007. For <span class="math inline">\(\lambda = 10\)</span> there are ten perceived NLs for every non-diseased case and the optimal wAFROC-based threshold is <span class="math inline">\(\zeta_{1;1,\mu, \lambda = 10, \nu}\)</span> = 1.856. The increase in <span class="math inline">\(\zeta_1\)</span> should make sense to CAD algorithm designers: with increasing numbers of NLs per case it is necessary to increase the reporting threshold (i.e., adopt a stricter criteria) if only because otherwise the reader would be subjected to 10 times the number of NLs/case for the same number of LLs/case.</p>
+<p>Removed to file</p>
 <p>The ROC-AUCs are reported as a check of the less familiar wAFROC-AUC figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the wAFROC-AUC or the ROC-AUC: either way the wAFROC-AUC optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.</p>
 </div>
 <div id="optim-op-point-vary-nu" class="section level2">
-<h2><span class="header-section-number">10.9</span> Appendix: varying <span class="math inline">\(\nu\)</span> optimizations</h2>
+<h2><span class="header-section-number">10.9</span> Appendix I: Varying <span class="math inline">\(\nu\)</span> optimizations</h2>
 <p>For <span class="math inline">\(\mu = 2\)</span> and <span class="math inline">\(\lambda = 1\)</span> optimizations were performed for <span class="math inline">\(\nu = 0.6, 0.7, 0.8, 0.9\)</span>.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="optim-op-point.html#cb103-1"></a>mu &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb103-2"><a href="optim-op-point.html#cb103-2"></a>lambdaP &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="optim-op-point.html#cb103-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>)</span>
+<span id="cb103-2"><a href="optim-op-point.html#cb103-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
 <span id="cb103-3"><a href="optim-op-point.html#cb103-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
-<span id="cb103-4"><a href="optim-op-point.html#cb103-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span>
-<span id="cb103-5"><a href="optim-op-point.html#cb103-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code></pre></div>
+<span id="cb103-4"><a href="optim-op-point.html#cb103-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb103-5"><a href="optim-op-point.html#cb103-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:optim-op-point-table-vary-nu">TABLE 10.3: </span>Summary of optimization results for <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\lambda = 1\)</span> and 4 values of <span class="math inline">\(\nu\)</span>.
@@ -834,7 +834,7 @@ FIGURE 10.7: The color coding is as in previous figures. The two ROC-AUCs are 0.
 FOM
 </th>
 <th style="text-align:left;">
-<span class="math inline">\(\nu\)</span>
+<span class="math inline">\(\lambda\)</span>
 </th>
 <th style="text-align:left;">
 <span class="math inline">\(\zeta_1\)</span>
@@ -856,7 +856,7 @@ FOM
 wAFROC
 </td>
 <td style="text-align:left;">
-0.6
+1
 </td>
 <td style="text-align:left;">
 0.888
@@ -876,7 +876,7 @@ wAFROC
 wAFROC
 </td>
 <td style="text-align:left;">
-0.7
+1
 </td>
 <td style="text-align:left;">
 0.674
@@ -896,7 +896,7 @@ wAFROC
 wAFROC
 </td>
 <td style="text-align:left;">
-0.8
+1
 </td>
 <td style="text-align:left;">
 0.407
@@ -916,7 +916,7 @@ wAFROC
 wAFROC
 </td>
 <td style="text-align:left;">
-0.9
+1
 </td>
 <td style="text-align:left;">
 -0.007
@@ -936,7 +936,7 @@ wAFROC
 Youden
 </td>
 <td style="text-align:left;">
-0.6
+1
 </td>
 <td style="text-align:left;">
 1.022
@@ -956,7 +956,7 @@ Youden
 Youden
 </td>
 <td style="text-align:left;">
-0.7
+1
 </td>
 <td style="text-align:left;">
 1.044
@@ -976,7 +976,7 @@ Youden
 Youden
 </td>
 <td style="text-align:left;">
-0.8
+1
 </td>
 <td style="text-align:left;">
 1.069
@@ -996,7 +996,7 @@ Youden
 Youden
 </td>
 <td style="text-align:left;">
-0.9
+1
 </td>
 <td style="text-align:left;">
 1.095
@@ -1054,13 +1054,13 @@ FIGURE 10.10: ROC plots for the two optimization methods. The color coding is as
 </div>
 </div>
 <div id="optim-op-point-vary-mu" class="section level2">
-<h2><span class="header-section-number">10.10</span> Appendix: varying <span class="math inline">\(\mu\)</span> optimizations</h2>
+<h2><span class="header-section-number">10.10</span> Appendix II: Varying <span class="math inline">\(\mu\)</span> optimizations</h2>
 <p>For <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\nu = 0.9\)</span> optimizations were performed for <span class="math inline">\(\mu = 1, 2, 3, 4\)</span>.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="optim-op-point.html#cb104-1"></a>lambdaP &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb104-2"><a href="optim-op-point.html#cb104-2"></a>nuP &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
-<span id="cb104-3"><a href="optim-op-point.html#cb104-3"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb104-4"><a href="optim-op-point.html#cb104-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span>
-<span id="cb104-5"><a href="optim-op-point.html#cb104-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="optim-op-point.html#cb104-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb104-2"><a href="optim-op-point.html#cb104-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb104-3"><a href="optim-op-point.html#cb104-3"></a>nuPArr &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
+<span id="cb104-4"><a href="optim-op-point.html#cb104-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb104-5"><a href="optim-op-point.html#cb104-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:optim-op-point-table-vary-mu">TABLE 10.4: </span>Summary of optimization results for <span class="math inline">\(\lambda = 1\)</span>, <span class="math inline">\(\nu = 0.9\)</span> and 4 values of <span class="math inline">\(\mu\)</span>.
@@ -1071,7 +1071,7 @@ FIGURE 10.10: ROC plots for the two optimization methods. The color coding is as
 FOM
 </th>
 <th style="text-align:left;">
-<span class="math inline">\(\mu\)</span>
+<span class="math inline">\(\lambda\)</span>
 </th>
 <th style="text-align:left;">
 <span class="math inline">\(\zeta_1\)</span>
@@ -1113,7 +1113,7 @@ wAFROC
 wAFROC
 </td>
 <td style="text-align:left;">
-2
+1
 </td>
 <td style="text-align:left;">
 -0.007
@@ -1133,7 +1133,7 @@ wAFROC
 wAFROC
 </td>
 <td style="text-align:left;">
-3
+1
 </td>
 <td style="text-align:left;">
 0.808
@@ -1153,7 +1153,7 @@ wAFROC
 wAFROC
 </td>
 <td style="text-align:left;">
-4
+1
 </td>
 <td style="text-align:left;">
 1.463
@@ -1193,7 +1193,7 @@ Youden
 Youden
 </td>
 <td style="text-align:left;">
-2
+1
 </td>
 <td style="text-align:left;">
 1.095
@@ -1213,7 +1213,7 @@ Youden
 Youden
 </td>
 <td style="text-align:left;">
-3
+1
 </td>
 <td style="text-align:left;">
 1.629
@@ -1233,7 +1233,7 @@ Youden
 Youden
 </td>
 <td style="text-align:left;">
-4
+1
 </td>
 <td style="text-align:left;">
 2.124
@@ -1269,7 +1269,7 @@ FIGURE 10.11: FROC plots with superimposed operating points for varying <span cl
 FIGURE 10.12: wAFROC plots for the two optimization methods. The color coding is as in previous figures.
 </p>
 </div>
-<p>The continuous section of each curve ends at the optimal threshold listed in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-mu">10.4</a>, namely <span class="math inline">\(\zeta_1\)</span> = -1.663 for the green-red-red-dashed curve and <span class="math inline">\(\zeta_1\)</span> = 0.462 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.</p>
+<p>TBA Need to add back from removed 977</p>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-mu-roc"></span>
 <img src="21-optim-op-point_files/figure-html/optim-op-point-vary-mu-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures." width="672" />
 <p class="caption">
@@ -1279,7 +1279,7 @@ FIGURE 10.13: ROC plots for the two optimization methods. The color coding is as
 <p>The continuous section of each curve ends at the optimal threshold listed in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-mu">10.4</a>. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.</p>
 </div>
 <div id="optim-op-point-limiting-situations" class="section level2">
-<h2><span class="header-section-number">10.11</span> Appendix: limiting situations</h2>
+<h2><span class="header-section-number">10.11</span> Appendix III: Limiting situations</h2>
 <div id="optim-op-point-high-performance-vary-mu" class="section level3">
 <h3><span class="header-section-number">10.11.1</span> High performance vary mu</h3>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="optim-op-point.html#cb105-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
