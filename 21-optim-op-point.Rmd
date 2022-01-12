@@ -287,9 +287,9 @@ ds <- datasetCadSimuFroc
 dsCad <- DfExtractDataset(ds, rdrs = 1)
 dsCadRoc <- DfFroc2Roc(dsCad)
 dsCadRocBinned <- DfBinDataset(dsCadRoc, opChType = "ROC")
-lesDistr <- c(1)
-relWeights <- c(1)
-fit <- FitRsmRoc(dsCadRocBinned, lesDistr)
+lesDistrCad <- c(1)
+relWeightsCad <- c(1)
+fit <- FitRsmRoc(dsCadRocBinned, lesDistrCad)
 cat("fitted values: \nmu = ", fit$mu, 
     "\nlambda = ", fit$lambdaP, 
     "\nnu = ", fit$nuP, "\n")
@@ -319,8 +319,8 @@ for (y in 1:2) {
                   mu, 
                   lambdaP = lambdaP, 
                   nuP = nuP, 
-                  lesDistr, 
-                  relWeights)
+                  lesDistrCad, 
+                  relWeightsCad)
     zetaOptArr1[y] <- x$minimum
     wafrocArr[y] <- -x$objective  # safe to use objective here
     rocAucArr[y] <- UtilAnalyticalAucsRSM(
@@ -328,8 +328,8 @@ for (y in 1:2) {
       lambdaP = lambdaP, 
       nuP = nuP, 
       zeta1 = x$minimum, 
-      lesDistr, 
-      relWeights)$aucROC
+      lesDistrCad, 
+      relWeightsCad)$aucROC
     nlfOptArr[y] <- RSM_xFROC(
       z = x$minimum, 
       lambdaP = lambdaP)
@@ -343,22 +343,22 @@ for (y in 1:2) {
                   mu, 
                   lambdaP = lambdaP, 
                   nuP = nuP, 
-                  lesDistr)
+                  lesDistrCad)
     zetaOptArr1[y] <- x$minimum
     wafrocArr[y] <- UtilAnalyticalAucsRSM(
       mu, 
       lambdaP = lambdaP, 
       nuP = nuP, 
       zeta1 = x$minimum, 
-      lesDistr, 
-      relWeights)$aucwAFROC
+      lesDistrCad, 
+      relWeightsCad)$aucwAFROC
     rocAucArr[y] <- UtilAnalyticalAucsRSM(
       mu, 
       lambdaP = lambdaP, 
       nuP = nuP, 
       zeta1 = x$minimum, 
-      lesDistr, 
-      relWeights)$aucROC
+      lesDistrCad, 
+      relWeightsCad)$aucROC
     nlfOptArr[y] <- RSM_xFROC(
       z = x$minimum, 
       lambdaP = lambdaP)
@@ -368,6 +368,8 @@ for (y in 1:2) {
 }
 ```
 
+
+### Summary table
 
 Table \@ref(tab:optim-op-point-table4) summarizes the results.
 
@@ -380,12 +382,15 @@ colnames(x12) <- c("FOM", "$\\lambda$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\te
 
 
 ```{r optim-op-point-table4, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for example FROC dataset. The wAFROC column always displays wAFROC-AUC, even though the optimized quantity may the Youden-index, as in the last four rows.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(2), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for example CAD FROC dataset. The wAFROC column always displays wAFROC-AUC, even though the optimized quantity may the Youden-index, as in the last four rows.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(2), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
 The wAFROC-AUC based optimization yields slightly larger figure of merit as measured by wAFROC-AUC, see Fig. \@ref(fig:optim-op-point-application-wafroc) and larger figure of merit as measured by ROC-AUC, see Fig. \@ref(fig:optim-op-point-application-roc).  
 
+
+
+### FROC
 
 
 ```{r, echo=FALSE}
@@ -408,13 +413,15 @@ for (y in 1:2) {
 ```
 
 
-
 Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimposed optimal operating points. 
 
 
 ```{r optim-op-point-application-froc, fig.cap="FROC plots with superposed optimal operating points. Black dot is using wAFROC optimization and red dot is using Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(froc)
 ```
+
+
+### wAFROC
 
 
 ```{r, echo=FALSE}
@@ -426,18 +433,24 @@ wafroc <- PlotRsmOperatingCharacteristics(
   c(lambda,lambda),
   c(nu,nu),
   c(zetaOptArr1[1], zetaOptArr1[2]),
-  lesDistr,
-  relWeights,
+  lesDistrCad,
+  relWeightsCad,
   OpChType = "wAFROC",
   legendPosition = "null"
 )$wAFROCPlot
 ```
 
 
+Fig. \@ref(fig:optim-op-point-application-wafroc) shows wAFROC curves using the two methods. The red curve is using wAFROC-AUC optimization and the green curve is using Youden-index optimization.
+
+
 ```{r optim-op-point-application-wafroc, fig.cap="The color coding is as in previous figures. The two wAFROC-AUCs are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization).", fig.show='hold', echo=FALSE}
 grid.arrange(wafroc)
 ```
 
+
+
+### ROC
 
 
 ```{r, echo=FALSE}
@@ -449,12 +462,15 @@ roc <- PlotRsmOperatingCharacteristics(
   c(lambda,lambda),
   c(nu,nu),
   c(zetaOptArr1[1], zetaOptArr1[2]),
-  lesDistr,
-  relWeights,
+  lesDistrCad,
+  relWeightsCad,
   OpChType = "ROC",
   legendPosition = "null"
 )$ROCPlot
 ```
+
+
+Fig. \@ref(fig:optim-op-point-application-roc) shows ROC curves using the two methods. The red curve is using wAFROC-AUC optimization and the green curve is using Youden-index optimization.
 
 
 ```{r optim-op-point-application-roc, fig.cap="The color coding is as in previous figures. The two ROC-AUCs are 0.815 (wAFROC-AUC optimization) and 0.798 (Youden-index optimization).", fig.show='hold', echo=FALSE}
