@@ -1,4 +1,4 @@
-# Optimal operating point {#optim-op-point2}
+# Optimal operating point appendices {#optim-op-point-appendices}
 
 ---
 output:
@@ -22,285 +22,13 @@ library(gridExtra)
 library(abind)
 library(dplyr)
 library(mvtnorm)
+library(here)
 ```
 
 
 
 ```{r, echo=FALSE}
-OpPtStr <- function(x,y) {
-  y <- paste0("(", sprintf("%.3f", x), ", ", sprintf("%.3f", y), ")")
-  return(y)
-}
-
-simplePrint <- function(x) {
-  sprintf("%.3f", x)
-}
-```
-
-
-
-
-```{r foms_2be_maximized, echo=FALSE}
-
-wAFROC <- function (
-  zeta1, mu, lambdaP, nuP, 
-  lesDistr, 
-  relWeights) {
-  # return negative of aucwAFROC 
-  # (as optimize finds minimum of function)
-  return(-UtilAnalyticalAucsRSM(mu, lambdaP = lambdaP, nuP = nuP, zeta1, lesDistr, relWeights)$aucwAFROC)
-}
-
-
-Youden <- function (zeta1, mu, lambdaP, nuP, lesDistr) {
-  # add sensitivity and specificity 
-  # and subtract 1, i.e., Youden's index
-  x <- RSM_yROC(zeta1, mu, lambdaP, nuP, lesDistr) + 
-    (1 - RSM_xROC(zeta1, lambdaP)) - 1
-  # return negative of Youden-index 
-  # (as optimize finds minimum of function)
-  return(-x)
-}
-```
-
-
-
-
-```{r do-one-set, cache = FALSE, echo=FALSE}
-doOneSet <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
-  wAfrocArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  rocArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  zetaOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  fpfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  tpfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  nlfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  llfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
-        mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        for (y in 1:2) {
-          if (y == 1) {
-            x <- optimize(wAFROC, 
-                          interval = c(-5,5), 
-                          mu, 
-                          lambdaP = lambdaP, 
-                          nuP = nuP, 
-                          lesDistr, 
-                          relWeights)
-            zetaOptArr[y,i1,i2,i3] <- x$minimum
-            wAfrocArr[y,i1,i2,i3] <- -x$objective # safe to use objective here
-            rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
-              mu, 
-              lambdaP = lambdaP, 
-              nuP = nuP, 
-              zeta1 = x$minimum, 
-              lesDistr, 
-              relWeights)$aucROC
-            fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
-              z = x$minimum, 
-              lambdaP = lambdaP)
-            tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
-              z = x$minimum, 
-              mu, 
-              lambdaP = lambdaP,
-              nuP = nuP,
-              lesDistr = lesDistr)
-            nlfOptArr[y,i1,i2,i3] <- RSM_xFROC(
-              z = x$minimum, 
-              lambdaP = lambdaP)
-            llfOptArr[y,i1,i2,i3] <- RSM_yFROC(
-              z = x$minimum, 
-              mu, 
-              nuP = nuP)
-          } else if (y == 2) {
-            x <- optimize(Youden, 
-                          interval = c(-5,5), 
-                          mu, 
-                          lambdaP = lambdaP, 
-                          nuP = nuP, 
-                          lesDistr)
-            zetaOptArr[y,i1,i2,i3] <- x$minimum
-            wAfrocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
-              mu, 
-              lambdaP = lambdaP, 
-              nuP = nuP, 
-              zeta1 = x$minimum, 
-              lesDistr, 
-              relWeights)$aucwAFROC
-            rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
-              mu, 
-              lambdaP = lambdaP, 
-              nuP = nuP, 
-              zeta1 = x$minimum, 
-              lesDistr, 
-              relWeights)$aucROC
-            fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
-              z = x$minimum, 
-              lambdaP = lambdaP)
-            tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
-              z = x$minimum, 
-              mu, 
-              lambdaP = lambdaP,
-              nuP = nuP,
-              lesDistr = lesDistr)
-            nlfOptArr[y,i1,i2,i3] <- RSM_xFROC(
-              z = x$minimum, 
-              lambdaP = lambdaP)
-            llfOptArr[y,i1,i2,i3] <- RSM_yFROC(
-              z = x$minimum, mu, nuP)
-          } else stop("incorrect y")
-        }
-      }
-    }
-  }
-  return(list(
-    zetaOptArr = zetaOptArr,
-    nlfOptArr = nlfOptArr,
-    llfOptArr = llfOptArr,
-    fpfOptArr = fpfOptArr,
-    tpfOptArr = tpfOptArr,
-    wAfrocArr = wAfrocArr, 
-    rocArr = rocArr)
-    )
-}
-```
-
-
-
-```{r plot-froc, echo=FALSE}
-plotFroc <- function(muArr, lambdaPArr, nuPArr) {
-  plotArr <- array(list(), dim = 8)
-  i <- 1
-  for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
-        mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        z <- seq(-5,mu+5,0.1)
-        xFROC <- RSM_xFROC(z, lambdaP)
-        yFROC <- RSM_yFROC(z, mu, nuP)
-        df_froc <- data.frame(
-          NLF = xFROC, 
-          LLF = yFROC)
-        plotArr[[i]] <- ggplot2::ggplot(
-          df_froc, 
-          aes(x = NLF, y = LLF)) + 
-          geom_line() +
-          scale_x_continuous(limits = c(0,lambdaP)) + 
-          scale_y_continuous(limits = c(0,1)) +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
-        for (y in 1:2) {
-          optPt <- data.frame(
-            NLF = nlfOptArr[y,i1,i2,i3], 
-            LLF = llfOptArr[y,i1,i2,i3])
-          plotArr[[i]] <- plotArr[[i]] + 
-            geom_point(data = optPt, color = y) 
-        }
-        i <- i + 1
-      }
-    }
-  }
-  return (plotArr)
-}
-```
-
-
-
-
-```{r plot-wafroc, echo=FALSE}
-plotwAfroc <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
-  plotArr <- array(list(), dim = 8)
-  i <- 1
-  for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
-        mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
-        lambda <- x$lambda
-        nu <- x$nu
-        plotArr[[i]] <- PlotRsmOperatingCharacteristics(
-          c(mu,mu),
-          c(lambda,lambda),
-          c(nu,nu),
-          c(zetaOptArr[1,i1,i2,i3], zetaOptArr[2,i1,i2,i3]),
-          lesDistr,
-          relWeights,
-          OpChType = "wAFROC",
-          legendPosition = "null"
-        )$wAFROCPlot +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
-        i <- i + 1
-      }
-    }
-  }
-  return(plotArr)
-}
-```
-
-
-
-
-
-```{r plot-roc, echo=FALSE}
-plotRoc <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
-  plotArr <- array(list(), dim = 8)
-  i <- 1
-  for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
-        mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
-        lambda <- x$lambda
-        nu <- x$nu
-        plotArr[[i]] <- PlotRsmOperatingCharacteristics(
-          c(mu,mu),
-          c(lambda,lambda),
-          c(nu,nu),
-          c(zetaOptArr[1,i1,i2,i3], zetaOptArr[2,i1,i2,i3]),
-          lesDistr,
-          relWeights,
-          OpChType = "ROC",
-          legendPosition = "null"
-        )$ROCPlot +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
-        i <- i + 1
-      }
-    }
-  }
-  return(plotArr)
-}
-```
-
-
-
-```{r do-one-table, echo=FALSE}
-doOneTable <- function(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, ind1,ind2,ind3, labelIndx) {
-  if (labelIndx == 1) {
-    x1 <- cbind(rep("wAFROC",4), mu = muArr, zeta1 = simplePrint(zetaOptArr[1,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[1,ind1,ind2,ind3]), ROC = simplePrint(rocArr[1,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[1,ind1,ind2,ind3], llfOptArr[1,ind1,ind2,ind3]))
-    x2 <- cbind(rep("Youden",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[2,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[2,ind1,ind2,ind3]), ROC = simplePrint(rocArr[2,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[2,ind1,ind2,ind3], llfOptArr[2,ind1,ind2,ind3]))
-    x12 <- as.data.frame(rbind(x1,x2))
-    colnames(x12) <- c("FOM", "$\\mu$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\text{ROC}$", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
-  } else if (labelIndx == 2) {
-    x1 <- cbind(rep("wAFROC",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[1,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[1,ind1,ind2,ind3]), ROC = simplePrint(rocArr[1,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[1,ind1,ind2,ind3], llfOptArr[1,ind1,ind2,ind3]))
-    x2 <- cbind(rep("Youden",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[2,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[2,ind1,ind2,ind3]), ROC = simplePrint(rocArr[2,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[2,ind1,ind2,ind3], llfOptArr[2,ind1,ind2,ind3]))
-    x12 <- as.data.frame(rbind(x1,x2))
-    colnames(x12) <- c("FOM", "$\\lambda$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\text{ROC}$", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
-  } else if (labelIndx == 3) {
-    x1 <- cbind(rep("wAFROC",4), nu = nuPArr, zeta1 = simplePrint(zetaOptArr[1,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[1,ind1,ind2,ind3]), ROC = simplePrint(rocArr[1,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[1,ind1,ind2,ind3], llfOptArr[1,ind1,ind2,ind3]))
-    x2 <- cbind(rep("Youden",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[2,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[2,ind1,ind2,ind3]), ROC = simplePrint(rocArr[2,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[2,ind1,ind2,ind3], llfOptArr[2,ind1,ind2,ind3]))
-    x12 <- as.data.frame(rbind(x1,x2))
-    colnames(x12) <- c("FOM", "$\\nu$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\text{ROC}$", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
-  } else stop("incorrect label index")
-  return(x12)
-}
+source(here("R/optim-op-point/optim-op-point-helpers.R"))
 ```
 
 
@@ -336,6 +64,7 @@ rocArr <- ret$rocArr
 ```
 
 
+### Summary table
 
 
 ```{r optim-op-point-table-vary-nu-contents, echo=FALSE}
@@ -371,13 +100,15 @@ Table \@ref(tab:optim-op-point-table-vary-nu) summarizes the results.
     + These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-nu-wafroc).
 
 
+### FROC
+
 The third effect is illustrated by the FROC plots with superimposed operating points for varying $\nu$ shown in Fig. \@ref(fig:optim-op-point-vary-nu-froc). The black dots are consistently above the red dots and the separation of the dots is greatest for $\nu = 0.9$ and smallest for $\nu = 0.6$. The difference in optimal thresholds found by the two optimization methods is greatest for poor performance.  
 
 The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lambda, \nu \right )$ with increasing $\nu$ (the black dots move to larger ordinates, as do the red dots). However, the accompanying change in $\text{NLF} \left ( f, \mu, \lambda, \nu \right )$ rules out an FROC curve based unambiguous determination of the direction of the change in overall performance. 
 
 
 
- 
+
 ```{r echo=FALSE}
 plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 ```
@@ -391,6 +122,8 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
+### wAFROC
+
 
  
 ```{r echo=FALSE}
@@ -400,13 +133,13 @@ plotArr = plotwAfroc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 
 
-
-
 ```{r optim-op-point-vary-nu-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
 
+
+### ROC
 
 
 
@@ -460,12 +193,14 @@ rocArr <- ret$rocArr
 
 
 
+### Summary table
 
 
 
 ```{r optim-op-point-table-vary-mu-contents, echo=FALSE}
 x12 <- doOneTable(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:4,1,1, labelIndx = 1)
 ```
+
 
 
 
@@ -488,11 +223,12 @@ Table \@ref(tab:optim-op-point-table-vary-mu) summarizes the results.
 1. For fixed $\mu, \lambda, \nu$ the Youden-index based optimization yields lesser performance than the corresponding wAFROC-AUC based optimization. The difference decreases with increasing $\mu$. These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-mu-wafroc).
 
 
+### FROC
+
 
 ```{r echo=FALSE}
 plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 ```
-
 
 
 
@@ -503,13 +239,12 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
+### wAFROC
+
 
 ```{r echo=FALSE}
 plotArr = plotwAfroc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 ```
-
-
-
 
 
 
@@ -523,14 +258,12 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 TBA The continuous section of each curve ends at the optimal threshold listed in Table \@ref(tab:optim-op-point-table-vary-mu), namely $\zeta_1$ = `r simplePrint(zetaOptArr[1,1,1,1])` for the green-red-red-dashed curve and $\zeta_1$ = `r simplePrint(zetaOptArr[2,1,1,1])` for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 
+### ROC
 
 
 ```{r echo=FALSE}
 plotArr = plotRoc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 ```
-
-
-
 
 
 
@@ -553,7 +286,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 ```{r}
-muArr <- c(3, 4, 5, 6)
+muArr <- c(2, 3, 4, 5)
 nuPArr <- c(0.9)
 lambdaPArr <- c(1)
 lesDistr <- c(0.5, 0.5)
@@ -576,6 +309,10 @@ rocArr <- ret$rocArr
 
 
 
+### Summary table
+
+
+
 ```{r optim-op-point-high-performance-vary-mu-table-vary-all-contents, echo=FALSE}
 x1 <- expand.grid(FOM = c("wAFROC", "Youden"), mu = muArr, lambda = lambdaPArr, nu = nuPArr)
 x1 <- cbind(x1, zeta1 = simplePrint(zetaOptArr[,,1,1]), wAFROC = simplePrint(wAfrocArr[,,1,1]), AUC = simplePrint(rocArr[,,1,1]), Sp = simplePrint(1-fpfOptArr[,,1,1]), Se = simplePrint(tpfOptArr[,,1,1]))
@@ -590,13 +327,13 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
+### FROC
+
 
 
 ```{r echo=FALSE}
 plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 ```
-
-
 
 
 
@@ -609,6 +346,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
+### wAFROC
 
 
 
@@ -626,6 +364,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
+### ROC
 
 
 
@@ -671,6 +410,9 @@ rocArr <- ret$rocArr
 
 
 
+### Summary table
+
+
 
 ```{r optim-op-point-low-performance-vary-mu-table-vary-all-contents, echo=FALSE}
 x1 <- expand.grid(FOM = c("wAFROC", "Youden"), mu = muArr, lambda = lambdaPArr, nu = nuPArr)
@@ -686,6 +428,7 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
+### FROC
 
 
 
@@ -703,36 +446,8 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-```{r, echo=FALSE}
-plotArr <- array(list(), dim = 8)
-i <- 1
-for (i1 in 1:length(muArr)) {
-  for (i2 in 1:length(lambdaPArr)) {
-    for (i3 in 1:length(nuPArr)) {
-      mu <- muArr[i1]
-      lambdaP <- lambdaPArr[i2]
-      nuP <- nuPArr[i3]
-      x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
-      lambda <- x$lambda
-      nu <- x$nu
-      plotArr[[i]] <- PlotRsmOperatingCharacteristics(
-        c(mu,mu),
-        c(lambda,lambda),
-        c(nu,nu),
-        c(zetaOptArr[1,i1,i2,i3], zetaOptArr[2,i1,i2,i3]),
-        lesDistr,
-        relWeights,
-        OpChType = "wAFROC",
-        legendPosition = "null"
-      )$wAFROCPlot +
-        ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
-      i <- i + 1
-    }
-  }
-}
-```
 
-
+### wAFROC
 
 
 
@@ -746,6 +461,10 @@ plotArr = plotwAfroc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 #grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
+
+
+
+### ROC
 
 
 
@@ -768,7 +487,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 ```{r}
-muArr <- c(5)
+muArr <- c(4)
 nuPArr <- c(0.9)
 lambdaPArr <- c(1,2,5,10)
 lesDistr <- c(0.5, 0.5)
@@ -792,6 +511,7 @@ rocArr <- ret$rocArr
 
 
 
+### Summary table
 
 
 
@@ -809,6 +529,9 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
+### FROC
+
+
 
 
 ```{r echo=FALSE}
@@ -824,6 +547,9 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
+### wAFROC
+
+
 
 ```{r echo=FALSE}
 plotArr = plotwAfroc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
@@ -833,12 +559,13 @@ plotArr = plotwAfroc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 
 
-
 ```{r optim-op-point-high-performance-vary-lambda-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
+
+
+### ROC
 
 
 
@@ -851,7 +578,6 @@ plotArr = plotRoc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 ```{r optim-op-point-high-performance-vary-lambda-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
 
@@ -882,6 +608,7 @@ rocArr <- ret$rocArr
 
 
 
+### Summary table
 
 
 
@@ -899,6 +626,9 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
+### FROC
+
+
 
 ```{r echo=FALSE}
 plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
@@ -909,9 +639,11 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 ```{r optim-op-point-low-performance-vary-lambda-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
+
+
+### wAFROC
 
 
 
@@ -927,9 +659,11 @@ plotArr = plotwAfroc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 ```{r optim-op-point-low-performance-vary-lambda-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
+
+
+### ROC
 
 
 
@@ -942,7 +676,6 @@ plotArr = plotRoc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 ```{r optim-op-point-low-performance-vary-lambda-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
 
@@ -974,6 +707,7 @@ rocArr <- ret$rocArr
 
 
 
+### Summary table
 
 
 
@@ -991,6 +725,8 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
+### FROC
+
 
 
 ```{r echo=FALSE}
@@ -1002,10 +738,11 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 ```{r optim-op-point-high-performance-vary-nu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
 
+
+### wAFROC
 
 
 
@@ -1020,10 +757,11 @@ plotArr = plotwAfroc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 ```{r optim-op-point-high-performance-vary-nu-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
 
+
+### ROC
 
 
 
@@ -1036,7 +774,6 @@ plotArr = plotRoc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 ```{r optim-op-point-high-performance-vary-nu-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
 
@@ -1067,6 +804,7 @@ rocArr <- ret$rocArr
 
 
 
+### Summary table
 
 
 
@@ -1084,6 +822,9 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
+### FROC
+
+
 
 ```{r echo=FALSE}
 plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
@@ -1094,9 +835,11 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 ```{r optim-op-point-low-performance-vary-nu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
+
+
+### wAFROC
 
 
 
@@ -1112,9 +855,11 @@ plotArr = plotwAfroc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 ```{r optim-op-point-low-performance-vary-nu-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
+
+
+### ROC
 
 
 
@@ -1127,9 +872,8 @@ plotArr = plotRoc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 ```{r optim-op-point-low-performance-vary-nu-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
 
 
-## References {#optim-op-point-references2}
+## References {#optim-op-point-appendices-references}

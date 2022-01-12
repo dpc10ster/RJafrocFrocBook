@@ -22,288 +22,13 @@ library(gridExtra)
 library(abind)
 library(dplyr)
 library(mvtnorm)
+library(here)
 ```
-
 
 
 ```{r, echo=FALSE}
-OpPtStr <- function(x,y) {
-  y <- paste0("(", sprintf("%.3f", x), ", ", sprintf("%.3f", y), ")")
-  return(y)
-}
-
-simplePrint <- function(x) {
-  sprintf("%.3f", x)
-}
+source(here("R/optim-op-point/optim-op-point-helpers.R"))
 ```
-
-
-
-
-```{r foms_2be_maximized, echo=FALSE}
-
-wAFROC <- function (
-  zeta1, mu, lambdaP, nuP, 
-  lesDistr, 
-  relWeights) {
-  # return negative of aucwAFROC 
-  # (as optimize finds minimum of function)
-  return(-UtilAnalyticalAucsRSM(mu, lambdaP = lambdaP, nuP = nuP, zeta1, lesDistr, relWeights)$aucwAFROC)
-}
-
-
-Youden <- function (zeta1, mu, lambdaP, nuP, lesDistr) {
-  # add sensitivity and specificity 
-  # and subtract 1, i.e., Youden's index
-  x <- RSM_yROC(zeta1, mu, lambdaP, nuP, lesDistr) + 
-    (1 - RSM_xROC(zeta1, lambdaP)) - 1
-  # return negative of Youden-index 
-  # (as optimize finds minimum of function)
-  return(-x)
-}
-```
-
-
-
-
-```{r do-one-set, cache = FALSE, echo=FALSE}
-doOneSet <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
-  wAfrocArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  rocArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  zetaOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  fpfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  tpfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  nlfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  llfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
-        mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        for (y in 1:2) {
-          if (y == 1) {
-            x <- optimize(wAFROC, 
-                          interval = c(-5,5), 
-                          mu, 
-                          lambdaP = lambdaP, 
-                          nuP = nuP, 
-                          lesDistr, 
-                          relWeights)
-            zetaOptArr[y,i1,i2,i3] <- x$minimum
-            wAfrocArr[y,i1,i2,i3] <- -x$objective # safe to use objective here
-            rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
-              mu, 
-              lambdaP = lambdaP, 
-              nuP = nuP, 
-              zeta1 = x$minimum, 
-              lesDistr, 
-              relWeights)$aucROC
-            fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
-              z = x$minimum, 
-              lambdaP = lambdaP)
-            tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
-              z = x$minimum, 
-              mu, 
-              lambdaP = lambdaP,
-              nuP = nuP,
-              lesDistr = lesDistr)
-            nlfOptArr[y,i1,i2,i3] <- RSM_xFROC(
-              z = x$minimum, 
-              lambdaP = lambdaP)
-            llfOptArr[y,i1,i2,i3] <- RSM_yFROC(
-              z = x$minimum, 
-              mu, 
-              nuP = nuP)
-          } else if (y == 2) {
-            x <- optimize(Youden, 
-                          interval = c(-5,5), 
-                          mu, 
-                          lambdaP = lambdaP, 
-                          nuP = nuP, 
-                          lesDistr)
-            zetaOptArr[y,i1,i2,i3] <- x$minimum
-            wAfrocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
-              mu, 
-              lambdaP = lambdaP, 
-              nuP = nuP, 
-              zeta1 = x$minimum, 
-              lesDistr, 
-              relWeights)$aucwAFROC
-            rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
-              mu, 
-              lambdaP = lambdaP, 
-              nuP = nuP, 
-              zeta1 = x$minimum, 
-              lesDistr, 
-              relWeights)$aucROC
-            fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
-              z = x$minimum, 
-              lambdaP = lambdaP)
-            tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
-              z = x$minimum, 
-              mu, 
-              lambdaP = lambdaP,
-              nuP = nuP,
-              lesDistr = lesDistr)
-            nlfOptArr[y,i1,i2,i3] <- RSM_xFROC(
-              z = x$minimum, 
-              lambdaP = lambdaP)
-            llfOptArr[y,i1,i2,i3] <- RSM_yFROC(
-              z = x$minimum, mu, nuP)
-          } else stop("incorrect y")
-        }
-      }
-    }
-  }
-  return(list(
-    zetaOptArr = zetaOptArr,
-    nlfOptArr = nlfOptArr,
-    llfOptArr = llfOptArr,
-    fpfOptArr = fpfOptArr,
-    tpfOptArr = tpfOptArr,
-    wAfrocArr = wAfrocArr, 
-    rocArr = rocArr)
-    )
-}
-```
-
-
-
-```{r plot-froc, echo=FALSE}
-plotFroc <- function(muArr, lambdaPArr, nuPArr) {
-  plotArr <- array(list(), dim = 8)
-  i <- 1
-  for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
-        mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        z <- seq(-5,mu+5,0.1)
-        xFROC <- RSM_xFROC(z, lambdaP)
-        yFROC <- RSM_yFROC(z, mu, nuP)
-        df_froc <- data.frame(
-          NLF = xFROC, 
-          LLF = yFROC)
-        plotArr[[i]] <- ggplot2::ggplot(
-          df_froc, 
-          aes(x = NLF, y = LLF)) + 
-          geom_line() +
-          scale_x_continuous(limits = c(0,lambdaP)) + 
-          scale_y_continuous(limits = c(0,1)) +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
-        for (y in 1:2) {
-          optPt <- data.frame(
-            NLF = nlfOptArr[y,i1,i2,i3], 
-            LLF = llfOptArr[y,i1,i2,i3])
-          plotArr[[i]] <- plotArr[[i]] + 
-            geom_point(data = optPt, color = y) 
-        }
-        i <- i + 1
-      }
-    }
-  }
-  return (plotArr)
-}
-```
-
-
-
-
-```{r plot-wafroc, echo=FALSE}
-plotwAfroc <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
-  plotArr <- array(list(), dim = 8)
-  i <- 1
-  for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
-        mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
-        lambda <- x$lambda
-        nu <- x$nu
-        plotArr[[i]] <- PlotRsmOperatingCharacteristics(
-          c(mu,mu),
-          c(lambda,lambda),
-          c(nu,nu),
-          c(zetaOptArr[1,i1,i2,i3], zetaOptArr[2,i1,i2,i3]),
-          lesDistr,
-          relWeights,
-          OpChType = "wAFROC",
-          legendPosition = "null"
-        )$wAFROCPlot +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
-        i <- i + 1
-      }
-    }
-  }
-  return(plotArr)
-}
-```
-
-
-
-
-
-```{r plot-roc, echo=FALSE}
-plotRoc <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
-  plotArr <- array(list(), dim = 8)
-  i <- 1
-  for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
-        mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
-        lambda <- x$lambda
-        nu <- x$nu
-        plotArr[[i]] <- PlotRsmOperatingCharacteristics(
-          c(mu,mu),
-          c(lambda,lambda),
-          c(nu,nu),
-          c(zetaOptArr[1,i1,i2,i3], zetaOptArr[2,i1,i2,i3]),
-          lesDistr,
-          relWeights,
-          OpChType = "ROC",
-          legendPosition = "null"
-        )$ROCPlot +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
-        i <- i + 1
-      }
-    }
-  }
-  return(plotArr)
-}
-```
-
-
-
-```{r do-one-table, echo=FALSE}
-doOneTable <- function(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, ind1,ind2,ind3, labelIndx) {
-  if (labelIndx == 1) {
-    x1 <- cbind(rep("wAFROC",4), mu = muArr, zeta1 = simplePrint(zetaOptArr[1,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[1,ind1,ind2,ind3]), ROC = simplePrint(rocArr[1,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[1,ind1,ind2,ind3], llfOptArr[1,ind1,ind2,ind3]))
-    x2 <- cbind(rep("Youden",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[2,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[2,ind1,ind2,ind3]), ROC = simplePrint(rocArr[2,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[2,ind1,ind2,ind3], llfOptArr[2,ind1,ind2,ind3]))
-    x12 <- as.data.frame(rbind(x1,x2))
-    colnames(x12) <- c("FOM", "$\\mu$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\text{ROC}$", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
-  } else if (labelIndx == 2) {
-    x1 <- cbind(rep("wAFROC",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[1,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[1,ind1,ind2,ind3]), ROC = simplePrint(rocArr[1,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[1,ind1,ind2,ind3], llfOptArr[1,ind1,ind2,ind3]))
-    x2 <- cbind(rep("Youden",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[2,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[2,ind1,ind2,ind3]), ROC = simplePrint(rocArr[2,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[2,ind1,ind2,ind3], llfOptArr[2,ind1,ind2,ind3]))
-    x12 <- as.data.frame(rbind(x1,x2))
-    colnames(x12) <- c("FOM", "$\\lambda$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\text{ROC}$", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
-  } else if (labelIndx == 3) {
-    x1 <- cbind(rep("wAFROC",4), nu = nuPArr, zeta1 = simplePrint(zetaOptArr[1,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[1,ind1,ind2,ind3]), ROC = simplePrint(rocArr[1,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[1,ind1,ind2,ind3], llfOptArr[1,ind1,ind2,ind3]))
-    x2 <- cbind(rep("Youden",4), lambda = lambdaPArr, zeta1 = simplePrint(zetaOptArr[2,ind1,ind2,ind3]), wAFROC = simplePrint(wAfrocArr[2,ind1,ind2,ind3]), ROC = simplePrint(rocArr[2,ind1,ind2,ind3]), OptOpPt = OpPtStr(nlfOptArr[2,ind1,ind2,ind3], llfOptArr[2,ind1,ind2,ind3]))
-    x12 <- as.data.frame(rbind(x1,x2))
-    colnames(x12) <- c("FOM", "$\\nu$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\text{ROC}$", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
-  } else stop("incorrect label index")
-  return(x12)
-}
-```
-
-
 
 ## TBA How much finished {#optim-op-point-how-much-finished}
 95%
@@ -356,8 +81,6 @@ In the following $f = 1$ denotes wAFROC-AUC optimization and $f = 2$ denotes You
 
 
 
-
-
 ```{r vary-lambda-parameters}
 muArr <- c(2)
 lambdaPArr <- c(1, 2, 5, 10)
@@ -398,6 +121,9 @@ The following quantities were calculated:
 1. $\text{NLF} \left (f, \mu, \lambda, \nu \right )$ and $\text{LLF} \left (f, \mu, \lambda, \nu \right )$: the coordinates of the operating point on the FROC curve corresponding to $\zeta_{1} \left ( f, \mu, \lambda, \nu \right )$.   
 
 
+### Summary table
+
+
 Table \@ref(tab:optim-op-point-table-vary-lambda) summarizes the results. The column labeled FOM shows the quantity being maximized (wAFROC-AUC or the Youden-index), the column labeled $\lambda$ lists the 4 values of $\lambda$, $\zeta_1$ is the optimal value of $\zeta_1$ that maximizes the chosen figure of merit. The column labeled wAFROC is the AUC under the wAFROC curve, the column labeled ROC is the AUC under the ROC curve, and $\left( \text{NLF},  \text{LLF}\right)$ is the operating point on the FROC curve corresponding to the value of $\zeta_1$ in the third column. All quantities in columns 3 through 6 are functions of $f, \mu, \lambda, \nu$. 
 
 
@@ -435,6 +161,10 @@ Inspection of this table reveals the following effects:
     + These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-lambda-wafroc).
 
 
+
+### FROC
+
+
 The third effect is illustrated by the FROC plots with superimposed operating points for varying $\lambda$ shown in Fig. \@ref(fig:optim-op-point-vary-lambda-froc). The black dots correspond to $f = 1$ and the red dots correspond to $f = 2$. The black dots are consistently above the red dots and the separation of the dots is greatest for $\lambda = 1$ and smallest for $\lambda = 10$.  
 
 The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lambda, \nu \right )$ with increasing $\lambda$: the black dots move to smaller ordinates, as do the red dots, which would seem to imply decreasing performance. However, the accompanying change in $\text{NLF} \left ( f, \mu, \lambda, \nu \right )$ rules out an unambiguous determination of the direction of the change in overall performance based on the FROC. 
@@ -451,6 +181,9 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
+
+
+### wAFROC
 
 
 ```{r echo=FALSE}
@@ -474,6 +207,9 @@ grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], nrow = 2, ncol
 
 
 
+### ROC
+
+
 ```{r echo=FALSE}
 plotArr = plotRoc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 ```
@@ -491,7 +227,7 @@ grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], nrow = 2, ncol
 
 
 
-Since the ROC curves show a similar dependence as the wAFROC curves one may wonder why not maximize the AUC under the ROC, instead of AUC under the wAFROC? It can be shown that as long as one restricts to proper ROC models, this will always yield $\zeta_1 = -\infty$. For a proper ROC curve the slope decreases monotonically as the operating point moves up the curve and at each point the slope is greater than that of the straight curve connecting the point to (1,1). This geometry ensures that AUC under any curve with a finite $\zeta_1$ is smaller than that under the full curve. Therefore maximum AUC can only be attained by choosing $\zeta_1 = -\infty$. This is illustrated in Fig. \@ref(fig:binormal-model-threshold-dependence-2) which shows a binormal ROC curve corresponding to $a = 2$ and $b = 1$, which is a proper ROC curve. The dot is the operating point corresponding to $\zeta_1 = 1.5$. In the region above the dot the continuous curve is above the dotted line, meaning AUC performance of an observer who adopts a finite $\zeta_1$ is less than performance of an observer who rates all cases, i.e., adopts $\zeta_1 = -\infty$.
+Since the ROC curves show a similar dependence as the wAFROC curves why not maximize the AUC under the ROC, instead of AUC under the wAFROC? It can be [shown]() that as long as one restricts to proper ROC models, this will always result in $\zeta_1 = -\infty$. For a proper ROC curve the slope decreases monotonically as the operating point moves up the curve and at each point the slope is greater than that of the straight curve connecting the point to (1,1). This geometry ensures that AUC under any curve with a finite $\zeta_1$ is smaller than that under the full curve. Therefore maximum AUC can only be attained by choosing $\zeta_1 = -\infty$. This is illustrated in Fig. \@ref(fig:binormal-model-threshold-dependence-2) which shows a binormal ROC curve corresponding to $a = 2$ and $b = 1$, which is a proper ROC curve. The dot is the operating point corresponding to $\zeta_1 = 1.5$. In the region above the dot the continuous curve is above the dotted line, meaning AUC performance of an observer who adopts a finite $\zeta_1$ is less than performance of an observer who rates all cases, i.e., adopts $\zeta_1 = -\infty$.
 
 
 ```{r echo=FALSE}
