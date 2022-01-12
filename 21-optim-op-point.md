@@ -816,7 +816,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 ```r
-muArr <- c(1, 2, 3, 5)
+muArr <- c(3, 4, 5, 6)
 nuPArr <- c(0.9)
 lambdaPArr <- c(1)
 lesDistr <- c(0.5, 0.5)
@@ -852,50 +852,6 @@ relWeights <- c(0.5, 0.5)
 <tbody>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> -1.663 </td>
-   <td style="text-align:left;"> 0.745 </td>
-   <td style="text-align:left;"> 0.850 </td>
-   <td style="text-align:left;"> 0.386 </td>
-   <td style="text-align:left;"> 0.978 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 0.462 </td>
-   <td style="text-align:left;"> 0.704 </td>
-   <td style="text-align:left;"> 0.815 </td>
-   <td style="text-align:left;"> 0.725 </td>
-   <td style="text-align:left;"> 0.819 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> -0.007 </td>
-   <td style="text-align:left;"> 0.864 </td>
-   <td style="text-align:left;"> 0.929 </td>
-   <td style="text-align:left;"> 0.605 </td>
-   <td style="text-align:left;"> 0.959 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 1.095 </td>
-   <td style="text-align:left;"> 0.831 </td>
-   <td style="text-align:left;"> 0.899 </td>
-   <td style="text-align:left;"> 0.872 </td>
-   <td style="text-align:left;"> 0.854 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
    <td style="text-align:right;"> 3 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0.9 </td>
@@ -918,6 +874,28 @@ relWeights <- c(0.5, 0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 1.463 </td>
+   <td style="text-align:left;"> 0.942 </td>
+   <td style="text-align:left;"> 0.970 </td>
+   <td style="text-align:left;"> 0.931 </td>
+   <td style="text-align:left;"> 0.946 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 2.124 </td>
+   <td style="text-align:left;"> 0.935 </td>
+   <td style="text-align:left;"> 0.964 </td>
+   <td style="text-align:left;"> 0.983 </td>
+   <td style="text-align:left;"> 0.929 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
    <td style="text-align:right;"> 5 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0.9 </td>
@@ -937,6 +915,28 @@ relWeights <- c(0.5, 0.5)
    <td style="text-align:left;"> 0.970 </td>
    <td style="text-align:left;"> 0.995 </td>
    <td style="text-align:left;"> 0.941 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 2.634 </td>
+   <td style="text-align:left;"> 0.950 </td>
+   <td style="text-align:left;"> 0.972 </td>
+   <td style="text-align:left;"> 0.996 </td>
+   <td style="text-align:left;"> 0.945 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 3.093 </td>
+   <td style="text-align:left;"> 0.949 </td>
+   <td style="text-align:left;"> 0.972 </td>
+   <td style="text-align:left;"> 0.999 </td>
+   <td style="text-align:left;"> 0.944 </td>
   </tr>
 </tbody>
 </table>
@@ -994,9 +994,9 @@ relWeights <- c(0.5, 0.5)
 
 
 ```r
-muArr <- c(1, 2, 3, 5)
+muArr <- c(1, 2, 3, 4)
 nuPArr <- c(0.1)
-lambdaPArr <- c(1)
+lambdaPArr <- c(10)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -1034,90 +1034,90 @@ relWeights <- c(0.5, 0.5)
   <tr>
    <td style="text-align:left;"> wAFROC </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
    <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> 2.799 </td>
-   <td style="text-align:left;"> 0.501 </td>
-   <td style="text-align:left;"> 0.503 </td>
-   <td style="text-align:left;"> 0.997 </td>
-   <td style="text-align:left;"> 0.008 </td>
+   <td style="text-align:left;"> 5.000 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 1.000 </td>
+   <td style="text-align:left;"> 0.000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
    <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> 0.264 </td>
-   <td style="text-align:left;"> 0.379 </td>
-   <td style="text-align:left;"> 0.545 </td>
-   <td style="text-align:left;"> 0.673 </td>
-   <td style="text-align:left;"> 0.403 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> 2.128 </td>
+   <td style="text-align:left;"> 1.563 </td>
+   <td style="text-align:left;"> 0.292 </td>
    <td style="text-align:left;"> 0.514 </td>
-   <td style="text-align:left;"> 0.533 </td>
-   <td style="text-align:left;"> 0.983 </td>
-   <td style="text-align:left;"> 0.082 </td>
+   <td style="text-align:left;"> 0.554 </td>
+   <td style="text-align:left;"> 0.469 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.1 </td>
+   <td style="text-align:left;"> 3.298 </td>
+   <td style="text-align:left;"> 0.502 </td>
+   <td style="text-align:left;"> 0.507 </td>
+   <td style="text-align:left;"> 0.995 </td>
+   <td style="text-align:left;"> 0.019 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
    <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> 0.937 </td>
-   <td style="text-align:left;"> 0.467 </td>
+   <td style="text-align:left;"> 1.865 </td>
+   <td style="text-align:left;"> 0.397 </td>
+   <td style="text-align:left;"> 0.535 </td>
+   <td style="text-align:left;"> 0.733 </td>
+   <td style="text-align:left;"> 0.327 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.1 </td>
+   <td style="text-align:left;"> 3.018 </td>
+   <td style="text-align:left;"> 0.518 </td>
+   <td style="text-align:left;"> 0.536 </td>
+   <td style="text-align:left;"> 0.987 </td>
+   <td style="text-align:left;"> 0.084 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.1 </td>
+   <td style="text-align:left;"> 2.198 </td>
+   <td style="text-align:left;"> 0.478 </td>
+   <td style="text-align:left;"> 0.555 </td>
+   <td style="text-align:left;"> 0.869 </td>
+   <td style="text-align:left;"> 0.231 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.1 </td>
+   <td style="text-align:left;"> 3.130 </td>
+   <td style="text-align:left;"> 0.536 </td>
    <td style="text-align:left;"> 0.559 </td>
-   <td style="text-align:left;"> 0.840 </td>
-   <td style="text-align:left;"> 0.265 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> 2.241 </td>
-   <td style="text-align:left;"> 0.533 </td>
-   <td style="text-align:left;"> 0.556 </td>
-   <td style="text-align:left;"> 0.988 </td>
-   <td style="text-align:left;"> 0.124 </td>
+   <td style="text-align:left;"> 0.991 </td>
+   <td style="text-align:left;"> 0.126 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 10 </td>
    <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> 1.488 </td>
-   <td style="text-align:left;"> 0.516 </td>
+   <td style="text-align:left;"> 2.564 </td>
+   <td style="text-align:left;"> 0.523 </td>
    <td style="text-align:left;"> 0.567 </td>
-   <td style="text-align:left;"> 0.934 </td>
-   <td style="text-align:left;"> 0.193 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> 2.940 </td>
-   <td style="text-align:left;"> 0.548 </td>
-   <td style="text-align:left;"> 0.571 </td>
-   <td style="text-align:left;"> 0.998 </td>
-   <td style="text-align:left;"> 0.144 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> 2.506 </td>
-   <td style="text-align:left;"> 0.547 </td>
-   <td style="text-align:left;"> 0.572 </td>
-   <td style="text-align:left;"> 0.994 </td>
-   <td style="text-align:left;"> 0.149 </td>
+   <td style="text-align:left;"> 0.950 </td>
+   <td style="text-align:left;"> 0.178 </td>
   </tr>
 </tbody>
 </table>
@@ -1174,7 +1174,7 @@ relWeights <- c(0.5, 0.5)
 
 
 ```r
-muArr <- c(3)
+muArr <- c(5)
 nuPArr <- c(0.9)
 lambdaPArr <- c(1,2,5,10)
 lesDistr <- c(0.5, 0.5)
@@ -1214,91 +1214,91 @@ relWeights <- c(0.5, 0.5)
 <tbody>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 5 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 0.808 </td>
-   <td style="text-align:left;"> 0.922 </td>
-   <td style="text-align:left;"> 0.961 </td>
-   <td style="text-align:left;"> 0.811 </td>
-   <td style="text-align:left;"> 0.949 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 1.629 </td>
-   <td style="text-align:left;"> 0.903 </td>
+   <td style="text-align:left;"> 2.063 </td>
+   <td style="text-align:left;"> 0.948 </td>
+   <td style="text-align:left;"> 0.972 </td>
+   <td style="text-align:left;"> 0.981 </td>
    <td style="text-align:left;"> 0.945 </td>
-   <td style="text-align:left;"> 0.950 </td>
-   <td style="text-align:left;"> 0.901 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 2.608 </td>
+   <td style="text-align:left;"> 0.946 </td>
+   <td style="text-align:left;"> 0.970 </td>
+   <td style="text-align:left;"> 0.995 </td>
+   <td style="text-align:left;"> 0.941 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 5 </td>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 1.071 </td>
-   <td style="text-align:left;"> 0.905 </td>
-   <td style="text-align:left;"> 0.953 </td>
-   <td style="text-align:left;"> 0.753 </td>
+   <td style="text-align:left;"> 2.204 </td>
    <td style="text-align:left;"> 0.947 </td>
+   <td style="text-align:left;"> 0.972 </td>
+   <td style="text-align:left;"> 0.973 </td>
+   <td style="text-align:left;"> 0.945 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 5 </td>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 1.835 </td>
-   <td style="text-align:left;"> 0.882 </td>
+   <td style="text-align:left;"> 2.746 </td>
+   <td style="text-align:left;"> 0.944 </td>
+   <td style="text-align:left;"> 0.969 </td>
+   <td style="text-align:left;"> 0.994 </td>
+   <td style="text-align:left;"> 0.939 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 2.390 </td>
+   <td style="text-align:left;"> 0.945 </td>
+   <td style="text-align:left;"> 0.971 </td>
+   <td style="text-align:left;"> 0.959 </td>
+   <td style="text-align:left;"> 0.945 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 2.926 </td>
+   <td style="text-align:left;"> 0.941 </td>
+   <td style="text-align:left;"> 0.967 </td>
+   <td style="text-align:left;"> 0.991 </td>
+   <td style="text-align:left;"> 0.935 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 2.533 </td>
+   <td style="text-align:left;"> 0.943 </td>
+   <td style="text-align:left;"> 0.970 </td>
+   <td style="text-align:left;"> 0.945 </td>
+   <td style="text-align:left;"> 0.945 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 3.062 </td>
+   <td style="text-align:left;"> 0.937 </td>
+   <td style="text-align:left;"> 0.965 </td>
+   <td style="text-align:left;"> 0.989 </td>
    <td style="text-align:left;"> 0.931 </td>
-   <td style="text-align:left;"> 0.936 </td>
-   <td style="text-align:left;"> 0.881 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 1.449 </td>
-   <td style="text-align:left;"> 0.871 </td>
-   <td style="text-align:left;"> 0.936 </td>
-   <td style="text-align:left;"> 0.692 </td>
-   <td style="text-align:left;"> 0.938 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 2.099 </td>
-   <td style="text-align:left;"> 0.847 </td>
-   <td style="text-align:left;"> 0.908 </td>
-   <td style="text-align:left;"> 0.914 </td>
-   <td style="text-align:left;"> 0.846 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 1.761 </td>
-   <td style="text-align:left;"> 0.835 </td>
-   <td style="text-align:left;"> 0.916 </td>
-   <td style="text-align:left;"> 0.676 </td>
-   <td style="text-align:left;"> 0.920 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 2.293 </td>
-   <td style="text-align:left;"> 0.814 </td>
-   <td style="text-align:left;"> 0.886 </td>
-   <td style="text-align:left;"> 0.896 </td>
-   <td style="text-align:left;"> 0.814 </td>
   </tr>
 </tbody>
 </table>
@@ -1351,7 +1351,7 @@ relWeights <- c(0.5, 0.5)
 
 ```r
 muArr <- c(1)
-nuPArr <- c(0.7)
+nuPArr <- c(0.2)
 lambdaPArr <- c(1, 2, 5, 10)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
@@ -1391,89 +1391,89 @@ relWeights <- c(0.5, 0.5)
    <td style="text-align:left;"> wAFROC </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> -0.054 </td>
-   <td style="text-align:left;"> 0.633 </td>
-   <td style="text-align:left;"> 0.780 </td>
-   <td style="text-align:left;"> 0.594 </td>
-   <td style="text-align:left;"> 0.833 </td>
+   <td style="text-align:right;"> 0.2 </td>
+   <td style="text-align:left;"> 2.081 </td>
+   <td style="text-align:left;"> 0.505 </td>
+   <td style="text-align:left;"> 0.520 </td>
+   <td style="text-align:left;"> 0.981 </td>
+   <td style="text-align:left;"> 0.059 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 0.405 </td>
-   <td style="text-align:left;"> 0.629 </td>
-   <td style="text-align:left;"> 0.761 </td>
-   <td style="text-align:left;"> 0.710 </td>
-   <td style="text-align:left;"> 0.739 </td>
+   <td style="text-align:right;"> 0.2 </td>
+   <td style="text-align:left;"> 0.284 </td>
+   <td style="text-align:left;"> 0.423 </td>
+   <td style="text-align:left;"> 0.587 </td>
+   <td style="text-align:left;"> 0.678 </td>
+   <td style="text-align:left;"> 0.469 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 1.202 </td>
-   <td style="text-align:left;"> 0.551 </td>
-   <td style="text-align:left;"> 0.671 </td>
-   <td style="text-align:left;"> 0.795 </td>
-   <td style="text-align:left;"> 0.521 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 0.809 </td>
-   <td style="text-align:left;"> 0.547 </td>
-   <td style="text-align:left;"> 0.704 </td>
-   <td style="text-align:left;"> 0.658 </td>
-   <td style="text-align:left;"> 0.686 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 2.409 </td>
-   <td style="text-align:left;"> 0.508 </td>
-   <td style="text-align:left;"> 0.540 </td>
-   <td style="text-align:left;"> 0.961 </td>
-   <td style="text-align:left;"> 0.118 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 1.276 </td>
-   <td style="text-align:left;"> 0.448 </td>
-   <td style="text-align:left;"> 0.636 </td>
-   <td style="text-align:left;"> 0.604 </td>
-   <td style="text-align:left;"> 0.622 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 3.148 </td>
+   <td style="text-align:right;"> 0.2 </td>
+   <td style="text-align:left;"> 2.795 </td>
    <td style="text-align:left;"> 0.501 </td>
-   <td style="text-align:left;"> 0.508 </td>
-   <td style="text-align:left;"> 0.992 </td>
-   <td style="text-align:left;"> 0.025 </td>
+   <td style="text-align:left;"> 0.505 </td>
+   <td style="text-align:left;"> 0.995 </td>
+   <td style="text-align:left;"> 0.016 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.2 </td>
+   <td style="text-align:left;"> 0.734 </td>
+   <td style="text-align:left;"> 0.380 </td>
+   <td style="text-align:left;"> 0.566 </td>
+   <td style="text-align:left;"> 0.629 </td>
+   <td style="text-align:left;"> 0.480 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.2 </td>
+   <td style="text-align:left;"> 3.718 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 0.999 </td>
+   <td style="text-align:left;"> 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.2 </td>
+   <td style="text-align:left;"> 1.237 </td>
+   <td style="text-align:left;"> 0.335 </td>
+   <td style="text-align:left;"> 0.542 </td>
+   <td style="text-align:left;"> 0.583 </td>
+   <td style="text-align:left;"> 0.486 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.2 </td>
+   <td style="text-align:left;"> 4.412 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 1.000 </td>
+   <td style="text-align:left;"> 0.000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 1.591 </td>
-   <td style="text-align:left;"> 0.389 </td>
-   <td style="text-align:left;"> 0.594 </td>
-   <td style="text-align:left;"> 0.572 </td>
-   <td style="text-align:left;"> 0.583 </td>
+   <td style="text-align:right;"> 0.2 </td>
+   <td style="text-align:left;"> 1.568 </td>
+   <td style="text-align:left;"> 0.309 </td>
+   <td style="text-align:left;"> 0.528 </td>
+   <td style="text-align:left;"> 0.557 </td>
+   <td style="text-align:left;"> 0.490 </td>
   </tr>
 </tbody>
 </table>
@@ -1527,9 +1527,9 @@ relWeights <- c(0.5, 0.5)
 
 
 ```r
-muArr <- c(5)
+muArr <- c(4)
 lambdaPArr <- c(1)
-nuPArr <- c(0.2, 0.5, 0.7, 0.9)
+nuPArr <- c(0.3, 0.5, 0.7, 0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -1566,91 +1566,91 @@ relWeights <- c(0.5, 0.5)
 <tbody>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> 2.778 </td>
-   <td style="text-align:left;"> 0.598 </td>
-   <td style="text-align:left;"> 0.638 </td>
-   <td style="text-align:left;"> 0.997 </td>
-   <td style="text-align:left;"> 0.279 </td>
+   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:left;"> 2.216 </td>
+   <td style="text-align:left;"> 0.640 </td>
+   <td style="text-align:left;"> 0.696 </td>
+   <td style="text-align:left;"> 0.987 </td>
+   <td style="text-align:left;"> 0.400 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> 2.513 </td>
-   <td style="text-align:left;"> 0.597 </td>
+   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:left;"> 2.023 </td>
    <td style="text-align:left;"> 0.639 </td>
-   <td style="text-align:left;"> 0.994 </td>
-   <td style="text-align:left;"> 0.283 </td>
+   <td style="text-align:left;"> 0.698 </td>
+   <td style="text-align:left;"> 0.979 </td>
+   <td style="text-align:left;"> 0.409 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0.5 </td>
-   <td style="text-align:left;"> 2.501 </td>
-   <td style="text-align:left;"> 0.747 </td>
-   <td style="text-align:left;"> 0.811 </td>
-   <td style="text-align:left;"> 0.994 </td>
-   <td style="text-align:left;"> 0.624 </td>
+   <td style="text-align:left;"> 2.006 </td>
+   <td style="text-align:left;"> 0.738 </td>
+   <td style="text-align:left;"> 0.806 </td>
+   <td style="text-align:left;"> 0.978 </td>
+   <td style="text-align:left;"> 0.622 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0.5 </td>
-   <td style="text-align:left;"> 2.543 </td>
-   <td style="text-align:left;"> 0.747 </td>
-   <td style="text-align:left;"> 0.811 </td>
-   <td style="text-align:left;"> 0.995 </td>
-   <td style="text-align:left;"> 0.624 </td>
+   <td style="text-align:left;"> 2.047 </td>
+   <td style="text-align:left;"> 0.738 </td>
+   <td style="text-align:left;"> 0.806 </td>
+   <td style="text-align:left;"> 0.980 </td>
+   <td style="text-align:left;"> 0.620 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 2.332 </td>
-   <td style="text-align:left;"> 0.847 </td>
-   <td style="text-align:left;"> 0.901 </td>
-   <td style="text-align:left;"> 0.990 </td>
-   <td style="text-align:left;"> 0.805 </td>
+   <td style="text-align:left;"> 1.796 </td>
+   <td style="text-align:left;"> 0.839 </td>
+   <td style="text-align:left;"> 0.898 </td>
+   <td style="text-align:left;"> 0.964 </td>
+   <td style="text-align:left;"> 0.804 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 2.570 </td>
-   <td style="text-align:left;"> 0.847 </td>
-   <td style="text-align:left;"> 0.900 </td>
-   <td style="text-align:left;"> 0.995 </td>
-   <td style="text-align:left;"> 0.802 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 2.063 </td>
-   <td style="text-align:left;"> 0.948 </td>
-   <td style="text-align:left;"> 0.972 </td>
+   <td style="text-align:left;"> 2.080 </td>
+   <td style="text-align:left;"> 0.837 </td>
+   <td style="text-align:left;"> 0.894 </td>
    <td style="text-align:left;"> 0.981 </td>
-   <td style="text-align:left;"> 0.945 </td>
+   <td style="text-align:left;"> 0.793 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 1.463 </td>
+   <td style="text-align:left;"> 0.942 </td>
+   <td style="text-align:left;"> 0.970 </td>
+   <td style="text-align:left;"> 0.931 </td>
+   <td style="text-align:left;"> 0.946 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 2.608 </td>
-   <td style="text-align:left;"> 0.946 </td>
-   <td style="text-align:left;"> 0.970 </td>
-   <td style="text-align:left;"> 0.995 </td>
-   <td style="text-align:left;"> 0.941 </td>
+   <td style="text-align:left;"> 2.124 </td>
+   <td style="text-align:left;"> 0.935 </td>
+   <td style="text-align:left;"> 0.964 </td>
+   <td style="text-align:left;"> 0.983 </td>
+   <td style="text-align:left;"> 0.929 </td>
   </tr>
 </tbody>
 </table>
@@ -1706,8 +1706,8 @@ relWeights <- c(0.5, 0.5)
 
 ```r
 muArr <- c(1)
-lambdaPArr <- c(1)
-nuPArr <- c(0.2, 0.5, 0.7, 0.9)
+lambdaPArr <- c(10)
+nuPArr <- c(0.3, 0.5, 0.7, 0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -1745,90 +1745,90 @@ relWeights <- c(0.5, 0.5)
   <tr>
    <td style="text-align:left;"> wAFROC </td>
    <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:left;"> 4.006 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 1.000 </td>
+   <td style="text-align:left;"> 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> 2.081 </td>
-   <td style="text-align:left;"> 0.505 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:left;"> 1.572 </td>
+   <td style="text-align:left;"> 0.325 </td>
+   <td style="text-align:left;"> 0.542 </td>
+   <td style="text-align:left;"> 0.560 </td>
+   <td style="text-align:left;"> 0.509 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:left;"> 3.493 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 0.502 </td>
+   <td style="text-align:left;"> 0.998 </td>
+   <td style="text-align:left;"> 0.007 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:left;"> 1.582 </td>
+   <td style="text-align:left;"> 0.358 </td>
+   <td style="text-align:left;"> 0.569 </td>
+   <td style="text-align:left;"> 0.566 </td>
+   <td style="text-align:left;"> 0.547 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:left;"> 3.148 </td>
+   <td style="text-align:left;"> 0.501 </td>
+   <td style="text-align:left;"> 0.508 </td>
+   <td style="text-align:left;"> 0.992 </td>
+   <td style="text-align:left;"> 0.025 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:left;"> 1.591 </td>
+   <td style="text-align:left;"> 0.389 </td>
+   <td style="text-align:left;"> 0.594 </td>
+   <td style="text-align:left;"> 0.572 </td>
+   <td style="text-align:left;"> 0.583 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:left;"> 2.881 </td>
+   <td style="text-align:left;"> 0.504 </td>
    <td style="text-align:left;"> 0.520 </td>
-   <td style="text-align:left;"> 0.981 </td>
+   <td style="text-align:left;"> 0.980 </td>
    <td style="text-align:left;"> 0.059 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> 0.284 </td>
-   <td style="text-align:left;"> 0.423 </td>
-   <td style="text-align:left;"> 0.587 </td>
-   <td style="text-align:left;"> 0.678 </td>
-   <td style="text-align:left;"> 0.469 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.5 </td>
-   <td style="text-align:left;"> 0.871 </td>
-   <td style="text-align:left;"> 0.557 </td>
-   <td style="text-align:left;"> 0.666 </td>
-   <td style="text-align:left;"> 0.825 </td>
-   <td style="text-align:left;"> 0.485 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.5 </td>
-   <td style="text-align:left;"> 0.353 </td>
-   <td style="text-align:left;"> 0.550 </td>
-   <td style="text-align:left;"> 0.699 </td>
-   <td style="text-align:left;"> 0.696 </td>
-   <td style="text-align:left;"> 0.643 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> -0.054 </td>
-   <td style="text-align:left;"> 0.633 </td>
-   <td style="text-align:left;"> 0.780 </td>
-   <td style="text-align:left;"> 0.594 </td>
-   <td style="text-align:left;"> 0.833 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.7 </td>
-   <td style="text-align:left;"> 0.405 </td>
-   <td style="text-align:left;"> 0.629 </td>
-   <td style="text-align:left;"> 0.761 </td>
-   <td style="text-align:left;"> 0.710 </td>
-   <td style="text-align:left;"> 0.739 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
    <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> -1.663 </td>
-   <td style="text-align:left;"> 0.745 </td>
-   <td style="text-align:left;"> 0.850 </td>
-   <td style="text-align:left;"> 0.386 </td>
-   <td style="text-align:left;"> 0.978 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.9 </td>
-   <td style="text-align:left;"> 0.462 </td>
-   <td style="text-align:left;"> 0.704 </td>
-   <td style="text-align:left;"> 0.815 </td>
-   <td style="text-align:left;"> 0.725 </td>
-   <td style="text-align:left;"> 0.819 </td>
+   <td style="text-align:left;"> 1.601 </td>
+   <td style="text-align:left;"> 0.420 </td>
+   <td style="text-align:left;"> 0.619 </td>
+   <td style="text-align:left;"> 0.579 </td>
+   <td style="text-align:left;"> 0.618 </td>
   </tr>
 </tbody>
 </table>
