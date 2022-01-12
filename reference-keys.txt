@@ -385,6 +385,8 @@ optim-op-point-vary-nu-mu
 optim-op-point-how-to-use-method
 optim-op-point-application
 optim-op-point-discussion
+optim-op-point-references
+optim-op-point2
 optim-op-point-vary-nu
 optim-op-point-vary-mu
 optim-op-point-limiting-situations
@@ -394,7 +396,7 @@ optim-op-point-high-performance-vary-lambda
 optim-op-point-low-performance-vary-lambda
 optim-op-point-high-performance-vary-nu
 optim-op-point-low-performance-vary-nu
-optim-op-point-references
+optim-op-point-references2
 datasets
 datasets-datasets
 datasets-references
