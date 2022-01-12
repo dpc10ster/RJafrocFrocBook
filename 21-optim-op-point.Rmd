@@ -980,7 +980,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 
 ```{r}
-muArr <- c(1, 2, 3, 5)
+muArr <- c(3, 4, 5, 6)
 nuPArr <- c(0.9)
 lambdaPArr <- c(1)
 lesDistr <- c(0.5, 0.5)
@@ -1073,9 +1073,9 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 ```{r}
-muArr <- c(1, 2, 3, 5)
+muArr <- c(1, 2, 3, 4)
 nuPArr <- c(0.1)
-lambdaPArr <- c(1)
+lambdaPArr <- c(10)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -1195,7 +1195,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 ```{r}
-muArr <- c(3)
+muArr <- c(5)
 nuPArr <- c(0.9)
 lambdaPArr <- c(1,2,5,10)
 lesDistr <- c(0.5, 0.5)
@@ -1287,7 +1287,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 ```{r}
 muArr <- c(1)
-nuPArr <- c(0.7)
+nuPArr <- c(0.2)
 lambdaPArr <- c(1, 2, 5, 10)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
@@ -1378,9 +1378,9 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 ```{r}
-muArr <- c(5)
+muArr <- c(4)
 lambdaPArr <- c(1)
-nuPArr <- c(0.2, 0.5, 0.7, 0.9)
+nuPArr <- c(0.3, 0.5, 0.7, 0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -1472,8 +1472,8 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 ```{r}
 muArr <- c(1)
-lambdaPArr <- c(1)
-nuPArr <- c(0.2, 0.5, 0.7, 0.9)
+lambdaPArr <- c(10)
+nuPArr <- c(0.3, 0.5, 0.7, 0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
