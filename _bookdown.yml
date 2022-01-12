@@ -15,6 +15,7 @@ rmd_files: [
   "10-rsm-3-fits.Rmd",
   "20-standalone-cad.Rmd",
   "21-optim-op-point.Rmd",
+  "22-optim-op-point.Rmd",
   "90-datasets.Rmd",
   "99-references.Rmd",
 ]
