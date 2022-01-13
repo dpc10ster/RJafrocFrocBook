@@ -206,7 +206,7 @@ x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:
 
 
 ```{r optim-op-point-table-vary-mu, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for $\\lambda = 1$, $\\nu = 0.9$  and 4 values of $\\mu$.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$, $\\nu = 0.9$.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
@@ -671,7 +671,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 ```{r}
 muArr <- c(4)
 lambdaPArr <- c(1)
-nuPArr <- c(0.3, 0.5, 0.7, 0.9)
+nuPArr <- c(0.6, 0.7, 0.8, 0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -766,7 +766,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 ```{r}
 muArr <- c(1)
 lambdaPArr <- c(10)
-nuPArr <- c(0.3, 0.5, 0.7, 0.9)
+nuPArr <- c(0.1, 0.2, 0.3, 0.4)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -798,7 +798,7 @@ x12 <- doOneTable(nuPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1
 
 
 ```{r optim-op-point-low-performance-vary-nu-table-vary-all, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $\\nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
