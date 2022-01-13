@@ -68,7 +68,7 @@ rocArr <- ret$rocArr
 
 
 ```{r optim-op-point-table-vary-nu-contents, echo=FALSE}
-x12 <- doOneTable(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1,1:4, labelIndx = 3)
+x12 <- doOneTable(nuPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1,1:4, labelIndx = 3)
 ```
 
 
@@ -198,7 +198,7 @@ rocArr <- ret$rocArr
 
 
 ```{r optim-op-point-table-vary-mu-contents, echo=FALSE}
-x12 <- doOneTable(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:4,1,1, labelIndx = 1)
+x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:4,1,1, labelIndx = 1)
 ```
 
 
@@ -309,7 +309,7 @@ rocArr <- ret$rocArr
 
 
 
-### Summary table
+#### Summary table
 
 
 
@@ -327,7 +327,7 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
-### FROC
+#### FROC
 
 
 
@@ -346,7 +346,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### wAFROC
+#### wAFROC
 
 
 
@@ -364,7 +364,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### ROC
+#### ROC
 
 
 
@@ -410,7 +410,7 @@ rocArr <- ret$rocArr
 
 
 
-### Summary table
+#### Summary table
 
 
 
@@ -428,7 +428,7 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
-### FROC
+#### FROC
 
 
 
@@ -447,7 +447,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### wAFROC
+#### wAFROC
 
 
 
@@ -464,7 +464,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### ROC
+#### ROC
 
 
 
@@ -511,7 +511,7 @@ rocArr <- ret$rocArr
 
 
 
-### Summary table
+#### Summary table
 
 
 
@@ -529,7 +529,7 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
-### FROC
+#### FROC
 
 
 
@@ -547,7 +547,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### wAFROC
+#### wAFROC
 
 
 
@@ -565,7 +565,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### ROC
+#### ROC
 
 
 
@@ -608,7 +608,7 @@ rocArr <- ret$rocArr
 
 
 
-### Summary table
+#### Summary table
 
 
 
@@ -626,7 +626,7 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
-### FROC
+#### FROC
 
 
 
@@ -643,7 +643,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### wAFROC
+#### wAFROC
 
 
 
@@ -663,7 +663,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### ROC
+#### ROC
 
 
 
@@ -707,7 +707,7 @@ rocArr <- ret$rocArr
 
 
 
-### Summary table
+#### Summary table
 
 
 
@@ -725,7 +725,7 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
-### FROC
+#### FROC
 
 
 
@@ -742,7 +742,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### wAFROC
+#### wAFROC
 
 
 
@@ -761,7 +761,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### ROC
+#### ROC
 
 
 
@@ -804,7 +804,7 @@ rocArr <- ret$rocArr
 
 
 
-### Summary table
+#### Summary table
 
 
 
@@ -822,7 +822,7 @@ kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$
 
 
 
-### FROC
+#### FROC
 
 
 
@@ -839,7 +839,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### wAFROC
+#### wAFROC
 
 
 
@@ -859,7 +859,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-### ROC
+#### ROC
 
 
 
