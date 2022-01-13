@@ -5146,11 +5146,15 @@ For a proper ROC curve the slope decreases monotonically as the operating point 
 \hypertarget{optim-op-point-vary-nu-mu}{%
 \section{\texorpdfstring{Varying \(\nu\) and \(\mu\) optimizations}{Varying \textbackslash nu and \textbackslash mu optimizations}}\label{optim-op-point-vary-nu-mu}}
 
-Results of varying \(\nu\) are in Appendix \ref{optim-op-point-vary-nu}. Table \ref{tab:optim-op-point-table-vary-nu} summarizes the results. FROC plots are in Fig. \ref{fig:optim-op-point-vary-nu-froc}, wAFROC plots are in Fig. \ref{fig:optim-op-point-vary-nu-wafroc} and ROC plots are in Fig. \ref{fig:optim-op-point-vary-nu-roc}. The results are similar to those described previously for varying \(\lambda\) but, since unlike increasing \(\lambda\) increasing \(\nu\) has the \emph{opposite} effect, namely \emph{increasing} performance, the directions of the effects are \emph{reversed}, meaning as \(\nu\) increases wAFROC-AUC and ROC-AUC performances increase and the reporting threshold \(\zeta_1\) decreases. Another difference is that the Youden-index based optimal threshold is almost independent of \(\nu\). This can be understood from the fact that since \(\lambda\) is being held constant the number of latent NLs is unchanging, which implies that FPF and specificity are not changing. The Youden-index (sensitivity plus specificity minus one) optimization effectively only maximizes sensitivity. Examination of the plots will confirm that FPF and NLF are relatively constant for Youden-index optimization. As before, wAFROC optimization yields lower reporting threshold and higher performance than Youden-index optimization and the difference between the two methods decreases as performance decreases.
+Details of varying \(\nu\) are in Appendix \ref{optim-op-point-vary-nu}. The results are similar to those just described for varying \(\lambda\) but, since increasing \(\nu\) results in \emph{increasing} performance, the directions of the effects are \emph{reversed}. As \(\nu\) increases wAFROC-AUC and ROC-AUC performances increase and the reporting threshold \(\zeta_1\) decreases. The Youden-index based optimal threshold is almost independent of \(\nu\) and NLF is relatively constant while LLF increases. Examination of the plots confirms that FPF and NLF are relatively constant for Youden-index optimization. As before, wAFROC optimization yields lower reporting threshold and higher performance than Youden-index optimization and the difference between the two methods decreases as performance decreases.
 
-Results of varying \(\mu\) are in Appendix \ref{optim-op-point-vary-mu}. Table \ref{tab:optim-op-point-table-vary-mu} summarizes the results, FROC plots are in Fig. \ref{fig:optim-op-point-vary-mu-froc}, wAFROC plots are in Fig. \ref{fig:optim-op-point-vary-mu-wafroc} and ROC plots are in Fig. \ref{fig:optim-op-point-vary-mu-roc}. Increasing \(\mu\) results in increasing performance, as expected, and is accompanied by increasing \(\zeta_1\), and this time LLF is relatively constant while NLF decreases for both optimization methods. With increasing separation of the two unit-normal distributions one can set a higher threshold which will maintain LLF while resulting in decreasing NLF. These findings are evident in the cited table and figures. Once again wAFROC optimization yields lower reporting threshold and higher performance than Youden-index optimization. In this example the difference in wAFROC-AUC, ROC-AUC and the operating points between the two methods decreases as performance \emph{increases}, which is the opposite of that found when \(\lambda\) or \(\nu\) were varied. With constant \(\lambda\) and \(\nu\) the \emph{numbers} of NLs and LLs are unchanging; all that happens is the \emph{values} of the z-samples from LLs increases as \(\mu\) increases, which allows the optimal threshold to increase (this can be understood as a pure ``ROC-type'' effect: as the normal distributions are more widely separated, the optimal thresold will increase, approaching, in the limit, half the separation, since in that limit TPF = 1 and FPF = 0).
+Details of varying \(\mu\) are in Appendix \ref{optim-op-point-vary-mu}. Increasing \(\mu\) results in increasing performance and is accompanied by increasing \(\zeta_1\), and this time LLF is relatively constant while NLF decreases for both optimization methods. These findings are evident in the cited table and figures. wAFROC optimization yields lower reporting threshold and higher performance than Youden-index optimization. In this example the difference in wAFROC-AUC, ROC-AUC and the operating points between the two methods decreases as performance \emph{increases}, which is the opposite of that found when \(\lambda\) or \(\nu\) were varied. With constant \(\lambda\) and \(\nu\) the \emph{numbers} of NLs and LLs are unchanging; all that happens is the \emph{values} of the z-samples from LLs increase as \(\mu\) increases, which allows the optimal threshold to increase (this can be understood as a pure ``ROC-type'' effect: as the normal distributions are more widely separated, the optimal threshold will increase, approaching, in the limit, half the separation, since in that limit TPF = 1 and FPF = 0).
 
-Limiting situations covering very high and very low performances when \(\mu\), \(\lambda\) and \(\nu\) are varied individually, are described in Appendix \ref{optim-op-point-limiting-situations}. For very high performance both methods yield near identical results. For very low performance the Youden-index method does better in ROC-AUC but worse in wAFROC-AUC. The difference c
+Limiting situations covering very high and very low performances when \(\mu\), \(\lambda\) and \(\nu\) are varied individually, are described in Appendix \ref{optim-op-point-limiting-situations}.
+
+For very high performance, defined as \(\text{ROC-AUC} > 0.9\), both methods place the optimal operating point on the sharp bend near the upper-left corner of all operating characteristics. The wAFROC based method chooses a somewhat lower threshold than the Youden-index method resulting in a higher operating point on the FROC.
+
+For very low performance, defined as \(0.5 < \text{ROC-AUC} < 0.6\), the Youden-index method chooses a lower threshold compared to wAFROC optimization, resulting in a higher operating point on the FROC, greater ROC-AUC but sharply lower wAFROC-AUC. In this limit the wAFROC method severly limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.
 
 \hypertarget{optim-op-point-how-to-use-method}{%
 \section{Using the method}\label{optim-op-point-how-to-use-method}}
@@ -5384,7 +5388,7 @@ For \(\lambda = 1\) and \(\nu = 0.9\) optimizations were performed for \(\mu = 1
 
 \begin{table}[H]
 
-\caption{\label{tab:optim-op-point-table-vary-mu}Summary of optimization results for $\lambda = 1$, $\nu = 0.9$  and 4 values of $\mu$.}
+\caption{\label{tab:optim-op-point-table-vary-mu}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$, $\nu = 0.9$.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{llllll}
@@ -5749,7 +5753,7 @@ FOM & $\lambda$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF
 \begin{Highlighting}[]
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{)}
 \NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.3}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\FloatTok{0.9}\NormalTok{)}
+\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\FloatTok{0.9}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -5767,19 +5771,19 @@ FOM & $\lambda$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF
 \toprule
 FOM & $\nu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \text{LLF}\right)$\\
 \midrule
- & 0.3 & 2.216 & 0.640 & 0.696 & (0.013, 0.289)\\
-\cmidrule{2-6}
- & 0.5 & 2.006 & 0.738 & 0.806 & (0.022, 0.488)\\
+ & 0.6 & 1.905 & 0.788 & 0.855 & (0.028, 0.589)\\
 \cmidrule{2-6}
  & 0.7 & 1.796 & 0.839 & 0.898 & (0.036, 0.690)\\
 \cmidrule{2-6}
+ & 0.8 & 1.663 & 0.890 & 0.936 & (0.048, 0.792)\\
+\cmidrule{2-6}
 \multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 0.9 & 1.463 & 0.942 & 0.970 & (0.072, 0.895)\\
 \cmidrule{1-6}
- & 0.3 & 2.023 & 0.639 & 0.698 & (0.022, 0.293)\\
-\cmidrule{2-6}
- & 0.5 & 2.047 & 0.738 & 0.806 & (0.020, 0.487)\\
+ & 0.6 & 2.063 & 0.788 & 0.852 & (0.020, 0.584)\\
 \cmidrule{2-6}
  & 0.7 & 2.080 & 0.837 & 0.894 & (0.019, 0.681)\\
+\cmidrule{2-6}
+ & 0.8 & 2.100 & 0.886 & 0.931 & (0.018, 0.777)\\
 \cmidrule{2-6}
 \multirow{-4}{*}{\raggedright\arraybackslash Youden} & 0.9 & 2.124 & 0.935 & 0.964 & (0.017, 0.873)\\
 \bottomrule
@@ -5820,7 +5824,7 @@ FOM & $\nu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \
 \begin{Highlighting}[]
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.3}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\FloatTok{0.9}\NormalTok{)}
+\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.4}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -5831,28 +5835,28 @@ FOM & $\nu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \
 
 \begin{table}[H]
 
-\caption{\label{tab:optim-op-point-low-performance-vary-nu-table-vary-all}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.}
+\caption{\label{tab:optim-op-point-low-performance-vary-nu-table-vary-all}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $\nu = 0.9$. Row labeling as in previous tables.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{llllll}
 \toprule
 FOM & $\nu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \text{LLF}\right)$\\
 \midrule
+ & 0.1 & 5.000 & 0.500 & 0.500 & (0.000, 0.000)\\
+\cmidrule{2-6}
+ & 0.2 & 4.412 & 0.500 & 0.500 & (0.000, 0.000)\\
+\cmidrule{2-6}
  & 0.3 & 4.006 & 0.500 & 0.500 & (0.000, 0.000)\\
 \cmidrule{2-6}
- & 0.5 & 3.493 & 0.500 & 0.502 & (0.002, 0.003)\\
-\cmidrule{2-6}
- & 0.7 & 3.148 & 0.501 & 0.508 & (0.008, 0.011)\\
-\cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 0.9 & 2.881 & 0.504 & 0.520 & (0.020, 0.027)\\
+\multirow{-4}{*}{\raggedright\arraybackslash wAFROC} & 0.4 & 3.718 & 0.500 & 0.501 & (0.001, 0.001)\\
 \cmidrule{1-6}
+ & 0.1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
+\cmidrule{2-6}
+ & 0.2 & 1.568 & 0.309 & 0.528 & (0.585, 0.057)\\
+\cmidrule{2-6}
  & 0.3 & 1.572 & 0.325 & 0.542 & (0.580, 0.085)\\
 \cmidrule{2-6}
- & 0.5 & 1.582 & 0.358 & 0.569 & (0.569, 0.140)\\
-\cmidrule{2-6}
- & 0.7 & 1.591 & 0.389 & 0.594 & (0.558, 0.194)\\
-\cmidrule{2-6}
-\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 0.9 & 1.601 & 0.420 & 0.619 & (0.547, 0.246)\\
+\multirow{-4}{*}{\raggedright\arraybackslash Youden} & 0.4 & 1.577 & 0.342 & 0.556 & (0.574, 0.113)\\
 \bottomrule
 \end{tabular}}
 \end{table}

@@ -242,7 +242,7 @@ relWeights <- c(0.5, 0.5)
 
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:optim-op-point-table-vary-mu)Summary of optimization results for $\lambda = 1$, $\nu = 0.9$  and 4 values of $\mu$.</caption>
+<caption>(\#tab:optim-op-point-table-vary-mu)Summary of optimization results for 4 values of $\mu$, $\lambda = 1$, $\nu = 0.9$.</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -1029,7 +1029,7 @@ relWeights <- c(0.5, 0.5)
 ```r
 muArr <- c(4)
 lambdaPArr <- c(1)
-nuPArr <- c(0.3, 0.5, 0.7, 0.9)
+nuPArr <- c(0.6, 0.7, 0.8, 0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -1064,19 +1064,11 @@ relWeights <- c(0.5, 0.5)
 <tbody>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 0.3 </td>
-   <td style="text-align:left;"> 2.216 </td>
-   <td style="text-align:left;"> 0.640 </td>
-   <td style="text-align:left;"> 0.696 </td>
-   <td style="text-align:left;"> (0.013, 0.289) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 0.5 </td>
-   <td style="text-align:left;"> 2.006 </td>
-   <td style="text-align:left;"> 0.738 </td>
-   <td style="text-align:left;"> 0.806 </td>
-   <td style="text-align:left;"> (0.022, 0.488) </td>
+   <td style="text-align:left;"> 0.6 </td>
+   <td style="text-align:left;"> 1.905 </td>
+   <td style="text-align:left;"> 0.788 </td>
+   <td style="text-align:left;"> 0.855 </td>
+   <td style="text-align:left;"> (0.028, 0.589) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
@@ -1088,6 +1080,14 @@ relWeights <- c(0.5, 0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:left;"> 0.8 </td>
+   <td style="text-align:left;"> 1.663 </td>
+   <td style="text-align:left;"> 0.890 </td>
+   <td style="text-align:left;"> 0.936 </td>
+   <td style="text-align:left;"> (0.048, 0.792) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
    <td style="text-align:left;"> 0.9 </td>
    <td style="text-align:left;"> 1.463 </td>
    <td style="text-align:left;"> 0.942 </td>
@@ -1096,19 +1096,11 @@ relWeights <- c(0.5, 0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 0.3 </td>
-   <td style="text-align:left;"> 2.023 </td>
-   <td style="text-align:left;"> 0.639 </td>
-   <td style="text-align:left;"> 0.698 </td>
-   <td style="text-align:left;"> (0.022, 0.293) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 0.5 </td>
-   <td style="text-align:left;"> 2.047 </td>
-   <td style="text-align:left;"> 0.738 </td>
-   <td style="text-align:left;"> 0.806 </td>
-   <td style="text-align:left;"> (0.020, 0.487) </td>
+   <td style="text-align:left;"> 0.6 </td>
+   <td style="text-align:left;"> 2.063 </td>
+   <td style="text-align:left;"> 0.788 </td>
+   <td style="text-align:left;"> 0.852 </td>
+   <td style="text-align:left;"> (0.020, 0.584) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
@@ -1117,6 +1109,14 @@ relWeights <- c(0.5, 0.5)
    <td style="text-align:left;"> 0.837 </td>
    <td style="text-align:left;"> 0.894 </td>
    <td style="text-align:left;"> (0.019, 0.681) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:left;"> 0.8 </td>
+   <td style="text-align:left;"> 2.100 </td>
+   <td style="text-align:left;"> 0.886 </td>
+   <td style="text-align:left;"> 0.931 </td>
+   <td style="text-align:left;"> (0.018, 0.777) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
@@ -1187,7 +1187,7 @@ relWeights <- c(0.5, 0.5)
 ```r
 muArr <- c(1)
 lambdaPArr <- c(10)
-nuPArr <- c(0.3, 0.5, 0.7, 0.9)
+nuPArr <- c(0.1, 0.2, 0.3, 0.4)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -1208,7 +1208,7 @@ relWeights <- c(0.5, 0.5)
 
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:optim-op-point-low-performance-vary-nu-table-vary-all)Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.</caption>
+<caption>(\#tab:optim-op-point-low-performance-vary-nu-table-vary-all)Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $\nu = 0.9$. Row labeling as in previous tables.</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -1222,6 +1222,22 @@ relWeights <- c(0.5, 0.5)
 <tbody>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:left;"> 0.1 </td>
+   <td style="text-align:left;"> 5.000 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> (0.000, 0.000) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
+   <td style="text-align:left;"> 0.2 </td>
+   <td style="text-align:left;"> 4.412 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> 0.500 </td>
+   <td style="text-align:left;"> (0.000, 0.000) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wAFROC </td>
    <td style="text-align:left;"> 0.3 </td>
    <td style="text-align:left;"> 4.006 </td>
    <td style="text-align:left;"> 0.500 </td>
@@ -1230,27 +1246,27 @@ relWeights <- c(0.5, 0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 0.5 </td>
-   <td style="text-align:left;"> 3.493 </td>
+   <td style="text-align:left;"> 0.4 </td>
+   <td style="text-align:left;"> 3.718 </td>
    <td style="text-align:left;"> 0.500 </td>
-   <td style="text-align:left;"> 0.502 </td>
-   <td style="text-align:left;"> (0.002, 0.003) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 0.7 </td>
-   <td style="text-align:left;"> 3.148 </td>
    <td style="text-align:left;"> 0.501 </td>
-   <td style="text-align:left;"> 0.508 </td>
-   <td style="text-align:left;"> (0.008, 0.011) </td>
+   <td style="text-align:left;"> (0.001, 0.001) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 0.9 </td>
-   <td style="text-align:left;"> 2.881 </td>
-   <td style="text-align:left;"> 0.504 </td>
-   <td style="text-align:left;"> 0.520 </td>
-   <td style="text-align:left;"> (0.020, 0.027) </td>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:left;"> 0.1 </td>
+   <td style="text-align:left;"> 1.563 </td>
+   <td style="text-align:left;"> 0.292 </td>
+   <td style="text-align:left;"> 0.514 </td>
+   <td style="text-align:left;"> (0.590, 0.029) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Youden </td>
+   <td style="text-align:left;"> 0.2 </td>
+   <td style="text-align:left;"> 1.568 </td>
+   <td style="text-align:left;"> 0.309 </td>
+   <td style="text-align:left;"> 0.528 </td>
+   <td style="text-align:left;"> (0.585, 0.057) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
@@ -1262,27 +1278,11 @@ relWeights <- c(0.5, 0.5)
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 0.5 </td>
-   <td style="text-align:left;"> 1.582 </td>
-   <td style="text-align:left;"> 0.358 </td>
-   <td style="text-align:left;"> 0.569 </td>
-   <td style="text-align:left;"> (0.569, 0.140) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 0.7 </td>
-   <td style="text-align:left;"> 1.591 </td>
-   <td style="text-align:left;"> 0.389 </td>
-   <td style="text-align:left;"> 0.594 </td>
-   <td style="text-align:left;"> (0.558, 0.194) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 0.9 </td>
-   <td style="text-align:left;"> 1.601 </td>
-   <td style="text-align:left;"> 0.420 </td>
-   <td style="text-align:left;"> 0.619 </td>
-   <td style="text-align:left;"> (0.547, 0.246) </td>
+   <td style="text-align:left;"> 0.4 </td>
+   <td style="text-align:left;"> 1.577 </td>
+   <td style="text-align:left;"> 0.342 </td>
+   <td style="text-align:left;"> 0.556 </td>
+   <td style="text-align:left;"> (0.574, 0.113) </td>
   </tr>
 </tbody>
 </table>
