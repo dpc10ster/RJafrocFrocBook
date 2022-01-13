@@ -13,38 +13,6 @@ output:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## TBA How much finished {#optim-op-point-how-much-finished}
 95%
 
@@ -97,8 +65,6 @@ In the following $f = 1$ denotes wAFROC-AUC optimization and $f = 2$ denotes You
 
 
 
-
-
 ```r
 muArr <- c(2)
 lambdaPArr <- c(1, 2, 5, 10)
@@ -128,6 +94,9 @@ The following quantities were calculated:
 1. $\text{ROC} \left (f, \mu, \lambda, \nu \right )$: the AUCs under the ROC curves; 
 
 1. $\text{NLF} \left (f, \mu, \lambda, \nu \right )$ and $\text{LLF} \left (f, \mu, \lambda, \nu \right )$: the coordinates of the operating point on the FROC curve corresponding to $\zeta_{1} \left ( f, \mu, \lambda, \nu \right )$.   
+
+
+### Summary table
 
 
 Table \@ref(tab:optim-op-point-table-vary-lambda) summarizes the results. The column labeled FOM shows the quantity being maximized (wAFROC-AUC or the Youden-index), the column labeled $\lambda$ lists the 4 values of $\lambda$, $\zeta_1$ is the optimal value of $\zeta_1$ that maximizes the chosen figure of merit. The column labeled wAFROC is the AUC under the wAFROC curve, the column labeled ROC is the AUC under the ROC curve, and $\left( \text{NLF},  \text{LLF}\right)$ is the operating point on the FROC curve corresponding to the value of $\zeta_1$ in the third column. All quantities in columns 3 through 6 are functions of $f, \mu, \lambda, \nu$. 
@@ -241,6 +210,10 @@ Inspection of this table reveals the following effects:
     + These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-lambda-wafroc).
 
 
+
+### FROC
+
+
 The third effect is illustrated by the FROC plots with superimposed operating points for varying $\lambda$ shown in Fig. \@ref(fig:optim-op-point-vary-lambda-froc). The black dots correspond to $f = 1$ and the red dots correspond to $f = 2$. The black dots are consistently above the red dots and the separation of the dots is greatest for $\lambda = 1$ and smallest for $\lambda = 10$.  
 
 The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lambda, \nu \right )$ with increasing $\lambda$: the black dots move to smaller ordinates, as do the red dots, which would seem to imply decreasing performance. However, the accompanying change in $\text{NLF} \left ( f, \mu, \lambda, \nu \right )$ rules out an unambiguous determination of the direction of the change in overall performance based on the FROC. 
@@ -256,6 +229,9 @@ The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lamb
 <p class="caption">(\#fig:optim-op-point-vary-lambda-froc)FROC plots with superimposed operating points for varying $\lambda$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.</p>
 </div>
 
+
+
+### wAFROC
 
 
 
@@ -278,6 +254,9 @@ The transition from continuous to dashed is determined by the value of $\zeta_1$
 
 
 
+### ROC
+
+
 
 
 
@@ -292,9 +271,11 @@ The decrease in $\text{ROC} \left ( f, \mu, \lambda, \nu \right )$ with increasi
 </div>
 
 
+### Comment
 
+Since the ROC curves show a similar dependence as the wAFROC curves why not maximize the AUC under the ROC, instead of AUC under the wAFROC? It can be [shown](https://dpc10ster.github.io/RJafrocRocBook/binormal-model.html#binormal-model-partial-true) that as long as one restricts to proper ROC models, this will always result in $\zeta_1 = -\infty$. 
 
-Since the ROC curves show a similar dependence as the wAFROC curves one may wonder why not maximize the AUC under the ROC, instead of AUC under the wAFROC? It can be shown that as long as one restricts to proper ROC models, this will always yield $\zeta_1 = -\infty$. For a proper ROC curve the slope decreases monotonically as the operating point moves up the curve and at each point the slope is greater than that of the straight curve connecting the point to (1,1). This geometry ensures that AUC under any curve with a finite $\zeta_1$ is smaller than that under the full curve. Therefore maximum AUC can only be attained by choosing $\zeta_1 = -\infty$. This is illustrated in Fig. \@ref(fig:binormal-model-threshold-dependence-2) which shows a binormal ROC curve corresponding to $a = 2$ and $b = 1$, which is a proper ROC curve. The dot is the operating point corresponding to $\zeta_1 = 1.5$. In the region above the dot the continuous curve is above the dotted line, meaning AUC performance of an observer who adopts a finite $\zeta_1$ is less than performance of an observer who rates all cases, i.e., adopts $\zeta_1 = -\infty$.
+For a proper ROC curve the slope decreases monotonically as the operating point moves up the curve and at each point the slope is greater than that of the straight curve connecting the point to (1,1). This geometry ensures that AUC under any curve with a finite $\zeta_1$ is smaller than that under the full curve. Therefore maximum AUC can only be attained by choosing $\zeta_1 = -\infty$. This is illustrated in Fig. \@ref(fig:binormal-model-threshold-dependence-2) which shows a binormal ROC curve corresponding to $a = 2$ and $b = 1$, which is a proper ROC curve. The dot is the operating point corresponding to $\zeta_1 = 1.5$. In the region above the dot the continuous curve is above the dotted line, meaning AUC performance of an observer who adopts a finite $\zeta_1$ is less than performance of an observer who rates all cases, i.e., adopts $\zeta_1 = -\infty$.
 
 
 
@@ -312,15 +293,12 @@ Since the ROC curves show a similar dependence as the wAFROC curves one may wond
 
 ## Varying $\nu$ and $\mu$ optimizations{#optim-op-point-vary-nu-mu}
 
-Results of varying $\nu$ are in Appendix \@ref(optim-op-point-vary-nu). Table \@ref(tab:optim-op-point-table-vary-nu) summarizes the results. FROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-froc), wAFROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-wafroc) and ROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-roc). The results are similar to those described previously for varying $\lambda$ but, since unlike increasing $\lambda$ increasing $\nu$ has the opposite effect, namely increasing performance, the directions of the effects are reversed. Another difference is that the Youden-index based optimal threshold is almost independent of $\nu$. The main result, that wAFROC optimization yields lower reporting theshold and higher performance than Youden-index optimization, remains unchanged and the difference between the two methods decreases as performance decreases.
+Results of varying $\nu$ are in Appendix \@ref(optim-op-point-vary-nu). Table \@ref(tab:optim-op-point-table-vary-nu) summarizes the results. FROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-froc), wAFROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-wafroc) and ROC plots are in Fig. \@ref(fig:optim-op-point-vary-nu-roc). The results are similar to those described previously for varying $\lambda$ but, since unlike increasing $\lambda$ increasing $\nu$ has the *opposite* effect, namely *increasing* performance, the directions of the effects are *reversed*, meaning as $\nu$ increases wAFROC-AUC and ROC-AUC performances increase and the reporting threshold $\zeta_1$ decreases. Another difference is that the Youden-index based optimal threshold is almost independent of $\nu$. This can be understood from the fact that since $\lambda$ is being held constant the number of latent NLs is unchanging, which implies that FPF and specificity are not changing. The Youden-index (sensitivity plus specificity minus one) optimization effectively only maximizes sensitivity. Examination of the plots will confirm that FPF and NLF are relatively constant for Youden-index optimization. As before, wAFROC optimization yields lower reporting threshold and higher performance than Youden-index optimization and the difference between the two methods decreases as performance decreases. 
+
+Results of varying $\mu$ are in Appendix \@ref(optim-op-point-vary-mu). Table \@ref(tab:optim-op-point-table-vary-mu) summarizes the results, FROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-froc), wAFROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-wafroc) and ROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-roc). Increasing $\mu$ results in increasing performance, as expected, and is accompanied by increasing $\zeta_1$, and this time LLF is relatively constant while NLF decreases for both optimization methods. With increasing separation of the two unit-normal distributions one can set a higher threshold which will maintain LLF while resulting in decreasing NLF. These findings are evident in the cited table and figures. Once again wAFROC optimization yields lower reporting threshold and higher performance than Youden-index optimization. In this example the difference in wAFROC-AUC, ROC-AUC and the operating points between the two methods decreases as performance *increases*, which is the opposite of that found when $\lambda$ or $\nu$ were varied. With constant $\lambda$ and $\nu$ the *numbers* of NLs and LLs are unchanging; all that happens is the *values* of the z-samples from LLs increases as $\mu$ increases, which allows the optimal threshold to increase (this can be understood as a pure "ROC-type" effect: as the normal distributions are more widely separated, the optimal thresold will increase, approaching, in the limit, half the separation, since in that limit TPF = 1 and FPF = 0).
 
 
-Results of varying $\mu$ are in Appendix \@ref(optim-op-point-vary-mu). Table \@ref(tab:optim-op-point-table-vary-mu) summarizes the results. FROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-froc), wAFROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-wafroc) and ROC plots are in Fig. \@ref(fig:optim-op-point-vary-mu-roc). The results are similar to those described previously for varying $\lambda$ but, since unlike increasing $\lambda$ increasing $\mu$ has the opposite effect, namely increasing performance, the directions of the effects are reversed. The main result, that wAFROC optimization yields lower reporting theshold and higher performance than Youden-index optimization, remains unchanged. This example illustrates that the difference in wAFROC and ROC AUCs between the two methods decreases as performance increases.
-
-
-Limiting situations covering very high and very low performances when $\mu$, $\lambda$ and $\nu$ are varied individually are described in Appendix \@ref(optim-op-point-limiting-situations). For very high performance both methods yield near identical results. For very low performance the Youden-index method does better, yielding higher ROC-AUCs. In this limit the wAFROC method gives undue importance to maximizing specificity while sacrificing sensitivity. 
-
-
+Limiting situations covering very high and very low performances when $\mu$, $\lambda$ and $\nu$ are varied individually, are described in Appendix \@ref(optim-op-point-limiting-situations). For very high performance both methods yield near identical results. For very low performance the Youden-index method does better in ROC-AUC but worse in wAFROC-AUC. The difference c
 
 
 
@@ -340,9 +318,9 @@ ds <- datasetCadSimuFroc
 dsCad <- DfExtractDataset(ds, rdrs = 1)
 dsCadRoc <- DfFroc2Roc(dsCad)
 dsCadRocBinned <- DfBinDataset(dsCadRoc, opChType = "ROC")
-lesDistr <- c(1)
-relWeights <- c(1)
-fit <- FitRsmRoc(dsCadRocBinned, lesDistr)
+lesDistrCad <- c(1)
+relWeightsCad <- c(1)
+fit <- FitRsmRoc(dsCadRocBinned, lesDistrCad)
 cat("fitted values: \nmu = ", fit$mu, 
     "\nlambda = ", fit$lambdaP, 
     "\nnu = ", fit$nuP, "\n")
@@ -359,13 +337,16 @@ cat("fitted values: \nmu = ", fit$mu,
 
 
 
-Table \@ref(tab:optim-op-point-table4) summarizes the results.
+### Summary table
+
+Table \@ref(tab:optim-op-point-table4) summarizes the results. As compared to Youden-index optimization the wAFROC-AUC based optimization results in a lower reporting threshold $\zeta_1$, larger figures of merit -- see Fig. \@ref(fig:optim-op-point-application-wafroc) for wAFROC-AUC and Fig. \@ref(fig:optim-op-point-application-roc) for ROC-AUC -- and a higher operating point on the FROC, see Fig. \@ref(fig:optim-op-point-application-froc). These results match the trends shown in Table \@ref(tab:optim-op-point-table-vary-lambda).  
+
 
 
 
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:optim-op-point-table4)Summary of optimization results for example FROC dataset. The wAFROC column always displays wAFROC-AUC, even though the optimized quantity may the Youden-index, as in the last four rows.</caption>
+<caption>(\#tab:optim-op-point-table4)Summary of optimization results for example CAD FROC dataset. Table header row as in the previous table.</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -397,15 +378,15 @@ Table \@ref(tab:optim-op-point-table4) summarizes the results.
 </table>
 
 
-The wAFROC-AUC based optimization yields slightly larger figure of merit as measured by wAFROC-AUC, see Fig. \@ref(fig:optim-op-point-application-wafroc) and larger figure of merit as measured by ROC-AUC, see Fig. \@ref(fig:optim-op-point-application-roc).  
+
+
+### FROC
 
 
 
 
 
-
-
-Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimposed optimal operating points. 
+Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimposed optimal operating points. With NLF = 0.278, a four-view mammogram would show about 1.2 false CAD marks per patient and lesion-level sensitivity would be about 68 percent.
 
 
 <div class="figure">
@@ -414,7 +395,13 @@ Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimpo
 </div>
 
 
+### wAFROC
 
+
+
+
+
+Fig. \@ref(fig:optim-op-point-application-wafroc) shows wAFROC curves using the two methods. The red curve is using wAFROC-AUC optimization and the green curve is using Youden-index optimization. The difference in AUCs is small - following the trend described in Section \@ref(optim-op-point-vary-nu-mu) for the larger values of $\lambda$.
 
 
 <div class="figure">
@@ -424,7 +411,13 @@ Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimpo
 
 
 
+### ROC
 
+
+
+
+
+Fig. \@ref(fig:optim-op-point-application-roc) shows ROC curves using the two methods. The red curve is using wAFROC-AUC optimization and the green curve is using Youden-index optimization. The difference in AUCs is larger, but recall that ROC-AUC performance is not being optimized.
 
 
 <div class="figure">
