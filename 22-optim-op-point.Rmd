@@ -314,15 +314,13 @@ rocArr <- ret$rocArr
 
 
 ```{r optim-op-point-high-performance-vary-mu-table-vary-all-contents, echo=FALSE}
-x1 <- expand.grid(FOM = c("wAFROC", "Youden"), mu = muArr, lambda = lambdaPArr, nu = nuPArr)
-x1 <- cbind(x1, zeta1 = simplePrint(zetaOptArr[,,1,1]), wAFROC = simplePrint(wAfrocArr[,,1,1]), AUC = simplePrint(rocArr[,,1,1]), Sp = simplePrint(1-fpfOptArr[,,1,1]), Se = simplePrint(tpfOptArr[,,1,1]))
-colnames(x1) <- c("FOM", "$\\mu$", "$\\lambda$", "$\\nu$", "$\\zeta_1$", "wAFROC", "ROC", "Sp", "Se")
+x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:4,1,1, labelIndx = 1)
 ```
 
 
 
 ```{r optim-op-point-high-performance-vary-mu-table-vary-all, echo=FALSE}
-kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$, $\\lambda$ and $\\nu$ parameters. FOM = figure of merit, $\\zeta_1$ = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
@@ -338,9 +336,8 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-high-performance-vary-mu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-low-performance-vary-mu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
 
@@ -377,7 +374,6 @@ plotArr = plotRoc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
 
 ```{r optim-op-point-high-performance-vary-mu-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
 
@@ -413,19 +409,15 @@ rocArr <- ret$rocArr
 #### Summary table
 
 
-
 ```{r optim-op-point-low-performance-vary-mu-table-vary-all-contents, echo=FALSE}
-x1 <- expand.grid(FOM = c("wAFROC", "Youden"), mu = muArr, lambda = lambdaPArr, nu = nuPArr)
-x1 <- cbind(x1, zeta1 = simplePrint(zetaOptArr), wAFROC = simplePrint(wAfrocArr), AUC = simplePrint(rocArr), Sp = simplePrint(1-fpfOptArr), Se = simplePrint(tpfOptArr))
-colnames(x1) <- c("FOM", "$\\mu$", "$\\lambda$", "$\\nu$", "$\\zeta_1$", "wAFROC", "ROC", "Sp", "Se")
+x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:4,1,1, labelIndx = 1)
 ```
 
 
 
 ```{r optim-op-point-low-performance-vary-mu-table-vary-all, echo=FALSE}
-kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$, $\\lambda$ and $\\nu$ parameters. FOM = figure of merit, $\\zeta_1$ = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
-
 
 
 #### FROC
@@ -439,9 +431,8 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-low-performance-vary-mu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-low-performance-vary-mu-vary-all, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
-#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
 
@@ -514,19 +505,15 @@ rocArr <- ret$rocArr
 #### Summary table
 
 
-
 ```{r optim-op-point-high-performance-vary-lambda-table-vary-all-contents, echo=FALSE}
-x1 <- expand.grid(FOM = c("wAFROC", "Youden"), mu = muArr, lambda = lambdaPArr, nu = nuPArr)
-x1 <- cbind(x1, zeta1 = simplePrint(zetaOptArr), wAFROC = simplePrint(wAfrocArr), AUC = simplePrint(rocArr), Sp = simplePrint(1-fpfOptArr), Se = simplePrint(tpfOptArr))
-colnames(x1) <- c("FOM", "$\\mu$", "$\\lambda$", "$\\nu$", "$\\zeta_1$", "wAFROC", "ROC", "Sp", "Se")
+x12 <- doOneTable(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1:4,1, labelIndx = 2)
 ```
 
 
 
 ```{r optim-op-point-high-performance-vary-lambda-table-vary-all, echo=FALSE}
-kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$, $\\lambda$ and $\\nu$ parameters. FOM = figure of merit, $\\zeta_1$ = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
-
 
 
 #### FROC
@@ -613,15 +600,13 @@ rocArr <- ret$rocArr
 
 
 ```{r optim-op-point-low-performance-vary-lambda-table-vary-all-contents, echo=FALSE}
-x1 <- expand.grid(FOM = c("wAFROC", "Youden"), mu = muArr, lambda = lambdaPArr, nu = nuPArr)
-x1 <- cbind(x1, zeta1 = simplePrint(zetaOptArr), wAFROC = simplePrint(wAfrocArr), AUC = simplePrint(rocArr), Sp = simplePrint(1-fpfOptArr), Se = simplePrint(tpfOptArr))
-colnames(x1) <- c("FOM", "$\\mu$", "$\\lambda$", "$\\nu$", "$\\zeta_1$", "wAFROC", "ROC", "Sp", "Se")
+x12 <- doOneTable(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1:4,1, labelIndx = 2)
 ```
 
 
 
 ```{r optim-op-point-low-performance-vary-lambda-table-vary-all, echo=FALSE}
-kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$, $\\lambda$ and $\\nu$ parameters. FOM = figure of merit, $\\zeta_1$ = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
@@ -712,15 +697,13 @@ rocArr <- ret$rocArr
 
 
 ```{r optim-op-point-high-performance-vary-nu-table-vary-all-contents, echo=FALSE}
-x1 <- expand.grid(FOM = c("wAFROC", "Youden"), mu = muArr, lambda = lambdaPArr, nu = nuPArr)
-x1 <- cbind(x1, zeta1 = simplePrint(zetaOptArr), wAFROC = simplePrint(wAfrocArr), AUC = simplePrint(rocArr), Sp = simplePrint(1-fpfOptArr), Se = simplePrint(tpfOptArr))
-colnames(x1) <- c("FOM", "$\\mu$", "$\\lambda$", "$\\nu$", "$\\zeta_1$", "wAFROC", "ROC", "Sp", "Se")
+x12 <- doOneTable(nuPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1,1:4, labelIndx = 3)
 ```
 
 
 
 ```{r optim-op-point-high-performance-vary-nu-table-vary-all, echo=FALSE}
-kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$, $\\lambda$ and $\\nu$ parameters. FOM = figure of merit, $\\zeta_1$ = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
@@ -809,15 +792,13 @@ rocArr <- ret$rocArr
 
 
 ```{r optim-op-point-low-performance-vary-nu-table-vary-all-contents, echo=FALSE}
-x1 <- expand.grid(FOM = c("wAFROC", "Youden"), mu = muArr, lambda = lambdaPArr, nu = nuPArr)
-x1 <- cbind(x1, zeta1 = simplePrint(zetaOptArr), wAFROC = simplePrint(wAfrocArr), AUC = simplePrint(rocArr), Sp = simplePrint(1-fpfOptArr), Se = simplePrint(tpfOptArr))
-colnames(x1) <- c("FOM", "$\\mu$", "$\\lambda$", "$\\nu$", "$\\zeta_1$", "wAFROC", "ROC", "Sp", "Se")
+x12 <- doOneTable(nuPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1,1:4, labelIndx = 3)
 ```
 
 
 
 ```{r optim-op-point-low-performance-vary-nu-table-vary-all, echo=FALSE}
-kbl(x1, caption = "Summary of optimizations for combinations of levels of $\\mu$, $\\lambda$ and $\\nu$ parameters. FOM = figure of merit, $\\zeta_1$ = threshold that optimizes FOM, wAFROC = wAFROC-AUC, ROC = ROC-AUC, Sp = specificity and Se = sensitivity.", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
