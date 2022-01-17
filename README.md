@@ -6,7 +6,7 @@
 * This book reviews FROC methodology.
 
 
-## How much finished {-}
+## How much finished HMF {-}
 
 * HMF approximately 70%
 * This book is currently (as of December 2021) in preparation.

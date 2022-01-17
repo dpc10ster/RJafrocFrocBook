@@ -26,13 +26,43 @@ knitr::write_bib(c(
 
 * It is intended as an online update to my print book [@chakraborty2017observer]. 
 * Since its publication in 2017 the `RJafroc` package, on which the `R` code examples in the book depend, has evolved considerably, causing many of the examples to "break". 
-* This also gives me the opportunity to improve on the book and include additional material.
-* The online book is in 3 parts.
-* This part is devoted to the FROC paradigm.
+* This gives me the opportunity to improve on the book and include additional material.
+* The online book has been divided into 3 books.
+* This book is devoted to the FROC paradigm.
+
+
+## Nearly finished chapters {-}
+
+* Chapter 1 The FROC paradigm and search
+* Chapter 2 Empirical plots from FROC data
+* Chapter 3 Visual Search
+* Chapter 4 The radiological search model (RSM)
+* Chapter 5 ROC curve implications of the RSM
+* Chapter 6 Search and classification performances
+* Chapter 7 RSM fitting
+* Chapter 8 Three proper ROC fits
+* Chapter 9 Standalone CAD vs. Radiologists
+* Chapter 10 Optimal operating point
+* Chapter 11 Optimal operating point appendices
+
+
+## The html version of the book {-}
+Go [here](https://dpc10ster.github.io/RJafrocFrocBook/) to view the `html` version of the book.
+
+
+## The pdf file of the book {-}
+
+Go [here](https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFrocBook.pdf) and then click on `Download` to get the `RJafrocFrocBook.pdf` file. The pdf version may not be as aesthetically pleasing as the HTML version, in particular the layout of figures and tables is sometimes disjointed from the citing text. 
 
 
 
-## TBA How much finished {-}
+
+## Please ignore following sections {-}
+
+* They are intended for my convenience and will be deleted in final version
+
+
+## Please ignore: TBA How much finished HMF{-}
 
 * HMF approximately 30%
 * This book is currently (as of December 2021) in preparation. 
@@ -41,16 +71,7 @@ knitr::write_bib(c(
 
 
 
-## The pdf file of the book {-}
-
-Go [here](https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFrocBook.pdf) and then click on `Download` to get the `RJafrocFrocBook.pdf` file.
-
-
-## The html version of the book {-}
-Go [here](https://dpc10ster.github.io/RJafrocFrocBook/) to view the `html` version of the book.
-
-
-## A note on the online distribution mechanism of the book {-}
+## Please ignore: A note on the online distribution mechanism of the book {-}
 * In the hard-copy version of my book [@chakraborty2017observer] the online distribution mechanism was `BitBucket`. 
 * `BitBucket` allows code sharing within a _closed_ group of a few users (e.g., myself and a grad student). 
 * Since the purpose of open-source code is to encourage collaborations, this was, in hindsight, an unfortunate choice. Moreover, as my experience with R-packages grew, it became apparent that the vast majority of R-packages are shared on `GitHub`, not `BitBucket`. 
@@ -59,7 +80,7 @@ Go [here](https://dpc10ster.github.io/RJafrocFrocBook/) to view the `html` versi
 * Go to [this link](https://github.com) and click on `Sign Up`.
 
 
-## Structure of the book {-}
+## Please ignore: Structure of the book {-}
 The book is divided into parts as follows:
 
 * Part I: Quick Start: intended for existing Windows `JAFROC` users who are seeking a quick-and-easy transition from Windows `JAFROC` to `RJafroc`. 
@@ -68,13 +89,13 @@ The book is divided into parts as follows:
 * Part IV: FROC paradigm: TBA
 
 
-## Contributing to this book {-}
+## Please ignore Contributing to this book {-}
 
 I appreciate constructive feedback on this document. To do this raise an `Issue` on the `GitHub` [interface](https://github.com/dpc10ster/RJafrocFrocBook). Click on the `Issues` tab under `dpc10ster/RJafrocFrocBook`, then click on `New issue`. When done this way, contributions from users automatically become part of the `GitHub` documentation/history of the book.
 
 
 
-## Is this book relevant to you and what are the alternatives? {-}
+## Please ignore: Is this book relevant to you and what are the alternatives? {-}
 
 * Diagnostic imaging system evaluation
 * Detection
@@ -87,14 +108,12 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 
 
 
-## Chapters needing heavy edits {-}
-
-* 12-froc.
-* 13-empirical.
-* 13-empirical-examples.
+## Please ignore: Chapters needing heavy edits {-}
 
 
-## Shelved vs. removed vs. parked folders needing heavy edits {-}
+
+
+## Please ignore: Shelved vs. removed vs. parked folders needing heavy edits {-}
 
 * replace functions with \text{}; eg. erf and exp in all of document
 * Also for TPF, FPF etc.
@@ -103,7 +122,7 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 * parked has dependence of ROC/FROC performance on threshold
 
 
-## Coding aids (for me) {-}
+## Please ignore: Coding aids (for me) {-}
 
 * weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-empirical1.Rmd which should be 13a-empirical1.Rmd
 

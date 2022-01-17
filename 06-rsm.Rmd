@@ -1,6 +1,6 @@
 # (PART\*) The radiological search model (RSM) {-}
 
-# The radiological search model {#rsm}
+# The radiological search model (RSM) {#rsm}
 
 
 ```{r setup, include=FALSE}
