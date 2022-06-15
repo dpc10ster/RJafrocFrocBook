@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 The FROC paradigm and search | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 The FROC paradigm and search | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Artificial intelligence and observer performance book based on RJafroc." />
   <meta name="github-repo" content="dpc10ster/RJafrocFrocBook" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-01-18" />
+<meta name="date" content="2022-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -434,24 +434,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="froc-paradigm" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> The FROC paradigm and search</h1>
-<div id="froc-paradigm-how-much-finished" class="section level2">
-<h2><span class="header-section-number">1.1</span> TBA How much finished</h2>
+<div id="froc-paradigm" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 1</span> The FROC paradigm and search<a href="froc-paradigm.html#froc-paradigm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="froc-paradigm-how-much-finished" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.1</span> TBA How much finished<a href="froc-paradigm.html#froc-paradigm-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>80%</p>
 </div>
-<div id="froc-paradigm-intro" class="section level2">
-<h2><span class="header-section-number">1.2</span> Introduction</h2>
+<div id="froc-paradigm-intro" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.2</span> Introduction<a href="froc-paradigm.html#froc-paradigm-intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Until now the focus has been on the receiver operating characteristic (ROC) paradigm. For diagnostic tasks such as detecting diffuse interstitial lung disease<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, or diseases similar to it, where <em>disease location is implicit</em>, this is an appropriate paradigm in that essential information is not being lost by limiting the radiologist’s response to a single rating categorizing the likelihood of presence of disease.</p>
 <p>In clinical practice it is not only important to identify if the patient is diseased but also to offer further guidance to subsequent care-givers regarding other characteristics (such as location, type, size, extent) of the disease. In most clinical tasks if the radiologist believes the patient is diseased there is a location (or locations) associated with the suspected disease. Physicians term this <em>focal disease</em>, i.e., disease located at specific region(s) of the image.</p>
 <p>For focal disease the ROC paradigm constrains the collected information to a single rating representing the confidence level that there is disease <em>somewhere</em> in the patient’s imaged anatomy. The emphasis on “somewhere” is because it begs the question: if the radiologist believes the disease is somewhere, why not have them to point to it? In fact they do “point to it” in the sense that they record the location(s) of suspect regions in their clinical report, but the ROC paradigm cannot use this information. Clinicians have long recognized problems with ignoring location <span class="citation">(Black and Dwyer <a href="#ref-BlackDwyer1990" role="doc-biblioref">1990</a>; Black <a href="#ref-RN1921" role="doc-biblioref">2000</a>)</span>. From the observer performance measurement point of view the most important consideration is that neglect of location information leads to loss of statistical power. The basic reason for this is that additional noise is introduced in the measurement due to crediting the reader for correctly detecting the diseased condition but pointing to the wrong location - i.e., <em>being right for the wrong reason</em>. One can compensate for reduced statistical power by increasing the numbers of readers and cases, which increases the cost of the study and is also unethical because, by not using the optimal paradigm and analysis, one is subjecting more patients to imaging procedures <span class="citation">(Halpern, Karlawish, and Berlin <a href="#ref-RN2662" role="doc-biblioref">2002</a>)</span>.</p>
-<div id="chapter-outline" class="section level3">
-<h3><span class="header-section-number">1.2.1</span> Chapter outline</h3>
+<div id="chapter-outline" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.1</span> Chapter outline<a href="froc-paradigm.html#chapter-outline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Four observer performance paradigms are compared as to the kinds of information collected and ignored. An essential characteristic of the FROC paradigm, namely <em>visual search</em>, is introduced. The FROC paradigm and its historical context is described. Key differences between FROC ratings and ROC ratings are noted. The FROC plot is introduced. A “solar” analogy is introduced – understanding this is key to obtaining a good intuitive feel for the FROC paradigm.</p>
 </div>
 </div>
-<div id="location-specific-paradigms" class="section level2">
-<h2><span class="header-section-number">1.3</span> Location specific paradigms</h2>
+<div id="location-specific-paradigms" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.3</span> Location specific paradigms<a href="froc-paradigm.html#location-specific-paradigms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Location-specific paradigms take into account, to varying degrees, information regarding the locations of perceived lesions, so they are sometimes referred to as lesion-specific (or lesion-level) paradigms: usage of these terms is discouraged. For example, all observer performance methods involve detecting the presence of true lesions; so ROC methodology is, in this sense, also lesion-specific. On the other hand <em>location</em> is a characteristic of true and perceived focal lesions, and methods that account for location are better termed <em>location-specific</em> than lesion-specific.</p>
 <p>The term <em>lesion</em> always refers to a true or real lesion. The prefix “true” or “real” is implicit. The term <em>suspicious region</em> is reserved for any region that, as far as the observer is concerned, has “lesion-like” characteristics. <em>A lesion is a real entity while a suspicious region is a perceived entity.</em></p>
 <p>There are three location-specific paradigms:</p>
@@ -475,15 +475,15 @@ FIGURE 1.1: Upper Left: ROC, Upper Right: FROC, Lower Left: LROC, Lower Right: R
 <li><p>In the region of interest (ROI) paradigm, the researcher segments the image into a number of regions-of-interest (ROIs) and the radiologist rates each ROI for presence of at least one suspicious region somewhere in the ROI. The rating is similar to the ROC rating, except it applies to the ROI, not the whole image. Assuming a 1 – 5 positive directed integer rating scale in Fig. <a href="froc-paradigm.html#fig:froc-paradigm-4">1.1</a> (bottom-right) there are four ROIs. The ROI at ~9 o’clock might be rated ROI-5 as it contains the most suspicious light-shaded cross, the one at ~11 o’clock might be rated ROI-1 as it does not contain any light-shaded crosses, the one at ~3 o’clock might be rated LROC-2 or 3 (the unmarked lightshaded cross would tend to increase the confidence level) and the one at ~7 o’clock might be rated ROI-1. In the example shown in Fig. <a href="froc-paradigm.html#fig:froc-paradigm-4">1.1</a> (bottom-right), each case yields 4 ratings<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p></li>
 </ul>
 </div>
-<div id="froc-paradigm-vis-search" class="section level2">
-<h2><span class="header-section-number">1.4</span> Visual search</h2>
+<div id="froc-paradigm-vis-search" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.4</span> Visual search<a href="froc-paradigm.html#froc-paradigm-vis-search" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The FROC paradigm in medical imaging is equivalent to a visual search task. Any search task has two components: (i) finding something and (ii) acting on it. Examples of a search tasks are looking for lost car-keys or a milk carton in the refrigerator. Success in a search task is finding the searched for object. Acting on it could be driving to work or drinking milk from the carton. There is expertise associated with any search task. Husbands are notoriously bad at finding the milk carton in the refrigerator (analogy due to Dr. Elizabeth Krupinski at an SPIE course taught jointly with the author). Like anything else, search expertise is honed by experience, i.e., lots of practice.</p>
 <p>Likewise a medical imaging search task has two components (i) finding suspicious regions and (ii) acting on each finding. “Finding” is the actual term used by clinicians in their reports. Acting on a finding involves determining if the finding is sufficiently suspicious for cancer to warrant reporting. If a suspicious region is found and provided it is sufficiently suspicious the region is marked and rated for confidence that it is a true (malignant) lesion.</p>
 <p>The radiologist does not know a-priori if the patient is diseased and, if diseased, how many lesions may be present. In the breast-screening context, it is known a-priori that about 5 out of 1000 cases have cancers, so 99.5% of the time odds are that the case has no malignant lesions<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. Considerably search expertise is needed for the radiologist to mark true lesions with high probability while not generating too many false marks.</p>
 <p>At my former institution (University of Pittsburgh) the radiologists digitally outline and annotate (describe) suspicious region(s) that are found. As one would expect from the low prevalence of breast cancer in the screening context, about 5 per 1000 cases in the US, and assuming expert-level radiologist interpretations, about 90% of breast cases do not generate any marks. About 10% of cases generate one or more marks and are recalled for further comprehensive imaging (termed diagnostic workup). Of marked cases about 90% generate one mark, about 10% generate 2 marks, and a rare case generates 3 or more marks (Dr. David Gur, private communication, ca. 2015).</p>
 <p>Conceptually, a mammography report consists of the locations of regions that exceed the threshold and the corresponding levels of suspicion, reported as a Breast Imaging Reporting and Data System (BIRADS) rating (the BIRADS rating is actually assigned after the diagnostic workup following a 0-screening rating; the screening rating itself is binary: 0 for recall or 1 for normal).</p>
-<div id="froc-paradigm-scoring-the-data" class="section level3">
-<h3><span class="header-section-number">1.4.1</span> Proximity criterion and scoring the data</h3>
+<div id="froc-paradigm-scoring-the-data" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.4.1</span> Proximity criterion and scoring the data<a href="froc-paradigm.html#froc-paradigm-scoring-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the first two clinical applications of the FROC paradigm <span class="citation">(Chakraborty et al. <a href="#ref-Chakraborty1986DigitalVsConv" role="doc-biblioref">1986</a>; Niklason et al. <a href="#ref-Niklason1986SimulatedPulmonary" role="doc-biblioref">1986</a>)</span> the marks and ratings were indicated by a grease pencil on an acrylic overlay aligned, in a reproducible way, to the CRT displayed chest image. Credit for a correct detection and localization, termed a lesion-localization or LL-event<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, was given only if a mark was sufficiently close (as per proximity criterion, see below) to an actual diseased region; otherwise, the observer’s mark-rating pair was scored as a non-lesion localization or NL-event.</p>
 <p>The use of ROC terminology, such as true positives or false positives to describe FROC data is not conducive to clarity, and is strongly discouraged.</p>
 <p>Definitions:</p>
@@ -494,17 +494,17 @@ FIGURE 1.1: Upper Left: ROC, Upper Right: FROC, Lower Left: LROC, Lower Right: R
 <p>What is meant by sufficiently close? One adopts an acceptance radius (for spherical lesions) or <em>proximity criterion</em> (the more general case). What constitutes “close enough” is a clinical decision the answer to which depends on the application. It is not necessary for two radiologists to point to the same pixel in order for them to agree that they are seeing the same suspicious region. Likewise, two physicians – e.g., the radiologist finding the lesion on an x-ray and the surgeon responsible for resecting it – do not have to agree on the exact center of a lesion in order to appropriately assess and treat it. More often than not, “clinical common sense” can be used to determine if a mark actually localized the real lesion. When in doubt, the researcher should ask an independent radiologist (i.e., not one used in the observer study) how to score ambiguous marks. A rigid definition of the proximity criterion should not be used.</p>
 <p>For roughly spherical nodules a simple rule can be used. If a circular lesion is 10 mm in diameter, one can use the “touching-coins” analogy to determine the criterion for a mark to be classified as lesion localization. Each coin is 10 mm in diameter, so if they touch, their centers are separated by 10 mm, and the rule is to classify any mark within 10 mm of an actual lesion center as a LL mark, and if the separation is greater, the mark is classified as a NL mark. A recent paper <span class="citation">(Dobbins III et al. <a href="#ref-Dobbins2016MultiInstitutional" role="doc-biblioref">2016</a>)</span> using FROC analysis gives more details on appropriate proximity criteria in the clinical context.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 </div>
-<div id="multiple-marks-in-the-same-vicinity" class="section level3">
-<h3><span class="header-section-number">1.4.2</span> Multiple marks in the same vicinity</h3>
+<div id="multiple-marks-in-the-same-vicinity" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.4.2</span> Multiple marks in the same vicinity<a href="froc-paradigm.html#multiple-marks-in-the-same-vicinity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Multiple marks near the same vicinity are rarely encountered with radiologists, especially if the perceived lesion is mass-like.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> However, algorithmic readers, such as computer aided detection (CAD) algorithms, tend to find multiple regions in the same area. Algorithm designers generally incorporate a clustering step to reduce overlapping regions to a single region and assign the highest rating to it (i.e., the rating of the highest rated mark, not the rating of the closest mark.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
 </div>
-<div id="historical-context" class="section level3">
-<h3><span class="header-section-number">1.4.3</span> Historical context</h3>
+<div id="historical-context" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.4.3</span> Historical context<a href="froc-paradigm.html#historical-context" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The term “free-response” was coined by <span class="citation">(Egan, Greenburg, and Schulman <a href="#ref-RN897" role="doc-biblioref">1961</a>)</span> to describe a task involving the detection of brief audio tone(s) against a background of white-noise (white-noise is what one hears if an FM tuner is set to an unused frequency). The tone(s) could occur at any instant within an active listening interval, defined by an indicator light bulb that is turned on. The listener’s task was to respond by pressing a button at the specific instant(s) when a tone(s) was perceived (heard). The listener was uncertain how many true tones could occur in an active listening interval and when they might occur. Therefore, the number of responses (button presses) per active interval was a priori unpredictable: it could be zero, one or more. The Egan et al study did not require the listener to rate each button press, but apart from this difference and with two-dimensional images replacing the listening intervals, the acoustic signal detection study is similar to medical imaging search tasks.</p>
 </div>
 </div>
-<div id="froc-paradigm-froc-plot" class="section level2">
-<h2><span class="header-section-number">1.5</span> The free-response receiver operating characteristic (FROC) plot</h2>
+<div id="froc-paradigm-froc-plot" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.5</span> The free-response receiver operating characteristic (FROC) plot<a href="froc-paradigm.html#froc-paradigm-froc-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The free-response receiver operating characteristic (FROC) plot was introduced <span class="citation">(Miller <a href="#ref-RN2104" role="doc-biblioref">1969</a>)</span> as a way of visualizing performance in the free-response auditory tone detection task.</p>
 <p>In the medical imaging context, assuming the mark rating pairs have been classified as NLs (non-lesion localizations) or LLs (lesion localizations):</p>
 <ul>
@@ -519,8 +519,8 @@ FIGURE 1.1: Upper Left: ROC, Upper Right: FROC, Lower Left: LROC, Lower Right: R
 <p>If <em>continuous ratings</em> are used, the procedure is to start with a very high threshold so that none of the ratings exceed the threshold and then to gradually lower the threshold. Every time the threshold crosses the rating of a mark, or possibly multiple marks, the total count of LLs and NLs exceeding the threshold is divided by the appropriate denominators yielding the ‘’raw’’ FROC plot. For example, when an LL rating just exceeds the threshold, the operating point jumps up by 1/(total number of lesions), and if two LLs simultaneously just exceed the threshold the operating point jumps up by 2/(total number of lesions). If an NL rating just exceeds the threshold, the operating point jumps to the right by 1/(total number of cases). If an LL rating and a NL rating simultaneously just exceed the threshold, the operating point moves diagonally, up by 1/(total number of lesions) and to the right by 1/(total number of cases). The reader should get the general idea by now and recognize that the cumulating procedure is very similar to the manner in which ROC operating points were calculated, the only differences being in the quantities being cumulated and the relevant denominators.</p>
 <p>Chapter <a href="empirical.html#empirical">2</a> describes the FROC, and other possible operating characteristics, in more detail.</p>
 </div>
-<div id="froc-paradigm-solar-analogy" class="section level2">
-<h2><span class="header-section-number">1.6</span> The “solar” analogy</h2>
+<div id="froc-paradigm-solar-analogy" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.6</span> The “solar” analogy<a href="froc-paradigm.html#froc-paradigm-solar-analogy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Consider the sun, regarded as a “lesion” to be detected, with two daily observations spaced 12 hours apart, so that at least one observation period is bound to have the sun in the sky. Furthermore assume the observer knows his GPS coordinates and has a watch that gives accurate local time, from which an accurate location of the sun can be deduced. Assuming clear skies and no obstructions to the view, the sun will always be correctly located and no rational observer will ever generate a non-lesion localization or NL, i.e., no region of the sky will be erroneously “marked”.</p>
 <p>FROC curve implications of this analogy are:</p>
 <ul>
@@ -540,8 +540,8 @@ FIGURE 1.1: Upper Left: ROC, Upper Right: FROC, Lower Left: LROC, Lower Right: R
 <p>The analogy is not restricted to the sun, which one might argue is an almost infinite SNR object and therefore atypical. Consider finding stars or planets. In clear skies, if one knows the constellations, one can still locate bright stars and planets like Venus or Jupiter. With less bright stars and / or obscuring clouds, there will be false-sightings and the FROC plot could approach a flat horizontal line at ordinate equal to zero, but the observer will not fill up the sky with false sightings of a desired star.</p>
 <p>False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization (LL) or incorrect localizations (NLs). At the time of writing there is a hunt for a new planet, possibly a gas giant , that is much further than even the newly demoted Pluto.</p>
 </div>
-<div id="froc-paradigm-discussion" class="section level2">
-<h2><span class="header-section-number">1.7</span> Discussion</h2>
+<div id="froc-paradigm-discussion" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.7</span> Discussion<a href="froc-paradigm.html#froc-paradigm-discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter has served as a general introduction to the location specific paradigms. The FROC paradigm, in particular, is directly related to visual search. The terms lesion-localization (LL) and non-lesion localization (NL) were introduced, to mean locating a true lesion and a false region, respectively. A qualitative definition of search performance was given, namely, the ability to find lesions while not finding non-lesions. This will be quantified in a later chapter. A widely used operating characteristic associated with it, namely the FROC curve, was introduced. A “solar” analogy was given that brings out important characteristics of the FROC - in particular its dependence on lesion contrast.</p>
 <p>In my experience the FROC paradigm is much misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the paradigm and the FROC curve. These are summarized below:</p>
 <ul>
@@ -555,12 +555,12 @@ FIGURE 1.1: Upper Left: ROC, Upper Right: FROC, Lower Left: LROC, Lower Right: R
 </ul>
 <p>The FROC plot is the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset and associated scalar measures of performance, termed <em>figures of merit</em> (FOMs).</p>
 </div>
-<div id="froc-paradigm-references" class="section level2">
-<h2><span class="header-section-number">1.8</span> References</h2>
+<div id="froc-paradigm-references" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.8</span> References<a href="froc-paradigm.html#froc-paradigm-references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
-<h3>REFERENCES</h3>
+<h3>REFERENCES<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references">
 <div id="ref-RN1921">
 <p>Black, William C. 2000. “Anatomic Extent of Disease: A Critical Variable in Reports of Diagnostic Accuracy.” Journal Article. <em>Radiology</em> 217 (2): 319–20. <a href="http://radiology.rsnajnls.org">http://radiology.rsnajnls.org</a>.</p>

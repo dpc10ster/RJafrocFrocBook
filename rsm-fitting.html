@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 RSM fitting | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 RSM fitting | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Artificial intelligence and observer performance book based on RJafroc." />
   <meta name="github-repo" content="dpc10ster/RJafrocFrocBook" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-01-18" />
+<meta name="date" content="2022-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -434,14 +434,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rsm-fitting" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> RSM fitting</h1>
-<div id="rsm-fitting-how-much-finished" class="section level2">
-<h2><span class="header-section-number">7.1</span> TBA How much finished</h2>
+<div id="rsm-fitting" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 7</span> RSM fitting<a href="rsm-fitting.html#rsm-fitting" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="rsm-fitting-how-much-finished" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.1</span> TBA How much finished<a href="rsm-fitting.html#rsm-fitting-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>10%</p>
 </div>
-<div id="rsm-fitting-intro" class="section level2">
-<h2><span class="header-section-number">7.2</span> TBA Introduction</h2>
+<div id="rsm-fitting-intro" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.2</span> TBA Introduction<a href="rsm-fitting.html#rsm-fitting-intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The radiological search model (RSM) is based on what is known, via eye-tracking measurements, about how radiologists look at medical images <span class="citation">(Kundel and Nodine <a href="#ref-kundel2004modeling" role="doc-biblioref">2004</a>)</span>. The ability of this model to predict search and lesion-classification expertise was described in TBA Chapter 17. If one could estimate search and lesion-classification expertise from clinical datasets then one would know which of them is limiting performance. This would provide insight into the decision making efficiency of observers. For this potential to be realized, one has to be able to reliably estimate parameters of the RSM from data, and this turned out to be a difficult problem.</p>
 <p>To put progress in this area in context a brief historical background is needed. I have worked on and off on the FROC estimation problem since 2002, and two persons (Dr. Hong-Jun Yoon and Xuetong Zhai) can attest to the effort. Initial attempts focused on fitting the FROC curve, in the (subsequently shown to be mistaken) belief that this was using <em>all</em> the data. In fact unmarked non-diseased cases, which are perfect decisions, are not taken into account in the FROC plot. In addition, there are degeneracy issues, which make parameter estimation difficult except in uninteresting situations. Early work involved maximization of the FROC likelihood function. This method was applied to seven designer-level CAD datasets. With CAD data one has a large number of marks and unmarked cases are relatively rare. However, only the CAD designer knows of their existence since in the clinic only a small fraction of the marks, those whose z-samples exceed a manufacturer-selected threshold, are actually shown to the radiologist. In other words the full FROC curve, extending to the end-point, is available to the CAD algorithm designer, which makes estimation of the end-point defining parameters <span class="math inline">\(\lambda&#39;, \nu&#39;\)</span> trivial. Estimating the remaining parameter of the RSM is then also relatively easy.</p>
 <p>It was gradually recognized that the FROC curve based method worked only for designer level CAD data, and not for human observer data. Consequently, subsequent effort focused on ROC curve-based fitting, and this proved successful at fitting radiologist datasets, where detailed definition of the ROC curve is not available. A preliminary account of this work can be found in a conference proceeding <span class="citation">(Chakraborty and Svahn <a href="#ref-RN2125" role="doc-biblioref">2011</a>)</span>.</p>
@@ -449,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The chapter starts with fitting FROC curves. This is partly for historical reasons and to make contact with a method used by CAD designers. Then focus shifts to fitting ROC curves and comparing the RSM-based method to existing methods, namely the proper ROC (PROPROC) <span class="citation">(Metz and Pan <a href="#ref-metz1999proper" role="doc-biblioref">1999</a>; Pan and Metz <a href="#ref-RN2413" role="doc-biblioref">1997</a>)</span> and the contaminated binormal model (CBM) <span class="citation">(Dorfman and Berbaum <a href="#ref-RN1501" role="doc-biblioref">2000</a>)</span> methods, both of which are proper ROC fitting models. These are described in more detail in TBA Chapter 20. The comparison is based on a large number of interpretations, namely, 14 datasets comprising 43 modalities, 80 readers and 2012 cases, most of which are from my international collaborations. Besides providing further evidence for the validity of the RSM, the estimates of search and lesion-classification performance derived from the fitted parameters demonstrate that there is information in ROC data that is currently ignored by analyses that do not account for search performance. <em>Specifically, it shows that search performance is the bottleneck that is currently limiting radiologist performance.</em></p>
 <p>The ability to fit RSM to clinical datasets is critical to sample size estimation – this was the practical reason why the RSM fitting problem had to be solved. Sample size estimation requires relating the wAFROC-AUC FOM to the corresponding ROC-AUC FOM in order to obtain a physically meaningful effect-size. Lacking a mathematical relationship between them, comparing the effect-sizes in the two units would be like comparing “apples and oranges”. A mathematical relation is only possible if one has a parametric model that predicts both ROC and wAFROC curves, as does the RSM. Therefore, this chapter concludes with sample size estimation for FROC studies using the wAFROC FOM. However, as long as one can predict the appropriate operating characteristic using RSM parameters, the method can be extended to other paradigms, e.g., the location ROC (LROC) <span class="citation">(Chakraborty and Yoon <a href="#ref-RN1654" role="doc-biblioref">2008</a>)</span> paradigm.</p>
 </div>
-<div id="rsm-fitting-roc-likelihood" class="section level2">
-<h2><span class="header-section-number">7.3</span> ROC Likelihood function</h2>
+<div id="rsm-fitting-roc-likelihood" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.3</span> ROC Likelihood function<a href="rsm-fitting.html#rsm-fitting-roc-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In Chapter <a href="rsm-pred.html#rsm-pred">5</a> expressions were derived for the coordinates (x,y) of the ROC curve predicted by the RSM, see Eqn. <a href="rsm-pred.html#eq:rsm-pred-fpf">(5.10)</a> and Eqn. <a href="rsm-pred.html#eq:rsm-pred-tpf">(5.13)</a>.</p>
 <p><span class="math display" id="eq:rsm-fitting-fpf">\[\begin{equation}
 x \equiv \text{FPF}\left (\zeta , \lambda&#39;\right ) = 1 - \text{exp}\left ( -\lambda&#39; \Phi\left ( -\zeta \right )  \right )
@@ -487,8 +487,8 @@ LL_{ROC} \left ( \mu, \lambda&#39;, \nu&#39;, \overrightarrow{f_L} \right )= \su
 <p>The Broyden–Fletcher–Goldfarb–Shanno (BFGS) <span class="citation">(Shanno and Kettler <a href="#ref-RN2646" role="doc-biblioref">1970</a>; Shanno <a href="#ref-RN2647" role="doc-biblioref">1970</a>; Goldfarb <a href="#ref-RN2648" role="doc-biblioref">1970</a>; Fletcher <a href="#ref-RN2649" role="doc-biblioref">1970</a>, <a href="#ref-RN2651" role="doc-biblioref">2013</a>; Broyden <a href="#ref-RN2650" role="doc-biblioref">1970</a>)</span> minimization algorithm, as implemented as function <code>mle2()</code> in R-package <code>bbmle</code> <span class="citation">(Bolker and R Development Core Team <a href="#ref-packageBbmle" role="doc-biblioref">2020</a>)</span> was used to minimize the negative of the likelihood function. Since the BFGS-algorithm varies each parameter in an unrestricted range <span class="math inline">\((-\infty, \infty)\)</span>, which would cause problems (e.g., RSM physical parameters cannot be negative and thresholds need to be properly ordered), appropriate variable transformations (both “forward” and “inverse”) were used so that parameters supplied to the log-likelihood function were always in the valid range, irrespective of values chosen by the BFGS-algorithm.</p>
 <p>The software also calculates the goodness of fit statistic using the method described in <code>RJafrocRocBook</code>. Because of the additional RSM parameter (as compared to conventional ROC models) the degrees-of-freedom (df) of the chisquare goodness of fit statistic is <span class="math inline">\(R_{FROC} – 3\)</span>. Calculating goodness of fit for the RSM can fail in situations where the corresponding statistic can be calculated for the binormal model, e.g., three (non – trivial) ROC operating points, corresponding to <span class="math inline">\(\text{df} = 1\)</span>. With RSM fitting one needs at least four (non – trivial) ROC operating points, each defined by bins with at least five counts in both non-diseased and diseased categories.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a></p>
 </div>
-<div id="rsm-fitting-fitrsmroc-implementation" class="section level2">
-<h2><span class="header-section-number">7.4</span> <code>FitRsmROC</code> implementation</h2>
+<div id="rsm-fitting-fitrsmroc-implementation" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.4</span> <code>FitRsmROC</code> implementation<a href="rsm-fitting.html#rsm-fitting-fitrsmroc-implementation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>RJafroc</code> function <code>FitRsmROC()</code> fits an RSM-predicted ROC curve to a binned single-modality single-reader ROC dataset. It is called by <code>ret &lt;- FitRsmRoc(binnedRocData, lesDistr, trt = 1, rdr = 1)</code>, where <code>binnedRocData</code> is a binned ROC dataset, <code>lesDistr</code> is the lesion distribution vector (normalized histogram) in the dataset and <code>trt</code> and <code>rdr</code> are the desired treatment and reader to extract from the dataset, each of which defaults to one.</p>
 <p>The return value <code>ret</code> is a <code>list</code> with the following elements:</p>
 <ul>
@@ -505,8 +505,8 @@ LL_{ROC} \left ( \mu, \lambda&#39;, \nu&#39;, \overrightarrow{f_L} \right )= \su
 <li><p><code>ret$fittedPlot</code> A <code>ggplot2</code> object containing the fitted operating characteristic along with the empirical operating points. Use <code>print</code> to display the object</p></li>
 </ul>
 </div>
-<div id="rsm-fitting-fitrsmroc-usage-example" class="section level2">
-<h2><span class="header-section-number">7.5</span> <code>FitRsmROC</code> usage example</h2>
+<div id="rsm-fitting-fitrsmroc-usage-example" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.5</span> <code>FitRsmROC</code> usage example<a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>The following example uses the <em>first</em> treatment in <code>dataset04</code>; this is a 5 treatment 4 radiologist FROC dataset <span class="citation">(Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a>)</span> consisting of 200 cases acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using <code>DfBinDataset()</code>. The number of parameters to be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.</li>
 </ul>
@@ -532,13 +532,13 @@ LL_{ROC} \left ( \mu, \lambda&#39;, \nu&#39;, \overrightarrow{f_L} \right )= \su
 <p><img src="09-rsm-fitting_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>The fitted ROC curve is proper: it’s slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is 0.907 which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.</p>
 </div>
-<div id="rsm-fitting-discussion-summary" class="section level2">
-<h2><span class="header-section-number">7.6</span> TBA Discussion / Summary</h2>
+<div id="rsm-fitting-discussion-summary" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.6</span> TBA Discussion / Summary<a href="rsm-fitting.html#rsm-fitting-discussion-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Over the years, there have been several attempts at fitting FROC data. Prior to the RSM-based ROC curve approach described in this chapter, all methods were aimed at fitting FROC curves, in the mistaken belief that this approach was using all the data. The earliest was my FROCFIT software 36. This was followed by Swensson’s approach 37, subsequently shown to be equivalent to my earlier work, as far as predicting the FROC curve was concerned 11. In the meantime, CAD developers, who relied heavily on the FROC curve to evaluate their algorithms, developed an empirical approach that was subsequently put on a formal basis in the IDCA method 12.</p>
 <p>This chapter describes an approach to fitting ROC curves, instead of FROC curves, using the RSM. On the face of it, fitting the ROC curve seems to be ignoring much of the data. As an example, the ROC rating on a non-diseased case is the rating of the highest-rated mark on that image, or negative infinity if the case has no marks. If the case has several NL marks, only the highest rated one is used. In fact the highest rated mark contains information about the other marks on the case, namely they were all rated lower. There is a statistical term for this, namely sufficiency 38. As an example, the highest of a number of samples from a uniform distribution is a sufficient statistic, i.e., it contains all the information contained in the observed samples. While not quite the same for normally distributed values, neglect of the NLs rated lower is not as bad as might seem at first.</p>
 </div>
-<div id="rsm-fitting-froc-likelihood" class="section level2">
-<h2><span class="header-section-number">7.7</span> Appendix 1: FROC likelihood function</h2>
+<div id="rsm-fitting-froc-likelihood" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.7</span> Appendix 1: FROC likelihood function<a href="rsm-fitting.html#rsm-fitting-froc-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Recall that the likelihood function is the probability of observing the data as a function of the parameter values. FROC notation was summarized in TBA Table 13.1. Thresholds <span class="math inline">\(\overrightarrow{\zeta } \equiv \left ( \zeta_0, \zeta_1, ..., \zeta_{R_{FROC}+1}, \right )\)</span> were defined, where <span class="math inline">\(R_{FROC}\)</span> is the number of FROC bins, and <span class="math inline">\(\zeta_0 = -\infty\)</span> and <span class="math inline">\(\zeta_{R_{FROC}+1} = \infty\)</span>. Since each z-sample is obtained by sampling an appropriately centered unit-variance normal distribution, the probability <span class="math inline">\(p_r\)</span> that a latent NL will be marked and rated in FROC bin <span class="math inline">\(r\)</span> and the probability <span class="math inline">\(q_r\)</span> that a latent LL will be marked and rated in FROC bin <span class="math inline">\(r\)</span> are given by:</p>
 <p><span class="math display" id="eq:rsm-fitting-pr-qr">\[\begin{equation}
 \left. 
@@ -551,8 +551,8 @@ q_r = &amp; \Phi\left ( \zeta_{r+1} - \mu \right ) - \Phi\left ( \zeta_r  - \mu 
 \end{equation}\]</span></p>
 <p>Understanding these equations is easy: the CDF function evaluated at a threshold is the probability that a z-sample is less than the threshold. The first equation is the difference between the CDF functions of a unit-normal distribution evaluated at the two thresholds. This is the probability that the NL z-sample falls in bin FROC:<span class="math inline">\(r\)</span>. The second equation gives the probability that the LL z-sample falls in bin FROC:<span class="math inline">\(r\)</span>. The probabilities <span class="math inline">\(p_r\)</span> and <span class="math inline">\(q_r\)</span> individually sum to unity when all bins, including the zero bin, are included.</p>
 <p>If NL and LL events are assumed independent, the contributions to the likelihood function can be separated, and one need not enumerate counts at the individual case-level; instead, in the description that follows, one enumerates NL and LL counts in the various bins over the whole dataset.</p>
-<div id="rsm-fitting-froc-nls" class="section level3">
-<h3><span class="header-section-number">7.7.1</span> Contribution of NLs</h3>
+<div id="rsm-fitting-froc-nls" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.7.1</span> Contribution of NLs<a href="rsm-fitting.html#rsm-fitting-froc-nls" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Define <span class="math inline">\(n\)</span> (a random non-negative integer) as the total number of latent NLs in the dataset. The observed NL counts vector is <span class="math inline">\(\overrightarrow{n} \equiv \left ( n_0, n_1, ...,n_{R_{FROC}}, \right )\)</span>. Here <span class="math inline">\(n_r\)</span> is the total number of NL counts in FROC ratings bin <span class="math inline">\(r\)</span>, <span class="math inline">\(n_0 = n - \sum_{r=1}^{R} n_r = n - N\)</span>, is the <em>unknown number of unmarked latent NLs</em> and <span class="math inline">\(N\)</span> is the total number of observed NLs in the dataset. The probability <span class="math inline">\(P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right )\)</span> of observing the NL counts vector <span class="math inline">\(\overrightarrow{n}\)</span> is (the factorials come from the multinomial distribution):</p>
 <p><span class="math display" id="eq:rsm-fitting-pnvector">\[\begin{equation}
 P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right ) = n! \prod_{r=0}^{R_{FROC}} \frac{p_r^{n_r}}{n_r!}
@@ -565,8 +565,8 @@ P\left ( \overrightarrow{n} \mid \lambda&#39;, \overrightarrow{\zeta} \right ) =
 \end{equation}\]</span></p>
 <p>In this expression <span class="math inline">\(K = K_1 + K_2\)</span> is the total number of cases. <span class="math inline">\(\text{pmf}_{\text{Poi}} \left ( n, K\lambda&#39; \right )\)</span> of the Poisson distribution yields the probability of <span class="math inline">\(n\)</span> counts from a Poisson distribution with mean <span class="math inline">\(K\lambda&#39;\)</span>. The multiplication by the total number of cases is required because one is counting the total number of latent NLs over the entire dataset. The lower limit on <span class="math inline">\(n\)</span> is needed because <span class="math inline">\(n\)</span> cannot be smaller than <span class="math inline">\(N\)</span>, the total number of observed NL counts. The left hand side of Eqn. <a href="rsm-fitting.html#eq:rsm-fitting-p-n-lambda-prime-zeta">(7.8)</a> is the probability of observing the NL counts vector <span class="math inline">\(\overrightarrow{n}\)</span> as a function of RSM parameters. Not surprisingly, since NLs are sampled from a zero-mean normal distribution, the <span class="math inline">\(\mu\)</span> parameter does not enter the above expression.</p>
 </div>
-<div id="rsm-fitting-froc-lls" class="section level3">
-<h3><span class="header-section-number">7.7.2</span> Contribution of LLs</h3>
+<div id="rsm-fitting-froc-lls" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.7.2</span> Contribution of LLs<a href="rsm-fitting.html#rsm-fitting-froc-lls" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Likewise, define <span class="math inline">\(l\)</span> (a non-negative random integer) the total number of latent LLs in the dataset and the LL counts vector is <span class="math inline">\(\overrightarrow{l} \equiv \left ( l_0, l_1, ...,l_{R_{FROC}}, \right )\)</span>. Here <span class="math inline">\(l_r\)</span> is the number of LL counts in FROC ratings bin <span class="math inline">\(r\)</span>, <span class="math inline">\(l_0 = l - \sum_{r=1}^{R_{FROC}} l_r = l - L\)</span> is the <em>known</em> number of unmarked latent LLs and <span class="math inline">\(L\)</span> is the total number of observed LLs in the dataset. The probability <span class="math inline">\(P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right )\)</span> of observing the LL counts vector <span class="math inline">\(\overrightarrow{l}\)</span> is:</p>
 <p><span class="math display" id="eq:rsm-fitting-plvector">\[\begin{equation}
 P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right ) = l! \prod_{r=0}^{R_{FROC}} \frac{q_r^{l_r}}{l_r!}
@@ -588,14 +588,14 @@ LL_{FROC} \equiv LL_{FROC}\left ( \overrightarrow{n}, \overrightarrow{l} \mid \m
 \tag{7.11}
 \end{equation}\]</span></p>
 </div>
-<div id="rsm-fitting-froc-degeneracy" class="section level3">
-<h3><span class="header-section-number">7.7.3</span> Degeneracy problems</h3>
+<div id="rsm-fitting-froc-degeneracy" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.7.3</span> Degeneracy problems<a href="rsm-fitting.html#rsm-fitting-froc-degeneracy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The product <span class="math inline">\(\lambda&#39; \left ( 1-p_0 \right ) = \lambda&#39;\Phi(-\zeta_1)\)</span> reveals degeneracy in the sense that two quantities appear as a product, so that they cannot be individually separated. The effect of increasing <span class="math inline">\(\lambda&#39;\)</span> can be counteracted by increasing <span class="math inline">\(\zeta_1\)</span>; increasing <span class="math inline">\(\lambda&#39;\)</span> yields more latent NLs but increasing <span class="math inline">\(\zeta_1\)</span> results in fewer of them being marked. The two possibilities cannot be distinguished. A similar degeneracy occurs in the term involving the product <span class="math inline">\(-\nu&#39; + \nu&#39; \ q_0 = -\nu&#39;(1- q_0) = -\nu&#39; \Phi(\mu-\zeta_1)\)</span>, where increasing <span class="math inline">\(\nu&#39;\)</span> can be counter balanced by decreasing <span class="math inline">\(\mu-\zeta_1\)</span>, i.e., by increasing <span class="math inline">\(\zeta_1\)</span>. Again, the effect of increasing <span class="math inline">\(\nu&#39;\)</span> is to produce more latent LLs, but increasing <span class="math inline">\(\zeta_1\)</span> results in fewer of them being marked.</p>
 <p><em>This is the fundamental problem with fitting RSM FROC curves to radiologist FROC data.</em></p>
 </div>
 </div>
-<div id="rsm-fitting-froc-idca" class="section level2">
-<h2><span class="header-section-number">7.8</span> Appendix 2: IDCA Likelihood function</h2>
+<div id="rsm-fitting-froc-idca" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.8</span> Appendix 2: IDCA Likelihood function<a href="rsm-fitting.html#rsm-fitting-froc-idca" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the limit <span class="math inline">\(\zeta_1 \rightarrow -\infty\)</span>, <span class="math inline">\(p_0 \rightarrow 0\)</span> and <span class="math inline">\(q_0 \rightarrow 0\)</span>, and TBA Eqn. (18.6) reduces to:</p>
 <p><span class="math display" id="eq:rsm-fitting-idca-ll">\[\begin{equation}
 LL_{FROC}^{IDCA} = \sum_{r=1}^{R_{FROC}} \left \{ n_r log\left ( p_r \right ) + l_r log\left ( q_r \right ) \right \} \\
@@ -689,12 +689,12 @@ LLF(\zeta) = &amp; \nu&#39; \Phi\left (\mu -\zeta \right )
 <p>IDCA uses the <em>unequal variance</em> binormal model to fit the pseudo-ROC, which of course opens up the possibility of an inappropriate chance-line crossing and a predicted FROC curve that is non-monotonically increasing with NLF (this is always present with IDCA fits, but one would need to examine the curve near the end-point very closely to see it). In practice the unequal variance model gives visually good fits for CAD datasets.</p>
 <p>In fact, IDCA yields excellent fits to some designer-level FROC datasets. However, the issue is not with the quality of the fits, rather the appropriateness of the FROC curve as a measure of performance, especially for human observers. For CAD the method works, so if one wished one could use IDCA to fit designer level CAD FROC data. However, with closely spaced operating points, the empirical FROC would also work and it does not involve any fitting assumptions. The issue is not fitting designer level CAD data but comparing stand-alone performance of designer level CAD to radiologists, and this is not solved by IDCA, which works for designer level CAD, but not for human observers. The latter do not report every suspicious region, no matter how low its confidence level, so the IDCA assumption <span class="math inline">\(\zeta_1 \rightarrow -\infty\)</span> is invalid. The problem of analyzing standalone performance of CAD against a group of radiologists interpreting the same cases is addressed in TBA Chapter 22.</p>
 </div>
-<div id="rsm-fitting-references" class="section level2">
-<h2><span class="header-section-number">7.9</span> References</h2>
+<div id="rsm-fitting-references" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.9</span> References<a href="rsm-fitting.html#rsm-fitting-references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
-<h3>REFERENCES</h3>
+<h3>REFERENCES<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references">
 <div id="ref-packageBbmle">
 <p>Bolker, Ben, and R Development Core Team. 2020. <em>Bbmle: Tools for General Maximum Likelihood Estimation</em>. <a href="https://CRAN.R-project.org/package=bbmle">https://CRAN.R-project.org/package=bbmle</a>.</p>

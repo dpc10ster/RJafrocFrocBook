@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 The radiological search model (RSM) | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 The radiological search model (RSM) | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Artificial intelligence and observer performance book based on RJafroc." />
   <meta name="github-repo" content="dpc10ster/RJafrocFrocBook" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-01-18" />
+<meta name="date" content="2022-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -434,20 +434,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rsm" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> The radiological search model (RSM)</h1>
-<div id="rsm-how-much-finished" class="section level2">
-<h2><span class="header-section-number">4.1</span> TBA How much finished</h2>
+<div id="rsm" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 4</span> The radiological search model (RSM)<a href="rsm.html#rsm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="rsm-how-much-finished" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.1</span> TBA How much finished<a href="rsm.html#rsm-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>70%</p>
 </div>
-<div id="rsm-intro" class="section level2">
-<h2><span class="header-section-number">4.2</span> Introduction</h2>
+<div id="rsm-intro" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.2</span> Introduction<a href="rsm.html#rsm-intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>All models of ROC data <em>not incorporating search</em> involve two fundamental parameters (i.e, not including binning-related threshold parameters). For example, the unequal variance binormal model in Chapter TBA (binormal-model) requires the <span class="math inline">\(a,b\)</span> parameters. Alternative ROC models described in TBA Chapter 20 also require two fundamental parameters.</p>
 <p><em>It turns out that all that is needed to model as seemingly complex a process as visual search, at least to first order, is one additional fundamental parameter</em>. The RSM contains three fundamental parameters: <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span>. However, it is easier to introduce the RSM via <span class="math inline">\(\mu\)</span> and intermediate primed parameters, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span>. The model is then re-parameterized to take into account that <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> must depend on <span class="math inline">\(\mu\)</span> via un-primed parameters <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> <em>which are intrinsic parameters</em>, i.e., independent of <span class="math inline">\(\mu\)</span>.</p>
 <p>The RSM is a model of the FROC paradigm. It accounts for all features characterizing the FROC paradigm, including localization and the random non-negative numbers of NLs and LLs per image.</p>
 </div>
-<div id="rsm-details" class="section level2">
-<h2><span class="header-section-number">4.3</span> The radiological search model</h2>
+<div id="rsm-details" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.3</span> The radiological search model<a href="rsm.html#rsm-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The radiological search model (RSM) for the free-response paradigm is a statistical parameterization of the Nodine-Kundel model. It consists of:</p>
 <ul>
 <li><p>A <em>search stage</em> corresponding to the initial glance in the Nodine-Kundel model, in which suspicious regions, i.e., the latent marks, are flagged for subsequent foveal scanning. The total number of latent marks on a case is <span class="math inline">\(\geq 0\)</span>; some cases may have zero latent marks, a fact that will turn out to have important consequences for the shapes of all RSM predicted operating characteristics.</p></li>
@@ -456,8 +456,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Latent marks can be either latent NLs (corresponding to non-diseased regions) or latent LLs (corresponding to diseased regions). The number of latent NLs on a case is denoted <span class="math inline">\(l_1\)</span>. The number of latent LLs on a diseased case is denoted <span class="math inline">\(l_2\)</span>. Latent NLs can occur on non-diseased and diseased cases, but latent LLs can only occur on diseased cases. We will initially assume that every diseased case has <span class="math inline">\(L\)</span> actual lesions. Later this will be extended to arbitrary number of lesions per diseased case. Since the number of latent LLs cannot exceed the number of lesions, <span class="math inline">\(0 \leq l_2 \leq L\)</span> . The symbol <span class="math inline">\(l_s\)</span> denotes a location with site-level truth state <span class="math inline">\(s\)</span>, where <span class="math inline">\(s = 1\)</span> for a NL and <span class="math inline">\(s = 2\)</span> for a LL.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p></li>
 </ul>
 </div>
-<div id="rsm-assumptions" class="section level2">
-<h2><span class="header-section-number">4.4</span> RSM assumptions</h2>
+<div id="rsm-assumptions" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.4</span> RSM assumptions<a href="rsm.html#rsm-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Assumption 1:</strong> The number of latent NLs, <span class="math inline">\(l_1 \geq 0\)</span>, is sampled from the Poisson distribution <span class="math inline">\(\text{Poi}\)</span> with mean <span class="math inline">\(\lambda&#39;\)</span>:</p>
 <p><span class="math display" id="eq:rsm-poisson-sampling">\[\begin{equation} 
 l_1 \sim \text{Poi}\left ( \lambda&#39; \right ) 
@@ -499,11 +499,11 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <p><strong>Rating assigned to unmarked sites:</strong> Unmarked LLs are assigned the zero rating: even lesions that were not flagged by the search stage, and therefore do not qualify as latent LLs, are assigned the zero rating. This is because they represent observable events. In contrast, unmarked latent NLs are unobservable events (unlike lesions, there is no a-priori reader-independent list of non-lesion locations; in fact, what constitutes a NL is reader dependent).</p>
 <p>By choosing <span class="math inline">\(R\)</span> large enough, the preceding discrete rating model is applicable to continuous z-samples.</p>
 </div>
-<div id="rsm-parameter-interpretations" class="section level2">
-<h2><span class="header-section-number">4.5</span> Physical interpretation of RSM parameters</h2>
+<div id="rsm-parameter-interpretations" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.5</span> Physical interpretation of RSM parameters<a href="rsm.html#rsm-parameter-interpretations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> have the following meanings:</p>
-<div id="rsm-mu-parameter" class="section level3">
-<h3><span class="header-section-number">4.5.1</span> The <span class="math inline">\(\mu\)</span> parameter</h3>
+<div id="rsm-mu-parameter" class="section level3 hasAnchor">
+<h3><span class="header-section-number">4.5.1</span> The <span class="math inline">\(\mu\)</span> parameter<a href="rsm.html#rsm-mu-parameter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <span class="math inline">\(\mu\)</span> parameter is the lesion contrast-to-noise-ratio, or more accurately, the perceptual signal to noise ratio <em>pSNR</em> introduced in (book) Chapter 12, between latent NLs and latent LLs. It is not the pSNR of the latent LL relative to its immediate surround. For structured backgrounds - as opposed to homogeneous backgrounds - pSNR is determined by the competition for the observer’s foveal attention from other regions, outside the immediate surround, that could be mistaken for lesions.</p>
 <p>The <span class="math inline">\(\mu\)</span> parameter is similar to detectability index <span class="math inline">\(d&#39;\)</span>, which is the separation parameter of two unit normal distributions required to achieve the observed probability of correct choice (PC) in a two alternative forced choice (2AFC) task between cued (i.e., pointed to by toggle-able arrows) NLs and cued LLs. Individually and for each reader one determines the locations of the latent marks using eye-tracking apparatus and then runs a 2AFC study as follows: pairs of images are shown, each with a cued location, one a latent NL and the other a latent LL, where all locations were recorded in prior eye-tracking sessions for the specific radiologist. The radiologist’s task is to pick the image with the latent LL. The probability correct <span class="math inline">\(\text{PC}\)</span> in this task is related to the <span class="math inline">\(d&#39;\)</span> parameter by:</p>
 <p><span class="math display" id="eq:rsm-mu-2afc">\[\begin{equation} 
@@ -512,13 +512,13 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 \end{equation}\]</span></p>
 <p>The radiologist on whom the eye-tracking measurements are performed and the one who performs the two alternative forced choice tasks must be the same, as two radiologists may not agree on latent NL marks. A complication in conducting such a study is that because of memory effects a lesion can only be shown once to each reader: clinical images are distinctive - once a radiologist has found a lesion in a clinical image, that event becomes imprinted in long-term memory; one cannot repeatedly compare this lesion to other NLs in the 2AFC task as the radiologist will always pick the remembered lesion.</p>
 </div>
-<div id="rsm-summary-lambda-prime-parameter" class="section level3">
-<h3><span class="header-section-number">4.5.2</span> The <span class="math inline">\(\lambda&#39;\)</span> parameter</h3>
+<div id="rsm-summary-lambda-prime-parameter" class="section level3 hasAnchor">
+<h3><span class="header-section-number">4.5.2</span> The <span class="math inline">\(\lambda&#39;\)</span> parameter<a href="rsm.html#rsm-summary-lambda-prime-parameter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <span class="math inline">\(\lambda&#39;\)</span> parameter determines the tendency of the observer to generate latent NLs. The mean number of latent NLs per case is an estimate of <span class="math inline">\(\lambda&#39;\)</span>.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
 <p>Consider two observers, one with <span class="math inline">\(\lambda&#39; = 1\)</span> and the other with <span class="math inline">\(\lambda&#39; = 2\)</span>. While one cannot predict the exact number of latent NLs on any specific case, one can predict the average number of latent NLs on a given case set.</p>
 <p>In the following examples the number of samples has been set to <span class="math inline">\(K_1=100\)</span> (the first argument to <code>rpois()</code>; the second argument is <span class="math inline">\(\lambda&#39;\)</span>).</p>
-<div id="example-1" class="section level4">
-<h4><span class="header-section-number">4.5.2.1</span> Example 1</h4>
+<div id="example-1" class="section level4 hasAnchor">
+<h4><span class="header-section-number">4.5.2.1</span> Example 1<a href="rsm.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="rsm.html#cb26-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
 <span id="cb26-2"><a href="rsm.html#cb26-2"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
 <span id="cb26-3"><a href="rsm.html#cb26-3"></a>samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">1</span>)</span></code></pre></div>
@@ -526,16 +526,16 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <pre><code>## samples1[1:10] =  0 1 1 2 0 2 3 1 1 0</code></pre>
 <p>For this observer, <span class="math inline">\(\lambda&#39; = 1\)</span>, the first case generated zero latent NLs, the 2nd and 3rd cases generated one NL each, the third case generated 2 NLs, etc.</p>
 </div>
-<div id="example-2" class="section level4">
-<h4><span class="header-section-number">4.5.2.2</span> Example 2</h4>
+<div id="example-2" class="section level4 hasAnchor">
+<h4><span class="header-section-number">4.5.2.2</span> Example 2<a href="rsm.html#example-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="rsm.html#cb29-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
 <span id="cb29-2"><a href="rsm.html#cb29-2"></a>samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## mean(samples2) =  2.02</code></pre>
 <pre><code>## samples2[1:10] =  1 1 2 4 1 4 4 2 2 0</code></pre>
 <p>For the second observer <span class="math inline">\(\lambda&#39; = 2\)</span>, the first and second case generated one latent NL each, the third generated two, etc. The average number of latent NL marks per case for the 1<sup>st</sup> observer is 1.01 and that for the 2<sup>nd</sup> one is 2.02.</p>
 </div>
-<div id="confidence-intervals" class="section level4">
-<h4><span class="header-section-number">4.5.2.3</span> Confidence intervals</h4>
+<div id="confidence-intervals" class="section level4 hasAnchor">
+<h4><span class="header-section-number">4.5.2.3</span> Confidence intervals<a href="rsm.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The following code illustrates Poisson sampling and estimation of an exact confidence interval for the mean for 100 samples from two Poisson distributions.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="rsm.html#cb32-1"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
 <span id="cb32-2"><a href="rsm.html#cb32-2"></a>lambdaP &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
@@ -563,8 +563,8 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <p>Since the number of cases was increased by a factor of 100, the width decreased by a factor of 10, the square-root of the ratio of the numbers of cases.</p>
 </div>
 </div>
-<div id="rsm-summary-nu-parameter" class="section level3">
-<h3><span class="header-section-number">4.5.3</span> The <span class="math inline">\(\nu&#39;\)</span> parameter</h3>
+<div id="rsm-summary-nu-parameter" class="section level3 hasAnchor">
+<h3><span class="header-section-number">4.5.3</span> The <span class="math inline">\(\nu&#39;\)</span> parameter<a href="rsm.html#rsm-summary-nu-parameter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <span class="math inline">\(\nu&#39;\)</span> parameter determines the ability of the observer to find lesions. Assuming the same number of lesions per diseased case, the mean fraction of latent LLs per diseased case is an estimate of <span class="math inline">\(\nu&#39;\)</span>.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> Consider two observers, one with <span class="math inline">\(\nu&#39; = 0.5\)</span> and the other with <span class="math inline">\(\nu&#39; = 0.9\)</span>. Again, while one cannot predict the precise number of latent LLs on any specific diseased case, or which specific lesions will be correctly localized, one can predict the average number of latent LLs per diseased case.</p>
 <p>The following code also uses <span class="math inline">\(K_2 = 100\)</span> samples, the number of diseased cases, each with one lesion.</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="rsm.html#cb47-1"></a>K2 &lt;-<span class="st"> </span><span class="dv">100</span></span>
@@ -605,8 +605,8 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <p>For reader 1, the estimate of the binomial success probability is 0.490 with 95% confidence interval (0.391, 0.590); for reader 2 the corresponding estimates are 0.933 and (0.866, 0.973).</p>
 </div>
 </div>
-<div id="rsm-re-parameterization" class="section level2">
-<h2><span class="header-section-number">4.6</span> Model re-parameterization</h2>
+<div id="rsm-re-parameterization" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.6</span> Model re-parameterization<a href="rsm.html#rsm-re-parameterization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>While the parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> are physically meaningful a little thought reveals that they cannot be varied independently of each other. Rather, <span class="math inline">\(\mu\)</span> is the <em>intrinsic</em> parameter whose value, together with two other intrinsic parameters <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span>, determine <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span>, respectively. The following is a convenient re-parameterization:<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
 <p><span class="math display" id="eq:rsm-transform">\[\begin{equation}
 \left. 
@@ -639,13 +639,13 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <p>According to Eqn. <a href="rsm.html#eq:rsm-transform">(4.9)</a> the value of <span class="math inline">\(\mu\)</span> also determines <span class="math inline">\(\lambda&#39;\)</span>: as <span class="math inline">\(\mu \rightarrow \infty\)</span>, <span class="math inline">\(\lambda&#39; \rightarrow 0\)</span>, and conversely, as <span class="math inline">\(\mu \rightarrow 0\)</span>, <span class="math inline">\(\lambda&#39; \rightarrow \infty\)</span>. Here too the sun analogy is instructive. Since the sun has very high contrast, there is no reason for the observer to searcch for other suspicious regions which have no possibility of resembling the sun. On the other hand, attempting to locate a faint star, possibly hidden by clouds, can generate latent NLs, because the expected small SNR from the faint real star could be comparable to that from a number of regions in the near background.</p>
 <p>The re-parameterization used here is not unique, but is simple and has the right limiting behaviors.</p>
 </div>
-<div id="rsm-discussion-summary" class="section level2">
-<h2><span class="header-section-number">4.7</span> Discussion / Summary</h2>
+<div id="rsm-discussion-summary" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.7</span> Discussion / Summary<a href="rsm.html#rsm-discussion-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter has described a statistical parameterization of the Nodine-Kundel model. The 3-parameter model of search in the context in the medical imaging accommodates key aspects of the process: search, the ability to find lesions while minimizing finding non-lesions, is described by two parameters, specifically, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> . The ability to correctly mark a found lesion (while not marking found non-lesions) is characterized by the third parameter of the model, <span class="math inline">\(\mu\)</span>. While the primed parameters have relatively simple physical meaning, they depend on <span class="math inline">\(\mu\)</span>. Consequently, it is necessary to define them in terms of intrinsic parameters.</p>
 <p>The next chapter explores the predictions of the radiological search model.</p>
 </div>
-<div id="rsm-references" class="section level2">
-<h2><span class="header-section-number">4.8</span> References</h2>
+<div id="rsm-references" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.8</span> References<a href="rsm.html#rsm-references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li>Chakraborty DP. Computer analysis of mammography phantom images (CAMPI): An application to the measurement of microcalcification image quality of directly acquired digital images. Medical Physics. 1997;24(8):1269-1277.</li>
 <li>Chakraborty DP, Eckert MP. Quantitative versus subjective evaluation of mammography accreditation phantom images. Medical Physics. 1995;22(2):133-143.</li>
@@ -656,7 +656,7 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 
 </div>
 </div>
-<h3>REFERENCES</h3>
+<h3>REFERENCES<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references">
 <div id="ref-chakraborty2006search">
 <p>Chakraborty, Dev P. 2006. “A Search Model and Figure of Merit for Observer Data Acquired According to the Free-Response Paradigm.” <em>Physics in Medicine &amp; Biology</em> 51 (14): 3449.</p>

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Standalone CAD vs. Radiologists | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Standalone CAD vs. Radiologists | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Artificial intelligence and observer performance book based on RJafroc." />
   <meta name="github-repo" content="dpc10ster/RJafrocFrocBook" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-01-18" />
+<meta name="date" content="2022-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,8 +50,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -434,40 +434,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="standalone-cad-radiologists" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Standalone CAD vs. Radiologists</h1>
-<div id="standalone-cad-radiologists-how-much-finished" class="section level2">
-<h2><span class="header-section-number">9.1</span> TBA How much finished</h2>
+<div id="standalone-cad-radiologists" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 9</span> Standalone CAD vs. Radiologists<a href="standalone-cad-radiologists.html#standalone-cad-radiologists" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="standalone-cad-radiologists-how-much-finished" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.1</span> TBA How much finished<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>10%</p>
 </div>
-<div id="standalone-cad-radiologists-abstract" class="section level2">
-<h2><span class="header-section-number">9.2</span> Abstract</h2>
+<div id="standalone-cad-radiologists-abstract" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.2</span> Abstract<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-abstract" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Computer aided detection (CAD) research for screening mammography has so far focused on measuring performance of radiologists with and without CAD. Typically a group of radiologists interpret a set of images with and without CAD assist. Standalone performance of CAD algorithms is rarely measured. The stated reason for this is that in the clinic CAD is never used alone, rather it is always used with radiologists. For this reason interest has been focused on the incremental improvement afforded by CAD.</p>
 <p>Another reason for the lack of focus on standalone CAD performance is the lack of clear methodology for measuring standalone CAD performance. This chapter extends the methodology used in a recent study of standalone performance. The method is termed random-reader fixed case (1T-RRFC), since it only accounts for reader variability but does not account for case-variability. The extension includes the effect of case-sampling variability. Since in the proposed method CAD is treated as an additional reader within a single treatment, the method is termed one-treatment random-reader random-case (1T-RRRC) analysis. The new method is based on existing methodology allowing comparison of the average performance of readers in a single treatment to a specified value. The key modification is to regard the difference in performance between radiologists and CAD as a figure of merit, to which the existing work is then directly applicable. The 1T-RRRC method was compared to 1T-RRFC. It was also compared to an unorthodox usage of conventional ROC (receiver operating characteristic) analysis software, termed 2T-RRRC analysis, which involves replicating the CAD ratings as many times as there are radiologists, to in effect simulate a second treatment, i.e., CAD is regarded as the second treatment. The proposed 1T-RRRC analysis has 3 random parameters as compared to 6 parameters in 2T-RRRC and one parameter in 1T-RRFC. As expected, since one is including an additional source of variability, both RRRC analyses (1T and 2T) yielded larger p-values and wider confidence intervals as compared to 1T-RRFC. For the F-statistic, degrees of freedom and p-value, both 1T-RRRC and 2T-RRRC analyses yielded exactly the same results. However, 2T-RRRC model parameter estimates were unrealistic; for example, it yields zero between-reader variance, whereas 1T-RRRC yielded the expected non-zero value. All three methods are implemented in an open-source <code>R</code> package <code>RJafroc.</code></p>
 </div>
-<div id="standalone-cad-radiologists-ker-words" class="section level2">
-<h2><span class="header-section-number">9.3</span> Keywords</h2>
+<div id="standalone-cad-radiologists-ker-words" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.3</span> Keywords<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-ker-words" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Technology assessment, computer-aided detection (CAD), screening mammography, standalone performance, single-treatment multi-reader ROC analysis.</p>
 </div>
-<div id="standalone-cad-radiologists-introduction" class="section level2">
-<h2><span class="header-section-number">9.4</span> Introduction</h2>
+<div id="standalone-cad-radiologists-introduction" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.4</span> Introduction<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the US the majority of screening mammograms are analyzed by computer aided detection (CAD) algorithms <span class="citation">(Rao et al. <a href="#ref-rao2010widely" role="doc-biblioref">2010</a>)</span>. Almost all major imaging device manufacturers provide CAD as part of their imaging workstation display software. In the United States CAD is approved for use as a second reader <span class="citation">(FDA <a href="#ref-fda2018guidance" role="doc-biblioref">2018</a>)</span>, i.e., the radiologist first interprets the images (typically 4 views, 2 views of each breast) without CAD and then CAD information (i.e., cued suspicious regions, possibly shown with associated probabilities of malignancies) is shown and the radiologist has the opportunity to revise the initial interpretation. In response to the second reader usage, the evolution of CAD algorithms has been guided mainly by comparing observer performance of radiologists with and without CAD.</p>
 <p>Clinical CAD systems sometimes only report the locations of suspicious regions, i.e., it may not provide ratings. However, a (continuous variable) malignancy index for every CAD-found suspicious region is available to the algorithm designer <span class="citation">(Edwards et al. <a href="#ref-edwards2002maximum" role="doc-biblioref">2002</a>)</span>. Standalone performance, i.e., performance of designer-level CAD by itself, regarded as an algorithmic reader, vs. radiologists, is rarely measured. In breast cancer screening I am aware of only one study <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>)</span> where standalone performance was measured. [Standalone performance has been measured in CAD for computed tomography colonography, chest radiography and three dimensional ultrasound <span class="citation">(Hein et al. <a href="#ref-hein2010computeraided" role="doc-biblioref">2010</a>; Summers et al. <a href="#ref-summers2008performance" role="doc-biblioref">2008</a>; Taylor et al. <a href="#ref-taylor2006computerassisted" role="doc-biblioref">2006</a>; De Boo et al. <a href="#ref-deBoo2011computeraided" role="doc-biblioref">2011</a>; Tan et al. <a href="#ref-tan2012computeraided" role="doc-biblioref">2012</a>)</span>].</p>
 <p>One possible reason for not measuring standalone performance of CAD is the lack of an accepted assessment methodology for such measurements. The purpose of this work is to remove that impediment.
 It describes a method for comparing standalone performance of designer-level CAD to radiologists interpreting the same cases and compares the method to those described in two recent publications <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>; Kooi et al. <a href="#ref-kooi2016comparison" role="doc-biblioref">2016</a>)</span>.</p>
 </div>
-<div id="standalone-cad-radiologists-methods" class="section level2">
-<h2><span class="header-section-number">9.5</span> Methods</h2>
+<div id="standalone-cad-radiologists-methods" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.5</span> Methods<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Summarized are two recent studies of CAD vs. radiologists in mammography. This is followed by comments on the methodologies used in the two studies. The second study used multi-treatment multi-reader receiver operating characteristic (ROC) software in an unorthodox or unconventional way. A statistical model and analysis method is described that avoids unorthodox, and perhaps unjustified, use of ROC software and has fewer model parameters.</p>
-<div id="standalone-cad-radiologists-two-previous-studies" class="section level3">
-<h3><span class="header-section-number">9.5.1</span> Studies assessing performance of CAD vs. radiologists</h3>
+<div id="standalone-cad-radiologists-two-previous-studies" class="section level3 hasAnchor">
+<h3><span class="header-section-number">9.5.1</span> Studies assessing performance of CAD vs. radiologists<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first study <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>)</span> measured performance in finding and localizing lesions in mammograms, i.e., visual search was involved, while the second study <span class="citation">(Kooi et al. <a href="#ref-kooi2016comparison" role="doc-biblioref">2016</a>)</span> measured lesion classification performance between non-diseased and diseased regions of interest (ROIs) previously found on mammograms by an independent algorithmic reader, i.e., visual search was not involved.</p>
-<div id="standalone-cad-radiologists-study1" class="section level4">
-<h4><span class="header-section-number">9.5.1.1</span> Study - 1</h4>
+<div id="standalone-cad-radiologists-study1" class="section level4 hasAnchor">
+<h4><span class="header-section-number">9.5.1.1</span> Study - 1<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-study1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The first study <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>)</span> compared standalone performance of a CAD device to that of 9 radiologists interpreting the same cases (120 non-diseased and 80 with a single malignant mass per case). It used the LROC (localization ROC) paradigm <span class="citation">(Starr et al. <a href="#ref-starr1975visual" role="doc-biblioref">1975</a>; Metz, Starr, and Lusted <a href="#ref-metz1976observer" role="doc-biblioref">1976</a>; Swensson <a href="#ref-swensson1996unified" role="doc-biblioref">1996</a>)</span>, in which the observer gives an overall rating for presence of disease (an integer 0 to 100 scale was used) and indicates the location of the most suspicious region. On a non-diseased case the rating is classified as a false positive (FP) but on a diseased case it is classified as a <em>correct localization</em> (CL) if the location is sufficiently close to the lesion, and otherwise it is classified as an <em>incorrect localization</em>. For a given reporting threshold, the number of correct localizations divided by the number of diseased cases estimates the probability of correct localization (PCL) at that threshold. On non-diseased cases the number of false positives (FPs) divided by the number of non-diseased cases estimates the probability of a false positive, or false positive fraction (FPF), at that threshold. The plot of PCL (ordinate) vs. FPF defines the LROC curve. Study - 1 used as figures of merit (FOMs) the interpolated PCL at two values of FPF, specifically FPF = 0.05 and FPF = 0.2, denoted <span class="math inline">\(\text{PCL}_{0.05}\)</span> and <span class="math inline">\(\text{PCL}_{0.2}\)</span>, respectively. The t-test between the radiologist <span class="math inline">\(\text{PCL}_{\text{FPF}}\)</span> values and that of CAD was used to compute the two-sided p-value for rejecting the NH of equal performance. Study - 1 reported p-value = 0.17 for <span class="math inline">\(\text{PCL}_{0.05}\)</span> and p-value <span class="math inline">\(\leq\)</span> 0.001, with CAD being inferior, for <span class="math inline">\(\text{PCL}_{0.2}\)</span>.</p>
 </div>
-<div id="standalone-cad-radiologists-study2" class="section level4">
-<h4><span class="header-section-number">9.5.1.2</span> Study - 2</h4>
+<div id="standalone-cad-radiologists-study2" class="section level4 hasAnchor">
+<h4><span class="header-section-number">9.5.1.2</span> Study - 2<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-study2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The second study <span class="citation">(Kooi et al. <a href="#ref-kooi2016comparison" role="doc-biblioref">2016</a>)</span> used 199 diseased and 199 non-diseased ROIs extracted by an independent CAD algorithm. These were interpreted using the ROC paradigm (i.e., rating only, no localization required) by a different CAD algorithmic observer from that used to determine the ROIs, and by four expert radiologists. The figure of merit was the empirical area (AUC) under the respective ROC curves (one per radiologist and one for CAD). The p-value for the difference in AUCs between the average radiologist and CAD was determined using an unorthodox application of the Dorfman-Berbaum-Metz <span class="citation">(Dorfman, Berbaum, and Metz <a href="#ref-dorfman1992receiver" role="doc-biblioref">1992</a>)</span> multiple-treatment multiple-reader multiple-case (DBM-MRMC) software with recent modifications <span class="citation">(Hillis, Berbaum, and Metz <a href="#ref-hillis2008recent" role="doc-biblioref">2008</a>)</span>. The unorthodox application was that in the input data file <em>radiologists and CAD were entered as two treatments</em>. In conventional (or orthodox) DBM-MRMC each reader provides two ratings per case and the data file would consist of paired ratings of a set of cases interpreted by 4 readers. To accommodate the paired data structure assumed by the software, the authors of Study - 2 <em>replicated the CAD ratings four times in the input data file</em>, as explained in the caption to Table <a href="standalone-cad-radiologists.html#tab:standalone-cad-table-conventional">9.1</a>. By this artifice they converted a single-treatment 5-reader (4 radiologists plus CAD) data file to a two-treatment 4-reader data file, in which the four readers in treatment 1 were the radiologists, and the four “readers” in treatment 2 were CAD replicated ratings. Note that for each case the four readers in the second treatment had identical ratings. In Table 1 the replicated CAD observers are labeled C1, C2, C3 and C4.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -934,14 +934,14 @@ C4
 </table>
 <p>Study – 2 reported a not significant difference between CAD and the radiologists (p = 0.253).</p>
 </div>
-<div id="standalone-cad-radiologists-comments" class="section level4">
-<h4><span class="header-section-number">9.5.1.3</span> Comments</h4>
+<div id="standalone-cad-radiologists-comments" class="section level4 hasAnchor">
+<h4><span class="header-section-number">9.5.1.3</span> Comments<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-comments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For the purpose of this work, which focuses on the respective analysis methods, the difference in observer performance paradigms between the two studies, namely a search paradigm in Study - 1 vs. an ROI classification paradigm in Study – 2, is inconsequential. The paired t-test used in Study - 1 treats the case-sample as fixed. In other words, the analysis is not accounting for case-sampling variability but it is accounting for reader variability. While not explicitly stated, the reason for the unorthodox analysis in Study – 2 was the desire to include case-sampling variability.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
 <p>In what follows, the analysis in Study – 1 is referred to as random-reader fixed-case (1T-RRFC) while that in Study – 2 is referred to as dual-treatment random-reader random-case (2T-RRRC).</p>
 </div>
 </div>
-<div id="the-1t-rrfc-analysis-model" class="section level3">
-<h3><span class="header-section-number">9.5.2</span> The 1T-RRFC analysis model</h3>
+<div id="the-1t-rrfc-analysis-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">9.5.2</span> The 1T-RRFC analysis model<a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The sampling model for the FOM is:</p>
 <span class="math display" id="eq:standalone-1t-rrfc">\[\begin{equation}
 \left.
@@ -960,8 +960,8 @@ R_j \sim  N\left ( 0,\sigma_R^2 \right )
 <p>Because of the assumed normal distribution of <span class="math inline">\(R_j\)</span>, in order to compare the readers to a fixed value, that of CAD denoted <span class="math inline">\(\theta_0\)</span>, one uses the (unpaired) t-test, as done in Study – 1. As evident from the model, no allowance is made for case-sampling variability, which is the reason for calling it the 1T-RRFC method.</p>
 <p>Performance of CAD on a fixed dataset does exhibit within-reader variability. The same algorithm applied repeatedly to a fixed dataset does not always produce the same mark-rating data. However, this source of CAD FOM variability is much smaller than inter-reader FOM variability of radiologists interpreting the same dataset. In fact the within-reader variability of radiologists is smaller than their inter-reader variability, and within-reader variability of CAD is even smaller still. For this reason one is justified in regarded <span class="math inline">\(\theta_0\)</span> as a fixed quantity for a given dataset. Varying the dataset will result in different values for <span class="math inline">\(\theta_0\)</span>, i.e., its case sampling variability needs to be accounted for, as done in the following analyses.</p>
 </div>
-<div id="standalone-cad-radiologists-2TRRRC-anlaysis" class="section level3">
-<h3><span class="header-section-number">9.5.3</span> The 2T-RRRC analysis model</h3>
+<div id="standalone-cad-radiologists-2TRRRC-anlaysis" class="section level3 hasAnchor">
+<h3><span class="header-section-number">9.5.3</span> The 2T-RRRC analysis model<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This could be termed the conventional or the orthodox method. There are two treatments and the study design is fully crossed: each reader interprets each case in each treatment, i.e., the data structure is as in the left half of Table 1.</p>
 <p>The following approach, termed 2T-RRRC, uses the Obuchowski and Rockette (OR) figure of merit sampling model <span class="citation">(Obuchowski and Rockette <a href="#ref-obuchowski1995hypothesis" role="doc-biblioref">1995</a>)</span> instead of the pseudovalue-based model used in the original DBM paper <span class="citation">(Dorfman, Berbaum, and Metz <a href="#ref-dorfman1992receiver" role="doc-biblioref">1992</a>)</span>. For the empirical FOM, Hillis has shown the two to be equivalent <span class="citation">(Hillis et al. <a href="#ref-hillis2005comparison" role="doc-biblioref">2005</a>)</span>.</p>
 <p>The OR model is:</p>
@@ -1008,8 +1008,8 @@ R_j \sim  N\left ( 0,\sigma_R^2 \right )\\
 \end{equation}\]</span>
 <p>In practice, since one is usually limited to one case-sample, i.e., <span class="math inline">\(c = 1\)</span>, resampling techniques <span class="citation">(Efron and Tibshirani <a href="#ref-efron1994introduction" role="doc-biblioref">1994</a>)</span> – e.g., the jackknife – are used to estimate these terms.</p>
 </div>
-<div id="standalone-cad-radiologists-1TRRRC-anlaysis" class="section level3">
-<h3><span class="header-section-number">9.5.4</span> The 1T-RRRC analysis model</h3>
+<div id="standalone-cad-radiologists-1TRRRC-anlaysis" class="section level3 hasAnchor">
+<h3><span class="header-section-number">9.5.4</span> The 1T-RRRC analysis model<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-1TRRRC-anlaysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is the contribution of this work. The key difference from the approach in Study - 2 is to regard standalone CAD as a different reader, not as a different treatment. Therefore, needed is a single treatment method for analyzing readers and CAD, where the latter is regarded as an additional reader. Accordingly the proposed method is termed single-treatment RRRC (1T-RRRC) analysis.</p>
 <p>The starting point is the <span class="citation">(Obuchowski and Rockette <a href="#ref-obuchowski1995hypothesis" role="doc-biblioref">1995</a>)</span> model for a single treatment, which for the radiologists (i.e., <em>excluding</em> CAD) interpreting in a single-treatment reduces to the following model:</p>
 <span class="math display" id="eq:standalone-or-model-single-treatment">\[\begin{equation}
@@ -1074,8 +1074,8 @@ j=1,2,...J
 [One expects identical estimates of <span class="math inline">\(\sigma_R^2\)</span> using 1T-RRFC, 2T-RRRC or 1T-RRRC analyses.]</p>
 </div>
 </div>
-<div id="standalone-cad-radiologists-computational-details" class="section level2">
-<h2><span class="header-section-number">9.6</span> Software implementation</h2>
+<div id="standalone-cad-radiologists-computational-details" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.6</span> Software implementation<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in <code>RJafroc</code>, an R-package <span class="citation">(Chakraborty, Philips, and Zhai <a href="#ref-packageRJafroc" role="doc-biblioref">2020</a>)</span>.</p>
 <p>The following code shows usage of the software to generate the results corrsponding to the three analyses. Note that <code>datasetCadLroc</code> is the LROC dataset and <code>dataset09</code> is the corresponding ROC dataset.</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="standalone-cad-radiologists.html#cb95-1"></a></span>
@@ -1121,8 +1121,8 @@ j=1,2,...J
 </ul>
 <p>The structures of these objects are illustrated with examples in the Appendix.</p>
 </div>
-<div id="standalone-cad-radiologists-results" class="section level2">
-<h2><span class="header-section-number">9.7</span> Results</h2>
+<div id="standalone-cad-radiologists-results" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.7</span> Results<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The three methods, in historical order 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study – 1 (I thank Prof. Karssemeijer for making this dataset available).</p>
 <p>Shown next, Table <a href="standalone-cad-radiologists.html#tab:standalone-cad-table2">9.2</a>, are the significance testing results corresponding to the three analyses.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1961,8 +1961,8 @@ NA
 </ol>
 <p>For an analysis method to be considered statistically valid it needs to be tested with simulations to determine if it has the proper null hypothesis behavior. The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of reference <span class="citation">(Chakraborty <a href="#ref-chakraborty2017observer" role="doc-biblioref">2017</a>)</span>. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).</p>
 </div>
-<div id="standalone-cad-radiologists-discussion" class="section level2">
-<h2><span class="header-section-number">9.8</span> Discussion</h2>
+<div id="standalone-cad-radiologists-discussion" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.8</span> Discussion<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>TBA TODOLAST The argument often made for not measuring standalone performance is that since CAD will be used only as a second reader, it is only necessary to measure performance of radiologists without and with CAD. It has been stated <span class="citation">(Nishikawa and Pesce <a href="#ref-nishikawa2011fundamental" role="doc-biblioref">2011</a>)</span>:</p>
 <blockquote>
 <p>High stand-alone performance is neither a necessary nor a sufficient condition for CAD to be truly useful clinically.</p>
@@ -1974,11 +1974,11 @@ NA
 <p>While there is consensus that CAD works for microcalcifications, for masses its performance is controversial27,28. Two large clinical studies TBA 29,30 (222,135 and 684,956 women, respectively) showed that CAD actually had a detrimental effect on patient outcome. A more recent large clinical study has confirmed the negative view of CAD31 and there has been a call for ending Medicare reimbursement for CAD interpretations32.</p>
 <p>In my opinion standalone performance is the most direct measure of CAD performance. Lack of clear-cut methodology to assess standalone CAD performance may have limited past CAD research. The current work hopoefully removes that impediment. Going forward, assessment of standalone performance of CAD vs. expert radiologists is strongly encouraged.</p>
 </div>
-<div id="standalone-cad-radiologists-appendix" class="section level2">
-<h2><span class="header-section-number">9.9</span> Appendix</h2>
+<div id="standalone-cad-radiologists-appendix" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.9</span> Appendix<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The structures of the<code>R</code> objects generated by the software are illustrated with three examples.</p>
-<div id="example-1-1" class="section level3">
-<h3><span class="header-section-number">9.9.1</span> Example 1</h3>
+<div id="example-1-1" class="section level3 hasAnchor">
+<h3><span class="header-section-number">9.9.1</span> Example 1<a href="standalone-cad-radiologists.html#example-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first example shows the structure of `RRFC_1T_PCL_0_2</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="standalone-cad-radiologists.html#cb96-1"></a><span class="kw">print</span>(fom_individual_rad)</span>
 <span id="cb96-2"><a href="standalone-cad-radiologists.html#cb96-2"></a><span class="co">#&gt;         rdr1 rdr2    rdr3  rdr4       rdr5       rdr6   rdr7  rdr8  rdr9</span></span>
@@ -2013,8 +2013,8 @@ NA
 <li>In the example the interval excludes zero showing that the FOM difference is significant.</li>
 </ul>
 </div>
-<div id="example-2-1" class="section level3">
-<h3><span class="header-section-number">9.9.2</span> Example 2</h3>
+<div id="example-2-1" class="section level3 hasAnchor">
+<h3><span class="header-section-number">9.9.2</span> Example 2<a href="standalone-cad-radiologists.html#example-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The next example shows the structure of <code>RRRC_2T_PCL_0_2</code>.</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="standalone-cad-radiologists.html#cb97-1"></a></span>
 <span id="cb97-2"><a href="standalone-cad-radiologists.html#cb97-2"></a><span class="kw">print</span>(fom_individual_rad)</span>
@@ -2081,8 +2081,8 @@ NA
 <li><code>Cov2</code>: <span class="math inline">\(\text{Cov}_2\)</span> calculated over individual treatments.</li>
 </ul>
 </div>
-<div id="example-3" class="section level3">
-<h3><span class="header-section-number">9.9.3</span> Example 3</h3>
+<div id="example-3" class="section level3 hasAnchor">
+<h3><span class="header-section-number">9.9.3</span> Example 3<a href="standalone-cad-radiologists.html#example-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The last example shows the structure of <code>RRRC_1T_PCL_0_2</code>.</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="standalone-cad-radiologists.html#cb100-1"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span></span>
 <span id="cb100-2"><a href="standalone-cad-radiologists.html#cb100-2"></a><span class="co">#&gt; $fomCAD</span></span>
@@ -2133,12 +2133,12 @@ NA
 <p>Notice that the <code>RRRC_1T_PCL_0_2</code> p value, i.e., 0.04172626, is identical to that of <code>RRRC_2T_PCL_0_2</code>, i.e., 0.04172626.</p>
 </div>
 </div>
-<div id="standalone-cad-radiologists-references" class="section level2">
-<h2><span class="header-section-number">9.10</span> References</h2>
+<div id="standalone-cad-radiologists-references" class="section level2 hasAnchor">
+<h2><span class="header-section-number">9.10</span> References<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
-<h3>REFERENCES</h3>
+<h3>REFERENCES<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references">
 <div id="ref-chakraborty2017observer">
 <p>Chakraborty, Dev P. 2017. <em>Observer Performance Methods for Diagnostic Imaging: Foundations, Modeling, and Applications with R-Based Examples</em>. Boca Raton, FL: CRC Press.</p>
