@@ -128,7 +128,7 @@ The return value `ret` is a `list` with the following elements:
 
 ```{r}
 rocData <- DfFroc2Roc(dataset04)
-lesDistr <- UtilLesionDistr(dataset04)[,2]
+lesDistr <- UtilLesionDistrVector(dataset04)
 ret <- FitRsmRoc(rocData, lesDistr = lesDistr)
 ```
 

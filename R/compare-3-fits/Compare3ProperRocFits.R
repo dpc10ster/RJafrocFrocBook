@@ -48,7 +48,7 @@ Compare3ProperRocFits <- function(datasetNames,
   options(warn = 2) # warnings AS errors
   fileName <- datasetNames[f]
   theData <- get(sprintf("dataset%02d", f)) # the datasets already exist as R objects
-  lesDistr <- UtilLesionDistr(theData) # RSM ROC fitting needs to know lesDistr
+  lesDistr <- UtilLesionDistrVector(theData) # RSM ROC fitting needs to know lesDistr
   
   # convert to HR ROC data; and remove negative infinities
   if (theData$descriptions$type == "FROC") rocData <- DfFroc2Roc(theData) else rocData <- theData  
@@ -91,7 +91,7 @@ Compare3ProperRocFits <- function(datasetNames,
       for (j in 1:J){
         AllResIndx <- AllResIndx + 1
         ret_C <- FitCbmRoc(binnedRocData, trt = i, rdr = j)
-        ret_R <- FitRsmRoc(binnedRocData, trt = i, rdr = j, lesDistr = lesDistr[,2]) # fit to RSM, need lesDistr matrix
+        ret_R <- FitRsmRoc(binnedRocData, trt = i, rdr = j, lesDistr = lesDistr) # fit to RSM, need lesDistr vector
         retCbm <- ret_C[-10] # deleting plots as they generate Notes in R CMD CHK -> file size too large
         retRsm <- ret_R[-11] #   do:
         aucProproc <- UtilAucPROPROC(c1[i,j], da[i,j])
@@ -156,7 +156,7 @@ gpfPlotRsmPropCbm <- function(f, mu, lambdaP, nuP, lesDistr, c1, da,
   FPF_P <- c(1, ret_P$FPF);TPF_P <- c(1, ret_P$TPF) # make sure it goes to upper-right corner
   plotProp <- data.frame(FPF = FPF_P, TPF = TPF_P, Model = "PROP")
   
-  ret_R <- gpfRsmOperatingCharacteristic (mu, lambdaP, nuP, lesDistr = lesDistr[,2]) # dpc 1/1/2021
+  ret_R <- gpfRsmOperatingCharacteristic (mu, lambdaP, nuP, lesDistr = lesDistr) # dpc 7/20/2022
   FPF_R <- ret_R$FPF;TPF_R <- ret_R$TPF
   plotRsm <- data.frame(FPF = FPF_R, TPF = TPF_R, Model = "RSM")
   dashedRsm <- data.frame(FPF = c(FPF_R[1], 1), TPF = c(TPF_R[1], 1), Model = "RSM")
