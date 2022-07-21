@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-06-15}
+\date{2022-07-21}
 
 \begin{document}
 \maketitle
@@ -3135,28 +3135,28 @@ The wAFROC ordinate is calculated using:
     On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.1818182, 0.2727273, 0.09090909, 0.4545455.
   \end{itemize}
 \item
-  The function \texttt{UtilLesionWeightsDistr} calculates the matrix given \texttt{relWeights}. For example:
+  The function \texttt{UtilLesionWeightsMatrixLesDistr} calculates the matrix given \texttt{lesDistr} and \texttt{relWeights}. For example:
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{relWeights =}\StringTok{  }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
-\NormalTok{L_max <-}\StringTok{ }\DecValTok{4}
-\KeywordTok{UtilLesionWeightsDistr}\NormalTok{(L_max, }\DataTypeTok{relWeights =}\NormalTok{ relWeights)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{relWeights =}\StringTok{  }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.4}\NormalTok{)}
+\KeywordTok{UtilLesionWeightsMatrixLesDistr}\NormalTok{(lesDistr, relWeights)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##           [,1]      [,2]       [,3]      [,4]
-## [1,] 1.0000000      -Inf       -Inf      -Inf
-## [2,] 0.4000000 0.6000000       -Inf      -Inf
-## [3,] 0.3333333 0.5000000 0.16666667      -Inf
-## [4,] 0.1818182 0.2727273 0.09090909 0.4545455
+##           [,1] [,2]      [,3] [,4]
+## [1,] 1.0000000 -Inf      -Inf -Inf
+## [2,] 0.4000000  0.6      -Inf -Inf
+## [3,] 0.3333333  0.5 0.1666667 -Inf
+## [4,] 0.2000000  0.3 0.1000000  0.4
 \end{verbatim}
 
 \begin{itemize}
 \item
-  It is important to label the lesions so that the correct weights are used. This is done using the \texttt{lesionID} field in the Excel input file. For example, \texttt{lesionID\ =\ 3} for the one with relative weight 0.1. Since \(\mathbf{W}\) is independent of cases, the lesion characteristics (which determine clinical outcome) of \texttt{lesionID\ =\ 1} on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix \(\mathbf{W}\).
+  It is necessary to label the lesions properly so that the correct weights are used. This is done using the \texttt{lesionID} field in the Excel input file. For example, \texttt{lesionID\ =\ 3} for the one with relative weight 0.1. Since \(\mathbf{W}\) is independent of cases, the lesion characteristics (which determine clinical outcome) of \texttt{lesionID\ =\ 1} on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix \(\mathbf{W}\).
 \item
   \(\text{pmf}_{Bin}\left ( l, L, \nu \right )\) is the probability mass function (pmf) of the binomial distribution with success probability \(\nu\) and trial size \(L\), defined in Eqn. \eqref{eq:rsm-binomial-pmf}. \(\text{W}_{Ll}\) is the weight of lesion \(l\) in cases with \(L\) lesions; for example \(\text{W}_{42} = 0.2727273\).
 \item
@@ -3167,9 +3167,8 @@ The wAFROC ordinate is calculated using:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{relWeights =}\StringTok{  }\DecValTok{0}
-\NormalTok{L_max <-}\StringTok{ }\DecValTok{4}
-\KeywordTok{UtilLesionWeightsDistr}\NormalTok{(L_max, }\DataTypeTok{relWeights =}\NormalTok{ relWeights)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\KeywordTok{UtilLesionWeightsMatrixLesDistr}\NormalTok{(lesDistr, }\DataTypeTok{relWeights =} \DecValTok{0}\NormalTok{)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3467,7 +3466,7 @@ The return value \texttt{ret} is a \texttt{list} with the following elements:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{rocData <-}\StringTok{ }\KeywordTok{DfFroc2Roc}\NormalTok{(dataset04)}
-\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{UtilLesionDistr}\NormalTok{(dataset04)[,}\DecValTok{2}\NormalTok{]}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{UtilLesionDistrVector}\NormalTok{(dataset04)}
 \NormalTok{ret <-}\StringTok{ }\KeywordTok{FitRsmRoc}\NormalTok{(rocData, }\DataTypeTok{lesDistr =}\NormalTok{ lesDistr)}
 \end{Highlighting}
 \end{Shaded}
@@ -3479,15 +3478,15 @@ The fitted parameter values are as follows (all cutoffs excepting \(\zeta_1\), t
 \begin{itemize}
 \tightlist
 \item
-  \(\mu\) = 3.655
+  \(\mu\) = 3.658
 \item
-  \(\lambda'\) = 9.873
+  \(\lambda'\) = 9.935
 \item
   \(\nu'\) = 0.796
 \item
-  \(\zeta_1\) = 1.501
+  \(\zeta_1\) = 1.504
 \item
-  \(\text{AUC}\) = 0.9065
+  \(\text{AUC}\) = 0.9064
 \item
   \(\sigma (\text{AUC})\) = 0.023
 \item
@@ -3496,7 +3495,7 @@ The fitted parameter values are as follows (all cutoffs excepting \(\zeta_1\), t
   \(\text{NLLFin}\) = 267.27
 \end{itemize}
 
-The relatively large separation parameter \(\mu\) implies good lesion-classification performance. The large \(\lambda'\) parameter implies poor search performance. On the average the observer generates 9.87 latent NL marks per image. However, because of the relatively large value of \(\zeta_1\), i.e., 1.5, only fraction 0.067 of these are actually marked, resulting in 0.66 actual marks per image. Search performance depends on the numbers of latent marks, i.e., \(\lambda'\) and \(\nu'\), not the actual numbers of marks.
+The relatively large separation parameter \(\mu\) implies good lesion-classification performance. The large \(\lambda'\) parameter implies poor search performance. On the average the observer generates 9.94 latent NL marks per image. However, because of the relatively large value of \(\zeta_1\), i.e., 1.5, only fraction 0.066 of these are actually marked, resulting in 0.66 actual marks per image. Search performance depends on the numbers of latent marks, i.e., \(\lambda'\) and \(\nu'\), not the actual numbers of marks.
 
 The fitting program decreased the negative of the log-likelihood function from 281.4 to 267.27. A decrease in negative log-likelihood is equivalent to an increase in the likelihood, which is as expected, as the function maximizes the log-likelihood.
 
@@ -3506,7 +3505,7 @@ Shown next is the fitted plot. Error bars (exact 95\% confidence intervals) are 
 
 \includegraphics{09-rsm-fitting_files/figure-latex/unnamed-chunk-2-1.pdf}
 
-The fitted ROC curve is proper: it's slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is 0.907 which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.
+The fitted ROC curve is proper: it's slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is 0.906 which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.
 
 \hypertarget{rsm-fitting-discussion-summary}{%
 \section{TBA Discussion / Summary}\label{rsm-fitting-discussion-summary}}

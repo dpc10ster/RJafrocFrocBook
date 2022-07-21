@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-06-15" />
+<meta name="date" content="2022-07-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -511,26 +511,26 @@ LL_{ROC} \left ( \mu, \lambda&#39;, \nu&#39;, \overrightarrow{f_L} \right )= \su
 <li>The following example uses the <em>first</em> treatment in <code>dataset04</code>; this is a 5 treatment 4 radiologist FROC dataset <span class="citation">(Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a>)</span> consisting of 200 cases acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using <code>DfBinDataset()</code>. The number of parameters to be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.</li>
 </ul>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="rsm-fitting.html#cb83-1"></a>rocData &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dataset04)</span>
-<span id="cb83-2"><a href="rsm-fitting.html#cb83-2"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">UtilLesionDistr</span>(dataset04)[,<span class="dv">2</span>]</span>
+<span id="cb83-2"><a href="rsm-fitting.html#cb83-2"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">UtilLesionDistrVector</span>(dataset04)</span>
 <span id="cb83-3"><a href="rsm-fitting.html#cb83-3"></a>ret &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(rocData, <span class="dt">lesDistr =</span> lesDistr)</span></code></pre></div>
 <p>The lesion distribution vector is 0.69, 0.2, 0.11. This means that fraction 0.69 of each diseased case contains one lesion, fraction 0.2 contains two lesions and fraction 0.11 contains three lesions. Since the fitted curve depends on the lesion distribution the fitting function needs to know this distribution.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a></p>
 <p>The fitted parameter values are as follows (all cutoffs excepting <span class="math inline">\(\zeta_1\)</span>, the chi-square statistic - <code>NA</code> for this dataset - and the covariance matrix, are not shown):</p>
 <ul>
-<li><span class="math inline">\(\mu\)</span> = 3.655</li>
-<li><span class="math inline">\(\lambda&#39;\)</span> = 9.873</li>
+<li><span class="math inline">\(\mu\)</span> = 3.658</li>
+<li><span class="math inline">\(\lambda&#39;\)</span> = 9.935</li>
 <li><span class="math inline">\(\nu&#39;\)</span> = 0.796</li>
-<li><span class="math inline">\(\zeta_1\)</span> = 1.501</li>
-<li><span class="math inline">\(\text{AUC}\)</span> = 0.9065</li>
+<li><span class="math inline">\(\zeta_1\)</span> = 1.504</li>
+<li><span class="math inline">\(\text{AUC}\)</span> = 0.9064</li>
 <li><span class="math inline">\(\sigma (\text{AUC})\)</span> = 0.023</li>
 <li><span class="math inline">\(\text{NLLIni}\)</span> = 281.4</li>
 <li><span class="math inline">\(\text{NLLFin}\)</span> = 267.27</li>
 </ul>
-<p>The relatively large separation parameter <span class="math inline">\(\mu\)</span> implies good lesion-classification performance. The large <span class="math inline">\(\lambda&#39;\)</span> parameter implies poor search performance. On the average the observer generates 9.87 latent NL marks per image. However, because of the relatively large value of <span class="math inline">\(\zeta_1\)</span>, i.e., 1.5, only fraction 0.067 of these are actually marked, resulting in 0.66 actual marks per image. Search performance depends on the numbers of latent marks, i.e., <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span>, not the actual numbers of marks.</p>
+<p>The relatively large separation parameter <span class="math inline">\(\mu\)</span> implies good lesion-classification performance. The large <span class="math inline">\(\lambda&#39;\)</span> parameter implies poor search performance. On the average the observer generates 9.94 latent NL marks per image. However, because of the relatively large value of <span class="math inline">\(\zeta_1\)</span>, i.e., 1.5, only fraction 0.066 of these are actually marked, resulting in 0.66 actual marks per image. Search performance depends on the numbers of latent marks, i.e., <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span>, not the actual numbers of marks.</p>
 <p>The fitting program decreased the negative of the log-likelihood function from 281.4 to 267.27. A decrease in negative log-likelihood is equivalent to an increase in the likelihood, which is as expected, as the function maximizes the log-likelihood.</p>
 <p>Because the RSM contains 3 parameters, which is one more that conventionql ROC models, the chisquare goodness of fit statistic usually cannot be calculated, except for large datasets - the criterion of 5 counts in each bin for true positives and false positives is usually hard to meet.</p>
 <p>Shown next is the fitted plot. Error bars (exact 95% confidence intervals) are shown for the lowest and highest operating points.</p>
 <p><img src="09-rsm-fitting_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>The fitted ROC curve is proper: it’s slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is 0.907 which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.</p>
+<p>The fitted ROC curve is proper: it’s slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is 0.906 which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.</p>
 </div>
 <div id="rsm-fitting-discussion-summary" class="section level2 hasAnchor">
 <h2><span class="header-section-number">7.6</span> TBA Discussion / Summary<a href="rsm-fitting.html#rsm-fitting-discussion-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>

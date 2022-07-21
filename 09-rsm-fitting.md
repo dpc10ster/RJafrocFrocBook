@@ -120,7 +120,7 @@ The return value `ret` is a `list` with the following elements:
 
 ```r
 rocData <- DfFroc2Roc(dataset04)
-lesDistr <- UtilLesionDistr(dataset04)[,2]
+lesDistr <- UtilLesionDistrVector(dataset04)
 ret <- FitRsmRoc(rocData, lesDistr = lesDistr)
 ```
 
@@ -128,17 +128,17 @@ The lesion distribution vector is 0.69, 0.2, 0.11. This means that fraction 0.69
 
 The fitted parameter values are as follows (all cutoffs excepting $\zeta_1$, the chi-square statistic - `NA` for this dataset - and the covariance matrix, are not shown):
 
-* $\mu$ = 3.655
-* $\lambda'$ = 9.873
+* $\mu$ = 3.658
+* $\lambda'$ = 9.935
 * $\nu'$ = 0.796
-* $\zeta_1$ = 1.501
-* $\text{AUC}$ = 0.9065
+* $\zeta_1$ = 1.504
+* $\text{AUC}$ = 0.9064
 * $\sigma (\text{AUC})$ = 0.023
 * $\text{NLLIni}$ = 281.4
 * $\text{NLLFin}$ = 267.27
 
 
-The relatively large separation parameter $\mu$ implies good lesion-classification performance. The large $\lambda'$ parameter implies poor search performance. On the average the observer generates 9.87 latent NL marks per image. However, because of the relatively large value of $\zeta_1$, i.e., 1.5, only fraction 0.067 of these are actually marked, resulting in 0.66 actual marks per image. Search performance depends on the numbers of latent marks, i.e., $\lambda'$ and $\nu'$, not the actual numbers of marks. 
+The relatively large separation parameter $\mu$ implies good lesion-classification performance. The large $\lambda'$ parameter implies poor search performance. On the average the observer generates 9.94 latent NL marks per image. However, because of the relatively large value of $\zeta_1$, i.e., 1.5, only fraction 0.066 of these are actually marked, resulting in 0.66 actual marks per image. Search performance depends on the numbers of latent marks, i.e., $\lambda'$ and $\nu'$, not the actual numbers of marks. 
 
 
 The fitting program decreased the negative of the log-likelihood function from 281.4 to 267.27. A decrease in negative log-likelihood is equivalent to an increase in the likelihood, which is as expected, as the function maximizes the log-likelihood. 
@@ -153,7 +153,7 @@ Shown next is the fitted plot. Error bars (exact 95% confidence intervals) are s
 <img src="09-rsm-fitting_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 
-The fitted ROC curve is proper: it's slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is 0.907 which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.
+The fitted ROC curve is proper: it's slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is 0.906 which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.
 
 
 ## TBA Discussion / Summary {#rsm-fitting-discussion-summary}

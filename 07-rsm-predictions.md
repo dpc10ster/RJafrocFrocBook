@@ -838,25 +838,25 @@ The wAFROC ordinate is calculated using:
     + On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.1818182, 0.2727273, 0.09090909, 0.4545455.
     
 
-* The function `UtilLesionWeightsDistr` calculates the matrix given `relWeights`. For example:
+* The function `UtilLesionWeightsMatrixLesDistr` calculates the matrix given `lesDistr` and `relWeights`. For example:
 
 
 ```r
-relWeights =  c(0.2, 0.3, 0.1, 0.5)
-L_max <- 4
-UtilLesionWeightsDistr(L_max, relWeights = relWeights)[,-1]
+lesDistr <- c(0.6, 0.2, 0.1, 0.1)
+relWeights =  c(0.2, 0.3, 0.1, 0.4)
+UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)[,-1]
 ```
 
 ```
-##           [,1]      [,2]       [,3]      [,4]
-## [1,] 1.0000000      -Inf       -Inf      -Inf
-## [2,] 0.4000000 0.6000000       -Inf      -Inf
-## [3,] 0.3333333 0.5000000 0.16666667      -Inf
-## [4,] 0.1818182 0.2727273 0.09090909 0.4545455
+##           [,1] [,2]      [,3] [,4]
+## [1,] 1.0000000 -Inf      -Inf -Inf
+## [2,] 0.4000000  0.6      -Inf -Inf
+## [3,] 0.3333333  0.5 0.1666667 -Inf
+## [4,] 0.2000000  0.3 0.1000000  0.4
 ```
 
 
-* It is important to label the lesions so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the one with relative weight 0.1. Since $\mathbf{W}$ is independent of cases, the lesion characteristics (which determine clinical outcome) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix $\mathbf{W}$. 
+* It is necessary to label the lesions properly so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the one with relative weight 0.1. Since $\mathbf{W}$ is independent of cases, the lesion characteristics (which determine clinical outcome) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix $\mathbf{W}$. 
 
 
 * $\text{pmf}_{Bin}\left ( l, L, \nu \right )$ is the probability mass function (pmf) of the binomial distribution with success probability $\nu$ and trial size $L$, defined in Eqn. \@ref(eq:rsm-binomial-pmf). $\text{W}_{Ll}$ is the weight of lesion $l$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.2727273$. 
@@ -870,9 +870,8 @@ UtilLesionWeightsDistr(L_max, relWeights = relWeights)[,-1]
 
 
 ```r
-relWeights =  0
-L_max <- 4
-UtilLesionWeightsDistr(L_max, relWeights = relWeights)[,-1]
+lesDistr <- c(0.6, 0.2, 0.1, 0.1)
+UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights = 0)[,-1]
 ```
 
 ```
