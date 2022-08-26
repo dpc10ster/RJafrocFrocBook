@@ -19,8 +19,7 @@ library(Rmpfr)
 
 ## TBA Introduction {#rsm-pred-intro}
 
-The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes predictions of the RSM. 
-The starting point is a general characteristic of all RSM prediced operating characteristics, namely they have the constrained end-point property. Derived next is the predicted *inferred ROC* curve followed by the predicted FROC and AFROC curves. 
+The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes predictions of the RSM. The starting point is a general characteristic of all RSM prediced operating characteristics, namely they have the constrained end-point property. Derived next is the predicted *inferred ROC* curve followed by the predicted FROC and AFROC curves. 
 
 Shown next is how *search performance* and *lesion-classification* performance can be measured from the inferred ROC curve. Search performance is the ability to find lesions while avoiding finding non-lesions, and lesion-classification performance is the ability, having found a suspicious region, to correctly classify it. Lesion-classification is different from (case) classification performance, i.e., distinguishing between diseased and non-diseased cases, which is measured by the area AUC under the ROC curve. 
 
@@ -402,10 +401,13 @@ The superscript $ROC$ is needed to keep track of the operating characteristic th
 The right hand side of Eqn. \@ref(eq:rsm-pred-auc) can be evaluated using a numerical integration function implemented in `R`, which is used in the `RJafroc` function `UtilAnalyticalAucsRSM()` whose help page follows: 
 
 
-```{r rsm-pred-help, echo=FALSE,fig.cap="Help page for `RJafroc` function `UtilAnalyticalAucsRSM`.",fig.show='hold',fig.align='center'}
+
+```{r rsm-pred-help, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Help page for `RJafroc` function `UtilAnalyticalAucsRSM`."}
 knitr::include_graphics("images/rsm-pred/util-analytical-aucs-rsm.png")
 ``` 
- 
+
+
+
 The arguments to `UtilAnalyticalAucsRSM()` are the intrinsic RSM parameters $\mu$, $\lambda$, $\nu$ and $\zeta_1$. The default value of $\zeta_1$ is $\zeta_1 = -\infty$. The remaining arguments `lesDistr` and `relWeights` are not RSM parameters per se, rather they specify the lesion-richness of the diseased cases and the relative lesion weights (not needed for computing ROC AUC). The dimensions of `lesDistr` and `relWeights` are each equal to the maximum number of lesions per case $L_{max}$. In the following code $L_{max} = 3$ and `lesDistr <- c(0.5, 0.3, 0.2)`, meaning 50 percent of diseased cases have one lesion per case, 30 percent have two lesions and 20 percent have three lesions.  
 
 The function returns a list containing the AUCs under the ROC and other operating characteristics.  
@@ -445,18 +447,23 @@ Experimenting with different parameter combinations reveals the following behavi
 When it comes to predicted ROC AUC there is an important difference between conventional ROC models and the RSM. The former has no dependence on $\zeta_1$. This is because in the ROC model every case yields a rating, no matter how low the z-sample, implying that effectively $\zeta_1 = -\infty$. The lack of $\zeta_1$ dependence is demonstrated by the help page for function `UtilAucBinormal`, shown below, which depends on only two parameters, $a$ and $b$ (the two-parameter dependence is also true for other ROC models implemented in `RJafroc`, e.g., `UtilAucCBM` and `UtilAucPROPROC`). 
 
 
-```{r rsm-pred-binorml-help, echo=FALSE,fig.cap="Help page for `RJafroc` function `UtilAucBinormal`.",fig.show='hold',fig.align='center'}
+
+```{r rsm-pred-binorml-help, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Help page for `RJafroc` function `UtilAucBinormal`."}
 knitr::include_graphics("images/rsm-pred/util-aucs-binormal.png")
 ``` 
+
 
 
 In contrast, in addition to the basic RSM parameters, i.e., $\mu$, $\lambda$ and $\nu$, the rsm-pred have an additional dependence on $\zeta_1$. This is because the value of $\zeta_1$ determines the location of the end-point. The $\zeta_1$ dependence is demonstrated next for the ROC plots, but it is true for all RSM predictions.
 
 
 
-```{r rsm-pred-operating-characteristics-help, echo=FALSE,fig.cap="Help page for `RJafroc` function `PlotRsmOperatingCharacteristics`.",fig.show='hold',fig.align='center'}
+
+```{r rsm-pred-operating-characteristics-help, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Help page for `RJafroc` function `PlotRsmOperatingCharacteristics`."}
 knitr::include_graphics("images/rsm-pred/PlotRsmOperatingCharacteristics.png")
 ``` 
+
+
 
 
 The dependence is demonstrated next for two values: $zeta_1 = -10$ and $zeta_1 = 1$. The common parameter values are $\mu = 2$, $\lambda = 1$,  $\nu = 1$, as shown in the following code-chunk. 

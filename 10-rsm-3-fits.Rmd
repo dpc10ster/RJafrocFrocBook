@@ -419,14 +419,17 @@ In Table \@ref(tab:rsm-3-fits-slopes-table1) the second column, labeled $\text{m
 For each dataset PROPROC parameters were obtained by running the Windows software with PROPROC selected as the curve-fitting method. The results are saved to files that end with `proprocnormareapooled.csv` ^[In accordance with R-package policies white-spaces in the original `PROPROC` output file names have been removed.] contained in "R/compare-3-fits/MRMCRuns/C/", where `C` denotes the name of the dataset (for example, for the Van Dyke dataset, `C` = "VD"). Examples are shown in the next two screen-shots.
 
 
-```{r rsm-3-fits-mrmc-runs, echo=FALSE,fig.cap="Screen shot (1 of 2) of `R/compare-3-fits/MRMCRuns` showing the folders containing the results of PROPROC analysis on 14 datasets.",fig.show='hold',fig.align='center'}
+```{r rsm-3-fits-mrmc-runs, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Screen shot (1 of 2) of `R/compare-3-fits/MRMCRuns` showing the folders containing the results of PROPROC analysis on 14 datasets."}
 knitr::include_graphics("images/compare-3-fits/MRMCRuns.png")
 ``` 
 
 
-```{r rsm-3-fits-mrmc-runs-vd, echo=FALSE,fig.cap="Screen shot (2 of 2) of `R/compare-3-fits/MRMCRuns/VD` showing files containing the results of PROPROC analysis for the Van Dyke dataset.",fig.show='hold',fig.align='center'}
+
+```{r rsm-3-fits-mrmc-runs-vd, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Screen shot (2 of 2) of `R/compare-3-fits/MRMCRuns/VD` showing files containing the results of PROPROC analysis for the Van Dyke dataset."}
 knitr::include_graphics("images/compare-3-fits/MRMCRuns-VD.png")
 ``` 
+
+
 
 The contents of `R/compare-3-fits/MRMCRuns/VD/VDproprocnormareapooled.csv` are shown next, see Fig. \@ref(fig:rsm-3-fits-proproc-output-van-dyke). ^[The `VD.lrc` file in this directory is the Van Dyke data formatted for input to OR DBM-MRMC 2.5.] The PROPROC parameters $c$ and $d_a$  are in the last two columns. The column names are `T` = treatment; `R` = reader; `return-code` = undocumented value, `area` = PROPROC AUC; `numCAT` = number of ROC bins; `adjPMean` = undocumented value; `c` =  $c$ and `d_a` =  $d_a$, are the PROPROC parameters defined in [@metz1999proper].
 
@@ -443,9 +446,13 @@ knitr::include_graphics("images/compare-3-fits/vanDyke.png")
 
 The following screen shot shows the pre-analyzed files created by the function `Compare3ProperRocFits()` described below. Each file is named `allResultsC`, where `C` is the abbreviated name of the dataset (uppercase C denotes one or more uppercase characters; for example, `C` = `VD` denotes the Van Dyke dataset.).
 
-```{r rsm-3-fits-all-results-rsm6, echo=FALSE,fig.cap="Screen shot of `R/compare-3-fits/RSM6` showing the results files created by  `Compare3ProperRocFits()` .",fig.show='hold',fig.align='center'}
+
+
+```{r rsm-3-fits-all-results-rsm6, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Screen shot of `R/compare-3-fits/RSM6` showing the results files created by  `Compare3ProperRocFits()`."}
 knitr::include_graphics("images/compare-3-fits/RSM6.png")
 ``` 
+
+
 
 ### Plots for Van Dyke dataset {#rsm-3-fits-representative-plots-van-dyke}
 
