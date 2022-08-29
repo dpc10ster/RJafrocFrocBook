@@ -17,7 +17,7 @@
 
 
 ## TBA How much finished {#froc-paradigm-how-much-finished}
-80%
+85%
 
 
 
@@ -72,15 +72,15 @@ The 4 panels in Fig. \@ref(fig:froc-paradigm-4) show a schematic mammogram inter
 
 ## Visual search {#froc-paradigm-vis-search}
 
-The FROC paradigm in medical imaging is equivalent to a visual search task. Any search task has two components: finding something and acting on it. Examples of a search tasks are looking for lost car-keys or a milk carton in the refrigerator. Success in a search task is finding the searched for object. Acting on it could be driving to work or drinking milk from the carton^[There is expertise associated with any search task. Husbands are notoriously bad at finding the milk carton in the refrigerator (analogy due to Dr. Elizabeth Krupinski at an SPIE course taught jointly with the author).]. 
+The FROC paradigm in medical imaging is equivalent to a visual search task. Any search task has two components: finding something^[while not finding irrelevant stuff, a subtle but important point] and acting on it. Examples of a search tasks are looking for lost car-keys or a milk carton in the refrigerator. Success in a search task is finding the searched for object^[without finding too many extraneous objects]. Acting on it could be driving to work or drinking milk from the carton^[There is expertise associated with any search task. Husbands are notoriously bad at finding the milk carton in the refrigerator (analogy due to Dr. Elizabeth Krupinski at an SPIE course taught jointly with the author).]. 
 
-Likewise, a medical imaging search task has two components: finding suspicious regions and acting on each finding^["Finding" is the actual term used by radiologists in their clinical reports]. Acting on a finding involves determining if it is sufficiently suspicious for cancer to warrant reporting and further patient follow-up. If a suspicious region is found and provided it is sufficiently suspicious for malignancy the region is marked and rated for confidence that it is a malignant lesion. 
+Likewise, a medical imaging search task has two components: finding lesions, without finding too many extraneous suspicious regions, and acting on each finding^["Finding" is the actual term used by radiologists in their clinical reports]. Acting on a finding involves determining if it is sufficiently suspicious for cancer to warrant reporting and further patient follow-up. If a suspicious region is found and provided it is sufficiently suspicious for malignancy the region is marked and rated for confidence that it is a malignant lesion. 
 
 The radiologist does not know a-priori if the patient is diseased and, if diseased, how many lesions may be present. In the breast-screening context, it is known that about 5 out of 1000 patients have cancers, so 99.5% of the time odds are that the patient has no malignant lesions[^3]. Considerably search expertise is needed for the radiologist to mark malignant lesions with high probability while not generating too many false marks.
 
 At my former institution (University of Pittsburgh) the radiologists digitally outline and annotate (describe) suspicious region(s) that are found. As one would expect from the low prevalence of breast cancer in the screening context and assuming expert-level radiologist interpretations, about 90% of breast cases do not generate any marks. About 10% of cases generate one or more marks and are recalled for further comprehensive imaging (termed diagnostic workup). Of marked cases about 90% generate one mark, about 10% generate 2 marks, and a rare case generates 3 or more marks (Dr. David Gur, private communication, ca. 2015). 
 
-Conceptually, a mammography report consists of the locations of regions that exceed the threshold and the corresponding levels of suspicion, reported as a Breast Imaging Reporting and Data System (BIRADS) rating. The BIRADS rating is actually assigned after the diagnostic workup following an screening BIRADS-0 rating. The screening rating itself is binary: BIRADS-0 for recall (the patient is recalled for a diagnostic workup to determine the final BIRADS rating) or BIRADS-1 for normal or no abnormality detected (the patient comes back about a year later for the next screening appointment).
+Conceptually, a mammography report consists of the locations of regions that exceed the threshold and the corresponding levels of suspicion, reported as a Breast Imaging Reporting and Data System (BIRADS) rating. The BIRADS rating is actually assigned after the diagnostic workup following a screening BIRADS-0 rating. The screening rating itself is binary: BIRADS-0 for recall (the patient is recalled for a diagnostic workup to determine the final BIRADS rating) or BIRADS-1 for normal or no abnormality detected (the patient comes back about a year later for the next screening appointment).
 
 
 [^3]: The probability of benign suspicious regions is much higher [@Ernster1981Epidemiology], about 13% for women aged 40-45.
@@ -130,7 +130,7 @@ In the medical imaging context, assuming the mark rating pairs have been classif
 
 -   The FROC plot is defined as that of LLF (ordinate) vs. NLF as the threshold is varied. If the points are connected by straight lines the resulting "curve" is termed the *empirical FROC curve*. 
 
--   The upper-right most operating point is termed the *observed end-point* and its coordinated are denoted $(\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})$.
+-   The upper-right-most operating point is termed the *observed end-point* and its coordinated are denoted $(\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})$.
 
 -   Unlike the ROC plot which is completely contained in the unit square, the FROC plot is not.
 
@@ -173,20 +173,20 @@ The analogy is not restricted to the sun, which one might argue is an almost inf
 False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization (LL) or incorrect localizations (NLs). At the time of writing there is a hunt for a new planet, possibly a gas giant , that is much further than even the newly demoted Pluto. 
 
 
-## Discussion {#froc-paradigm-discussion}
+## Some misconceptions {#froc-paradigm-misconceptions}
 
-This chapter has served as a general introduction to the location specific paradigms. The FROC paradigm, in particular, is directly related to visual search. The terms lesion-localization (LL) and non-lesion localization (NL) were introduced, to mean locating a true lesion and a false region, respectively. A qualitative definition of search performance was given, namely, the ability to find lesions while not finding non-lesions. This will be quantified in a later chapter. A widely used operating characteristic associated with it, namely the FROC curve, was introduced. A "solar" analogy was given that brings out important characteristics of the FROC - in particular its dependence on lesion contrast. 
+In my experience the FROC paradigm is much misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the meaning of search, the paradigm and the FROC curve. These are summarized below: 
 
-In my experience the FROC paradigm is much misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the paradigm and the FROC curve. These are summarized below: 
+-   Loose terminology:
+    - Using the term "lesion-specific" to describe location-specific paradigms.
+    - Using the term "lesion" when one means a "suspicious region" that may or may not be a true lesion.
+    - Using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localizations, that apply to regions of the image. 
+    - Using the FROC-1 rating to mean in effect "I see no signs of disease in this image " when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
+-   Misconception
+    - A fundamental misunderstanding of search performance embodied in the commonly heard statement "CAD is perfect at search because it looks at everything".
+    - Showing FROC curves as reaching the unit ordinate as this is the exception rather than the rule.
+    - Believing that FROC curves extend to very large values (potentially infinite) along the abscissa and all the observer has to do to access this region is to lower their reporting threshold.
 
--   Loose terminology: using the term "lesion-specific" to describe location-specific paradigms.
--   Loose terminology: using the term "lesion" when one means a "suspicious region" that may or may not be a true lesion.
--   Loose terminology: using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localization, that apply to localized regions of the image. 
--   Loose terminology: using the FROC-1 rating to mean in effect "I see no signs of disease in this image ", when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
--   Misconception: showing FROC curves as reaching the unit ordinate, as this is the exception rather than the rule.
--   Misconception: believing that FROC curves extend to very large values along the abscissa and all the observer has to do to access this region is to lower their reporting threshold.
--   Misconception: blaming the FROC paradigm for alleged arbitrariness of the proximity criterion and multiple marks in the same region. These are not clinically important. 
-
-The FROC plot is the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset and associated scalar measures of performance, termed *figures of merit* (FOMs).
+The FROC plot is historically the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset that have evolved over the years.
 
 ## References {#froc-paradigm-references}
