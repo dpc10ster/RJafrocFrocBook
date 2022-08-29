@@ -337,6 +337,8 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 ```{r optim-op-point-low-performance-vary-mu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+# DpcBugFix 8/28/22
+# in next line the generating code has been altered to suppress title on each plot; TBA; TODOLAST 
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
