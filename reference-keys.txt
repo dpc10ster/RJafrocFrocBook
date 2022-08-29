@@ -48,7 +48,8 @@ eq:empirical-computational-afroc1
 eq:empirical-computational-afroc1a
 eq:empirical-computational-wafroc1
 fig:visual-search-us-presidents
-fig:visual-search-chest-images
+fig:visual-search-chest-images1
+fig:visual-search-chest-images2
 fig:visual-search-kundel-nodine
 fig:visual-search-eye-tracking
 eq:rsm-poisson-sampling
@@ -204,8 +205,8 @@ tinytex-problems
 froc-paradigm
 froc-paradigm-how-much-finished
 froc-paradigm-intro
-chapter-outline
-location-specific-paradigms
+froc-paradigm-outline
+froc-paradigm-location-specific-paradigms
 froc-paradigm-vis-search
 froc-paradigm-scoring-the-data
 multiple-marks-in-the-same-vicinity
@@ -371,10 +372,11 @@ standalone-cad-radiologists-1TRRRC-anlaysis
 standalone-cad-radiologists-computational-details
 standalone-cad-radiologists-results
 standalone-cad-radiologists-discussion
-standalone-cad-radiologists-appendix
+standalone-cad-radiologists-appendix1
 example-1-1
 example-2-1
 example-3
+standalone-cad-radiologists-appendix2
 standalone-cad-radiologists-references
 optim-op-point
 optim-op-point-how-much-finished

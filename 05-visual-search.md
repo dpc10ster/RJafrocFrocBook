@@ -24,19 +24,30 @@ The following sections draw heavily on work by Nodine and Kundel [@nodine1987usi
 
 Looking at and understanding an image involves grouping and assigning labels to different regions of interest (ROIs) in the image, where the labels correspond to entities that exist (or have existed in the examples to follow) in the real world. As an example, if one looks at Fig. \@ref(fig:visual-search-us-presidents), one would label them (from left to right and top to bottom, in raster fashion): Franklin Roosevelt, Harry Truman, Lyndon Johnson, Richard Nixon, Jimmy Carter, Ronald Reagan, George H. W. Bush, and the presidential seal. The accuracy of the labeling depends on prior-knowledge, i.e., expertise, of the observer. If one were ignorant about US presidents one would be unable to correctly label them. 
 
+This image consists of 8 sub-images or ROIs. Understanding an image involves grouping and assigning labels to different ROIs, where the labels correspond to entities that exist in the real world. One familiar with US history would label them, from left to right and top to bottom, in raster fashion, Franklin Roosevelt, Harry Truman, Lyndon Johnson, Richard Nixon, Jimmy Carter, Ronald Reagan, George H. Bush and the presidential seal. Labeling accuracy depends on expertise of the observer. The row and column index of each ROI identifies its location.
+
 <div class="figure" style="text-align: center">
-<img src="images/15-visual-search/usPresidents.png" alt="This image consists of 8 sub-images or ROIs. Understanding an image involves grouping and assigning labels to different ROIs, where the labels correspond to entities that exist in the real world. One familiar with US history would label them, from left to right and top to bottom, in raster fashion, Franklin Roosevelt, Harry Truman, Lyndon Johnson, Richard Nixon, Jimmy Carter, Ronald Reagan, George H. Bush and the presidential seal. Labeling accuracy depends on expertise of the observer. The row and column index of each ROI identifies its location."  />
-<p class="caption">(\#fig:visual-search-us-presidents)This image consists of 8 sub-images or ROIs. Understanding an image involves grouping and assigning labels to different ROIs, where the labels correspond to entities that exist in the real world. One familiar with US history would label them, from left to right and top to bottom, in raster fashion, Franklin Roosevelt, Harry Truman, Lyndon Johnson, Richard Nixon, Jimmy Carter, Ronald Reagan, George H. Bush and the presidential seal. Labeling accuracy depends on expertise of the observer. The row and column index of each ROI identifies its location.</p>
+<img src="images/15-visual-search/usPresidents.png" alt="Grouping and labeling ROIs" width="300pt" />
+<p class="caption">(\#fig:visual-search-us-presidents)Grouping and labeling ROIs</p>
 </div>
 
 
-Image interpretation in radiology is not fundamentally different. It involves assigning labels to an image by grouping and recognizing areas of the image that have correspondences to the radiologist’s knowledge of the underlying anatomy, and, most importantly, deviations from the underlying anatomy. Most doctors, who need not be radiologists, can look at a chest x-ray and say, "this is the heart", "this is a rib", "this is a clavicle", "this is the aortic arch", etc., the top image in Fig. \@ref(fig:visual-search-chest-images). This is because they know the underlying anatomy, the bottom image in Fig. \@ref(fig:visual-search-chest-images) and have a basic understanding of the x-ray image formation physics that relates the anatomy to the image.
+Image interpretation in radiology is not fundamentally different. It involves assigning labels to an image by grouping and recognizing areas of the image that have correspondences to the radiologist’s knowledge of the underlying anatomy, and, most importantly, deviations from the underlying anatomy. Most doctors, who need not be radiologists, can look at a chest x-ray and say, "this is the heart", "this is a rib", "this is a clavicle", "this is the aortic arch", etc., Fig. \@ref(fig:visual-search-chest-images1). This is because they know the underlying anatomy, Fig. \@ref(fig:visual-search-chest-images2) and have a basic understanding of the x-ray image formation physics that relates the anatomy to the image.
+
 
 
 <div class="figure" style="text-align: center">
-<img src="images/15-visual-search/chest-imageA.png" alt="Image interpretation in radiology involves assigning labels to an image by grouping and recognizing areas of the image that have correspondences to the radiologist’s knowledge of the underlying anatomy. (TOP) Most doctors can look at a chest x-ray and say, &quot;this is the heart&quot;, &quot;this is a rib&quot;, &quot;this is the clavicle&quot;, &quot;this is the aortic arch&quot;, etc. (BOTTOM) This is because they know the underlying anatomy and have a basic understanding of x-ray image formation physics that relates anatomy to the image."  /><img src="images/15-visual-search/chest-imageB.png" alt="Image interpretation in radiology involves assigning labels to an image by grouping and recognizing areas of the image that have correspondences to the radiologist’s knowledge of the underlying anatomy. (TOP) Most doctors can look at a chest x-ray and say, &quot;this is the heart&quot;, &quot;this is a rib&quot;, &quot;this is the clavicle&quot;, &quot;this is the aortic arch&quot;, etc. (BOTTOM) This is because they know the underlying anatomy and have a basic understanding of x-ray image formation physics that relates anatomy to the image."  />
-<p class="caption">(\#fig:visual-search-chest-images)Image interpretation in radiology involves assigning labels to an image by grouping and recognizing areas of the image that have correspondences to the radiologist’s knowledge of the underlying anatomy. (TOP) Most doctors can look at a chest x-ray and say, "this is the heart", "this is a rib", "this is the clavicle", "this is the aortic arch", etc. (BOTTOM) This is because they know the underlying anatomy and have a basic understanding of x-ray image formation physics that relates anatomy to the image.</p>
+<img src="images/15-visual-search/chest-imageA.png" alt="Grouping and labeling in radiology." width="300pt" />
+<p class="caption">(\#fig:visual-search-chest-images1)Grouping and labeling in radiology.</p>
 </div>
+
+
+
+<div class="figure" style="text-align: center">
+<img src="images/15-visual-search/chest-imageB.png" alt="Correct grouping and labeling requires knowledge of the underlying anatomy." width="300pt" />
+<p class="caption">(\#fig:visual-search-chest-images2)Correct grouping and labeling requires knowledge of the underlying anatomy.</p>
+</div>
+
 
 
 ## Recognition vs. detection {#visual-search-recognition-detection}
@@ -64,16 +75,17 @@ The Kundel-Nodine model [@kundel2007holistic; @kundel2004modeling] is a schema o
 Assuming the task has been defined prior to viewing, based on eye-tracking recordings obtained on radiologists while they interpreted images, Kundel and Nodine proposed the following schema for the diagnostic interpretation process, consisting of two major components: (1) glancing or global impression and (2) scanning or feature analysis:
 
 
+
 <div class="figure" style="text-align: center">
-<img src="images/15-visual-search/kundel-nodine.png" alt="The Kundel-Nodine model of radiological search. The glancing/global stage identifies perturbations from the template of a generic non-diseased case. The scanning stage analyzes the each perturbation and calculates the probability it is a true lesion. Only perturbations with sufficiently high probability are marked."  />
-<p class="caption">(\#fig:visual-search-kundel-nodine)The Kundel-Nodine model of radiological search. The glancing/global stage identifies perturbations from the template of a generic non-diseased case. The scanning stage analyzes the each perturbation and calculates the probability it is a true lesion. Only perturbations with sufficiently high probability are marked.</p>
+<img src="images/15-visual-search/kundel-nodine.png" alt="The Kundel-Nodine model of radiological search." width="300pt" />
+<p class="caption">(\#fig:visual-search-kundel-nodine)The Kundel-Nodine model of radiological search.</p>
 </div>
 
 
 
 ### Glancing / Global impression {#visual-search-glancing-global-impression}
 
-The colloquial term "glancing" is meant literally. The glance is brief, typically lasting about 100 - 300 ms, too short for detailed foveal examination and interpretation. Instead, during this brief interval peripheral vision and reader expertise are the primary mechanisms responsible for the identification of the perturbations. The glance results in a global impression, or gestalt, that identifies perturbations from the template. Object recognition occurs at a holistic level, i.e., in the context of the whole image, as there is insufficient time for detailed viewing and all of this is going on using peripheral vision. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in [@nodine1987using]. Perturbations are flagged for subsequent detailed viewing, i.e., the initial glance tells the visual system where to look more closely. 
+The colloquial term "glancing" is meant literally. The glance is brief, typically lasting about 100 - 300 ms, too short for detailed foveal examination and interpretation. Instead, during this brief interval peripheral vision and reader expertise are the primary mechanisms responsible for the identification of the perturbations. The glance results in a global impression, or gestalt, that identifies perturbations from the template. Object recognition occurs at a holistic level, i.e., in the context of the whole image, as there is insufficient time for detailed viewing and all of this is going on using peripheral vision. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in [@nodine1987using]. Perturbations are flagged for subsequent detailed viewing, in other words *the initial glance tells the visual system where to look more closely*. 
 
 ### Scanning / Local feature analysis {#visual-search-scanning-local-feature-analysis}
 
@@ -83,10 +95,13 @@ The essential point that emerges is that decisions are made at a finite, relativ
 
 Eye-tracker recordings for a two-view digital mammogram for two observers are shown in Fig. \@ref(fig:visual-search-eye-tracking), for an inexperienced observer (upper two panels) and an expert mammographer (lower two panels). The small circles indicate individual fixations (dwell time ~ 100 ms). The larger high-contrast circles indicate clustered fixations (cumulative dwell time ~ 1 s). The larger low-contrast circles indicate a mass visible on both views. The inexperienced observer finds many more suspicious regions than does the expert mammographer but misses the lesion in the MLO view. In other words, the inexperienced observer generates many latent NLs but only one latent LL. The mammographer finds the lesion in the MLO view, which qualifies as a latent LL, without finding suspicious regions in the non-diseased parenchyma, i.e., the expert generated zero latent NLs on this case and one latent LL. It is possible the observer was so confident in the malignancy found in the MLO view that there was no need to fixate the visible lesion in the other view - the decision had already been made to recall the patient for further imaging.
 
+
+
 <div class="figure" style="text-align: center">
-<img src="images/15-visual-search/eye-tracking-4-images.png" alt="Eye-tracking recordings for a two-view digital mammogram: see details."  />
-<p class="caption">(\#fig:visual-search-eye-tracking)Eye-tracking recordings for a two-view digital mammogram: see details.</p>
+<img src="images/15-visual-search/eye-tracking-4-images.png" alt="Eye-tracking recordings for a two-view digital mammogram." width="300pt" />
+<p class="caption">(\#fig:visual-search-eye-tracking)Eye-tracking recordings for a two-view digital mammogram.</p>
 </div>
+
 
 
 **Details:** Eye-tracking recordings for a two-view digital mammogram display for two observers, an inexperienced observer (upper two panels) and an expert mammographer (lower two panels). The small circles indicate individual fixations (dwell time ~ 100 ms).  The larger high-contrast circles indicate clustered fixations (cumulative dwell time ~ 1 sec). The latter correspond to the latent marks in the search-model. The larger low-contrast circles indicate a mass visible on both views. The inexperienced observer finds many more suspicious regions than does the expert mammographer but misses the lesion in the MLO view. In other words the inexperienced observer generates many latent NLs but only one latent LL. The mammographer finds the lesion in the MLO view, which qualifies as a latent LL, without finding suspicious regions in the non-diseased parenchyma, i.e., the expert generated zero latent NLs on this case and one latent LL. It is possible the observer was so confident in the malignancy found in the MLO view that there was no need to fixate the visible lesion in the other view - the decision had already been made to recall the patient for further imaging, which confirmed the finding.

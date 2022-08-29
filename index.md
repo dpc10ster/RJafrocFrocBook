@@ -1,7 +1,7 @@
 --- 
 title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
-date: "2022-07-21"
+date: "2022-08-29"
 site: bookdown::bookdown_site
 output: 
    bookdown::pdf_document: default
@@ -19,11 +19,13 @@ description: "Artificial intelligence and observer performance book based on RJa
 
 # Preface {-}
 
-* It is intended as an online update to my print book [@chakraborty2017observer]. 
+* Intended as an online update to my print book [@chakraborty2017observer]. 
 * Since its publication in 2017 the `RJafroc` package, on which the `R` code examples in the book depend, has evolved considerably, causing many of the examples to "break". 
 * This gives me the opportunity to improve on the book and include additional material.
 * The online book has been divided into 3 books.
-* This book is devoted to the FROC paradigm.
+    + The [QuickStart](https://dpc10ster.github.io/RJafrocQuickStart/) book.
+    + The [Roc](https://dpc10ster.github.io/RJafrocRocBook/) book.
+    + The current [Froc](https://dpc10ster.github.io/RJafrocFrocBook/) book, which focuses on the FROC paradigm.
 
 
 ## Nearly finished chapters {-}
@@ -41,9 +43,6 @@ description: "Artificial intelligence and observer performance book based on RJa
 * Chapter 11 Optimal operating point appendices
 
 
-## The html version of the book {-}
-Go [here](https://dpc10ster.github.io/RJafrocFrocBook/) to view the `html` version of the book.
-
 
 ## The pdf file of the book {-}
 
@@ -60,7 +59,7 @@ Go [here](https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFroc
 ## Please ignore: TBA How much finished HMF{-}
 
 * HMF approximately 30%
-* This book is currently (as of December 2021) in preparation. 
+* This book is currently (as of August 2022) in preparation. 
 * Parts labeled TBA and TODOLAST need to be updated on final revision.
 * Un-comment links like `\@ref(froc-paradigm-solar-analogy)` etc. Search for `\@ref`
 
@@ -76,12 +75,6 @@ Go [here](https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFroc
 
 
 ## Please ignore: Structure of the book {-}
-The book is divided into parts as follows:
-
-* Part I: Quick Start: intended for existing Windows `JAFROC` users who are seeking a quick-and-easy transition from Windows `JAFROC` to `RJafroc`. 
-* Part II: ROC paradigm: this covers the basics of the ROC paradigm 
-* Part III: Significance Testing: The general procedure used to determine the significance level, and associated statistics, of the observed difference in figure of merit between pairs of treatments or readers
-* Part IV: FROC paradigm: TBA
 
 
 ## Please ignore Contributing to this book {-}

@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-07-21}
+\date{2022-08-29}
 
 \begin{document}
 \maketitle
@@ -150,15 +150,23 @@
 \begin{itemize}
 \tightlist
 \item
-  It is intended as an online update to my print book \citep{chakraborty2017observer}.
+  Intended as an online update to my print book \citep{chakraborty2017observer}.
 \item
   Since its publication in 2017 the \texttt{RJafroc} package, on which the \texttt{R} code examples in the book depend, has evolved considerably, causing many of the examples to ``break''.
 \item
   This gives me the opportunity to improve on the book and include additional material.
 \item
   The online book has been divided into 3 books.
-\item
-  This book is devoted to the FROC paradigm.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The \href{https://dpc10ster.github.io/RJafrocQuickStart/}{QuickStart} book.
+  \item
+    The \href{https://dpc10ster.github.io/RJafrocRocBook/}{Roc} book.
+  \item
+    The current \href{https://dpc10ster.github.io/RJafrocFrocBook/}{Froc} book, which focuses on the FROC paradigm.
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{nearly-finished-chapters}{%
@@ -191,12 +199,6 @@
   Chapter 11 Optimal operating point appendices
 \end{itemize}
 
-\hypertarget{the-html-version-of-the-book}{%
-\section*{The html version of the book}\label{the-html-version-of-the-book}}
-\addcontentsline{toc}{section}{The html version of the book}
-
-Go \href{https://dpc10ster.github.io/RJafrocFrocBook/}{here} to view the \texttt{html} version of the book.
-
 \hypertarget{the-pdf-file-of-the-book}{%
 \section*{The pdf file of the book}\label{the-pdf-file-of-the-book}}
 \addcontentsline{toc}{section}{The pdf file of the book}
@@ -222,7 +224,7 @@ Go \href{https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFrocB
 \item
   HMF approximately 30\%
 \item
-  This book is currently (as of December 2021) in preparation.
+  This book is currently (as of August 2022) in preparation.
 \item
   Parts labeled TBA and TODOLAST need to be updated on final revision.
 \item
@@ -252,20 +254,6 @@ Go \href{https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFrocB
 \hypertarget{please-ignore-structure-of-the-book}{%
 \section*{Please ignore: Structure of the book}\label{please-ignore-structure-of-the-book}}
 \addcontentsline{toc}{section}{Please ignore: Structure of the book}
-
-The book is divided into parts as follows:
-
-\begin{itemize}
-\tightlist
-\item
-  Part I: Quick Start: intended for existing Windows \texttt{JAFROC} users who are seeking a quick-and-easy transition from Windows \texttt{JAFROC} to \texttt{RJafroc}.
-\item
-  Part II: ROC paradigm: this covers the basics of the ROC paradigm
-\item
-  Part III: Significance Testing: The general procedure used to determine the significance level, and associated statistics, of the observed difference in figure of merit between pairs of treatments or readers
-\item
-  Part IV: FROC paradigm: TBA
-\end{itemize}
 
 \hypertarget{please-ignore-contributing-to-this-book}{%
 \section*{Please ignore Contributing to this book}\label{please-ignore-contributing-to-this-book}}
@@ -409,23 +397,23 @@ I appreciate constructive feedback on this document. To do this raise an \texttt
 \hypertarget{froc-paradigm-intro}{%
 \section{Introduction}\label{froc-paradigm-intro}}
 
-Until now the focus has been on the receiver operating characteristic (ROC) paradigm. For diagnostic tasks such as detecting diffuse interstitial lung disease\footnote{Diffuse interstitial lung disease refers to disease within both lungs that affects the interstitium or connective tissue that forms the support structure of the lungs' air sacs or alveoli. When one inhales, the alveoli fill with air and pass oxygen to the blood stream. When one exhales, carbon dioxide passes from the blood into the alveoli and is expelled from the body. When interstitial disease is present, the interstitium becomes inflamed and stiff, preventing the alveoli from fully expanding. This limits both the delivery of oxygen to the blood stream and the removal of carbon dioxide from the body. As the disease progresses, the interstitium scars with thickening of the walls of the alveoli, which further hampers lung function. By definition, diffuse interstitial lung disease is spread through, and confined to, lung tissues.}, or diseases similar to it, where \emph{disease location is implicit}, this is an appropriate paradigm in that essential information is not being lost by limiting the radiologist's response to a single rating categorizing the likelihood of presence of disease.
+For diagnostic tasks such as detecting diffuse interstitial lung disease\footnote{Diffuse interstitial lung disease refers to disease within both lungs that affects the interstitium or connective tissue that forms the support structure of the lungs' air sacs or alveoli. When one inhales, the alveoli fill with air and pass oxygen to the blood stream. When one exhales, carbon dioxide passes from the blood into the alveoli and is expelled from the body. When interstitial disease is present, the interstitium becomes inflamed and stiff, preventing the alveoli from fully expanding. This limits both the delivery of oxygen to the blood stream and the removal of carbon dioxide from the body. As the disease progresses, the interstitium scars with thickening of the walls of the alveoli, which further hampers lung function. \emph{Diffuse interstitial lung disease is spread through and confined to the lung}.}, or diseases similar to it, \emph{where disease location is either irrelevant or implicit}, this is an appropriate paradigm in the sense that essential information is not being lost by limiting the radiologist's response to a single rating per case.
 
 In clinical practice it is not only important to identify if the patient is diseased but also to offer further guidance to subsequent care-givers regarding other characteristics (such as location, type, size, extent) of the disease. In most clinical tasks if the radiologist believes the patient is diseased there is a location (or locations) associated with the suspected disease. Physicians term this \emph{focal disease}, i.e., disease located at specific region(s) of the image.
 
-For focal disease the ROC paradigm constrains the collected information to a single rating representing the confidence level that there is disease \emph{somewhere} in the patient's imaged anatomy. The emphasis on ``somewhere'' is because it begs the question: if the radiologist believes the disease is somewhere, why not have them to point to it? In fact they do ``point to it'' in the sense that they record the location(s) of suspect regions in their clinical report, but the ROC paradigm cannot use this information. Clinicians have long recognized problems with ignoring location \citep{BlackDwyer1990, RN1921}. From the observer performance measurement point of view the most important consideration is that neglect of location information leads to loss of statistical power. The basic reason for this is that additional noise is introduced in the measurement due to crediting the reader for correctly detecting the diseased condition but pointing to the wrong location - i.e., \emph{being right for the wrong reason}. One can compensate for reduced statistical power by increasing the numbers of readers and cases, which increases the cost of the study and is also unethical because, by not using the optimal paradigm and analysis, one is subjecting more patients to imaging procedures \citep{RN2662}.
+For focal disease the ROC paradigm constrains the collected information to a single rating that there is disease \emph{somewhere} in the patient's imaged anatomy. The emphasis on ``somewhere'' is because it begs the question: if the radiologist believes the disease is ``somewhere'', why not have them to point to it? In fact they do ``point to it'' in the sense that they record the location(s) of suspect regions in their clinical report, but the ROC paradigm cannot use this information. Clinicians have long recognized problems with ignoring location information \citep{BlackDwyer1990, RN1921}.
 
-\hypertarget{chapter-outline}{%
-\subsection{Chapter outline}\label{chapter-outline}}
+From our point of view the most important problem is that neglect of location information leads to loss of statistical power. The reason for this is the additional noise introduced into the AUC measurement due to crediting a radiologist for correctly detecting the diseased condition (a ROC paradigm True Positive or TP event) when the radiologist may have pointed to the wrong location, in which case \emph{the radiologist is credited for a TP when in fact two mistakes were made: the true localized disease was missed and a false location was incorrectly identified as diseased}. Not discriminating between 2 types of TP events, one with correct localizations (associated with an expert radiologist) and the other with incorrect localizations (a radiologist with lesser expertise) leads to reduced ability to distinguish between them (the ROC performance difference will be smaller) as compared to the FROC paradigm described in this book (the FROC performance difference will be larger). This and other problems with using the ROC paradigm in localization tasks are described in \citep{bunch1977free}, a publication that spurred my initial interest in this field \citep{Chakraborty1986DigitalVsConv}.
 
-Four observer performance paradigms are compared as to the kinds of information collected and ignored. An essential characteristic of the FROC paradigm, namely \emph{visual search}, is introduced. The FROC paradigm and its historical context is described. Key differences between FROC ratings and ROC ratings are noted. The FROC plot is introduced. A ``solar'' analogy is introduced -- understanding this is key to obtaining a good intuitive feel for the FROC paradigm.
+\hypertarget{froc-paradigm-outline}{%
+\subsection{Chapter outline}\label{froc-paradigm-outline}}
 
-\hypertarget{location-specific-paradigms}{%
-\section{Location specific paradigms}\label{location-specific-paradigms}}
+Four observer performance paradigms are compared as to the kinds of information collected and ignored. An essential characteristic of the FROC paradigm, namely \emph{visual search}, is introduced. The FROC paradigm and its historical context is described. Key differences between FROC ratings and ROC ratings are noted. The FROC plot is introduced. A ``solar'' analogy is introduced which yields a good intuitive feel for the FROC paradigm.
 
-Location-specific paradigms take into account, to varying degrees, information regarding the locations of perceived lesions, so they are sometimes referred to as lesion-specific (or lesion-level) paradigms: usage of these terms is discouraged. For example, all observer performance methods involve detecting the presence of true lesions; so ROC methodology is, in this sense, also lesion-specific. On the other hand \emph{location} is a characteristic of true and perceived focal lesions, and methods that account for location are better termed \emph{location-specific} than lesion-specific.
+\hypertarget{froc-paradigm-location-specific-paradigms}{%
+\section{Location specific paradigms}\label{froc-paradigm-location-specific-paradigms}}
 
-The term \emph{lesion} always refers to a true or real lesion. The prefix ``true'' or ``real'' is implicit. The term \emph{suspicious region} is reserved for any region that, as far as the observer is concerned, has ``lesion-like'' characteristics. \emph{A lesion is a real entity while a suspicious region is a perceived entity.}
+Location-specific paradigms\footnote{Location-specific paradigms are sometimes referred to as lesion-specific (or lesion-level) paradigms: usage of these terms is discouraged. For example, all observer performance methods involve detecting the presence of true lesions; so ROC methodology is, in this sense, also lesion-specific. On the other hand \emph{location} is a characteristic of true and perceived focal lesions, and methods that account for location are better termed \emph{location-specific} than lesion-specific.} take into account, to varying degrees, information regarding the locations of perceived lesions.
 
 There are three location-specific paradigms:
 
@@ -443,52 +431,56 @@ There are three location-specific paradigms:
 \includegraphics[width=1\linewidth]{images/4Paradigms} \caption{Upper Left: ROC, Upper Right: FROC, Lower Left: LROC, Lower Right: ROI}\label{fig:froc-paradigm-4}
 \end{figure}
 
-Fig. \ref{fig:froc-paradigm-4} shows a schematic mammogram interpreted according to current observer performance paradigms. The arrows point to two real lesions and the three light crosses indicate suspicious regions. If a suspicious region is marked it is indicated by a dark cross. Evidently the radiologist saw one of the lesions, missed the other lesion and mistook two normal structures for lesions.
+\begin{quote}
+In this book \emph{lesion} always refers to a true or real lesion. The term \emph{suspicious region} or \emph{perceived lesion} is reserved for any region that, as far as the observer is concerned, has ``lesion-like'' characteristics. \emph{A lesion is a real entity while a suspicious region is a perceived entity.}
+\end{quote}
 
-In Fig. \ref{fig:froc-paradigm-4}, evidently the radiologist found one of the lesions (the light-shaded cross near the left most arrow), missed the other one (pointed to by the second arrow) and mistook two normal structures for lesions (the two light-shaded crosses that are relatively far from any true lesion).
+The 4 panels in Fig. \ref{fig:froc-paradigm-4} show a schematic mammogram interpreted according to the 4 current observer performance paradigms. The arrows point to two lesions and the three light crosses indicate suspicious regions. A marked suspicious region is indicated by a dark cross. Evidently the radiologist found one of the lesions (the light-shaded cross near the left most arrow in the top-left panel), missed the other lesion and mistook two normal structures for lesions (the two light-shaded crosses that are relatively far from any of the lesions). In this example there are three suspicious regions one of which is close to a real lesion.
 
 \begin{itemize}
 \item
-  In the ROC paradigm, Fig. \ref{fig:froc-paradigm-4} (top-left), the radiologist assigns a single rating indicating the confidence level that there is at least one lesion somewhere in the image. Assuming a 1 -- 5 positive directed integer rating scale, if the left-most light-shaded cross is a highly suspicious region then the ROC rating might be 5 (highest confidence for presence of disease).
+  In the ROC paradigm, Fig. \ref{fig:froc-paradigm-4} (top-left panel), the radiologist assigns a single rating indicating the confidence level that there is at least one lesion somewhere in the image. Assuming a 1 -- 5 positive directed integer rating scale, if the left-most light-shaded cross is a highly suspicious region then the ROC rating might be 5 (highest confidence for presence of disease). There are no dark-shaded crosses on this panel as no marking occurs in the ROC paradigm.
 \item
-  In the free-response (FROC) paradigm, Fig. \ref{fig:froc-paradigm-4} (top-right), the dark-shaded crosses indicate suspicious regions that were \emph{marked} (or \emph{reported} in the clinical report), and the adjacent numbers are the corresponding ratings, which apply to specific suspicious regions in the image, unlike the ROC paradigm, where the rating applies to the whole image. Assuming the allowed FROC ratings are 1 through 4, two marks are shown, one rated FROC-4, which is close to a true lesion, and the other rated FROC-1, which is not close to any true lesion. The third suspicious region, indicated by the light-shaded cross, was not marked, implying its confidence level did not exceed the lowest reporting threshold. The marked region rated FROC-4 (highest FROC confidence) is likely what caused the radiologist to assign the ROC-5 rating to this image in the top-left ROC paradigm figure.
+  In the free-response (FROC) paradigm, Fig. \ref{fig:froc-paradigm-4} (top-right panel), the dark-shaded crosses indicate suspicious regions that were \emph{marked}, and the adjacent numbers are the corresponding ratings. In this example the two ratings shown apply to specific suspicious regions, unlike the ROC paradigm where the single rating applies to the whole image. Assuming the allowed FROC ratings are integers 1 through 4, two marks are shown, one rated FROC-4, which is close to a true lesion, and the other rated FROC-1, which is not close to any true lesion. The third suspicious region, indicated by the light-shaded cross, was not marked, implying its confidence level did not exceed the lowest reporting threshold for a FROC-1 rating. The marked region rated FROC-4 (the highest FROC confidence level) is likely what caused the radiologist to assign the ROC-5 rating to this image in the ROC paradigm panel.
 \item
-  In the LROC paradigm, Fig. \ref{fig:froc-paradigm-4} (bottom-left), the radiologist rates the confidence that there is at least one lesion somewhere in the image (as in the ROC paradigm) and marks the most suspicious region in the image. In this example the rating might be LROC-5, the five rating being the same as in the ROC paradigm, and the mark may be the suspicious region rated FROC-4 in the FROC paradigm, and, since it is close to a true lesion, in LROC terminology it would be recorded as a \emph{correct localization}. If the mark were not near a lesion it would be recorded as an \emph{incorrect localization}. Only one mark is allowed in this paradigm, and in fact one mark is \emph{required} on every image, even if the observer does not find any suspicious regions to report.
+  In the LROC paradigm, Fig. \ref{fig:froc-paradigm-4} (bottom-left panel), the radiologist rates the confidence that there is at least one lesion somewhere in the image (as in the ROC paradigm) and marks the most suspicious region in the image. In this example the rating might be LROC-5, the five rating being the same as in the ROC paradigm, and the mark may be the suspicious region rated FROC-4 in the FROC paradigm panel, and, since it is close to a true lesion, in LROC terminology it would be recorded as a \emph{correct localization}. If the mark were not near a lesion it would be recorded as an \emph{incorrect localization}. Only one mark is allowed in this paradigm, and in fact one mark is \emph{required} on every image, even if the observer does not find any suspicious regions to report.
 \item
-  In the region of interest (ROI) paradigm, the researcher segments the image into a number of regions-of-interest (ROIs) and the radiologist rates each ROI for presence of at least one suspicious region somewhere in the ROI. The rating is similar to the ROC rating, except it applies to the ROI, not the whole image. Assuming a 1 -- 5 positive directed integer rating scale in Fig. \ref{fig:froc-paradigm-4} (bottom-right) there are four ROIs. The ROI at \textasciitilde9 o'clock might be rated ROI-5 as it contains the most suspicious light-shaded cross, the one at \textasciitilde11 o'clock might be rated ROI-1 as it does not contain any light-shaded crosses, the one at \textasciitilde3 o'clock might be rated LROC-2 or 3 (the unmarked lightshaded cross would tend to increase the confidence level) and the one at \textasciitilde7 o'clock might be rated ROI-1. In the example shown in Fig. \ref{fig:froc-paradigm-4} (bottom-right), each case yields 4 ratings\footnote{When different views of the same patient anatomy (perhaps in different modalities) are available, it is assumed that all images are segmented consistently, and the rating for each ROI takes into account all views of that ROI in the different views (or modalities). The segmentation shown in the figure is a schematic. In fact the ROIs could be clinically driven descriptors of location, such as ``apex of lung'' or ``mediastinum'', and the image does not have to have lines showing the ROIs (which would be distracting to the radiologist). The number of ROIs per image can be at the researcher's discretion and there is no requirement that every case have a fixed number of ROIs.}.
+  In the region of interest (ROI) paradigm, the researcher segments the image into a number of regions-of-interest (ROIs) and the radiologist rates each ROI for presence of at least one suspicious region within the ROI. The rating is similar to the ROC rating, except it applies to the ROI, not the whole image. Assuming a 1 -- 5 positive directed integer rating scale in Fig. \ref{fig:froc-paradigm-4} (bottom-right panel) there are four ROIs. The ROI at \textasciitilde9 o'clock might be rated ROI-5 as it contains the most suspicious light-shaded cross (the region that was rated FROC-4), the one at \textasciitilde11 o'clock might be rated ROI-1 as it does not contain any light-shaded crosses, the one at \textasciitilde3 o'clock might be rated LROC-2 or LROC-3 (the unmarked light-shaded cross would tend to increase the confidence level) and the one at \textasciitilde7 o'clock might be rated ROI-1\footnote{The ROIs could be clinically driven descriptors of location, such as ``apex of lung'' or ``mediastinum'', and the image does not have to have lines showing the ROIs (which would be distracting to the radiologist). The number of ROIs per image can be at the researcher's discretion and there is no requirement that every case have the same number of ROIs.}.
 \end{itemize}
 
 \hypertarget{froc-paradigm-vis-search}{%
 \section{Visual search}\label{froc-paradigm-vis-search}}
 
-The FROC paradigm in medical imaging is equivalent to a visual search task. Any search task has two components: (i) finding something and (ii) acting on it. Examples of a search tasks are looking for lost car-keys or a milk carton in the refrigerator. Success in a search task is finding the searched for object. Acting on it could be driving to work or drinking milk from the carton. There is expertise associated with any search task. Husbands are notoriously bad at finding the milk carton in the refrigerator (analogy due to Dr.~Elizabeth Krupinski at an SPIE course taught jointly with the author). Like anything else, search expertise is honed by experience, i.e., lots of practice.
+The FROC paradigm in medical imaging is equivalent to a visual search task. Any search task has two components: finding something and acting on it. Examples of a search tasks are looking for lost car-keys or a milk carton in the refrigerator. Success in a search task is finding the searched for object. Acting on it could be driving to work or drinking milk from the carton\footnote{There is expertise associated with any search task. Husbands are notoriously bad at finding the milk carton in the refrigerator (analogy due to Dr.~Elizabeth Krupinski at an SPIE course taught jointly with the author).}.
 
-Likewise a medical imaging search task has two components (i) finding suspicious regions and (ii) acting on each finding. ``Finding'' is the actual term used by clinicians in their reports. Acting on a finding involves determining if the finding is sufficiently suspicious for cancer to warrant reporting. If a suspicious region is found and provided it is sufficiently suspicious the region is marked and rated for confidence that it is a true (malignant) lesion.
+Likewise, a medical imaging search task has two components: finding suspicious regions and acting on each finding\footnote{``Finding'' is the actual term used by radiologists in their clinical reports}. Acting on a finding involves determining if it is sufficiently suspicious for cancer to warrant reporting and further patient follow-up. If a suspicious region is found and provided it is sufficiently suspicious for malignancy the region is marked and rated for confidence that it is a malignant lesion.
 
-The radiologist does not know a-priori if the patient is diseased and, if diseased, how many lesions may be present. In the breast-screening context, it is known a-priori that about 5 out of 1000 cases have cancers, so 99.5\% of the time odds are that the case has no malignant lesions\footnote{The probability of benign suspicious regions is much higher \citep{Ernster1981Epidemiology}, about 13\% for women aged 40-45.}. Considerably search expertise is needed for the radiologist to mark true lesions with high probability while not generating too many false marks.
+The radiologist does not know a-priori if the patient is diseased and, if diseased, how many lesions may be present. In the breast-screening context, it is known that about 5 out of 1000 patients have cancers, so 99.5\% of the time odds are that the patient has no malignant lesions\footnote{The probability of benign suspicious regions is much higher \citep{Ernster1981Epidemiology}, about 13\% for women aged 40-45.}. Considerably search expertise is needed for the radiologist to mark malignant lesions with high probability while not generating too many false marks.
 
-At my former institution (University of Pittsburgh) the radiologists digitally outline and annotate (describe) suspicious region(s) that are found. As one would expect from the low prevalence of breast cancer in the screening context, about 5 per 1000 cases in the US, and assuming expert-level radiologist interpretations, about 90\% of breast cases do not generate any marks. About 10\% of cases generate one or more marks and are recalled for further comprehensive imaging (termed diagnostic workup). Of marked cases about 90\% generate one mark, about 10\% generate 2 marks, and a rare case generates 3 or more marks (Dr.~David Gur, private communication, ca. 2015).
+At my former institution (University of Pittsburgh) the radiologists digitally outline and annotate (describe) suspicious region(s) that are found. As one would expect from the low prevalence of breast cancer in the screening context and assuming expert-level radiologist interpretations, about 90\% of breast cases do not generate any marks. About 10\% of cases generate one or more marks and are recalled for further comprehensive imaging (termed diagnostic workup). Of marked cases about 90\% generate one mark, about 10\% generate 2 marks, and a rare case generates 3 or more marks (Dr.~David Gur, private communication, ca. 2015).
 
-Conceptually, a mammography report consists of the locations of regions that exceed the threshold and the corresponding levels of suspicion, reported as a Breast Imaging Reporting and Data System (BIRADS) rating (the BIRADS rating is actually assigned after the diagnostic workup following a 0-screening rating; the screening rating itself is binary: 0 for recall or 1 for normal).
+Conceptually, a mammography report consists of the locations of regions that exceed the threshold and the corresponding levels of suspicion, reported as a Breast Imaging Reporting and Data System (BIRADS) rating. The BIRADS rating is actually assigned after the diagnostic workup following an screening BIRADS-0 rating. The screening rating itself is binary: BIRADS-0 for recall (the patient is recalled for a diagnostic workup to determine the final BIRADS rating) or BIRADS-1 for normal or no abnormality detected (the patient comes back about a year later for the next screening appointment).
 
 \hypertarget{froc-paradigm-scoring-the-data}{%
 \subsection{Proximity criterion and scoring the data}\label{froc-paradigm-scoring-the-data}}
 
-In the first two clinical applications of the FROC paradigm \citep{Chakraborty1986DigitalVsConv, Niklason1986SimulatedPulmonary} the marks and ratings were indicated by a grease pencil on an acrylic overlay aligned, in a reproducible way, to the CRT displayed chest image. Credit for a correct detection and localization, termed a lesion-localization or LL-event\footnote{The proper terminology for this paradigm has evolved. Older publications and some newer ones refer to this as a true positive (TP) event, thereby confusing a ROC related term that does not involve search with one that does.}, was given only if a mark was sufficiently close (as per proximity criterion, see below) to an actual diseased region; otherwise, the observer's mark-rating pair was scored as a non-lesion localization or NL-event.
+In the first two quasi-clinical applications of the FROC paradigm \citep{Chakraborty1986DigitalVsConv, Niklason1986SimulatedPulmonary} the marks and ratings were indicated by a grease pencil on an acrylic overlay aligned, in a reproducible way, to the CRT displayed chest image of an anthropomorphic chest phantom with superposed simulated lesions. Credit for a correct detection and localization, termed a lesion-localization or LL-event\footnote{The proper terminology for this paradigm has evolved. Older publications and some newer ones refer to this as a true positive (TP) event, thereby confusing a ROC related term that does not involve search with one that does.}, was given only if a mark was sufficiently close (as per proximity criterion, see below) to an actual diseased region; otherwise, the observer's mark was scored as a non-lesion localization or NL-event.
 
 The use of ROC terminology, such as true positives or false positives to describe FROC data is not conducive to clarity, and is strongly discouraged.
 
 Definitions:
 
+\begin{quote}
 \begin{itemize}
 \tightlist
 \item
-  NL = non-lesion localization, i.e., a mark that is \emph{not} close to any lesion
+  NL = non-lesion localization, i.e., a mark that is not close to any lesion
 \item
   LL = lesion localization, i.e., a mark that is close to a lesion
 \end{itemize}
+\end{quote}
 
-What is meant by sufficiently close? One adopts an acceptance radius (for spherical lesions) or \emph{proximity criterion} (the more general case). What constitutes ``close enough'' is a clinical decision the answer to which depends on the application. It is not necessary for two radiologists to point to the same pixel in order for them to agree that they are seeing the same suspicious region. Likewise, two physicians -- e.g., the radiologist finding the lesion on an x-ray and the surgeon responsible for resecting it -- do not have to agree on the exact center of a lesion in order to appropriately assess and treat it. More often than not, ``clinical common sense'' can be used to determine if a mark actually localized the real lesion. When in doubt, the researcher should ask an independent radiologist (i.e., not one used in the observer study) how to score ambiguous marks. A rigid definition of the proximity criterion should not be used.
+What is meant by sufficiently close? One adopts an acceptance radius (for spherical lesions) or \emph{proximity criterion} (the more general case). What constitutes ``close enough'' is a clinical decision the answer to which depends on the application. It is not necessary for two radiologists to point to the same pixel in order for them to agree that they are seeing the same suspicious region. Likewise, two physicians -- e.g., the radiologist finding the lesion on an x-ray and the surgeon responsible for resecting it -- do not have to agree on the exact center of a lesion in order to appropriately assess and treat it. More often than not, ``clinical common sense'' can be used to determine if a mark actually localized the lesion. When in doubt, the researcher should ask an independent radiologist (i.e., not one used in the observer study) how to score ambiguous marks. A rigid definition of the proximity criterion should not be used.
 
 For roughly spherical nodules a simple rule can be used. If a circular lesion is 10 mm in diameter, one can use the ``touching-coins'' analogy to determine the criterion for a mark to be classified as lesion localization. Each coin is 10 mm in diameter, so if they touch, their centers are separated by 10 mm, and the rule is to classify any mark within 10 mm of an actual lesion center as a LL mark, and if the separation is greater, the mark is classified as a NL mark. A recent paper \citep{Dobbins2016MultiInstitutional} using FROC analysis gives more details on appropriate proximity criteria in the clinical context. \footnote{Generally the proximity criterion is more stringent for smaller lesions than for larger one. However, for very small lesions allowance is made so that the criterion does not penalize the radiologist for normal marking ``jitter''. For 3D images the proximity criteria is different in the x-y plane vs.~the slice thickness axis.}
 
@@ -1792,24 +1784,35 @@ The following sections draw heavily on work by Nodine and Kundel \citep{nodine19
 
 Looking at and understanding an image involves grouping and assigning labels to different regions of interest (ROIs) in the image, where the labels correspond to entities that exist (or have existed in the examples to follow) in the real world. As an example, if one looks at Fig. \ref{fig:visual-search-us-presidents}, one would label them (from left to right and top to bottom, in raster fashion): Franklin Roosevelt, Harry Truman, Lyndon Johnson, Richard Nixon, Jimmy Carter, Ronald Reagan, George H. W. Bush, and the presidential seal. The accuracy of the labeling depends on prior-knowledge, i.e., expertise, of the observer. If one were ignorant about US presidents one would be unable to correctly label them.
 
+This image consists of 8 sub-images or ROIs. Understanding an image involves grouping and assigning labels to different ROIs, where the labels correspond to entities that exist in the real world. One familiar with US history would label them, from left to right and top to bottom, in raster fashion, Franklin Roosevelt, Harry Truman, Lyndon Johnson, Richard Nixon, Jimmy Carter, Ronald Reagan, George H. Bush and the presidential seal. Labeling accuracy depends on expertise of the observer. The row and column index of each ROI identifies its location.
+
 \begin{figure}
 
-{\centering \includegraphics{images/15-visual-search/usPresidents} 
+{\centering \includegraphics[width=300pt]{images/15-visual-search/usPresidents} 
 
 }
 
-\caption{This image consists of 8 sub-images or ROIs. Understanding an image involves grouping and assigning labels to different ROIs, where the labels correspond to entities that exist in the real world. One familiar with US history would label them, from left to right and top to bottom, in raster fashion, Franklin Roosevelt, Harry Truman, Lyndon Johnson, Richard Nixon, Jimmy Carter, Ronald Reagan, George H. Bush and the presidential seal. Labeling accuracy depends on expertise of the observer. The row and column index of each ROI identifies its location.}\label{fig:visual-search-us-presidents}
+\caption{Grouping and labeling ROIs}\label{fig:visual-search-us-presidents}
 \end{figure}
 
-Image interpretation in radiology is not fundamentally different. It involves assigning labels to an image by grouping and recognizing areas of the image that have correspondences to the radiologist's knowledge of the underlying anatomy, and, most importantly, deviations from the underlying anatomy. Most doctors, who need not be radiologists, can look at a chest x-ray and say, ``this is the heart'', ``this is a rib'', ``this is a clavicle'', ``this is the aortic arch'', etc., the top image in Fig. \ref{fig:visual-search-chest-images}. This is because they know the underlying anatomy, the bottom image in Fig. \ref{fig:visual-search-chest-images} and have a basic understanding of the x-ray image formation physics that relates the anatomy to the image.
+Image interpretation in radiology is not fundamentally different. It involves assigning labels to an image by grouping and recognizing areas of the image that have correspondences to the radiologist's knowledge of the underlying anatomy, and, most importantly, deviations from the underlying anatomy. Most doctors, who need not be radiologists, can look at a chest x-ray and say, ``this is the heart'', ``this is a rib'', ``this is a clavicle'', ``this is the aortic arch'', etc., Fig. \ref{fig:visual-search-chest-images1}. This is because they know the underlying anatomy, Fig. \ref{fig:visual-search-chest-images2} and have a basic understanding of the x-ray image formation physics that relates the anatomy to the image.
 
 \begin{figure}
 
-{\centering \includegraphics{images/15-visual-search/chest-imageA} \includegraphics{images/15-visual-search/chest-imageB} 
+{\centering \includegraphics[width=300pt]{images/15-visual-search/chest-imageA} 
 
 }
 
-\caption{Image interpretation in radiology involves assigning labels to an image by grouping and recognizing areas of the image that have correspondences to the radiologist’s knowledge of the underlying anatomy. (TOP) Most doctors can look at a chest x-ray and say, "this is the heart", "this is a rib", "this is the clavicle", "this is the aortic arch", etc. (BOTTOM) This is because they know the underlying anatomy and have a basic understanding of x-ray image formation physics that relates anatomy to the image.}\label{fig:visual-search-chest-images}
+\caption{Grouping and labeling in radiology.}\label{fig:visual-search-chest-images1}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=300pt]{images/15-visual-search/chest-imageB} 
+
+}
+
+\caption{Correct grouping and labeling requires knowledge of the underlying anatomy.}\label{fig:visual-search-chest-images2}
 \end{figure}
 
 \hypertarget{visual-search-recognition-detection}{%
@@ -1841,17 +1844,17 @@ Assuming the task has been defined prior to viewing, based on eye-tracking recor
 
 \begin{figure}
 
-{\centering \includegraphics{images/15-visual-search/kundel-nodine} 
+{\centering \includegraphics[width=300pt]{images/15-visual-search/kundel-nodine} 
 
 }
 
-\caption{The Kundel-Nodine model of radiological search. The glancing/global stage identifies perturbations from the template of a generic non-diseased case. The scanning stage analyzes the each perturbation and calculates the probability it is a true lesion. Only perturbations with sufficiently high probability are marked.}\label{fig:visual-search-kundel-nodine}
+\caption{The Kundel-Nodine model of radiological search.}\label{fig:visual-search-kundel-nodine}
 \end{figure}
 
 \hypertarget{visual-search-glancing-global-impression}{%
 \subsection{Glancing / Global impression}\label{visual-search-glancing-global-impression}}
 
-The colloquial term ``glancing'' is meant literally. The glance is brief, typically lasting about 100 - 300 ms, too short for detailed foveal examination and interpretation. Instead, during this brief interval peripheral vision and reader expertise are the primary mechanisms responsible for the identification of the perturbations. The glance results in a global impression, or gestalt, that identifies perturbations from the template. Object recognition occurs at a holistic level, i.e., in the context of the whole image, as there is insufficient time for detailed viewing and all of this is going on using peripheral vision. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in \citep{nodine1987using}. Perturbations are flagged for subsequent detailed viewing, i.e., the initial glance tells the visual system where to look more closely.
+The colloquial term ``glancing'' is meant literally. The glance is brief, typically lasting about 100 - 300 ms, too short for detailed foveal examination and interpretation. Instead, during this brief interval peripheral vision and reader expertise are the primary mechanisms responsible for the identification of the perturbations. The glance results in a global impression, or gestalt, that identifies perturbations from the template. Object recognition occurs at a holistic level, i.e., in the context of the whole image, as there is insufficient time for detailed viewing and all of this is going on using peripheral vision. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in \citep{nodine1987using}. Perturbations are flagged for subsequent detailed viewing, in other words \emph{the initial glance tells the visual system where to look more closely}.
 
 \hypertarget{visual-search-scanning-local-feature-analysis}{%
 \subsection{Scanning / Local feature analysis}\label{visual-search-scanning-local-feature-analysis}}
@@ -1864,11 +1867,11 @@ Eye-tracker recordings for a two-view digital mammogram for two observers are sh
 
 \begin{figure}
 
-{\centering \includegraphics{images/15-visual-search/eye-tracking-4-images} 
+{\centering \includegraphics[width=300pt]{images/15-visual-search/eye-tracking-4-images} 
 
 }
 
-\caption{Eye-tracking recordings for a two-view digital mammogram: see details.}\label{fig:visual-search-eye-tracking}
+\caption{Eye-tracking recordings for a two-view digital mammogram.}\label{fig:visual-search-eye-tracking}
 \end{figure}
 
 \textbf{Details:} Eye-tracking recordings for a two-view digital mammogram display for two observers, an inexperienced observer (upper two panels) and an expert mammographer (lower two panels). The small circles indicate individual fixations (dwell time \textasciitilde{} 100 ms). The larger high-contrast circles indicate clustered fixations (cumulative dwell time \textasciitilde{} 1 sec). The latter correspond to the latent marks in the search-model. The larger low-contrast circles indicate a mass visible on both views. The inexperienced observer finds many more suspicious regions than does the expert mammographer but misses the lesion in the MLO view. In other words the inexperienced observer generates many latent NLs but only one latent LL. The mammographer finds the lesion in the MLO view, which qualifies as a latent LL, without finding suspicious regions in the non-diseased parenchyma, i.e., the expert generated zero latent NLs on this case and one latent LL. It is possible the observer was so confident in the malignancy found in the MLO view that there was no need to fixate the visible lesion in the other view - the decision had already been made to recall the patient for further imaging, which confirmed the finding.
@@ -2333,8 +2336,7 @@ The next chapter explores the predictions of the radiological search model.
 \hypertarget{rsm-pred-intro}{%
 \section{TBA Introduction}\label{rsm-pred-intro}}
 
-The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes predictions of the RSM.
-The starting point is a general characteristic of all RSM prediced operating characteristics, namely they have the constrained end-point property. Derived next is the predicted \emph{inferred ROC} curve followed by the predicted FROC and AFROC curves.
+The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes predictions of the RSM. The starting point is a general characteristic of all RSM prediced operating characteristics, namely they have the constrained end-point property. Derived next is the predicted \emph{inferred ROC} curve followed by the predicted FROC and AFROC curves.
 
 Shown next is how \emph{search performance} and \emph{lesion-classification} performance can be measured from the inferred ROC curve. Search performance is the ability to find lesions while avoiding finding non-lesions, and lesion-classification performance is the ability, having found a suspicious region, to correctly classify it. Lesion-classification is different from (case) classification performance, i.e., distinguishing between diseased and non-diseased cases, which is measured by the area AUC under the ROC curve.
 
@@ -2735,7 +2737,7 @@ The right hand side of Eqn. \eqref{eq:rsm-pred-auc} can be evaluated using a num
 
 \begin{figure}
 
-{\centering \includegraphics{images/rsm-pred/util-analytical-aucs-rsm} 
+{\centering \includegraphics[width=300pt]{images/rsm-pred/util-analytical-aucs-rsm} 
 
 }
 
@@ -2789,7 +2791,7 @@ When it comes to predicted ROC AUC there is an important difference between conv
 
 \begin{figure}
 
-{\centering \includegraphics{images/rsm-pred/util-aucs-binormal} 
+{\centering \includegraphics[width=300pt]{images/rsm-pred/util-aucs-binormal} 
 
 }
 
@@ -2800,7 +2802,7 @@ In contrast, in addition to the basic RSM parameters, i.e., \(\mu\), \(\lambda\)
 
 \begin{figure}
 
-{\centering \includegraphics{images/rsm-pred/PlotRsmOperatingCharacteristics} 
+{\centering \includegraphics[width=300pt]{images/rsm-pred/PlotRsmOperatingCharacteristics} 
 
 }
 
@@ -4155,7 +4157,7 @@ For each dataset PROPROC parameters were obtained by running the Windows softwar
 
 \begin{figure}
 
-{\centering \includegraphics{images/compare-3-fits/MRMCRuns} 
+{\centering \includegraphics[width=300pt]{images/compare-3-fits/MRMCRuns} 
 
 }
 
@@ -4164,7 +4166,7 @@ For each dataset PROPROC parameters were obtained by running the Windows softwar
 
 \begin{figure}
 
-{\centering \includegraphics{images/compare-3-fits/MRMCRuns-VD} 
+{\centering \includegraphics[width=300pt]{images/compare-3-fits/MRMCRuns-VD} 
 
 }
 
@@ -4189,11 +4191,11 @@ The following screen shot shows the pre-analyzed files created by the function \
 
 \begin{figure}
 
-{\centering \includegraphics{images/compare-3-fits/RSM6} 
+{\centering \includegraphics[width=300pt]{images/compare-3-fits/RSM6} 
 
 }
 
-\caption{Screen shot of `R/compare-3-fits/RSM6` showing the results files created by  `Compare3ProperRocFits()` .}\label{fig:rsm-3-fits-all-results-rsm6}
+\caption{Screen shot of `R/compare-3-fits/RSM6` showing the results files created by  `Compare3ProperRocFits()`.}\label{fig:rsm-3-fits-all-results-rsm6}
 \end{figure}
 
 \hypertarget{rsm-3-fits-representative-plots-van-dyke}{%
@@ -4715,15 +4717,15 @@ While there is consensus that CAD works for microcalcifications, for masses its 
 
 In my opinion standalone performance is the most direct measure of CAD performance. Lack of clear-cut methodology to assess standalone CAD performance may have limited past CAD research. The current work hopoefully removes that impediment. Going forward, assessment of standalone performance of CAD vs.~expert radiologists is strongly encouraged.
 
-\hypertarget{standalone-cad-radiologists-appendix}{%
-\section{Appendix}\label{standalone-cad-radiologists-appendix}}
+\hypertarget{standalone-cad-radiologists-appendix1}{%
+\section{Appendix 1}\label{standalone-cad-radiologists-appendix1}}
 
 The structures of the\texttt{R} objects generated by the software are illustrated with three examples.
 
 \hypertarget{example-1-1}{%
 \subsection{Example 1}\label{example-1-1}}
 
-The first example shows the structure of `RRFC\_1T\_PCL\_0\_2
+The first example shows the structure of \texttt{RRFC\_1T\_PCL\_0\_2}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4972,6 +4974,18 @@ The differences from \texttt{RRFC\_1T\_PCL\_0\_2} are listed next:
 \end{itemize}
 
 Notice that the \texttt{RRRC\_1T\_PCL\_0\_2} p value, i.e., 0.04172626, is identical to that of \texttt{RRRC\_2T\_PCL\_0\_2}, i.e., 0.04172626.
+
+\hypertarget{standalone-cad-radiologists-appendix2}{%
+\section{Appendix 2}\label{standalone-cad-radiologists-appendix2}}
+
+TBA
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{source}\NormalTok{(}\KeywordTok{here}\NormalTok{(}\StringTok{"R/standalone-cad/DfReadLrocDataFile.R"}\NormalTok{))}
+\NormalTok{lrocDataset <-}\StringTok{ }\KeywordTok{DfReadLrocDataFile}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{standalone-cad-radiologists-references}{%
 \section{References}\label{standalone-cad-radiologists-references}}
