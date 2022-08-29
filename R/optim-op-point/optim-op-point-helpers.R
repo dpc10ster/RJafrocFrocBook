@@ -151,8 +151,12 @@ plotFroc <- function(muArr, lambdaPArr, nuPArr) {
           aes(x = NLF, y = LLF)) + 
           geom_line() +
           scale_x_continuous(limits = c(0,lambdaP)) + 
-          scale_y_continuous(limits = c(0,1)) +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
+          scale_y_continuous(limits = c(0,1)) #+
+          #ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
+          # attempt to fix the following error in GitHub Actions
+          # Quitting from lines 340-341 (22-optim-op-point.Rmd) 
+          # Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  : 
+          #   polygon edge not found
         for (y in 1:2) {
           optPt <- data.frame(
             NLF = nlfOptArr[y,i1,i2,i3], 
