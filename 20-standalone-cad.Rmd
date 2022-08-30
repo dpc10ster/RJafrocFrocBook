@@ -314,7 +314,7 @@ Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model, which conta
 
 ## Software implementation {#standalone-cad-radiologists-computational-details}
 
-The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in `RJafroc`, an R-package [@packageRJafroc]. 
+The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in `RJafroc`, an R-package [@R-RJafroc]. 
 
 The following code shows usage of the software to generate the results corrsponding to the three analyses. Note that `datasetCadLroc` is the LROC dataset and `dataset09` is the corresponding ROC dataset. 
 

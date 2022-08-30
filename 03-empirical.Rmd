@@ -307,7 +307,7 @@ The formalism should not obscure the fact that the futility of extrapolation out
 
 ### Illustration with a dataset {#empirical-froc-plot-illustration}
 
-The following code uses `dataset04` [@zanca2009evaluation] in the `RJafroc` package to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so in principle one can generate 20 plots. In this example I have selected treatment 1 and reader 1 to produce the plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "FROC")$Plot` with different treatments and readers specified.
+The following plot uses `dataset04` [@zanca2009evaluation] in `RJafroc` to illustrate an empirical FROC plot (we used this example in the previous chapter).
 
 
 ```{r, echo=TRUE}
@@ -316,9 +316,6 @@ ret <- PlotEmpiricalOperatingCharacteristics(
   trts = 1, rdrs = 1, opChType = "FROC")
 print(ret$Plot)
 ```
-
-
-The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rating 5, the next higher one corresponds to marks rated 4 or 5, etc. The FROC plots vary widely but share the common characteristic that the operating points cannot move downward-left as one cumulates lower confidence level marks. 
 
 
 Shown next is calculation of the figure of merit for this dataset. All 20 values are shown. The value for `trt1` and `rdr1` is the area under the FROC plot shown above.
