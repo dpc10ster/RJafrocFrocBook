@@ -157,7 +157,9 @@ print(ret$Plot)
 ```
 
 
-The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic that the operating point cannot move downward or to the left as one cumulates lower confidence level marks (i.e., it can only move upward and to the right; the curve can flatten out or it can end at a finite value of NLF). 
+The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic that the operating point cannot move downward or to the left as one cumulates lower confidence level marks (i.e., it can only move upward and to the right; the plot can flatten out or it can end at a finite value of NLF). 
+
+The plot shown above is termed an *empirical plot* as it consists of the empirical (observed) operating points connected by straight line segments.
 
 
 ## The "solar" analogy {#froc-paradigm-solar-analogy}

@@ -318,7 +318,7 @@ print(ret$Plot)
 ```
 
 
-Shown next is calculation of the figure of merit for this dataset. All 20 values are shown. The value for `trt1` and `rdr1` is the area under the FROC plot shown above.
+Shown next is calculation of the figure of merit for this dataset. All 20 modality-reader combinations are shown. The value for `trt1` and `rdr1` is the area under the FROC plot shown above.
 
 
 ```{r, echo=TRUE}
