@@ -29,14 +29,16 @@ library(grid)
 
 ## TBA Introduction {#empirical-intro}
 
-FROC data consists of mark-rating pairs. In this chapter a distinction is made between latent and actual marks. This is followed by a table summarizing FROC notation. This is a key table which will be used in later chapters. Section `\@ref(froc-paradigm-froc-plot)` introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are *visual* depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are *quantitative* measures of performance, termed *figures of merit* (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC plot, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square.   
+In this chapter a distinction is made between *latent* and *actual* marks. This is followed by a table summarizing FROC notation, a key table used in later chapters. Section `\@ref(froc-paradigm-froc-plot)` introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are *visual* depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are *quantitative* measures of performance, termed *figures of merit* (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC plot, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square.   
 
 
 ## Mark rating pairs {#empirical-mark-rating-pairs}
 
-*FROC data consists of mark-rating pairs*. Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as *lesion localization* (LL) if it is sufficiently close to a true lesion, according to the adopted proximity criterion, and otherwise it is recorded as *non-lesion localization* (NL).
+*FROC data consists of mark-rating pairs*. Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as *lesion localization* (LL) if it is sufficiently close to a true lesion and otherwise it is recorded as *non-lesion localization* (NL).
 
-*In an FROC study the number of marks on an image is an a-priori unknown modality-reader-case dependent non-negative random integer.* It is incorrect and naive to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don't assign equal attention units to all areas of the image. The best insight into the number of marks per case is obtained from eye-tracking studies [@RN1490], but even here the information is incomplete, as eye-tracking studies can only measure foveal gaze and not lesions found by peripheral vision, and such studies are very difficult to conduct in a clinical setting.
+*In an FROC study the number of marks on an image is an a-priori unknown non-negative random integer.* It is incorrect and naive to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don't assign equal attention units to all areas of the image. 
+
+Currently the best insight into the numbers and locations of marks per case is obtained from eye-tracking studies [@duchowski2017eye], but the information is incomplete as eye-tracking studies can only measure *foveal* gaze and not lesions found by *peripheral* vision. Moreover, such studies are near impossible to conduct in a clinical setting (at least with the eye-tracking apparatus that I am familiar with).
 
 
 ### Latent vs. actual marks
@@ -46,14 +48,14 @@ To distinguish between suspicious regions that were considered for marking and r
 -   A *latent* mark is defined as a suspicious region, regardless of whether or not it was marked. A latent mark becomes an *actual* mark if it is marked.
 -   A latent mark is a latent LL if it is close to a true lesion and otherwise it is a latent NL.
 -   A non-diseased case can only have latent NLs. A diseased case can have latent NLs and latent LLs.
--   If marked, a latent NL is recorded as an actual NL.
--   If not marked, a latent NL is an *unobservable event*.
--   In contrast, unmarked lesions are observable events -- one knows (trivially) which lesions were not marked.
+-   If marked a latent NL is recorded as an actual NL.
+-   If not marked a latent NL is an *unobservable event*.
+-   In contrast unmarked lesions are observable events -- one knows (trivially) which lesions were not marked.
 
 
 ### Binning rule
 
-Recall that ROC data modeling requires the existence of a *case-dependent* decision variable, or z-sample $z$, and case-independent decision thresholds $\zeta_r$, where $r = 0, 1, ..., R_{ROC}-1$ and $R_{ROC}$ is the number of ROC study bins ^[The subscript is used to make explicit the paradigm used.] and a binning rule that if $\zeta_r \leq z < \zeta_{r+1}$ the case is rated $r + 1$. Dummy cutoffs are defined as $\zeta_0 = -\infty$ and $\zeta_{R_{ROC}} = \infty$. The z-sample applies to the whole case. To summarize:
+Recall that ROC data modeling requires the existence of a *case-dependent* decision variable, or z-sample $z$, and case-independent decision thresholds $\zeta_r$, where $r = 0, 1, ..., R_{ROC}-1$, where $R_{ROC}$ is the number of ROC study bins ^[The subscript is used to make explicit the paradigm used as otherwise it leads to confusion.] and a binning rule that if $\zeta_r \leq z < \zeta_{r+1}$ the case is rated $r + 1$. Dummy cutoffs are defined as $\zeta_0 = -\infty$ and $\zeta_{R_{ROC}} = \infty$. The z-sample applies to the whole case. To summarize:
 
 
 \begin{equation}
@@ -69,7 +71,7 @@ r = 0, 1, ..., R_{ROC}-1\\
 \end{equation}
 
 
-Analogously, FROC data modeling requires the existence of a *case and location dependent* z-sample for each latent mark and *case and location independent* reporting thresholds $\zeta_r$, where $r = 1, ..., R_{FROC}$ and $R_{FROC}$ is the number of FROC study bins, and the rule that a latent mark is marked and rated $r$ if $\zeta_r \leq z < \zeta_{r+1}$. Dummy cutoffs are defined as $\zeta_0 = -\infty$ and $\zeta_{R_{FROC}+1} = \infty$. For the same numbers of non-dummy cutoffs, the number of FROC bins is one less than the number of ROC bins. For example, 4 non-dummy cutoffs $\zeta_1, \zeta_2, \zeta_3, \zeta_4$ can correspond to a 5-rating ROC study or to a 4-rating FROC study. To summarize:
+Analogously, FROC data modeling requires the existence of a *case and location dependent* z-sample for each latent mark and *case and location independent* reporting thresholds $\zeta_r$, where $r = 1, ..., R_{FROC}$ and $R_{FROC}$ is the number of FROC study bins, and the binning rule that a latent mark is marked and rated $r$ if $\zeta_r \leq z < \zeta_{r+1}$. Dummy cutoffs are defined as $\zeta_0 = -\infty$ and $\zeta_{R_{FROC}+1} = \infty$. For the same numbers of non-dummy cutoffs, the number of FROC bins is one less than the number of ROC bins. For example, 4 non-dummy cutoffs $\zeta_1, \zeta_2, \zeta_3, \zeta_4$ can correspond to a 5-rating ROC study or to a 4-rating FROC study. To summarize:
 
 
 \begin{equation}
@@ -93,20 +95,20 @@ FROC notation is summarized in Table \@ref(tab:empirical-notation), in which *ma
 
 ```{r empirical-notation, echo=FALSE}
 frocNotation = array(dim = c(16,3))
-frocNotation[1,]  <- c("1", "t", "Case-level truth: 1 for non-diseased and 2 for diseased")
-frocNotation[2,]  <- c("2", "$K_t$", "Number of cases with case-level truth t")
-frocNotation[3,]  <- c("3", "$k_t t$", "Case $k_t$ in case-level truth t")
-frocNotation[4,]  <- c("4", "s", "Location-level truth: 1 for NL and 2 for LL")
-frocNotation[5,]  <- c("5", "$l_s s$", "Mark $l_s$ in location-level truth s")
+frocNotation[1,]  <- c("1", "$t$", "Case-level truth: 1 for non-diseased and 2 for diseased case")
+frocNotation[2,]  <- c("2", "$K_t$", "Number of cases with case-level truth $t$")
+frocNotation[3,]  <- c("3", "$k_t t$", "Case $k_t$ in case-level truth $t$")
+frocNotation[4,]  <- c("4", "$s$", "Location-level truth: 1 for NL and 2 for LL")
+frocNotation[5,]  <- c("5", "$l_s s$", "Mark $l_s$ in location-level truth $s$")
 frocNotation[6,]  <- c("6", "$N_{k_t t}$", "Number of NLs in case $k_t t$")
 frocNotation[7,]  <- c("7", "$L_{k_2 2}$", "Number of lesions in case $k_2 2$")
-frocNotation[8,]  <- c("8", "$z_{k_t t l_1 1}$", "z-sample for case $k_t t$ and mark $l_1 1$")
-frocNotation[9,]  <- c("9", "$z_{k_2 2 l_2 2}$", "z-sample for case $k_2 2$ and mark $l_2 2$")
+frocNotation[8,]  <- c("8", "$z_{k_t t l_1 1}$", "$z$-sample for case $k_t t$ and NL mark $l_1 1$")
+frocNotation[9,]  <- c("9", "$z_{k_2 2 l_2 2}$", "$z$-sample for case $k_2 2$ and LL mark $l_2 2$")
 frocNotation[10,]  <- c("10", "$R_{FROC}$", "Number of FROC bins")
-frocNotation[11,]  <- c("11", "$\\zeta_1$", "Lowest reporting threshold")
-frocNotation[12,]  <- c("12", "$\\zeta_r$", "r = 2, 3, ... the other non-dummy reporting thresholds")
-frocNotation[13,]  <- c("13", "$\\zeta_0, \\zeta_{R_{FROC}+1}$", "Dummy thresholds")
-frocNotation[14,]  <- c("14", "$W_{k_2 l_2}$", "Weight of lesion $l_2 2$ in case $k_2 2$")
+frocNotation[11,]  <- c("11", "$\\zeta_1$", "Lowest non-dummy reporting threshold")
+frocNotation[12,]  <- c("12", "$\\zeta_r$", "$r$ = 2, 3, ..., the other non-dummy reporting thresholds")
+frocNotation[13,]  <- c("13", "$\\zeta_0, \\zeta_{R_{FROC}+1}$", "Dummy thresholds, negative infinity and positive infinity, respectively")
+frocNotation[14,]  <- c("14", "$W_{k_2 l_2}$", "Weight of lesion $l_2 2$ in case $k_2 2$, explained later")
 frocNotation[15,]  <- c("15", "$L_{max}$", "Maximum number of lesions per case in dataset")
 frocNotation[16,]  <- c("16", "$L_T$", "Total number of lesions in dataset")
 df <- as.data.frame(frocNotation)
@@ -126,11 +128,11 @@ knitr::kable(df, caption = "FROC notation; all marks refer to latent marks.", es
 
 -   Row 5: Similar to row 3, two indices $l_s s$ are needed to select latent mark $l_s$ in location-level truth state $s$. As a useful mnemonic, $l$ is for *location*.
 
--   Row 6: $N_{k_t t}$ is the total number of latent NL marks in case $k_t t$.
+-   Row 6: $N_{k_t t}$ is the total number of latent NL marks in case $k_t t$. Latent NL marks are possible on non-diseased and diseased cases (i.e., both values of $t$ are allowed). 
 
 -   Row 7: $L_{k_2 2}$ is the number of lesions in diseased case $k_2 2$.
 
--   Row 8: The z-sample for case $k_t t$ and NL mark $l_1 1$ is denoted $z_{k_t t l_1 1}$. Latent NL marks are possible on non-diseased and diseased cases (both values of $t$ are allowed). The range of a z-sample is $-\infty < z_{k_t t l_1 1} < \infty$, provided $l_1 \neq \varnothing$; otherwise, it is an unobservable event.
+-   Row 8: The z-sample for case $k_t t$ and NL mark $l_1 1$ is denoted $z_{k_t t l_1 1}$. The range of a z-sample is $-\infty < z_{k_t t l_1 1} < \infty$, provided $l_1 \neq \varnothing$; otherwise, it is an unobservable event.
 
 -   Row 9: The z-sample of a latent LL is $z_{k_2 2 l_2 2}$. Unmarked lesions are observable events and are therefore assigned negative infinity ratings (the null-set notation is unnecessary for them).
 
