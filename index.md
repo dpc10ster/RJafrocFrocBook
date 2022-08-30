@@ -1,7 +1,7 @@
 --- 
 title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
-date: "2022-08-29"
+date: "2022-08-30"
 site: bookdown::bookdown_site
 output: 
    bookdown::pdf_document: default
@@ -19,8 +19,9 @@ description: "Artificial intelligence and observer performance book based on RJa
 
 # Preface {-}
 
-* Intended as an online update to my print book [@chakraborty2017observer]. 
-* Since its publication in 2017 the `RJafroc` package, on which the `R` code examples in the book depend, has evolved considerably, causing many of the examples to "break". 
+* Intended as an online update to my print book [@chakraborty2017observer].
+* All references in this book to `RJafroc` refer to the R package with that name (case sensitive) [@R-RJafroc]. 
+* Since its publication in 2017 `RJafroc`, on which the `R` code examples in the book depend, has evolved considerably, causing many of the examples to "break". 
 * This gives me the opportunity to improve on the book and include additional material.
 * The online book has been divided into 3 books.
     + The [QuickStart](https://dpc10ster.github.io/RJafrocQuickStart/) book.

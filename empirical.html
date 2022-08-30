@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-08-29" />
+<meta name="date" content="2022-08-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,9 +168,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#multiple-marks-in-the-same-vicinity"><i class="fa fa-check"></i><b>1.4.2</b> Multiple marks in the same vicinity</a></li>
 <li class="chapter" data-level="1.4.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#historical-context"><i class="fa fa-check"></i><b>1.4.3</b> Historical context</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>1.5</b> The free-response receiver operating characteristic (FROC) plot</a></li>
+<li class="chapter" data-level="1.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>1.5</b> The free-response receiver operating characteristic (FROC) plot</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-plot-illustration"><i class="fa fa-check"></i><b>1.5.1</b> Illustration with a dataset</a></li>
+</ul></li>
 <li class="chapter" data-level="1.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>1.6</b> The “solar” analogy</a></li>
-<li class="chapter" data-level="1.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>1.7</b> Discussion</a></li>
+<li class="chapter" data-level="1.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-misconceptions"><i class="fa fa-check"></i><b>1.7</b> Some misconceptions</a></li>
 <li class="chapter" data-level="1.8" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-references"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>2</b> Empirical plots from FROC data</a><ul>
@@ -442,12 +444,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="empirical-intro" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.2</span> TBA Introduction<a href="empirical.html#empirical-intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>FROC data consists of mark-rating pairs. In this chapter a distinction is made between latent and actual marks. This is followed by a table summarizing FROC notation. This is a key table which will be used in later chapters. Section <code>\@ref(froc-paradigm-froc-plot)</code> introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are <em>visual</em> depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are <em>quantitative</em> measures of performance, termed <em>figures of merit</em> (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC plot, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square.</p>
+<p>In this chapter a distinction is made between <em>latent</em> and <em>actual</em> marks. This is followed by a table summarizing FROC notation, a key table used in later chapters. Section <code>\@ref(froc-paradigm-froc-plot)</code> introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are <em>visual</em> depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are <em>quantitative</em> measures of performance, termed <em>figures of merit</em> (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC plot, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square.</p>
 </div>
 <div id="empirical-mark-rating-pairs" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.3</span> Mark rating pairs<a href="empirical.html#empirical-mark-rating-pairs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><em>FROC data consists of mark-rating pairs</em>. Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as <em>lesion localization</em> (LL) if it is sufficiently close to a true lesion, according to the adopted proximity criterion, and otherwise it is recorded as <em>non-lesion localization</em> (NL).</p>
-<p><em>In an FROC study the number of marks on an image is an a-priori unknown modality-reader-case dependent non-negative random integer.</em> It is incorrect and naive to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don’t assign equal attention units to all areas of the image. The best insight into the number of marks per case is obtained from eye-tracking studies <span class="citation">(Duchowski <a href="#ref-RN1490" role="doc-biblioref">2002</a>)</span>, but even here the information is incomplete, as eye-tracking studies can only measure foveal gaze and not lesions found by peripheral vision, and such studies are very difficult to conduct in a clinical setting.</p>
+<p><em>FROC data consists of mark-rating pairs</em>. Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as <em>lesion localization</em> (LL) if it is sufficiently close to a true lesion and otherwise it is recorded as <em>non-lesion localization</em> (NL).</p>
+<p><em>In an FROC study the number of marks on an image is an a-priori unknown non-negative random integer.</em> It is incorrect and naive to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don’t assign equal attention units to all areas of the image.</p>
+<p>Currently the best insight into the numbers and locations of marks per case is obtained from eye-tracking studies <span class="citation">(Duchowski and Duchowski <a href="#ref-duchowski2017eye" role="doc-biblioref">2017</a>)</span>, but the information is incomplete as eye-tracking studies can only measure <em>foveal</em> gaze and not lesions found by <em>peripheral</em> vision. Moreover, such studies are near impossible to conduct in a clinical setting (at least with the eye-tracking apparatus that I am familiar with).</p>
 <div id="latent-vs.-actual-marks" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.1</span> Latent vs. actual marks<a href="empirical.html#latent-vs.-actual-marks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To distinguish between suspicious regions that were considered for marking and regions that were actually marked, it is necessary to introduce the distinction between <em>latent</em> marks and <em>actual</em> marks.</p>
@@ -455,14 +458,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>A <em>latent</em> mark is defined as a suspicious region, regardless of whether or not it was marked. A latent mark becomes an <em>actual</em> mark if it is marked.</li>
 <li>A latent mark is a latent LL if it is close to a true lesion and otherwise it is a latent NL.</li>
 <li>A non-diseased case can only have latent NLs. A diseased case can have latent NLs and latent LLs.</li>
-<li>If marked, a latent NL is recorded as an actual NL.</li>
-<li>If not marked, a latent NL is an <em>unobservable event</em>.</li>
-<li>In contrast, unmarked lesions are observable events – one knows (trivially) which lesions were not marked.</li>
+<li>If marked a latent NL is recorded as an actual NL.</li>
+<li>If not marked a latent NL is an <em>unobservable event</em>.</li>
+<li>In contrast unmarked lesions are observable events – one knows (trivially) which lesions were not marked.</li>
 </ul>
 </div>
 <div id="binning-rule" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.2</span> Binning rule<a href="empirical.html#binning-rule" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Recall that ROC data modeling requires the existence of a <em>case-dependent</em> decision variable, or z-sample <span class="math inline">\(z\)</span>, and case-independent decision thresholds <span class="math inline">\(\zeta_r\)</span>, where <span class="math inline">\(r = 0, 1, ..., R_{ROC}-1\)</span> and <span class="math inline">\(R_{ROC}\)</span> is the number of ROC study bins<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> and a binning rule that if <span class="math inline">\(\zeta_r \leq z &lt; \zeta_{r+1}\)</span> the case is rated <span class="math inline">\(r + 1\)</span>. Dummy cutoffs are defined as <span class="math inline">\(\zeta_0 = -\infty\)</span> and <span class="math inline">\(\zeta_{R_{ROC}} = \infty\)</span>. The z-sample applies to the whole case. To summarize:</p>
+<p>Recall that ROC data modeling requires the existence of a <em>case-dependent</em> decision variable, or z-sample <span class="math inline">\(z\)</span>, and case-independent decision thresholds <span class="math inline">\(\zeta_r\)</span>, where <span class="math inline">\(r = 0, 1, ..., R_{ROC}-1\)</span>, where <span class="math inline">\(R_{ROC}\)</span> is the number of ROC study bins<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> and a binning rule that if <span class="math inline">\(\zeta_r \leq z &lt; \zeta_{r+1}\)</span> the case is rated <span class="math inline">\(r + 1\)</span>. Dummy cutoffs are defined as <span class="math inline">\(\zeta_0 = -\infty\)</span> and <span class="math inline">\(\zeta_{R_{ROC}} = \infty\)</span>. The z-sample applies to the whole case. To summarize:</p>
 <p><span class="math display" id="eq:binning-rule-roc">\[\begin{equation}
 \left.
 \begin{aligned}  
@@ -474,7 +477,7 @@ r = 0, 1, ..., R_{ROC}-1\\
 \right \}
 \tag{2.1}
 \end{equation}\]</span></p>
-<p>Analogously, FROC data modeling requires the existence of a <em>case and location dependent</em> z-sample for each latent mark and <em>case and location independent</em> reporting thresholds <span class="math inline">\(\zeta_r\)</span>, where <span class="math inline">\(r = 1, ..., R_{FROC}\)</span> and <span class="math inline">\(R_{FROC}\)</span> is the number of FROC study bins, and the rule that a latent mark is marked and rated <span class="math inline">\(r\)</span> if <span class="math inline">\(\zeta_r \leq z &lt; \zeta_{r+1}\)</span>. Dummy cutoffs are defined as <span class="math inline">\(\zeta_0 = -\infty\)</span> and <span class="math inline">\(\zeta_{R_{FROC}+1} = \infty\)</span>. For the same numbers of non-dummy cutoffs, the number of FROC bins is one less than the number of ROC bins. For example, 4 non-dummy cutoffs <span class="math inline">\(\zeta_1, \zeta_2, \zeta_3, \zeta_4\)</span> can correspond to a 5-rating ROC study or to a 4-rating FROC study. To summarize:</p>
+<p>Analogously, FROC data modeling requires the existence of a <em>case and location dependent</em> z-sample for each latent mark and <em>case and location independent</em> reporting thresholds <span class="math inline">\(\zeta_r\)</span>, where <span class="math inline">\(r = 1, ..., R_{FROC}\)</span> and <span class="math inline">\(R_{FROC}\)</span> is the number of FROC study bins, and the binning rule that a latent mark is marked and rated <span class="math inline">\(r\)</span> if <span class="math inline">\(\zeta_r \leq z &lt; \zeta_{r+1}\)</span>. Dummy cutoffs are defined as <span class="math inline">\(\zeta_0 = -\infty\)</span> and <span class="math inline">\(\zeta_{R_{FROC}+1} = \infty\)</span>. For the same numbers of non-dummy cutoffs, the number of FROC bins is one less than the number of ROC bins. For example, 4 non-dummy cutoffs <span class="math inline">\(\zeta_1, \zeta_2, \zeta_3, \zeta_4\)</span> can correspond to a 5-rating ROC study or to a 4-rating FROC study. To summarize:</p>
 <p><span class="math display" id="eq:binning-rule-froc">\[\begin{equation}
 \left.
 \begin{aligned}  
@@ -515,10 +518,10 @@ Meaning
 1
 </td>
 <td style="text-align:left;">
-t
+<span class="math inline">\(t\)</span>
 </td>
 <td style="text-align:left;">
-Case-level truth: 1 for non-diseased and 2 for diseased
+Case-level truth: 1 for non-diseased and 2 for diseased case
 </td>
 </tr>
 <tr>
@@ -529,7 +532,7 @@ Case-level truth: 1 for non-diseased and 2 for diseased
 <span class="math inline">\(K_t\)</span>
 </td>
 <td style="text-align:left;">
-Number of cases with case-level truth t
+Number of cases with case-level truth <span class="math inline">\(t\)</span>
 </td>
 </tr>
 <tr>
@@ -540,7 +543,7 @@ Number of cases with case-level truth t
 <span class="math inline">\(k_t t\)</span>
 </td>
 <td style="text-align:left;">
-Case <span class="math inline">\(k_t\)</span> in case-level truth t
+Case <span class="math inline">\(k_t\)</span> in case-level truth <span class="math inline">\(t\)</span>
 </td>
 </tr>
 <tr>
@@ -548,7 +551,7 @@ Case <span class="math inline">\(k_t\)</span> in case-level truth t
 4
 </td>
 <td style="text-align:left;">
-s
+<span class="math inline">\(s\)</span>
 </td>
 <td style="text-align:left;">
 Location-level truth: 1 for NL and 2 for LL
@@ -562,7 +565,7 @@ Location-level truth: 1 for NL and 2 for LL
 <span class="math inline">\(l_s s\)</span>
 </td>
 <td style="text-align:left;">
-Mark <span class="math inline">\(l_s\)</span> in location-level truth s
+Mark <span class="math inline">\(l_s\)</span> in location-level truth <span class="math inline">\(s\)</span>
 </td>
 </tr>
 <tr>
@@ -595,7 +598,7 @@ Number of lesions in case <span class="math inline">\(k_2 2\)</span>
 <span class="math inline">\(z_{k_t t l_1 1}\)</span>
 </td>
 <td style="text-align:left;">
-z-sample for case <span class="math inline">\(k_t t\)</span> and mark <span class="math inline">\(l_1 1\)</span>
+<span class="math inline">\(z\)</span>-sample for case <span class="math inline">\(k_t t\)</span> and NL mark <span class="math inline">\(l_1 1\)</span>
 </td>
 </tr>
 <tr>
@@ -606,7 +609,7 @@ z-sample for case <span class="math inline">\(k_t t\)</span> and mark <span clas
 <span class="math inline">\(z_{k_2 2 l_2 2}\)</span>
 </td>
 <td style="text-align:left;">
-z-sample for case <span class="math inline">\(k_2 2\)</span> and mark <span class="math inline">\(l_2 2\)</span>
+<span class="math inline">\(z\)</span>-sample for case <span class="math inline">\(k_2 2\)</span> and LL mark <span class="math inline">\(l_2 2\)</span>
 </td>
 </tr>
 <tr>
@@ -628,7 +631,7 @@ Number of FROC bins
 <span class="math inline">\(\zeta_1\)</span>
 </td>
 <td style="text-align:left;">
-Lowest reporting threshold
+Lowest non-dummy reporting threshold
 </td>
 </tr>
 <tr>
@@ -639,7 +642,7 @@ Lowest reporting threshold
 <span class="math inline">\(\zeta_r\)</span>
 </td>
 <td style="text-align:left;">
-r = 2, 3, … the other non-dummy reporting thresholds
+<span class="math inline">\(r\)</span> = 2, 3, …, the other non-dummy reporting thresholds
 </td>
 </tr>
 <tr>
@@ -650,7 +653,7 @@ r = 2, 3, … the other non-dummy reporting thresholds
 <span class="math inline">\(\zeta_0, \zeta_{R_{FROC}+1}\)</span>
 </td>
 <td style="text-align:left;">
-Dummy thresholds
+Dummy thresholds, negative infinity and positive infinity, respectively
 </td>
 </tr>
 <tr>
@@ -661,7 +664,7 @@ Dummy thresholds
 <span class="math inline">\(W_{k_2 l_2}\)</span>
 </td>
 <td style="text-align:left;">
-Weight of lesion <span class="math inline">\(l_2 2\)</span> in case <span class="math inline">\(k_2 2\)</span>
+Weight of lesion <span class="math inline">\(l_2 2\)</span> in case <span class="math inline">\(k_2 2\)</span>, explained later
 </td>
 </tr>
 <tr>
@@ -696,9 +699,9 @@ Total number of lesions in dataset
 <li><p>Row 3: Two indices <span class="math inline">\(k_t t\)</span> are needed to select case <span class="math inline">\(k_t\)</span> in truth state <span class="math inline">\(t\)</span>. As a useful mnemonic, <span class="math inline">\(k\)</span> is for <em>case</em>.</p></li>
 <li><p>Row 4: <span class="math inline">\(s\)</span> location-level truth state: 1 for non-diseased and 2 for diseased.</p></li>
 <li><p>Row 5: Similar to row 3, two indices <span class="math inline">\(l_s s\)</span> are needed to select latent mark <span class="math inline">\(l_s\)</span> in location-level truth state <span class="math inline">\(s\)</span>. As a useful mnemonic, <span class="math inline">\(l\)</span> is for <em>location</em>.</p></li>
-<li><p>Row 6: <span class="math inline">\(N_{k_t t}\)</span> is the total number of latent NL marks in case <span class="math inline">\(k_t t\)</span>.</p></li>
+<li><p>Row 6: <span class="math inline">\(N_{k_t t}\)</span> is the total number of latent NL marks in case <span class="math inline">\(k_t t\)</span>. Latent NL marks are possible on non-diseased and diseased cases (i.e., both values of <span class="math inline">\(t\)</span> are allowed).</p></li>
 <li><p>Row 7: <span class="math inline">\(L_{k_2 2}\)</span> is the number of lesions in diseased case <span class="math inline">\(k_2 2\)</span>.</p></li>
-<li><p>Row 8: The z-sample for case <span class="math inline">\(k_t t\)</span> and NL mark <span class="math inline">\(l_1 1\)</span> is denoted <span class="math inline">\(z_{k_t t l_1 1}\)</span>. Latent NL marks are possible on non-diseased and diseased cases (both values of <span class="math inline">\(t\)</span> are allowed). The range of a z-sample is <span class="math inline">\(-\infty &lt; z_{k_t t l_1 1} &lt; \infty\)</span>, provided <span class="math inline">\(l_1 \neq \varnothing\)</span>; otherwise, it is an unobservable event.</p></li>
+<li><p>Row 8: The z-sample for case <span class="math inline">\(k_t t\)</span> and NL mark <span class="math inline">\(l_1 1\)</span> is denoted <span class="math inline">\(z_{k_t t l_1 1}\)</span>. The range of a z-sample is <span class="math inline">\(-\infty &lt; z_{k_t t l_1 1} &lt; \infty\)</span>, provided <span class="math inline">\(l_1 \neq \varnothing\)</span>; otherwise, it is an unobservable event.</p></li>
 <li><p>Row 9: The z-sample of a latent LL is <span class="math inline">\(z_{k_2 2 l_2 2}\)</span>. Unmarked lesions are observable events and are therefore assigned negative infinity ratings (the null-set notation is unnecessary for them).</p></li>
 <li><p>Row 10: <span class="math inline">\(R_{FROC}\)</span> is the number of bins in the FROC study.</p></li>
 <li><p>Rows 11, 12 and 13: The cutoffs in the FROC study. The lowest threshold is <span class="math inline">\(\zeta_1\)</span>. The other non-dummy thresholds are <span class="math inline">\(\zeta_r\)</span> where <span class="math inline">\(r=2,3,...,R_{FROC}\)</span>. The dummy thresholds are <span class="math inline">\(\zeta_0 = -\infty\)</span> and <span class="math inline">\(\zeta_{R_{FROC}+1} = \infty\)</span>.</p></li>
@@ -709,7 +712,7 @@ Total number of lesions in dataset
 </div>
 <div id="empirical-indexing-marks" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.4.2</span> A conceptual and notatonal issue<a href="empirical.html#empirical-indexing-marks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>An aspect of FROC data, <em>that there could be cases with no NL marks, no matter how low the reporting threshold</em>, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold <span class="math inline">\(\zeta_1\)</span> is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case “filling up” with NL marks.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> In fact the first model of FROC data <span class="citation">(Chakraborty <a href="#ref-chakraborty1989maximum" role="doc-biblioref">1989</a>)</span> predicts that, as the reporting threshold is lowered to <span class="math inline">\(\zeta_1 = -\infty\)</span>, the number of NL marks per case approaches <span class="math inline">\(\infty\)</span> as does <span class="math inline">\(\text{NLF}_{max}\)</span>. However, observed FROC curves end at a finite value of <span class="math inline">\(\text{NLF}_{max}\)</span>. This is one reason I introduced the radiological search model (RSM) <span class="citation">(Dev P Chakraborty <a href="#ref-chakraborty2006search" role="doc-biblioref">2006</a>)</span>. I will have much more to say about this in Chapter <code>\@ref(rsm)</code>, but for now I state one assumption of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over all cases) is a finite number.</p>
+<p>An aspect of FROC data, <em>that there could be cases with no NL marks, no matter how low the reporting threshold</em>, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold <span class="math inline">\(\zeta_1\)</span> is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case “filling up” with NL marks.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> In fact the first model of FROC data <span class="citation">(Chakraborty <a href="#ref-chakraborty1989maximum" role="doc-biblioref">1989</a>)</span> predicts that as the reporting threshold is lowered to <span class="math inline">\(\zeta_1 = -\infty\)</span>, the number of NL marks per case approaches <span class="math inline">\(\infty\)</span> as does <span class="math inline">\(\text{NLF}_{max}\)</span>. However, observed FROC curves end at a finite value of <span class="math inline">\(\text{NLF}_{max}\)</span>. This is one reason I introduced the radiological search model (RSM) <span class="citation">(Dev P Chakraborty <a href="#ref-chakraborty2006search" role="doc-biblioref">2006</a>)</span>. I will have much more to say about this in Chapter <code>\@ref(rsm)</code>, but for now I state one assumption of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over all cases) is a finite number.</p>
 <p>With this background, let us return to the conceptual issue: why does the observer not keep “filling-up” the image with NL marks? The answer is that <em>the observer can only mark regions that have a non-zero chance of being a lesion</em>. For example, if the actual number of latent NLs on a particular case is 2, then, as the reporting threshold is lowered, the observer will make at most two NL marks. Having exhausted these two regions the observer will not mark any more regions because there are no more regions to be marked - <em>all other regions in the image have, in the perception of the observer, zero chance of being a lesion</em>.</p>
 <p>The notational issue is how to handle images with no latent NL marks. Basically it involves restricting summations over cases <span class="math inline">\(k_ t t\)</span> to those cases which have at least one latent NL mark, i.e., <span class="math inline">\(N_{k_t t} \neq 0\)</span>, as in the following:</p>
 <ul>
@@ -721,7 +724,7 @@ Total number of lesions in dataset
 <div id="empirical-froc-plot" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.5</span> The empirical FROC plot<a href="empirical.html#empirical-froc-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The FROC, Chapter <code>\@ref(froc-paradigm-froc-plot)</code>, is the plot of LLF (along the ordinate) vs. NLF (along the abscissa).</p>
-<p>Using the notation of Table <a href="empirical.html#tab:empirical-notation">2.1</a> and assuming binned data<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>, then, corresponding to the operating point determined by threshold <span class="math inline">\(\zeta_r\)</span>, the FROC abscissa is <span class="math inline">\(\text{NLF}_r \equiv \text{NLF}\left ( \zeta_r \right )\)</span>, the total number of NLs rated <span class="math inline">\(\geq\)</span> threshold <span class="math inline">\(\zeta_r\)</span> divided by the total number of cases, and the corresponding ordinate is <span class="math inline">\(\text{LLF}_r \equiv \text{LLF}\left ( \zeta_r \right )\)</span>, the total number of LLs rated <span class="math inline">\(\geq\)</span> threshold <span class="math inline">\(\zeta_r\)</span> divided by the total number of lesions:</p>
+<p>Using the notation of Table <a href="empirical.html#tab:empirical-notation">2.1</a> and assuming binned data<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>, then, corresponding to the operating point determined by threshold <span class="math inline">\(\zeta_r\)</span>, the FROC abscissa is <span class="math inline">\(\text{NLF}_r \equiv \text{NLF}\left ( \zeta_r \right )\)</span>, the total number of NLs rated <span class="math inline">\(\geq\)</span> threshold <span class="math inline">\(\zeta_r\)</span> divided by the total number of cases, and the corresponding ordinate is <span class="math inline">\(\text{LLF}_r \equiv \text{LLF}\left ( \zeta_r \right )\)</span>, the total number of LLs rated <span class="math inline">\(\geq\)</span> threshold <span class="math inline">\(\zeta_r\)</span> divided by the total number of lesions:</p>
 <p><span class="math display" id="eq:empirical-NLF1">\[\begin{equation}
 \text{NLF}_r  = \frac{n\left ( \text{NLs rated} \geq \zeta_r\right )}{n\left ( \text{cases} \right )}
 \tag{2.3}
@@ -811,26 +814,25 @@ r = 1, 2, ...,R_{FROC}
 </div>
 <div id="empirical-froc-plot-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.5.5</span> Illustration with a dataset<a href="empirical.html#empirical-froc-plot-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The following code uses <code>dataset04</code> <span class="citation">(Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a>)</span> in the <code>RJafroc</code> package to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so in principle one can generate 20 plots. In this example I have selected treatment 1 and reader 1 to produce the plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "FROC")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="empirical.html#cb2-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb2-2"><a href="empirical.html#cb2-2"></a>  dataset04, </span>
-<span id="cb2-3"><a href="empirical.html#cb2-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>)</span>
-<span id="cb2-4"><a href="empirical.html#cb2-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<p>The following plot uses <code>dataset04</code> <span class="citation">(Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a>)</span> in <code>RJafroc</code> to illustrate an empirical FROC plot (we used this example in the previous chapter).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="empirical.html#cb3-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb3-2"><a href="empirical.html#cb3-2"></a>  dataset04, </span>
+<span id="cb3-3"><a href="empirical.html#cb3-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;FROC&quot;</span>)</span>
+<span id="cb3-4"><a href="empirical.html#cb3-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="03-empirical_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rating 5, the next higher one corresponds to marks rated 4 or 5, etc. The FROC plots vary widely but share the common characteristic that the operating points cannot move downward-left as one cumulates lower confidence level marks.</p>
 <p>Shown next is calculation of the figure of merit for this dataset. All 20 values are shown. The value for <code>trt1</code> and <code>rdr1</code> is the area under the FROC plot shown above.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="empirical.html#cb3-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;FROC&quot;</span>)</span>
-<span id="cb3-2"><a href="empirical.html#cb3-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4       rdr5</span></span>
-<span id="cb3-3"><a href="empirical.html#cb3-3"></a><span class="co">#&gt; trt1 0.2361972 0.1085035 0.2268486 0.09922535</span></span>
-<span id="cb3-4"><a href="empirical.html#cb3-4"></a><span class="co">#&gt; trt2 0.2192077 0.2231338 0.4793310 0.18450704</span></span>
-<span id="cb3-5"><a href="empirical.html#cb3-5"></a><span class="co">#&gt; trt3 0.1947359 0.1063028 0.2543662 0.15137324</span></span>
-<span id="cb3-6"><a href="empirical.html#cb3-6"></a><span class="co">#&gt; trt4 0.2198768 0.1307394 0.3293662 0.13882042</span></span>
-<span id="cb3-7"><a href="empirical.html#cb3-7"></a><span class="co">#&gt; trt5 0.1800528 0.1097535 0.3015141 0.16563380</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="empirical.html#cb4-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;FROC&quot;</span>)</span>
+<span id="cb4-2"><a href="empirical.html#cb4-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4       rdr5</span></span>
+<span id="cb4-3"><a href="empirical.html#cb4-3"></a><span class="co">#&gt; trt1 0.2361972 0.1085035 0.2268486 0.09922535</span></span>
+<span id="cb4-4"><a href="empirical.html#cb4-4"></a><span class="co">#&gt; trt2 0.2192077 0.2231338 0.4793310 0.18450704</span></span>
+<span id="cb4-5"><a href="empirical.html#cb4-5"></a><span class="co">#&gt; trt3 0.1947359 0.1063028 0.2543662 0.15137324</span></span>
+<span id="cb4-6"><a href="empirical.html#cb4-6"></a><span class="co">#&gt; trt4 0.2198768 0.1307394 0.3293662 0.13882042</span></span>
+<span id="cb4-7"><a href="empirical.html#cb4-7"></a><span class="co">#&gt; trt5 0.1800528 0.1097535 0.3015141 0.16563380</span></span></code></pre></div>
 </div>
 </div>
 <div id="empirical-ROC" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.6</span> The inferred-ROC plot<a href="empirical.html#empirical-ROC" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>By adopting a rational rule for converting the mark-rating data per case to a single rating per case, and commonly the highest rating rule is used,<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> it is possible to infer ROC data from FROC mark-rating data.</p>
+<p>By adopting a rational rule for converting the mark-rating data per case to a single rating per case, and commonly the highest rating rule is used,<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> it is possible to infer ROC data from FROC mark-rating data.</p>
 <div id="the-inferred-roc-rating" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.6.1</span> The inferred-ROC rating<a href="empirical.html#the-inferred-roc-rating" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The rating of the highest rated mark in a case, or <span class="math inline">\(-\infty\)</span> if the case has no marks, is defined as the inferred-ROC rating for the case. Inferred-ROC ratings on non-diseased cases are referred to as inferred-FP ratings and those on diseased cases as inferred-TP ratings.</p>
@@ -900,25 +902,25 @@ TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \max_{l_2}{\l
 <div id="empirical-roc-plot-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.6.5</span> Illustration with a dataset<a href="empirical.html#empirical-roc-plot-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical ROC plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "ROC")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="empirical.html#cb4-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb4-2"><a href="empirical.html#cb4-2"></a>  dataset04, </span>
-<span id="cb4-3"><a href="empirical.html#cb4-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
-<span id="cb4-4"><a href="empirical.html#cb4-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="empirical.html#cb5-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb5-2"><a href="empirical.html#cb5-2"></a>  dataset04, </span>
+<span id="cb5-3"><a href="empirical.html#cb5-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
+<span id="cb5-4"><a href="empirical.html#cb5-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="03-empirical_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Shown next is calculation of the figure of merit for this dataset.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="empirical.html#cb5-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;HrAuc&quot;</span>)</span>
-<span id="cb5-2"><a href="empirical.html#cb5-2"></a><span class="co">#&gt;         rdr1    rdr3    rdr4    rdr5</span></span>
-<span id="cb5-3"><a href="empirical.html#cb5-3"></a><span class="co">#&gt; trt1 0.90425 0.79820 0.81175 0.86645</span></span>
-<span id="cb5-4"><a href="empirical.html#cb5-4"></a><span class="co">#&gt; trt2 0.86425 0.84470 0.82050 0.87160</span></span>
-<span id="cb5-5"><a href="empirical.html#cb5-5"></a><span class="co">#&gt; trt3 0.81295 0.81635 0.75275 0.85730</span></span>
-<span id="cb5-6"><a href="empirical.html#cb5-6"></a><span class="co">#&gt; trt4 0.90235 0.83150 0.78865 0.87980</span></span>
-<span id="cb5-7"><a href="empirical.html#cb5-7"></a><span class="co">#&gt; trt5 0.84140 0.77300 0.77115 0.84800</span></span></code></pre></div>
+<p>Shown next is calculation of the figure of merit for this dataset.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="empirical.html#cb6-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;HrAuc&quot;</span>)</span>
+<span id="cb6-2"><a href="empirical.html#cb6-2"></a><span class="co">#&gt;         rdr1    rdr3    rdr4    rdr5</span></span>
+<span id="cb6-3"><a href="empirical.html#cb6-3"></a><span class="co">#&gt; trt1 0.90425 0.79820 0.81175 0.86645</span></span>
+<span id="cb6-4"><a href="empirical.html#cb6-4"></a><span class="co">#&gt; trt2 0.86425 0.84470 0.82050 0.87160</span></span>
+<span id="cb6-5"><a href="empirical.html#cb6-5"></a><span class="co">#&gt; trt3 0.81295 0.81635 0.75275 0.85730</span></span>
+<span id="cb6-6"><a href="empirical.html#cb6-6"></a><span class="co">#&gt; trt4 0.90235 0.83150 0.78865 0.87980</span></span>
+<span id="cb6-7"><a href="empirical.html#cb6-7"></a><span class="co">#&gt; trt5 0.84140 0.77300 0.77115 0.84800</span></span></code></pre></div>
 </div>
 </div>
 <div id="empirical-AFROC" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.7</span> The alternative FROC (AFROC) plot<a href="empirical.html#empirical-AFROC" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Fig. 4 in <span class="citation">(Bunch et al. <a href="#ref-bunch1977free" role="doc-biblioref">1977</a>)</span> anticipated another way of visualizing FROC data. I subsequently termed<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> this the <em>alternative FROC (AFROC)</em> plot <span class="citation">(Chakraborty <a href="#ref-chakraborty1989maximum" role="doc-biblioref">1989</a>)</span>.</li>
+<li>Fig. 4 in <span class="citation">(Bunch et al. <a href="#ref-bunch1977free" role="doc-biblioref">1977</a>)</span> anticipated another way of visualizing FROC data. I subsequently termed<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> this the <em>alternative FROC (AFROC)</em> plot <span class="citation">(Chakraborty <a href="#ref-chakraborty1989maximum" role="doc-biblioref">1989</a>)</span>.</li>
 <li>The empirical AFROC is defined as the plot of <span class="math inline">\(\text{LLF}(\zeta_r)\)</span> along the ordinate vs. <span class="math inline">\(\text{FPF}(\zeta_r)\)</span> along the abscissa.</li>
 <li><span class="math inline">\(\text{LLF}_r \equiv \text{LLF}(\zeta_r)\)</span> was defined in Eqn. <a href="empirical.html#eq:empirical-LLFr">(2.7)</a>.</li>
 <li><span class="math inline">\(\text{FPF}_r \equiv \text{FPF}(\zeta_r)\)</span> was defined in Eqn. <a href="empirical.html#eq:empirical-fpf">(2.13)</a>.</li>
@@ -965,24 +967,24 @@ TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \max_{l_2}{\l
 <div id="empirical-afroc-plot-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.7.3</span> Illustration with a dataset<a href="empirical.html#empirical-afroc-plot-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical AFROC plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="empirical.html#cb6-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb6-2"><a href="empirical.html#cb6-2"></a>  dataset04, </span>
-<span id="cb6-3"><a href="empirical.html#cb6-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC&quot;</span>)</span>
-<span id="cb6-4"><a href="empirical.html#cb6-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="empirical.html#cb7-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb7-2"><a href="empirical.html#cb7-2"></a>  dataset04, </span>
+<span id="cb7-3"><a href="empirical.html#cb7-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC&quot;</span>)</span>
+<span id="cb7-4"><a href="empirical.html#cb7-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="03-empirical_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Shown next is calculation of the figure of merit for this dataset.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="empirical.html#cb7-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;AFROC&quot;</span>)</span>
-<span id="cb7-2"><a href="empirical.html#cb7-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
-<span id="cb7-3"><a href="empirical.html#cb7-3"></a><span class="co">#&gt; trt1 0.7427113 0.7104930 0.7003169 0.7909859</span></span>
-<span id="cb7-4"><a href="empirical.html#cb7-4"></a><span class="co">#&gt; trt2 0.7586972 0.7161620 0.7225352 0.7927465</span></span>
-<span id="cb7-5"><a href="empirical.html#cb7-5"></a><span class="co">#&gt; trt3 0.6983451 0.6955282 0.6777817 0.7547535</span></span>
-<span id="cb7-6"><a href="empirical.html#cb7-6"></a><span class="co">#&gt; trt4 0.7817606 0.7234507 0.7132746 0.8136268</span></span>
-<span id="cb7-7"><a href="empirical.html#cb7-7"></a><span class="co">#&gt; trt5 0.7169718 0.6690845 0.6587324 0.7682042</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="empirical.html#cb8-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;AFROC&quot;</span>)</span>
+<span id="cb8-2"><a href="empirical.html#cb8-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
+<span id="cb8-3"><a href="empirical.html#cb8-3"></a><span class="co">#&gt; trt1 0.7427113 0.7104930 0.7003169 0.7909859</span></span>
+<span id="cb8-4"><a href="empirical.html#cb8-4"></a><span class="co">#&gt; trt2 0.7586972 0.7161620 0.7225352 0.7927465</span></span>
+<span id="cb8-5"><a href="empirical.html#cb8-5"></a><span class="co">#&gt; trt3 0.6983451 0.6955282 0.6777817 0.7547535</span></span>
+<span id="cb8-6"><a href="empirical.html#cb8-6"></a><span class="co">#&gt; trt4 0.7817606 0.7234507 0.7132746 0.8136268</span></span>
+<span id="cb8-7"><a href="empirical.html#cb8-7"></a><span class="co">#&gt; trt5 0.7169718 0.6690845 0.6587324 0.7682042</span></span></code></pre></div>
 </div>
 </div>
 <div id="empirical-wAFROC" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.8</span> The weighted-AFROC plot (wAFROC) plot<a href="empirical.html#empirical-wAFROC" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The AFROC ordinate defined in Eqn. <a href="empirical.html#eq:empirical-LLFr">(2.7)</a> gives equal importance to every lesion in a case. Therefore, a case with more lesions will have more influence on the AFROC (see next section for an explicit demonstration of this fact). This is undesirable since each case (i.e., patient) should get equal importance in the analysis – as with ROC analysis, one wishes to draw conclusions about the population of cases and each case is an equally valid sample from the population. In particular, one does not want the analysis to be skewed towards cases with greater numbers of lesions.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<p>The AFROC ordinate defined in Eqn. <a href="empirical.html#eq:empirical-LLFr">(2.7)</a> gives equal importance to every lesion in a case. Therefore, a case with more lesions will have more influence on the AFROC (see next section for an explicit demonstration of this fact). This is undesirable since each case (i.e., patient) should get equal importance in the analysis – as with ROC analysis, one wishes to draw conclusions about the population of cases and each case is an equally valid sample from the population. In particular, one does not want the analysis to be skewed towards cases with greater numbers of lesions.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a></p>
 <p>Another issue is that the AFROC assigns equal <em>clinical</em> importance to each lesion in a case. Lesion weights were introduced <span class="citation">(Chakraborty and Berbaum <a href="#ref-RN1385" role="doc-biblioref">2004</a>)</span> to allow for the possibility that the clinical importance of finding a lesion might be lesion-dependent <span class="citation">(Chakraborty and Yoon <a href="#ref-RN1966" role="doc-biblioref">2009</a>)</span>. For example, it is possible that a diseased cases has lesions of two types with differing clinical importance; the figure-of-merit should give more credit to finding the more clinically important one. Clinical importance could be defined as the mortality associated with the specific lesion type; these can be obtained from epidemiological studies <span class="citation">(DeSantis et al. <a href="#ref-desantis2011breast" role="doc-biblioref">2011</a>)</span>.</p>
 <p>Let <span class="math inline">\(W_{k_2 l_2} \geq 0\)</span> denote the <em>weight</em> (i.e., short for clinical importance) of lesion <span class="math inline">\(l_2\)</span> in diseased case <span class="math inline">\(k_2\)</span> (since weights are only applicable to diseased cases one can, without ambiguity, drop the case-level and location-level truth subscripts, i.e., the notation <span class="math inline">\(W_{k_2 2 l_2 2}\)</span> would be superfluous). For each diseased case <span class="math inline">\(k_2 2\)</span> the weights are subject to the constraint:</p>
 <p><span class="math display" id="eq:empirical-weights-constraint">\[\begin{equation}
@@ -1002,18 +1004,18 @@ TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \max_{l_2}{\l
 <div id="empirical-wafroc-plot-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.8.2</span> Illustration with a dataset<a href="empirical.html#empirical-wafroc-plot-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical ROC plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "wAFROC")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="empirical.html#cb8-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb8-2"><a href="empirical.html#cb8-2"></a>  dataset04, <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
-<span id="cb8-3"><a href="empirical.html#cb8-3"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="empirical.html#cb9-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb9-2"><a href="empirical.html#cb9-2"></a>  dataset04, <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
+<span id="cb9-3"><a href="empirical.html#cb9-3"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="03-empirical_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Shown next is calculation of the figure of merit for this dataset.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="empirical.html#cb9-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
-<span id="cb9-2"><a href="empirical.html#cb9-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
-<span id="cb9-3"><a href="empirical.html#cb9-3"></a><span class="co">#&gt; trt1 0.7792667 0.7248917 0.7036250 0.8050917</span></span>
-<span id="cb9-4"><a href="empirical.html#cb9-4"></a><span class="co">#&gt; trt2 0.7870000 0.7269000 0.7226167 0.8037833</span></span>
-<span id="cb9-5"><a href="empirical.html#cb9-5"></a><span class="co">#&gt; trt3 0.7296917 0.7157583 0.6723083 0.7726583</span></span>
-<span id="cb9-6"><a href="empirical.html#cb9-6"></a><span class="co">#&gt; trt4 0.8101333 0.7431167 0.6943583 0.8294083</span></span>
-<span id="cb9-7"><a href="empirical.html#cb9-7"></a><span class="co">#&gt; trt5 0.7488000 0.6822750 0.6551750 0.7712500</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="empirical.html#cb10-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
+<span id="cb10-2"><a href="empirical.html#cb10-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
+<span id="cb10-3"><a href="empirical.html#cb10-3"></a><span class="co">#&gt; trt1 0.7792667 0.7248917 0.7036250 0.8050917</span></span>
+<span id="cb10-4"><a href="empirical.html#cb10-4"></a><span class="co">#&gt; trt2 0.7870000 0.7269000 0.7226167 0.8037833</span></span>
+<span id="cb10-5"><a href="empirical.html#cb10-5"></a><span class="co">#&gt; trt3 0.7296917 0.7157583 0.6723083 0.7726583</span></span>
+<span id="cb10-6"><a href="empirical.html#cb10-6"></a><span class="co">#&gt; trt4 0.8101333 0.7431167 0.6943583 0.8294083</span></span>
+<span id="cb10-7"><a href="empirical.html#cb10-7"></a><span class="co">#&gt; trt5 0.7488000 0.6822750 0.6551750 0.7712500</span></span></code></pre></div>
 </div>
 </div>
 <div id="empirical-AFROC1" class="section level2 hasAnchor">
@@ -1041,19 +1043,19 @@ FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}
 <div id="empirical-afroc1-plot-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.9.2</span> Illustration with a dataset<a href="empirical.html#empirical-afroc1-plot-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical ROC plot. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC1")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="empirical.html#cb10-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb10-2"><a href="empirical.html#cb10-2"></a>  dataset04, </span>
-<span id="cb10-3"><a href="empirical.html#cb10-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC1&quot;</span>)</span>
-<span id="cb10-4"><a href="empirical.html#cb10-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="empirical.html#cb11-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb11-2"><a href="empirical.html#cb11-2"></a>  dataset04, </span>
+<span id="cb11-3"><a href="empirical.html#cb11-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;AFROC1&quot;</span>)</span>
+<span id="cb11-4"><a href="empirical.html#cb11-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="03-empirical_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Shown next is calculation of the figure of merit for this dataset.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="empirical.html#cb11-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;AFROC1&quot;</span>)</span>
-<span id="cb11-2"><a href="empirical.html#cb11-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
-<span id="cb11-3"><a href="empirical.html#cb11-3"></a><span class="co">#&gt; trt1 0.7744718 0.7157218 0.7229225 0.7913908</span></span>
-<span id="cb11-4"><a href="empirical.html#cb11-4"></a><span class="co">#&gt; trt2 0.7826585 0.7278169 0.7364437 0.7897887</span></span>
-<span id="cb11-5"><a href="empirical.html#cb11-5"></a><span class="co">#&gt; trt3 0.7412852 0.6868310 0.6946303 0.7573415</span></span>
-<span id="cb11-6"><a href="empirical.html#cb11-6"></a><span class="co">#&gt; trt4 0.8087852 0.7346831 0.7343486 0.8155634</span></span>
-<span id="cb11-7"><a href="empirical.html#cb11-7"></a><span class="co">#&gt; trt5 0.7580810 0.6825704 0.6643662 0.7742782</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="empirical.html#cb12-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;AFROC1&quot;</span>)</span>
+<span id="cb12-2"><a href="empirical.html#cb12-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
+<span id="cb12-3"><a href="empirical.html#cb12-3"></a><span class="co">#&gt; trt1 0.7744718 0.7157218 0.7229225 0.7913908</span></span>
+<span id="cb12-4"><a href="empirical.html#cb12-4"></a><span class="co">#&gt; trt2 0.7826585 0.7278169 0.7364437 0.7897887</span></span>
+<span id="cb12-5"><a href="empirical.html#cb12-5"></a><span class="co">#&gt; trt3 0.7412852 0.6868310 0.6946303 0.7573415</span></span>
+<span id="cb12-6"><a href="empirical.html#cb12-6"></a><span class="co">#&gt; trt4 0.8087852 0.7346831 0.7343486 0.8155634</span></span>
+<span id="cb12-7"><a href="empirical.html#cb12-7"></a><span class="co">#&gt; trt5 0.7580810 0.6825704 0.6643662 0.7742782</span></span></code></pre></div>
 </div>
 </div>
 <div id="empirical-wAFROC1" class="section level2 hasAnchor">
@@ -1065,19 +1067,19 @@ FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}
 <div id="empirical-wafroc1-plot-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.10.2</span> Illustration with a dataset<a href="empirical.html#empirical-wafroc1-plot-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following code uses <code>dataset04</code> to illustrate an empirical wAFROC plot1. The reader should experiment by running <code>PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = wAFROC1")$Plot</code> with different treatments and readers specified.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="empirical.html#cb12-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
-<span id="cb12-2"><a href="empirical.html#cb12-2"></a>  dataset04, </span>
-<span id="cb12-3"><a href="empirical.html#cb12-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
-<span id="cb12-4"><a href="empirical.html#cb12-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="empirical.html#cb13-1"></a>ret &lt;-<span class="st"> </span><span class="kw">PlotEmpiricalOperatingCharacteristics</span>(</span>
+<span id="cb13-2"><a href="empirical.html#cb13-2"></a>  dataset04, </span>
+<span id="cb13-3"><a href="empirical.html#cb13-3"></a>  <span class="dt">trts =</span> <span class="dv">1</span>, <span class="dt">rdrs =</span> <span class="dv">1</span>, <span class="dt">opChType =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb13-4"><a href="empirical.html#cb13-4"></a><span class="kw">print</span>(ret<span class="op">$</span>Plot)</span></code></pre></div>
 <p><img src="03-empirical_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Shown next is calculation of the figure of merit for this dataset.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="empirical.html#cb13-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
-<span id="cb13-2"><a href="empirical.html#cb13-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
-<span id="cb13-3"><a href="empirical.html#cb13-3"></a><span class="co">#&gt; trt1 0.8068333 0.7298917 0.7262042 0.8058542</span></span>
-<span id="cb13-4"><a href="empirical.html#cb13-4"></a><span class="co">#&gt; trt2 0.8084625 0.7379917 0.7363083 0.8010167</span></span>
-<span id="cb13-5"><a href="empirical.html#cb13-5"></a><span class="co">#&gt; trt3 0.7680875 0.7075583 0.6890208 0.7743875</span></span>
-<span id="cb13-6"><a href="empirical.html#cb13-6"></a><span class="co">#&gt; trt4 0.8348750 0.7533917 0.7160250 0.8308333</span></span>
-<span id="cb13-7"><a href="empirical.html#cb13-7"></a><span class="co">#&gt; trt5 0.7857708 0.6953292 0.6605167 0.7774000</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="empirical.html#cb14-1"></a><span class="kw">UtilFigureOfMerit</span>(dataset04, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb14-2"><a href="empirical.html#cb14-2"></a><span class="co">#&gt;           rdr1      rdr3      rdr4      rdr5</span></span>
+<span id="cb14-3"><a href="empirical.html#cb14-3"></a><span class="co">#&gt; trt1 0.8068333 0.7298917 0.7262042 0.8058542</span></span>
+<span id="cb14-4"><a href="empirical.html#cb14-4"></a><span class="co">#&gt; trt2 0.8084625 0.7379917 0.7363083 0.8010167</span></span>
+<span id="cb14-5"><a href="empirical.html#cb14-5"></a><span class="co">#&gt; trt3 0.7680875 0.7075583 0.6890208 0.7743875</span></span>
+<span id="cb14-6"><a href="empirical.html#cb14-6"></a><span class="co">#&gt; trt4 0.8348750 0.7533917 0.7160250 0.8308333</span></span>
+<span id="cb14-7"><a href="empirical.html#cb14-7"></a><span class="co">#&gt; trt5 0.7857708 0.6953292 0.6605167 0.7774000</span></span></code></pre></div>
 </div>
 </div>
 <div id="empirical-plots" class="section level2 hasAnchor">
@@ -1158,22 +1160,22 @@ FIGURE 2.1: Left: AFROC plot; Right: corresponding wAFROC plot.
 </p>
 </div>
 <p>The operating points can be used to numerically calculate the AUCs under the empirical AFROC and wAFROC plots, as done in the following code:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="empirical.html#cb23-1"></a>afroc_auc &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span> <span class="op">/</span><span class="st"> </span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span></span>
-<span id="cb23-2"><a href="empirical.html#cb23-2"></a><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="dv">6</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">+</span><span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="dv">6</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">/</span><span class="dv">2</span></span>
-<span id="cb23-3"><a href="empirical.html#cb23-3"></a></span>
-<span id="cb23-4"><a href="empirical.html#cb23-4"></a>wafroc_auc &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.525</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.775</span> <span class="op">+</span><span class="st"> </span></span>
-<span id="cb23-5"><a href="empirical.html#cb23-5"></a><span class="st">  </span><span class="fl">0.775</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">+</span><span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.775</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">/</span><span class="dv">2</span></span>
-<span id="cb23-6"><a href="empirical.html#cb23-6"></a></span>
-<span id="cb23-7"><a href="empirical.html#cb23-7"></a>afroc_auc</span>
-<span id="cb23-8"><a href="empirical.html#cb23-8"></a><span class="co">#&gt; [1] 0.7708333</span></span>
-<span id="cb23-9"><a href="empirical.html#cb23-9"></a>wafroc_auc</span>
-<span id="cb23-10"><a href="empirical.html#cb23-10"></a><span class="co">#&gt; [1] 0.678125</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="empirical.html#cb24-1"></a>afroc_auc &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span> <span class="op">/</span><span class="st"> </span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span></span>
+<span id="cb24-2"><a href="empirical.html#cb24-2"></a><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="dv">6</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">+</span><span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="dv">6</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">/</span><span class="dv">2</span></span>
+<span id="cb24-3"><a href="empirical.html#cb24-3"></a></span>
+<span id="cb24-4"><a href="empirical.html#cb24-4"></a>wafroc_auc &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.525</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.775</span> <span class="op">+</span><span class="st"> </span></span>
+<span id="cb24-5"><a href="empirical.html#cb24-5"></a><span class="st">  </span><span class="fl">0.775</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">+</span><span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.775</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">/</span><span class="dv">2</span></span>
+<span id="cb24-6"><a href="empirical.html#cb24-6"></a></span>
+<span id="cb24-7"><a href="empirical.html#cb24-7"></a>afroc_auc</span>
+<span id="cb24-8"><a href="empirical.html#cb24-8"></a><span class="co">#&gt; [1] 0.7708333</span></span>
+<span id="cb24-9"><a href="empirical.html#cb24-9"></a>wafroc_auc</span>
+<span id="cb24-10"><a href="empirical.html#cb24-10"></a><span class="co">#&gt; [1] 0.678125</span></span></code></pre></div>
 <p>The same AUC results are obtained using the function <code>UtilFigureOfMerit</code></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="empirical.html#cb24-1"></a><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">AFROC AUC = &quot;</span>, <span class="kw">as.numeric</span>(<span class="kw">UtilFigureOfMerit</span>(frocData, <span class="dt">FOM =</span> <span class="st">&quot;AFROC&quot;</span>)),<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb24-2"><a href="empirical.html#cb24-2"></a><span class="co">#&gt; </span></span>
-<span id="cb24-3"><a href="empirical.html#cb24-3"></a><span class="co">#&gt; AFROC AUC =  0.7708333</span></span>
-<span id="cb24-4"><a href="empirical.html#cb24-4"></a><span class="kw">cat</span>(<span class="st">&quot;wAFROC AUC = &quot;</span>, <span class="kw">as.numeric</span>(<span class="kw">UtilFigureOfMerit</span>(frocData, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)),<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb24-5"><a href="empirical.html#cb24-5"></a><span class="co">#&gt; wAFROC AUC =  0.678125</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="empirical.html#cb25-1"></a><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">AFROC AUC = &quot;</span>, <span class="kw">as.numeric</span>(<span class="kw">UtilFigureOfMerit</span>(frocData, <span class="dt">FOM =</span> <span class="st">&quot;AFROC&quot;</span>)),<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb25-2"><a href="empirical.html#cb25-2"></a><span class="co">#&gt; </span></span>
+<span id="cb25-3"><a href="empirical.html#cb25-3"></a><span class="co">#&gt; AFROC AUC =  0.7708333</span></span>
+<span id="cb25-4"><a href="empirical.html#cb25-4"></a><span class="kw">cat</span>(<span class="st">&quot;wAFROC AUC = &quot;</span>, <span class="kw">as.numeric</span>(<span class="kw">UtilFigureOfMerit</span>(frocData, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)),<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb25-5"><a href="empirical.html#cb25-5"></a><span class="co">#&gt; wAFROC AUC =  0.678125</span></span></code></pre></div>
 <p>From the preceding it is seen that the AFROC-based trapezoidal plots consist of upward and rightward jumps, starting from the origin (0,0) and ending at (1,1). This is true regardless of whether the z-samples are binned or not: i.e., at the “microscopic” level the jumps always exist. Each upward jump is associated with a <code>LL</code> rating exceeding a virtual threshold. Each rightward jump is associated with a <code>FP</code> rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it. This makes sense in terms of correct decisions being rewarded and incorrect ones being penalized, and can be seen from two examples. If there are only upward jumps, then the trapezoidal plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect – the straight-line extension to (1,1) ensures that the net area is unity. If there are only horizontal jumps, that takes the operating point from the origin to (1,0), where none of the lesions are localized and every non-diseased image has at least one NL mark, representing worst possible performance. Here, despite the straight line extension to (1,1), the net area is zero.</p>
 <p><em>The area under the AFROC is the probability that a lesion is rated higher than any mark on a non-diseased case.</em></p>
 <p><em>The area under the weighted-AFROC is lesion-weight adjusted probability that a lesion is rated higher than any mark on a non-diseased case.</em></p>
@@ -1435,8 +1437,8 @@ This shows that <span class="math inline">\(\text{A}_{AFROC}\)</span> behaves li
 <div id="ref-desantis2011breast">
 <p>DeSantis, Carol, Rebecca Siegel, Priti Bandi, and Ahmedin Jemal. 2011. “Breast Cancer Statistics, 2011.” <em>CA: A Cancer Journal for Clinicians</em> 61 (6): 408–18.</p>
 </div>
-<div id="ref-RN1490">
-<p>Duchowski, A. T. 2002. <em>Eye Tracking Methodology: Theory and Practice</em>. Book. Clemson, SC: Clemson University.</p>
+<div id="ref-duchowski2017eye">
+<p>Duchowski, Andrew T, and Andrew T Duchowski. 2017. <em>Eye Tracking Methodology: Theory and Practice</em>. Springer.</p>
 </div>
 <div id="ref-swensson1996unified">
 <p>Swensson, Richard G. 1996. “Unified Measurement of Observer Performance in Detecting and Localizing Target Objects on Images.” <em>Medical Physics</em> 23 (10): 1709–25.</p>
@@ -1447,14 +1449,14 @@ This shows that <span class="math inline">\(\text{A}_{AFROC}\)</span> behaves li
 </div>
 <div class="footnotes">
 <hr />
-<ol start="12">
-<li id="fn12"><p>The subscript is used to make explicit the paradigm used.<a href="empirical.html#fnref12" class="footnote-back">↩︎</a></p></li>
-<li id="fn13"><p>I expected the number of NL marks per image to be limited only by the ratio of image size to lesion size, i.e., larger values for smaller lesions.<a href="empirical.html#fnref13" class="footnote-back">↩︎</a></p></li>
-<li id="fn14"><p>This is not a limiting assumption: if the data is continuous, for finite numbers of cases, no ordering information is lost if the number of ratings is chosen large enough. This is analogous to Bamber’s theorem in Chapter 05, where a proof, although given for binned data, is applicable to continuous data.<a href="empirical.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>The highest rating method was used in early FROC modeling in <span class="citation">(Bunch et al. <a href="#ref-bunch1977free" role="doc-biblioref">1977</a>)</span> and in <span class="citation">(Swensson <a href="#ref-swensson1996unified" role="doc-biblioref">1996</a>)</span>, the latter in the context of LROC paradigm modeling.<a href="empirical.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>In function <code>UtilFigureOfMerit</code> the <code>FOM</code> argument has to be set to <code>HrAuc</code>, which denotes the highest rating inferred-ROC AUC.<a href="empirical.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>The late Prof. Richard Swensson did not like my choice of the word “alternative” in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.<a href="empirical.html#fnref17" class="footnote-back">↩︎</a></p></li>
-<li id="fn18"><p>Historical note: I became aware of how serious this issue could be when a researcher contacted me about using FROC methodology for nuclear medicine bone scan images, where the number of lesions on diseased cases can vary from a few to a hundred!<a href="empirical.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<ol start="14">
+<li id="fn14"><p>The subscript is used to make explicit the paradigm used as otherwise it leads to confusion.<a href="empirical.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>I expected the number of NL marks per image to be limited only by the ratio of image size to lesion size, i.e., larger values for smaller lesions.<a href="empirical.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>This is not a limiting assumption: if the data is continuous, for finite numbers of cases, no ordering information is lost if the number of ratings is chosen large enough. This is analogous to Bamber’s theorem in Chapter 05, where a proof, although given for binned data, is applicable to continuous data.<a href="empirical.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>The highest rating method was used in early FROC modeling in <span class="citation">(Bunch et al. <a href="#ref-bunch1977free" role="doc-biblioref">1977</a>)</span> and in <span class="citation">(Swensson <a href="#ref-swensson1996unified" role="doc-biblioref">1996</a>)</span>, the latter in the context of LROC paradigm modeling.<a href="empirical.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>In function <code>UtilFigureOfMerit</code> the <code>FOM</code> argument has to be set to <code>HrAuc</code>, which denotes the highest rating inferred-ROC AUC.<a href="empirical.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>The late Prof. Richard Swensson did not like my choice of the word “alternative” in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.<a href="empirical.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>Historical note: I became aware of how serious this issue could be when a researcher contacted me about using FROC methodology for nuclear medicine bone scan images, where the number of lesions on diseased cases can vary from a few to a hundred!<a href="empirical.html#fnref20" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

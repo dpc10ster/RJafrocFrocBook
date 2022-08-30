@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-08-29}
+\date{2022-08-30}
 
 \begin{document}
 \maketitle
@@ -152,7 +152,9 @@
 \item
   Intended as an online update to my print book \citep{chakraborty2017observer}.
 \item
-  Since its publication in 2017 the \texttt{RJafroc} package, on which the \texttt{R} code examples in the book depend, has evolved considerably, causing many of the examples to ``break''.
+  All references in this book to \texttt{RJafroc} refer to the R package with that name (case sensitive) \citep{R-RJafroc}.
+\item
+  Since its publication in 2017 \texttt{RJafroc}, on which the \texttt{R} code examples in the book depend, has evolved considerably, causing many of the examples to ``break''.
 \item
   This gives me the opportunity to improve on the book and include additional material.
 \item
@@ -392,7 +394,7 @@ I appreciate constructive feedback on this document. To do this raise an \texttt
 \hypertarget{froc-paradigm-how-much-finished}{%
 \section{TBA How much finished}\label{froc-paradigm-how-much-finished}}
 
-80\%
+85\%
 
 \hypertarget{froc-paradigm-intro}{%
 \section{Introduction}\label{froc-paradigm-intro}}
@@ -451,15 +453,15 @@ The 4 panels in Fig. \ref{fig:froc-paradigm-4} show a schematic mammogram interp
 \hypertarget{froc-paradigm-vis-search}{%
 \section{Visual search}\label{froc-paradigm-vis-search}}
 
-The FROC paradigm in medical imaging is equivalent to a visual search task. Any search task has two components: finding something and acting on it. Examples of a search tasks are looking for lost car-keys or a milk carton in the refrigerator. Success in a search task is finding the searched for object. Acting on it could be driving to work or drinking milk from the carton\footnote{There is expertise associated with any search task. Husbands are notoriously bad at finding the milk carton in the refrigerator (analogy due to Dr.~Elizabeth Krupinski at an SPIE course taught jointly with the author).}.
+The FROC paradigm in medical imaging is equivalent to a visual search task. Any search task has two components: finding something\footnote{while not finding irrelevant stuff, a subtle but important point} and acting on it. Examples of a search tasks are looking for lost car-keys or a milk carton in the refrigerator. Success in a search task is finding the searched for object\footnote{without finding too many extraneous objects}. Acting on it could be driving to work or drinking milk from the carton\footnote{There is expertise associated with any search task. Husbands are notoriously bad at finding the milk carton in the refrigerator (analogy due to Dr.~Elizabeth Krupinski at an SPIE course taught jointly with the author).}.
 
-Likewise, a medical imaging search task has two components: finding suspicious regions and acting on each finding\footnote{``Finding'' is the actual term used by radiologists in their clinical reports}. Acting on a finding involves determining if it is sufficiently suspicious for cancer to warrant reporting and further patient follow-up. If a suspicious region is found and provided it is sufficiently suspicious for malignancy the region is marked and rated for confidence that it is a malignant lesion.
+Likewise, a medical imaging search task has two components: finding lesions, without finding too many extraneous suspicious regions, and acting on each finding\footnote{``Finding'' is the actual term used by radiologists in their clinical reports}. Acting on a finding involves determining if it is sufficiently suspicious for cancer to warrant reporting and further patient follow-up. If a suspicious region is found and provided it is sufficiently suspicious for malignancy the region is marked and rated for confidence that it is a malignant lesion.
 
 The radiologist does not know a-priori if the patient is diseased and, if diseased, how many lesions may be present. In the breast-screening context, it is known that about 5 out of 1000 patients have cancers, so 99.5\% of the time odds are that the patient has no malignant lesions\footnote{The probability of benign suspicious regions is much higher \citep{Ernster1981Epidemiology}, about 13\% for women aged 40-45.}. Considerably search expertise is needed for the radiologist to mark malignant lesions with high probability while not generating too many false marks.
 
 At my former institution (University of Pittsburgh) the radiologists digitally outline and annotate (describe) suspicious region(s) that are found. As one would expect from the low prevalence of breast cancer in the screening context and assuming expert-level radiologist interpretations, about 90\% of breast cases do not generate any marks. About 10\% of cases generate one or more marks and are recalled for further comprehensive imaging (termed diagnostic workup). Of marked cases about 90\% generate one mark, about 10\% generate 2 marks, and a rare case generates 3 or more marks (Dr.~David Gur, private communication, ca. 2015).
 
-Conceptually, a mammography report consists of the locations of regions that exceed the threshold and the corresponding levels of suspicion, reported as a Breast Imaging Reporting and Data System (BIRADS) rating. The BIRADS rating is actually assigned after the diagnostic workup following an screening BIRADS-0 rating. The screening rating itself is binary: BIRADS-0 for recall (the patient is recalled for a diagnostic workup to determine the final BIRADS rating) or BIRADS-1 for normal or no abnormality detected (the patient comes back about a year later for the next screening appointment).
+Conceptually, a mammography report consists of the locations of regions that exceed the threshold and the corresponding levels of suspicion, reported as a Breast Imaging Reporting and Data System (BIRADS) rating. The BIRADS rating is actually assigned after the diagnostic workup following a screening BIRADS-0 rating. The screening rating itself is binary: BIRADS-0 for recall (the patient is recalled for a diagnostic workup to determine the final BIRADS rating) or BIRADS-1 for normal or no abnormality detected (the patient comes back about a year later for the next screening appointment).
 
 \hypertarget{froc-paradigm-scoring-the-data}{%
 \subsection{Proximity criterion and scoring the data}\label{froc-paradigm-scoring-the-data}}
@@ -509,7 +511,7 @@ In the medical imaging context, assuming the mark rating pairs have been classif
 \item
   The FROC plot is defined as that of LLF (ordinate) vs.~NLF as the threshold is varied. If the points are connected by straight lines the resulting ``curve'' is termed the \emph{empirical FROC curve}.
 \item
-  The upper-right most operating point is termed the \emph{observed end-point} and its coordinated are denoted \((\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})\).
+  The upper-right-most operating point is termed the \emph{observed end-point} and its coordinated are denoted \((\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})\).
 \item
   Unlike the ROC plot which is completely contained in the unit square, the FROC plot is not.
 \end{itemize}
@@ -521,6 +523,24 @@ If \emph{integer ratings} are used for each recorded mark then in a four-rating 
 If \emph{continuous ratings} are used, the procedure is to start with a very high threshold so that none of the ratings exceed the threshold and then to gradually lower the threshold. Every time the threshold crosses the rating of a mark, or possibly multiple marks, the total count of LLs and NLs exceeding the threshold is divided by the appropriate denominators yielding the `'raw'' FROC plot. For example, when an LL rating just exceeds the threshold, the operating point jumps up by 1/(total number of lesions), and if two LLs simultaneously just exceed the threshold the operating point jumps up by 2/(total number of lesions). If an NL rating just exceeds the threshold, the operating point jumps to the right by 1/(total number of cases). If an LL rating and a NL rating simultaneously just exceed the threshold, the operating point moves diagonally, up by 1/(total number of lesions) and to the right by 1/(total number of cases). The reader should get the general idea by now and recognize that the cumulating procedure is very similar to the manner in which ROC operating points were calculated, the only differences being in the quantities being cumulated and the relevant denominators.
 
 Chapter \ref{empirical} describes the FROC, and other possible operating characteristics, in more detail.
+
+\hypertarget{froc-paradigm-plot-illustration}{%
+\subsection{Illustration with a dataset}\label{froc-paradigm-plot-illustration}}
+
+The following code uses \texttt{dataset04} \citep{zanca2009evaluation} in \texttt{RJafroc} to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so in principle one can generate 20 plots. In this example I have selected treatment 1 and reader 1 to produce the plot. The reader should experiment by running, for example \texttt{PlotEmpiricalOperatingCharacteristics(dataset04,\ trts\ =\ 2,\ rdrs\ =\ 1,\ opChType\ =\ "FROC")\$Plot}, i.e., with different treatments and readers specified.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ret <-}\StringTok{ }\KeywordTok{PlotEmpiricalOperatingCharacteristics}\NormalTok{(}
+\NormalTok{  dataset04, }
+  \DataTypeTok{trts =} \DecValTok{1}\NormalTok{, }\DataTypeTok{rdrs =} \DecValTok{1}\NormalTok{, }\DataTypeTok{opChType =} \StringTok{"FROC"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(ret}\OperatorTok{$}\NormalTok{Plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-froc_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic that the operating point cannot move downward or to the left as one cumulates lower confidence level marks (i.e., it can only move upward and to the right; the curve can flatten out or it can end at a finite value of NLF).
 
 \hypertarget{froc-paradigm-solar-analogy}{%
 \section{The ``solar'' analogy}\label{froc-paradigm-solar-analogy}}
@@ -559,32 +579,42 @@ The analogy is not restricted to the sun, which one might argue is an almost inf
 
 False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization (LL) or incorrect localizations (NLs). At the time of writing there is a hunt for a new planet, possibly a gas giant , that is much further than even the newly demoted Pluto.
 
-\hypertarget{froc-paradigm-discussion}{%
-\section{Discussion}\label{froc-paradigm-discussion}}
+\hypertarget{froc-paradigm-misconceptions}{%
+\section{Some misconceptions}\label{froc-paradigm-misconceptions}}
 
-This chapter has served as a general introduction to the location specific paradigms. The FROC paradigm, in particular, is directly related to visual search. The terms lesion-localization (LL) and non-lesion localization (NL) were introduced, to mean locating a true lesion and a false region, respectively. A qualitative definition of search performance was given, namely, the ability to find lesions while not finding non-lesions. This will be quantified in a later chapter. A widely used operating characteristic associated with it, namely the FROC curve, was introduced. A ``solar'' analogy was given that brings out important characteristics of the FROC - in particular its dependence on lesion contrast.
-
-In my experience the FROC paradigm is much misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the paradigm and the FROC curve. These are summarized below:
+In my experience the FROC paradigm is much misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the meaning of search, the paradigm and the FROC curve. These are summarized below:
 
 \begin{itemize}
 \tightlist
 \item
-  Loose terminology: using the term ``lesion-specific'' to describe location-specific paradigms.
+  Loose terminology:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Using the term ``lesion-specific'' to describe location-specific paradigms.
+  \item
+    Using the term ``lesion'' when one means a ``suspicious region'' that may or may not be a true lesion.
+  \item
+    Using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localizations, that apply to regions of the image.
+  \item
+    Using the FROC-1 rating to mean in effect ``I see no signs of disease in this image'' when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
+  \end{itemize}
 \item
-  Loose terminology: using the term ``lesion'' when one means a ``suspicious region'' that may or may not be a true lesion.
-\item
-  Loose terminology: using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localization, that apply to localized regions of the image.
-\item
-  Loose terminology: using the FROC-1 rating to mean in effect ``I see no signs of disease in this image'', when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
-\item
-  Misconception: showing FROC curves as reaching the unit ordinate, as this is the exception rather than the rule.
-\item
-  Misconception: believing that FROC curves extend to very large values along the abscissa and all the observer has to do to access this region is to lower their reporting threshold.
-\item
-  Misconception: blaming the FROC paradigm for alleged arbitrariness of the proximity criterion and multiple marks in the same region. These are not clinically important.
+  Misconception
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A fundamental misunderstanding of search performance embodied in the commonly heard statement ``CAD is perfect at search because it looks at everything''.
+  \item
+    Showing FROC curves as reaching the unit ordinate as this is the exception rather than the rule.
+  \item
+    Believing that FROC curves extend to very large values (potentially infinite) along the abscissa and all the observer has to do to access this region is to lower their reporting threshold.
+  \end{itemize}
 \end{itemize}
 
-The FROC plot is the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset and associated scalar measures of performance, termed \emph{figures of merit} (FOMs).
+The FROC plot is historically the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset that have evolved over the years.
 
 \hypertarget{froc-paradigm-references}{%
 \section{References}\label{froc-paradigm-references}}
@@ -600,14 +630,16 @@ The FROC plot is the first proposed way of visually summarizing FROC data. The n
 \hypertarget{empirical-intro}{%
 \section{TBA Introduction}\label{empirical-intro}}
 
-FROC data consists of mark-rating pairs. In this chapter a distinction is made between latent and actual marks. This is followed by a table summarizing FROC notation. This is a key table which will be used in later chapters. Section \texttt{\textbackslash{}@ref(froc-paradigm-froc-plot)} introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are \emph{visual} depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are \emph{quantitative} measures of performance, termed \emph{figures of merit} (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC plot, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square.
+In this chapter a distinction is made between \emph{latent} and \emph{actual} marks. This is followed by a table summarizing FROC notation, a key table used in later chapters. Section \texttt{\textbackslash{}@ref(froc-paradigm-froc-plot)} introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are \emph{visual} depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are \emph{quantitative} measures of performance, termed \emph{figures of merit} (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC plot, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square.
 
 \hypertarget{empirical-mark-rating-pairs}{%
 \section{Mark rating pairs}\label{empirical-mark-rating-pairs}}
 
-\emph{FROC data consists of mark-rating pairs}. Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as \emph{lesion localization} (LL) if it is sufficiently close to a true lesion, according to the adopted proximity criterion, and otherwise it is recorded as \emph{non-lesion localization} (NL).
+\emph{FROC data consists of mark-rating pairs}. Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as \emph{lesion localization} (LL) if it is sufficiently close to a true lesion and otherwise it is recorded as \emph{non-lesion localization} (NL).
 
-\emph{In an FROC study the number of marks on an image is an a-priori unknown modality-reader-case dependent non-negative random integer.} It is incorrect and naive to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don't assign equal attention units to all areas of the image. The best insight into the number of marks per case is obtained from eye-tracking studies \citep{RN1490}, but even here the information is incomplete, as eye-tracking studies can only measure foveal gaze and not lesions found by peripheral vision, and such studies are very difficult to conduct in a clinical setting.
+\emph{In an FROC study the number of marks on an image is an a-priori unknown non-negative random integer.} It is incorrect and naive to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don't assign equal attention units to all areas of the image.
+
+Currently the best insight into the numbers and locations of marks per case is obtained from eye-tracking studies \citep{duchowski2017eye}, but the information is incomplete as eye-tracking studies can only measure \emph{foveal} gaze and not lesions found by \emph{peripheral} vision. Moreover, such studies are near impossible to conduct in a clinical setting (at least with the eye-tracking apparatus that I am familiar with).
 
 \hypertarget{latent-vs.-actual-marks}{%
 \subsection{Latent vs.~actual marks}\label{latent-vs.-actual-marks}}
@@ -623,17 +655,17 @@ To distinguish between suspicious regions that were considered for marking and r
 \item
   A non-diseased case can only have latent NLs. A diseased case can have latent NLs and latent LLs.
 \item
-  If marked, a latent NL is recorded as an actual NL.
+  If marked a latent NL is recorded as an actual NL.
 \item
-  If not marked, a latent NL is an \emph{unobservable event}.
+  If not marked a latent NL is an \emph{unobservable event}.
 \item
-  In contrast, unmarked lesions are observable events -- one knows (trivially) which lesions were not marked.
+  In contrast unmarked lesions are observable events -- one knows (trivially) which lesions were not marked.
 \end{itemize}
 
 \hypertarget{binning-rule}{%
 \subsection{Binning rule}\label{binning-rule}}
 
-Recall that ROC data modeling requires the existence of a \emph{case-dependent} decision variable, or z-sample \(z\), and case-independent decision thresholds \(\zeta_r\), where \(r = 0, 1, ..., R_{ROC}-1\) and \(R_{ROC}\) is the number of ROC study bins \footnote{The subscript is used to make explicit the paradigm used.} and a binning rule that if \(\zeta_r \leq z < \zeta_{r+1}\) the case is rated \(r + 1\). Dummy cutoffs are defined as \(\zeta_0 = -\infty\) and \(\zeta_{R_{ROC}} = \infty\). The z-sample applies to the whole case. To summarize:
+Recall that ROC data modeling requires the existence of a \emph{case-dependent} decision variable, or z-sample \(z\), and case-independent decision thresholds \(\zeta_r\), where \(r = 0, 1, ..., R_{ROC}-1\), where \(R_{ROC}\) is the number of ROC study bins \footnote{The subscript is used to make explicit the paradigm used as otherwise it leads to confusion.} and a binning rule that if \(\zeta_r \leq z < \zeta_{r+1}\) the case is rated \(r + 1\). Dummy cutoffs are defined as \(\zeta_0 = -\infty\) and \(\zeta_{R_{ROC}} = \infty\). The z-sample applies to the whole case. To summarize:
 
 \begin{equation}
 \left.
@@ -647,7 +679,7 @@ r = 0, 1, ..., R_{ROC}-1\\
 \label{eq:binning-rule-roc}
 \end{equation}
 
-Analogously, FROC data modeling requires the existence of a \emph{case and location dependent} z-sample for each latent mark and \emph{case and location independent} reporting thresholds \(\zeta_r\), where \(r = 1, ..., R_{FROC}\) and \(R_{FROC}\) is the number of FROC study bins, and the rule that a latent mark is marked and rated \(r\) if \(\zeta_r \leq z < \zeta_{r+1}\). Dummy cutoffs are defined as \(\zeta_0 = -\infty\) and \(\zeta_{R_{FROC}+1} = \infty\). For the same numbers of non-dummy cutoffs, the number of FROC bins is one less than the number of ROC bins. For example, 4 non-dummy cutoffs \(\zeta_1, \zeta_2, \zeta_3, \zeta_4\) can correspond to a 5-rating ROC study or to a 4-rating FROC study. To summarize:
+Analogously, FROC data modeling requires the existence of a \emph{case and location dependent} z-sample for each latent mark and \emph{case and location independent} reporting thresholds \(\zeta_r\), where \(r = 1, ..., R_{FROC}\) and \(R_{FROC}\) is the number of FROC study bins, and the binning rule that a latent mark is marked and rated \(r\) if \(\zeta_r \leq z < \zeta_{r+1}\). Dummy cutoffs are defined as \(\zeta_0 = -\infty\) and \(\zeta_{R_{FROC}+1} = \infty\). For the same numbers of non-dummy cutoffs, the number of FROC bins is one less than the number of ROC bins. For example, 4 non-dummy cutoffs \(\zeta_1, \zeta_2, \zeta_3, \zeta_4\) can correspond to a 5-rating ROC study or to a 4-rating FROC study. To summarize:
 
 \begin{equation}
 \left.
@@ -676,33 +708,33 @@ FROC notation is summarized in Table \ref{tab:empirical-notation}, in which \emp
 \hline
 Row & Symbol & Meaning\\
 \hline
-1 & t & Case-level truth: 1 for non-diseased and 2 for diseased\\
+1 & $t$ & Case-level truth: 1 for non-diseased and 2 for diseased case\\
 \hline
-2 & $K_t$ & Number of cases with case-level truth t\\
+2 & $K_t$ & Number of cases with case-level truth $t$\\
 \hline
-3 & $k_t t$ & Case $k_t$ in case-level truth t\\
+3 & $k_t t$ & Case $k_t$ in case-level truth $t$\\
 \hline
-4 & s & Location-level truth: 1 for NL and 2 for LL\\
+4 & $s$ & Location-level truth: 1 for NL and 2 for LL\\
 \hline
-5 & $l_s s$ & Mark $l_s$ in location-level truth s\\
+5 & $l_s s$ & Mark $l_s$ in location-level truth $s$\\
 \hline
 6 & $N_{k_t t}$ & Number of NLs in case $k_t t$\\
 \hline
 7 & $L_{k_2 2}$ & Number of lesions in case $k_2 2$\\
 \hline
-8 & $z_{k_t t l_1 1}$ & z-sample for case $k_t t$ and mark $l_1 1$\\
+8 & $z_{k_t t l_1 1}$ & $z$-sample for case $k_t t$ and NL mark $l_1 1$\\
 \hline
-9 & $z_{k_2 2 l_2 2}$ & z-sample for case $k_2 2$ and mark $l_2 2$\\
+9 & $z_{k_2 2 l_2 2}$ & $z$-sample for case $k_2 2$ and LL mark $l_2 2$\\
 \hline
 10 & $R_{FROC}$ & Number of FROC bins\\
 \hline
-11 & $\zeta_1$ & Lowest reporting threshold\\
+11 & $\zeta_1$ & Lowest non-dummy reporting threshold\\
 \hline
-12 & $\zeta_r$ & r = 2, 3, ... the other non-dummy reporting thresholds\\
+12 & $\zeta_r$ & $r$ = 2, 3, ..., the other non-dummy reporting thresholds\\
 \hline
-13 & $\zeta_0, \zeta_{R_{FROC}+1}$ & Dummy thresholds\\
+13 & $\zeta_0, \zeta_{R_{FROC}+1}$ & Dummy thresholds, negative infinity and positive infinity, respectively\\
 \hline
-14 & $W_{k_2 l_2}$ & Weight of lesion $l_2 2$ in case $k_2 2$\\
+14 & $W_{k_2 l_2}$ & Weight of lesion $l_2 2$ in case $k_2 2$, explained later\\
 \hline
 15 & $L_{max}$ & Maximum number of lesions per case in dataset\\
 \hline
@@ -726,11 +758,11 @@ Row & Symbol & Meaning\\
 \item
   Row 5: Similar to row 3, two indices \(l_s s\) are needed to select latent mark \(l_s\) in location-level truth state \(s\). As a useful mnemonic, \(l\) is for \emph{location}.
 \item
-  Row 6: \(N_{k_t t}\) is the total number of latent NL marks in case \(k_t t\).
+  Row 6: \(N_{k_t t}\) is the total number of latent NL marks in case \(k_t t\). Latent NL marks are possible on non-diseased and diseased cases (i.e., both values of \(t\) are allowed).
 \item
   Row 7: \(L_{k_2 2}\) is the number of lesions in diseased case \(k_2 2\).
 \item
-  Row 8: The z-sample for case \(k_t t\) and NL mark \(l_1 1\) is denoted \(z_{k_t t l_1 1}\). Latent NL marks are possible on non-diseased and diseased cases (both values of \(t\) are allowed). The range of a z-sample is \(-\infty < z_{k_t t l_1 1} < \infty\), provided \(l_1 \neq \varnothing\); otherwise, it is an unobservable event.
+  Row 8: The z-sample for case \(k_t t\) and NL mark \(l_1 1\) is denoted \(z_{k_t t l_1 1}\). The range of a z-sample is \(-\infty < z_{k_t t l_1 1} < \infty\), provided \(l_1 \neq \varnothing\); otherwise, it is an unobservable event.
 \item
   Row 9: The z-sample of a latent LL is \(z_{k_2 2 l_2 2}\). Unmarked lesions are observable events and are therefore assigned negative infinity ratings (the null-set notation is unnecessary for them).
 \item
@@ -748,7 +780,7 @@ Row & Symbol & Meaning\\
 \hypertarget{empirical-indexing-marks}{%
 \subsection{A conceptual and notatonal issue}\label{empirical-indexing-marks}}
 
-An aspect of FROC data, \emph{that there could be cases with no NL marks, no matter how low the reporting threshold}, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold \(\zeta_1\) is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case ``filling up'' with NL marks \footnote{I expected the number of NL marks per image to be limited only by the ratio of image size to lesion size, i.e., larger values for smaller lesions.}. In fact the first model of FROC data \citep{chakraborty1989maximum} predicts that, as the reporting threshold is lowered to \(\zeta_1 = -\infty\), the number of NL marks per case approaches \(\infty\) as does \(\text{NLF}_{max}\). However, observed FROC curves end at a finite value of \(\text{NLF}_{max}\). This is one reason I introduced the radiological search model (RSM) \citep{chakraborty2006search}. I will have much more to say about this in Chapter \texttt{\textbackslash{}@ref(rsm)}, but for now I state one assumption of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over all cases) is a finite number.
+An aspect of FROC data, \emph{that there could be cases with no NL marks, no matter how low the reporting threshold}, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold \(\zeta_1\) is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case ``filling up'' with NL marks \footnote{I expected the number of NL marks per image to be limited only by the ratio of image size to lesion size, i.e., larger values for smaller lesions.}. In fact the first model of FROC data \citep{chakraborty1989maximum} predicts that as the reporting threshold is lowered to \(\zeta_1 = -\infty\), the number of NL marks per case approaches \(\infty\) as does \(\text{NLF}_{max}\). However, observed FROC curves end at a finite value of \(\text{NLF}_{max}\). This is one reason I introduced the radiological search model (RSM) \citep{chakraborty2006search}. I will have much more to say about this in Chapter \texttt{\textbackslash{}@ref(rsm)}, but for now I state one assumption of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over all cases) is a finite number.
 
 With this background, let us return to the conceptual issue: why does the observer not keep ``filling-up'' the image with NL marks? The answer is that \emph{the observer can only mark regions that have a non-zero chance of being a lesion}. For example, if the actual number of latent NLs on a particular case is 2, then, as the reporting threshold is lowered, the observer will make at most two NL marks. Having exhausted these two regions the observer will not mark any more regions because there are no more regions to be marked - \emph{all other regions in the image have, in the perception of the observer, zero chance of being a lesion}.
 
@@ -889,7 +921,7 @@ The formalism should not obscure the fact that the futility of extrapolation out
 \hypertarget{empirical-froc-plot-illustration}{%
 \subsection{Illustration with a dataset}\label{empirical-froc-plot-illustration}}
 
-The following code uses \texttt{dataset04} \citep{zanca2009evaluation} in the \texttt{RJafroc} package to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so in principle one can generate 20 plots. In this example I have selected treatment 1 and reader 1 to produce the plot. The reader should experiment by running \texttt{PlotEmpiricalOperatingCharacteristics(dataset04,\ trts\ =\ 1,\ rdrs\ =\ 1,\ opChType\ =\ "FROC")\$Plot} with different treatments and readers specified.
+The following plot uses \texttt{dataset04} \citep{zanca2009evaluation} in \texttt{RJafroc} to illustrate an empirical FROC plot (we used this example in the previous chapter).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -901,8 +933,6 @@ The following code uses \texttt{dataset04} \citep{zanca2009evaluation} in the \t
 \end{Shaded}
 
 \includegraphics{03-empirical_files/figure-latex/unnamed-chunk-1-1.pdf}
-
-The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rating 5, the next higher one corresponds to marks rated 4 or 5, etc. The FROC plots vary widely but share the common characteristic that the operating points cannot move downward-left as one cumulates lower confidence level marks.
 
 Shown next is calculation of the figure of merit for this dataset. All 20 values are shown. The value for \texttt{trt1} and \texttt{rdr1} is the area under the FROC plot shown above.
 
@@ -3420,7 +3450,7 @@ LL_{ROC} \left ( \mu, \lambda', \nu', \overrightarrow{f_L} \right )= \sum_{r=0}^
 
 The total number of parameters to be estimated, including the \(R_{FROC}\) thresholds, is \(3+R_{FROC}\). Maximizing the likelihood function yields estimates of the RSM parameters.
 
-The Broyden--Fletcher--Goldfarb--Shanno (BFGS) \citep{RN2646, RN2647, RN2648, RN2649, RN2651, RN2650} minimization algorithm, as implemented as function \texttt{mle2()} in R-package \texttt{bbmle} \citep{packageBbmle} was used to minimize the negative of the likelihood function. Since the BFGS-algorithm varies each parameter in an unrestricted range \((-\infty, \infty)\), which would cause problems (e.g., RSM physical parameters cannot be negative and thresholds need to be properly ordered), appropriate variable transformations (both ``forward'' and ``inverse'') were used so that parameters supplied to the log-likelihood function were always in the valid range, irrespective of values chosen by the BFGS-algorithm.
+The Broyden--Fletcher--Goldfarb--Shanno (BFGS) \citep{RN2646, RN2647, RN2648, RN2649, RN2651, RN2650} minimization algorithm, as implemented as function \texttt{mle2()} in R-package \texttt{bbmle} \citep{bbmle} was used to minimize the negative of the likelihood function. Since the BFGS-algorithm varies each parameter in an unrestricted range \((-\infty, \infty)\), which would cause problems (e.g., RSM physical parameters cannot be negative and thresholds need to be properly ordered), appropriate variable transformations (both ``forward'' and ``inverse'') were used so that parameters supplied to the log-likelihood function were always in the valid range, irrespective of values chosen by the BFGS-algorithm.
 
 The software also calculates the goodness of fit statistic using the method described in \texttt{RJafrocRocBook}. Because of the additional RSM parameter (as compared to conventional ROC models) the degrees-of-freedom (df) of the chisquare goodness of fit statistic is \(R_{FROC} – 3\). Calculating goodness of fit for the RSM can fail in situations where the corresponding statistic can be calculated for the binormal model, e.g., three (non -- trivial) ROC operating points, corresponding to \(\text{df} = 1\). With RSM fitting one needs at least four (non -- trivial) ROC operating points, each defined by bins with at least five counts in both non-diseased and diseased categories. \footnote{With three operating points, each defined by bins with at least five counts in both non-diseased and diseased categories, the number of usable ROC bins is four. Subtracting three one gets \(df = 1\), and the statistic can be calculated using an ROC model. However, because of the extra RSM parameter, the corresponding RSM \(\text{df} = 0\), and the chi-square statistic cannot be calculated.}
 
@@ -4514,7 +4544,7 @@ Setting \(\text{Var} = 0, \text{Cov}_2 = 0\) yields the 1T-RRFC model, which con
 \hypertarget{standalone-cad-radiologists-computational-details}{%
 \section{Software implementation}\label{standalone-cad-radiologists-computational-details}}
 
-The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in \texttt{RJafroc}, an R-package \citep{packageRJafroc}.
+The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in \texttt{RJafroc}, an R-package \citep{R-RJafroc}.
 
 The following code shows usage of the software to generate the results corrsponding to the three analyses. Note that \texttt{datasetCadLroc} is the LROC dataset and \texttt{dataset09} is the corresponding ROC dataset.
 
@@ -5952,7 +5982,7 @@ FOM & $\nu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \
 \hypertarget{datasets-datasets}{%
 \section{Datasets}\label{datasets-datasets}}
 
-The datasets are embedded in the \texttt{RJafroc} package. They can be viewed in the help file of the package, a partial screen-shot of which is shown next.
+The datasets are embedded in \texttt{RJafroc}. They can be viewed in the help file of the package, a partial screen-shot of which is shown next.
 
 \begin{figure}
 

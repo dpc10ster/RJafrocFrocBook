@@ -212,8 +212,9 @@ froc-paradigm-scoring-the-data
 multiple-marks-in-the-same-vicinity
 historical-context
 froc-paradigm-froc-plot
+froc-paradigm-plot-illustration
 froc-paradigm-solar-analogy
-froc-paradigm-discussion
+froc-paradigm-misconceptions
 froc-paradigm-references
 empirical
 empirical-how-much-finished

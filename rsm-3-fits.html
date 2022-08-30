@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-08-29" />
+<meta name="date" content="2022-08-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,9 +168,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#multiple-marks-in-the-same-vicinity"><i class="fa fa-check"></i><b>1.4.2</b> Multiple marks in the same vicinity</a></li>
 <li class="chapter" data-level="1.4.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#historical-context"><i class="fa fa-check"></i><b>1.4.3</b> Historical context</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>1.5</b> The free-response receiver operating characteristic (FROC) plot</a></li>
+<li class="chapter" data-level="1.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>1.5</b> The free-response receiver operating characteristic (FROC) plot</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-plot-illustration"><i class="fa fa-check"></i><b>1.5.1</b> Illustration with a dataset</a></li>
+</ul></li>
 <li class="chapter" data-level="1.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>1.6</b> The “solar” analogy</a></li>
-<li class="chapter" data-level="1.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>1.7</b> Discussion</a></li>
+<li class="chapter" data-level="1.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-misconceptions"><i class="fa fa-check"></i><b>1.7</b> Some misconceptions</a></li>
 <li class="chapter" data-level="1.8" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-references"><i class="fa fa-check"></i><b>1.8</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>2</b> Empirical plots from FROC data</a><ul>
@@ -449,30 +451,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The PROPROC (proper ROC) model described in TBA Chapter 20.</li>
 <li>The CBM (contaminated binormal model) described in TBA Chapter 20.</li>
 </ul>
-<p>This chapter compares these methods by fitting the to 14 multiple-treatment multiple-reader datasets described in Chapter <a href="datasets.html#datasets">12</a>.<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a></p>
-<p>Both RSM and CBM are implemented in <code>RJafroc</code>. <code>PROPROC</code> is implemented in Windows software<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a> available <a href="https://perception.lab.uiowa.edu/OR-DBM-MRMC-252">here</a>, last accessed 1/4/21.</p>
+<p>This chapter compares these methods by fitting the to 14 multiple-treatment multiple-reader datasets described in Chapter <a href="datasets.html#datasets">12</a>.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
+<p>Both RSM and CBM are implemented in <code>RJafroc</code>. <code>PROPROC</code> is implemented in Windows software<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a> available <a href="https://perception.lab.uiowa.edu/OR-DBM-MRMC-252">here</a>, last accessed 1/4/21.</p>
 </div>
 <div id="rsm-3-fits-applications" class="section level2 hasAnchor">
 <h2><span class="header-section-number">8.3</span> Application to two datasets<a href="rsm-3-fits.html#rsm-3-fits-applications" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The RSM, PROPROC and CBM algorithms were applied to the 14 datasets described in Chapter <a href="datasets.html#datasets">12</a>.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="rsm-3-fits.html#cb84-1"></a>datasetNames &lt;-<span class="st">  </span></span>
-<span id="cb84-2"><a href="rsm-3-fits.html#cb84-2"></a><span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;TONY&quot;</span>, <span class="st">&quot;VD&quot;</span>, <span class="st">&quot;FR&quot;</span>, </span>
-<span id="cb84-3"><a href="rsm-3-fits.html#cb84-3"></a>  <span class="st">&quot;FED&quot;</span>, <span class="st">&quot;JT&quot;</span>, <span class="st">&quot;MAG&quot;</span>, </span>
-<span id="cb84-4"><a href="rsm-3-fits.html#cb84-4"></a>  <span class="st">&quot;OPT&quot;</span>, <span class="st">&quot;PEN&quot;</span>, <span class="st">&quot;NICO&quot;</span>,</span>
-<span id="cb84-5"><a href="rsm-3-fits.html#cb84-5"></a>  <span class="st">&quot;RUS&quot;</span>, <span class="st">&quot;DOB1&quot;</span>, <span class="st">&quot;DOB2&quot;</span>, </span>
-<span id="cb84-6"><a href="rsm-3-fits.html#cb84-6"></a>  <span class="st">&quot;DOB3&quot;</span>, <span class="st">&quot;FZR&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="rsm-3-fits.html#cb85-1"></a>datasetNames &lt;-<span class="st">  </span></span>
+<span id="cb85-2"><a href="rsm-3-fits.html#cb85-2"></a><span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;TONY&quot;</span>, <span class="st">&quot;VD&quot;</span>, <span class="st">&quot;FR&quot;</span>, </span>
+<span id="cb85-3"><a href="rsm-3-fits.html#cb85-3"></a>  <span class="st">&quot;FED&quot;</span>, <span class="st">&quot;JT&quot;</span>, <span class="st">&quot;MAG&quot;</span>, </span>
+<span id="cb85-4"><a href="rsm-3-fits.html#cb85-4"></a>  <span class="st">&quot;OPT&quot;</span>, <span class="st">&quot;PEN&quot;</span>, <span class="st">&quot;NICO&quot;</span>,</span>
+<span id="cb85-5"><a href="rsm-3-fits.html#cb85-5"></a>  <span class="st">&quot;RUS&quot;</span>, <span class="st">&quot;DOB1&quot;</span>, <span class="st">&quot;DOB2&quot;</span>, </span>
+<span id="cb85-6"><a href="rsm-3-fits.html#cb85-6"></a>  <span class="st">&quot;DOB3&quot;</span>, <span class="st">&quot;FZR&quot;</span>)</span></code></pre></div>
 <p>In the following we focus on just two ROC datasets which have been widely used in the literature to illustrate ROC methodological advances, namely the Van Dyke (VD) and the Franken (FR) datasets.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="rsm-3-fits.html#cb85-1"></a>results &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
-<span id="cb85-2"><a href="rsm-3-fits.html#cb85-2"></a></span>
-<span id="cb85-3"><a href="rsm-3-fits.html#cb85-3"></a>results[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">2</span>) <span class="co"># VD dataset</span></span>
-<span id="cb85-4"><a href="rsm-3-fits.html#cb85-4"></a>results[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">3</span>) <span class="co"># FR dataset</span></span>
-<span id="cb85-5"><a href="rsm-3-fits.html#cb85-5"></a></span>
-<span id="cb85-6"><a href="rsm-3-fits.html#cb85-6"></a>resultsArr &lt;-<span class="st"> </span>plotArr &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
-<span id="cb85-7"><a href="rsm-3-fits.html#cb85-7"></a></span>
-<span id="cb85-8"><a href="rsm-3-fits.html#cb85-8"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) {</span>
-<span id="cb85-9"><a href="rsm-3-fits.html#cb85-9"></a>  plotArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allPlots</span>
-<span id="cb85-10"><a href="rsm-3-fits.html#cb85-10"></a>  resultsArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allResults</span>
-<span id="cb85-11"><a href="rsm-3-fits.html#cb85-11"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="rsm-3-fits.html#cb86-1"></a>results &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
+<span id="cb86-2"><a href="rsm-3-fits.html#cb86-2"></a></span>
+<span id="cb86-3"><a href="rsm-3-fits.html#cb86-3"></a>results[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">2</span>) <span class="co"># VD dataset</span></span>
+<span id="cb86-4"><a href="rsm-3-fits.html#cb86-4"></a>results[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">3</span>) <span class="co"># FR dataset</span></span>
+<span id="cb86-5"><a href="rsm-3-fits.html#cb86-5"></a></span>
+<span id="cb86-6"><a href="rsm-3-fits.html#cb86-6"></a>resultsArr &lt;-<span class="st"> </span>plotArr &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
+<span id="cb86-7"><a href="rsm-3-fits.html#cb86-7"></a></span>
+<span id="cb86-8"><a href="rsm-3-fits.html#cb86-8"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) {</span>
+<span id="cb86-9"><a href="rsm-3-fits.html#cb86-9"></a>  plotArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allPlots</span>
+<span id="cb86-10"><a href="rsm-3-fits.html#cb86-10"></a>  resultsArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allResults</span>
+<span id="cb86-11"><a href="rsm-3-fits.html#cb86-11"></a>}</span></code></pre></div>
 <ul>
 <li>The supporting code is in the function <code>Compare3ProperRocFits()</code> located at <code>R/compare-3-fits/Compare3ProperRocFits.R</code>.</li>
 <li>The analyzed results file locations are shown in Section <a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results">8.10.2</a>.</li>
@@ -487,7 +489,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The Franken dataset contains <span class="math inline">\(I \times J = 2 \times 4 = 8\)</span> composite plots.</li>
 <li>The following shows how to display the composite plot for the Van Dyke dataset for treatment 1 and reader 2.</li>
 </ul>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="rsm-3-fits.html#cb86-1"></a>plotArr[[<span class="dv">1</span>]][[<span class="dv">1</span>,<span class="dv">2</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="rsm-3-fits.html#cb87-1"></a>plotArr[[<span class="dv">1</span>]][[<span class="dv">1</span>,<span class="dv">2</span>]]</span></code></pre></div>
 <p><img src="10-rsm-3-fits_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>The plot is labeled <code>D2, i = 1, j = 2</code>, meaning the second dataset in the <code>datasetNames</code> array, i.e., <code>datasetNames[2]</code>, the second treatment and the second reader. It contains 3 plots:</p>
 <ul>
@@ -520,7 +522,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sigma_AUC =  0.04740562 
 ## NLLini =  96.48516 
 ## NLLfin =  85.86244</code></pre>
-<p>The first four values are the fitted values for the RSM parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span>, <span class="math inline">\(\nu&#39;\)</span> and <span class="math inline">\(\zeta_1\)</span>. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
+<p>The first four values are the fitted values for the RSM parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span>, <span class="math inline">\(\nu&#39;\)</span> and <span class="math inline">\(\zeta_1\)</span>. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood.<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a></p>
 <p>Displayed next are RSM parameters for the Franken dataset, treatment 2 and reader 3:</p>
 <pre><code>## RSM parameters, Franken dataset, treatment 2, reader 3: 
 ## mu =  2.641412 
@@ -621,8 +623,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>An analysis was conducted to determine the average slopes and bootstrap confidence intervals.</p>
 <p>The code for calculating the average slopes is in <code>R/compare-3-fits/slopesConvVsRsm.R</code> and that for the bootstrap confidence intervals is in <code>R/compare-3-fits/slopesAucsConvVsRsmCI.R</code>.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="rsm-3-fits.html#cb93-1"></a>slopes &lt;-<span class="st"> </span><span class="kw">slopesConvVsRsm</span>(datasetNames)</span>
-<span id="cb93-2"><a href="rsm-3-fits.html#cb93-2"></a>slopeCI &lt;-<span class="st"> </span><span class="kw">slopesAucsConvVsRsmCI</span>(datasetNames)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="rsm-3-fits.html#cb94-1"></a>slopes &lt;-<span class="st"> </span><span class="kw">slopesConvVsRsm</span>(datasetNames)</span>
+<span id="cb94-2"><a href="rsm-3-fits.html#cb94-2"></a>slopeCI &lt;-<span class="st"> </span><span class="kw">slopesAucsConvVsRsmCI</span>(datasetNames)</span></code></pre></div>
 <p>The call to function <code>slopesConvVsRsm()</code> returns <code>slopes</code>, which contains, for each of 14 datasets, four <code>lists</code>: two plots and two slopes. For example:</p>
 <ul>
 <li>PRO vs. RSM: <code>slopes$p1[[2]]</code> is the plot of <span class="math inline">\(\text{AUC}^{PRO}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span> for all treatments and readers in the Van Dyke dataset. The plot for dataset <span class="math inline">\(f, f = 1, 2, ...14\)</span> is accessed as <code>slopes$p1[[f]]</code> which yields the plot of <span class="math inline">\(\text{AUC}^{PRO}_{f \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{f \bullet \bullet}\)</span>.</li>
@@ -990,7 +992,7 @@ NA
 <h2><span class="header-section-number">8.10</span> Appendices<a href="rsm-3-fits.html#rsm-3-fits-appendices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="rsm-3-fits-one-dataset-proproc" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.10.1</span> Location of PROPROC files<a href="rsm-3-fits.html#rsm-3-fits-one-dataset-proproc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For each dataset PROPROC parameters were obtained by running the Windows software with PROPROC selected as the curve-fitting method. The results are saved to files that end with <code>proprocnormareapooled.csv</code><a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a> contained in “R/compare-3-fits/MRMCRuns/C/”, where <code>C</code> denotes the name of the dataset (for example, for the Van Dyke dataset, <code>C</code> = “VD”). Examples are shown in the next two screen-shots.</p>
+<p>For each dataset PROPROC parameters were obtained by running the Windows software with PROPROC selected as the curve-fitting method. The results are saved to files that end with <code>proprocnormareapooled.csv</code><a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a> contained in “R/compare-3-fits/MRMCRuns/C/”, where <code>C</code> denotes the name of the dataset (for example, for the Van Dyke dataset, <code>C</code> = “VD”). Examples are shown in the next two screen-shots.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:rsm-3-fits-mrmc-runs"></span>
 <img src="images/compare-3-fits/MRMCRuns.png" alt="Screen shot (1 of 2) of `R/compare-3-fits/MRMCRuns` showing the folders containing the results of PROPROC analysis on 14 datasets." width="300pt" />
 <p class="caption">
@@ -1003,7 +1005,7 @@ FIGURE 8.4: Screen shot (1 of 2) of <code>R/compare-3-fits/MRMCRuns</code> showi
 FIGURE 8.5: Screen shot (2 of 2) of <code>R/compare-3-fits/MRMCRuns/VD</code> showing files containing the results of PROPROC analysis for the Van Dyke dataset.
 </p>
 </div>
-<p>The contents of <code>R/compare-3-fits/MRMCRuns/VD/VDproprocnormareapooled.csv</code> are shown next, see Fig. <a href="rsm-3-fits.html#fig:rsm-3-fits-proproc-output-van-dyke">8.6</a>.<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a> The PROPROC parameters <span class="math inline">\(c\)</span> and <span class="math inline">\(d_a\)</span> are in the last two columns. The column names are <code>T</code> = treatment; <code>R</code> = reader; <code>return-code</code> = undocumented value, <code>area</code> = PROPROC AUC; <code>numCAT</code> = number of ROC bins; <code>adjPMean</code> = undocumented value; <code>c</code> = <span class="math inline">\(c\)</span> and <code>d_a</code> = <span class="math inline">\(d_a\)</span>, are the PROPROC parameters defined in <span class="citation">(Metz and Pan <a href="#ref-metz1999proper" role="doc-biblioref">1999</a>)</span>.</p>
+<p>The contents of <code>R/compare-3-fits/MRMCRuns/VD/VDproprocnormareapooled.csv</code> are shown next, see Fig. <a href="rsm-3-fits.html#fig:rsm-3-fits-proproc-output-van-dyke">8.6</a>.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a> The PROPROC parameters <span class="math inline">\(c\)</span> and <span class="math inline">\(d_a\)</span> are in the last two columns. The column names are <code>T</code> = treatment; <code>R</code> = reader; <code>return-code</code> = undocumented value, <code>area</code> = PROPROC AUC; <code>numCAT</code> = number of ROC bins; <code>adjPMean</code> = undocumented value; <code>c</code> = <span class="math inline">\(c\)</span> and <code>d_a</code> = <span class="math inline">\(d_a\)</span>, are the PROPROC parameters defined in <span class="citation">(Metz and Pan <a href="#ref-metz1999proper" role="doc-biblioref">1999</a>)</span>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:rsm-3-fits-proproc-output-van-dyke"></span>
 <img src="images/compare-3-fits/vanDyke.png" alt="PROPROC output for the Van Dyke ROC data set. The first column is the treatment, the second is the reader, the fourth is the AUC and the last two columns are the c and $d_a$ parameters." width="50%" height="20%" />
 <p class="caption">
@@ -1074,12 +1076,12 @@ FIGURE 8.12: Composite plots in both treatments for Van Dyke dataset, reader 5.
 </div>
 <div class="footnotes">
 <hr />
-<ol start="32">
-<li id="fn32"><p>Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.<a href="rsm-3-fits.html#fnref32" class="footnote-back">↩︎</a></p></li>
-<li id="fn33"><p>OR DBM-MRMC 2.5, Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.<a href="rsm-3-fits.html#fnref33" class="footnote-back">↩︎</a></p></li>
-<li id="fn34"><p>The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being <em>minimized</em>, the final value is smaller than the initial value.<a href="rsm-3-fits.html#fnref34" class="footnote-back">↩︎</a></p></li>
-<li id="fn35"><p>In accordance with R-package policies white-spaces in the original <code>PROPROC</code> output file names have been removed.<a href="rsm-3-fits.html#fnref35" class="footnote-back">↩︎</a></p></li>
-<li id="fn36"><p>The <code>VD.lrc</code> file in this directory is the Van Dyke data formatted for input to OR DBM-MRMC 2.5.<a href="rsm-3-fits.html#fnref36" class="footnote-back">↩︎</a></p></li>
+<ol start="34">
+<li id="fn34"><p>Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.<a href="rsm-3-fits.html#fnref34" class="footnote-back">↩︎</a></p></li>
+<li id="fn35"><p>OR DBM-MRMC 2.5, Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.<a href="rsm-3-fits.html#fnref35" class="footnote-back">↩︎</a></p></li>
+<li id="fn36"><p>The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being <em>minimized</em>, the final value is smaller than the initial value.<a href="rsm-3-fits.html#fnref36" class="footnote-back">↩︎</a></p></li>
+<li id="fn37"><p>In accordance with R-package policies white-spaces in the original <code>PROPROC</code> output file names have been removed.<a href="rsm-3-fits.html#fnref37" class="footnote-back">↩︎</a></p></li>
+<li id="fn38"><p>The <code>VD.lrc</code> file in this directory is the Van Dyke data formatted for input to OR DBM-MRMC 2.5.<a href="rsm-3-fits.html#fnref38" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

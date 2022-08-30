@@ -9,7 +9,7 @@
 
 ## Datasets {#datasets-datasets}
 
-The datasets are embedded in the `RJafroc` package. They can be viewed in the help file of the package, a partial screen-shot of which is shown next. 
+The datasets are embedded in `RJafroc`. They can be viewed in the help file of the package, a partial screen-shot of which is shown next. 
 
 
 <div class="figure" style="text-align: center">
