@@ -1,5 +1,7 @@
 # (PART\*) CAD applications {-}
 
+# Standalone CAD vs. Radiologists {#standalone-cad-radiologists}
+
 
 ---
 output:
@@ -21,9 +23,6 @@ output:
   library(seqinr)
   library(here)
 ```
-
-
-# Standalone CAD vs. Radiologists {#standalone-cad-radiologists}
 
 
 ## TBA How much finished {#standalone-cad-radiologists-how-much-finished}
