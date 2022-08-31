@@ -201,7 +201,7 @@ Equations \@ref(eq:empirical-NLF1) and \@ref(eq:empirical-LLF1) are equivalent t
 
 
 \begin{equation}
-\text{NLF}_r  = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right )\sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right ) 
+\text{NLF}_r  = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right )\sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right ) 
 (\#eq:empirical-NLFr)
 \end{equation}
 
@@ -217,7 +217,7 @@ and
 
 Each indicator function, $\mathbb{I}()$, yields unity if the argument is true and zero otherwise.
 
-In Eqn. \@ref(eq:empirical-NLFr) $\mathbb{I} \left ( N_{k_t t} \neq 0 \right )$ ensures that *only cases with at least one latent NL* are counted. Recall that $N_{k_t t}$ is the total number of latent NLs in case $k_t t$.  The term $\mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right )$ counts over all NL marks with ratings $\geq \zeta_r$. The three summations yield the total number of NLs in the dataset with z-samples $\geq \zeta_r$ and dividing by the total number of cases yields $\text{NLF}_r$. This equation also shows explicitly that NLs on both non-diseased ($t=1$) and diseased ($t=2$) cases contribute to NLF.
+In Eqn. \@ref(eq:empirical-NLFr) $\mathbb{I} \left ( N_{k_t t} > 0 \right )$ ensures that *only cases with at least one latent NL* are counted. Recall that $N_{k_t t}$ is the total number of latent NLs in case $k_t t$.  The term $\mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right )$ counts over all NL marks with ratings $\geq \zeta_r$. The three summations yield the total number of NLs in the dataset with z-samples $\geq \zeta_r$ and dividing by the total number of cases yields $\text{NLF}_r$. This equation also shows explicitly that NLs on both non-diseased ($t=1$) and diseased ($t=2$) cases contribute to NLF.
 
 In Eqn. \@ref(eq:empirical-LLFr) a summation over $t$ is not needed as only diseased cases contribute to LLF. A term like $\mathbb{I} \left ( L_{k_2 2} \neq 0 \right )$ would be superfluous since $L_{k_2 2} > 0$ as each diseased case must have at least one lesion. The term $\mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r \right )$ counts over all LL marks with ratings $\geq \zeta_r$. Dividing by $L_T$, the total number of lesions in the dataset, yields $\text{LLF}_r$.
 
@@ -235,7 +235,7 @@ The abscissa of the observed end-point $NLF_1$, is defined by:
 
 
 \begin{equation}
-\text{NLF}_1 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_1 \right ) 
+\text{NLF}_1 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_1 \right ) 
 (\#eq:empirical-NLF11)
 \end{equation}
 
@@ -267,17 +267,19 @@ To understand this consider the expression for $NLF_0$, i.e., using Eqn. \@ref(e
 
 
 \begin{equation}
-\text{NLF}_0 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq -\infty \right ) 
+\text{NLF}_0 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq -\infty \right ) 
 \end{equation}
 
 
-The right hand side of this equation can be separated into two terms, the contribution of latent NLs with z-samples in the range $z \geq \zeta_1$ and those in the range $-\infty \leq z < \zeta_1$. The first term yields the abscissa of the observed end-point, Eqn. \@ref(eq:empirical-NLF11). The 2nd term is:
+The right hand side of this equation can be separated into two terms, the contribution of latent NLs with z-samples in the range $z \geq \zeta_1$ and those in the range $-\infty \leq z < \zeta_1$. The first term yields the abscissa of the observed end-point, Eqn. \@ref(eq:empirical-NLF11) but the 2nd term cannot be evaluated:
 
 
 \begin{equation}
 \left. 
 \begin{aligned} 
-\text{2nd term}=&\left (\frac{1}{K_1+K_2} \right )\sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( -\infty \leq z_{k_t t l_1 1} < \zeta_1 \right )\\
+\text{1st term}=&\left (\frac{1}{K_1+K_2} \right )\sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \ge \zeta_1 \right )\\
+=&\text{NLF}_1\\
+\text{2nd term}=&\left (\frac{1}{K_1+K_2} \right )\sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( -\infty \leq z_{k_t t l_1 1} < \zeta_1 \right )\\
 =&\frac{\text{unknown number}}{K_1+K_2}
 \end{aligned}
 \right \} 
@@ -285,7 +287,7 @@ The right hand side of this equation can be separated into two terms, the contri
 \end{equation}
 
 
-It represents the contribution of unmarked NLs, i.e., latent NLs whose z-samples were below $\zeta_1$. It determines how much further to the right the observer's NLF would have moved, relative to $NLF_1$, if one could get the observer to lower the reporting criterion to $-\infty$. *Since the observer may not oblige, this term cannot, in general, be evaluated.* Therefore $NLF_0$ cannot be evaluated. The basic problem is that *unmarked latent NLs represent unobservable events*.
+The 2nd term represents the contribution of *unmarked NLs*, i.e., latent NLs whose z-samples were below $\zeta_1$. It determines how much further to the right the observer's NLF would have moved relative to $NLF_1$ *if* one could get the observer to lower the reporting criterion to $-\infty$. *Since the observer may not oblige, this term cannot, in general, be evaluated.* Therefore $NLF_0$ cannot be evaluated. The basic problem is that *unmarked latent NLs represent unobservable events*.
 
 Turning our attention to $LLF_0$:
 
@@ -301,9 +303,10 @@ Turning our attention to $LLF_0$:
 \end{equation}
 
 
-Unlike unmarked latent NLs, **unmarked lesions can safely be assigned the $-\infty$ rating, because an unmarked lesion is an observable event*. The right hand side of Eqn. \@ref(eq:empirical-LLF0) evaluates to unity. However, since the corresponding abscissa $NLF_0$ is undefined, one cannot plot this point. It follows that one cannot extrapolate outside the observed end-point.
+Unlike unmarked latent NLs, *unmarked lesions can safely be assigned the $-\infty$ rating, because an unmarked lesion is an observable event*. The right hand side of Eqn. \@ref(eq:empirical-LLF0) evaluates to unity. However, since the corresponding abscissa $NLF_0$ is undefined, one cannot plot this point. It follows that one cannot extrapolate outside the observed end-point.
 
-The formalism should not obscure the fact that the futility of extrapolation outside the observed end-point of the FROC is a fairly obvious property: one does not know how far to the right the abscissa of the observed end-point might extend if one could get the observer to report every latent NL.
+The above formalism should not obscure the fact that the futility of extrapolation outside the observed end-point of the FROC is a fairly obvious scientific property: extrapolating outside the range of the observed operating points is generally not a good idea.
+
 
 ### Illustration with a dataset {#empirical-froc-plot-illustration}
 
@@ -322,8 +325,8 @@ Shown next is calculation of the figure of merit for this dataset. All 20 modali
 
 
 ```{r, echo=TRUE}
-fom <- as.data.frame(UtilFigureOfMerit(dataset04, FOM = "FROC"))
-print(fom)
+auc_froc <- as.data.frame(UtilFigureOfMerit(dataset04, FOM = "FROC"))
+print(auc_froc)
 ```
 
 
@@ -334,7 +337,7 @@ auc_froc <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "FROC")))
 
 ## The inferred-ROC plot {#empirical-ROC}
 
-By adopting a rational rule for converting the mark-rating data per case to a single rating per case, and commonly the highest rating rule is used [^empirical1-3], it is possible to infer ROC data from FROC mark-rating data.
+By adopting a rule for converting the mark-rating data per case to a single rating per case, and commonly the highest rating rule is used [^empirical1-3], it is possible to infer ROC data from FROC mark-rating data.
 
 [^empirical1-3]: The highest rating method was used in early FROC modeling in [@bunch1977free] and in [@swensson1996unified], the latter in the context of LROC paradigm modeling.
 
@@ -346,13 +349,15 @@ When there is little possibility for confusion, the prefix "inferred" is suppres
 
 Definitions:
 
--   $FPF(\zeta)$ = cumulated inferred FP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of non-diseased cases.
--   $TPF(\zeta)$ = cumulated inferred TP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of diseased cases
+>
+ -   $FPF(\zeta)$ = cumulated inferred FP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of non-diseased cases.
+ -   $TPF(\zeta)$ = cumulated inferred TP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of diseased cases
 
 Definition of ROC plot:
 
--   The ROC is the plot of inferred $TPF(\zeta)$ vs. inferred $FPF(\zeta)$.
--   *The plot includes a straight line extension from the observed end-point to (1,1)*.
+>
+ -   The ROC is the plot of inferred $TPF(\zeta)$ vs. inferred $FPF(\zeta)$.
+ -   *The plot includes a straight line extension from the observed end-point to (1,1)*.
 
 
 ### Inferred FPF
@@ -363,9 +368,11 @@ The highest z-sample ROC false positive (FP) rating for non-diseased case $k_1 1
 \begin{equation}
 \left.
 \begin{aligned}
-FP_{k_1 1}=&\max_{l1} \left ( z_{k_1 1 l_1 1 } \mid l_1 \neq \varnothing \right ) \\
-=& -\infty \mid l_1 = \varnothing  
- \end{aligned}
+\begin{matrix}
+FP_{k_1 1}=&\max_{l_1} \left ( z_{k_1 1 l_1 1 } \right ) & \text{if} & l_1 \neq \varnothing\\
+FP_{k_1 1}=&-\infty & \text{if} & l_1 = \varnothing
+\end{matrix}
+\end{aligned}
 \right \}
 (\#eq:empirical-FP)
 \end{equation}
@@ -382,11 +389,13 @@ If the case has at least one latent NL mark, then $l_1 \neq \varnothing$, where 
 
 ### Inferred TPF
 
-The inferred true positive (TP) z-sample for diseased case $k_2 2$ is defined by:
+The inferred true positive (TP) z-sample for diseased case $k_2 2$ is defined by one of the following three equations, as explained below:
 
 
 \begin{equation}
-TP_{k_2 2} = \text{max}_{l_1 l_2}\left ( z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2} \mid l_1 \neq \varnothing \right )
+\begin{matrix}
+TP_{k_2 2} = \text{max}_{l_1 l_2}\left ( z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}  \right ) & \text{if} & l_1 \neq \varnothing
+\end{matrix}
 (\#eq:empirical-TP1)
 \end{equation}
 
@@ -395,7 +404,10 @@ or
 
 
 \begin{equation}
-TP_{k_2 2} = \max_{l_2}  \left ( z_{k_2 2 l_2 2} \mid\left ( l_1 = \varnothing \land \left (\max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} \neq -\infty  \right )  \right ) \right ) 
+\begin{matrix}
+TP_{k_2 2} = \max_{l_2}  \left ( z_{k_2 2 l_2 2} \right ) 
+ & \text{if} & \left( l_1 = \varnothing \right) \land \left (\text{max}_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} > -\infty  \right )
+\end{matrix}
 (\#eq:empirical-TP2)
 \end{equation}
 
@@ -405,7 +417,10 @@ or
 
 
 \begin{equation}
-TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} = -\infty  \right )  \right )
+\begin{matrix}
+TP_{k_2 2} = -\infty 
+ & \text{if} & \left ( l_1 = \varnothing \land\left ( \max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} = -\infty  \right )  \right )
+\end{matrix}
 (\#eq:empirical-TP3)
 \end{equation}
 
