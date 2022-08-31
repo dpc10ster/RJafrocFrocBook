@@ -459,7 +459,7 @@ print(ret$Plot)
 ```
 
 
-Shown next is calculation of the figure of merit for this dataset ^[In function `UtilFigureOfMerit` the `FOM` argument has to be set to `HrAuc`, which denotes the highest rating inferred-ROC AUC.].
+Shown next is calculation of the figure of merit for this dataset. Note that in function `UtilFigureOfMerit()` the `FOM` argument has to be set to `HrAuc`, for highest rating AUC.].
 
 
 ```{r, echo=TRUE}
@@ -476,12 +476,14 @@ auc_HrAuc <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "HrAuc")))
 
 ## The alternative FROC (AFROC) plot {#empirical-AFROC}
 
--   Fig. 4 in [@bunch1977free] anticipated another way of visualizing FROC data. I subsequently termed[^empirical1-4] this the *alternative FROC (AFROC)* plot [@chakraborty1989maximum].
+-   Fig. 4 in [@bunch1977free] anticipated another way of visualizing FROC data. I subsequently termed this the *alternative FROC (AFROC)* plot [@chakraborty1989maximum].
 -   The empirical AFROC is defined as the plot of $\text{LLF}(\zeta_r)$ along the ordinate vs. $\text{FPF}(\zeta_r)$ along the abscissa.
--   $\text{LLF}_r \equiv \text{LLF}(\zeta_r)$ was defined in Eqn. \@ref(eq:empirical-LLFr).
--   $\text{FPF}_r \equiv \text{FPF}(\zeta_r)$ was defined in Eqn. \@ref(eq:empirical-fpf).
+-   $\text{LLF}_r \equiv \text{LLF}(\zeta_r)$, the ordinate of the FROC plot, was defined in Eqn. \@ref(eq:empirical-LLFr).
+-   $\text{FPF}_r \equiv \text{FPF}(\zeta_r)$, the abscissa of the ROC plot, was defined in Eqn. \@ref(eq:empirical-fpf).
 
-[^empirical1-4]: The late Prof. Richard Swensson did not like my choice of the word "alternative" in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.
+
+The late Prof. Richard Swensson did not like my choice of the word "alternative" in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.
+
 
 ### Definition: empirical AFROC plot and AUC {#empirical-definition-empirical-auc-afroc}
 
