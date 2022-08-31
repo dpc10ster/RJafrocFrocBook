@@ -128,7 +128,7 @@ In the medical imaging context, assuming the mark rating pairs have been classif
 
 -   Lesion localization fraction (LLF) is defined as the total number of LLs rated at or above the same threshold rating divided by the total number of lesions.
 
--   The FROC plot is defined as that of LLF (ordinate) vs. NLF as the threshold is varied. If the points are connected by straight lines the resulting "curve" is termed the *empirical FROC curve*. 
+-   The FROC plot is defined as that of LLF (ordinate) vs. NLF as the threshold is varied.
 
 -   The upper-right-most operating point is termed the *observed end-point* and its coordinated are denoted $(\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})$.
 
@@ -143,6 +143,7 @@ If *continuous ratings* are used, the procedure is to start with a very high thr
 
 
 Chapter \@ref(empirical) describes the FROC, and other possible operating characteristics, in more detail. 
+
 
 ### Illustration with a dataset {#froc-paradigm-plot-illustration}
 

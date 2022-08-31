@@ -163,7 +163,7 @@ The notational issue is how to handle images with no latent NL marks. Basically 
 * Likewise, $l_2 = \left \{ 1,2,...,L_{k_2 2} \right \}$ indexes latent LL marks. Unmarked LLs are assigned negative infinity ratings. The null set notation is not needed for latent LLs.
 
 
-## The empirical FROC plot {#empirical-froc-plot}
+## Operating points {#empirical-froc-plot-operating-points}
 
 The FROC, Chapter `\@ref(froc-paradigm-froc-plot)`, is the plot of LLF (along the ordinate) vs. NLF (along the abscissa).
 
@@ -186,7 +186,7 @@ and
 \end{equation}
 
 
-The observed operating points correspond to the following values of $r$:
+The allowed values of $r$ are:
 
 
 \begin{equation}
@@ -197,7 +197,7 @@ r = 1, 2, ...,R_{FROC}
 
 Due to the ordering of the thresholds, i.e., $\zeta_1 < \zeta_2 ... < \zeta_{R_{FROC}}$, higher values of $r$ correspond to lower operating points. The uppermost operating point, i.e., that defined by $r = 1$, is referred to the as the *observed end-point*.
 
-Equations \@ref(eq:empirical-NLF1) and \@ref(eq:empirical-LLF1) is are equivalent to:
+Equations \@ref(eq:empirical-NLF1) and \@ref(eq:empirical-LLF1) are equivalent to:
 
 
 \begin{equation}
@@ -219,7 +219,7 @@ Each indicator function, $\mathbb{I}()$, yields unity if the argument is true an
 
 In Eqn. \@ref(eq:empirical-NLFr) $\mathbb{I} \left ( N_{k_t t} \neq 0 \right )$ ensures that *only cases with at least one latent NL* are counted. Recall that $N_{k_t t}$ is the total number of latent NLs in case $k_t t$.  The term $\mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right )$ counts over all NL marks with ratings $\geq \zeta_r$. The three summations yield the total number of NLs in the dataset with z-samples $\geq \zeta_r$ and dividing by the total number of cases yields $\text{NLF}_r$. This equation also shows explicitly that NLs on both non-diseased ($t=1$) and diseased ($t=2$) cases contribute to NLF.
 
-In Eqn. \@ref(eq:empirical-LLFr) a summation over $t$ is not needed as only diseased cases contribute to LLF. Analogous to the first indicator function term in Eqn. \@ref(eq:empirical-NLFr), a term like $\mathbb{I} \left ( L_{k_2 2} \neq 0 \right )$ would be superfluous since $L_{k_2 2} > 0$ as each diseased case must have at least one lesion. The term $\mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r \right )$ counts over all LL marks with ratings $\geq \zeta_r$. Dividing by $L_T$, the total number of lesions in the dataset, yields $\text{LLF}_r$.
+In Eqn. \@ref(eq:empirical-LLFr) a summation over $t$ is not needed as only diseased cases contribute to LLF. A term like $\mathbb{I} \left ( L_{k_2 2} \neq 0 \right )$ would be superfluous since $L_{k_2 2} > 0$ as each diseased case must have at least one lesion. The term $\mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r \right )$ counts over all LL marks with ratings $\geq \zeta_r$. Dividing by $L_T$, the total number of lesions in the dataset, yields $\text{LLF}_r$.
 
 ### Definition: empirical FROC plot and AUC {#empirical-definition-empirical-auc-froc}
 
@@ -322,7 +322,8 @@ Shown next is calculation of the figure of merit for this dataset. All 20 modali
 
 
 ```{r, echo=TRUE}
-UtilFigureOfMerit(dataset04, FOM = "FROC")
+fom <- as.data.frame(UtilFigureOfMerit(dataset04, FOM = "FROC"))
+print(fom)
 ```
 
 
