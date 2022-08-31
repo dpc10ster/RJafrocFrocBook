@@ -120,7 +120,7 @@ In the medical imaging context, assuming the mark rating pairs have been classif
 
 -   Lesion localization fraction (LLF) is defined as the total number of LLs rated at or above the same threshold rating divided by the total number of lesions.
 
--   The FROC plot is defined as that of LLF (ordinate) vs. NLF as the threshold is varied. If the points are connected by straight lines the resulting "curve" is termed the *empirical FROC curve*. 
+-   The FROC plot is defined as that of LLF (ordinate) vs. NLF as the threshold is varied.
 
 -   The upper-right-most operating point is termed the *observed end-point* and its coordinated are denoted $(\text{NLF}_{\text{max}}, \text{LLF}_{\text{max}})$.
 
@@ -135,6 +135,7 @@ If *continuous ratings* are used, the procedure is to start with a very high thr
 
 
 Chapter \@ref(empirical) describes the FROC, and other possible operating characteristics, in more detail. 
+
 
 ### Illustration with a dataset {#froc-paradigm-plot-illustration}
 
@@ -152,7 +153,9 @@ print(ret$Plot)
 <img src="02-froc_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
 
-The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic that the operating point cannot move downward or to the left as one cumulates lower confidence level marks (i.e., it can only move upward and to the right; the curve can flatten out or it can end at a finite value of NLF). 
+The study in question was a 5 rating FROC study. The lowest non-trivial point corresponds to the marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic that the operating point cannot move downward or to the left as one cumulates lower confidence level marks (i.e., it can only move upward and to the right; the plot can flatten out or it can end at a finite value of NLF). 
+
+The plot shown above is termed an *empirical plot* as it consists of the empirical (observed) operating points connected by straight line segments.
 
 
 ## The "solar" analogy {#froc-paradigm-solar-analogy}

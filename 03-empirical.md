@@ -216,24 +216,36 @@ With this background, let us return to the conceptual issue: why does the observ
 
 [^empirical1-1]: I expected the number of NL marks per image to be limited only by the ratio of image size to lesion size, i.e., larger values for smaller lesions.
 
-The notational issue is how to handle images with no latent NL marks. Basically it involves restricting summations over cases $k_ t t$ to those cases which have at least one latent NL mark, i.e., $N_{k_t t} \neq 0$, as in the following: 
+The notational issue is how to handle images with no latent NL marks. Basically it involves restricting summations over cases $k_ t t$ to those cases which have at least one latent NL mark, i.e., $N_{k_t t} > 0$, as in the following: 
 
 * $l_1 = \{1, 2, ..., N_{k_t t}\}$ indexes latent NL marks, provided the case has at least one latent NL mark, and otherwise $N_{k_t t} = 0$ and $l_1 = \varnothing$, the null set. The possible values of $l_1$ are $l_1 = \left \{ \varnothing \right \}\oplus \left \{ 1,2,...N_{k_t t} \right \}$. The null set applies when the case has no latent NL marks and $\oplus$ is the "exclusive-or" symbol ("exclusive-or" is used in the English sense: "one or the other, but not neither nor both"). In other words, $l_1$ can *either* be the null set or take on values $1,2,...N_{k_t t}$.
 
-* Likewise, $l_2 = \left \{ 1,2,...,L_{k_2 2} \right \}$ indexes latent LL marks. Unmarked LLs are assigned negative infinity ratings. The null set notation is not needed for latent LLs.
+* $l_2 = \left \{ 1,2,...,L_{k_2 2} \right \}$ indexes latent LL marks. Unmarked LLs are assigned negative infinity ratings as these are observable events. The null set notation is not needed because for every diseased case $L_{k_2 2} > 0$.
 
 
-## The empirical FROC plot {#empirical-froc-plot}
+## The FROC plot and AUC {#empirical-froc-plot-1}
 
-The FROC, Chapter `\@ref(froc-paradigm-froc-plot)`, is the plot of LLF (along the ordinate) vs. NLF (along the abscissa).
+Definitions:
 
-Using the notation of Table \@ref(tab:empirical-notation) and assuming binned data[^empirical1-2], then, corresponding to the operating point determined by threshold $\zeta_r$, the FROC abscissa is $\text{NLF}_r \equiv \text{NLF}\left ( \zeta_r \right )$, the total number of NLs rated $\geq$ threshold $\zeta_r$ divided by the total number of cases, and the corresponding ordinate is $\text{LLF}_r \equiv \text{LLF}\left ( \zeta_r \right )$, the total number of LLs rated $\geq$ threshold $\zeta_r$ divided by the total number of lesions:
+>
+ -   $NLF_r \equiv NLF(\zeta_r)$ = cumulated NL counts with z-sample $\geq$ threshold $\zeta_r$ divided by total number of non-diseased cases.
+ -   $LLF_r \equiv LLF(\zeta_r)$ = cumulated LL counts with z-sample $\geq$ threshold $\zeta_r$ divided by total number of lesions.
 
-[^empirical1-2]: This is not a limiting assumption: if the data is continuous, for finite numbers of cases, no ordering information is lost if the number of ratings is chosen large enough. This is analogous to Bamber's theorem in Chapter 05, where a proof, although given for binned data, is applicable to continuous data.
+
+Definitions:
+
+>
+The empirical FROC plot connects adjacent operating points $\left (\text{NLF}_r, \text{LLF}_r \right )$, including the origin (0,0) and the observed end-point, with straight lines. The area under this plot is the empirical FROC AUC, denoted $A_{\text{FROC}}$. **Warning: this is a particularly dangerous figure of merit, as will shortly become clear.**
+
+Using the notation of Table \@ref(tab:empirical-notation) and assuming binned data[^empirical1-2] and $n(x)$ denotes the number of events $x$:
+
+[^empirical1-2]: This is not a limiting assumption: if the data is continuous, for finite numbers of cases, no ordering information is lost if the number of ratings is chosen large enough. 
+
+
 
 
 \begin{equation}
-\text{NLF}_r  = \frac{n\left ( \text{NLs rated} \geq \zeta_r\right )}{n\left ( \text{cases} \right )}
+\text{NLF}_r  = \frac{n\left ( \text{NLs rated} \geq \zeta_r\right )}{K_1 + K_2}
 (\#eq:empirical-NLF1)
 \end{equation}
 
@@ -241,12 +253,12 @@ Using the notation of Table \@ref(tab:empirical-notation) and assuming binned da
 and
 
 \begin{equation}
-\text{LLF}_r  = \frac{n\left ( \text{LLs rated} \geq \zeta_r\right )}{n\left ( \text{lesions} \right )}
+\text{LLF}_r  = \frac{n\left ( \text{LLs rated} \geq \zeta_r\right )}{L_T}
 (\#eq:empirical-LLF1)
 \end{equation}
 
 
-The observed operating points correspond to the following values of $r$:
+The allowed values of $r$ are:
 
 
 \begin{equation}
@@ -257,11 +269,11 @@ r = 1, 2, ...,R_{FROC}
 
 Due to the ordering of the thresholds, i.e., $\zeta_1 < \zeta_2 ... < \zeta_{R_{FROC}}$, higher values of $r$ correspond to lower operating points. The uppermost operating point, i.e., that defined by $r = 1$, is referred to the as the *observed end-point*.
 
-Equations \@ref(eq:empirical-NLF1) and \@ref(eq:empirical-LLF1) is are equivalent to:
+Equations \@ref(eq:empirical-NLF1) and \@ref(eq:empirical-LLF1) are equivalent to:
 
 
 \begin{equation}
-\text{NLF}_r  = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right )\sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right ) 
+\text{NLF}_r  = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right )\sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right ) 
 (\#eq:empirical-NLFr)
 \end{equation}
 
@@ -277,30 +289,25 @@ and
 
 Each indicator function, $\mathbb{I}()$, yields unity if the argument is true and zero otherwise.
 
-In Eqn. \@ref(eq:empirical-NLFr) $\mathbb{I} \left ( N_{k_t t} \neq 0 \right )$ ensures that *only cases with at least one latent NL* are counted. Recall that $N_{k_t t}$ is the total number of latent NLs in case $k_t t$.  The term $\mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right )$ counts over all NL marks with ratings $\geq \zeta_r$. The three summations yield the total number of NLs in the dataset with z-samples $\geq \zeta_r$ and dividing by the total number of cases yields $\text{NLF}_r$. This equation also shows explicitly that NLs on both non-diseased ($t=1$) and diseased ($t=2$) cases contribute to NLF.
+In Eqn. \@ref(eq:empirical-NLFr) $\mathbb{I} \left ( N_{k_t t} > 0 \right )$ ensures that *only cases with at least one latent NL* are counted. Recall that $N_{k_t t}$ is the total number of latent NLs in case $k_t t$.  The term $\mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_r \right )$ counts over all NL marks with ratings $\geq \zeta_r$. The three summations yield the total number of NLs in the dataset with z-samples $\geq \zeta_r$ and dividing by the total number of cases yields $\text{NLF}_r$. This equation also shows explicitly that NLs on both non-diseased ($t=1$) and diseased ($t=2$) cases contribute to NLF.
 
-In Eqn. \@ref(eq:empirical-LLFr) a summation over $t$ is not needed as only diseased cases contribute to LLF. Analogous to the first indicator function term in Eqn. \@ref(eq:empirical-NLFr), a term like $\mathbb{I} \left ( L_{k_2 2} \neq 0 \right )$ would be superfluous since $L_{k_2 2} > 0$ as each diseased case must have at least one lesion. The term $\mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r \right )$ counts over all LL marks with ratings $\geq \zeta_r$. Dividing by $L_T$, the total number of lesions in the dataset, yields $\text{LLF}_r$.
+In Eqn. \@ref(eq:empirical-LLFr) a summation over $t$ is not needed as only diseased cases contribute to LLF. A term like $\mathbb{I} \left ( L_{k_2 2} > 0 \right )$ would be superfluous since $L_{k_2 2} > 0$ as each diseased case must have at least one lesion. The term $\mathbb{I} \left ( z_{k_2 2 l_2 2} \geq \zeta_r \right )$ counts over all LL marks with ratings $\geq \zeta_r$. Dividing by $L_T$, the total number of lesions in the dataset, yields $\text{LLF}_r$.
 
-### Definition: empirical FROC plot and AUC {#empirical-definition-empirical-auc-froc}
-
-The empirical FROC plot connects adjacent operating points $\left (\text{NLF}_r, \text{LLF}_r \right )$, including the origin (0,0) and the observed end-point, with straight lines. The area under this plot is the empirical FROC AUC, denoted $A_{\text{FROC}}$.
-
-### The origin, a trivial point {#empirical-origin-trivial-point}
 
 Since $\zeta_{R_{FROC}+1} = \infty$ according to Eqn. \@ref(eq:empirical-NLFr) and Eqn. \@ref(eq:empirical-LLFr), $r = R_{FROC}+1$ yields the trivial operating point (0,0).
 
-### The observed end-point and its semi-constrained property {#empirical-end-point}
+### The observed FROC end-point and its semi-constrained property {#empirical-end-point}
 
 The abscissa of the observed end-point $NLF_1$, is defined by:
 
 
 \begin{equation}
-\text{NLF}_1 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_1 \right ) 
+\text{NLF}_1 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq \zeta_1 \right ) 
 (\#eq:empirical-NLF11)
 \end{equation}
 
 
-Since each case could have an arbitrary number of NLs, $NLF_1$ need not equal unity, except fortuitously.
+Since each case could have an arbitrary non-negative number of NLs, $NLF_1$ need not equal unity, except fortuitously.
 
 The ordinate of the observed end-point $LLF_1$, is defined by:
 
@@ -327,17 +334,19 @@ To understand this consider the expression for $NLF_0$, i.e., using Eqn. \@ref(e
 
 
 \begin{equation}
-\text{NLF}_0 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq -\infty \right ) 
+\text{NLF}_0 = \frac{1}{K_1+K_2} \sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \geq -\infty \right ) 
 \end{equation}
 
 
-The right hand side of this equation can be separated into two terms, the contribution of latent NLs with z-samples in the range $z \geq \zeta_1$ and those in the range $-\infty \leq z < \zeta_1$. The first term yields the abscissa of the observed end-point, Eqn. \@ref(eq:empirical-NLF11). The 2nd term is:
+The right hand side of this equation can be separated into two terms, the contribution of latent NLs with z-samples in the range $z \geq \zeta_1$ and those in the range $-\infty \leq z < \zeta_1$. The first term yields the abscissa of the observed end-point, Eqn. \@ref(eq:empirical-NLF11) but the 2nd term cannot be evaluated:
 
 
 \begin{equation}
 \left. 
 \begin{aligned} 
-\text{2nd term}=&\left (\frac{1}{K_1+K_2} \right )\sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} \neq 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( -\infty \leq z_{k_t t l_1 1} < \zeta_1 \right )\\
+\text{1st term}=&\left (\frac{1}{K_1+K_2} \right )\sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( z_{k_t t l_1 1} \ge \zeta_1 \right )\\
+=&\text{NLF}_1\\
+\text{2nd term}=&\left (\frac{1}{K_1+K_2} \right )\sum_{t=1}^{2} \sum_{k_t=1}^{K_t} \mathbb{I} \left ( N_{k_t t} > 0 \right ) \sum_{l_1=1}^{N_{k_t t}} \mathbb{I} \left ( -\infty \leq z_{k_t t l_1 1} < \zeta_1 \right )\\
 =&\frac{\text{unknown number}}{K_1+K_2}
 \end{aligned}
 \right \} 
@@ -345,7 +354,7 @@ The right hand side of this equation can be separated into two terms, the contri
 \end{equation}
 
 
-It represents the contribution of unmarked NLs, i.e., latent NLs whose z-samples were below $\zeta_1$. It determines how much further to the right the observer's NLF would have moved, relative to $NLF_1$, if one could get the observer to lower the reporting criterion to $-\infty$. *Since the observer may not oblige, this term cannot, in general, be evaluated.* Therefore $NLF_0$ cannot be evaluated. The basic problem is that *unmarked latent NLs represent unobservable events*.
+The 2nd term represents the contribution of *unmarked NLs*, i.e., latent NLs whose z-samples were below $\zeta_1$. It determines how much further to the right the observer's NLF would have moved relative to $NLF_1$ *if* one could get the observer to lower the reporting criterion to $-\infty$. *Since the observer may not oblige, this term cannot, in general, be evaluated.* Therefore $NLF_0$ cannot be evaluated. The basic problem is that *unmarked latent NLs represent unobservable events*.
 
 Turning our attention to $LLF_0$:
 
@@ -361,9 +370,10 @@ Turning our attention to $LLF_0$:
 \end{equation}
 
 
-Unlike unmarked latent NLs, **unmarked lesions can safely be assigned the $-\infty$ rating, because an unmarked lesion is an observable event*. The right hand side of Eqn. \@ref(eq:empirical-LLF0) evaluates to unity. However, since the corresponding abscissa $NLF_0$ is undefined, one cannot plot this point. It follows that one cannot extrapolate outside the observed end-point.
+Unlike unmarked latent NLs, *unmarked lesions can safely be assigned the $-\infty$ rating, because an unmarked lesion is an observable event*. The right hand side of Eqn. \@ref(eq:empirical-LLF0) evaluates to unity. However, since the corresponding abscissa $NLF_0$ is undefined, one cannot plot this point. It follows that one cannot extrapolate outside the observed end-point.
 
-The formalism should not obscure the fact that the futility of extrapolation outside the observed end-point of the FROC is a fairly obvious property: one does not know how far to the right the abscissa of the observed end-point might extend if one could get the observer to report every latent NL.
+The above formalism should not obscure the fact that the futility of extrapolation outside the observed end-point of the FROC is obvious for scientific reasons: extrapolating outside the range of the observed data is generally not a good idea.
+
 
 ### Illustration with a dataset {#empirical-froc-plot-illustration}
 
@@ -380,13 +390,13 @@ print(ret$Plot)
 
 <img src="03-empirical_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
-
-Shown next is calculation of the figure of merit for this dataset. All 20 values are shown. The value for `trt1` and `rdr1` is the area under the FROC plot shown above.
+Shown next is calculation of the figure of merit for this dataset. All 20 modality-reader combinations are shown. 
 
 
 
 ```r
-UtilFigureOfMerit(dataset04, FOM = "FROC")
+auc_froc <- as.data.frame(UtilFigureOfMerit(dataset04, FOM = "FROC"))
+print(auc_froc)
 #>           rdr1      rdr3      rdr4       rdr5
 #> trt1 0.2361972 0.1085035 0.2268486 0.09922535
 #> trt2 0.2192077 0.2231338 0.4793310 0.18450704
@@ -396,12 +406,16 @@ UtilFigureOfMerit(dataset04, FOM = "FROC")
 ```
 
 
+The value 0.2361972 for `trt1` and `rdr1` is the area under the FROC plot shown above.
+
+
+
 
 
 
 ## The inferred-ROC plot {#empirical-ROC}
 
-By adopting a rational rule for converting the mark-rating data per case to a single rating per case, and commonly the highest rating rule is used [^empirical1-3], it is possible to infer ROC data from FROC mark-rating data.
+By adopting a rule for converting the mark-rating data per case to a single rating per case, and commonly the highest rating rule is used [^empirical1-3], it is possible to infer ROC data from FROC mark-rating data.
 
 [^empirical1-3]: The highest rating method was used in early FROC modeling in [@bunch1977free] and in [@swensson1996unified], the latter in the context of LROC paradigm modeling.
 
@@ -413,13 +427,15 @@ When there is little possibility for confusion, the prefix "inferred" is suppres
 
 Definitions:
 
--   $FPF(\zeta)$ = cumulated inferred FP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of non-diseased cases.
--   $TPF(\zeta)$ = cumulated inferred TP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of diseased cases
+>
+ -   $FPF(\zeta)$ = cumulated inferred FP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of non-diseased cases.
+ -   $TPF(\zeta)$ = cumulated inferred TP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of diseased cases
 
 Definition of ROC plot:
 
--   The ROC is the plot of inferred $TPF(\zeta)$ vs. inferred $FPF(\zeta)$.
--   *The plot includes a straight line extension from the observed end-point to (1,1)*.
+>
+ -   The ROC is the plot of inferred $TPF(\zeta)$ vs. inferred $FPF(\zeta)$.
+ -   *The plot includes a straight line extension from the observed end-point to (1,1)*.
 
 
 ### Inferred FPF
@@ -430,9 +446,11 @@ The highest z-sample ROC false positive (FP) rating for non-diseased case $k_1 1
 \begin{equation}
 \left.
 \begin{aligned}
-FP_{k_1 1}=&\max_{l1} \left ( z_{k_1 1 l_1 1 } \mid l_1 \neq \varnothing \right ) \\
-=& -\infty \mid l_1 = \varnothing  
- \end{aligned}
+\begin{matrix}
+FP_{k_1 1}=&\max_{l_1} \left ( z_{k_1 1 l_1 1 } \right ) & \text{if} & l_1 \neq \varnothing\\
+FP_{k_1 1}=&-\infty & \text{if} & l_1 = \varnothing
+\end{matrix}
+\end{aligned}
 \right \}
 (\#eq:empirical-FP)
 \end{equation}
@@ -449,11 +467,13 @@ If the case has at least one latent NL mark, then $l_1 \neq \varnothing$, where 
 
 ### Inferred TPF
 
-The inferred true positive (TP) z-sample for diseased case $k_2 2$ is defined by:
+The inferred true positive (TP) z-sample for diseased case $k_2 2$ is defined by one of the following three equations, as explained below:
 
 
 \begin{equation}
-TP_{k_2 2} = \text{max}_{l_1 l_2}\left ( z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2} \mid l_1 \neq \varnothing \right )
+\begin{matrix}
+TP_{k_2 2} = \text{max}_{l_1 l_2}\left ( z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}  \right ) & \text{if} & l_1 \neq \varnothing
+\end{matrix}
 (\#eq:empirical-TP1)
 \end{equation}
 
@@ -462,7 +482,10 @@ or
 
 
 \begin{equation}
-TP_{k_2 2} = \max_{l_2}  \left ( z_{k_2 2 l_2 2} \mid\left ( l_1 = \varnothing \land \left (\max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} \neq -\infty  \right )  \right ) \right ) 
+\begin{matrix}
+TP_{k_2 2} = \max_{l_2}  \left ( z_{k_2 2 l_2 2} \right ) 
+ & \text{if} & \left( l_1 = \varnothing \right) \land \left (\text{max}_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} > -\infty  \right )
+\end{matrix}
 (\#eq:empirical-TP2)
 \end{equation}
 
@@ -472,7 +495,10 @@ or
 
 
 \begin{equation}
-TP_{k_2 2} = = -\infty \mid \left ( l_1 = \varnothing \land\left ( \max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} = -\infty  \right )  \right )
+\begin{matrix}
+TP_{k_2 2} = -\infty 
+ & \text{if} & \left ( l_1 = \varnothing \land\left ( \max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} = -\infty  \right )  \right )
+\end{matrix}
 (\#eq:empirical-TP3)
 \end{equation}
 
@@ -494,13 +520,42 @@ The inferred true positive fraction $\text{TPF}_r$ is defined by:
 \end{equation}
 
 
-### Definition: empirical ROC plot and  {#empirical-definition-empirical-auc-roc}
+### The empirical ROC plot and AUC {#empirical-definition-empirical-auc-roc}
 
+Definitions: 
+
+>
 The inferred empirical ROC plot connects adjacent points $\left( \text{FPF}_r, \text{TPF}_r \right )$, including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). Like a real ROC, this plot is constrained to lie within the unit square. The area under this plot is the empirical inferred ROC AUC, denoted $A_{\text{ROC}}$.
+
+### The observed end-point of the ROC and its constrained property {#empirical-ROC-constrained}
+
+The abscissa of the observed end-point $FPF_1$, is defined by:
+
+\begin{equation}
+\text{FPF}_1 \equiv \text{FPF} \left ( \zeta_1 \right ) = \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq \zeta_1 \right )
+(\#eq:empirical-fpf-repeat)
+\end{equation}
+
+Since each case gets a single FP rating, and only unmarked cases get the $-\infty$ rating, $\text{FPF}_1 \leq 1$. 
+
+
+The ordinate of the observed end-point $TPF_1$, is defined by:
+
+
+\begin{equation}
+\text{TPF}_1 \equiv \text{TPF}(\zeta_1) = \frac{1}{K_2}\sum_{k_2=1}^{K_2} \mathbb{I}\left ( TP_{k_2 2} \geq \zeta_1 \right )
+(\#eq:empirical-TPF-repeat)
+\end{equation}
+
+
+Since each case gets a single TP rating, and only unmarked cases get the $-\infty$ rating, $\text{TPF}_1 \leq 1$. 
+
+It follows that the observed end-point of the ROC (as is well known) satisfies the constrained end-point property: it lies below-left the (1,1) corner of the plot.
+
 
 ### Illustration with a dataset {#empirical-roc-plot-illustration}
 
-The following code uses `dataset04` to illustrate an empirical ROC plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "ROC")$Plot` with different treatments and readers specified.
+The following code uses `dataset04` to illustrate an empirical ROC plot for treatment 1 and reader 1. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = ROC")$Plot` with different treatments and readers specified.
 
 
 
@@ -514,7 +569,7 @@ print(ret$Plot)
 <img src="03-empirical_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 
-Shown next is calculation of the figure of merit for this dataset ^[In function `UtilFigureOfMerit` the `FOM` argument has to be set to `HrAuc`, which denotes the highest rating inferred-ROC AUC.].
+Shown next is calculation of the figure of merit for this dataset. Note that in function `UtilFigureOfMerit()` the `FOM` argument has to be set to `HrAuc`, for highest rating AUC.].
 
 
 
@@ -536,12 +591,14 @@ UtilFigureOfMerit(dataset04, FOM = "HrAuc")
 
 ## The alternative FROC (AFROC) plot {#empirical-AFROC}
 
--   Fig. 4 in [@bunch1977free] anticipated another way of visualizing FROC data. I subsequently termed[^empirical1-4] this the *alternative FROC (AFROC)* plot [@chakraborty1989maximum].
+-   Fig. 4 in [@bunch1977free] anticipated another way of visualizing FROC data. I subsequently termed this the *alternative FROC (AFROC)* plot [@chakraborty1989maximum].
 -   The empirical AFROC is defined as the plot of $\text{LLF}(\zeta_r)$ along the ordinate vs. $\text{FPF}(\zeta_r)$ along the abscissa.
--   $\text{LLF}_r \equiv \text{LLF}(\zeta_r)$ was defined in Eqn. \@ref(eq:empirical-LLFr).
--   $\text{FPF}_r \equiv \text{FPF}(\zeta_r)$ was defined in Eqn. \@ref(eq:empirical-fpf).
+-   $\text{LLF}_r \equiv \text{LLF}(\zeta_r)$, the ordinate of the FROC plot, was defined in Eqn. \@ref(eq:empirical-LLFr).
+-   $\text{FPF}_r \equiv \text{FPF}(\zeta_r)$, the abscissa of the ROC plot, was defined in Eqn. \@ref(eq:empirical-fpf).
 
-[^empirical1-4]: The late Prof. Richard Swensson did not like my choice of the word "alternative" in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.
+
+The late Prof. Richard Swensson did not like my choice of the word "alternative" in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.
+
 
 ### Definition: empirical AFROC plot and AUC {#empirical-definition-empirical-auc-afroc}
 
@@ -552,49 +609,29 @@ Key points:
 -   The ordinates (LLF) of the FROC and AFROC are identical.
 -   The abscissa (FPF) of the ROC and AFROC are identical.
 -   The AFROC is, in this sense, a hybrid plot, incorporating aspects of both ROC and FROC plots.
--   Unlike the empirical FROC, whose observed end-point has the semi-constrained property, *the AFROC end-point is constrained to within the unit square*, as detailed next.
-
-### The constrained observed end-point of the AFROC {#empirical-AFROC-constrained}
-
-Since $\zeta_{R_{FROC}+1} = \infty$, according to Eqn. \@ref(eq:empirical-LLFr) and Eqn. \@ref(eq:empirical-fpf), $r = R_{FROC}+1$ yields the trivial operating point (0,0). Likewise, since $\zeta_0 = -\infty$, $r = 0$ yields the trivial point (1,1):
+-   The AFROC is constrained to within the unit square.
 
 
+
+
+### The observed end-point of the AFROC and its constrained property {#empirical-AFROC-constrained}
+
+The abscissa of the observed end-point $FPF_1$, is defined by:
 
 \begin{equation}
-\left.
-\begin{aligned} 
-\text{FPF}_{R_{FROC}+1} =& \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq \infty \right )\\
-=& 0\\
-\text{LLF}_{R_{FROC}+1} =& \frac{1}{L_T} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}}\mathbb{I} \left ( LL_{k_2 2 l_2 2} \geq \infty \right )\\
-=& 0
-\end{aligned}
-\right \}
-(\#eq:empirical-fpf-LLF-last)
+\text{FPF}_1 \equiv \text{FPF} \left ( \zeta_1 \right ) = \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq \zeta_1 \right )
+(\#eq:empirical-fpf-repeat2)
 \end{equation}
 
 
-and
+Since each non-diseased case gets a single FP rating, and only unmarked non-diseased cases get the $-\infty$ rating, $\text{FPF}_1 \leq 1$.
 
+According to Eqn. \@ref(eq:empirical-LLF1a) the ordinate $\text{LLF}_1 \leq 1$. It follows that the observed end-point of the AFROC (like the ROC) satisfies the constrained end-point property: it lies below-left the (1,1) corner of the plot.
 
-
-\begin{equation}
-\left.
-\begin{aligned} 
-\text{FPF}_0 =& \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq -\infty \right )\\
-=& 1\\
-\text{LLF}_0 =& \frac{1}{L_T} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{L_{k_2 2}}\mathbb{I} \left ( LL_{k_2 2 l_2 2} \geq -\infty \right )\\
-=& 1
-\end{aligned}
-\right \}
-(\#eq:empirical-fpf0-LLF0)
-\end{equation}
-
-
-Because every non-diseased case is assigned a rating, and is therefore counted, the right hand side of the first equation in \@ref(eq:empirical-fpf0-LLF0) evaluates to unity. This is obvious for marked cases. Since each unmarked case also gets a rating, albeit a $-\infty$ rating, it is also counted (the argument of the indicator function in Eqn. \@ref(eq:empirical-fpf0-LLF0) is true even when the inferred-FP rating is $-\infty$).
 
 ### Illustration with a dataset {#empirical-afroc-plot-illustration}
 
-The following code uses `dataset04` to illustrate an empirical AFROC plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC")$Plot` with different treatments and readers specified.
+The following code uses `dataset04` to illustrate an empirical AFROC plot for treatment 1 and reader 1. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC")$Plot` with different treatments and readers specified.
 
 
 
@@ -668,7 +705,7 @@ The empirical wAFROC plot connects adjacent operating points $\left ( \text{FPF}
 
 ### Illustration with a dataset {#empirical-wafroc-plot-illustration}
 
-The following code uses `dataset04` to illustrate an empirical ROC plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "wAFROC")$Plot` with different treatments and readers specified.
+The following code uses `dataset04` to illustrate an empirical ROC plot for treatment 1 and reader 1. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "wAFROC")$Plot` with different treatments and readers specified.
 
 
 
@@ -735,7 +772,7 @@ The empirical AFROC1 plot connects adjacent operating points $\left ( FPF_r^1, \
 
 ### Illustration with a dataset {#empirical-afroc1-plot-illustration}
 
-The following code uses `dataset04` to illustrate an empirical ROC plot. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC1")$Plot` with different treatments and readers specified.
+The following code uses `dataset04` to illustrate an empirical ROC plot for treatment 1 and reader 1. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = "AFROC1")$Plot` with different treatments and readers specified.
 
 
 
@@ -781,7 +818,7 @@ The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points 
 
 ### Illustration with a dataset {#empirical-wafroc1-plot-illustration}
 
-The following code uses `dataset04` to illustrate an empirical wAFROC plot1. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = wAFROC1")$Plot` with different treatments and readers specified.
+The following code uses `dataset04` to illustrate an empirical wAFROC1 plot for treatment 1 and reader 1. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = wAFROC1")$Plot` with different treatments and readers specified.
 
 
 

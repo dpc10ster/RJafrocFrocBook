@@ -1,5 +1,7 @@
 # (PART\*) CAD applications {-}
 
+# Standalone CAD vs. Radiologists {#standalone-cad-radiologists}
+
 
 ---
 output:
@@ -11,9 +13,6 @@ output:
 
 
 
-
-
-# Standalone CAD vs. Radiologists {#standalone-cad-radiologists}
 
 
 ## TBA How much finished {#standalone-cad-radiologists-how-much-finished}

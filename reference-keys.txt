@@ -17,8 +17,9 @@ eq:empirical-TP1
 eq:empirical-TP2
 eq:empirical-TP3
 eq:empirical-TPF
-eq:empirical-fpf-LLF-last
-eq:empirical-fpf0-LLF0
+eq:empirical-fpf-repeat
+eq:empirical-TPF-repeat
+eq:empirical-fpf-repeat2
 eq:empirical-weights-constraint
 eq:empirical-wLLFr
 eq:empirical-FP1
@@ -225,9 +226,7 @@ binning-rule
 empirical-notation
 comments-on-table-reftabempirical-notation
 empirical-indexing-marks
-empirical-froc-plot
-empirical-definition-empirical-auc-froc
-empirical-origin-trivial-point
+empirical-froc-plot-1
 empirical-end-point
 empirical-froc-plot-futility-extrapolation
 empirical-froc-plot-illustration
@@ -236,6 +235,7 @@ the-inferred-roc-rating
 inferred-fpf
 inferred-tpf
 empirical-definition-empirical-auc-roc
+empirical-ROC-constrained
 empirical-roc-plot-illustration
 empirical-AFROC
 empirical-definition-empirical-auc-afroc
