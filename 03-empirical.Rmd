@@ -16,7 +16,8 @@ library(grid)
 
 
 ## TBA How much finished {#empirical-how-much-finished}
-90%
+70%
+Appendices and computational formulae need to be tied up to main flow of chapter.
 
 
 
