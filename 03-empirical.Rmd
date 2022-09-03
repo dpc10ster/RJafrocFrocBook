@@ -744,6 +744,8 @@ auc_wafroc1 <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "wAFROC1"
 
 ## Summary of operating characteristics {#empirical-summary}
 
+A summary of the operating characteristics defined from FROC data:
+
 ```{r empirical-summary, echo=FALSE}
 fomTable = array(dim = c(6,3))
 fomTable[1,]  <- c("FROC", "NLF", "LLF")
