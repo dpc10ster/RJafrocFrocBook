@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-08-31}
+\date{2022-09-06}
 
 \begin{document}
 \maketitle
@@ -581,10 +581,10 @@ The analogy is not restricted to the sun, which one might argue is an almost inf
 
 False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization (LL) or incorrect localizations (NLs). At the time of writing there is a hunt for a new planet, possibly a gas giant , that is much further than even the newly demoted Pluto.
 
-\hypertarget{froc-paradigm-misconceptions}{%
-\section{Some misconceptions}\label{froc-paradigm-misconceptions}}
+\hypertarget{froc-paradigm-discussion}{%
+\section{Discussion}\label{froc-paradigm-discussion}}
 
-In my experience the FROC paradigm is much misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the meaning of search, the paradigm and the FROC curve. These are summarized below:
+The FROC paradigm is often misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the meaning of search, the paradigm and the FROC curve. These are summarized below:
 
 \begin{itemize}
 \tightlist
@@ -627,7 +627,8 @@ The FROC plot is historically the first proposed way of visually summarizing FRO
 \hypertarget{empirical-how-much-finished}{%
 \section{TBA How much finished}\label{empirical-how-much-finished}}
 
-90\%
+70\%
+Appendices and computational formulae need to be tied up to main flow of chapter.
 
 \hypertarget{empirical-intro}{%
 \section{TBA Introduction}\label{empirical-intro}}
@@ -1105,10 +1106,14 @@ Since each case gets a single TP rating, and only unmarked cases get the \(-\inf
 
 It follows that the observed end-point of the ROC (as is well known) satisfies the constrained end-point property: it lies below-left the (1,1) corner of the plot.
 
+\begin{quote}
+The upper-right corner (reached by counting all ratings \(\ge -\infty\)) of the ROC plot is not to be confused by the observed end-point (reached by counting all ratings \(\ge \zeta_1\)).
+\end{quote}
+
 \hypertarget{empirical-roc-plot-illustration}{%
 \subsection{Illustration with a dataset}\label{empirical-roc-plot-illustration}}
 
-The following code uses \texttt{dataset04} to illustrate an empirical ROC plot for treatment 1 and reader 1. The reader should experiment by running \texttt{PlotEmpiricalOperatingCharacteristics(dataset04,\ trts\ =\ 1,\ rdrs\ =\ 1,\ opChType\ =\ ROC")\$Plot} with different treatments and readers specified.
+The following code uses \texttt{dataset04} to illustrate an empirical ROC plot for treatment 1 and reader 1. The reader should experiment by running \texttt{PlotEmpiricalOperatingCharacteristics(dataset04,\ trts\ =\ 1,\ rdrs\ =\ 1,\ opChType\ =\ ROC")\$Plot} with different treatments \texttt{trts} and readers \texttt{rdrs} specified.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1150,8 +1155,6 @@ Shown next is calculation of the figure of merit for this dataset. Note that in 
   \(\text{FPF}_r \equiv \text{FPF}(\zeta_r)\), the abscissa of the ROC plot, was defined in Eqn. \eqref{eq:empirical-fpf}.
 \end{itemize}
 
-The late Prof.~Richard Swensson did not like my choice of the word ``alternative'' in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed.
-
 \hypertarget{empirical-definition-empirical-auc-afroc}{%
 \subsection{Definition: empirical AFROC plot and AUC}\label{empirical-definition-empirical-auc-afroc}}
 
@@ -1166,29 +1169,24 @@ Key points:
 \item
   The abscissa (FPF) of the ROC and AFROC are identical.
 \item
-  The AFROC is, in this sense, a hybrid plot, incorporating aspects of both ROC and FROC plots.
+  The AFROC is a hybrid plot incorporating aspects of both ROC and FROC plots.
 \item
   The AFROC is constrained to within the unit square.
 \end{itemize}
 
+\begin{quote}
+Prof.~Richard Swensson did not like my choice of the word ``alternative'' in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed. To anticipate the central message of this book, the AUC based on this operating characteristic (and weighted versions of it introduced below), are superior to the FROC-AUC and the ROC-AUC in terms of statistical power and reliability (the FROC-AUC is especially unreliable).
+\end{quote}
+
 \hypertarget{empirical-AFROC-constrained}{%
 \subsection{The observed end-point of the AFROC and its constrained property}\label{empirical-AFROC-constrained}}
 
-The abscissa of the observed end-point \(FPF_1\), is defined by:
-
-\begin{equation}
-\text{FPF}_1 \equiv \text{FPF} \left ( \zeta_1 \right ) = \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I} \left ( FP_{k_1 1} \geq \zeta_1 \right )
-\label{eq:empirical-fpf-repeat2}
-\end{equation}
-
-Since each non-diseased case gets a single FP rating, and only unmarked non-diseased cases get the \(-\infty\) rating, \(\text{FPF}_1 \leq 1\).
-
-According to Eqn. \eqref{eq:empirical-LLF1a} the ordinate \(\text{LLF}_1 \leq 1\). It follows that the observed end-point of the AFROC (like the ROC) satisfies the constrained end-point property: it lies below-left the (1,1) corner of the plot.
+According to Eqn. \eqref{eq:empirical-fpf} the abscissa of the observed end-point \(FPF_1 \leq 1\) and according to Eqn. \eqref{eq:empirical-LLF1a} the ordinate of the observed end-point \(\text{LLF}_1 \leq 1\). It follows that the observed end-point of the AFROC satisfies the constrained end-point property, i.e., it lies below-left the (1,1) corner of the plot.
 
 \hypertarget{empirical-afroc-plot-illustration}{%
 \subsection{Illustration with a dataset}\label{empirical-afroc-plot-illustration}}
 
-The following code uses \texttt{dataset04} to illustrate an empirical AFROC plot for treatment 1 and reader 1. The reader should experiment by running \texttt{PlotEmpiricalOperatingCharacteristics(dataset04,\ trts\ =\ 1,\ rdrs\ =\ 1,\ opChType\ =\ "AFROC")\$Plot} with different treatments and readers specified.
+The following code uses \texttt{dataset04} to illustrate an empirical AFROC plot for treatment 1 and reader 1.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1201,7 +1199,7 @@ The following code uses \texttt{dataset04} to illustrate an empirical AFROC plot
 
 \includegraphics{03-empirical_files/figure-latex/unnamed-chunk-7-1.pdf}
 
-Shown next is calculation of the figure of merit for this dataset.
+Shown next are the figures of merit for this dataset for all treatment reader combinations.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1218,7 +1216,7 @@ Shown next is calculation of the figure of merit for this dataset.
 \hypertarget{empirical-wAFROC}{%
 \section{The weighted-AFROC plot (wAFROC) plot}\label{empirical-wAFROC}}
 
-The AFROC ordinate defined in Eqn. \eqref{eq:empirical-LLFr} gives equal importance to every lesion in a case. Therefore, a case with more lesions will have more influence on the AFROC (see next section for an explicit demonstration of this fact). This is undesirable since each case (i.e., patient) should get equal importance in the analysis -- as with ROC analysis, one wishes to draw conclusions about the population of cases and each case is an equally valid sample from the population. In particular, one does not want the analysis to be skewed towards cases with greater numbers of lesions. \footnote{Historical note: I became aware of how serious this issue could be when a researcher contacted me about using FROC methodology for nuclear medicine bone scan images, where the number of lesions on diseased cases can vary from a few to a hundred!}
+The AFROC ordinate defined in Eqn. \eqref{eq:empirical-LLFr} gives equal importance to every lesion in a case. A case with more lesions will have more influence on the AFROC (see next section for an explicit demonstration of this fact). This is undesirable since each case (i.e., patient) should get equal importance in the analysis -- as with ROC analysis, one wishes to draw conclusions about the population of cases and each case is an equally valid sample from the population. In particular, one does not want the analysis to be skewed towards cases with greater numbers of lesions. \footnote{Historical note: I became aware of how serious this issue could be when a researcher contacted me about using FROC methodology for nuclear medicine bone scan images, where the number of lesions on diseased cases can vary from a few to a hundred!}
 
 Another issue is that the AFROC assigns equal \emph{clinical} importance to each lesion in a case. Lesion weights were introduced \citep{RN1385} to allow for the possibility that the clinical importance of finding a lesion might be lesion-dependent \citep{RN1966}. For example, it is possible that a diseased cases has lesions of two types with differing clinical importance; the figure-of-merit should give more credit to finding the more clinically important one. Clinical importance could be defined as the mortality associated with the specific lesion type; these can be obtained from epidemiological studies \citep{desantis2011breast}.
 
@@ -1229,8 +1227,6 @@ Let \(W_{k_2 l_2} \geq 0\) denote the \emph{weight} (i.e., short for clinical im
 \label{eq:empirical-weights-constraint}
 \end{equation}
 
-The constraint assures that the each diseased case exerts equal importance in determining the weighted-AFROC (wAFROC) operating characteristic, regardless of the number of lesions in it (see TBA Chapter 14 for a demonstration of this fact).
-
 The weighted lesion localization fraction \(\text{wLLF}_r\) is defined by \citep{RN2484}:
 
 \begin{equation}
@@ -1239,14 +1235,16 @@ The weighted lesion localization fraction \(\text{wLLF}_r\) is defined by \citep
 \end{equation}
 
 \hypertarget{empirical-definition-empirical-auc-wafroc}{%
-\subsection{Definition: empirical wAFROC plot and AUC}\label{empirical-definition-empirical-auc-wafroc}}
+\subsection{The empirical wAFROC plot and AUC}\label{empirical-definition-empirical-auc-wafroc}}
 
+\begin{quote}
 The empirical wAFROC plot connects adjacent operating points \(\left ( \text{FPF}_r, \text{wLLF}_r \right )\), including the origin (0,0), with straight lines plus a straight-line segment connecting the observed end-point to (1,1). The area under this plot is the empirical weighted-AFROC AUC, denoted \(A_{\text{wAFROC}}\).
+\end{quote}
 
 \hypertarget{empirical-wafroc-plot-illustration}{%
 \subsection{Illustration with a dataset}\label{empirical-wafroc-plot-illustration}}
 
-The following code uses \texttt{dataset04} to illustrate an empirical ROC plot for treatment 1 and reader 1. The reader should experiment by running \texttt{PlotEmpiricalOperatingCharacteristics(dataset04,\ trts\ =\ 1,\ rdrs\ =\ 1,\ opChType\ =\ "wAFROC")\$Plot} with different treatments and readers specified.
+The following code uses \texttt{dataset04} to illustrate an empirical ROC plot for treatment 1 and reader 1.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1275,36 +1273,40 @@ Shown next is calculation of the figure of merit for this dataset.
 \hypertarget{empirical-AFROC1}{%
 \section{The AFROC1 plot}\label{empirical-AFROC1}}
 
-Historically the AFROC originally used a different definition of FPF, which is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-``FP'' rating on a \emph{diseased case} as the maximum of all NL ratings on the case, or \(-\infty\) if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a \emph{non-diseased case}. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case \(k_t t\) is {[}the ``1'' superscript below is necessary to distinguish it from Eqn. \eqref{eq:empirical-FP}{]}:
+Historically the AFROC originally used a different definition of FPF, resulting in what is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-``FP'' rating on a \emph{diseased case} as the maximum of all NL ratings on the case, or \(-\infty\) if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a \emph{non-diseased case}. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case \(k_t t\) is {[}the ``1'' superscript below is necessary to distinguish it from Eqn. \eqref{eq:empirical-FP}{]}:
 
 \begin{equation}
 \left.
 \begin{aligned}
-FP_{k_t t}^1 =& \max_{l_1} \left ( z_{k_t t l_1 1 } \mid  l_1 \neq \varnothing \right )\\
-=& -\infty \mid l_1 = \varnothing
+\begin{matrix}
+FP_{k_1 t}^1=&\max_{l_1} \left ( z_{k_t t l_1 1 } \right ) & \text{if} & l_1 \neq \varnothing\\
+FP_{k_t t}^1=&-\infty & \text{if} & l_1 = \varnothing
+\end{matrix}
 \end{aligned}
 \right \}
 \label{eq:empirical-FP1}
 \end{equation}
 
-\(FP_{k_t t}^1\) is the maximum over all latent NL marks, labeled by the location index \(l_1\), occurring in case \(k_t t\), or \(-\infty\) if \(l_1 = \varnothing\). The corresponding false positive fraction \(FPF_r^1\) is defined by {[}the ``1'' superscript is necessary to distinguish it from Eqn. \eqref{eq:empirical-fpf}{]}:
+\(FP_{k_t t}^1\) is the maximum over all latent NL marks, labeled by the location index \(l_1\), occurring in case \(k_t t\), or \(-\infty\) if \(l_1 = \varnothing\). The corresponding false positive fraction \(FPF_r^1\) is defined by:
 
 \begin{equation}
 FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
 \label{eq:empirical-fpf1}
 \end{equation}
 
-Note the subtle differences between Eqn. \eqref{eq:empirical-fpf} and Eqn. \eqref{eq:empirical-fpf1}. The latter counts ``FPs'' on non-diseased and diseased cases while Eqn. \eqref{eq:empirical-fpf} counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to be both a TP and a FP is questionable from both clinical and statistical considerations. However, this operating characteristic can be useful in applications where all or almost all cases are diseased.
+Note the subtle differences between Eqn. \eqref{eq:empirical-fpf} and Eqn. \eqref{eq:empirical-fpf1}. The latter counts ``FPs'' on non-diseased and diseased cases while Eqn. \eqref{eq:empirical-fpf} counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to generate both a TP and a FP may be questionable, however, this operating characteristic is useful in applications where all or almost all cases are diseased.
 
 \hypertarget{empirical-definition-empirical-auc-afroc1}{%
-\subsection{Definition: empirical AFROC1 plot and AUC}\label{empirical-definition-empirical-auc-afroc1}}
+\subsection{Empirical AFROC1 plot and AUC}\label{empirical-definition-empirical-auc-afroc1}}
 
-The empirical AFROC1 plot connects adjacent operating points \(\left ( FPF_r^1, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 and the AFROC plot is in the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted \(A_{\text{AFROC1}}\).
+\begin{quote}
+The empirical AFROC1 plot connects adjacent operating points \(\left ( FPF_r^1, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 plot and the AFROC plot is the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted \(A_{\text{AFROC1}}\).
+\end{quote}
 
 \hypertarget{empirical-afroc1-plot-illustration}{%
 \subsection{Illustration with a dataset}\label{empirical-afroc1-plot-illustration}}
 
-The following code uses \texttt{dataset04} to illustrate an empirical ROC plot for treatment 1 and reader 1. The reader should experiment by running \texttt{PlotEmpiricalOperatingCharacteristics(dataset04,\ trts\ =\ 1,\ rdrs\ =\ 1,\ opChType\ =\ "AFROC1")\$Plot} with different treatments and readers specified.
+The following code uses \texttt{dataset04} to illustrate an empirical ROC plot for treatment 1 and reader 1.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1334,15 +1336,19 @@ Shown next is calculation of the figure of merit for this dataset.
 \hypertarget{empirical-wAFROC1}{%
 \section{The weighted-AFROC1 (wAFROC1) plot}\label{empirical-wAFROC1}}
 
-\hypertarget{empirical-definition-empirical-auc-wafroc1}{%
-\subsection{Definition: empirical wAFROC1 plot and AUC}\label{empirical-definition-empirical-auc-wafroc1}}
+Similar to the logic for introducing the wAFROC plot as a way of giving equal importance to all diseased cases and allowing the clinical importance of lesions to be modeled by appropriate weights, we introduce a weighted version of the AFROC1, termed the wAFROC1. The ordinate of this plot is the weighted lesion localization fraction \(\text{wLLF}_r\) defined in Eqn. \eqref{eq:empirical-wLLFr}. The abscissa is FPF1, defined in Eqn. \eqref{eq:empirical-fpf1}.
 
+\hypertarget{empirical-definition-empirical-auc-wafroc1}{%
+\subsection{Empirical wAFROC1 plot and AUC}\label{empirical-definition-empirical-auc-wafroc1}}
+
+\begin{quote}
 The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points \(\left ( FPF_r^1, \text{wLLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted \(A_{\text{wAFROC1}}\).
+\end{quote}
 
 \hypertarget{empirical-wafroc1-plot-illustration}{%
 \subsection{Illustration with a dataset}\label{empirical-wafroc1-plot-illustration}}
 
-The following code uses \texttt{dataset04} to illustrate an empirical wAFROC1 plot for treatment 1 and reader 1. The reader should experiment by running \texttt{PlotEmpiricalOperatingCharacteristics(dataset04,\ trts\ =\ 1,\ rdrs\ =\ 1,\ opChType\ =\ wAFROC1")\$Plot} with different treatments and readers specified.
+The following code uses \texttt{dataset04} to illustrate an empirical wAFROC1 plot for treatment 1 and reader 1.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1369,10 +1375,38 @@ Shown next is calculation of the figure of merit for this dataset.
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{empirical-summary}{%
+\section{Summary of operating characteristics}\label{empirical-summary}}
+
+A summary of the operating characteristics defined from FROC data:
+
+\begin{table}
+
+\caption{\label{tab:empirical-summary}Summary of operating characteristics (OCs) from FROC data; X = abscissa, Y = ordinate.}
+\centering
+\begin{tabular}[t]{l|l|l}
+\hline
+OCs & X & Y\\
+\hline
+FROC & NLF & LLF\\
+\hline
+ROC & FPF & TPF\\
+\hline
+AFROC & FPF & LLF\\
+\hline
+wAFROC & FPF & wLLF\\
+\hline
+AFROC1 & FPF1 & LLF\\
+\hline
+wAFROC1 & FPF1 & wLLF\\
+\hline
+\end{tabular}
+\end{table}
+
 \hypertarget{empirical-plots}{%
 \section{Plots of FROC, AFROC and wAFROC AUCs vs.~ROC AUC}\label{empirical-plots}}
 
-Plots of \(A_{\text{FROC}}\), \(A_{\text{AFROC}}\) and \(A_{\text{wAFROC}}\) vs.~\(A_{\text{ROC}}\) were generated for the dataset used in the previous illustrations.
+Regarding the ROC-AUC as the gold standard, shown next are plots of \(A_{\text{FROC}}\), \(A_{\text{AFROC}}\) and \(A_{\text{wAFROC}}\) vs.~\(A_{\text{ROC}}\) generated for the dataset used in the previous illustrations.
 
 The following is the plot of \(A_{\text{FROC}}\) vs.~\(A_{\text{ROC}}\). There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. \(A_{\text{ROC}}\) is assumed to be the gold standard. Note the poor correlation between \(A_{\text{FROC}}\) and \(A_{\text{ROC}}\). The slope is negative and there is much scatter.
 
@@ -1393,9 +1427,9 @@ The following is the plot of \(A_{\text{wAFROC}}\) vs.~\(A_{\text{ROC}}\). Again
 \hypertarget{empirical-numerical-illustration}{%
 \section{AFROC vs.~wAFROC}\label{empirical-numerical-illustration}}
 
-The wAFROC and AFROC, particularly the concept that the wAFROC gives equal importance to each diseased case while the AFROC gives more important to diseased cases with more lesions, are perhaps best illustrated with a numerical example. The dataset consists of \(K_1 = 4\) non-diseased and \(K_2 = 4\) diseased cases. The first two diseased cases have one lesion each, and the remaining two have two lesions each.
+The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions, are perhaps best illustrated with a numerical example. The dataset consists of \(K_1 = 4\) non-diseased and \(K_2 = 4\) diseased cases. The first two diseased cases have one lesion each, and the remaining two have two lesions each.
 
-Shown next is the \texttt{NL} ratings array which has 8 rows, corresponding to the total number of cases, and 2 columns, corresponding to the maximum number of NLs and LLs per case (notice there are two entries for case \#3). The negative infinities represent unmarked locations.
+Shown next is the \texttt{NL} ratings array; it has 8 rows, corresponding to the total number of cases, and 2 columns, corresponding to the maximum number of NLs and LLs per case (notice there are two entries for case \#3). The negative infinities represent unmarked locations.
 
 \begin{verbatim}
 #> 
@@ -1419,7 +1453,7 @@ Shown next is the \texttt{FP} ratings array. Since FPs are only possible on non-
 #> [1] -Inf  0.5  0.7 -0.3
 \end{verbatim}
 
-Show next is the sorted \texttt{FP} ratings.
+Here are the sorted \texttt{FP} ratings.
 
 \begin{verbatim}
 #> [1] -Inf -0.3  0.5  0.7
@@ -1428,12 +1462,11 @@ Show next is the sorted \texttt{FP} ratings.
 The sorting makes it easy to construct the \texttt{FPF} values, shown next.
 
 \begin{verbatim}
-#> 
 #> FPF values:
 #>  0.000 0.000 0.000 0.000 0.000 0.250 0.500 0.500 0.750 1.000
 \end{verbatim}
 
-The first non-zero \texttt{FPF} value is 0.25, which occurs when the sliding threshold is lowered past the highest \texttt{FP} value, namely 0.7. The 0.25 comes from 1 \texttt{FP} case divided by 4 non-diseased cases. The next \texttt{FPF} value is 0.5, which occurs when the sliding threshold is lowered past the next-highest \texttt{FP} value, namely 0.5. The 0.5 comes from 2 divided by 4. The next \texttt{FPF} value is 0.75 and the last \texttt{FPF} value is unity.
+The first non-zero \texttt{FPF} value is \(0.25 = 1/4\), which occurs when a conceptual sliding threshold is lowered past the highest \texttt{FP} value, namely 0.7. (The 0.25 comes from 1 \texttt{FP} case divided by 4 non-diseased cases.) The next \texttt{FPF} value is \(0.5 = 2/4\), which occurs when the sliding threshold is lowered past the next-highest \texttt{FP} value, namely 0.5. The next \texttt{FPF} value is 0.75 and the last \texttt{FPF} value is unity.
 
 Shown next is the \texttt{LL} ratings array:
 
@@ -1447,7 +1480,7 @@ Shown next is the \texttt{LL} ratings array:
 #> [4,]  3.0    2
 \end{verbatim}
 
-Show next is the sorted \texttt{LL} ratings.
+Here are the sorted \texttt{LL} ratings.
 
 \begin{verbatim}
 #> [1] -Inf -Inf -Inf -0.2  0.9  1.6  2.0  3.0

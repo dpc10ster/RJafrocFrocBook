@@ -187,9 +187,9 @@ The analogy is not restricted to the sun, which one might argue is an almost inf
 False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization (LL) or incorrect localizations (NLs). At the time of writing there is a hunt for a new planet, possibly a gas giant , that is much further than even the newly demoted Pluto. 
 
 
-## Some misconceptions {#froc-paradigm-misconceptions}
+## Discussion {#froc-paradigm-discussion}
 
-In my experience the FROC paradigm is much misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the meaning of search, the paradigm and the FROC curve. These are summarized below: 
+The FROC paradigm is often misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the meaning of search, the paradigm and the FROC curve. These are summarized below: 
 
 -   Loose terminology:
     - Using the term "lesion-specific" to describe location-specific paradigms.

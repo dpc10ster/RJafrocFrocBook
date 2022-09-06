@@ -19,11 +19,11 @@ eq:empirical-TP3
 eq:empirical-TPF
 eq:empirical-fpf-repeat
 eq:empirical-TPF-repeat
-eq:empirical-fpf-repeat2
 eq:empirical-weights-constraint
 eq:empirical-wLLFr
 eq:empirical-FP1
 eq:empirical-fpf1
+tab:empirical-summary
 fig:plots-afrocPlot-wafrocPlot
 fig:empirical-theorems
 eq:empirical-theorem1
@@ -215,7 +215,7 @@ historical-context
 froc-paradigm-froc-plot
 froc-paradigm-plot-illustration
 froc-paradigm-solar-analogy
-froc-paradigm-misconceptions
+froc-paradigm-discussion
 froc-paradigm-references
 empirical
 empirical-how-much-finished
@@ -250,6 +250,7 @@ empirical-afroc1-plot-illustration
 empirical-wAFROC1
 empirical-definition-empirical-auc-wafroc1
 empirical-wafroc1-plot-illustration
+empirical-summary
 empirical-plots
 empirical-numerical-illustration
 empirical-Discussion
