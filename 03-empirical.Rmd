@@ -763,16 +763,24 @@ knitr::kable(df, caption = "Summary of operating characteristics (OCs) from FROC
 
 ## Plots of FROC, AFROC and wAFROC AUCs vs. ROC AUC {#empirical-plots}
 
-Regarding the ROC-AUC as the gold standard, shown next are plots of $A_{\text{FROC}}$, $A_{\text{AFROC}}$ and $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$ generated for the dataset used in the previous illustrations. 
+Regarding the ROC-AUC, i.e., $A_{\text{ROC}}$, as the gold standard against which all other figures of merit should be compared for consistency in orderings, shown next are plots of $A_{\text{FROC}}$, $A_{\text{AFROC}}$ and $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$ for the dataset used in the previous illustrations. 
 
-The following is the plot of $A_{\text{FROC}}$ vs. $A_{\text{ROC}}$. There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. $A_{\text{ROC}}$ is assumed to be the gold standard. Note the poor correlation between $A_{\text{FROC}}$ and $A_{\text{ROC}}$. The slope is negative and there is much scatter. 
-
-
-
+### Plot of FROC AUC vs. ROC AUC
 
 ```{r, echo=FALSE}
 df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
                  auc_froc = as.vector(auc_froc))
+fit <- lm(auc_froc ~ auc_HrAuc, df)
+fit1 <- summary(fit)
+r2 <- fit1$r.squared
+```
+
+
+The following is the plot of $A_{\text{FROC}}$ vs. $A_{\text{ROC}}$. There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. Note the poor correlation and negative slope between $A_{\text{FROC}}$ and $A_{\text{ROC}}$, $R^2$ = `r r2`, slope = `r fit$coefficients[2]`. 
+
+
+
+```{r, echo=FALSE}
 p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_froc)) +
   geom_smooth(method = "lm", 
               se = FALSE, color = "black", formula = y ~ x) +
@@ -784,18 +792,25 @@ print(p1)
 ```
 
 
-Evidently $A_{\text{FROC}}$ does not correlate well with $A_{\text{ROC}}$. The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot rewards an observer who generates more and more NLs while not generating more LLs, i.e., as the operating point moves further to the right along the flat part of the plot. In fact the perfect observer, Section `\@ref(froc-paradigm-solar-analogy)`, whose FROC plot is the vertical line connecting (0,0) and (0,1) has zero $A_{\text{FROC}}$! One can try ot avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is some arbitrarily chosen fixed value -- indeed this procedure has been used by many CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure would be subjective and totally dependent on the algorithm designer. Moreover it would not solve the problem that the perfect observer would still yield $A_{\text{FROC}} = 0$. The perfect observer problem is not academic as the method would fail for any observer with $\text{NLF}_{max} < x$. For such an observer the partial area would be undefined. This would force the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data from the analysis leading to a severe statistical power penalty.
-
-The basic problem is that the FROC plot is unconstrained in the NLF direction. 
+The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot *rewards* an observer who generates more NLs, i.e., as the operating point moves further to the right. (The perfect observer whose FROC plot is the vertical line connecting (0,0) and (0,1) is heavily penalized since $A_{\text{FROC}} = 0$ for this observer.) One can try to try to avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is an arbitrarily chosen fixed value -- indeed the partial area procedure has been used by CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure is subjective. The method would fail for any observer with $\text{NLF}_{max} < x$ as then the partial area is undefined. This forces the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data and lead to a statistical power penalty.
 
 
-The following is the plot of $A_{\text{AFROC}}$ vs. $A_{\text{ROC}}$. This time there is a strong positive correlation between the two. The reason is that the AFROC is fully contained in the unit square. An observer who generates more NL marks would in fact yield smaller $A_{\text{AFROC}}$ - this is explained in a later section TBA . 
-
+### Plot of AFROC AUC vs. ROC AUC
 
 
 ```{r, echo=FALSE}
 df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
                  auc_afroc = as.vector(auc_afroc))
+fit <- lm(auc_afroc ~ auc_HrAuc, df)
+fit1 <- summary(fit)
+r2 <- fit1$r.squared
+```
+
+The following is the plot of $A_{\text{AFROC}}$ vs. $A_{\text{ROC}}$. This time there is a strong positive correlation between the two, $R^2$ = `r r2`, slope = `r fit$coefficients[2]`. The reason is that the AFROC is fully contained in the unit square. An observer who generates more NL marks will yield smaller $A_{\text{AFROC}}$ -- as the abscissa of the AFROC approaches unity the restriction to the unit square ensures that AUC will decrease. 
+
+
+
+```{r, echo=FALSE}
 p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_afroc)) +
   geom_smooth(method = "lm", 
               se = FALSE, color = "black", formula = y ~ x) +
@@ -807,16 +822,23 @@ print(p1)
 ```
 
 
-
-
-The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, there is a strong positive correlation between the two. The wAFROC is also fully contained in the unit square.
-
-
+### Plot of wAFROC AUC vs. ROC AUC
 
 
 ```{r, echo=FALSE}
 df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
                  auc_wafroc = as.vector(auc_wafroc))
+fit <- lm(auc_wafroc ~ auc_HrAuc, df)
+fit1 <- summary(fit)
+r2 <- fit1$r.squared
+```
+
+
+The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, there is a strong positive correlation between the two, $R^2$ = `r r2`, slope = `r fit$coefficients[2]`. The reason is that the wAFROC is also fully contained in the unit square.
+
+
+
+```{r, echo=FALSE}
 p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_wafroc)) +
   geom_smooth(method = "lm", 
               se = FALSE, color = "black", formula = y ~ x) +
@@ -830,20 +852,25 @@ print(p1)
 
 
 
-## AFROC vs. wAFROC {#empirical-numerical-illustration}
+## Understanding AFROC and wAFROC, a numerical illustration {#empirical-numerical-illustration}
 
-The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions, are perhaps best illustrated with a numerical example. The dataset consists of $K_1 = 4$ non-diseased and $K_2 = 4$ diseased cases. The first two diseased cases have one lesion each, and the remaining two have two lesions each. 
+The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions can be illustrated with a fictitious small dataset consisting of $K_1 = 4$ non-diseased and $K_2 = 5$ diseased cases. 
+
+The maximum number of NLs per case is two and the maximum number of lesions per case is three. The first two diseased cases have one lesion each, the third and fourth have two lesions each and the fifth has 3 lesions. 
 
 
 ```{r empirical-numerical, echo = F, cache=F}
 NL <- array(c(-Inf, 0.5,  0.7, -0.3, 1.5, -Inf, 
               -Inf, -Inf, -Inf, -Inf, 0.6, -Inf, 
               -Inf, -Inf, -Inf, -Inf), dim = c(8,2))
-LL <- array(c(0.9, -0.2,  1.6, 3, -Inf, -Inf, -Inf, 2), dim = c(4,2))
+LL <- array(c(0.9, -0.2, 1.6, 3, 1,
+              -Inf, -Inf, -Inf, 2, 2.5, 
+              -Inf, -Inf, -Inf, -Inf, 1), dim = c(5,3))
 
-frocData <- Df2RJafrocDataset(NL, LL, perCase = c(1,1,2,2))
-frocData$lesions$weights[3,] <- c(0.1, 0.9)
-frocData$lesions$weights[4,] <- c(0.9, 0.1)
+frocData <- Df2RJafrocDataset(NL, LL, perCase = c(1,1,2,2,3))
+frocData$lesions$weights[3,] <- c(0.1, 0.9, -Inf)
+frocData$lesions$weights[4,] <- c(0.9, 0.1, -Inf)
+frocData$lesions$weights[5,] <- c(0.3, 0.4, 0.3)
 
 K1 <- 4
 K2 <- 4
@@ -870,21 +897,44 @@ LLF <- afrocPlot$data$genOrdinate
 wLLF <- wafrocPlot$data$genOrdinate
 ```
 
+### NL and LL ratings
 
-Shown next is the `NL` ratings array; it has 8 rows, corresponding to the total number of cases, and 2 columns, corresponding to the maximum number of NLs and LLs per case (notice there are two entries for case #3). The negative infinities represent unmarked locations. 
+Shown next is the `NL` ratings array; it has 8 rows, corresponding to the total number of cases (where the first four correspond to non-diseased cases and the rest to diseased cases), and 2 columns, corresponding to the maximum number of NLs per case. The negative infinities represent unmarked locations. 
 
 
 ```{r, echo=FALSE}
-cat("\nNL ratings:")
+cat("NL ratings:\n")
 NL
 ```
 
+Shown next is the `LL` ratings array; it has 4 rows, corresponding to the total number of diseased cases, and 2 columns, corresponding to the maximum number of LLs per case:
+
+
+```{r, echo=FALSE}
+cat("LL ratings:\n")
+LL
+```
+
+### Lesion weights
+
+Show next is the lesion weights array:
+
+
+```{r, echo=FALSE}
+cat("lesion weights:\n")
+frocData$lesions$weights
+```
+
+
+
+
+### FPF
 
 Shown next is the `FP` ratings array. Since FPs are only possible on non-diseased cases, this is a length 4 row-vector. Each value is the maximum of the two `NL` ratings for the corresponding non-diseased case. As an example, for case #3 the maximum of the two `NL` values is 0.7.   
 
 
 ```{r, echo=FALSE}
-cat("\nFP ratings:")
+cat("FP ratings:\n")
 FP
 ```
 
@@ -900,7 +950,7 @@ The sorting makes it easy to construct the `FPF` values, shown next.
 
 
 ```{r, echo=FALSE}
-cat("FPF values:")
+cat("FPF values:\n")
 for (i in 1:length(FPF)) {
   cat(sprintf (" %.3f", FPF[i]))
 }
@@ -910,15 +960,7 @@ cat("\n")
 
 The first non-zero `FPF` value is $0.25 = 1/4$, which occurs when a conceptual sliding threshold is lowered past the highest `FP` value, namely 0.7. (The 0.25 comes from 1 `FP` case divided by 4 non-diseased cases.) The next `FPF` value is $0.5 = 2/4$, which occurs when the sliding threshold is lowered past the next-highest `FP` value, namely 0.5. The next `FPF` value is 0.75 and the last `FPF` value is unity.
 
-
-Shown next is the `LL` ratings array:
-
-
-```{r, echo=FALSE}
-cat("\nLL ratings:")
-LL
-```
-
+### LLF
 
 Here are the sorted `LL` ratings. 
 
@@ -932,7 +974,7 @@ The sorting makes it easy to construct the `LLF` values, shown next.
 
 
 ```{r, echo=FALSE}
-cat("\nLLF values:")
+cat("LLF values:\n")
 for (i in 1:length(LLF)) {
   cat(sprintf (" %.3f", LLF[i]))
 }
@@ -943,15 +985,8 @@ cat("\n")
 
 The first non-zero `LLF` value is 0.167, which occurs when the sliding threshold is lowered past the highest `LL` value, namely 3. The 0.167 comes from 1 LL divided by 6 lesions. The next `LLF` value is 0.333, which occurs when the sliding threshold is lowered past the next-highest `LL` value, namely 2 (2/6 = 0.333). The next `LLF` value is 0.5, which occurs when the sliding threshold is lowered past 1.6 (3/6 = 0.5), and so on.
 
-Show next is the lesion weights array:
 
-
-
-```{r, echo=FALSE}
-cat("\nlesion weights:")
-frocData$lesions$weights
-```
-
+### wLLF
 
 Since the first two diseased cases have one lesion each, the [1,1] and [2,1] elements of the the weight array are each equal to unity and the [1,2] and [2,2] elements are each equal to negative infinity, which is being used as a missing value. For diseased case #3 the first lesion has weight 0.1 while the second lesion has weight 0.9 (the weights must sum to unity). For diseased case #4 the weights are reversed. 
 
@@ -959,7 +994,7 @@ The sorted `LL` ratings array and the weights are used to construct the `wLLF` v
 
 
 ```{r, echo=FALSE}
-cat("\nwLLF values:")
+cat("wLLF values:\n")
 for (i in 1:length(LLF)) {
   cat(sprintf (" %.3f", wLLF[i]))
 }
@@ -1000,7 +1035,7 @@ The same AUC results are obtained using the function `UtilFigureOfMerit`
 
 
 ```{r, echo=TRUE}
-cat("\nAFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "AFROC")),"\n")
+cat("AFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "AFROC")),"\n")
 cat("wAFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "wAFROC")),"\n")
 ```
 
