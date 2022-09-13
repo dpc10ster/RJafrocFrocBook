@@ -1438,9 +1438,9 @@ According to Eqn. \@ref(eq:empirical-A0), $A_0$ increases as $\text{FPF}_1$ decr
 
 $z_{k_11l_11}'$ denotes a *finite* NL z-sample. This notation is used to eliminate the negative infinities due to unmarked NLs which are not observable events. This notation is not needed for LLs since unmarked LLs are observable events. The first double summation inside the square bracket compares, using the $\psi$ function, all finite NL ratings on *non-diseased* cases with all lesion ratings on diseased case $k_22$. The second double summation compares all finite NL ratings on *diseased cases* with all lesion ratings on diseased case $k_22$. The double summation outside the square bracket sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
 
-The formula can be simplified by making two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings, including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
+The formula can be simplified by creating two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
 
-The following example uses the same 9-case FROC dataset used earlier. The AUC is calculated two ways: using geometry and using the formula (implemented in `RJafroc` function `UtilFigureOfMerit`).
+The following example uses the same 9-case FROC dataset used earlier. The AUC is calculated two ways: using geometry and using the formula (implemented in function `UtilFigureOfMerit`).
 
 
 ```{r empirical-numerical2, echo = F, cache=F}
@@ -1468,10 +1468,6 @@ cat("RJafroc yields: ", auc_formula, "\n")
 ```
 
 
-```{r, echo=F}
-#cat("\nGeometry yields FROC AUC = ", auc_geom,"\n")
-#cat(  "Formula yields  FROC AUC = ", auc_formula,"\n")
-```
 
 
 ### ROC
