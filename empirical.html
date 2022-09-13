@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Empirical plots from FROC data | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Empirical plots from FROC data | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-09-06" />
+<meta name="date" content="2022-09-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -217,8 +217,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10.2" data-path="empirical.html"><a href="empirical.html#empirical-wafroc1-plot-illustration"><i class="fa fa-check"></i><b>2.10.2</b> Illustration with a dataset</a></li>
 </ul></li>
 <li class="chapter" data-level="2.11" data-path="empirical.html"><a href="empirical.html#empirical-summary"><i class="fa fa-check"></i><b>2.11</b> Summary of operating characteristics</a></li>
-<li class="chapter" data-level="2.12" data-path="empirical.html"><a href="empirical.html#empirical-plots"><i class="fa fa-check"></i><b>2.12</b> Plots of FROC, AFROC and wAFROC AUCs vs. ROC AUC</a></li>
-<li class="chapter" data-level="2.13" data-path="empirical.html"><a href="empirical.html#empirical-numerical-illustration"><i class="fa fa-check"></i><b>2.13</b> AFROC vs. wAFROC</a></li>
+<li class="chapter" data-level="2.12" data-path="empirical.html"><a href="empirical.html#empirical-plots"><i class="fa fa-check"></i><b>2.12</b> Plots of FROC, AFROC and wAFROC AUCs vs. ROC AUC</a><ul>
+<li class="chapter" data-level="2.12.1" data-path="empirical.html"><a href="empirical.html#plot-of-froc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>2.12.1</b> Plot of FROC AUC vs. ROC AUC</a></li>
+<li class="chapter" data-level="2.12.2" data-path="empirical.html"><a href="empirical.html#plot-of-afroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>2.12.2</b> Plot of AFROC AUC vs. ROC AUC</a></li>
+<li class="chapter" data-level="2.12.3" data-path="empirical.html"><a href="empirical.html#plot-of-wafroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>2.12.3</b> Plot of wAFROC AUC vs. ROC AUC</a></li>
+</ul></li>
+<li class="chapter" data-level="2.13" data-path="empirical.html"><a href="empirical.html#empirical-numerical-illustrati-Infon"><i class="fa fa-check"></i><b>2.13</b> Understanding AFROC vs. wAFROC, a numerical illustration</a><ul>
+<li class="chapter" data-level="2.13.1" data-path="empirical.html"><a href="empirical.html#nl-and-ll-ratings"><i class="fa fa-check"></i><b>2.13.1</b> NL and LL ratings</a></li>
+<li class="chapter" data-level="2.13.2" data-path="empirical.html"><a href="empirical.html#lesion-weights"><i class="fa fa-check"></i><b>2.13.2</b> Lesion weights</a></li>
+<li class="chapter" data-level="2.13.3" data-path="empirical.html"><a href="empirical.html#fpf"><i class="fa fa-check"></i><b>2.13.3</b> FPF</a></li>
+<li class="chapter" data-level="2.13.4" data-path="empirical.html"><a href="empirical.html#llf"><i class="fa fa-check"></i><b>2.13.4</b> LLF</a></li>
+<li class="chapter" data-level="2.13.5" data-path="empirical.html"><a href="empirical.html#wllf"><i class="fa fa-check"></i><b>2.13.5</b> wLLF</a></li>
+</ul></li>
 <li class="chapter" data-level="2.14" data-path="empirical.html"><a href="empirical.html#empirical-Discussion"><i class="fa fa-check"></i><b>2.14</b> TBA Discussion</a></li>
 <li class="chapter" data-level="2.15" data-path="empirical.html"><a href="empirical.html#empirical-two-theorems"><i class="fa fa-check"></i><b>2.15</b> Appendix 1: Two Theorems</a><ul>
 <li class="chapter" data-level="2.15.1" data-path="empirical.html"><a href="empirical.html#empirical-two-theorems-1"><i class="fa fa-check"></i><b>2.15.1</b> Theorem 1</a></li>
@@ -1205,73 +1215,133 @@ wLLF
 </div>
 <div id="empirical-plots" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.12</span> Plots of FROC, AFROC and wAFROC AUCs vs. ROC AUC<a href="empirical.html#empirical-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Regarding the ROC-AUC as the gold standard, shown next are plots of <span class="math inline">\(A_{\text{FROC}}\)</span>, <span class="math inline">\(A_{\text{AFROC}}\)</span> and <span class="math inline">\(A_{\text{wAFROC}}\)</span> vs. <span class="math inline">\(A_{\text{ROC}}\)</span> generated for the dataset used in the previous illustrations.</p>
-<p>The following is the plot of <span class="math inline">\(A_{\text{FROC}}\)</span> vs. <span class="math inline">\(A_{\text{ROC}}\)</span>. There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. <span class="math inline">\(A_{\text{ROC}}\)</span> is assumed to be the gold standard. Note the poor correlation between <span class="math inline">\(A_{\text{FROC}}\)</span> and <span class="math inline">\(A_{\text{ROC}}\)</span>. The slope is negative and there is much scatter.</p>
-<p><img src="03-empirical_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<p>Evidently <span class="math inline">\(A_{\text{FROC}}\)</span> does not correlate well with <span class="math inline">\(A_{\text{ROC}}\)</span>. The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot rewards an observer who generates more and more NLs while not generating more LLs, i.e., as the operating point moves further to the right along the flat part of the plot. In fact the perfect observer, Section <code>\@ref(froc-paradigm-solar-analogy)</code>, whose FROC plot is the vertical line connecting (0,0) and (0,1) has zero <span class="math inline">\(A_{\text{FROC}}\)</span>! One can try ot avoid this problem by limiting the area under the FROC to that between <span class="math inline">\(\text{NLF} = 0\)</span> and <span class="math inline">\(\text{NLF} = x\)</span> where <span class="math inline">\(x\)</span> is some arbitrarily chosen fixed value – indeed this procedure has been used by many CAD algorithm designers. Since the choice of <span class="math inline">\(x\)</span> is arbitrary the procedure would be subjective and totally dependent on the algorithm designer. Moreover it would not solve the problem that the perfect observer would still yield <span class="math inline">\(A_{\text{FROC}} = 0\)</span>. The perfect observer problem is not academic as the method would fail for any observer with <span class="math inline">\(\text{NLF}_{max} &lt; x\)</span>. For such an observer the partial area would be undefined. This would force the algorithm designer to chose <span class="math inline">\(x\)</span> as the minimum of all <span class="math inline">\(\text{NLF}_{max}\)</span> values over all observers and treatments, which would exclude a lot of data from the analysis leading to a severe statistical power penalty.</p>
-<p>The basic problem is that the FROC plot is unconstrained in the NLF direction.</p>
-<p>The following is the plot of <span class="math inline">\(A_{\text{AFROC}}\)</span> vs. <span class="math inline">\(A_{\text{ROC}}\)</span>. This time there is a strong positive correlation between the two. The reason is that the AFROC is fully contained in the unit square. An observer who generates more NL marks would in fact yield smaller <span class="math inline">\(A_{\text{AFROC}}\)</span> - this is explained in a later section TBA .</p>
+<p>Regarding the ROC-AUC, i.e., <span class="math inline">\(A_{\text{ROC}}\)</span>, as the gold standard against which all other figures of merit should be compared for consistency in orderings, shown next are plots of <span class="math inline">\(A_{\text{FROC}}\)</span>, <span class="math inline">\(A_{\text{AFROC}}\)</span> and <span class="math inline">\(A_{\text{wAFROC}}\)</span> vs. <span class="math inline">\(A_{\text{ROC}}\)</span> for the dataset used in the previous illustrations.</p>
+<div id="plot-of-froc-auc-vs.-roc-auc" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.12.1</span> Plot of FROC AUC vs. ROC AUC<a href="empirical.html#plot-of-froc-auc-vs.-roc-auc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The following is the plot of <span class="math inline">\(A_{\text{FROC}}\)</span> vs. <span class="math inline">\(A_{\text{ROC}}\)</span>. There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. Note the poor correlation and negative slope between <span class="math inline">\(A_{\text{FROC}}\)</span> and <span class="math inline">\(A_{\text{ROC}}\)</span>, <span class="math inline">\(R^2\)</span> = 0.0347791, slope = -0.3978636.</p>
 <p><img src="03-empirical_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<p>The following is the plot of <span class="math inline">\(A_{\text{wAFROC}}\)</span> vs. <span class="math inline">\(A_{\text{ROC}}\)</span>. Again, there is a strong positive correlation between the two. The wAFROC is also fully contained in the unit square.</p>
-<p><img src="03-empirical_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot <em>rewards</em> an observer who generates more NLs, i.e., as the operating point moves further to the right. (The perfect observer whose FROC plot is the vertical line connecting (0,0) and (0,1) is heavily penalized since <span class="math inline">\(A_{\text{FROC}} = 0\)</span> for this observer.) One can try to try to avoid this problem by limiting the area under the FROC to that between <span class="math inline">\(\text{NLF} = 0\)</span> and <span class="math inline">\(\text{NLF} = x\)</span> where <span class="math inline">\(x\)</span> is an arbitrarily chosen fixed value – indeed the partial area procedure has been used by CAD algorithm designers. Since the choice of <span class="math inline">\(x\)</span> is arbitrary the procedure is subjective. The method would fail for any observer with <span class="math inline">\(\text{NLF}_{max} &lt; x\)</span> as then the partial area is undefined. This forces the algorithm designer to chose <span class="math inline">\(x\)</span> as the minimum of all <span class="math inline">\(\text{NLF}_{max}\)</span> values over all observers and treatments, which would exclude a lot of data and lead to a statistical power penalty.</p>
 </div>
-<div id="empirical-numerical-illustration" class="section level2 hasAnchor">
-<h2><span class="header-section-number">2.13</span> AFROC vs. wAFROC<a href="empirical.html#empirical-numerical-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions, are perhaps best illustrated with a numerical example. The dataset consists of <span class="math inline">\(K_1 = 4\)</span> non-diseased and <span class="math inline">\(K_2 = 4\)</span> diseased cases. The first two diseased cases have one lesion each, and the remaining two have two lesions each.</p>
-<p>Shown next is the <code>NL</code> ratings array; it has 8 rows, corresponding to the total number of cases, and 2 columns, corresponding to the maximum number of NLs and LLs per case (notice there are two entries for case #3). The negative infinities represent unmarked locations.</p>
-<pre><code>#&gt; 
-#&gt; NL ratings:
-#&gt;      [,1] [,2]
-#&gt; [1,] -Inf -Inf
-#&gt; [2,]  0.5 -Inf
-#&gt; [3,]  0.7  0.6
-#&gt; [4,] -0.3 -Inf
-#&gt; [5,]  1.5 -Inf
-#&gt; [6,] -Inf -Inf
-#&gt; [7,] -Inf -Inf
-#&gt; [8,] -Inf -Inf</code></pre>
+<div id="plot-of-afroc-auc-vs.-roc-auc" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.12.2</span> Plot of AFROC AUC vs. ROC AUC<a href="empirical.html#plot-of-afroc-auc-vs.-roc-auc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The following is the plot of <span class="math inline">\(A_{\text{AFROC}}\)</span> vs. <span class="math inline">\(A_{\text{ROC}}\)</span>. This time there is a strong positive correlation between the two, <span class="math inline">\(R^2\)</span> = 0.7258723, slope = 0.8649687. The reason is that the AFROC is fully contained in the unit square. An observer who generates more NL marks will yield smaller <span class="math inline">\(A_{\text{AFROC}}\)</span> – as the abscissa of the AFROC approaches unity the restriction to the unit square ensures that AUC will decrease.</p>
+<p><img src="03-empirical_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="plot-of-wafroc-auc-vs.-roc-auc" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.12.3</span> Plot of wAFROC AUC vs. ROC AUC<a href="empirical.html#plot-of-wafroc-auc-vs.-roc-auc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The following is the plot of <span class="math inline">\(A_{\text{wAFROC}}\)</span> vs. <span class="math inline">\(A_{\text{ROC}}\)</span>. Again, there is a strong positive correlation between the two, <span class="math inline">\(R^2\)</span> = 0.8569511, slope = 1.0691159. The reason is that the wAFROC is also fully contained in the unit square.</p>
+<p><img src="03-empirical_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+</div>
+<div id="empirical-numerical-illustrati-Infon" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.13</span> Understanding AFROC vs. wAFROC, a numerical illustration<a href="empirical.html#empirical-numerical-illustrati-Infon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions can be illustrated with a fictitious small dataset consisting of <span class="math inline">\(K_1 = 4\)</span> non-diseased and <span class="math inline">\(K_2 = 5\)</span> diseased cases. The maximum number of NLs per case is two and the maximum number of lesions per case is three. The first two diseased cases have one lesion each, the third and fourth have two lesions each and the fifth has 3 lesions. Here is how we code the NL and LL ratings (<code>t()</code> is the <code>R</code> transpose operator). The negative infinities represent unmarked locations. For example, the first non-diseased case has no NL marks, the second has one mark rated 0.5, etc., and the first diseased case has one NL mark rated 1.5, etc. The first lesion in the LL array was rated 0.9. the second was rated -0.2, …, and the 3 lesions in the fifth diseased case were rated 1, 2.5 and 1, respectively.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="empirical.html#cb15-1"></a>NL &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">array</span>(<span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>,  </span>
+<span id="cb15-2"><a href="empirical.html#cb15-2"></a>                 <span class="fl">0.5</span>, <span class="op">-</span><span class="ot">Inf</span>, </span>
+<span id="cb15-3"><a href="empirical.html#cb15-3"></a>                 <span class="fl">0.7</span>, <span class="fl">0.6</span>, </span>
+<span id="cb15-4"><a href="empirical.html#cb15-4"></a>                <span class="fl">-0.3</span>, <span class="op">-</span><span class="ot">Inf</span>, </span>
+<span id="cb15-5"><a href="empirical.html#cb15-5"></a>                 <span class="fl">1.5</span>, <span class="op">-</span><span class="ot">Inf</span>, </span>
+<span id="cb15-6"><a href="empirical.html#cb15-6"></a>                <span class="op">-</span><span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>, </span>
+<span id="cb15-7"><a href="empirical.html#cb15-7"></a>                <span class="op">-</span><span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>, </span>
+<span id="cb15-8"><a href="empirical.html#cb15-8"></a>                <span class="op">-</span><span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>,</span>
+<span id="cb15-9"><a href="empirical.html#cb15-9"></a>              <span class="op">-</span><span class="st">  </span><span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">9</span>)))</span>
+<span id="cb15-10"><a href="empirical.html#cb15-10"></a>LL &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">array</span>(<span class="kw">c</span>(<span class="fl">0.9</span>, <span class="op">-</span><span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>, </span>
+<span id="cb15-11"><a href="empirical.html#cb15-11"></a>               <span class="fl">-0.2</span>, <span class="op">-</span><span class="ot">Inf</span>,<span class="op">-</span><span class="ot">Inf</span>, </span>
+<span id="cb15-12"><a href="empirical.html#cb15-12"></a>                <span class="fl">1.6</span>, <span class="op">-</span><span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>, </span>
+<span id="cb15-13"><a href="empirical.html#cb15-13"></a>                  <span class="dv">3</span>,    <span class="dv">2</span>, <span class="op">-</span><span class="ot">Inf</span>, </span>
+<span id="cb15-14"><a href="empirical.html#cb15-14"></a>                  <span class="dv">1</span>,    <span class="fl">2.5</span>,  <span class="dv">1</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">5</span>)))</span></code></pre></div>
+<p>The ratings are converted to a dataset <code>frocData</code> as shown next:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="empirical.html#cb16-1"></a>frocData &lt;-<span class="st"> </span><span class="kw">Df2RJafrocDataset</span>(NL, LL, <span class="dt">perCase =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code></pre></div>
+<p>In the above code <code>perCase = c(1,1,2,2,3)</code> specifies the number of lesions per case: 1 in the first diseased case, 1 in the second, 2 in the third, …, and 3 in the fifth. The function <code>Df2RJafrocDataset()</code> generates the dataset object.</p>
+<p>The lesion weights are specified in the following lines.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="empirical.html#cb17-1"></a>frocData<span class="op">$</span>lesions<span class="op">$</span>weights[<span class="dv">3</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>, <span class="op">-</span><span class="ot">Inf</span>)</span>
+<span id="cb17-2"><a href="empirical.html#cb17-2"></a>frocData<span class="op">$</span>lesions<span class="op">$</span>weights[<span class="dv">4</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>, <span class="fl">0.1</span>, <span class="op">-</span><span class="ot">Inf</span>)</span>
+<span id="cb17-3"><a href="empirical.html#cb17-3"></a>frocData<span class="op">$</span>lesions<span class="op">$</span>weights[<span class="dv">5</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.3</span>)</span></code></pre></div>
+<p>The first and second diseased cases, which have only one lesion each, are assigned unit weights by default. The first lesion in the third diseased case has weight 0.1 and the second has weight 0.9 – notice that the weights sum to unity. The fourth diseased cases has the lesion weights reversed, 0.9 and 0.1. The three lesions in the fifth diseased case are assigned weights 0.3. 0.4 and 0.3.</p>
+<div id="nl-and-ll-ratings" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.13.1</span> NL and LL ratings<a href="empirical.html#nl-and-ll-ratings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Shown next is the <code>NL</code> ratings array; it has 9 rows, corresponding to the total number of cases (the first four correspond to non-diseased cases and the rest to diseased cases) and 2 columns, corresponding to the maximum number of NLs per case.</p>
+<pre><code>#&gt; NL ratings:
+#&gt;       [,1] [,2]
+#&gt;  [1,] -Inf -Inf
+#&gt;  [2,]  0.5 -Inf
+#&gt;  [3,]  0.7  0.6
+#&gt;  [4,] -0.3 -Inf
+#&gt;  [5,]  1.5 -Inf
+#&gt;  [6,] -Inf -Inf
+#&gt;  [7,] -Inf -Inf
+#&gt;  [8,] -Inf -Inf
+#&gt;  [9,] -Inf -Inf</code></pre>
+<p>Shown next is the <code>LL</code> ratings array; it has 5 rows, corresponding to the total number of diseased cases, and 3 columns, corresponding to the maximum number of LLs per case:</p>
+<pre><code>#&gt; LL ratings:
+#&gt;      [,1] [,2] [,3]
+#&gt; [1,]  0.9 -Inf -Inf
+#&gt; [2,] -0.2 -Inf -Inf
+#&gt; [3,]  1.6 -Inf -Inf
+#&gt; [4,]  3.0  2.0 -Inf
+#&gt; [5,]  1.0  2.5    1</code></pre>
+</div>
+<div id="lesion-weights" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.13.2</span> Lesion weights<a href="empirical.html#lesion-weights" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Show next is the lesion weights array:</p>
+<pre><code>#&gt; lesion weights:
+#&gt;      [,1] [,2] [,3]
+#&gt; [1,]  1.0 -Inf -Inf
+#&gt; [2,]  1.0 -Inf -Inf
+#&gt; [3,]  0.1  0.9 -Inf
+#&gt; [4,]  0.9  0.1 -Inf
+#&gt; [5,]  0.3  0.4  0.3</code></pre>
+<p>The negative infinities represent missing values.</p>
+</div>
+<div id="fpf" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.13.3</span> FPF<a href="empirical.html#fpf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Shown next is the <code>FP</code> ratings array. Since FPs are only possible on non-diseased cases, this is a length 4 row-vector. Each value is the maximum of the two <code>NL</code> ratings for the corresponding non-diseased case. As an example, for case #3 the maximum of the two <code>NL</code> values is 0.7.</p>
-<pre><code>#&gt; 
-#&gt; FP ratings:
+<pre><code>#&gt; FP ratings:
 #&gt; [1] -Inf  0.5  0.7 -0.3</code></pre>
 <p>Here are the sorted <code>FP</code> ratings.</p>
 <pre><code>#&gt; [1] -Inf -0.3  0.5  0.7</code></pre>
 <p>The sorting makes it easy to construct the <code>FPF</code> values, shown next.</p>
 <pre><code>#&gt; FPF values:
-#&gt;  0.000 0.000 0.000 0.000 0.000 0.250 0.500 0.500 0.750 1.000</code></pre>
+#&gt;  0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.250 0.500 0.500 0.750 1.000</code></pre>
 <p>The first non-zero <code>FPF</code> value is <span class="math inline">\(0.25 = 1/4\)</span>, which occurs when a conceptual sliding threshold is lowered past the highest <code>FP</code> value, namely 0.7. (The 0.25 comes from 1 <code>FP</code> case divided by 4 non-diseased cases.) The next <code>FPF</code> value is <span class="math inline">\(0.5 = 2/4\)</span>, which occurs when the sliding threshold is lowered past the next-highest <code>FP</code> value, namely 0.5. The next <code>FPF</code> value is 0.75 and the last <code>FPF</code> value is unity.</p>
-<p>Shown next is the <code>LL</code> ratings array:</p>
-<pre><code>#&gt; 
-#&gt; LL ratings:
-#&gt;      [,1] [,2]
-#&gt; [1,]  0.9 -Inf
-#&gt; [2,] -0.2 -Inf
-#&gt; [3,]  1.6 -Inf
-#&gt; [4,]  3.0    2</code></pre>
+</div>
+<div id="llf" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.13.4</span> LLF<a href="empirical.html#llf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Here are the sorted <code>LL</code> ratings.</p>
-<pre><code>#&gt; [1] -Inf -Inf -Inf -0.2  0.9  1.6  2.0  3.0</code></pre>
-<p>The sorting makes it easy to construct the <code>LLF</code> values, shown next.</p>
-<pre><code>#&gt; 
-#&gt; LLF values:
-#&gt;  0.000 0.167 0.333 0.500 0.667 0.667 0.667 0.833 0.833 1.000</code></pre>
-<p>The first non-zero <code>LLF</code> value is 0.167, which occurs when the sliding threshold is lowered past the highest <code>LL</code> value, namely 3. The 0.167 comes from 1 LL divided by 6 lesions. The next <code>LLF</code> value is 0.333, which occurs when the sliding threshold is lowered past the next-highest <code>LL</code> value, namely 2 (2/6 = 0.333). The next <code>LLF</code> value is 0.5, which occurs when the sliding threshold is lowered past 1.6 (3/6 = 0.5), and so on.</p>
-<p>Show next is the lesion weights array:</p>
-<pre><code>#&gt; 
-#&gt; lesion weights:
-#&gt;      [,1] [,2]
-#&gt; [1,]  1.0 -Inf
-#&gt; [2,]  1.0 -Inf
-#&gt; [3,]  0.1  0.9
-#&gt; [4,]  0.9  0.1</code></pre>
-<p>Since the first two diseased cases have one lesion each, the [1,1] and [2,1] elements of the the weight array are each equal to unity and the [1,2] and [2,2] elements are each equal to negative infinity, which is being used as a missing value. For diseased case #3 the first lesion has weight 0.1 while the second lesion has weight 0.9 (the weights must sum to unity). For diseased case #4 the weights are reversed.</p>
+<pre><code>#&gt;  [1] -Inf -Inf -Inf -Inf -Inf -Inf -Inf -0.2  0.9  1.0  1.0  1.6  2.0  2.5  3.0</code></pre>
+<p>The <code>LLF</code> values are shown next.</p>
+<pre><code>#&gt; LLF values:
+#&gt;  0.000 0.111 0.222 0.333 0.444 0.667 0.778 0.778 0.778 0.889 0.889 1.000</code></pre>
+<p>The first non-zero <code>LLF</code> value is 0.111, which occurs when the sliding threshold is lowered past the highest <code>LL</code> value, namely 3. The 0.111 comes from 1 LL divided by 9, the total number of lesions. The next <code>LLF</code> value is 0.222, which occurs when the sliding threshold is lowered past the next-highest <code>LL</code> value, namely 2.5 (2/9 = 0.222). The next <code>LLF</code> value is 0.333, which occurs when the sliding threshold is lowered past 2 (3/9 = 0.333), and so on.</p>
+</div>
+<div id="wllf" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.13.5</span> wLLF<a href="empirical.html#wllf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The sorted <code>LL</code> ratings array and the weights are used to construct the <code>wLLF</code> values shown next.</p>
-<pre><code>#&gt; 
-#&gt; wLLF values:
-#&gt;  0.000 0.225 0.250 0.275 0.525 0.525 0.525 0.775 0.775 1.000</code></pre>
-<p>The first non-zero <code>wLLF</code> value is 0.225, which occurs when the sliding threshold is lowered past the highest <code>LL</code> value, namely 3. Since this comes from the first lesion on diseased case #4, whose weight is 0.9, the corresponding incremental vertical jump is 1 divided by 4 (<em>sic</em>) times 0.9. Notice that we are dividing by 4, the total number of diseased cases, not 6 as in the <code>LLF</code> example.</p>
-<p>The next <code>wLLF</code> value is 0.25, which occurs when the sliding threshold is lowered past the next-highest <code>LL</code> value, namely 2, which comes from the 2nd lesion on the fourth diseased case with weight 0.1. The incremental jump in <code>wLLF</code> is 1 divided by 4 times 0.1, which is 0.025. The net <code>wLLF</code> value corresponding to these two lesions is <span class="math inline">\(1/4*0.9 + 1/4*0.1 = 1/4 = 0.25\)</span>. The two lesions on diseased case #4 contribute 0.25 in <code>wLLF</code> increment. In contrast, they contribute <span class="math inline">\(2/6 = 0.333\)</span> in <code>LLF</code> increment, showing explicitly that the AFROC gives greater importance to diseased cases with more lesions while the wAFROC does not.</p>
-<p>The next <code>wLLF</code> value is 0.275, which occurs when the sliding threshold is lowered past 1.6, which ratings comes from the first lesion on diseased case #3, with weight 0.1, <span class="math inline">\(1/4*0.9 + 1/4*0.1 + 1/4*0.1 = 0.275\)</span>, and so on.</p>
-<p>The reader should complete these hand-calculations to reproduce all of the <code>wLLF</code> values shown above.</p>
+<pre><code>#&gt; wLLF values:
+#&gt;  0.000 0.180 0.260 0.280 0.300 0.420 0.620 0.620 0.620 0.820 0.820 1.000</code></pre>
+<p>The first non-zero <code>wLLF</code> value is 0.18, which occurs when the sliding threshold is lowered past the highest <code>LL</code> value, namely 3. Since this comes from lesion #1 on diseased case #4, whose weight is 0.9, the corresponding incremental vertical jump is <span class="math inline">\(1/5*0.9 = 0.18\)</span>, which is also the net <code>wLLF</code> value corresponding to the most suspicious lesion crossing the cutoff. Notice that we are dividing by 5, the total number of diseased cases, not 9 as in the <code>LLF</code> example.</p>
+<p>The next <code>wLLF</code> value is 0.26, which occurs when the sliding threshold is lowered past the next-highest <code>LL</code> value, namely 2.5, which comes from the 2nd lesion on the fifth diseased case with weight 0.4. The incremental jump in <code>wLLF</code> is <span class="math inline">\(1/5*0.4 = 0.08\)</span>. The net <code>wLLF</code> value corresponding to the two most suspicious lesions crossing the cutoff is <span class="math inline">\(1/5*0.9 + 1/5*0.4 = 0.26\)</span>.</p>
+<p>The next <code>wLLF</code> value is 0.280, which occurs when the sliding threshold is lowered past 1.6, which comes from lesion #1 on diseased case #3, with weight 0.1, and the net <code>wLLF</code> value corresponding to the three most suspicious lesions crossing the cutoff is <span class="math inline">\(1/5*0.9 + 1/5*0.4 + 1/5*0.1 = 0.280\)</span>, and so on.</p>
+<p>The reader should complete these hand-calculations to reproduce all of the <code>wLLF</code> values shown above. The values (FPF, LLF and wLLF) defining the AFROC and wAFROC are summarized here:</p>
+<pre><code>#&gt;     FPF       LLF wLLF
+#&gt; 1  0.00 0.0000000 0.00
+#&gt; 2  0.00 0.1111111 0.18
+#&gt; 3  0.00 0.2222222 0.26
+#&gt; 4  0.00 0.3333333 0.28
+#&gt; 5  0.00 0.4444444 0.30
+#&gt; 6  0.00 0.6666667 0.42
+#&gt; 7  0.00 0.7777778 0.62
+#&gt; 8  0.25 0.7777778 0.62
+#&gt; 9  0.50 0.7777778 0.62
+#&gt; 10 0.50 0.8888889 0.82
+#&gt; 11 0.75 0.8888889 0.82
+#&gt; 12 1.00 1.0000000 1.00</code></pre>
+<p>This shows that the empirical AFROC is defined by the following 6 operating points: (0,0), (0,0.7777778), (0.5,0.7777778), (0.5,0.8888889), (0.75, 0.8888889) and (1,1). Likewise, the empirical wAFROC is defined by the following 6 operating points: (0,0), (0,0.62), (0.5,62), (0.5,0.82), (0.75, 0.82) and (1,1). In each case one simply connects neighboring points with straight lines.</p>
+<p>The hand-calculations also show why the AFROC gives more importance to diseased cases with more lesions while the wAFROC does not.</p>
+<ul>
+<li><p>Considering the AFROC, diseased case #5 with three lesions which contributes three vertical jumps to LLF totaling <span class="math inline">\(3/9 = 0.333333\)</span>.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> This is larger than the contribution to LLF of diseased case #1 with one lesion <span class="math inline">\(1/9 = 0.11111\)</span>.</p></li>
+<li><p>Considering the wAFROC, the three lesions on diseased case #5 contribute <span class="math inline">\(1/5*0.3 + 1/5*0.4 + 1/5*0.3 = 0.2\)</span> to wLLF, the same as diseased case #1, <span class="math inline">\(1/5*1 = 0.2\)</span>.</p></li>
+</ul>
 <p>Shown in Fig. <a href="empirical.html#fig:plots-afrocPlot-wafrocPlot">2.1</a> are the empirical AFROC and wAFROC plots.</p>
 <div class="figure"><span style="display:block;" id="fig:plots-afrocPlot-wafrocPlot"></span>
 <img src="03-empirical_files/figure-html/plots-afrocPlot-wafrocPlot-1.png" alt="Left: AFROC plot; Right: corresponding wAFROC plot." width="672" />
@@ -1280,25 +1350,28 @@ FIGURE 2.1: Left: AFROC plot; Right: corresponding wAFROC plot.
 </p>
 </div>
 <p>The operating points can be used to numerically calculate the AUCs under the empirical AFROC and wAFROC plots, as done in the following code:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="empirical.html#cb24-1"></a>afroc_auc &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span> <span class="op">/</span><span class="st"> </span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span></span>
-<span id="cb24-2"><a href="empirical.html#cb24-2"></a><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="dv">6</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">+</span><span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="dv">6</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">/</span><span class="dv">2</span></span>
-<span id="cb24-3"><a href="empirical.html#cb24-3"></a></span>
-<span id="cb24-4"><a href="empirical.html#cb24-4"></a>wafroc_auc &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.525</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.775</span> <span class="op">+</span><span class="st"> </span></span>
-<span id="cb24-5"><a href="empirical.html#cb24-5"></a><span class="st">  </span><span class="fl">0.775</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">+</span><span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.775</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">/</span><span class="dv">2</span></span>
-<span id="cb24-6"><a href="empirical.html#cb24-6"></a></span>
-<span id="cb24-7"><a href="empirical.html#cb24-7"></a>afroc_auc</span>
-<span id="cb24-8"><a href="empirical.html#cb24-8"></a><span class="co">#&gt; [1] 0.7708333</span></span>
-<span id="cb24-9"><a href="empirical.html#cb24-9"></a>wafroc_auc</span>
-<span id="cb24-10"><a href="empirical.html#cb24-10"></a><span class="co">#&gt; [1] 0.678125</span></span></code></pre></div>
-<p>The same AUC results are obtained using the function <code>UtilFigureOfMerit</code></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="empirical.html#cb25-1"></a><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">AFROC AUC = &quot;</span>, <span class="kw">as.numeric</span>(<span class="kw">UtilFigureOfMerit</span>(frocData, <span class="dt">FOM =</span> <span class="st">&quot;AFROC&quot;</span>)),<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb25-2"><a href="empirical.html#cb25-2"></a><span class="co">#&gt; </span></span>
-<span id="cb25-3"><a href="empirical.html#cb25-3"></a><span class="co">#&gt; AFROC AUC =  0.7708333</span></span>
-<span id="cb25-4"><a href="empirical.html#cb25-4"></a><span class="kw">cat</span>(<span class="st">&quot;wAFROC AUC = &quot;</span>, <span class="kw">as.numeric</span>(<span class="kw">UtilFigureOfMerit</span>(frocData, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)),<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb25-5"><a href="empirical.html#cb25-5"></a><span class="co">#&gt; wAFROC AUC =  0.678125</span></span></code></pre></div>
-<p>From the preceding it is seen that the AFROC-based trapezoidal plots consist of upward and rightward jumps, starting from the origin (0,0) and ending at (1,1). This is true regardless of whether the z-samples are binned or not: i.e., at the “microscopic” level the jumps always exist. Each upward jump is associated with a <code>LL</code> rating exceeding a virtual threshold. Each rightward jump is associated with a <code>FP</code> rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it. This makes sense in terms of correct decisions being rewarded and incorrect ones being penalized, and can be seen from two examples. If there are only upward jumps, then the trapezoidal plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect – the straight-line extension to (1,1) ensures that the net area is unity. If there are only horizontal jumps, that takes the operating point from the origin to (1,0), where none of the lesions are localized and every non-diseased image has at least one NL mark, representing worst possible performance. Here, despite the straight line extension to (1,1), the net area is zero.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="empirical.html#cb28-1"></a>afroc_auc &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.7777778</span> <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-2"><a href="empirical.html#cb28-2"></a><span class="st">  </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.8888889</span> <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-3"><a href="empirical.html#cb28-3"></a><span class="st">  </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.8888889</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.8888889</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">/</span><span class="dv">2</span></span>
+<span id="cb28-4"><a href="empirical.html#cb28-4"></a></span>
+<span id="cb28-5"><a href="empirical.html#cb28-5"></a>wafroc_auc &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.62</span> <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-6"><a href="empirical.html#cb28-6"></a><span class="st">  </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.82</span> <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-7"><a href="empirical.html#cb28-7"></a><span class="st">  </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.82</span> <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-8"><a href="empirical.html#cb28-8"></a><span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.82</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">/</span><span class="dv">2</span></span>
+<span id="cb28-9"><a href="empirical.html#cb28-9"></a></span>
+<span id="cb28-10"><a href="empirical.html#cb28-10"></a><span class="kw">cat</span>(<span class="st">&quot;afroc_auc =&quot;</span>, afroc_auc,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb28-11"><a href="empirical.html#cb28-11"></a><span class="co">#&gt; afroc_auc = 0.8472222</span></span>
+<span id="cb28-12"><a href="empirical.html#cb28-12"></a><span class="kw">cat</span>(<span class="st">&quot;wafroc_auc =&quot;</span>, wafroc_auc,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb28-13"><a href="empirical.html#cb28-13"></a><span class="co">#&gt; wafroc_auc = 0.7425</span></span></code></pre></div>
+<p>The same AUC results are obtained using the function <code>UtilFigureOfMerit</code>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="empirical.html#cb29-1"></a><span class="kw">cat</span>(<span class="st">&quot;AFROC AUC = &quot;</span>, <span class="kw">as.numeric</span>(<span class="kw">UtilFigureOfMerit</span>(frocData, <span class="dt">FOM =</span> <span class="st">&quot;AFROC&quot;</span>)),<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb29-2"><a href="empirical.html#cb29-2"></a><span class="co">#&gt; AFROC AUC =  0.8472222</span></span>
+<span id="cb29-3"><a href="empirical.html#cb29-3"></a><span class="kw">cat</span>(<span class="st">&quot;wAFROC AUC = &quot;</span>, <span class="kw">as.numeric</span>(<span class="kw">UtilFigureOfMerit</span>(frocData, <span class="dt">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)),<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb29-4"><a href="empirical.html#cb29-4"></a><span class="co">#&gt; wAFROC AUC =  0.7425</span></span></code></pre></div>
+<p>From the preceding it is seen that the empirical plots consist of upward and rightward jumps starting from the origin (0,0) and ending at (1,1). Each upward jump is associated with a <code>LL</code> rating exceeding a virtual threshold. Each rightward jump is associated with a <code>FP</code> rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it, i.e., correct decisions are rewarded and incorrect ones are penalized. If there are only upward jumps then the empirical plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect – the straight-line extension of the plot to (1,1) ensures that the net area is unity. If there are only horizontal jumps the operating point moves from the origin to (1,0), where none of the lesions are localized and every non-diseased image has at least one NL mark and despite the straight line extension to (1,1), the net area is zero. This represents worst possible performance.</p>
 <p><em>The area under the AFROC is the probability that a lesion is rated higher than any mark on a non-diseased case.</em></p>
 <p><em>The area under the weighted-AFROC is lesion-weight adjusted probability that a lesion is rated higher than any mark on a non-diseased case.</em></p>
+</div>
 </div>
 <div id="empirical-Discussion" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.14</span> TBA Discussion<a href="empirical.html#empirical-Discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1465,8 +1538,8 @@ A_0 = \frac{\left ( 1 - \text{FPF}_1 \right )\left ( 1 + \text{wLLF}_1 \right )}
 <p>The following example uses the same 8-case FROC dataset used earlier. This time the FROC plot is shown and the AUC is calculated two ways: using geometry and using the formula (implemented in <code>RJafroc</code> function <code>UtilFigureOfMerit</code>).</p>
 <p><img src="03-empirical_files/figure-html/empirical-numerical2-1.png" width="672" /></p>
 <pre><code>#&gt; 
-#&gt; Geometry yields FROC AUC =  0.4166667
-#&gt; Formula yields  FROC AUC =  0.4166667</code></pre>
+#&gt; Geometry yields FROC AUC =  0.345679
+#&gt; Formula yields  FROC AUC =  0.4074074</code></pre>
 </div>
 <div id="roc" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.16.2</span> ROC<a href="empirical.html#roc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1575,6 +1648,7 @@ This shows that <span class="math inline">\(\text{A}_{AFROC}\)</span> behaves li
 <li id="fn16"><p>This is not a limiting assumption: if the data is continuous, for finite numbers of cases, no ordering information is lost if the number of ratings is chosen large enough.<a href="empirical.html#fnref16" class="footnote-back">↩︎</a></p></li>
 <li id="fn17"><p>The highest rating method was used in early FROC modeling in <span class="citation">(Bunch et al. <a href="#ref-bunch1977free" role="doc-biblioref">1977</a>)</span> and in <span class="citation">(Swensson <a href="#ref-swensson1996unified" role="doc-biblioref">1996</a>)</span>, the latter in the context of LROC paradigm modeling.<a href="empirical.html#fnref17" class="footnote-back">↩︎</a></p></li>
 <li id="fn18"><p>Historical note: I became aware of how serious this issue could be when a researcher contacted me about using FROC methodology for nuclear medicine bone scan images, where the number of lesions on diseased cases can vary from a few to a hundred!<a href="empirical.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>The jumps need not be contiguous: they will be contiguous only if the three lesion ratings are closely spaced such that they are crossed in succession, in any order, by the sliding virtual threshold; otherwise the jumps will be interspersed by jumps from lesions in other cases.<a href="empirical.html#fnref19" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

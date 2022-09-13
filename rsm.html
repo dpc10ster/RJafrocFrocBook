@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 The radiological search model (RSM) | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 The radiological search model (RSM) | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-09-06" />
+<meta name="date" content="2022-09-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -217,8 +217,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10.2" data-path="empirical.html"><a href="empirical.html#empirical-wafroc1-plot-illustration"><i class="fa fa-check"></i><b>2.10.2</b> Illustration with a dataset</a></li>
 </ul></li>
 <li class="chapter" data-level="2.11" data-path="empirical.html"><a href="empirical.html#empirical-summary"><i class="fa fa-check"></i><b>2.11</b> Summary of operating characteristics</a></li>
-<li class="chapter" data-level="2.12" data-path="empirical.html"><a href="empirical.html#empirical-plots"><i class="fa fa-check"></i><b>2.12</b> Plots of FROC, AFROC and wAFROC AUCs vs. ROC AUC</a></li>
-<li class="chapter" data-level="2.13" data-path="empirical.html"><a href="empirical.html#empirical-numerical-illustration"><i class="fa fa-check"></i><b>2.13</b> AFROC vs. wAFROC</a></li>
+<li class="chapter" data-level="2.12" data-path="empirical.html"><a href="empirical.html#empirical-plots"><i class="fa fa-check"></i><b>2.12</b> Plots of FROC, AFROC and wAFROC AUCs vs. ROC AUC</a><ul>
+<li class="chapter" data-level="2.12.1" data-path="empirical.html"><a href="empirical.html#plot-of-froc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>2.12.1</b> Plot of FROC AUC vs. ROC AUC</a></li>
+<li class="chapter" data-level="2.12.2" data-path="empirical.html"><a href="empirical.html#plot-of-afroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>2.12.2</b> Plot of AFROC AUC vs. ROC AUC</a></li>
+<li class="chapter" data-level="2.12.3" data-path="empirical.html"><a href="empirical.html#plot-of-wafroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>2.12.3</b> Plot of wAFROC AUC vs. ROC AUC</a></li>
+</ul></li>
+<li class="chapter" data-level="2.13" data-path="empirical.html"><a href="empirical.html#empirical-numerical-illustrati-Infon"><i class="fa fa-check"></i><b>2.13</b> Understanding AFROC vs. wAFROC, a numerical illustration</a><ul>
+<li class="chapter" data-level="2.13.1" data-path="empirical.html"><a href="empirical.html#nl-and-ll-ratings"><i class="fa fa-check"></i><b>2.13.1</b> NL and LL ratings</a></li>
+<li class="chapter" data-level="2.13.2" data-path="empirical.html"><a href="empirical.html#lesion-weights"><i class="fa fa-check"></i><b>2.13.2</b> Lesion weights</a></li>
+<li class="chapter" data-level="2.13.3" data-path="empirical.html"><a href="empirical.html#fpf"><i class="fa fa-check"></i><b>2.13.3</b> FPF</a></li>
+<li class="chapter" data-level="2.13.4" data-path="empirical.html"><a href="empirical.html#llf"><i class="fa fa-check"></i><b>2.13.4</b> LLF</a></li>
+<li class="chapter" data-level="2.13.5" data-path="empirical.html"><a href="empirical.html#wllf"><i class="fa fa-check"></i><b>2.13.5</b> wLLF</a></li>
+</ul></li>
 <li class="chapter" data-level="2.14" data-path="empirical.html"><a href="empirical.html#empirical-Discussion"><i class="fa fa-check"></i><b>2.14</b> TBA Discussion</a></li>
 <li class="chapter" data-level="2.15" data-path="empirical.html"><a href="empirical.html#empirical-two-theorems"><i class="fa fa-check"></i><b>2.15</b> Appendix 1: Two Theorems</a><ul>
 <li class="chapter" data-level="2.15.1" data-path="empirical.html"><a href="empirical.html#empirical-two-theorems-1"><i class="fa fa-check"></i><b>2.15.1</b> Theorem 1</a></li>
@@ -455,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>A <em>search stage</em> corresponding to the initial glance in the Nodine-Kundel model, in which suspicious regions, i.e., the latent marks, are flagged for subsequent foveal scanning. The total number of latent marks on a case is <span class="math inline">\(\geq 0\)</span>; some cases may have zero latent marks, a fact that will turn out to have important consequences for the shapes of all RSM predicted operating characteristics.</p></li>
 <li><p>A <em>decision stage</em> during which each latent mark is closely examined (via foveal scanning), relevant features are extracted and analyzed and the observer calculates a decision variable or z-sample for each latent mark. The number of z-samples equals the number of latent marks.</p></li>
 <li><p>If the z-sample exceeds a pre-selected minimum reporting threshold the location is marked, i.e., the latent mark is recorded as an actual mark.</p></li>
-<li><p>Latent marks can be either latent NLs (corresponding to non-diseased regions) or latent LLs (corresponding to diseased regions). The number of latent NLs on a case is denoted <span class="math inline">\(l_1\)</span>. The number of latent LLs on a diseased case is denoted <span class="math inline">\(l_2\)</span>. Latent NLs can occur on non-diseased and diseased cases, but latent LLs can only occur on diseased cases. We will initially assume that every diseased case has <span class="math inline">\(L\)</span> actual lesions. Later this will be extended to arbitrary number of lesions per diseased case. Since the number of latent LLs cannot exceed the number of lesions, <span class="math inline">\(0 \leq l_2 \leq L\)</span> . The symbol <span class="math inline">\(l_s\)</span> denotes a location with site-level truth state <span class="math inline">\(s\)</span>, where <span class="math inline">\(s = 1\)</span> for a NL and <span class="math inline">\(s = 2\)</span> for a LL.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p></li>
+<li><p>Latent marks can be either latent NLs (corresponding to non-diseased regions) or latent LLs (corresponding to diseased regions). The number of latent NLs on a case is denoted <span class="math inline">\(l_1\)</span>. The number of latent LLs on a diseased case is denoted <span class="math inline">\(l_2\)</span>. Latent NLs can occur on non-diseased and diseased cases, but latent LLs can only occur on diseased cases. We will initially assume that every diseased case has <span class="math inline">\(L\)</span> actual lesions. Later this will be extended to arbitrary number of lesions per diseased case. Since the number of latent LLs cannot exceed the number of lesions, <span class="math inline">\(0 \leq l_2 \leq L\)</span> . The symbol <span class="math inline">\(l_s\)</span> denotes a location with site-level truth state <span class="math inline">\(s\)</span>, where <span class="math inline">\(s = 1\)</span> for a NL and <span class="math inline">\(s = 2\)</span> for a LL.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a></p></li>
 </ul>
 </div>
 <div id="rsm-assumptions" class="section level2 hasAnchor">
@@ -516,22 +526,22 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 </div>
 <div id="rsm-summary-lambda-prime-parameter" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.5.2</span> The <span class="math inline">\(\lambda&#39;\)</span> parameter<a href="rsm.html#rsm-summary-lambda-prime-parameter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The <span class="math inline">\(\lambda&#39;\)</span> parameter determines the tendency of the observer to generate latent NLs. The mean number of latent NLs per case is an estimate of <span class="math inline">\(\lambda&#39;\)</span>.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a></p>
+<p>The <span class="math inline">\(\lambda&#39;\)</span> parameter determines the tendency of the observer to generate latent NLs. The mean number of latent NLs per case is an estimate of <span class="math inline">\(\lambda&#39;\)</span>.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
 <p>Consider two observers, one with <span class="math inline">\(\lambda&#39; = 1\)</span> and the other with <span class="math inline">\(\lambda&#39; = 2\)</span>. While one cannot predict the exact number of latent NLs on any specific case, one can predict the average number of latent NLs on a given case set.</p>
 <p>In the following examples the number of samples has been set to <span class="math inline">\(K_1=100\)</span> (the first argument to <code>rpois()</code>; the second argument is <span class="math inline">\(\lambda&#39;\)</span>).</p>
 <div id="example-1" class="section level4 hasAnchor">
 <h4><span class="header-section-number">4.5.2.1</span> Example 1<a href="rsm.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="rsm.html#cb27-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb27-2"><a href="rsm.html#cb27-2"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb27-3"><a href="rsm.html#cb27-3"></a>samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="rsm.html#cb31-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb31-2"><a href="rsm.html#cb31-2"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb31-3"><a href="rsm.html#cb31-3"></a>samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## mean(samples1) =  1.01</code></pre>
 <pre><code>## samples1[1:10] =  0 1 1 2 0 2 3 1 1 0</code></pre>
 <p>For this observer, <span class="math inline">\(\lambda&#39; = 1\)</span>, the first case generated zero latent NLs, the 2nd and 3rd cases generated one NL each, the third case generated 2 NLs, etc.</p>
 </div>
 <div id="example-2" class="section level4 hasAnchor">
 <h4><span class="header-section-number">4.5.2.2</span> Example 2<a href="rsm.html#example-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="rsm.html#cb30-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb30-2"><a href="rsm.html#cb30-2"></a>samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="rsm.html#cb34-1"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb34-2"><a href="rsm.html#cb34-2"></a>samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## mean(samples2) =  2.02</code></pre>
 <pre><code>## samples2[1:10] =  1 1 2 4 1 4 4 2 2 0</code></pre>
 <p>For the second observer <span class="math inline">\(\lambda&#39; = 2\)</span>, the first and second case generated one latent NL each, the third generated two, etc. The average number of latent NL marks per case for the 1<sup>st</sup> observer is 1.01 and that for the 2<sup>nd</sup> one is 2.02.</p>
@@ -539,13 +549,13 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <div id="confidence-intervals" class="section level4 hasAnchor">
 <h4><span class="header-section-number">4.5.2.3</span> Confidence intervals<a href="rsm.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The following code illustrates Poisson sampling and estimation of an exact confidence interval for the mean for 100 samples from two Poisson distributions.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="rsm.html#cb33-1"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb33-2"><a href="rsm.html#cb33-2"></a>lambdaP &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb33-3"><a href="rsm.html#cb33-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">1</span>])</span>
-<span id="cb33-4"><a href="rsm.html#cb33-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">2</span>])</span>
-<span id="cb33-5"><a href="rsm.html#cb33-5"></a></span>
-<span id="cb33-6"><a href="rsm.html#cb33-6"></a>ret11 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples1),K1)</span>
-<span id="cb33-7"><a href="rsm.html#cb33-7"></a>ret21 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples2),K1)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="rsm.html#cb37-1"></a>K1 &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb37-2"><a href="rsm.html#cb37-2"></a>lambdaP &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb37-3"><a href="rsm.html#cb37-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">1</span>])</span>
+<span id="cb37-4"><a href="rsm.html#cb37-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(K1,<span class="dt">lambda =</span> lambdaP[<span class="dv">2</span>])</span>
+<span id="cb37-5"><a href="rsm.html#cb37-5"></a></span>
+<span id="cb37-6"><a href="rsm.html#cb37-6"></a>ret11 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples1),K1)</span>
+<span id="cb37-7"><a href="rsm.html#cb37-7"></a>ret21 &lt;-<span class="st"> </span><span class="kw">poisson.exact</span>(<span class="kw">sum</span>(samples2),K1)</span></code></pre></div>
 <pre><code>## K1 =  100 , lambdaP 1st reader =  1 , lambdaP 2nd reader =  2</code></pre>
 <pre><code>## obs. mean, reader 1 =  1.01</code></pre>
 <pre><code>## obs. mean, reader 2 =  2.02</code></pre>
@@ -558,25 +568,25 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <pre><code>## Rdr. 1: 95% CI =  0.9859414 1.025349</code></pre>
 <pre><code>## Rdr. 2: 95% CI =  1.978335 2.033955</code></pre>
 <p>This time for reader 1, the estimate of the Poisson parameter is 1.01 with 95% confidence interval (0.986, 1.025); for reader 2 the corresponding estimate is 2.01 with 95% confidence interval (1.978, 2.034). The width of the confidence interval is inversely proportional to the square root of the number of cases (the example below is for reader 1):</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="rsm.html#cb44-1"></a>ret11<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret11<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="rsm.html#cb48-1"></a>ret11<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret11<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 0.40458</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="rsm.html#cb46-1"></a>ret12<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret12<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="rsm.html#cb50-1"></a>ret12<span class="op">$</span>conf.int[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>ret12<span class="op">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 0.03940756</code></pre>
 <p>Since the number of cases was increased by a factor of 100, the width decreased by a factor of 10, the square-root of the ratio of the numbers of cases.</p>
 </div>
 </div>
 <div id="rsm-summary-nu-parameter" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.5.3</span> The <span class="math inline">\(\nu&#39;\)</span> parameter<a href="rsm.html#rsm-summary-nu-parameter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The <span class="math inline">\(\nu&#39;\)</span> parameter determines the ability of the observer to find lesions. Assuming the same number of lesions per diseased case, the mean fraction of latent LLs per diseased case is an estimate of <span class="math inline">\(\nu&#39;\)</span>.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> Consider two observers, one with <span class="math inline">\(\nu&#39; = 0.5\)</span> and the other with <span class="math inline">\(\nu&#39; = 0.9\)</span>. Again, while one cannot predict the precise number of latent LLs on any specific diseased case, or which specific lesions will be correctly localized, one can predict the average number of latent LLs per diseased case.</p>
+<p>The <span class="math inline">\(\nu&#39;\)</span> parameter determines the ability of the observer to find lesions. Assuming the same number of lesions per diseased case, the mean fraction of latent LLs per diseased case is an estimate of <span class="math inline">\(\nu&#39;\)</span>.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> Consider two observers, one with <span class="math inline">\(\nu&#39; = 0.5\)</span> and the other with <span class="math inline">\(\nu&#39; = 0.9\)</span>. Again, while one cannot predict the precise number of latent LLs on any specific diseased case, or which specific lesions will be correctly localized, one can predict the average number of latent LLs per diseased case.</p>
 <p>The following code also uses <span class="math inline">\(K_2 = 100\)</span> samples, the number of diseased cases, each with one lesion.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="rsm.html#cb48-1"></a>K2 &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb48-2"><a href="rsm.html#cb48-2"></a>L &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb48-3"><a href="rsm.html#cb48-3"></a>nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
-<span id="cb48-4"><a href="rsm.html#cb48-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP1)</span>
-<span id="cb48-5"><a href="rsm.html#cb48-5"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP2)</span>
-<span id="cb48-6"><a href="rsm.html#cb48-6"></a></span>
-<span id="cb48-7"><a href="rsm.html#cb48-7"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1),K2<span class="op">*</span>L)</span>
-<span id="cb48-8"><a href="rsm.html#cb48-8"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2),K2<span class="op">*</span>L)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="rsm.html#cb52-1"></a>K2 &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb52-2"><a href="rsm.html#cb52-2"></a>L &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb52-3"><a href="rsm.html#cb52-3"></a>nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
+<span id="cb52-4"><a href="rsm.html#cb52-4"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples1 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP1)</span>
+<span id="cb52-5"><a href="rsm.html#cb52-5"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed);samples2 &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2,L,nuP2)</span>
+<span id="cb52-6"><a href="rsm.html#cb52-6"></a></span>
+<span id="cb52-7"><a href="rsm.html#cb52-7"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1),K2<span class="op">*</span>L)</span>
+<span id="cb52-8"><a href="rsm.html#cb52-8"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2),K2<span class="op">*</span>L)</span></code></pre></div>
 <pre><code>## K2 =  100 , nuP 1st reader =  0.5 , nuP 2nd reader =  0.9</code></pre>
 <pre><code>## mean, reader 1 =  0.48</code></pre>
 <pre><code>## mean, reader 2 =  0.94</code></pre>
@@ -584,21 +594,21 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 <pre><code>## Rdr. 2: 95% CI =  0.8739701 0.9776651</code></pre>
 <p>The result shows that for reader 1 the estimate of the binomial success rate parameter is 0.48 with 95% confidence interval (0.38, 0.58). For reader 2 the corresponding estimates are 0.94 and (0.87, 0.98). As the number of diseased cases increases, the confidence interval shrinks in inverse proportion to the square root of cases.</p>
 <p>As a more complicated but clinically realistic example, consider a dataset with 100 cases in all where 97 have one lesion per case, two have two lesions per case and one has three lesions per case (these are typical lesion distributions observed in screening mammography). The code follows:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="rsm.html#cb54-1"></a>K2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">97</span>,<span class="dv">2</span>,<span class="dv">1</span>);Lk &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
-<span id="cb54-2"><a href="rsm.html#cb54-2"></a>samples1 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
-<span id="cb54-3"><a href="rsm.html#cb54-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb54-4"><a href="rsm.html#cb54-4"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
-<span id="cb54-5"><a href="rsm.html#cb54-5"></a>  samples1[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP1)</span>
-<span id="cb54-6"><a href="rsm.html#cb54-6"></a>}</span>
-<span id="cb54-7"><a href="rsm.html#cb54-7"></a></span>
-<span id="cb54-8"><a href="rsm.html#cb54-8"></a>samples2 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
-<span id="cb54-9"><a href="rsm.html#cb54-9"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
-<span id="cb54-10"><a href="rsm.html#cb54-10"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
-<span id="cb54-11"><a href="rsm.html#cb54-11"></a>  samples2[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP2)</span>
-<span id="cb54-12"><a href="rsm.html#cb54-12"></a>}</span>
-<span id="cb54-13"><a href="rsm.html#cb54-13"></a></span>
-<span id="cb54-14"><a href="rsm.html#cb54-14"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1[<span class="op">!</span><span class="kw">is.na</span>(samples1)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span>
-<span id="cb54-15"><a href="rsm.html#cb54-15"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2[<span class="op">!</span><span class="kw">is.na</span>(samples2)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="rsm.html#cb58-1"></a>K2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">97</span>,<span class="dv">2</span>,<span class="dv">1</span>);Lk &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);nuP1 &lt;-<span class="st"> </span><span class="fl">0.5</span>;nuP2 &lt;-<span class="st"> </span><span class="fl">0.9</span>;</span>
+<span id="cb58-2"><a href="rsm.html#cb58-2"></a>samples1 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
+<span id="cb58-3"><a href="rsm.html#cb58-3"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb58-4"><a href="rsm.html#cb58-4"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
+<span id="cb58-5"><a href="rsm.html#cb58-5"></a>  samples1[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP1)</span>
+<span id="cb58-6"><a href="rsm.html#cb58-6"></a>}</span>
+<span id="cb58-7"><a href="rsm.html#cb58-7"></a></span>
+<span id="cb58-8"><a href="rsm.html#cb58-8"></a>samples2 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">sum</span>(K2),<span class="kw">length</span>(K2)))</span>
+<span id="cb58-9"><a href="rsm.html#cb58-9"></a>seed &lt;-<span class="st"> </span><span class="dv">1</span>;<span class="kw">set.seed</span>(seed)</span>
+<span id="cb58-10"><a href="rsm.html#cb58-10"></a><span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(K2)) {</span>
+<span id="cb58-11"><a href="rsm.html#cb58-11"></a>  samples2[<span class="dv">1</span><span class="op">:</span>K2[l],l] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(K2[l],Lk[l],nuP2)</span>
+<span id="cb58-12"><a href="rsm.html#cb58-12"></a>}</span>
+<span id="cb58-13"><a href="rsm.html#cb58-13"></a></span>
+<span id="cb58-14"><a href="rsm.html#cb58-14"></a>ret1 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples1[<span class="op">!</span><span class="kw">is.na</span>(samples1)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span>
+<span id="cb58-15"><a href="rsm.html#cb58-15"></a>ret2 &lt;-<span class="st"> </span><span class="kw">binom.exact</span>(<span class="kw">sum</span>(samples2[<span class="op">!</span><span class="kw">is.na</span>(samples2)]),<span class="kw">sum</span>(K2<span class="op">*</span>Lk))</span></code></pre></div>
 <pre><code>## K2[1] = 97 , K2[2] = 2 , K2[3] = 1 , nuP1 = 0.5 , nuP2 = 0.9</code></pre>
 <pre><code>## obsvd. mean, reader 1 =  0.4903846</code></pre>
 <pre><code>## obsvd. mean, reader 2 =  0.9326923</code></pre>
@@ -609,7 +619,7 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 </div>
 <div id="rsm-re-parameterization" class="section level2 hasAnchor">
 <h2><span class="header-section-number">4.6</span> Model re-parameterization<a href="rsm.html#rsm-re-parameterization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>While the parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> are physically meaningful a little thought reveals that they cannot be varied independently of each other. Rather, <span class="math inline">\(\mu\)</span> is the <em>intrinsic</em> parameter whose value, together with two other intrinsic parameters <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span>, determine <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span>, respectively. The following is a convenient re-parameterization:<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
+<p>While the parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span> are physically meaningful a little thought reveals that they cannot be varied independently of each other. Rather, <span class="math inline">\(\mu\)</span> is the <em>intrinsic</em> parameter whose value, together with two other intrinsic parameters <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span>, determine <span class="math inline">\(\lambda&#39;\)</span> and <span class="math inline">\(\nu&#39;\)</span>, respectively. The following is a convenient re-parameterization:<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a></p>
 <p><span class="math display" id="eq:rsm-transform">\[\begin{equation}
 \left. 
 \begin{aligned}
@@ -669,11 +679,11 @@ z_{l_2} \sim N \left ( \mu, 1 \right )
 </div>
 <div class="footnotes">
 <hr />
-<ol start="19">
-<li id="fn19"><p>In this chapter distributional assumptions are made for the numbers of latent NLs and LLs and the associated z-samples. Since the RSM is a parametric model one does not need the four subscript notation needed to account for case and location dependence, as necessary in the empirical description in Chapter <a href="empirical.html#empirical">2</a>. This allows for a simpler notation, as the reader may have noticed, unencumbered by the 4 subscripts in Table <a href="empirical.html#empirical-notation">2.4</a>.<a href="rsm.html#fnref19" class="footnote-back">↩︎</a></p></li>
-<li id="fn20"><p>It can be measured via eye-tracking apparatus. This time it is only necessary to cluster the marks and classify each mark as a latent NL or latent LL according to the adopted acceptance radius. An eye-tracking based estimate would be the total number of latent NLs in the dataset divided by the total number of cases.<a href="rsm.html#fnref20" class="footnote-back">↩︎</a></p></li>
-<li id="fn21"><p>It too can be measured via eye-tracking apparatus performed on a radiologist. An eye-tracking based estimate would be the total number of latent LLs in the dataset divided by the total number of lesions.<a href="rsm.html#fnref21" class="footnote-back">↩︎</a></p></li>
-<li id="fn22"><p>The need for the first re-parameterization, involving <span class="math inline">\(\nu&#39;\)</span>, was foreseen in the original search model papers <span class="citation">(Dev P Chakraborty <a href="#ref-chakraborty2006search" role="doc-biblioref">2006</a>; DP Chakraborty <a href="#ref-chakraborty2006roc" role="doc-biblioref">2006</a>)</span> but the need for the second re-parameterization (involving <span class="math inline">\(\lambda&#39;\)</span>) was discovered more recently.<a href="rsm.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<ol start="20">
+<li id="fn20"><p>In this chapter distributional assumptions are made for the numbers of latent NLs and LLs and the associated z-samples. Since the RSM is a parametric model one does not need the four subscript notation needed to account for case and location dependence, as necessary in the empirical description in Chapter <a href="empirical.html#empirical">2</a>. This allows for a simpler notation, as the reader may have noticed, unencumbered by the 4 subscripts in Table <a href="empirical.html#empirical-notation">2.4</a>.<a href="rsm.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>It can be measured via eye-tracking apparatus. This time it is only necessary to cluster the marks and classify each mark as a latent NL or latent LL according to the adopted acceptance radius. An eye-tracking based estimate would be the total number of latent NLs in the dataset divided by the total number of cases.<a href="rsm.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>It too can be measured via eye-tracking apparatus performed on a radiologist. An eye-tracking based estimate would be the total number of latent LLs in the dataset divided by the total number of lesions.<a href="rsm.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p>The need for the first re-parameterization, involving <span class="math inline">\(\nu&#39;\)</span>, was foreseen in the original search model papers <span class="citation">(Dev P Chakraborty <a href="#ref-chakraborty2006search" role="doc-biblioref">2006</a>; DP Chakraborty <a href="#ref-chakraborty2006roc" role="doc-biblioref">2006</a>)</span> but the need for the second re-parameterization (involving <span class="math inline">\(\lambda&#39;\)</span>) was discovered more recently.<a href="rsm.html#fnref23" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

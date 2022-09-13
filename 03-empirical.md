@@ -901,73 +901,161 @@ A summary of the operating characteristics defined from FROC data:
 
 ## Plots of FROC, AFROC and wAFROC AUCs vs. ROC AUC {#empirical-plots}
 
-Regarding the ROC-AUC as the gold standard, shown next are plots of $A_{\text{FROC}}$, $A_{\text{AFROC}}$ and $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$ generated for the dataset used in the previous illustrations. 
+Regarding the ROC-AUC, i.e., $A_{\text{ROC}}$, as the gold standard against which all other figures of merit should be compared for consistency in orderings, shown next are plots of $A_{\text{FROC}}$, $A_{\text{AFROC}}$ and $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$ for the dataset used in the previous illustrations. 
 
-The following is the plot of $A_{\text{FROC}}$ vs. $A_{\text{ROC}}$. There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. $A_{\text{ROC}}$ is assumed to be the gold standard. Note the poor correlation between $A_{\text{FROC}}$ and $A_{\text{ROC}}$. The slope is negative and there is much scatter. 
-
-
+### Plot of FROC AUC vs. ROC AUC
 
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 
-Evidently $A_{\text{FROC}}$ does not correlate well with $A_{\text{ROC}}$. The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot rewards an observer who generates more and more NLs while not generating more LLs, i.e., as the operating point moves further to the right along the flat part of the plot. In fact the perfect observer, Section `\@ref(froc-paradigm-solar-analogy)`, whose FROC plot is the vertical line connecting (0,0) and (0,1) has zero $A_{\text{FROC}}$! One can try ot avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is some arbitrarily chosen fixed value -- indeed this procedure has been used by many CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure would be subjective and totally dependent on the algorithm designer. Moreover it would not solve the problem that the perfect observer would still yield $A_{\text{FROC}} = 0$. The perfect observer problem is not academic as the method would fail for any observer with $\text{NLF}_{max} < x$. For such an observer the partial area would be undefined. This would force the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data from the analysis leading to a severe statistical power penalty.
-
-The basic problem is that the FROC plot is unconstrained in the NLF direction. 
-
-
-The following is the plot of $A_{\text{AFROC}}$ vs. $A_{\text{ROC}}$. This time there is a strong positive correlation between the two. The reason is that the AFROC is fully contained in the unit square. An observer who generates more NL marks would in fact yield smaller $A_{\text{AFROC}}$ - this is explained in a later section TBA . 
+The following is the plot of $A_{\text{FROC}}$ vs. $A_{\text{ROC}}$. There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. Note the poor correlation and negative slope between $A_{\text{FROC}}$ and $A_{\text{ROC}}$, $R^2$ = 0.0347791, slope = -0.3978636. 
 
 
 
 <img src="03-empirical_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 
+The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot *rewards* an observer who generates more NLs, i.e., as the operating point moves further to the right. (The perfect observer whose FROC plot is the vertical line connecting (0,0) and (0,1) is heavily penalized since $A_{\text{FROC}} = 0$ for this observer.) One can try to try to avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is an arbitrarily chosen fixed value -- indeed the partial area procedure has been used by CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure is subjective. The method would fail for any observer with $\text{NLF}_{max} < x$ as then the partial area is undefined. This forces the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data and lead to a statistical power penalty.
 
 
-The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, there is a strong positive correlation between the two. The wAFROC is also fully contained in the unit square.
-
-
-
-
-<img src="03-empirical_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+### Plot of AFROC AUC vs. ROC AUC
 
 
 
 
-## AFROC vs. wAFROC {#empirical-numerical-illustration}
-
-The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions, are perhaps best illustrated with a numerical example. The dataset consists of $K_1 = 4$ non-diseased and $K_2 = 4$ diseased cases. The first two diseased cases have one lesion each, and the remaining two have two lesions each. 
+The following is the plot of $A_{\text{AFROC}}$ vs. $A_{\text{ROC}}$. This time there is a strong positive correlation between the two, $R^2$ = 0.7258723, slope = 0.8649687. The reason is that the AFROC is fully contained in the unit square. An observer who generates more NL marks will yield smaller $A_{\text{AFROC}}$ -- as the abscissa of the AFROC approaches unity the restriction to the unit square ensures that AUC will decrease. 
 
 
 
+<img src="03-empirical_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 
-Shown next is the `NL` ratings array; it has 8 rows, corresponding to the total number of cases, and 2 columns, corresponding to the maximum number of NLs and LLs per case (notice there are two entries for case #3). The negative infinities represent unmarked locations. 
+### Plot of wAFROC AUC vs. ROC AUC
+
+
+
+
+
+The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, there is a strong positive correlation between the two, $R^2$ = 0.8569511, slope = 1.0691159. The reason is that the wAFROC is also fully contained in the unit square.
+
+
+
+<img src="03-empirical_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+
+
+
+
+## Understanding AFROC vs. wAFROC, a numerical illustration {#empirical-numerical-illustrati-Infon}
+
+The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions can be illustrated with a fictitious small dataset consisting of $K_1 = 4$ non-diseased and $K_2 = 5$ diseased cases. The maximum number of NLs per case is two and the maximum number of lesions per case is three. The first two diseased cases have one lesion each, the third and fourth have two lesions each and the fifth has 3 lesions. Here is how we code the NL and LL ratings (`t()` is the `R` transpose operator). The negative infinities represent unmarked locations. For example, the first non-diseased case has no NL marks, the second has one mark rated 0.5, etc., and the first diseased case has one NL mark rated 1.5, etc. The first lesion in the LL array was rated 0.9. the second was rated -0.2, ..., and the 3 lesions in the fifth diseased case were rated 1, 2.5 and 1, respectively.
+
+
+
+```r
+NL <- t(array(c(-Inf, -Inf,  
+                 0.5, -Inf, 
+                 0.7, 0.6, 
+                -0.3, -Inf, 
+                 1.5, -Inf, 
+                -Inf, -Inf, 
+                -Inf, -Inf, 
+                -Inf, -Inf,
+              -  Inf, -Inf), dim = c(2,9)))
+LL <- t(array(c(0.9, -Inf, -Inf, 
+               -0.2, -Inf,-Inf, 
+                1.6, -Inf, -Inf, 
+                  3,    2, -Inf, 
+                  1,    2.5,  1), dim = c(3,5)))
+```
+
+The ratings are converted to a dataset `frocData` as shown next:
+
+
+```r
+frocData <- Df2RJafrocDataset(NL, LL, perCase = c(1,1,2,2,3))
+```
+
+
+In the above code `perCase = c(1,1,2,2,3)` specifies the number of lesions per case: 1 in the first diseased case, 1 in the second, 2 in the third, ..., and 3 in the fifth. The function `Df2RJafrocDataset()` generates the dataset object. 
+
+
+The lesion weights are specified in the following lines. 
+
+
+
+```r
+frocData$lesions$weights[3,] <- c(0.1, 0.9, -Inf)
+frocData$lesions$weights[4,] <- c(0.9, 0.1, -Inf)
+frocData$lesions$weights[5,] <- c(0.3, 0.4, 0.3)
+```
+
+
+The first and second diseased cases, which have only one lesion each, are assigned unit weights by default. The first lesion in the third diseased case has weight 0.1 and the second has weight 0.9 -- notice that the weights sum to unity. The fourth diseased cases has the lesion weights reversed, 0.9 and 0.1. The three lesions in the fifth diseased case are assigned weights 0.3. 0.4 and 0.3. 
+
+
+
+
+### NL and LL ratings
+
+Shown next is the `NL` ratings array; it has 9 rows, corresponding to the total number of cases (the first four correspond to non-diseased cases and the rest to diseased cases) and 2 columns, corresponding to the maximum number of NLs per case.  
 
 
 
 ```
-#> 
 #> NL ratings:
-#>      [,1] [,2]
-#> [1,] -Inf -Inf
-#> [2,]  0.5 -Inf
-#> [3,]  0.7  0.6
-#> [4,] -0.3 -Inf
-#> [5,]  1.5 -Inf
-#> [6,] -Inf -Inf
-#> [7,] -Inf -Inf
-#> [8,] -Inf -Inf
+#>       [,1] [,2]
+#>  [1,] -Inf -Inf
+#>  [2,]  0.5 -Inf
+#>  [3,]  0.7  0.6
+#>  [4,] -0.3 -Inf
+#>  [5,]  1.5 -Inf
+#>  [6,] -Inf -Inf
+#>  [7,] -Inf -Inf
+#>  [8,] -Inf -Inf
+#>  [9,] -Inf -Inf
 ```
 
+Shown next is the `LL` ratings array; it has 5 rows, corresponding to the total number of diseased cases, and 3 columns, corresponding to the maximum number of LLs per case:
+
+
+
+```
+#> LL ratings:
+#>      [,1] [,2] [,3]
+#> [1,]  0.9 -Inf -Inf
+#> [2,] -0.2 -Inf -Inf
+#> [3,]  1.6 -Inf -Inf
+#> [4,]  3.0  2.0 -Inf
+#> [5,]  1.0  2.5    1
+```
+
+### Lesion weights
+
+Show next is the lesion weights array:
+
+
+
+```
+#> lesion weights:
+#>      [,1] [,2] [,3]
+#> [1,]  1.0 -Inf -Inf
+#> [2,]  1.0 -Inf -Inf
+#> [3,]  0.1  0.9 -Inf
+#> [4,]  0.9  0.1 -Inf
+#> [5,]  0.3  0.4  0.3
+```
+
+
+The negative infinities represent missing values.
+
+
+### FPF
 
 Shown next is the `FP` ratings array. Since FPs are only possible on non-diseased cases, this is a length 4 row-vector. Each value is the maximum of the two `NL` ratings for the corresponding non-diseased case. As an example, for case #3 the maximum of the two `NL` values is 0.7.   
 
 
 
 ```
-#> 
 #> FP ratings:
 #> [1] -Inf  0.5  0.7 -0.3
 ```
@@ -987,87 +1075,82 @@ The sorting makes it easy to construct the `FPF` values, shown next.
 
 ```
 #> FPF values:
-#>  0.000 0.000 0.000 0.000 0.000 0.250 0.500 0.500 0.750 1.000
+#>  0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.250 0.500 0.500 0.750 1.000
 ```
 
 
 The first non-zero `FPF` value is $0.25 = 1/4$, which occurs when a conceptual sliding threshold is lowered past the highest `FP` value, namely 0.7. (The 0.25 comes from 1 `FP` case divided by 4 non-diseased cases.) The next `FPF` value is $0.5 = 2/4$, which occurs when the sliding threshold is lowered past the next-highest `FP` value, namely 0.5. The next `FPF` value is 0.75 and the last `FPF` value is unity.
 
-
-Shown next is the `LL` ratings array:
-
-
-
-```
-#> 
-#> LL ratings:
-#>      [,1] [,2]
-#> [1,]  0.9 -Inf
-#> [2,] -0.2 -Inf
-#> [3,]  1.6 -Inf
-#> [4,]  3.0    2
-```
-
+### LLF
 
 Here are the sorted `LL` ratings. 
 
 
 
 ```
-#> [1] -Inf -Inf -Inf -0.2  0.9  1.6  2.0  3.0
+#>  [1] -Inf -Inf -Inf -Inf -Inf -Inf -Inf -0.2  0.9  1.0  1.0  1.6  2.0  2.5  3.0
 ```
 
 
-The sorting makes it easy to construct the `LLF` values, shown next.
+The `LLF` values are shown next.
 
 
 
 ```
-#> 
 #> LLF values:
-#>  0.000 0.167 0.333 0.500 0.667 0.667 0.667 0.833 0.833 1.000
+#>  0.000 0.111 0.222 0.333 0.444 0.667 0.778 0.778 0.778 0.889 0.889 1.000
 ```
 
 
 
-The first non-zero `LLF` value is 0.167, which occurs when the sliding threshold is lowered past the highest `LL` value, namely 3. The 0.167 comes from 1 LL divided by 6 lesions. The next `LLF` value is 0.333, which occurs when the sliding threshold is lowered past the next-highest `LL` value, namely 2 (2/6 = 0.333). The next `LLF` value is 0.5, which occurs when the sliding threshold is lowered past 1.6 (3/6 = 0.5), and so on.
-
-Show next is the lesion weights array:
+The first non-zero `LLF` value is 0.111, which occurs when the sliding threshold is lowered past the highest `LL` value, namely 3. The 0.111 comes from 1 LL divided by 9, the total number of lesions. The next `LLF` value is 0.222, which occurs when the sliding threshold is lowered past the next-highest `LL` value, namely 2.5 (2/9 = 0.222). The next `LLF` value is 0.333, which occurs when the sliding threshold is lowered past 2 (3/9 = 0.333), and so on.
 
 
-
-
-```
-#> 
-#> lesion weights:
-#>      [,1] [,2]
-#> [1,]  1.0 -Inf
-#> [2,]  1.0 -Inf
-#> [3,]  0.1  0.9
-#> [4,]  0.9  0.1
-```
-
-
-Since the first two diseased cases have one lesion each, the [1,1] and [2,1] elements of the the weight array are each equal to unity and the [1,2] and [2,2] elements are each equal to negative infinity, which is being used as a missing value. For diseased case #3 the first lesion has weight 0.1 while the second lesion has weight 0.9 (the weights must sum to unity). For diseased case #4 the weights are reversed. 
+### wLLF
 
 The sorted `LL` ratings array and the weights are used to construct the `wLLF` values shown next.
 
 
 
 ```
-#> 
 #> wLLF values:
-#>  0.000 0.225 0.250 0.275 0.525 0.525 0.525 0.775 0.775 1.000
+#>  0.000 0.180 0.260 0.280 0.300 0.420 0.620 0.620 0.620 0.820 0.820 1.000
 ```
 
 
-The first non-zero `wLLF` value is 0.225, which occurs when the sliding threshold is lowered past the highest `LL` value, namely 3. Since this comes from the first lesion on diseased case #4, whose weight is 0.9, the corresponding incremental vertical jump is 1 divided by 4 (*sic*) times 0.9. Notice that we are dividing by 4, the total number of diseased cases, not 6 as in the `LLF` example.   
+The first non-zero `wLLF` value is 0.18, which occurs when the sliding threshold is lowered past the highest `LL` value, namely 3. Since this comes from lesion #1 on diseased case #4, whose weight is 0.9, the corresponding incremental vertical jump is $1/5*0.9 = 0.18$, which is also the net `wLLF` value corresponding to the most suspicious lesion crossing the cutoff. Notice that we are dividing by 5, the total number of diseased cases, not 9 as in the `LLF` example.   
 
-The next `wLLF` value is 0.25, which occurs when the sliding threshold is lowered past the next-highest `LL` value, namely 2, which comes from the 2nd lesion on the fourth diseased case with weight 0.1. The incremental jump in `wLLF` is 1 divided by 4 times 0.1, which is 0.025. The net `wLLF` value corresponding to these two lesions is $1/4*0.9 + 1/4*0.1 = 1/4 = 0.25$. The two lesions on diseased case #4 contribute 0.25 in `wLLF` increment. In contrast, they contribute $2/6 = 0.333$ in `LLF` increment, showing explicitly that the AFROC gives greater importance to diseased cases with more lesions while the wAFROC does not.
+The next `wLLF` value is 0.26, which occurs when the sliding threshold is lowered past the next-highest `LL` value, namely 2.5, which comes from the 2nd lesion on the fifth diseased case with weight 0.4. The incremental jump in `wLLF` is $1/5*0.4 = 0.08$. The net `wLLF` value corresponding to the two most suspicious lesions crossing the cutoff is $1/5*0.9 + 1/5*0.4 = 0.26$. 
 
-The next `wLLF` value is 0.275, which occurs when the sliding threshold is lowered past 1.6, which ratings comes from the first lesion on diseased case #3, with weight 0.1, $1/4*0.9 + 1/4*0.1 + 1/4*0.1 = 0.275$, and so on. 
+The next `wLLF` value is 0.280, which occurs when the sliding threshold is lowered past 1.6, which comes from lesion #1 on diseased case #3, with weight 0.1, and the net `wLLF` value corresponding to the three most suspicious lesions crossing the cutoff is $1/5*0.9 + 1/5*0.4 + 1/5*0.1 = 0.280$, and so on. 
 
-The reader should complete these hand-calculations to reproduce all of the `wLLF` values shown above.
+The reader should complete these hand-calculations to reproduce all of the `wLLF` values shown above. The values (FPF, LLF and wLLF) defining the AFROC and wAFROC are summarized here:
+
+
+```
+#>     FPF       LLF wLLF
+#> 1  0.00 0.0000000 0.00
+#> 2  0.00 0.1111111 0.18
+#> 3  0.00 0.2222222 0.26
+#> 4  0.00 0.3333333 0.28
+#> 5  0.00 0.4444444 0.30
+#> 6  0.00 0.6666667 0.42
+#> 7  0.00 0.7777778 0.62
+#> 8  0.25 0.7777778 0.62
+#> 9  0.50 0.7777778 0.62
+#> 10 0.50 0.8888889 0.82
+#> 11 0.75 0.8888889 0.82
+#> 12 1.00 1.0000000 1.00
+```
+
+This shows that the empirical AFROC is defined by the following 6 operating points: (0,0), (0,0.7777778), (0.5,0.7777778), (0.5,0.8888889), (0.75, 0.8888889) and (1,1). Likewise, the empirical wAFROC is defined by the following 6 operating points: (0,0), (0,0.62), (0.5,62), (0.5,0.82), (0.75, 0.82) and (1,1). In each case one simply connects neighboring points with straight lines. 
+
+The hand-calculations also show why the AFROC gives more importance to diseased cases with more lesions while the wAFROC does not.
+
+* Considering the AFROC, diseased case #5 with three lesions which contributes three vertical jumps to LLF totaling $3/9 = 0.333333$ ^[The jumps need not be contiguous: they will be contiguous only if the three lesion ratings are closely spaced such that they are crossed in succession, in any order, by the sliding virtual threshold; otherwise the jumps will be interspersed by jumps from lesions in other cases.]. This is larger than the contribution to LLF of diseased case #1 with one lesion $1/9 = 0.11111$. 
+
+* Considering the wAFROC, the three lesions on diseased case #5 contribute $1/5*0.3 + 1/5*0.4 + 1/5*0.3 = 0.2$ to wLLF, the same as diseased case #1, $1/5*1 = 0.2$. 
+
 
 Shown in Fig. \@ref(fig:plots-afrocPlot-wafrocPlot) are the empirical AFROC and wAFROC plots.
 
@@ -1081,34 +1164,37 @@ The operating points can be used to numerically calculate the AUCs under the emp
 
 
 ```r
-afroc_auc <- 0.5 * 4 / 6 + 0.25 * 5 /6 + 
- 5 /6 * 0.25 +  (1 - 5 /6) * 0.25 /2
+afroc_auc <- 0.5 * 0.7777778 + 
+  0.25 * 0.8888889 + 
+  0.25 * 0.8888889 + (1 - 0.8888889) * 0.25 /2
 
-wafroc_auc <- 0.5 * 0.525 + 0.25 * 0.775 + 
-  0.775 * 0.25 +  (1 - 0.775) * 0.25 /2
+wafroc_auc <- 0.5 * 0.62 + 
+  0.25 * 0.82 + 
+  0.25 * 0.82 + 
+  (1 - 0.82) * 0.25 /2
 
-afroc_auc
-#> [1] 0.7708333
-wafroc_auc
-#> [1] 0.678125
+cat("afroc_auc =", afroc_auc,"\n")
+#> afroc_auc = 0.8472222
+cat("wafroc_auc =", wafroc_auc,"\n")
+#> wafroc_auc = 0.7425
 ```
 
 
-The same AUC results are obtained using the function `UtilFigureOfMerit`
+The same AUC results are obtained using the function `UtilFigureOfMerit`:
 
 
 
 ```r
-cat("\nAFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "AFROC")),"\n")
-#> 
-#> AFROC AUC =  0.7708333
+cat("AFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "AFROC")),"\n")
+#> AFROC AUC =  0.8472222
 cat("wAFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "wAFROC")),"\n")
-#> wAFROC AUC =  0.678125
+#> wAFROC AUC =  0.7425
 ```
 
 
 
-From the preceding  it is seen that the AFROC-based trapezoidal plots consist of upward and rightward jumps, starting from the origin (0,0) and ending at (1,1). This is true regardless of whether the z-samples are binned or not: i.e., at the "microscopic" level the jumps always exist. Each upward jump is associated with a `LL` rating exceeding a virtual threshold. Each rightward jump is associated with a `FP` rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it. This makes sense in terms of correct decisions being rewarded and incorrect ones being penalized, and can be seen from two examples. If there are only upward jumps, then the trapezoidal plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect -- the straight-line extension to (1,1) ensures that the net area is unity. If there are only horizontal jumps, that takes the operating point from the origin to (1,0), where none of the lesions are localized and every non-diseased image has at least one NL mark, representing worst possible performance. Here, despite the straight line extension to (1,1), the net area is zero.
+From the preceding  it is seen that the empirical plots consist of upward and rightward jumps starting from the origin (0,0) and ending at (1,1). Each upward jump is associated with a `LL` rating exceeding a virtual threshold. Each rightward jump is associated with a `FP` rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it, i.e., correct decisions are rewarded and incorrect ones are penalized. If there are only upward jumps then the empirical plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect -- the straight-line extension of the plot to (1,1) ensures that the net area is unity. If there are only horizontal jumps the operating point moves from the origin to (1,0), where none of the lesions are localized and every non-diseased image has at least one NL mark and despite the straight line extension to (1,1), the net area is zero. This represents worst possible performance. 
+
 
 
 
@@ -1376,8 +1462,8 @@ The following example uses the same 8-case FROC dataset used earlier. This time 
 
 ```
 #> 
-#> Geometry yields FROC AUC =  0.4166667
-#> Formula yields  FROC AUC =  0.4166667
+#> Geometry yields FROC AUC =  0.345679
+#> Formula yields  FROC AUC =  0.4074074
 ```
 
 

@@ -252,7 +252,15 @@ empirical-definition-empirical-auc-wafroc1
 empirical-wafroc1-plot-illustration
 empirical-summary
 empirical-plots
-empirical-numerical-illustration
+plot-of-froc-auc-vs.-roc-auc
+plot-of-afroc-auc-vs.-roc-auc
+plot-of-wafroc-auc-vs.-roc-auc
+empirical-numerical-illustrati-Infon
+nl-and-ll-ratings
+lesion-weights
+fpf
+llf
+wllf
 empirical-Discussion
 empirical-two-theorems
 empirical-two-theorems-1
