@@ -1041,7 +1041,14 @@ x <- data.frame(FPF=FPF, LLF=LLF, wLLF=wLLF)
 x
 ```
 
-This shows that the empirical AFROC is defined by the following 6 operating points: (0,0), (0,0.7777778), (0.5,0.7777778), (0.5,0.8888889), (0.75, 0.8888889) and (1,1). Likewise, the empirical wAFROC is defined by the following 6 operating points: (0,0), (0,0.62), (0.5,62), (0.5,0.82), (0.75, 0.82) and (1,1). In each case one simply connects neighboring points with straight lines.   
+This shows that the empirical AFROC is defined by the following 6 operating points: (0,0), (0,0.7777778), (0.5,0.7777778), (0.5,0.8888889), (0.75, 0.8888889) and (1,1). Likewise, the empirical wAFROC is defined by the following 6 operating points: (0,0), (0,0.62), (0.5,62), (0.5,0.82), (0.75, 0.82) and (1,1). In each case one simply connects neighboring points with straight lines. 
+
+The hand-calculations also show why the AFROC gives more importance to diseased cases with more lesions while the wAFROC does not.
+
+* Considering the AFROC, diseased case #5 with three lesions which contributes three vertical jumps to LLF totaling $3/9 = 0.333333$ ^[The jumps need not be contiguous: they will be contiguous only if the three lesion ratings are closely spaced such that they are crossed in succession, in any order, by the sliding virtual threshold; otherwise the jumps will be interspersed by jumps from lesions in other cases.]. This is larger than the contribution to LLF of diseased case #1 with one lesion $1/9 = 0.11111$. 
+
+* Considering the wAFROC, the three lesions on diseased case #5 contribute $1/5*0.3 + 1/5*0.4 + 1/5*0.3 = 0.2$ to wLLF, the same as diseased case #1, $1/5*1 = 0.2$. 
+
 
 Shown in Fig. \@ref(fig:plots-afrocPlot-wafrocPlot) are the empirical AFROC and wAFROC plots.
 
@@ -1052,10 +1059,15 @@ grid.arrange(afrocPlot, wafrocPlot, ncol = 2)
 
 The operating points can be used to numerically calculate the AUCs under the empirical AFROC and wAFROC plots, as done in the following code:
 
-```{r, echo=FALSE}
-afroc_auc <- 0.5 * 0.7777778 + 0.25 * 0.8888889 + 0.25 * 0.8888889 + (1 - 0.8888889) * 0.25 /2
+```{r, echo=T}
+afroc_auc <- 0.5 * 0.7777778 + 
+  0.25 * 0.8888889 + 
+  0.25 * 0.8888889 + (1 - 0.8888889) * 0.25 /2
 
-wafroc_auc <- 0.5 * 0.62 + 0.25 * 0.82 + 0.25 * 0.82 + (1 - 0.82) * 0.25 /2
+wafroc_auc <- 0.5 * 0.62 + 
+  0.25 * 0.82 + 
+  0.25 * 0.82 + 
+  (1 - 0.82) * 0.25 /2
 
 cat("afroc_auc =", afroc_auc,"\n")
 cat("wafroc_auc =", wafroc_auc,"\n")
@@ -1072,7 +1084,8 @@ cat("wAFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "wAFROC")),"\n
 
 
 
-From the preceding  it is seen that the AFROC-based trapezoidal plots consist of upward and rightward jumps, starting from the origin (0,0) and ending at (1,1). This is true regardless of whether the z-samples are binned or not: i.e., at the "microscopic" level the jumps always exist. Each upward jump is associated with a `LL` rating exceeding a virtual threshold. Each rightward jump is associated with a `FP` rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it. This makes sense in terms of correct decisions being rewarded and incorrect ones being penalized, and can be seen from two examples. If there are only upward jumps, then the trapezoidal plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect -- the straight-line extension to (1,1) ensures that the net area is unity. If there are only horizontal jumps, that takes the operating point from the origin to (1,0), where none of the lesions are localized and every non-diseased image has at least one NL mark, representing worst possible performance. Here, despite the straight line extension to (1,1), the net area is zero.
+From the preceding  it is seen that the empirical plots consist of upward and rightward jumps starting from the origin (0,0) and ending at (1,1). Each upward jump is associated with a `LL` rating exceeding a virtual threshold. Each rightward jump is associated with a `FP` rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it, i.e., correct decisions are rewarded and incorrect ones are penalized. If there are only upward jumps then the empirical plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect -- the straight-line extension of the plot to (1,1) ensures that the net area is unity. If there are only horizontal jumps the operating point moves from the origin to (1,0), where none of the lesions are localized and every non-diseased image has at least one NL mark and despite the straight line extension to (1,1), the net area is zero. This represents worst possible performance. 
+
 
 
 
