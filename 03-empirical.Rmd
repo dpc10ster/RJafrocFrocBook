@@ -23,16 +23,27 @@ Appendices and computational formulae need to be tied up to main flow of chapter
 
 ## TBA Introduction {#empirical-intro}
 
-In this chapter a distinction is made between *latent* and *actual* marks. This is followed by a table summarizing FROC notation, a key table used in later chapters. Section `\@ref(froc-paradigm-froc-plot)` introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are *visual* depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are *quantitative* measures of performance, termed *figures of merit* (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC plot, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square.   
+FROC data consists of mark-rating pairs. A distinction is made here between *latent* marks (suspicious regions perceived by the visual system) and *actual* marks (those that are actually marked). This is followed by a key table, used in later chapters, summarizing FROC notation. The notation is used to define the empirical FROC plot (briefly introduced in the previous chapter). 
+
+
+Operating characteristics are *visual* depictions of performance. Scalar measures derived from operating characteristics can serve as *quantitative* measures of performance. Empirical area measures (AUCs) associated with the FROC plot and other plots possible with FROC data are defined and illustrated with a small FROC dataset. 
+
+
+If one ignores localization information and simply considers the highest rating on each case as representing its ROC rating, and this can be used to define the empirical ROC curve and associated area measure ROC-AUC from FROC data. Since ROC-AUC is a fundamental measure of classification accuracy between non-diseased and diseased cases, any proposed area measure that does not ignore location information should, if it is to be useful, correlate with ROC-AUC. These correlations are explored using the small dataset and it is shown readily that FROC-AUC is a very poor measure of performance. 
+
+
+Some of the other empirical plots and AUCs are less familiar (as compared to the well-known ROC plots and ROC-AUC). As an aid to understanding them I have included hand-calculations of the empirical operating characteristics and AUCs for the small dataset. The calculations also illustrate the advantage of using weighted versions of empirical plots (lesion weights are a way of allowing one to model the clinical importance of different type of lesions present in a clinical dataset; a weighted plot assures that each case gets the same importance in determining AUC regardless of the number of lesions in it). 
+
+
+Computing the AUCs from plots can be tedious at best. Computational formulae are presented in Appendix 1 which allow ready computation of any of the AUCs directly from the FROC ratings. Finally Appendix 2 presents two important theorems TBA.
+
 
 
 ## Mark rating pairs {#empirical-mark-rating-pairs}
 
-*FROC data consists of mark-rating pairs*. Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as *lesion localization* (LL) if it is sufficiently close to a true lesion and otherwise it is recorded as *non-lesion localization* (NL).
+Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as *lesion localization* (LL) if it is sufficiently close to a true lesion and otherwise it is recorded as *non-lesion localization* (NL).
 
-*In an FROC study the number of marks on an image is an a-priori unknown non-negative random integer.* It is incorrect and naive to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don't assign equal attention units to all areas of the image. 
-
-Currently the best insight into the numbers and locations of marks per case is obtained from eye-tracking studies [@duchowski2017eye], but the information is incomplete as eye-tracking studies can only measure *foveal* gaze and not lesions found by *peripheral* vision. Moreover, such studies are near impossible to conduct in a clinical setting (at least with the eye-tracking apparatus that I am familiar with).
+In an FROC study the number of marks on an image is an a-priori unknown non-negative random integer. It is incorrect and naive to estimate it by dividing the image area by the lesion area because not all regions of the image are equally likely to have lesions, lesions do not have the same size, and perhaps most important, clinicians don't assign equal attention units to all areas of the image ^[Currently the best insight into the numbers and locations of marks per case is obtained from eye-tracking studies [@duchowski2017eye], but the information is incomplete as eye-tracking studies can only measure *foveal* gaze and not lesions found by *peripheral* vision. Moreover, such studies are near impossible to conduct in a clinical setting (at least with the eye-tracking apparatus that I am familiar with).]. 
 
 
 ### Latent vs. actual marks
@@ -634,225 +645,7 @@ auc_wafroc <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "wAFROC"))
 
 
 
-## The AFROC1 plot {#empirical-AFROC1}
-
-Historically the AFROC originally used a different definition of FPF, resulting in what is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-"FP" rating on a *diseased case* as the maximum of all NL ratings on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:empirical-FP)]:
-
-
-\begin{equation}
-\left.
-\begin{aligned}
-\begin{matrix}
-FP_{k_1 t}^1=&\max_{l_1} \left ( z_{k_t t l_1 1 } \right ) & \text{if} & l_1 \neq \varnothing\\
-FP_{k_t t}^1=&-\infty & \text{if} & l_1 = \varnothing
-\end{matrix}
-\end{aligned}
-\right \}
-(\#eq:empirical-FP1)
-\end{equation}
-
-
-
-$FP_{k_t t}^1$ is the maximum over all latent NL marks, labeled by the location index $l_1$, occurring in case $k_t t$, or $-\infty$ if $l_1 = \varnothing$. The corresponding false positive fraction $FPF_r^1$ is defined by:
-
-
-\begin{equation}
-FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
-(\#eq:empirical-fpf1)
-\end{equation}
-
-
-Note the subtle differences between Eqn. \@ref(eq:empirical-fpf) and Eqn. \@ref(eq:empirical-fpf1). The latter counts "FPs" on non-diseased and diseased cases while Eqn. \@ref(eq:empirical-fpf) counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to generate both a TP and a FP may be questionable, however, this operating characteristic is useful in applications where all or almost all cases are diseased.
-
-### Empirical AFROC1 plot and  AUC {#empirical-definition-empirical-auc-afroc1}
-
->
-The empirical AFROC1 plot connects adjacent operating points $\left ( FPF_r^1, \text{LLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 plot and the AFROC plot is the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted $A_{\text{AFROC1}}$.
-
-
-
-### Illustration with a dataset {#empirical-afroc1-plot-illustration}
-
-The following code uses `dataset04` to illustrate an empirical ROC plot for treatment 1 and reader 1.
-
-
-```{r, echo=TRUE}
-ret <- PlotEmpiricalOperatingCharacteristics(
-  dataset04, 
-  trts = 1, rdrs = 1, opChType = "AFROC1")
-print(ret$Plot)
-```
-
-
-
-Shown next is calculation of the figure of merit for this dataset.
-
-
-```{r, echo=TRUE}
-UtilFigureOfMerit(dataset04, FOM = "AFROC1")
-```
-
-
-
-
-```{r, echo=FALSE}
-auc_afroc1 <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "AFROC1")))
-```
-
-
-
-
-## The weighted-AFROC1 (wAFROC1) plot {#empirical-wAFROC1}
-
-Similar to the logic for introducing the wAFROC plot as a way of giving equal importance to all diseased cases and allowing the clinical importance of lesions to be modeled by appropriate weights, we introduce a weighted version of the AFROC1, termed the wAFROC1. The ordinate of this plot is the weighted lesion localization fraction $\text{wLLF}_r$ defined in Eqn. \@ref(eq:empirical-wLLFr). The abscissa is FPF1, defined in Eqn. \@ref(eq:empirical-fpf1). 
-
-
-
-### Empirical wAFROC1 plot and  AUC {#empirical-definition-empirical-auc-wafroc1}
-
->
-The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points $\left ( FPF_r^1, \text{wLLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted $A_{\text{wAFROC1}}$.
-
-
-### Illustration with a dataset {#empirical-wafroc1-plot-illustration}
-
-The following code uses `dataset04` to illustrate an empirical wAFROC1 plot for treatment 1 and reader 1.
-
-
-```{r, echo=TRUE}
-ret <- PlotEmpiricalOperatingCharacteristics(
-  dataset04, 
-  trts = 1, rdrs = 1, opChType = "wAFROC1")
-print(ret$Plot)
-```
-
-
-Shown next is calculation of the figure of merit for this dataset.
-
-
-```{r, echo=TRUE}
-UtilFigureOfMerit(dataset04, FOM = "wAFROC1")
-```
-
-
-
-
-```{r, echo=FALSE}
-auc_wafroc1 <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "wAFROC1")))
-```
-
-
-
-## Summary of operating characteristics {#empirical-summary}
-
-A summary of the operating characteristics defined from FROC data:
-
-```{r empirical-summary, echo=FALSE}
-fomTable = array(dim = c(6,3))
-fomTable[1,]  <- c("FROC", "NLF", "LLF")
-fomTable[2,]  <- c("ROC", "FPF", "TPF")
-fomTable[3,]  <- c("AFROC", "FPF", "LLF")
-fomTable[4,]  <- c("wAFROC", "FPF", "wLLF")
-fomTable[5,]  <- c("AFROC1", "FPF1", "LLF")
-fomTable[6,]  <- c("wAFROC1", "FPF1", "wLLF")
-df <- as.data.frame(fomTable)
-colnames(df) <- c("OCs", "X", "Y")
-knitr::kable(df, caption = "Summary of operating characteristics (OCs) from FROC data; X = abscissa, Y = ordinate.", escape = FALSE)
-```
-
-
-## Plots of FROC, AFROC and wAFROC AUCs vs. ROC AUC {#empirical-plots}
-
-Regarding the ROC-AUC, i.e., $A_{\text{ROC}}$, as the gold standard against which all other figures of merit should be compared for consistency in orderings, shown next are plots of $A_{\text{FROC}}$, $A_{\text{AFROC}}$ and $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$ for the dataset used in the previous illustrations. 
-
-### Plot of FROC AUC vs. ROC AUC
-
-```{r, echo=FALSE}
-df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
-                 auc_froc = as.vector(auc_froc))
-fit <- lm(auc_froc ~ auc_HrAuc, df)
-fit1 <- summary(fit)
-r2 <- fit1$r.squared
-```
-
-
-The following is the plot of $A_{\text{FROC}}$ vs. $A_{\text{ROC}}$. There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. Note the poor correlation and negative slope between $A_{\text{FROC}}$ and $A_{\text{ROC}}$, $R^2$ = `r r2`, slope = `r fit$coefficients[2]`. 
-
-
-
-```{r, echo=FALSE}
-p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_froc)) +
-  geom_smooth(method = "lm", 
-              se = FALSE, color = "black", formula = y ~ x) +
-  geom_point() + 
-  scale_x_continuous(limits = c(0.75, 0.92)) +
-  scale_y_continuous(limits = c(0, 0.5)) +
-  labs(title = "froc vs. roc") 
-print(p1)
-```
-
-
-The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot *rewards* an observer who generates more NLs, i.e., as the operating point moves further to the right. (The perfect observer whose FROC plot is the vertical line connecting (0,0) and (0,1) is heavily penalized since $A_{\text{FROC}} = 0$ for this observer.) One can try to try to avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is an arbitrarily chosen fixed value -- indeed the partial area procedure has been used by CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure is subjective. The method would fail for any observer with $\text{NLF}_{max} < x$ as then the partial area is undefined. This forces the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data and lead to a statistical power penalty.
-
-
-### Plot of AFROC AUC vs. ROC AUC
-
-
-```{r, echo=FALSE}
-df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
-                 auc_afroc = as.vector(auc_afroc))
-fit <- lm(auc_afroc ~ auc_HrAuc, df)
-fit1 <- summary(fit)
-r2 <- fit1$r.squared
-```
-
-The following is the plot of $A_{\text{AFROC}}$ vs. $A_{\text{ROC}}$. This time there is a strong positive correlation between the two, $R^2$ = `r r2`, slope = `r fit$coefficients[2]`. The reason is that the AFROC is fully contained in the unit square. An observer who generates more NL marks will yield smaller $A_{\text{AFROC}}$ -- as the abscissa of the AFROC approaches unity the restriction to the unit square ensures that AUC will decrease. 
-
-
-
-```{r, echo=FALSE}
-p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_afroc)) +
-  geom_smooth(method = "lm", 
-              se = FALSE, color = "black", formula = y ~ x) +
-  geom_point() + 
-  scale_x_continuous(limits = c(0.75, 0.92)) +
-  scale_y_continuous(limits = c(0.6, 0.85)) +
-  labs(title = "afroc vs. roc") 
-print(p1)
-```
-
-
-### Plot of wAFROC AUC vs. ROC AUC
-
-
-```{r, echo=FALSE}
-df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
-                 auc_wafroc = as.vector(auc_wafroc))
-fit <- lm(auc_wafroc ~ auc_HrAuc, df)
-fit1 <- summary(fit)
-r2 <- fit1$r.squared
-```
-
-
-The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, there is a strong positive correlation between the two, $R^2$ = `r r2`, slope = `r fit$coefficients[2]`. The reason is that the wAFROC is also fully contained in the unit square.
-
-
-
-```{r, echo=FALSE}
-p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_wafroc)) +
-  geom_smooth(method = "lm", 
-              se = FALSE, color = "black", formula = y ~ x) +
-  geom_point() + 
-  scale_x_continuous(limits = c(0.75, 0.92)) +
-  scale_y_continuous(limits = c(0.6, 0.85)) +
-  labs(title = "wafroc vs. roc") 
-print(p1)
-```
-
-
-
-
-## Understanding AFROC vs. wAFROC, a numerical illustration {#empirical-numerical-illustrati-Infon}
+## Understanding AFROC vs. wAFROC {#empirical-numerical-understanding}
 
 The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions can be illustrated with a fictitious small dataset consisting of $K_1 = 4$ non-diseased and $K_2 = 5$ diseased cases. The maximum number of NLs per case is two and the maximum number of lesions per case is three. The first two diseased cases have one lesion each, the third and fourth have two lesions each and the fifth has 3 lesions. Here is how we code the NL and LL ratings (`t()` is the `R` transpose operator). The negative infinities represent unmarked locations. For example, the first non-diseased case has no NL marks, the second has one mark rated 0.5, etc., and the first diseased case has one NL mark rated 1.5, etc. The first lesion in the LL array was rated 0.9. the second was rated -0.2, ..., and the 3 lesions in the fifth diseased case were rated 1, 2.5 and 1, respectively.
 
@@ -1094,13 +887,364 @@ From the preceding  it is seen that the empirical plots consist of upward and ri
 
 
 
+## FROC-AUC is a poor measure {#empirical-froc-auc-poor}
+
+Regarding the ROC-AUC, i.e., $A_{\text{ROC}}$, as the gold standard against which all other figures of merit should be compared for consistency in orderings, shown next are plots of $A_{\text{FROC}}$, $A_{\text{AFROC}}$ and $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$ for the dataset used in the previous illustrations. 
+
+### Plot of FROC AUC vs. ROC AUC
+
+```{r, echo=FALSE}
+df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
+                 auc_froc = as.vector(auc_froc))
+fit <- lm(auc_froc ~ auc_HrAuc, df)
+fit1 <- summary(fit)
+r2 <- fit1$r.squared
+```
+
+
+The following is the plot of $A_{\text{FROC}}$ vs. $A_{\text{ROC}}$. There are 20 points on the plot corresponding to 5 treatments and 4 readers. The straight line is a least squares fit. Note the poor correlation and negative slope between $A_{\text{FROC}}$ and $A_{\text{ROC}}$, $R^2$ = `r r2`, slope = `r fit$coefficients[2]`. 
+
+
+
+```{r, echo=FALSE}
+p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_froc)) +
+  geom_smooth(method = "lm", 
+              se = FALSE, color = "black", formula = y ~ x) +
+  geom_point() + 
+  scale_x_continuous(limits = c(0.75, 0.92)) +
+  scale_y_continuous(limits = c(0, 0.5)) +
+  labs(title = "froc vs. roc") 
+print(p1)
+```
+
+
+The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot *rewards* an observer who generates more NLs, i.e., as the operating point moves further to the right. (The perfect observer whose FROC plot is the vertical line connecting (0,0) and (0,1) is heavily penalized since $A_{\text{FROC}} = 0$ for this observer.) One can try to try to avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is an arbitrarily chosen fixed value -- indeed the partial area procedure has been used by CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure is subjective. The method would fail for any observer with $\text{NLF}_{max} < x$ as then the partial area is undefined. This forces the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data and lead to a statistical power penalty.
+
+
+### Plot of AFROC AUC vs. ROC AUC
+
+
+```{r, echo=FALSE}
+df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
+                 auc_afroc = as.vector(auc_afroc))
+fit <- lm(auc_afroc ~ auc_HrAuc, df)
+fit1 <- summary(fit)
+r2 <- fit1$r.squared
+```
+
+The following is the plot of $A_{\text{AFROC}}$ vs. $A_{\text{ROC}}$. This time there is a strong positive correlation between the two, $R^2$ = `r r2`, slope = `r fit$coefficients[2]`. The reason is that the AFROC is fully contained in the unit square. An observer who generates more NL marks will yield smaller $A_{\text{AFROC}}$ -- as the abscissa of the AFROC approaches unity the restriction to the unit square ensures that AUC will decrease. 
+
+
+
+```{r, echo=FALSE}
+p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_afroc)) +
+  geom_smooth(method = "lm", 
+              se = FALSE, color = "black", formula = y ~ x) +
+  geom_point() + 
+  scale_x_continuous(limits = c(0.75, 0.92)) +
+  scale_y_continuous(limits = c(0.6, 0.85)) +
+  labs(title = "afroc vs. roc") 
+print(p1)
+```
+
+
+### Plot of wAFROC AUC vs. ROC AUC
+
+
+```{r, echo=FALSE}
+df <- data.frame(auc_HrAuc = as.vector(auc_HrAuc), 
+                 auc_wafroc = as.vector(auc_wafroc))
+fit <- lm(auc_wafroc ~ auc_HrAuc, df)
+fit1 <- summary(fit)
+r2 <- fit1$r.squared
+```
+
+
+The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, there is a strong positive correlation between the two, $R^2$ = `r r2`, slope = `r fit$coefficients[2]`. The reason is that the wAFROC is also fully contained in the unit square.
+
+
+
+```{r, echo=FALSE}
+p1 <- ggplot(data = df, aes(x = auc_HrAuc, y = auc_wafroc)) +
+  geom_smooth(method = "lm", 
+              se = FALSE, color = "black", formula = y ~ x) +
+  geom_point() + 
+  scale_x_continuous(limits = c(0.75, 0.92)) +
+  scale_y_continuous(limits = c(0.6, 0.85)) +
+  labs(title = "wafroc vs. roc") 
+print(p1)
+```
+
+
+
+
+## The AFROC1 plot {#empirical-AFROC1}
+
+Historically the AFROC originally used a different definition of FPF, resulting in what is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-"FP" rating on a *diseased case* as the maximum of all NL ratings on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:empirical-FP)]:
+
+
+\begin{equation}
+\left.
+\begin{aligned}
+\begin{matrix}
+FP_{k_1 t}^1=&\max_{l_1} \left ( z_{k_t t l_1 1 } \right ) & \text{if} & l_1 \neq \varnothing\\
+FP_{k_t t}^1=&-\infty & \text{if} & l_1 = \varnothing
+\end{matrix}
+\end{aligned}
+\right \}
+(\#eq:empirical-FP1)
+\end{equation}
+
+
+
+$FP_{k_t t}^1$ is the maximum over all latent NL marks, labeled by the location index $l_1$, occurring in case $k_t t$, or $-\infty$ if $l_1 = \varnothing$. The corresponding false positive fraction $FPF_r^1$ is defined by:
+
+
+\begin{equation}
+FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
+(\#eq:empirical-fpf1)
+\end{equation}
+
+
+Note the subtle differences between Eqn. \@ref(eq:empirical-fpf) and Eqn. \@ref(eq:empirical-fpf1). The latter counts "FPs" on non-diseased and diseased cases while Eqn. \@ref(eq:empirical-fpf) counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to generate both a TP and a FP may be questionable, however, this operating characteristic is useful in applications where all or almost all cases are diseased.
+
+### Empirical AFROC1 plot and  AUC {#empirical-definition-empirical-auc-afroc1}
+
+>
+The empirical AFROC1 plot connects adjacent operating points $\left ( FPF_r^1, \text{LLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 plot and the AFROC plot is the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted $A_{\text{AFROC1}}$.
+
+
+
+### Illustration with a dataset {#empirical-afroc1-plot-illustration}
+
+The following code uses `dataset04` to illustrate an empirical ROC plot for treatment 1 and reader 1.
+
+
+```{r, echo=TRUE}
+ret <- PlotEmpiricalOperatingCharacteristics(
+  dataset04, 
+  trts = 1, rdrs = 1, opChType = "AFROC1")
+print(ret$Plot)
+```
+
+
+
+Shown next is calculation of the figure of merit for this dataset.
+
+
+```{r, echo=TRUE}
+UtilFigureOfMerit(dataset04, FOM = "AFROC1")
+```
+
+
+
+
+```{r, echo=FALSE}
+auc_afroc1 <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "AFROC1")))
+```
+
+
+
+
+## The weighted-AFROC1 (wAFROC1) plot {#empirical-wAFROC1}
+
+Similar to the logic for introducing the wAFROC plot as a way of giving equal importance to all diseased cases and allowing the clinical importance of lesions to be modeled by appropriate weights, we introduce a weighted version of the AFROC1, termed the wAFROC1. The ordinate of this plot is the weighted lesion localization fraction $\text{wLLF}_r$ defined in Eqn. \@ref(eq:empirical-wLLFr). The abscissa is FPF1, defined in Eqn. \@ref(eq:empirical-fpf1). 
+
+
+
+### Empirical wAFROC1 plot and  AUC {#empirical-definition-empirical-auc-wafroc1}
+
+>
+The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points $\left ( FPF_r^1, \text{wLLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted $A_{\text{wAFROC1}}$.
+
+
+### Illustration with a dataset {#empirical-wafroc1-plot-illustration}
+
+The following code uses `dataset04` to illustrate an empirical wAFROC1 plot for treatment 1 and reader 1.
+
+
+```{r, echo=TRUE}
+ret <- PlotEmpiricalOperatingCharacteristics(
+  dataset04, 
+  trts = 1, rdrs = 1, opChType = "wAFROC1")
+print(ret$Plot)
+```
+
+
+Shown next is calculation of the figure of merit for this dataset.
+
+
+```{r, echo=TRUE}
+UtilFigureOfMerit(dataset04, FOM = "wAFROC1")
+```
+
+
+
+
+```{r, echo=FALSE}
+auc_wafroc1 <- as.numeric(as.matrix(UtilFigureOfMerit(dataset04, FOM = "wAFROC1")))
+```
+
+
+
+## Summary of operating characteristics {#empirical-summary}
+
+A summary of the operating characteristics defined from FROC data:
+
+```{r empirical-summary, echo=FALSE}
+fomTable = array(dim = c(6,3))
+fomTable[1,]  <- c("FROC", "NLF", "LLF")
+fomTable[2,]  <- c("ROC", "FPF", "TPF")
+fomTable[3,]  <- c("AFROC", "FPF", "LLF")
+fomTable[4,]  <- c("wAFROC", "FPF", "wLLF")
+fomTable[5,]  <- c("AFROC1", "FPF1", "LLF")
+fomTable[6,]  <- c("wAFROC1", "FPF1", "wLLF")
+df <- as.data.frame(fomTable)
+colnames(df) <- c("OCs", "X", "Y")
+knitr::kable(df, caption = "Summary of operating characteristics (OCs) from FROC data; X = abscissa, Y = ordinate.", escape = FALSE)
+```
+
+
 ## TBA Discussion {#empirical-Discussion}
 
 This chapter described the difference between latent and actual marks and notation to describe FROC data. The notation was used in deriving formulae for FROC, inferred-ROC, AFROC, wAFROC, AFROC1, wAFROC1 and EFROC operating characteristics. In each case an area measure was defined. With the exception of the FROC plot, all operating characteristics defined in this chapter are contained in the unit square. Discussion of the preferred operating characteristic is deferred to a subsequent chapter TBA.
 
 FROC data consists of mark-rating pairs. In this chapter a distinction is made between latent and actual marks. This is followed by a table summarizing FROC notation. This is a key table which will be used in later chapters. Section `\@ref(froc-paradigm-froc-plot)` introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are *visual* depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are *quantitative* measures of performance, termed *figures of merit* (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square. 
 
-## Appendix 1: Two Theorems {#empirical-two-theorems}
+
+With the exception of the FROC plot all empirical plots include a straight line extension from the observed end-point to (1,1).
+
+
+## Appendix 1: Summary of computational formulae {#empirical-summary-computational}
+
+### FROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{FROC} =& \frac{1}{\left ( K_1+K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
+&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \psi\left ( z_{k_11l_11}',z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \psi\left ( z_{k_2'2l_11}',z_{k_22l_22} \right )
+\right]
+\end{aligned}
+(\#eq:empirical-computational-froc)
+\end{equation}
+
+
+$z_{k_11l_11}'$ denotes a *finite* NL z-sample. This notation is used to eliminate the negative infinities due to unmarked NLs which are not observable events. This notation is not needed for LLs since unmarked LLs are observable events. The first double summation inside the square bracket compares, using the $\psi$ function, all finite NL ratings on *non-diseased* cases with all lesion ratings on diseased case $k_22$. The second double summation compares all finite NL ratings on *diseased cases* with all lesion ratings on diseased case $k_22$. The double summation outside the square bracket sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
+
+The formula can be simplified by creating two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
+
+The following example uses the same 9-case FROC dataset used earlier. The AUC is calculated two ways: using geometry and using the formula (implemented in function `UtilFigureOfMerit`).
+
+
+```{r empirical-numerical2, echo = F, cache=F}
+
+trapz = function(x, y)
+{ ### computes the integral of y with respect to x using trapezoidal integration.
+  # from caTools package
+  idx = 2:length(x)
+  return (as.double( (x[idx] - x[idx-1]) %*% (y[idx] + y[idx-1])) / 2)
+}
+
+frocPlot <- PlotEmpiricalOperatingCharacteristics(
+  frocData,trts = 1, 
+  rdrs = 1, 
+  opChType = "FROC", 
+  legend.position = "NULL")
+print(frocPlot$Plot)
+
+NLF <- frocPlot$Points$genAbscissa
+LLF <- frocPlot$Points$genOrdinate
+
+cat("numerical integration yields: ", trapz(NLF, LLF), "\n")
+auc_formula <- as.numeric(UtilFigureOfMerit(frocData, FOM = "FROC"))
+cat("RJafroc yields: ", auc_formula, "\n")
+```
+
+
+
+
+### ROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{ROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2} \psi\left ( \max_{l_1}\left (z_{k_11l_11} \right ), \max_{l_1l_2}\left (z_{k_22l_11}, z_{k_22l_22}  \right ) \right )
+\end{aligned}
+(\#eq:empirical-computational-roc)
+\end{equation}
+
+
+
+
+### AFROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC} = \frac{1}{K_1\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
+\end{aligned}
+(\#eq:empirical-computational-afroc)
+\end{equation}
+
+
+### wAFROC
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{wAFROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
+\end{aligned}
+(\#eq:empirical-computational-wafroc)
+\end{equation}
+
+
+The FOM-statistic $\text{A}_{AFROC}$ achieves its highest value, unity, if and only if every lesion is rated higher than any mark on non-diseased cases, for then the $\psi$ function always yields unity, and the summations yield unity. If, on the other hand, every lesion is rated lower than every mark on every non-diseased case, the $\psi$ function always yields zero, and the FOM-statistic is zero. Therefore, $0 \leq \text{A}_{AFROC} \leq 1$.
+This shows that $\text{A}_{AFROC}$ behaves like a probability but its range is *twice* that of $\text{A}_{ROC}$; recall that $0.5 \leq \text{A}_{ROC} \leq 1$ (assuming the observer has equal or better than random performance and the observer does not have the direction of the rating scale accidentally reversed). This has the consequence that treatment related differences between $\text{A}_{AFROC}$ (i.e., effect sizes) are larger relative to the corresponding ROC effect sizes (just as temperature differences in the Fahrenheit scale are larger than the same differences expressed in the Celsius scale). This has important implications for FROC sample size estimation, see `RJafrocQuickStart` Chapter TBA.
+
+
+The range $0 \leq \text{A}_{AFROC} \leq 1$ is one reason why the "chance diagonal" of the AFROC, corresponding to $\text{A}_{AFROC} = 0.5$, does *not* reflect chance-level performance. $\text{A}_{AFROC} = 0.5$ is actually reasonable performance, being exactly in the middle of the allowed range. An example of this was given in TBA §13.4.2.2 for the case of an expert radiologist who does not mark any cases.
+
+
+### AFROC1
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC1} =& \frac{1}{\left (K_1 +K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
+& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_22l_11}'  \right ),z_{k_22l_22} \right )  \right ]
+\end{aligned}
+(\#eq:empirical-computational-afroc1)
+\end{equation}
+
+
+
+In the second term inside the square brackets, notice the need to distinguish between the two indices for diseased cases $z_{k_22l_11}'$ and $z_{k_22l_22}$. 
+
+A check of normalization is obtained by assuming all NL ratings are less than any LL rating, in which case the terms inside the square brackets reduce to $K_1+K_2$ and $\text{A}_{AFROC1}$ is seen to be unity:
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC1} =& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} 1 \\
+=& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}L_{k_2 2} \\
+=& 1
+\end{aligned}
+(\#eq:empirical-computational-afroc1a)
+\end{equation}
+
+
+
+### wAFROC1
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{wAFROC1} =& \frac{1}{\left (K_1 + K_2 \right )K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\\
+& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_2'2l_11}  \right ),z_{k_22l_22} \right )  \right ]
+\end{aligned}
+(\#eq:empirical-computational-wafroc1)
+\end{equation}
+
+
+
+## Appendix 2: Two Theorems {#empirical-two-theorems}
 
 
 The area $\text{A}_{wAFROC}$ under the empirical wAFROC plot is obtained by summing the areas of individual trapezoids defined by drawing vertical lines from each pair of adjacent operating points to the x-axis. A sample plot is shown Fig. \@ref(fig:empirical-theorems).
@@ -1419,135 +1563,6 @@ According to Eqn. \@ref(eq:empirical-A0), $A_0$ increases as $\text{FPF}_1$ decr
 * Each unmarked non-diseased case represents a perfect decision.
 * For a perfect observer whose operating characteristic is the vertical line from (0,0) to (0,1) followed by the horizontal line from (0,1) to (1,1), *the area under the straight-line extension comprises the entire AUC*. Excluding it would yield zero AUC for a perfect observer, which is obviously incorrect. 
 * Stated equivalently, for the perfect observer $\text{FPF}_1 = 0$ and $\text{wLLF}_1 = 1$ and then, according to Eqn. \@ref(eq:empirical-A0), the area under the straight line extension is $A_0 = 1$.
-
-
-
-## Appendix 2: Summary of computational formulae {#empirical-summary-computational}
-
-### FROC
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{FROC} =& \frac{1}{\left ( K_1+K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
-&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \psi\left ( z_{k_11l_11}',z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \psi\left ( z_{k_2'2l_11}',z_{k_22l_22} \right )
-\right]
-\end{aligned}
-(\#eq:empirical-computational-froc)
-\end{equation}
-
-
-$z_{k_11l_11}'$ denotes a *finite* NL z-sample. This notation is used to eliminate the negative infinities due to unmarked NLs which are not observable events. This notation is not needed for LLs since unmarked LLs are observable events. The first double summation inside the square bracket compares, using the $\psi$ function, all finite NL ratings on *non-diseased* cases with all lesion ratings on diseased case $k_22$. The second double summation compares all finite NL ratings on *diseased cases* with all lesion ratings on diseased case $k_22$. The double summation outside the square bracket sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
-
-The formula can be simplified by creating two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
-
-The following example uses the same 9-case FROC dataset used earlier. The AUC is calculated two ways: using geometry and using the formula (implemented in function `UtilFigureOfMerit`).
-
-
-```{r empirical-numerical2, echo = F, cache=F}
-
-trapz = function(x, y)
-{ ### computes the integral of y with respect to x using trapezoidal integration.
-  # from caTools package
-  idx = 2:length(x)
-  return (as.double( (x[idx] - x[idx-1]) %*% (y[idx] + y[idx-1])) / 2)
-}
-
-frocPlot <- PlotEmpiricalOperatingCharacteristics(
-  frocData,trts = 1, 
-  rdrs = 1, 
-  opChType = "FROC", 
-  legend.position = "NULL")
-print(frocPlot$Plot)
-
-NLF <- frocPlot$Points$genAbscissa
-LLF <- frocPlot$Points$genOrdinate
-
-cat("numerical integration yields: ", trapz(NLF, LLF), "\n")
-auc_formula <- as.numeric(UtilFigureOfMerit(frocData, FOM = "FROC"))
-cat("RJafroc yields: ", auc_formula, "\n")
-```
-
-
-
-
-### ROC
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{ROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2} \psi\left ( \max_{l_1}\left (z_{k_11l_11} \right ), \max_{l_1l_2}\left (z_{k_22l_11}, z_{k_22l_22}  \right ) \right )
-\end{aligned}
-(\#eq:empirical-computational-roc)
-\end{equation}
-
-
-
-
-### AFROC
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{AFROC} = \frac{1}{K_1\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
-\end{aligned}
-(\#eq:empirical-computational-afroc)
-\end{equation}
-
-
-### wAFROC
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{wAFROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
-\end{aligned}
-(\#eq:empirical-computational-wafroc)
-\end{equation}
-
-
-The FOM-statistic $\text{A}_{AFROC}$ achieves its highest value, unity, if and only if every lesion is rated higher than any mark on non-diseased cases, for then the $\psi$ function always yields unity, and the summations yield unity. If, on the other hand, every lesion is rated lower than every mark on every non-diseased case, the $\psi$ function always yields zero, and the FOM-statistic is zero. Therefore, $0 \leq \text{A}_{AFROC} \leq 1$.
-This shows that $\text{A}_{AFROC}$ behaves like a probability but its range is *twice* that of $\text{A}_{ROC}$; recall that $0.5 \leq \text{A}_{ROC} \leq 1$ (assuming the observer has equal or better than random performance and the observer does not have the direction of the rating scale accidentally reversed). This has the consequence that treatment related differences between $\text{A}_{AFROC}$ (i.e., effect sizes) are larger relative to the corresponding ROC effect sizes (just as temperature differences in the Fahrenheit scale are larger than the same differences expressed in the Celsius scale). This has important implications for FROC sample size estimation, see `RJafrocQuickStart` Chapter TBA.
-
-
-The range $0 \leq \text{A}_{AFROC} \leq 1$ is one reason why the "chance diagonal" of the AFROC, corresponding to $\text{A}_{AFROC} = 0.5$, does *not* reflect chance-level performance. $\text{A}_{AFROC} = 0.5$ is actually reasonable performance, being exactly in the middle of the allowed range. An example of this was given in TBA §13.4.2.2 for the case of an expert radiologist who does not mark any cases.
-
-
-### AFROC1
-
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{AFROC1} =& \frac{1}{\left (K_1 +K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
-& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_22l_11}'  \right ),z_{k_22l_22} \right )  \right ]
-\end{aligned}
-(\#eq:empirical-computational-afroc1)
-\end{equation}
-
-
-
-In the second term inside the square brackets, notice the need to distinguish between the two indices for diseased cases $z_{k_22l_11}'$ and $z_{k_22l_22}$. 
-
-A check of normalization is obtained by assuming all NL ratings are less than any LL rating, in which case the terms inside the square brackets reduce to $K_1+K_2$ and $\text{A}_{AFROC1}$ is seen to be unity:
-
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{AFROC1} =& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} 1 \\
-=& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}L_{k_2 2} \\
-=& 1
-\end{aligned}
-(\#eq:empirical-computational-afroc1a)
-\end{equation}
-
-
-
-### wAFROC1
-
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{wAFROC1} =& \frac{1}{\left (K_1 + K_2 \right )K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\\
-& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_2'2l_11}  \right ),z_{k_22l_22} \right )  \right ]
-\end{aligned}
-(\#eq:empirical-computational-wafroc1)
-\end{equation}
 
 
 
