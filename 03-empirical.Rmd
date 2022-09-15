@@ -29,7 +29,7 @@ FROC data consists of mark-rating pairs. A distinction is made here between *lat
 Operating characteristics are *visual* depictions of performance. Scalar measures derived from operating characteristics can serve as *quantitative* measures of performance. Empirical area measures (AUCs) associated with the FROC plot and other plots possible with FROC data are defined and illustrated with a small FROC dataset. Except for the FROC all of the other plots introduced in this chapter include a straight line extension from the uppermost observed operating point to (1,1).
 
 
-If one ignores localization information and simply considers the highest rating on each case as representing its ROC rating, one can define the empirical ROC curve and associated area measure ROC-AUC from FROC data. Since ROC-AUC is a fundamental measure of classification accuracy between non-diseased and diseased cases any proposed other area measure that does not ignore location information should, if it is to be useful, correlate with ROC-AUC. These correlations are explored using the small dataset and it is shown that FROC-AUC is a poor measure of performance. While ways of circumventing FROC-AUC have been proposed and have been used by some investigators none are satisfactory and the claim of this book is that **the FROC should never be used to quantify performance**. The basic reason is simple: unlike all of the other operating characteristics defined in this chapter the FROC plot is not constrained to lie within the unit square and the area under a straight line extension to (1,1) is meaningless.
+If one ignores localization information and simply considers the highest rating on each case as representing its ROC rating, one can define the empirical ROC plot and associated area measure ROC-AUC from FROC data. Since ROC-AUC is a fundamental measure of classification accuracy between non-diseased and diseased cases any proposed other area measure that does not ignore location information should, if it is to be useful, correlate with ROC-AUC. These correlations are explored using the small dataset and it is shown that FROC-AUC is a poor measure of performance. While ways of circumventing FROC-AUC have been proposed and have been used by some investigators none are satisfactory and the claim of this book is that **the FROC should never be used to quantify performance**. The basic reason is simple: unlike all of the other operating characteristics defined in this chapter the FROC plot is not constrained to lie within the unit square and the area under a straight line extension to (1,1) is meaningless.
 
 
 Some of the other empirical plots and AUCs are less familiar (as compared to the well-known ROC plots and ROC-AUC). As an aid to understanding them I have included numerical calculations of the empirical operating characteristics and AUCs for the small dataset. The calculations also illustrate the advantage of using weighted versions of some of the empirical plots (lesion weights are a way of allowing one to model the clinical importance (i.e., morbidity) of different type of lesions present in a clinical dataset; a weighted plot assures that each case gets the same importance in determining AUC regardless of the number of lesions in it). 
@@ -155,7 +155,7 @@ knitr::kable(df, caption = "FROC notation; all marks refer to latent marks.", es
 
 ### A conceptual and notatonal issue {#empirical-indexing-marks}
 
-An aspect of FROC data, *that there could be cases with no NL marks, no matter how low the reporting threshold*, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold $\zeta_1$ is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case "filling up" with NL marks [^empirical1-1]. In fact the first model of FROC data [@chakraborty1989maximum] predicts that as the reporting threshold is lowered to $\zeta_1 = -\infty$, the number of NL marks per case approaches $\infty$ as does $\text{NLF}_{max}$. However, observed FROC curves end at a finite value of $\text{NLF}_{max}$. This is one reason I introduced the radiological search model (RSM) [@chakraborty2006search]. I will have much more to say about this in Chapter `\@ref(rsm)`, but for now I state one assumption of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over all cases) is a finite number. 
+An aspect of FROC data, *that there could be cases with no NL marks, no matter how low the reporting threshold*, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold $\zeta_1$ is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case "filling up" with NL marks [^empirical1-1]. In fact the first model of FROC data [@chakraborty1989maximum] predicts that as the reporting threshold is lowered to $\zeta_1 = -\infty$, the number of NL marks per case approaches $\infty$ as does $\text{NLF}_{max}$. However, observed FROC plots end at a finite value of $\text{NLF}_{max}$. This is one reason I introduced the radiological search model (RSM) [@chakraborty2006search]. I will have much more to say about this in Chapter `\@ref(rsm)`, but for now I state one assumption of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over all cases) is a finite number. 
 
 With this background, let us return to the conceptual issue: why does the observer not keep "filling-up" the image with NL marks? The answer is that *the observer can only mark regions that have a non-zero chance of being a lesion*. For example, if the actual number of latent NLs on a particular case is 2, then, as the reporting threshold is lowered, the observer will make at most two NL marks. Having exhausted these two regions the observer will not mark any more regions because there are no more regions to be marked - *all other regions in the image have, in the perception of the observer, zero chance of being a lesion*.
 
@@ -1109,7 +1109,7 @@ knitr::kable(df, caption = "Summary of operating characteristics (OCs) from FROC
 
 This chapter described the difference between latent and actual marks and notation to describe FROC data. The notation was used in deriving formulae for FROC, inferred-ROC, AFROC, wAFROC, AFROC1, wAFROC1 and EFROC operating characteristics. In each case an area measure was defined. With the exception of the FROC plot, all operating characteristics defined in this chapter are contained in the unit square. Discussion of the preferred operating characteristic is deferred to a subsequent chapter TBA.
 
-FROC data consists of mark-rating pairs. In this chapter a distinction is made between latent and actual marks. This is followed by a table summarizing FROC notation. This is a key table which will be used in later chapters. Section `\@ref(froc-paradigm-froc-plot)` introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are *visual* depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are *quantitative* measures of performance, termed *figures of merit* (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square. 
+FROC data consists of mark-rating pairs. In this chapter a distinction is made between latent and actual marks. This is followed by a table summarizing FROC notation. This is a key table which will be used in later chapters. Section `\@ref(froc-paradigm-froc-plot)` introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are *visual* depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are *quantitative* measures of performance, termed *figures of merit* (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC plot, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square. 
 
 
 With the exception of the FROC plot all empirical plots include a straight line extension from the observed end-point to (1,1).
@@ -1365,12 +1365,12 @@ It follows that:
 This formula is the wAFROC analog of the familiar Bamber theorem [@bamber1975area] relating the empirical AUC under the ROC to the ratings:
 
 \begin{equation}
-\text{A}_{ROC} = \frac{1}{K_1K_2}  \sum_{k_2=1}^{K_2} \sum_{k_1=1}^{K_1} \psi\left (  r_{k_1} , r_{k_2} \right )
+\text{A}_{ROC} = \frac{1}{K_1K_2}  \sum_{k_2=1}^{K_2} \sum_{k_1=1}^{K_1} \psi\left (  r_{k_11} , r_{k_22} \right )
 (\#eq:empirical-bamber-theorem)
 \end{equation}
 
 
-where $r_{k_1}$ and $r_{k_2}$ are the ROC ratings of non-diseased case $k_1$ and diseased case $k_2$ respectively.
+where $r_{k_11}$ and $r_{k_22}$ are the ROC ratings of non-diseased case $k_11$ and diseased case $k_22$ respectively.
 
 
 
@@ -1482,18 +1482,33 @@ According to Eqn. \@ref(eq:empirical-theorem12), $A_0$ increases as $\text{FPF}_
 
 ### FROC
 
+
+The formula for the area under the empirical FROC plot follows:
+
+
 \begin{equation}
 \begin{aligned}
-\text{A}_{FROC} =& \frac{1}{\left ( K_1+K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
-&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right ) \psi\left ( z_{k_11l_11},z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right )\psi\left ( z_{k_2'2l_11},z_{k_22l_22} \right )
-\right]
+\text{A}_{FROC} =& \frac{1}{\left ( K_1+K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \left( A+B \right)
 \end{aligned}
 (\#eq:empirical-computational-froc)
 \end{equation}
 
-$\mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right )$ ensures that only *finite* NL z-samples enter the computation (recall that unmarked NLs are unobservable events). This conditioning is not needed for LLs since unmarked LLs are observable events. The first double summation inside the square bracket compares, using the $\psi$ function, all finite NL ratings on *non-diseased* cases $k_11$ with all lesion ratings on diseased case $k_22$. The second double summation compares all finite NL ratings on *diseased cases* $k_2'2$ with all lesion ratings on diseased case $k_22$. The double summation outside the square bracket sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
+where A and B are defined by:
 
-The formula is equivalent to creating two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
+
+\begin{equation}
+\begin{aligned}
+A =& \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right ) \psi\left ( z_{k_11l_11},z_{k_22l_22} \right )\\
+B =&\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \mathbb{I} \left ( z_{z_{k'_22l_11}} \neq  -\infty \right )\psi\left ( z_{k_2'2l_11},z_{k_22l_22} \right )
+\end{aligned}
+(\#eq:empirical-computational-froc-ab-terms)
+\end{equation}
+
+
+
+For term A, $\mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right )$ ensures that only *finite* NL z-samples on non-diseased cases enter the computation (recall that unmarked NLs are unobservable events). Likewise, for term B, $\mathbb{I} \left ( z_{k'_22l_11} \neq  -\infty \right )$ ensures that only *finite* NL z-samples on diseased cases enter the computation. This is not needed for LLs since unmarked LLs are observable events. In term A the double summation compares using the $\psi$ function all finite NL ratings on *non-diseased* cases $k_11$ with all lesion ratings on diseased case $k_22$. In term B the double summation compares all finite NL ratings on *diseased cases* $k_2'2$ with all lesion ratings on diseased case $k_22$. The double summation in Eqn. \@ref(eq:empirical-computational-froc) sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
+
+The above formula is equivalent to creating two arrays, the first containing all finite NL ratings and the second containing all lesion ratings (including unmarked lesions). One compares, using the $\psi$ function, the ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
 
 The following example uses the same 9-case FROC dataset used earlier. The AUC is calculated two ways: using geometry and using Eqn. \@ref(eq:empirical-computational-froc) implemented in function `UtilFigureOfMerit`.
 
@@ -1512,7 +1527,7 @@ frocPlot <- PlotEmpiricalOperatingCharacteristics(
   rdrs = 1, 
   opChType = "FROC", 
   legend.position = "NULL")
-print(frocPlot$Plot)
+#print(frocPlot$Plot)
 
 NLF <- frocPlot$Points$genAbscissa
 LLF <- frocPlot$Points$genOrdinate
@@ -1527,6 +1542,9 @@ cat("RJafroc yields: ", auc_formula, "\n")
 
 ### ROC
 
+The ROC-AUC formula is much simpler.     
+
+
 \begin{equation}
 \begin{aligned}
 \text{A}_{ROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2} \psi\left ( \max_{l_1}\left (z_{k_11l_11} \right ), \max_{l_1l_2}\left (z_{k_22l_11}, z_{k_22l_22}  \right ) \right )
@@ -1535,9 +1553,12 @@ cat("RJafroc yields: ", auc_formula, "\n")
 \end{equation}
 
 
+The first argument of the $\psi$ function is the maximum NL rating on a non-diseased case or $-\infty$ if the case has no NL marks. The second argument is the maximum of all marks, NL or LL, on a diseased case, or $-\infty$ if the case has no marks. The value of the $\psi$ function is summed over all non-diseased and diseased cases and divided by $K_1$ and $K_2$, analogous to the Bamber theorem Eqn. \@ref(eq:empirical-bamber-theorem).
 
 
 ### AFROC
+
+The formula for the area under the empirical AFROC plot follows:
 
 \begin{equation}
 \begin{aligned}
@@ -1545,6 +1566,10 @@ cat("RJafroc yields: ", auc_formula, "\n")
 \end{aligned}
 (\#eq:empirical-computational-afroc)
 \end{equation}
+
+
+
+The first argument of the $\psi$ function is the maximum NL rating on a non-diseased case or $-\infty$ if the case has no NL marks. The second argument is the LL rating on a diseased case. The value of the $\psi$ function is summed over all non-diseased cases and all lesions and divided by $K_1$ and the total number of lesions.
 
 
 ### wAFROC
