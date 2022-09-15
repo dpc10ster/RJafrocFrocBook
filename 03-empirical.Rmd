@@ -17,7 +17,7 @@ library(grid)
 
 ## TBA How much finished {#empirical-how-much-finished}
 85%
-Appendices and computational formulae need to be tied up to main flow of chapter.
+FROC done; need to add text surrounding equations in Appendix 3
 
 
 
