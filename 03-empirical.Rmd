@@ -409,7 +409,7 @@ The inferred true positive (TP) z-sample for diseased case $k_2 2$ is defined by
 
 \begin{equation}
 \begin{matrix}
-TP_{k_2 2} = \text{max}_{l_1 l_2}\left ( z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}  \right ) & \text{if} & l_1 \neq \varnothing
+TP_{k_2 2} = \max_{l_1 l_2}\left ( z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}  \right ) & \text{if} & l_1 \neq \varnothing
 \end{matrix}
 (\#eq:empirical-TP1)
 \end{equation}
@@ -421,7 +421,7 @@ or
 \begin{equation}
 \begin{matrix}
 TP_{k_2 2} = \max_{l_2}  \left ( z_{k_2 2 l_2 2} \right ) 
- & \text{if} & \left( l_1 = \varnothing \right) \land \left (\text{max}_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} > -\infty  \right )
+ & \text{if} & \left( l_1 = \varnothing \right) \land \left (\max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} > -\infty  \right )
 \end{matrix}
 (\#eq:empirical-TP2)
 \end{equation}
@@ -440,7 +440,7 @@ TP_{k_2 2} = -\infty
 \end{equation}
 
 
-Here $\land$ is the logical AND operator. An explanation is in order. Consider Eqn. \@ref(eq:empirical-TP1). There are two z-samples inside the $\text{max}$ operator: $z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}$. The first z-sample is from a NL on a diseased case, as per the $l_1 1$ subscripts, while the second is from a LL on the same diseased case, as per the $l_2 2$ subscripts.  
+Here $\land$ is the logical AND operator. An explanation is in order. Consider Eqn. \@ref(eq:empirical-TP1). There are two z-samples inside the $\max$ operator: $z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}$. The first z-sample is from a NL on a diseased case, as per the $l_1 1$ subscripts, while the second is from a LL on the same diseased case, as per the $l_2 2$ subscripts.  
 
 -   If $l_1 \neq \varnothing$ then Eqn. \@ref(eq:empirical-TP1) applies, i.e., one takes the maximum over all z-samples, NLs and LLs, whichever is higher, on the diseased case.
 
@@ -1485,18 +1485,17 @@ According to Eqn. \@ref(eq:empirical-theorem12), $A_0$ increases as $\text{FPF}_
 \begin{equation}
 \begin{aligned}
 \text{A}_{FROC} =& \frac{1}{\left ( K_1+K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
-&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \psi\left ( z_{k_11l_11}',z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \psi\left ( z_{k_2'2l_11}',z_{k_22l_22} \right )
+&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right ) \psi\left ( z_{k_11l_11},z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right )\psi\left ( z_{k_2'2l_11},z_{k_22l_22} \right )
 \right]
 \end{aligned}
 (\#eq:empirical-computational-froc)
 \end{equation}
 
+$\mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right )$ ensures that only *finite* NL z-samples enter the computation (recall that unmarked NLs are unobservable events). This conditioning is not needed for LLs since unmarked LLs are observable events. The first double summation inside the square bracket compares, using the $\psi$ function, all finite NL ratings on *non-diseased* cases $k_11$ with all lesion ratings on diseased case $k_22$. The second double summation compares all finite NL ratings on *diseased cases* $k_2'2$ with all lesion ratings on diseased case $k_22$. The double summation outside the square bracket sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
 
-$z_{k_11l_11}'$ denotes a *finite* NL z-sample. This notation is used to eliminate the negative infinities due to unmarked NLs which are not observable events. This notation is not needed for LLs since unmarked LLs are observable events. The first double summation inside the square bracket compares, using the $\psi$ function, all finite NL ratings on *non-diseased* cases with all lesion ratings on diseased case $k_22$. The second double summation compares all finite NL ratings on *diseased cases* with all lesion ratings on diseased case $k_22$. The double summation outside the square bracket sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
+The formula is equivalent to creating two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
 
-The formula can be simplified by creating two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
-
-The following example uses the same 9-case FROC dataset used earlier. The AUC is calculated two ways: using geometry and using the formula (implemented in function `UtilFigureOfMerit`).
+The following example uses the same 9-case FROC dataset used earlier. The AUC is calculated two ways: using geometry and using Eqn. \@ref(eq:empirical-computational-froc) implemented in function `UtilFigureOfMerit`.
 
 
 ```{r empirical-numerical2, echo = F, cache=F}
