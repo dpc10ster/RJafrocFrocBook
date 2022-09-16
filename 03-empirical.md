@@ -6,30 +6,32 @@
 
 
 ## TBA How much finished {#empirical-how-much-finished}
-70%
-Appendices and computational formulae need to be tied up to main flow of chapter.
+100%
 
 
 
-## TBA Introduction {#empirical-intro}
+## Introduction {#empirical-intro}
 
-FROC data consists of mark-rating pairs. A distinction is made here between *latent* marks (suspicious regions perceived by the visual system) and *actual* marks (those that are actually marked). This is followed by a key table, used in later chapters, summarizing FROC notation. The notation is used to define the empirical FROC plot (briefly introduced in the previous chapter). 
-
-
-Operating characteristics are *visual* depictions of performance. Scalar measures derived from operating characteristics can serve as *quantitative* measures of performance. Empirical area measures (AUCs) associated with the FROC plot and other plots possible with FROC data are defined and illustrated with a small FROC dataset. 
+FROC data consists of mark-rating pairs. A distinction is made between *latent* marks (suspicious regions perceived by the visual system) and *actual* marks. A key table (used in later chapters) summarizing FROC notation is introduced which allows unambiguous description of the data. 
 
 
-If one ignores localization information and simply considers the highest rating on each case as representing its ROC rating, and this can be used to define the empirical ROC curve and associated area measure ROC-AUC from FROC data. Since ROC-AUC is a fundamental measure of classification accuracy between non-diseased and diseased cases, any proposed area measure that does not ignore location information should, if it is to be useful, correlate with ROC-AUC. These correlations are explored using the small dataset and it is shown readily that FROC-AUC is a very poor measure of performance. 
+Operating characteristics (plots) introduced in this chapter are the FROC, the (inferred) ROC, the alternative FROC (AFROC), the weighted AFROC (wAFROC), the AFROC1, wAFROC1. Formulae for coordinates of each plot are given in terms of the underlying mark-rating data. Empirical plots refer to those generated directly from the data - no statistical modeling is involved.
 
 
-Some of the other empirical plots and AUCs are less familiar (as compared to the well-known ROC plots and ROC-AUC). As an aid to understanding them I have included hand-calculations of the empirical operating characteristics and AUCs for the small dataset. The calculations also illustrate the advantage of using weighted versions of empirical plots (lesion weights are a way of allowing one to model the clinical importance of different type of lesions present in a clinical dataset; a weighted plot assures that each case gets the same importance in determining AUC regardless of the number of lesions in it). 
+Plots are *visual* depictions of performance. Scalar measures derived from plots can serve as *quantitative* measures of performance. Empirical area measures (AUCs) associated with the FROC plot and other plots possible with FROC data are defined and illustrated with a small FROC dataset. Except for the FROC all of the other plots include a straight line extension from the uppermost observed operating point to (1,1).
 
 
-Computing the AUCs from plots can be tedious at best. Computational formulae are presented in Appendix 1 which allow ready computation of any of the AUCs directly from the FROC ratings. Finally Appendix 2 presents two important theorems TBA.
+If one ignores localization information and simply considers the highest rating on each case as representing its ROC rating, one can define the empirical ROC plot and associated area measure ROC-AUC from FROC data. Since ROC-AUC is a fundamental measure of classification accuracy between non-diseased and diseased cases any other proposed area measure that does not ignore location information should, if it is to be useful, correlate with ROC-AUC. These correlations are explored using the small dataset and it is shown that FROC-AUC is a poor measure of performance. While ways of circumventing FROC-AUC have been proposed and have been used by some investigators none are satisfactory and the claim of this book is that **the FROC should never be used to quantify performance**. The basic reason is simple: unlike all of the other plots defined in this chapter the FROC plot is not constrained to lie within the unit square and the area under a straight line extension to (1,1) is meaningless.
+
+
+Some of the other empirical plots and AUCs are less familiar as compared to the well-known ROC plots and ROC-AUC. As an aid to understanding them I have included numerical calculations of the empirical plots and AUCs for the small dataset. The calculations also illustrate the advantage of using weighted versions of some of the empirical plots (lesion weights are a way of allowing one to model the clinical importance (i.e., morbidity) of different type of lesions present in a clinical dataset; a weighted plot assures that each case gets the same importance in determining AUC regardless of the number of lesions in it). 
+
+
+Computing the AUCs from plots can be tedious at best and computational formulae are needed which would allow any of the AUCs to be calculated directly from the FROC ratings. Appendix 1 proves a formula for the wAFROC-AUC, Appendix 2 provides an interpretation of the area under the straight line extension for this plot. Appendix 3 summarizes, without proofs, the computation formulae for AUCs for all of the plots introduced in this chapter. 
 
 
 
-## Mark rating pairs {#empirical-mark-rating-pairs}
+## FROC data and notation {#empirical-mark-rating-pairs}
 
 Each mark indicates the location of a region suspicious enough to warrant reporting and the rating is the associated confidence level. A mark is recorded as *lesion localization* (LL) if it is sufficiently close to a true lesion and otherwise it is recorded as *non-lesion localization* (NL).
 
@@ -82,7 +84,7 @@ r = 1, 2, ..., R_{FROC}\\
 \end{equation}
 
 
-## Notation {#empirical-notation}
+### Notation {#empirical-notation}
 
 *Clear notation is vital to understanding this paradigm.* The notation needs to account for case and location dependencies of ratings and the distinction between case-level and location-level ground truth. The notation also has to account for cases with no marks.
 
@@ -215,7 +217,7 @@ FROC notation is summarized in Table \@ref(tab:empirical-notation), in which *ma
 
 ### A conceptual and notatonal issue {#empirical-indexing-marks}
 
-An aspect of FROC data, *that there could be cases with no NL marks, no matter how low the reporting threshold*, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold $\zeta_1$ is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case "filling up" with NL marks [^empirical1-1]. In fact the first model of FROC data [@chakraborty1989maximum] predicts that as the reporting threshold is lowered to $\zeta_1 = -\infty$, the number of NL marks per case approaches $\infty$ as does $\text{NLF}_{max}$. However, observed FROC curves end at a finite value of $\text{NLF}_{max}$. This is one reason I introduced the radiological search model (RSM) [@chakraborty2006search]. I will have much more to say about this in Chapter `\@ref(rsm)`, but for now I state one assumption of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over all cases) is a finite number. 
+An aspect of FROC data, *that there could be cases with no NL marks, no matter how low the reporting threshold*, has created problems both from conceptual and notational viewpoints. Taking the conceptual issue first, my thinking (prior to 2004) was that as the reporting threshold $\zeta_1$ is lowered, the number of NL marks per case increases almost indefinitely. I visualized this process as each case "filling up" with NL marks [^empirical1-1]. In fact the first model of FROC data [@chakraborty1989maximum] predicts that as the reporting threshold is lowered to $\zeta_1 = -\infty$, the number of NL marks per case approaches $\infty$ as does $\text{NLF}_{max}$. However, observed FROC plots end at a finite value of $\text{NLF}_{max}$. This is one reason I introduced the radiological search model (RSM) [@chakraborty2006search]. I will have much more to say about this in Chapter `\@ref(rsm)`, but for now I state one assumption of the RSM: the number of latent NL marks is a Poisson distributed random integer with a finite value for the mean parameter of the distribution. This means that the actual number of latent NL marks per case can be 0, 1, 2, .., whose average (over all cases) is a finite number. 
 
 With this background, let us return to the conceptual issue: why does the observer not keep "filling-up" the image with NL marks? The answer is that *the observer can only mark regions that have a non-zero chance of being a lesion*. For example, if the actual number of latent NLs on a particular case is 2, then, as the reporting threshold is lowered, the observer will make at most two NL marks. Having exhausted these two regions the observer will not mark any more regions because there are no more regions to be marked - *all other regions in the image have, in the perception of the observer, zero chance of being a lesion*.
 
@@ -228,7 +230,7 @@ The notational issue is how to handle images with no latent NL marks. Basically 
 * $l_2 = \left \{ 1,2,...,L_{k_2 2} \right \}$ indexes latent LL marks. Unmarked LLs are assigned negative infinity ratings as these are observable events. The null set notation is not needed because for every diseased case $L_{k_2 2} > 0$.
 
 
-## The FROC plot and AUC {#empirical-froc-plot-1}
+## The FROC plot {#empirical-froc-plot-1}
 
 Definitions:
 
@@ -477,7 +479,7 @@ The inferred true positive (TP) z-sample for diseased case $k_2 2$ is defined by
 
 \begin{equation}
 \begin{matrix}
-TP_{k_2 2} = \text{max}_{l_1 l_2}\left ( z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}  \right ) & \text{if} & l_1 \neq \varnothing
+TP_{k_2 2} = \max_{l_1 l_2}\left ( z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}  \right ) & \text{if} & l_1 \neq \varnothing
 \end{matrix}
 (\#eq:empirical-TP1)
 \end{equation}
@@ -489,7 +491,7 @@ or
 \begin{equation}
 \begin{matrix}
 TP_{k_2 2} = \max_{l_2}  \left ( z_{k_2 2 l_2 2} \right ) 
- & \text{if} & \left( l_1 = \varnothing \right) \land \left (\text{max}_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} > -\infty  \right )
+ & \text{if} & \left( l_1 = \varnothing \right) \land \left (\max_{l_2}{\left (z_{k_2 2 l_2 2}  \right )} > -\infty  \right )
 \end{matrix}
 (\#eq:empirical-TP2)
 \end{equation}
@@ -508,7 +510,7 @@ TP_{k_2 2} = -\infty
 \end{equation}
 
 
-Here $\land$ is the logical AND operator. An explanation is in order. Consider Eqn. \@ref(eq:empirical-TP1). There are two z-samples inside the $\text{max}$ operator: $z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}$. The first z-sample is from a NL on a diseased case, as per the $l_1 1$ subscripts, while the second is from a LL on the same diseased case, as per the $l_2 2$ subscripts.  
+Here $\land$ is the logical AND operator. An explanation is in order. Consider Eqn. \@ref(eq:empirical-TP1). There are two z-samples inside the $\max$ operator: $z_{k_2 2 l_1 1} ,z_{k_2 2 l_2 2}$. The first z-sample is from a NL on a diseased case, as per the $l_1 1$ subscripts, while the second is from a LL on the same diseased case, as per the $l_2 2$ subscripts.  
 
 -   If $l_1 \neq \varnothing$ then Eqn. \@ref(eq:empirical-TP1) applies, i.e., one takes the maximum over all z-samples, NLs and LLs, whichever is higher, on the diseased case.
 
@@ -619,7 +621,7 @@ Key points:
 
 
 >
-Prof. Richard Swensson did not like my choice of the word "alternative" in naming this operating characteristic. I had no idea in 1989 how important this operating characteristic would later turn out to be, otherwise a more meaningful name might have been proposed. To anticipate the central message of this book, the AUC based on this operating characteristic (and weighted versions of it introduced below), are superior to the FROC-AUC and the ROC-AUC in terms of statistical power and reliability (the FROC-AUC is especially unreliable). 
+Prof. Richard Swensson did not like my choice of the word "alternative" in naming this operating characteristic. I had no idea in 1989 how important this plot would later turn out to be, otherwise a more meaningful name might have been proposed. To anticipate the central message of this book, the AUC based on this plot (and weighted versions of it introduced below), are superior to the FROC-AUC and the ROC-AUC in terms of statistical power and reliability (the FROC-AUC is especially unreliable). 
 
 
 
@@ -665,8 +667,6 @@ UtilFigureOfMerit(dataset04, FOM = "AFROC")
 
 
 
-
-
 ## The weighted-AFROC plot (wAFROC) plot {#empirical-wAFROC}
 
 The AFROC ordinate defined in Eqn. \@ref(eq:empirical-LLFr) gives equal importance to every lesion in a case. A case with more lesions will have more influence on the AFROC (see next section for an explicit demonstration of this fact). This is undesirable since each case (i.e., patient) should get equal importance in the analysis -- as with ROC analysis, one wishes to draw conclusions about the population of cases and each case is an equally valid sample from the population. In particular, one does not want the analysis to be skewed towards cases with greater numbers of lesions. [^empirical1-5]
@@ -690,7 +690,7 @@ The weighted lesion localization fraction $\text{wLLF}_r$ is defined by [@RN2484
 
 
 \begin{equation}
-\text{wLLF}_r \equiv \text{wLLF}\left ( \zeta_r \right ) = \frac{1}{K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_r \right )
+\text{wLLF}_r \equiv \text{wLLF}\left ( \zeta_r \right ) = \frac{1}{K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 2 l_2 2} \geq \zeta_r \right )
 (\#eq:empirical-wLLFr)
 \end{equation}
 
@@ -737,7 +737,7 @@ UtilFigureOfMerit(dataset04, FOM = "wAFROC")
 
 
 
-## Understanding AFROC vs. wAFROC {#empirical-numerical-understanding}
+## AFROC vs. wAFROC {#empirical-numerical-understanding}
 
 The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions can be illustrated with a fictitious small dataset consisting of $K_1 = 4$ non-diseased and $K_2 = 5$ diseased cases. The maximum number of NLs per case is two and the maximum number of lesions per case is three. The first two diseased cases have one lesion each, the third and fourth have two lesions each and the fifth has 3 lesions. Here is how we code the NL and LL ratings (`t()` is the `R` transpose operator). The negative infinities represent unmarked locations. For example, the first non-diseased case has no NL marks, the second has one mark rated 0.5, etc., and the first diseased case has one NL mark rated 1.5, etc. The first lesion in the LL array was rated 0.9. the second was rated -0.2, ..., and the 3 lesions in the fifth diseased case were rated 1, 2.5 and 1, respectively.
 
@@ -977,22 +977,63 @@ The same AUC results are obtained using the function `UtilFigureOfMerit`:
 
 
 ```r
-cat("AFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "AFROC")),"\n")
+cat("AFROC AUC = ", 
+    as.numeric(UtilFigureOfMerit(frocData, FOM = "AFROC")),"\n")
 #> AFROC AUC =  0.8472222
-cat("wAFROC AUC = ", as.numeric(UtilFigureOfMerit(frocData, FOM = "wAFROC")),"\n")
+cat("wAFROC AUC = ", 
+    as.numeric(UtilFigureOfMerit(frocData, FOM = "wAFROC")),"\n")
 #> wAFROC AUC =  0.7425
 ```
 
 
 
-From the preceding  it is seen that the empirical plots consist of upward and rightward jumps starting from the origin (0,0) and ending at (1,1). Each upward jump is associated with a `LL` rating exceeding a virtual threshold. Each rightward jump is associated with a `FP` rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it, i.e., correct decisions are rewarded and incorrect ones are penalized. If there are only upward jumps then the empirical plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect -- the straight-line extension of the plot to (1,1) ensures that the net area is unity. If there are only horizontal jumps the operating point moves from the origin to (1,0), where none of the lesions are localized and every non-diseased image has at least one NL mark and despite the straight line extension to (1,1), the net area is zero. This represents worst possible performance. 
+It is seen that the empirical plots consist of upward and rightward jumps starting from the origin (0,0) and ending at (1,1). Each upward jump is associated with a `LL` rating exceeding a virtual threshold. Each rightward jump is associated with a `FP` rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it, i.e., correct decisions are rewarded and incorrect ones are penalized. If there are only upward jumps then the empirical plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect -- the straight-line extension of the plot to (1,1) ensures that the net area is unity. If there are only horizontal jumps the operating point moves from the origin to (1,0), where none of the lesions are localized and every non-diseased image has at least one NL mark and despite the straight line extension to (1,1), the net area is zero. This represents worst possible performance. 
 
-## Interpretation of the AUCs {#empirical-meanings}
+## Interpretation of AUCs {#empirical-meanings}
 
 >
 * The area under the AFROC is the probability that a lesion is rated higher than any mark on a non-diseased case.
 * The area under the weighted-AFROC is lesion-weight adjusted probability that a lesion is rated higher than any mark on a non-diseased case.
 
+
+
+## Instructive examples {#empirical-instructive-cases}
+
+I am including a few extreme cases that I have found to be instructive. These include chance level performance and observers who do not generate any marks.
+
+### The FROC {#empirical-instructive-cases-FROC}
+
+The chance level FROC is a "flat-liner" hugging the x-axis except for a possible upturn at large NLF. For an observer who does not generate any marks the FROC plot contains but one point, the origin, and $A_{\text{FROC}}=0$.
+
+
+### The ROC {#empirical-instructive-cases-ROC}
+
+The chance level ROC is the positive diagonal connecting (0,0) to (1,1). There could be several operating points on this diagonal (apart from sampling effects) but $A_{\text{ROC}}=0.5$. 
+
+An observer who does not generate any marks the ROC plot consists of two points, the origin and (1,1) and $A_{\text{ROC}}=0.5$.
+
+
+### The AFROC {#empirical-instructive-cases-AFROC}
+
+
+#### Chance level performance {#empirical-instructive-cases-AFROC-chance-level}
+
+
+The chance level AFROC is not the line connecting (0,0) to (1,1). This is a serious misconception that I have encountered. A chance level observer will generate a "flat-liner" but this time the plot ends at (1,0) and the straight line extension will be a vertical line connecting (1,0) to (1,1) and $A_{\text{AFROC}}=0$. 
+
+
+#### Case of no marks {#empirical-empirical-instructive-cases-AFROC-no-marks}
+
+This is a highly interesting and instructive example. The AFROC plot is a straight line connecting (0,0) and (1,1) which could be mistakenly termed as representing chance level performance. This is far from the truth.
+
+
+>
+An expert radiologist successfully screens out non-diseased cases and sees nothing suspicious in any of them – not mistaking variants of normal anatomy for false lesions on non-diseased cases is a sign of expertise. Suppose the lesions on diseased cases are very difficult to see, even for the expert, so the radiologist does not mark any of them in addition to not marking any NLs on diseased cases. **The expert radiologist therefore does not report anything, i.e., generates no marks, and the operating point is "stuck" at the origin (0,0).** Even in this unusual situation, one would be justified in connecting the origin to (1,1) and claiming area under AFROC is 0.5. The extension gives the radiologist credit for not marking any non-diseased case; of course, the radiologist does not get any credit for marking any of the lesions. An even better radiologist, who finds and marks some of the lesions, will score higher, and AFROC-AUC will exceed 0.5. 
+
+
+### The wAFROC {#empirical-instructive-cases-wAFROC}
+
+Similar comments apply to the wAFROC as already described above for AFROC.
 
 
 ## FROC-AUC is a poor measure {#empirical-froc-auc-poor}
@@ -1064,12 +1105,17 @@ $FP_{k_t t}^1$ is the maximum over all latent NL marks, labeled by the location 
 
 
 \begin{equation}
-FPF_r^1 \equiv FPF_r^1\left ( \zeta_r \right ) = \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
+\left.
+\begin{aligned}
+FPF_r^1 
+&\equiv FPF_r^1\left ( \zeta_r \right ) \\
+&= \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
+\end{aligned}
+\right \}
 (\#eq:empirical-fpf1)
 \end{equation}
 
-
-Note the subtle differences between Eqn. \@ref(eq:empirical-fpf) and Eqn. \@ref(eq:empirical-fpf1). The latter counts "FPs" on non-diseased and diseased cases while Eqn. \@ref(eq:empirical-fpf) counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to generate both a TP and a FP may be questionable, however, this operating characteristic is useful in applications where all or almost all cases are diseased.
+Note the subtle differences between Eqn. \@ref(eq:empirical-fpf) and Eqn. \@ref(eq:empirical-fpf1). The latter counts "FPs" on non-diseased and diseased cases while Eqn. \@ref(eq:empirical-fpf) counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to generate both a TP and a FP may be questionable, however, this plot is useful in applications where all or almost all cases are diseased.
 
 ### Empirical AFROC1 plot and  AUC {#empirical-definition-empirical-auc-afroc1}
 
@@ -1166,17 +1212,18 @@ UtilFigureOfMerit(dataset04, FOM = "wAFROC1")
 
 
 
-## Summary of operating characteristics {#empirical-summary}
+## Summary {#empirical-summary}
 
-A summary of the operating characteristics defined from FROC data:
+Here is a summary of the plots defined from FROC data along with my recommendations:
 
 <table>
-<caption>(\#tab:empirical-summary)Summary of operating characteristics (OCs) from FROC data; X = abscissa, Y = ordinate.</caption>
+<caption>(\#tab:empirical-summary)Summary of plots from FROC data. All empirical plots except FROC include a straight line extension from the uppermost observed point to (1,1).</caption>
  <thead>
   <tr>
-   <th style="text-align:left;"> OCs </th>
-   <th style="text-align:left;"> X </th>
-   <th style="text-align:left;"> Y </th>
+   <th style="text-align:left;"> OC </th>
+   <th style="text-align:left;"> Abscissa </th>
+   <th style="text-align:left;"> Ordinate </th>
+   <th style="text-align:left;"> Comments </th>
   </tr>
  </thead>
 <tbody>
@@ -1184,162 +1231,47 @@ A summary of the operating characteristics defined from FROC data:
    <td style="text-align:left;"> FROC </td>
    <td style="text-align:left;"> NLF </td>
    <td style="text-align:left;"> LLF </td>
+   <td style="text-align:left;"> Not recommended </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ROC </td>
    <td style="text-align:left;"> FPF </td>
    <td style="text-align:left;"> TPF </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> AFROC </td>
    <td style="text-align:left;"> FPF </td>
    <td style="text-align:left;"> LLF </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
    <td style="text-align:left;"> FPF </td>
    <td style="text-align:left;"> wLLF </td>
+   <td style="text-align:left;"> Recommended when $K_1 \approx K_2$ </td>
   </tr>
   <tr>
    <td style="text-align:left;"> AFROC1 </td>
    <td style="text-align:left;"> FPF1 </td>
    <td style="text-align:left;"> LLF </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wAFROC1 </td>
    <td style="text-align:left;"> FPF1 </td>
    <td style="text-align:left;"> wLLF </td>
+   <td style="text-align:left;"> Recommended when $K_1 \ll K_2$ </td>
   </tr>
 </tbody>
 </table>
 
 
-## TBA Discussion {#empirical-Discussion}
 
-This chapter described the difference between latent and actual marks and notation to describe FROC data. The notation was used in deriving formulae for FROC, inferred-ROC, AFROC, wAFROC, AFROC1, wAFROC1 and EFROC operating characteristics. In each case an area measure was defined. With the exception of the FROC plot, all operating characteristics defined in this chapter are contained in the unit square. Discussion of the preferred operating characteristic is deferred to a subsequent chapter TBA.
-
-FROC data consists of mark-rating pairs. In this chapter a distinction is made between latent and actual marks. This is followed by a table summarizing FROC notation. This is a key table which will be used in later chapters. Section `\@ref(froc-paradigm-froc-plot)` introduced the empirical FROC plot. This chapter presents mathematical expressions for this and other empirical plots possible with FROC data: the inferred-ROC, the alternative FROC, the weighted alternative FROC, and others. Operating characteristics are *visual* depicters of performance. Scalar quantities, typically area measures derived from operating characteristics, are *quantitative* measures of performance, termed *figures of merit* (FOMs). This chapter defines an area measure for each empirical operating characteristic. An FROC dataset is used to illustrate the plots and area measures. With the exception of the FROC, all empirical plots include a straight line extension from the observed end-point to (1,1). The correlation between the area measures is qualitatively examined via plots. It is shown that for this dataset the FROC area measure correlates poorly with that under the ROC curve, whereas the other measures correlate better. This is explained by the fact that, unlike the other measures, the FROC plot is not contained within the unit square. 
+## Appendix 1: Proof of formula for wAFROC-AUC {#empirical-theorem-1}
 
 
-With the exception of the FROC plot all empirical plots include a straight line extension from the observed end-point to (1,1).
-
-
-## Appendix 1: Summary of computational formulae {#empirical-summary-computational}
-
-### FROC
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{FROC} =& \frac{1}{\left ( K_1+K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
-&\left[ \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \psi\left ( z_{k_11l_11}',z_{k_22l_22} \right )+\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \psi\left ( z_{k_2'2l_11}',z_{k_22l_22} \right )
-\right]
-\end{aligned}
-(\#eq:empirical-computational-froc)
-\end{equation}
-
-
-$z_{k_11l_11}'$ denotes a *finite* NL z-sample. This notation is used to eliminate the negative infinities due to unmarked NLs which are not observable events. This notation is not needed for LLs since unmarked LLs are observable events. The first double summation inside the square bracket compares, using the $\psi$ function, all finite NL ratings on *non-diseased* cases with all lesion ratings on diseased case $k_22$. The second double summation compares all finite NL ratings on *diseased cases* with all lesion ratings on diseased case $k_22$. The double summation outside the square bracket sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
-
-The formula can be simplified by creating two arrays, the first containing all finite NL ratings and the second, with length equal to the total number of lesions, containing all lesion ratings including unmarked lesions. One compares, using the $\psi$ function, the NL and LL ratings in the two arrays and divides by the total number of cases and by the total number of lesions. 
-
-The following example uses the same 9-case FROC dataset used earlier. The AUC is calculated two ways: using geometry and using the formula (implemented in function `UtilFigureOfMerit`).
-
-
-<img src="03-empirical_files/figure-html/empirical-numerical2-1.png" width="672" />
-
-```
-#> numerical integration yields:  0.4074074
-#> RJafroc yields:  0.4074074
-```
-
-
-
-
-### ROC
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{ROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2} \psi\left ( \max_{l_1}\left (z_{k_11l_11} \right ), \max_{l_1l_2}\left (z_{k_22l_11}, z_{k_22l_22}  \right ) \right )
-\end{aligned}
-(\#eq:empirical-computational-roc)
-\end{equation}
-
-
-
-
-### AFROC
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{AFROC} = \frac{1}{K_1\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
-\end{aligned}
-(\#eq:empirical-computational-afroc)
-\end{equation}
-
-
-### wAFROC
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{wAFROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
-\end{aligned}
-(\#eq:empirical-computational-wafroc)
-\end{equation}
-
-
-The FOM-statistic $\text{A}_{AFROC}$ achieves its highest value, unity, if and only if every lesion is rated higher than any mark on non-diseased cases, for then the $\psi$ function always yields unity, and the summations yield unity. If, on the other hand, every lesion is rated lower than every mark on every non-diseased case, the $\psi$ function always yields zero, and the FOM-statistic is zero. Therefore, $0 \leq \text{A}_{AFROC} \leq 1$.
-This shows that $\text{A}_{AFROC}$ behaves like a probability but its range is *twice* that of $\text{A}_{ROC}$; recall that $0.5 \leq \text{A}_{ROC} \leq 1$ (assuming the observer has equal or better than random performance and the observer does not have the direction of the rating scale accidentally reversed). This has the consequence that treatment related differences between $\text{A}_{AFROC}$ (i.e., effect sizes) are larger relative to the corresponding ROC effect sizes (just as temperature differences in the Fahrenheit scale are larger than the same differences expressed in the Celsius scale). This has important implications for FROC sample size estimation, see `RJafrocQuickStart` Chapter TBA.
-
-
-The range $0 \leq \text{A}_{AFROC} \leq 1$ is one reason why the "chance diagonal" of the AFROC, corresponding to $\text{A}_{AFROC} = 0.5$, does *not* reflect chance-level performance. $\text{A}_{AFROC} = 0.5$ is actually reasonable performance, being exactly in the middle of the allowed range. An example of this was given in TBA §13.4.2.2 for the case of an expert radiologist who does not mark any cases.
-
-
-### AFROC1
-
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{AFROC1} =& \frac{1}{\left (K_1 +K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \\
-& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_22l_11}'  \right ),z_{k_22l_22} \right )  \right ]
-\end{aligned}
-(\#eq:empirical-computational-afroc1)
-\end{equation}
-
-
-
-In the second term inside the square brackets, notice the need to distinguish between the two indices for diseased cases $z_{k_22l_11}'$ and $z_{k_22l_22}$. 
-
-A check of normalization is obtained by assuming all NL ratings are less than any LL rating, in which case the terms inside the square brackets reduce to $K_1+K_2$ and $\text{A}_{AFROC1}$ is seen to be unity:
-
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{AFROC1} =& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} 1 \\
-=& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}L_{k_2 2} \\
-=& 1
-\end{aligned}
-(\#eq:empirical-computational-afroc1a)
-\end{equation}
-
-
-
-### wAFROC1
-
-
-\begin{equation}
-\begin{aligned}
-\text{A}_{wAFROC1} =& \frac{1}{\left (K_1 + K_2 \right )K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\\
-& \left[ \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) + \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_2'2l_11}  \right ),z_{k_22l_22} \right )  \right ]
-\end{aligned}
-(\#eq:empirical-computational-wafroc1)
-\end{equation}
-
-
-
-## Appendix 2: Two Theorems {#empirical-two-theorems}
-
-
-The area $\text{A}_{wAFROC}$ under the empirical wAFROC plot is obtained by summing the areas of individual trapezoids defined by drawing vertical lines from each pair of adjacent operating points to the x-axis. A sample plot is shown Fig. \@ref(fig:empirical-theorems).
+The area $\text{A}_{wAFROC}$ under the empirical wAFROC plot is obtained by summing the areas of individual trapezoids defined by dropping vertical lines from each pair of adjacent operating points to the x-axis. A sample plot is shown Fig. \@ref(fig:empirical-theorems).
 
 
 
@@ -1351,18 +1283,6 @@ The area $\text{A}_{wAFROC}$ under the empirical wAFROC plot is obtained by summ
 The operating point labeled $i$ has coordinates $\left ( \text{FPF}_i, \text{wLLF}_i \right )$ given by Eqn. \@ref(eq:empirical-fpf) and Eqn. \@ref(eq:empirical-wLLFr).
 
 
-### Theorem 1  {#empirical-two-theorems-1}
-
-TBA The area $A_{\text{wAFROC}}$ under the empirical wAFROC plot equals the weighted-AFROC FOM-statistic $\theta_{\text{wAFROC}}$ defined by Eqn.` \@ref(eq:empirical-theta-wafroc)`:
-
-
-\begin{equation}
-\theta_{\text{wAFROC}} = A_{\text{wAFROC}}
-(\#eq:empirical-theorem1)
-\end{equation}
-
-
-
 The area $A_i$ of the leftmost shaded trapezoid in Fig. \@ref(fig:empirical-theorems) is:
 
 
@@ -1372,40 +1292,41 @@ A_i = \frac{\left (\text{FPF}_i - \text{FPF}_{i+1}\right )\left (\text{wLLF}_i +
 \end{equation}
 
 
-Then,
+The weighted lesion localization fraction $\text{wLLF}_r$ corresponding to threshold $\zeta_r$ is defined by Eqn. \@ref(eq:empirical-wLLFr). It follows that:
 
 
 \begin{equation}
+\left. 
 \begin{aligned}
-A_i =&  \frac{\left (\text{FPF}_i - \text{FPF}_{i+1}\right )}{2K_2} \times \\ 
-& \left[ \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_i \right ) \right. \\
-&+ \left. \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_{i+1} \right ) \right]  
+A_i =&  \frac{\left (\text{FPF}_i - \text{FPF}_{i+1}\right )}{2} \times \\ 
+& \frac{1}{K_2}\left[ \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 2 l_2 2} \geq \zeta_i \right ) \right. \\
+&+ \left. \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 2 l_2 2} \geq \zeta_{i+1} \right ) \right]  
 \end{aligned}
+\right \} 
 (\#eq:empirical-theorem2)
 \end{equation}
-
-
 
 
 Using the probabilistic relation:
 
 
 \begin{equation}
-\mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_i \right ) = \mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_{i+1} \right ) + \mathbb{I}\left ( \zeta_{i} \leq z_{k_2 l_2 2} < \zeta_{i+1} \right )
+\mathbb{I}\left ( z_{k_2 2 l_2 2} \geq \zeta_i \right ) = \mathbb{I}\left ( \zeta_{i} \leq z_{k_2 2 l_2 2} < \zeta_{i+1} \right ) + \mathbb{I}\left ( z_{k_2 2 l_2 2} \geq \zeta_{i+1} \right )
 (\#eq:empirical-appendix-1)
 \end{equation}
 
-
-we can expand the 1st term inside the square bracket:
+we can expand the first term inside the square bracket:
 
 
 \begin{equation}
+\left. 
 \begin{aligned}
 A_i =&  \frac{\left (\text{FPF}_i - \text{FPF}_{i+1}\right )}{2K_2} \times \\ 
-& \left[ \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( \zeta_{i} \leq z_{k_2 l_2 2} < \zeta_{i+1} \right ) \right. \\
-&+ \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_{i+1} \right ) \\ 
-&+ \left. \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_{i+1} \right ) \right]  
+& \left[ \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( \zeta_{i} \leq z_{k_2 2 l_2 2} < \zeta_{i+1} \right ) \right. \\
+&+ \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 2 l_2 2} \geq \zeta_{i+1} \right ) \\ 
+&+ \left. \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 2 l_2 2} \geq \zeta_{i+1} \right ) \right]  
 \end{aligned}
+\right \} 
 \end{equation}
 
 
@@ -1413,25 +1334,32 @@ The last two terms are equal, therefore:
 
 
 \begin{equation}
+\left. 
 \begin{aligned}
 A_i =& \frac{\left (\text{FPF}_i - \text{FPF}_{i+1}\right )}{K_2} \times \\ 
-& \left[ \frac{1}{2} \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( \zeta_{i} \leq z_{k_2 l_2 2} < \zeta_{i+1} \right ) \right. \\
-& +\left. \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 l_2 2} \geq \zeta_{i+1} \right ) \right]  
+& \left[ \frac{1}{2} \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( \zeta_{i} \leq z_{k_2 2 l_2 2} < \zeta_{i+1} \right ) \right. \\
+& +\left. \sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}}W_{k_2 l_2} \mathbb{I}\left ( z_{k_2 2 l_2 2} \geq \zeta_{i+1} \right ) \right]  
 \end{aligned}
+\right \} 
 (\#eq:empirical-theorem3)
 \end{equation}
 
 
 
-The final steps of the proof require that the z-samples be converted to integer ratings, which can be done without loss of ordering information if the number of bins is sufficiently large. Let $r_{k_t t l_s s}$  denote the integer rating of mark $k_t tl_s s$, which implies that marks with z-samples satisfying  $\zeta_i \leq z_{k_t l_s s} < \zeta_{i+1}$,  where $i=0,1,...R$ are rated $i$. The dummy thresholds $\zeta_0$ and $\zeta_{R+1}$ are defined as $-\infty$ and $+\infty$, respectively. From Eqn. \@ref(eq:empirical-fpf) it follows that:
+The final steps of the proof require that the z-samples be converted to integer ratings, which can be done without loss of ordering information if the number of bins is sufficiently large. Let $r_{k_t t l_s s}$  denote the integer rating of mark $k_t tl_s s$, which implies that marks with z-samples satisfying  $\zeta_i \leq z_{k_t tl_s s} < \zeta_{i+1}$,  where $i=0,1,...R$, are rated $i$ (dummy thresholds $\zeta_0$ and $\zeta_{R+1}$ are defined as $-\infty$ and $+\infty$, respectively). 
+
+
+From Eqn. \@ref(eq:empirical-fpf) it follows that:
 
 
 
 \begin{equation}
+\left. 
 \begin{aligned}
 \text{FPF}_i - \text{FPF}_{i+1}=& \frac{1}{K_1} \left[ \sum_{k_1=1}^{K_1} \mathbb{I}\left ( \max_{l_1} \left (z_{k_1 1 l_1 1}  \right ) \geq \zeta_i \right ) - \sum_{k_1=1}^{K_1} \mathbb{I}\left ( z_{k_1 1 l_1 1} \geq \zeta_{i+1} \right ) \right] \\
 =& \frac{1}{K_1} \sum_{k_1=1}^{K_1} \mathbb{I}\left ( \zeta_i \leq \max_{l_1} \left (z_{k_1 1 l_1 1}  \right ) < \zeta_{i+1} \right ) 
 \end{aligned}
+\right \} 
 (\#eq:empirical-theorem4)
 \end{equation}
 
@@ -1441,14 +1369,18 @@ Because of the binning rule, $\mathbb{I}\left ( \zeta_i \leq \max_{l_1} \left (z
 
 
 \begin{equation}
+\left. 
 \begin{aligned}
 \text{A}_i =& \frac{1}{K_1K_2}  \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}}\sum_{k_1=1}^{K_1} \\
 &\left [ \frac{1}{2} W_{k_2l_2} \mathbb{I}\left ( \max_{l_1} \left (r_{k_1 1 l_1 1}  \right ) = i  \right )\mathbb{I}\left ( r_{k_2 2 l_2 2} = i\right ) \right. \\
-+& \left. \mathbb{I}\left ( \max_{l_1} \left (r_{k_1 l_1 1}  \right ) = i  \right )\mathbb{I}\left ( r_{k_2 2 l_2 2} > i \right )  \right ]
++& \left. \mathbb{I}\left ( \max_{l_1} \left (r_{k_1 1 l_1 1}  \right ) = i  \right )\mathbb{I}\left ( r_{k_2 2 l_2 2} > i \right )  \right ]
 \end{aligned}
+\right \} 
 (\#eq:empirical-theorem5)
 \end{equation}
 
+
+Eqn. \@ref(eq:empirical-theorem5) follows from the property of the indicator function, which constrains $i$ in the indicator functions inside the square bracket in Eqn. (17) to  $\max_{l_1} \left ( r_{k_1 1 l_1 1} \right )$, where the functions are unity and otherwise they are zero. 
 
 
 Summing over all values of $i$, one gets for the total area under the empirical wAFROC plot: 
@@ -1456,36 +1388,81 @@ Summing over all values of $i$, one gets for the total area under the empirical 
 
 \begin{equation}
 \begin{aligned}
-\text{A}_{wAFROC} =& \frac{1}{K_1K_2}  \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}}\sum_{k_1=1}^{K_1} W_{k_2l_2} \\
-&\left [ \frac{1}{2} \mathbb{I}\left ( r_{k_2 2l_2 2} = \max_{l_1} \left (r_{k_1 1l_1 1}  \right )  \right ) + \mathbb{I}\left ( r_{k_22 l_2 2} > \max_{l_1} \left (r_{k_11 l_1 1}  \right )  \right )  \right ]
+\text{A}_{wAFROC} =& \frac{1}{K_1K_2}  \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}}\sum_{k_1=1}^{K_1} W_{k_2l_2} \left( A+B \right)
 \end{aligned}
 (\#eq:empirical-theorem6)
 \end{equation}
 
-Eqn. \@ref(eq:empirical-theorem5) follows from the property of the indicator function, which constrains $i$ in the indicator functions inside the square bracket in Eqn. (17) to  $\text{max}_{l_1} \left ( r_{k_1 1 l_1 1} \right )$, where the functions are unity and otherwise they are zero. Using the definition of the Wilcoxon kernel function, TBA Eqn. (3), it follows that:
+
+where A and B are defined by:
 
 
 \begin{equation}
+\left. 
 \begin{aligned}
-\text{A}_{wAFROC} =& \frac{1}{K_1K_2}  \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}}\sum_{k_1=1}^{K_1} W_{k_2l_2} \psi\left ( \text{max}_{l_1} \left ( r_{k_1 1 l_1 1} \right ) , r_{k_2 2 l_2 2} \right )
+A =& \mathbb{I}\left ( r_{k_2 2l_2 2} = \max_{l_1} \left (r_{k_1 1l_1 1}  \right )  \right ) \\
+B =& \mathbb{I}\left ( r_{k_22 l_2 2} > \max_{l_1} \left (r_{k_11 l_1 1}  \right )  \right )  
+\end{aligned}
+\right \} 
+(\#eq:empirical-theorem6a)
+\end{equation}
+
+
+Defining the Wilcoxon kernel function $\psi(x,y)$ by:
+
+
+\begin{equation}
+\left. 
+\begin{matrix}
+\begin{aligned}
+&\psi\left( x,y \right) = 1 &  x < y\\
+&\psi\left( x,y \right) = 0.5  & x = y \\
+&\psi\left( x,y \right) = 0  & x > y
+\end{aligned}
+\end{matrix}
+\right \} 
+(\#eq:empirical-wilcoxon-kernel)
+\end{equation}
+
+
+It follows that:
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{wAFROC} =& \frac{1}{K_1K_2}  \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}}\sum_{k_1=1}^{K_1} W_{k_2l_2} \psi\left ( \max_{l_1} \left ( r_{k_1 1 l_1 1} \right ) , r_{k_2 2 l_2 2} \right )
 \end{aligned}
 (\#eq:empirical-theorem7)
 \end{equation}
 
 
+This formula is the wAFROC analog of the familiar Bamber theorem [@bamber1975area] relating the empirical AUC under the ROC to the ratings:
+
+\begin{equation}
+\text{A}_{ROC} = \frac{1}{K_1K_2}  \sum_{k_2=1}^{K_2} \sum_{k_1=1}^{K_1} \psi\left (  r_{k_11} , r_{k_22} \right )
+(\#eq:empirical-bamber-theorem)
+\end{equation}
 
 
-### Theorem 2  {#empirical-two-theorems-2}
+where $r_{k_11}$ and $r_{k_22}$ are the ROC ratings of non-diseased case $k_11$ and diseased case $k_22$ respectively.
 
-We prove a theorem that the contribution of the $i = 0$ term in Eqn. TBA is identical to the area under the extension of the wAFROC from the uppermost non-trivial point to (1,1). According to Eqn. TBA,
+
+
+## Appendix 2: Interpretation of area under straight line extension of wAFROC  {#empirical-theorem-2}
+
+We prove that the contribution of the $i = 0$ term in Eqn. \@ref(eq:empirical-theorem5) is identical to the area under the extension of the wAFROC from the uppermost empirical operating point to (1,1). 
+
+
+According to Eqn. \@ref(eq:empirical-theorem5),
 
 
 \begin{equation}
+\left. 
 \begin{aligned}
 \text{A}_0 =& \frac{1}{K_1K_2}  \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}}\sum_{k_1=1}^{K_1} \\
 &\left [ \frac{1}{2} W_{k_2l_2} \mathbb{I}\left ( \max_{l_1} \left (r_{k_1 1 l_1 1}  \right ) = 0  \right )\mathbb{I}\left ( r_{k_2 2 l_2 2} = 0 \right ) \right. \\
-+& \left. \mathbb{I}\left ( \max_{l_1} \left (r_{k_1 l_1 1}  \right ) = 0  \right )\mathbb{I}\left ( r_{k_2 2 l_2 2} > 0 \right )  \right ]
++& \left. \mathbb{I}\left ( \max_{l_1} \left (r_{k_1 1 l_1 1}  \right ) = 0  \right )\mathbb{I}\left ( r_{k_2 2 l_2 2} > 0 \right )  \right ]
 \end{aligned}
+\right \} 
 (\#eq:empirical-theorem8)
 \end{equation}
 
@@ -1494,16 +1471,27 @@ Rearranging the summations:
 
 
 \begin{equation}
+\left. 
 \begin{aligned}
 \text{A}_0 =& 
-\left [ \frac{1}{2K_1} \sum_{k_1=1}^{K_1}\mathbb{I}\left ( \max_{l_1} \left (r_{k_1 1 l_1 1}  \right ) = 0  \right ) \frac{1}{K_2} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}} W_{k_2l_2} \mathbb{I}\left ( r_{k_2 2 l_2 2} = 0 \right ) \right. \\
-&+ \left. \frac{1}{K_1} \sum_{k_1=1}^{K_1}\mathbb{I}\left ( \max_{l_1} \left (r_{k_1 l_1 1}  \right ) = 0  \right ) \frac{1}{K_2} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}} W_{k_2l_2} \mathbb{I}\left ( r_{k_2 2 l_2 2} > 0 \right )  \right ]
+\frac{1}{2} \frac{1}{K_1} \sum_{k_1=1}^{K_1}\mathbb{I}\left ( \max_{l_1} \left (r_{k_1 1 l_1 1}  \right ) = 0  \right ) \frac{1}{K_2} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}} W_{k_2l_2} \mathbb{I}\left ( r_{k_2 2 l_2 2} = 0 \right ) \\
++& \frac{1}{K_1} \sum_{k_1=1}^{K_1}\mathbb{I}\left ( \max_{l_1} \left (r_{k_1 1 l_1 1}  \right ) = 0  \right ) \frac{1}{K_2} \sum_{k_2=1}^{K_2} \sum_{l_2=1}^{l_{k_2}} W_{k_2l_2} \mathbb{I}\left ( r_{k_2 2 l_2 2} > 0 \right )
 \end{aligned}
+\right \} 
 (\#eq:empirical-theorem9)
 \end{equation}
 
 
-Because the indicator function and the summation symbol counts the numbers of unmarked (zero rated) non-diseased cases and the division by $K_1$ yields the corresponding contribution to $\text{FPF}$, which is the complement of the largest $\text{FPF}$ value,  $\text{FPF}_1$, obtained by cumulating all ratings 1 and above it follows that:
+Consider the term: 
+
+
+\begin{equation}
+\frac{1}{K_1} \sum_{k_1=1}^{K_1}\mathbb{I}\left ( \max_{l_1} \left (r_{k_1 1 l_1 1}  \right ) = 0  \right )
+(\#eq:empirical-theorem9a)
+\end{equation}
+
+
+Because the indicator function and the summation over $k_1$ counts the numbers of unmarked non-diseased cases and the division by $K_1$ yields the corresponding contribution to $\text{FPF}$, the above term equals the complement of the largest observed $\text{FPF}$ value, $\text{FPF}_1$, obtained by cumulating all non-zero ratings, i.e, 1 and above. It follows that:
 
 
 \begin{equation}
@@ -1526,7 +1514,7 @@ Similarly,
 
 
 
-Using these expressions, Eqn. TBA reduces to:
+Using these expressions, Eqn. \@ref(eq:empirical-theorem9) reduces to:
 
 
 
@@ -1538,26 +1526,196 @@ Using these expressions, Eqn. TBA reduces to:
 \end{equation}
 
 
-This is seen to be the area of a rectangle of base $\left ( 1-\text{FPF}_1 \right )$ and height $\text{wLLF}_1$ plus the area of a triangle of base $\left ( 1-\text{FPF}_1 \right )$ and height $1-\text{wLLF}_1$. In other words it is the area under the extension of the wAFROC from the uppermost non-trivial point  to (1,1). 
+The area under the straight line extension of the wAFROC from the observed end-point $\left ( \text{FPF}_1, \text{wLLF}_1 \right )$ to (1,1) equals the area of a rectangle with base $\left ( 1-\text{FPF}_1 \right )$ and height $\text{wLLF}_1$ plus the area of a triangle with base $\left ( 1-\text{FPF}_1 \right )$ and height $(1-\text{wLLF}_1)$: 
 
 
-
-
-The area $A_0$ under the straight-line extension of the wAFROC from the observed end-point $\left ( \text{FPF}_1, \text{wLLF}_1 \right )$ to (1,1) is given by:
-
-```{=tex}
 \begin{equation}
-A_0 = \frac{\left ( 1 - \text{FPF}_1 \right )\left ( 1 + \text{wLLF}_1 \right )}{2}
-(\#eq:empirical-A0)
+\left. 
+\begin{aligned}
+\text{Area st. line ext.} =& \left ( 1-\text{FPF}_1 \right )\text{wLLF}_1 
++ \frac{\left( 1-\text{FPF}_1 \right )\left ( 1-\text{wLLF}_1 \right )}{2}  \\
+=& \left ( 1-\text{FPF}_1 \right )\left( \text{wLLF}_1 + \frac{\left ( 1-\text{wLLF}_1 \right )}{2} \right) \\
+=&
+\frac{\left ( 1-\text{FPF}_1 \right ) \left ( 1+\text{wLLF}_1 \right )}{2}
+\end{aligned}
+\right \} 
+(\#eq:empirical-theorem12a)
 \end{equation}
+
+
+which equals the right hand side of Eqn. \@ref(eq:empirical-theorem12).
+
+
+>
+In other words $A_0$ is the area under the extension of the wAFROC from observed end-point $\left ( \text{FPF}_1, \text{wLLF}_1 \right )$ to (1,1). 
+
+
+
+According to Eqn. \@ref(eq:empirical-theorem12), $A_0$ increases as $\text{FPF}_1$ decreases, i.e., as more non-diseased cases are *not marked* and as $\text{wLLF}_1$ increases, i.e., as more lesions, especially those with greater weights, *are marked*. Both observations are in keeping with the behavior of a valid performance measure.
+
+>
+* Failure to include the area under the straight-line extension results in not counting the full contribution to the FOM of unmarked non-diseased cases and unmarked lesions. This is best seen by considering the case of a perfect observer.
+* For a perfect observer whose plot is the vertical line from (0,0) to (0,1) followed by the horizontal line from (0,1) to (1,1), *the area under the straight-line extension comprises the entire AUC*. Excluding it would yield zero AUC for a perfect observer which is obviously incorrect. 
+* Stated equivalently, for the perfect observer $\text{FPF}_1 = 0$ and $\text{wLLF}_1 = 1$ and then, according to Eqn. \@ref(eq:empirical-theorem12), the area under the straight line extension is $A_0 = 1$.
+
+
+
+## Appendix 3: Summary of computational formulae {#empirical-summary-computational-formulae}
+
+### FROC
+
+
+The formula for the area under the empirical FROC plot follows:
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{FROC} =& \frac{1}{\left ( K_1+K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \left( A+B \right)
+\end{aligned}
+(\#eq:empirical-computational-froc)
+\end{equation}
+
+where A and B are defined by:
+
+
+\begin{equation}
+\left. 
+\begin{aligned}
+A =& \sum_{k_1=1}^{K_1}\sum_{l_1=1}^{N_{k_1 1}} \mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right ) \psi\left ( z_{k_11l_11},z_{k_22l_22} \right )\\
+B =&\sum_{k_2'=1}^{K_2}\sum_{l_1=1}^{N_{k_2' 2}} \mathbb{I} \left ( z_{z_{k'_22l_11}} \neq  -\infty \right )\psi\left ( z_{k_2'2l_11},z_{k_22l_22} \right )
+\end{aligned}
+\right \} 
+(\#eq:empirical-computational-froc-ab-terms)
+\end{equation}
+
+
+
+For term A, $\mathbb{I} \left ( z_{k_11l_11} \neq  -\infty \right )$ ensures that only *finite* NL z-samples on non-diseased cases enter the computation (recall that unmarked NLs are unobservable events). Likewise, for term B, $\mathbb{I} \left ( z_{k'_22l_11} \neq  -\infty \right )$ ensures that only *finite* NL z-samples on diseased cases enter the computation. This is not needed for LLs since unmarked LLs are observable events. In term A the double summation compares using the $\psi$ function all finite NL ratings on *non-diseased* cases $k_11$ with all lesion ratings on diseased case $k_22$. In term B the double summation compares all finite NL ratings on *diseased cases* $k_2'2$ with all lesion ratings on diseased case $k_22$. The double summation in Eqn. \@ref(eq:empirical-computational-froc) sums over all diseased cases $k_22$ and all lesions in each diseased case. The final value is divided by the total number of cases and the total number of lesions.
+
+In term B notice the need to distinguish between two indices for diseased cases $z_{k'_22l_11}$ and $z_{k_22l_22}$. 
+
+
+The above formula is equivalent to creating two arrays the first containing all finite NL ratings and the second containing all lesion ratings (including unmarked lesions). One cumulates the$\psi$ function values, using the ratings in the two arrays, and divides by the total number of cases and by the total number of lesions. 
+
+The following example uses the same 9-case FROC dataset used earlier. The AUC is calculated two ways: using geometry and using Eqn. \@ref(eq:empirical-computational-froc) implemented in function `UtilFigureOfMerit`.
+
+
+
 ```
-According to Eqn. \@ref(eq:empirical-A0), $A_0$ increases as $\text{FPF}_1$ decreases, i.e., as more non-diseased cases are *not marked* and as $\text{wLLF}_1$ increases, i.e., as more lesions, especially those with greater weights, *are marked*. Both observations are in keeping with the behavior of a valid FOM.
-
-* Failure to include the area under the straight-line extension results in not counting the full positive contribution to the FOM of unmarked non-diseased cases and marked lesions. 
-* Each unmarked non-diseased case represents a perfect decision.
-* For a perfect observer whose operating characteristic is the vertical line from (0,0) to (0,1) followed by the horizontal line from (0,1) to (1,1), *the area under the straight-line extension comprises the entire AUC*. Excluding it would yield zero AUC for a perfect observer, which is obviously incorrect. 
-* Stated equivalently, for the perfect observer $\text{FPF}_1 = 0$ and $\text{wLLF}_1 = 1$ and then, according to Eqn. \@ref(eq:empirical-A0), the area under the straight line extension is $A_0 = 1$.
+#> numerical integration yields:  0.4074074
+#> RJafroc yields:  0.4074074
+```
 
 
+
+
+### ROC
+
+The ROC-AUC formula is much simpler.     
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{ROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2} \psi\left ( \max_{l_1}\left (z_{k_11l_11} \right ), \max_{l_1l_2}\left (z_{k_22l_11}, z_{k_22l_22}  \right ) \right )
+\end{aligned}
+(\#eq:empirical-computational-roc)
+\end{equation}
+
+
+The first argument of the $\psi$ function is the maximum NL rating on a non-diseased case or $-\infty$ if the case has no NL marks. The second argument is the maximum of all marks, NL or LL, on a diseased case, or $-\infty$ if the case has no marks. The value of the $\psi$ function is summed over all non-diseased and diseased cases and divided by $K_1$ and $K_2$, analogous to the Bamber theorem Eqn. \@ref(eq:empirical-bamber-theorem).
+
+
+### AFROC
+
+The formula for the area under the empirical AFROC plot follows:
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC} = \frac{1}{K_1\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
+\end{aligned}
+(\#eq:empirical-computational-afroc)
+\end{equation}
+
+
+
+The first argument of the $\psi$ function is the maximum NL rating on a non-diseased case or $-\infty$ if the case has no NL marks. The second argument is the LL rating on a diseased case. The value of the $\psi$ function is summed over all non-diseased cases and all lesions and divided by $K_1$ and the total number of lesions.
+
+
+### wAFROC
+
+The formula for the area under the empirical wAFROC plot follows:
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{wAFROC} = \frac{1}{K_1K_2}\sum_{k_1=1}^{K_1}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right )
+\end{aligned}
+(\#eq:empirical-computational-wafroc)
+\end{equation}
+
+
+This is similar to Eqn. \@ref(eq:empirical-computational-afroc) except for the inclusion of the lesion weight term $W_{k_2l_2}$ inside the summations.
+
+The FOM-statistic $\text{A}_{wAFROC}$ achieves its highest value, unity, if and only if every lesion is rated higher than any mark on non-diseased cases, for then the $\psi$ function always yields unity, and the summations yield unity. If, on the other hand, every lesion is rated lower than every mark on every non-diseased case, the $\psi$ function always yields zero, and the FOM-statistic is zero. Therefore, $0 \leq \text{A}_{wAFROC} \leq 1$. This shows that $\text{A}_{wAFROC}$ behaves like a probability and its range is *twice* that of $\text{A}_{ROC}$; recall that $0.5 \leq \text{A}_{ROC} \leq 1$ (assuming the observer has equal or better than random performance and the observer does not have the direction of the rating scale reversed). This has the consequence that treatment related differences between $\text{A}_{wAFROC}$ (i.e., effect sizes) are larger relative to the corresponding ROC effect sizes (just as temperature differences in the Fahrenheit scale are larger than the same differences expressed in the Celsius scale). This has important implications for FROC sample size estimation, see [sample size chapter](https://dpc10ster.github.io/RJafrocQuickStart/froc-sample-size.html) in the `RJafrocQuickStart` book.
+
+
+The range $0 \leq \text{A}_{wAFROC} \leq 1$ is one reason why the "chance diagonal" of the AFROC, corresponding to $\text{A}_{wAFROC} = 0.5$, does *not* reflect chance-level performance. $\text{A}_{AFROC} = 0.5$ is actually reasonable performance, being exactly in the middle of the allowed range. An example of this was given above for the case of an expert radiologist who does not mark any cases.
+
+
+Similar comments apply to the AFROC_AUC, i.e. $0 \leq \text{A}_{AFROC} \leq 1$, etc. 
+
+
+### AFROC1
+
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{AFROC1} =& \frac{1}{\left (K_1 +K_2 \right )\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} \left( A + B \right)
+\end{aligned}
+(\#eq:empirical-computational-afroc1)
+\end{equation}
+
+where A and B are defined by:
+
+\begin{equation}
+\left. 
+\begin{aligned}
+A =& \sum_{k_1=1}^{K_1}\psi\left ( \max_{l_1}\left (z_{k_11l_11}  \right ),z_{k_22l_22} \right ) \\
+B =& \sum_{k_2'=1}^{K_2}\psi\left ( \max_{l_1}\left (z_{k_22l_11}'  \right ),z_{k_22l_22} \right )
+\end{aligned}
+\right \} 
+(\#eq:empirical-computational-afroc1ab)
+\end{equation}
+
+
+The normalization can checked by assuming all NL ratings are less than any LL rating, in which case terms A and B reduce to $K_1+K_2$ and $\text{A}_{AFROC1} = 1$:
+
+
+\begin{equation}
+\left. 
+\begin{aligned}
+\text{A}_{AFROC1} =& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} 1 \\
+=& \frac{1}{\sum_{k_2=1}^{K_2}L_{k_2 2}}\sum_{k_2=1}^{K_2}L_{k_2 2} \\
+=& 1
+\end{aligned}
+\right \} 
+(\#eq:empirical-computational-afroc1a)
+\end{equation}
+
+
+
+### wAFROC1
+
+
+This is similar to the above expression for AFROC1 except for the presence of the weight term $W_{k_2l_2}$:
+
+\begin{equation}
+\begin{aligned}
+\text{A}_{wAFROC1} =& \frac{1}{\left (K_1 + K_2 \right )K_2}\sum_{k_2=1}^{K_2}\sum_{l_2=1}^{L_{k_2 2}} W_{k_2l_2}\left( A+B \right)
+\end{aligned}
+(\#eq:empirical-computational-wafroc1)
+\end{equation}
+
+
+A and B are as defined in Eqn. \@ref(eq:empirical-computational-afroc1ab).
 
 ## References {#empirical-references}
