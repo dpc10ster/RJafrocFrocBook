@@ -4,7 +4,7 @@ repo: https://github.com/dpc10ster/RJafrocFrocBook
 output_dir: docs
 delete_merged_file: TRUE
 rmd_files: [
-  "index.Rmd", 
+  "01-preface.Rmd", 
   "02-froc.Rmd",
   "03-empirical.Rmd",
   "05-visual-search.Rmd",
