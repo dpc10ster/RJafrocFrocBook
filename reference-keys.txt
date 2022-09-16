@@ -7,6 +7,7 @@ eq:empirical-LLF1
 eq:empirical-range-r
 eq:empirical-NLFr
 eq:empirical-LLFr
+eq:empirical-indicator-function
 eq:empirical-NLF11
 eq:empirical-LLF1a
 eq:empirical-NLF0a
@@ -205,9 +206,6 @@ fig:optim-op-point-low-performance-vary-nu-vary-all-froc
 fig:optim-op-point-low-performance-vary-nu-vary-all-wafroc
 fig:optim-op-point-low-performance-vary-nu-vary-all-roc
 fig:datasets-datasets
-formatting
-tables
-tinytex-problems
 froc-paradigm
 froc-paradigm-how-much-finished
 froc-paradigm-intro
@@ -226,10 +224,11 @@ empirical
 empirical-how-much-finished
 empirical-intro
 empirical-mark-rating-pairs
+lls-vs.-nls
 latent-vs.-actual-marks
 binning-rule
 empirical-notation
-comments-on-table-reftabempirical-notation
+comments
 empirical-indexing-marks
 empirical-froc-plot-1
 empirical-end-point
