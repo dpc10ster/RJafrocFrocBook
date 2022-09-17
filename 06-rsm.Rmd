@@ -8,7 +8,7 @@ library(exactci)
 
 
 ## How much finished {#rsm-how-much-finished}
-60%
+90%
 Switch to $\mu$, $\lambda$ and $\nu$ and do away with prime parameter?
 
 
