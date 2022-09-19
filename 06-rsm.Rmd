@@ -17,7 +17,7 @@ Switch to $\mu$, $\lambda$ and $\nu$ and do away with prime parameter?
 
 All models of ROC data *that do not incorporate search* involve two fundamental parameters (i.e., not including binning-related threshold parameters). For example, the unequal variance binormal model requires the $a,b$ parameters. Alternative ROC models (e.g., CBM and PROPROC) also require two fundamental parameters.
 
-Two fundamental parameters of ROC models are needed (1) to accommodate the average visibility of lesions in the dataset (e.g., the $a$ or separation parameter) and (ii) the fact that the observed diseased case distribution is usually wider than that of the non-diseased cases (e.g., the $b <1$ parameter). If one assumes same widths for both distributions, so in effect $b=1$ is no longer a free parameter, and one allows a varying number of latent marks on all cases, then it becomes possible that the distribution of the highest rating on diseased cases will have greater width than that on non-diseased cases simply due to the fact that latent NLs on diseased cases will have lower z-samples than latent LLs on diseased cases (i.e., a mix of NL and LLs) while on non-diseased cases there will be only NL z-samples. So the basic idea is to have a visibility parameter, a parameter describing the distribution of the number of latent NLs per case and a parameter describing the distribution of the number of latent LLs per case, i.e., a three-parameter model should suffice. And in fact the RSM contains three fundamental parameters: $\mu$, $\lambda$ and $\nu$. 
+Two fundamental parameters of ROC models are needed (1) to accommodate the average visibility of lesions in the dataset (e.g., the $a$ or separation parameter) and (ii) the fact that the observed diseased case distribution is usually wider than that of the non-diseased cases (e.g., the $b <1$ parameter). If one assumes same widths for both distributions, so in effect $b=1$ is no longer a free parameter, and one allows a varying number of latent marks on all cases, then it becomes possible that the distribution of the highest rating on diseased cases will have greater width than that on non-diseased cases simply due to the fact that latent NLs on diseased cases will have lower z-samples than latent LLs on diseased cases (i.e., a mix of NL and LLs) while on non-diseased cases there will be only NL z-samples. So the basic idea is to have a visibility parameter, a parameter describing the distribution of the number of latent NLs per case and a parameter describing the distribution of the number of latent LLs per case, i.e., a three-parameter model should suffice. And in fact the RSM contains three fundamental parameters: $\mu$, $\lambda$ and $\nu$. In addition the lowest threshold $\zeta_1$ needs to be included as a parameter as it determines the extent and shape of the RSM predicted operating characteristics. This will become clearer in the next chapter but for now can be illustrated by considering the extreme case $\zeta_1 = \infty$ when the predicted FROC is the single point (0,0). 
 
 
 ## The radiological search model {#rsm-details}
@@ -29,7 +29,7 @@ The radiological search model (RSM) for the free-response paradigm is a statisti
 
 * If the z-sample exceeds a pre-selected minimum reporting threshold, denoted $\zeta_1$ the location is marked, i.e., the latent mark becomes an actual mark. 
 
-* Latent marks can be either latent NLs (corresponding to non-diseased regions) or latent LLs (corresponding to lesions). The number of latent NLs or LLs on a case are denoted $l_1, l_2$ respectively. Latent NLs can occur on non-diseased or diseased cases but latent LLs can only occur on diseased cases. Assume that every diseased case has $L$ actual lesions (this will later be extended to arbitrary number of lesions per diseased case). ^[ISince the RSM is a parametric model one does not need the four subscript notation needed to account for case and location dependence necessary to describe observed data, as in Chapter \@ref(empirical). This allows for simpler notation, as the reader may have noticed, unencumbered by 4 subscripts as in $z_{k_ttl_ss}$ in Table \@ref(empirical-notation).]
+* Latent marks can be either latent NLs (corresponding to non-diseased regions) or latent LLs (corresponding to lesions). The number of latent NLs or LLs on a case are denoted $l_1, l_2$ respectively. Latent NLs can occur on non-diseased or diseased cases but latent LLs can only occur on diseased cases. Assume that every diseased case has $L$ actual lesions (this will later be extended to arbitrary number of lesions per diseased case). ^[Since the RSM is a parametric model one does not need the four subscript notation needed to account for case and location dependence necessary to describe observed data, as in Chapter \@ref(empirical). This allows for simpler notation, as the reader may have noticed, unencumbered by 4 subscripts as in $z_{k_ttl_ss}$ in Table \@ref(empirical-notation).]
 
 
 ## RSM assumptions {#rsm-assumptions}
@@ -211,7 +211,7 @@ cat ("Rdr. 2: 95% CI = ", "[", ret2$conf.int[1:2],"]\n")
 
 The result shows that for reader 1 the estimate of the binomial success rate parameter is 0.48 with 95% confidence interval (0.379, 0.582). For reader 2 the corresponding estimates are 0.94 and (0.874, 0.978). 
 
-## FIX ME
+
 As a more complicated but clinically realistic example, consider a dataset with 100 cases where 97 cases have one lesion per case, two have two lesions per case and one has three lesions per case (these are typical lesion distributions observed in screening mammography). The code follows:
 
 
@@ -219,6 +219,7 @@ As a more complicated but clinically realistic example, consider a dataset with 
 K2 <- c(97,2,1);Lk <- c(1,2,3);nu <- c(0.5, 0.9)
 samples1 <- array(dim = c(sum(K2),length(K2)))
 seed <- 1;set.seed(seed)
+# I am using el instead of l as the latter looks like 1
 for (el in 1:length(K2)) {
   samples1[1:K2[el],el] <- rbinom(K2[el],Lk[el],nu[1])
 }
@@ -285,7 +286,7 @@ Since it determines $\nu$, the $\nu_i$ parameter can be considered as the intrin
 \end{equation}
 
 
-According to Eqn. \@ref(eq:rsm-transform), as $\mu \rightarrow \infty$, $\nu \rightarrow 1$ and conversely, as $\mu \rightarrow 0$, $\nu \rightarrow 0$. The dependence of $\nu$ on $\mu$ is consistent with the fact that higher contrast lesions are easier to find. An observer without special expertise may find a high contrast lesion. Conversely, lower contrast lesions will be more difficult to find even by expert observers. 
+According to Eqn. \@ref(eq:rsm-transform), as $\mu \rightarrow \infty$, $\nu \rightarrow 1$ and conversely, as $\mu \rightarrow 0$, $\nu \rightarrow 0$. The dependence of $\nu$ on $\mu$ is consistent with the fact that higher contrast lesions are easier to find. A non-expert is expected to find a high contrast lesion whereas a low contrast lesion will be more difficult to find even by expert observers. 
 
 The analogy to finding the sun in Chapter \@ref(froc-paradigm-solar-analogy) is instructive: objects with very high perceptual SNR are certain to be found.
 
@@ -294,16 +295,9 @@ According to Eqn. \@ref(eq:rsm-transform) the value of $\mu$ also determines $\l
 
 ## Discussion / Summary {#rsm-discussion-summary}
 
-This chapter has described a statistical parameterization of the Nodine-Kundel model. The 3-parameter model of search in the context in the medical imaging accommodates key aspects of the process: search, finding lesions and finding non-lesions. These are characterized by the two search parameters $\lambda$ and $\nu$.The ability to correctly rate a lesion higher than a NL is characterized by the third parameter of the model $\mu$. While the primed parameters have relatively simple physical meanings they depend on $\mu$. Consequently, it is necessary to introduce the intrinsic parameters $\lambda_i$ and $\nu_i$ which are independent of $\mu$. 
+This chapter has described a statistical parameterization of the Nodine-Kundel model. The 3-parameter model (plus $\zeta_1$) of search accommodates key aspects of the process: search: finding lesions and finding non-lesions. These are characterized by the two search parameters $\lambda$ and $\nu$. The ability to correctly rate a lesion higher than a NL is characterized by the third (classification) parameter of the model $\mu$. While the 2 search parameters have relatively simple physical meanings they depend on $\mu$. Consequently, it is necessary to introduce intrinsic parameters $\lambda_i$ and $\nu_i$ which are independent of $\mu$. 
 
 
 The next chapter explores the predictions of the radiological search model.
 
-
-## References {#rsm-references}
-1.	Chakraborty DP. Computer analysis of mammography phantom images (CAMPI): An application to the measurement of microcalcification image quality of directly acquired digital images. Medical Physics. 1997;24(8):1269-1277.
-2.	Chakraborty DP, Eckert MP. Quantitative versus subjective evaluation of mammography accreditation phantom images. Medical Physics. 1995;22(2):133-143.
-3.	Chakraborty DP, Yoon H-J, Mello-Thoms C. Application of threshold-bias independent analysis to eye-tracking and FROC data. Academic Radiology. 2012;In press.
-4.	Chakraborty DP. ROC Curves predicted by a model of visual search. Phys Med Biol. 2006;51:3463–3482.
-5.	Chakraborty DP. A search model and figure of merit for observer data acquired according to the free-response paradigm. Phys Med Biol. 2006;51:3449–3462.
 
