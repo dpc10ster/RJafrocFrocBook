@@ -19,28 +19,30 @@ library(Rmpfr)
 
 ## TBA Introduction {#rsm-pred-intro}
 
-The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes predictions of the RSM. The starting point is a general characteristic of all RSM prediced operating characteristics, namely they have the constrained end-point property. Derived next is the predicted *inferred ROC* curve followed by the predicted FROC and AFROC curves. 
+The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes the ROC curve predictions of the RSM. The starting point is a general characteristic of all RSM predicted operating characteristics, namely they have the constrained end-point property. Derived next is the predicted *inferred ROC* curve followed by the predicted FROC and AFROC curves. 
 
 Shown next is how *search performance* and *lesion-classification* performance can be measured from the inferred ROC curve. Search performance is the ability to find lesions while avoiding finding non-lesions, and lesion-classification performance is the ability, having found a suspicious region, to correctly classify it. Lesion-classification is different from (case) classification performance, i.e., distinguishing between diseased and non-diseased cases, which is measured by the area AUC under the ROC curve. 
 
 TBA Based on the ROC/FROC/AFROC curve predictions of the RSM, a comparison is presented between area measures that can be calculated from FROC data, leading to an important and perhaps surprising conclusion, *the FROC curve is a poor descriptor of search performance and that the AFROC/wAFROC curves are preferred*. Most applications of FROC methods, particularly in CAD, have relied on the FROC curve to measure performance.
 
-In this chapter formulae for RSM quantities are given in terms of the physical search parameters $\lambda'$ and $\nu'$. The formulae can be transformed to intrinsic RSM parameters $\lambda$ and $\nu$ using Eqn. \@ref(eq:rsm-inv-transform). 
+In this chapter formulae for RSM quantities are given in terms of the RSM parameters $\lambda$ and $\nu$. The formulae can be transformed to intrinsic RSM parameters $\lambda_i$ and $\nu_i$ using Eqn. \@ref(eq:rsm-inv-transform). 
 
-## Inferred ROC ratings {#rsm-pred-inferred-roc}
 
-Consider a $R_{\text{FROC}} \geq 1$ rating FROC study with allowed ratings $r = 1, 2, ..., R_{\text{FROC}}$. To be clearer one precedes the rating with the applicable paradigm: e.g., the ratings of marks range from FROC:1 to FROC:$R_{\text{FROC}}$. **The inferred-ROC z-sample (continuous rating) of a case is defined as the z-sample of the highest rated mark on the case or $-\infty$ if the case has no marks.** The inferred-ROC rating ROC:1 is reserved for cases with no marks. Since the ratings are ordered labels no ordering information is lost provided every other ROC rating is also "bumped up" by unity. The ROC ratings scale therefore extends from $1$ to $R_{\text{FROC}} + 1$. Thus, a $R_{\text{FROC}}$ rating FROC study corresponds to a $R_{\text{FROC}} + 1$ rating ROC study. The symbol $h_{k_t t}$ is used to denote the rating of the highest rated z-sample on case $k_t t$ with truth state $t$. Thus $h_{k_1 1}$ refers to the highest rating on a non-diseased case $k_1 1$ and $h_{k_2 2}$ refers to the highest rating on diseased case $k_2 2$. For non-diseased cases, the maximum is over all latent NLs on the case. For diseased cases, the maximum is over all latent NLs *and* latent LLs on the case. Define the set of ordered thresholds $\zeta_r < \zeta_{r+1}$ and dummy thresholds $\zeta_0 = -\infty,  \zeta_{R_{\text{FROC}}+1} = \infty$. Then, if $\zeta_r \leq h_{k_t t} < \zeta_{r+1}$, where $r = 1, 2, ..., R_{\text{FROC}}$, the case is rated ROC:$(r+1)$ and if $h_{k_t t} < \zeta_{1}$ the case is rated ROC:1. The lowest possible ROC rating on a case with at least one mark is ROC:2. A case with no latent sites *or* if the highest rated latent site satisfies $h_{k_t t} < \zeta_{1}$ is rated ROC:1. Note that one cannot distinguish between whether the ROC:1 rating was the result of the case not having any latent sites or the case had at least one latent site, but none of the z-samples exceeded $\zeta_{1}$.
+
+## Inferred ROC z-sample {#rsm-pred-inferred-roc}
+
+*The inferred ROC z-sample of a case, denoted $h_{k_t t}$, is the z-sample of the highest rated latent mark on the case or $-\infty$ if the case has no latent marks.* For non-diseased cases the maximum is over all latent NLs on the case. For diseased cases the maximum is over all latent NLs *and* latent LLs on the case.  
 
 
 ## End-point of the ROC {#rsm-pred-end-point}
 
-A consequence of the possibility that some cases have no marks is that the ROC curve has the *constrained end-point property*, namely the full range of ROC space, i.e., $0 \leq \text{FPF} \leq 1$ and $0 \leq \text{TPF} \leq 1$, is not continuously accessible to the observer. In fact, $0 \leq \text{FPF} \leq \text{FPF}_{max}$ and $0 \leq \text{TPF} \leq \text{TPF}_{max}$ where $\text{FPF}_{max}$ and $\text{TPF}_{max}$ are generally less than unity.   
+A consequence of the possibility that some cases have no marks is that the ROC curve has the *constrained end-point property*, namely the full range of ROC space, i.e., $0 \leq \text{FPF} \leq 1$ and $0 \leq \text{TPF} \leq 1$, is not continuously accessible to the observer. In fact, $0 \leq \text{FPF} \leq \text{FPF}_{\text{max}}$ and $0 \leq \text{TPF} \leq \text{TPF}_{\text{max}}$ where $\text{FPF}_{\text{max}}$ and $\text{TPF}_{\text{max}}$ are generally less than unity.   
 
 Starting from a finite value as $\zeta_1$ is lowered to $-\infty$ some of the previously ROC:1 rated cases that had at least one latent site but whose z-sample did not exceed $\zeta_1$ will now generate marks and therefore the case will be "bumped-up" to the ROC:2 bin, until eventually *only cases with no latent sites* remain in the ROC:1 bin - these cases will never be rated ROC:2. An observer who finds no suspicious regions, literally nothing to report, will assign the lowest available bin to the case, which happens to be ROC:1. The finite number of cases in the ROC:1 bin at infinitely low threshold has the consequence that the uppermost non-trivial continuously accessible operating point – that obtained by cumulating ratings ROC:2 and above - is below-left of (1,1). The (1,1) point is "trivially" reached when one cumulates the counts in all bins, i.e., ROC:1 and above. This behavior is distinct from traditional ROC models where the entire curve, extending from (0, 0) to (1, 1), is continuously accessible to the observer. This is because in conventional ROC models every case yields a finite decision variable, no matter how small. Lowering the lowest threshold to $-\infty$ eventually moves all cases in the previously ROC:1 bin to the ROC:2 bin, and one is eventually left with zero counts in the ROC:1 bin and the operating point, obtained by cumulating bins ROC:2 and above, is (1,1). 
 
-As another way of describing this unusual behavior, as the observer is encouraged to be more "aggressive in reporting lesions", the ROC point moves continuously upwards and to the right from (0, 0) to the end-point, $\left (\text{FPF}_{max}, \text{TPF}_{max} \right )$, and no further. The ROC curve cannot just “hang there” since cumulating all cases always yields the (1,1) operating point. **Therefore, the complete ROC curve is obtained by extending the end-point using a dashed line that connects it to (1,1).** The observer cannot operate along the dashed line. In the language of "moving up the ROC curve" there is a discontinuous jump from the end-point to (1,1). At the end-point the shape of the ROC curve changes from concave-down to a dashed straight line. It can be shown TBA that the limiting slope of the continuous ROC at the end-point is equal to the slope of the dashed straight line connecting the end-point to (1,1). 
+As another way of describing this unusual behavior, as the observer is encouraged to be more "aggressive in reporting lesions", the ROC point moves continuously upwards and to the right from (0, 0) to the end-point, $\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$, and no further. The ROC curve cannot just “hang there” since cumulating all cases always yields the (1,1) operating point. **Therefore, the complete ROC curve is obtained by extending the end-point using a dashed line that connects it to (1,1).** The observer cannot operate along the dashed line. In the language of "moving up the ROC curve" there is a discontinuous jump from the end-point to (1,1). At the end-point the shape of the ROC curve changes from concave-down to a dashed straight line. It can be shown TBA that the limiting slope of the continuous ROC at the end-point is equal to the slope of the dashed straight line connecting the end-point to (1,1). 
  
-How closely the operating point approaches the limiting point $\left (\text{FPF}_{max}, \text{TPF}_{max} \right )$ is unrelated to the number of bins; rather, it depends on $\zeta_1$. As the latter is lowered the observed end-point approaches $\left (\text{FPF}_{max}, \text{TPF}_{max} \right )$ from below-left. As will be shown below, how closely $\left (\text{FPF}_{max}, \text{TPF}_{max} \right )$ approaches (1,1) depends on the $\lambda'$ and $\nu'$ RSM parameters: namely, as $\lambda'$ and $\nu'$ increase, $\left (\text{FPF}_{max}, \text{TPF}_{max} \right )$  approaches (1,1) from below-left. 
+How closely the operating point approaches the limiting point $\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$ is unrelated to the number of bins; rather, it depends on $\zeta_1$. As the latter is lowered the observed end-point approaches $\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$ from below-left. As will be shown below, how closely $\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$ approaches (1,1) depends on the $\lambda'$ and $\nu'$ RSM parameters: namely, as $\lambda'$ and $\nu'$ increase, $\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$  approaches (1,1) from below-left. 
 
 
 ### The abscissa of the ROC end-point {#rsm-pred-constrained-end-point-abscissa}
@@ -49,10 +51,10 @@ Consider the probability that a non-diseased case has at least one latent NL. Su
 
 $$\text{pmf}_{Poi} \left (0,\lambda' \right ) = \text{exp} \left ( -\lambda' \right )$$.
 
-Therefore the probability that the case has *at least one* latent NL is the complement of the above probability. At sufficiently low $\zeta_1$ each of these cases yields a FP. Therefore, the maximum continuously accessible abscissa of the ROC, i.e., $\text{FPF}_{max}$, is: 
+Therefore the probability that the case has *at least one* latent NL is the complement of the above probability. At sufficiently low $\zeta_1$ each of these cases yields a FP. Therefore, the maximum continuously accessible abscissa of the ROC, i.e., $\text{FPF}_{\text{max}}$, is: 
 
 \begin{equation} 
-\text{FPF}_{max} = 1 - \text{exp} \left ( -\lambda' \right )
+\text{FPF}_{\text{max}} = 1 - \text{exp} \left ( -\lambda' \right )
 (\#eq:rsm-pred-fpf-max)
 \end{equation}
 
@@ -73,10 +75,10 @@ By these assumptions the probability of zero latent NLs *and* zero latent LLs on
 
 $$\text{exp}(-\lambda') (1 - \nu')^L$$. 
 
-Therefore, the probability that there exists *at least one* latent site is the complement of the above expression, which equals $\text{TPF}_{max}$, i.e., 
+Therefore, the probability that there exists *at least one* latent site is the complement of the above expression, which equals $\text{TPF}_{\text{max}}$, i.e., 
 
 \begin{equation}
-\text{TPF}_{max} \left ( \mu, \lambda', \nu', L \right ) = 1 - \text{exp} \left ( - \lambda' \right ) \left ( 1 - \nu' \right )^L
+\text{TPF}_{\text{max}} \left ( \mu, \lambda', \nu', L \right ) = 1 - \text{exp} \left ( - \lambda' \right ) \left ( 1 - \nu' \right )^L
 (\#eq:rsm-pred-tpf-max)
 \end{equation}
 
@@ -91,17 +93,17 @@ Defining $f_L$  the fraction of diseased cases with $L$ lesions and $L_{max}$ th
 \end{equation}
 
 
-By restricting attention to the set of diseased cases with $L$ lesions each, Eqn. \@ref(eq:rsm-pred-tpf-max) for $\text{TPF}_{max}$ applies. Since TPF is a probability and probabilities of independent processes add it follows that:
+By restricting attention to the set of diseased cases with $L$ lesions each, Eqn. \@ref(eq:rsm-pred-tpf-max) for $\text{TPF}_{\text{max}}$ applies. Since TPF is a probability and probabilities of independent processes add it follows that:
 
 \begin{equation}
-\text{TPF}_{max} \left ( \mu, \lambda', \nu', L \right ) = 1 - \sum_{L=1}^{L_{max}}f_L\text{exp} \left ( - \lambda' \right ) \left ( 1 - \nu' \right )^L
+\text{TPF}_{\text{max}} \left ( \mu, \lambda', \nu', L \right ) = 1 - \sum_{L=1}^{L_{max}}f_L\text{exp} \left ( - \lambda' \right ) \left ( 1 - \nu' \right )^L
 (\#eq:rsm-pred-tpf-max-fl1)
 \end{equation}
 
 
-The ordinate of the end-point is a weighted summation of $\text{TPF}_{max} \left ( \mu, \lambda', \nu', L \right )$ over the lesion distribution vector $\overrightarrow{f_L}$. 
+The ordinate of the end-point is a weighted summation of $\text{TPF}_{\text{max}} \left ( \mu, \lambda', \nu', L \right )$ over the lesion distribution vector $\overrightarrow{f_L}$. 
 
-The expression for $\text{FPF}_{max}$ is unaffected.
+The expression for $\text{FPF}_{\text{max}}$ is unaffected.
 
 
 ## ROC curve {#rsm-pred-roc-curve}
@@ -119,7 +121,7 @@ On the continuous ROC curve each case has at least one mark and therefore the in
 \end{equation}
 
 
-Varying the threshold parameter $\zeta$ from $\infty$ to $-\infty$ sweeps out the continuous section of the predicted ROC curve from (0,0) to $\left (\text{FPF}_{max}, \text{TPF}_{max} \right )$. 
+Varying the threshold parameter $\zeta$ from $\infty$ to $-\infty$ sweeps out the continuous section of the predicted ROC curve from (0,0) to $\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$. 
 
 
 ### Derivation of FPF {#rsm-pred-roc-curve-fpf}
@@ -139,7 +141,7 @@ Consider the set of non-diseased cases with $n$ latent NLs each, where $n > 0$. 
 \end{equation}
 
 
-The conditioning notation in Eqn. \@ref(eq:rsm-pred-fpf-zeta-n) reflects the fact that this expression applies specifically to non-diseased cases with $n$ latent NLs each. To obtain $\text{FPF}_{max}$ one performs a Poisson-weighted summation of $\text{FPF}\left (\zeta \mid n \right )$ over $n$ from 0 to $\infty$ (the inclusion of the $n = 0$ term is explained below):    
+The conditioning notation in Eqn. \@ref(eq:rsm-pred-fpf-zeta-n) reflects the fact that this expression applies specifically to non-diseased cases with $n$ latent NLs each. To obtain $\text{FPF}_{\text{max}}$ one performs a Poisson-weighted summation of $\text{FPF}\left (\zeta \mid n \right )$ over $n$ from 0 to $\infty$ (the inclusion of the $n = 0$ term is explained below):    
 
 \begin{equation}
 \text{FPF}\left (\zeta, \lambda' \right ) = \sum_{n=0}^{\infty} \text{pmf}_{Poi} \left ( n, \lambda' \right )\text{FPF}\left (\zeta \mid n \right )
@@ -332,7 +334,7 @@ F\left ( \zeta \right ) =& \sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu' \Phi \left
 \end{equation}
 
 
-These equations have exactly the same structure as [@swensson1996unified] Eqns. 1 and 2 and the logic used there to demonstrate that ROC curves predicted by Swensson's LROC model was proper also applies to the present situation. Specifically, since the $\Phi$ function ranges between 0 and 1 and $0 \leq \nu' \leq 1$, it follows that $F\left ( \zeta \right ) \leq 1$. Therefore $y\left ( \zeta \right ) \geq x\left ( \zeta \right )$ and the ROC curve is constrained to the upper half of the ROC space, namely the portion above the chance diagonal. Additionally, the more general constraint shown by Swensson applies, namely the slope of the ROC curve at any operating point (x, y) cannot be less than the slope of the dashed straight line connecting (x, y) and $\left (\text{FPF}_{max}, \text{TPF}_{max} \right )$, the coordinates of the RSM end-point. This implies that the slope decreases monotonically and also rules out curves with "hooks". 
+These equations have exactly the same structure as [@swensson1996unified] Eqns. 1 and 2 and the logic used there to demonstrate that ROC curves predicted by Swensson's LROC model was proper also applies to the present situation. Specifically, since the $\Phi$ function ranges between 0 and 1 and $0 \leq \nu' \leq 1$, it follows that $F\left ( \zeta \right ) \leq 1$. Therefore $y\left ( \zeta \right ) \geq x\left ( \zeta \right )$ and the ROC curve is constrained to the upper half of the ROC space, namely the portion above the chance diagonal. Additionally, the more general constraint shown by Swensson applies, namely the slope of the ROC curve at any operating point (x, y) cannot be less than the slope of the dashed straight line connecting (x, y) and $\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$, the coordinates of the RSM end-point. This implies that the slope decreases monotonically and also rules out curves with "hooks". 
 
 
 
@@ -364,7 +366,7 @@ The integrals of the pdfs (non-diseased followed by diseased) over the entire al
 \left. 
 \begin{aligned}
 \int_{-\infty}^{\infty}\text{pdf}_N \left ( \zeta \right )d \zeta =& \left ( 1-\text{FPF}\left (\zeta , \lambda'\right ) \right ) \bigg \rvert_{-\infty}^{\infty}\\
-=& \text{FPF}_{max}
+=& \text{FPF}_{\text{max}}
 \end{aligned}
 \right \}
 (\#eq:rsm-pred-int-pdf-n)
@@ -376,14 +378,14 @@ The integrals of the pdfs (non-diseased followed by diseased) over the entire al
 \left. 
 \begin{aligned}
 \int_{-\infty}^{\infty}\text{pdf}_D \left ( \zeta \right )d \zeta =& \left ( 1-\text{TPF}\left (\zeta , \mu, \lambda', \nu', \overrightarrow{f_L} \right ) \right ) \bigg \rvert_{-\infty}^{\infty}\\
-=& \text{TPF}_{max}
+=& \text{TPF}_{\text{max}}
 \end{aligned}
 \right \}
 (\#eq:rsm-pred-int-pdf-d)
 \end{equation}
 
 
-In other words, they evaluate to the coordinates of the predicted end-point, *each of which is less than unity*. The reason is that the integration is along the *continuous* section of the ROC curve and does not include the contribution along the dashed straight line extension from $\left ( \text{FPF}_{max}, \text{TPF}_{max} \right )$ to (1,1). The latter contributions correspond to cases with no marks, i.e., $1 - \text{FPF}_{max}$ for non-diseased cases and $1 - \text{TPF}_{max}$ for diseased cases. Adding these contributions to the integrals along the continuous section yields unity for both types of cases. ^[The original RSM publications [@chakraborty2006search; @chakraborty2006roc] unnecessarily introduced Dirac delta functions to force the integrals to be unity. The explanation given here should clarify the issue.]
+In other words, they evaluate to the coordinates of the predicted end-point, *each of which is less than unity*. The reason is that the integration is along the *continuous* section of the ROC curve and does not include the contribution along the dashed straight line extension from $\left ( \text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$ to (1,1). The latter contributions correspond to cases with no marks, i.e., $1 - \text{FPF}_{\text{max}}$ for non-diseased cases and $1 - \text{TPF}_{\text{max}}$ for diseased cases. Adding these contributions to the integrals along the continuous section yields unity for both types of cases. ^[The original RSM publications [@chakraborty2006search; @chakraborty2006roc] unnecessarily introduced Dirac delta functions to force the integrals to be unity. The explanation given here should clarify the issue.]
 
 
 ## ROC AUC {#rsm-pred-roc-curve-auc}
@@ -531,9 +533,9 @@ The following are evident from these figures:
 2. For $\mu$ close to zero the operating characteristic approaches the chance diagonal and the area under the ROC curve approaches 0.5.
 3. The area under the ROC increases monotonically from 0.5 to 1 as $\mu$ increases from zero to infinity.
 4. For large $\mu$ the accessible portion of the operating characteristic approaches the vertical line connecting (0,0) to (0,1), the area under which is zero. The complete ROC curve is obtained by connecting this point to (1,1) by the dashed line and in this limit the area under the complete ROC curve approaches unity. Omitting the area under the dashed portion of the curve will result in a severe underestimate of true performance. 
-5. As $L_{max}$ increases (allowed values are 1, 2, 3, etc.) the area under the ROC curve increases, approaching unity and  $\text{TPF}_{max}$ approaches unity. With more lesions per diseased case, the chances are higher that at least one of them will be found and marked. However, $\text{FPF}_{max}$ remains constant as determined by the constant value of $\lambda' = \frac{\lambda}{\mu}$, Eqn. \@ref(eq:rsm-pred-fpf-max)
-6. As $\lambda$ decreases $\text{FPF}_{max}$ decreases to zero and $\text{TPF}_{max}$ decreases. The decrease in $\text{TPF}_{max}$  is consistent with the fact that, with fewer NLs, there is less chance of a NL being rated higher than a LL, and one is completely dependent on at least one lesion being found.
-7. As $\nu$ increases $\text{FPF}_{max}$ stays constant at the value determined by $\lambda$  and  $\mu$, while $\text{TPF}_{max}$ approaches unity. The corresponding physical parameter $\nu'$ increases approaching unity, guaranteeing every lesion will be found. 
+5. As $L_{max}$ increases (allowed values are 1, 2, 3, etc.) the area under the ROC curve increases, approaching unity and  $\text{TPF}_{\text{max}}$ approaches unity. With more lesions per diseased case, the chances are higher that at least one of them will be found and marked. However, $\text{FPF}_{\text{max}}$ remains constant as determined by the constant value of $\lambda' = \frac{\lambda}{\mu}$, Eqn. \@ref(eq:rsm-pred-fpf-max)
+6. As $\lambda$ decreases $\text{FPF}_{\text{max}}$ decreases to zero and $\text{TPF}_{\text{max}}$ decreases. The decrease in $\text{TPF}_{\text{max}}$  is consistent with the fact that, with fewer NLs, there is less chance of a NL being rated higher than a LL, and one is completely dependent on at least one lesion being found.
+7. As $\nu$ increases $\text{FPF}_{\text{max}}$ stays constant at the value determined by $\lambda$  and  $\mu$, while $\text{TPF}_{\text{max}}$ approaches unity. The corresponding physical parameter $\nu'$ increases approaching unity, guaranteeing every lesion will be found. 
 
 
 ## Example RSM pdf curves {#rsm-pred-pdf-curves}
@@ -565,7 +567,7 @@ grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], ncol = 2)
 
 Fig. \@ref(fig:rsm-pred-fig-pdf-mu-plots) shows pdf plots for the same values of parameters as in Fig. \@ref(fig:rsm-pred-fig-auc-mu-plots). 
 
-Consider the plot of the pdfs for $\mu = 1$. Since the integral of a pdf function over an interval amounts to counting the fraction of events occurring in the interval, it should be evident that the area under the non-diseased pdf equals $\text{FPF}_{max}$ and that under the diseased pdf equals $\text{TPF}_{max}$. For the chosen value $\lambda = 1$ one has $\text{FPF}_{max} = 1 - e^{-\lambda} = 0.632$. The area under the non-diseased pdf is less than unity because it is missing the contribution of non-diseased cases with no marks, the probability of which is $e^{-\lambda} = e^{-1} = 0.368$. Equivalently, it is missing the area under the dashed straight line segment of the ROC curve. Likewise, the area under the diseased pdf equals $\text{TPF}_{max}$, Eqn. \@ref(eq:rsm-pred-tpf-max), which is also less than unity. For the chosen values of $\mu = \lambda = \nu = L = 1$ it equals $\text{TPF}_{max} = 1 - e^{-\lambda} e^{-\nu} = 0.865$. This area is somewhat larger than that under the non-diseased pdf, as is evident from visual examination of the plot. A greater fraction of diseased cases generate marks than do non-diseased cases, consistent with the presence of lesions in diseased cases. The complement of 0.865 is due to diseased cases with no marks, which account for a fraction 0.135 of diseased cases. To summarize, the pdf's do not integrate to unity for the reason that the integrals account only for the continuous section of the ROC curve and do not include cases with zero latent marks that do not generate z-samples. The effect becomes more exaggerated for higher values of $\mu$ as this causes $\text{FPF}_{max}$ to further decrease. 
+Consider the plot of the pdfs for $\mu = 1$. Since the integral of a pdf function over an interval amounts to counting the fraction of events occurring in the interval, it should be evident that the area under the non-diseased pdf equals $\text{FPF}_{\text{max}}$ and that under the diseased pdf equals $\text{TPF}_{\text{max}}$. For the chosen value $\lambda = 1$ one has $\text{FPF}_{\text{max}} = 1 - e^{-\lambda} = 0.632$. The area under the non-diseased pdf is less than unity because it is missing the contribution of non-diseased cases with no marks, the probability of which is $e^{-\lambda} = e^{-1} = 0.368$. Equivalently, it is missing the area under the dashed straight line segment of the ROC curve. Likewise, the area under the diseased pdf equals $\text{TPF}_{\text{max}}$, Eqn. \@ref(eq:rsm-pred-tpf-max), which is also less than unity. For the chosen values of $\mu = \lambda = \nu = L = 1$ it equals $\text{TPF}_{\text{max}} = 1 - e^{-\lambda} e^{-\nu} = 0.865$. This area is somewhat larger than that under the non-diseased pdf, as is evident from visual examination of the plot. A greater fraction of diseased cases generate marks than do non-diseased cases, consistent with the presence of lesions in diseased cases. The complement of 0.865 is due to diseased cases with no marks, which account for a fraction 0.135 of diseased cases. To summarize, the pdf's do not integrate to unity for the reason that the integrals account only for the continuous section of the ROC curve and do not include cases with zero latent marks that do not generate z-samples. The effect becomes more exaggerated for higher values of $\mu$ as this causes $\text{FPF}_{\text{max}}$ to further decrease. 
 
 The plot in Fig. \@ref(fig:rsm-pred-fig-pdf-mu-plots) labeled $\mu = 0.05$ may be surprising. Since it corresponds to a small value of $\mu$, one may expect both pdfs to overlap and be centered at zero. Instead, while they do overlap, the shape is distinctly non-Gaussian and centered at approximately 1.8. This is because the small value of $\mu$ results in a large value of the $\lambda'$ parameter, since $\lambda' = \lambda / \mu = 20$. The highest of a large number of samples from the unit normal distribution is not normal and is peaked at a value above zero [@fisher1928limiting].
 
@@ -626,12 +628,12 @@ Regarding Dr. Wagner's second point, it would require a great amount of data to 
 
 The following proof is adapted from a document supplied by Dr. Xuetong Zhai, then ( ca. 2017) a graduate student working under the supervision of the author.
 
-The end point coordinates of the continuous part of ROC curve was derived above, Eqn. \@ref(eq:rsm-pred-fpf-max) for $\text{FPF}_{max}$ and Eqn. \@ref(eq:rsm-pred-tpf-max) for $\text{TPF}_{max}$. Therefore, the slope $m_{st}$ of the dashed dashed straight line is:
+The end point coordinates of the continuous part of ROC curve was derived above, Eqn. \@ref(eq:rsm-pred-fpf-max) for $\text{FPF}_{\text{max}}$ and Eqn. \@ref(eq:rsm-pred-tpf-max) for $\text{TPF}_{\text{max}}$. Therefore, the slope $m_{st}$ of the dashed dashed straight line is:
 
 \begin{equation}
 \left. 
 \begin{aligned}
-m_{st} =& \frac{1-\text{TPF}_{max}}{1-\text{FPF}_{max}}\\
+m_{st} =& \frac{1-\text{TPF}_{\text{max}}}{1-\text{FPF}_{\text{max}}}\\
 =&\frac{\sum_{L=1}^{L_{max}} f_L \left ( 1 - \nu' \right )^L
  \text{exp} \left ( - \lambda' \right )} {\text{exp} \left ( - \lambda' \right )} \\
 =& \sum_{L=1}^{L_{max}} f_L \left ( 1 - \nu' \right )^L  \\

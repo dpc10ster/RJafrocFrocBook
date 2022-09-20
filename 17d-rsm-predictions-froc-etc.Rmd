@@ -98,14 +98,14 @@ The AFROC x-coordinate is the same as the ROC x-coordinate and Eqn. \@ref(eq:rsm
 \begin{equation}
 \left. 
 \begin{aligned}
-\text{FPF}_{max} =& 1 - \text{exp}\left (\lambda / \mu \right ) \\
+\text{FPF}_{\text{max}} =& 1 - \text{exp}\left (\lambda / \mu \right ) \\
 LLF_{max}=& 1 - \text{exp}(-\nu \mu))\\
 \end{aligned}
 \right \}
 (\#eq:rsm-pred-froc-FPF-LLF-max)
 \end{equation}
 
-It too has the constrained end-point property. In terms of the intrinsic RSM parameters, As $\mu$ increases starting from $0+$, $\text{FPF}_{max}$ decreases starting from $1-$, approaching $0+$ as $\mu$ approaches $\infty$. In the same limit, $\text{TPF}_{max}$ increases starting from 0, approaching $1-$. [The notation "1-" denotes a number just less than one.] 
+It too has the constrained end-point property. In terms of the intrinsic RSM parameters, As $\mu$ increases starting from $0+$, $\text{FPF}_{\text{max}}$ decreases starting from $1-$, approaching $0+$ as $\mu$ approaches $\infty$. In the same limit, $\text{TPF}_{\text{max}}$ increases starting from 0, approaching $1-$. [The notation "1-" denotes a number just less than one.] 
 
 Source the file mainRsmAFROC.R. Note the change at line 7 with type = "AFROC", which generates AFROC plots shown in Fig. 17.4 (A-F) for the following values of  : 0.001, 1, 2, 3, 4 and 5.
 
@@ -142,9 +142,9 @@ Experiment with different values for the parameters to confirm that the followin
 
 1.	The AFROC plot is independent of the number of lesions per case. Area under AFROC is independent of  . These statements are not true for the wAFROC TBA!!. In contrast, the ROC ordinate increases with increasing numbers of lesions per case.  
 
-2.	From Eqn. \@ref(eq:rsm-pred-froc-tpf-max) and Eqn. \@ref(eq:rsm-pred-froc-NLF-LLF-max) it follows that $\text{TPF}_{max} \geq LLF_{max}$  with the equality holding in the limit $\mu \rightarrow \infty$. 
+2.	From Eqn. \@ref(eq:rsm-pred-froc-tpf-max) and Eqn. \@ref(eq:rsm-pred-froc-NLF-LLF-max) it follows that $\text{TPF}_{\text{max}} \geq LLF_{max}$  with the equality holding in the limit $\mu \rightarrow \infty$. 
 
-The physical reason for $\text{TPF}_{max} \geq LLF_{max}$  is that the ROC gives credit for incorrect localizations on diseased cases, while the AFROC does not. This is the well-known "right for wrong reason" argument [@bunch1977free] originally advanced in 1977.
+The physical reason for $\text{TPF}_{\text{max}} \geq LLF_{max}$  is that the ROC gives credit for incorrect localizations on diseased cases, while the AFROC does not. This is the well-known "right for wrong reason" argument [@bunch1977free] originally advanced in 1977.
 
 3.	As   increases the AFROC curve more closely approaches the upper-left corner of the plot, denoting increasing performance and the area under the AFROC curve approaches 1, which is the best possible performance: (a)  decreases and (b)   increases, denoting decreasing numbers of incorrect decisions on non-diseased and diseased cases, respectively. 
 4.	For   and non-zero   the operating characteristic approaches the horizontal line extending from the origin to (1,0), which is the continuous section of the curve, followed by the vertical dashed line connecting (1,0) to (1,1) and AFROC-AUC approaches zero. In this limit, none of the lesions is localized and every case has at least one NL mark, which implies worst possible performance.

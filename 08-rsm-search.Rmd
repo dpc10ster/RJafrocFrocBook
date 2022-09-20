@@ -28,8 +28,8 @@ From the previous chapter the coordinates of the end-point are given by:
 \begin{equation}
 \left. 
 \begin{aligned}
-&\text{FPF}_{max} = 1 - exp\left (\lambda' \right ) \\
-&\text{TPF}_{max} \left ( \mu, \lambda', \nu', L \right ) = 1 - \sum_{L=1}^{L_{max}}f_L\text{exp} \left ( - \lambda' \right ) \left ( 1 - \nu' \right )^L
+&\text{FPF}_{\text{max}} = 1 - exp\left (\lambda' \right ) \\
+&\text{TPF}_{\text{max}} \left ( \mu, \lambda', \nu', L \right ) = 1 - \sum_{L=1}^{L_{max}}f_L\text{exp} \left ( - \lambda' \right ) \left ( 1 - \nu' \right )^L
 \end{aligned}
 \right \}
 (\#eq:rsm-sc-FPF-TPF-max)
@@ -50,14 +50,14 @@ a <- 2.5; b <- 1
 mu <- 2; lambda <- 1; nu <- 1; nLesDistr <- c(1, 1); if (length(nLesDistr) == 2) dim(nLesDistr) <- c(1, 2) 
 
 plotZeta <- seq(-20, 20, by = 0.01)
-lambdaP <- lambda / mu
+lambda <- lambda / mu
 if (abs(nu * mu) <= 1e-6 ) nuP <- 1e-6 else nuP <- (1-exp(-nu * mu))
 
 FPFBM <- 1 - pnorm(plotZeta)
 TPFBM <- 1 - pnorm(plotZeta, mean = a/b, sd = 1/b)
 plotBM <- data.frame(FPF = FPFBM, TPF = TPFBM)
 
-FPFRSM <- sapply(plotZeta, RSM_xROC, lambdaP = lambdaP)
+FPFRSM <- sapply(plotZeta, RSM_xROC, lambda = lambda)
 TPFRSM <- sapply(plotZeta, RSM_yROC, mu = mu, lambda = lambda, 
                 nu = nu, lesDistr = 1) # DPC TBA
 plotRSM <- data.frame(FPF = FPFRSM, TPF = TPFRSM)
@@ -108,7 +108,7 @@ Using [geometry](https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#L
 
 
 \begin{equation} 
-S=\sqrt{2}d_S=\text{TPF}_{max}-\text{FPF}_{max}
+S=\sqrt{2}d_S=\text{TPF}_{\text{max}}-\text{FPF}_{\text{max}}
 (\#eq:rsm-sc-perp-distance)
 \end{equation}
 
