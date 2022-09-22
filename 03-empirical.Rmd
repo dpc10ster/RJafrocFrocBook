@@ -385,17 +385,21 @@ By adopting a rule for converting the mark-rating data per case to a single rati
 
 
 
-### The inferred-ROC z-sample
+### The inferred-ROC z-sample {#empirical-ROC-fpf}
 
-The z-sample of the highest rated mark in a case, or $-\infty$ if the case has no marks, is defined as the inferred-ROC z-sample for the case. Inferred-ROC z-samples on non-diseased cases are referred to as inferred-FP z-samples and those on diseased cases as inferred-TP z-samples.
 
-When there is little possibility for confusion, the prefix "inferred" is suppressed. Using the by now familiar cumulation procedure, FP counts are cumulated to calculate FPF and likewise TP counts are cumulated to calculate TPF.
+The highest ROC z-sample of a case, denoted $h_{k_t t}$, is the z-sample of the highest rated latent mark on the case or $-\infty$ if the case has no latent marks. For non-diseased cases $t = 1$ the maximum is over all latent NLs on the case. For diseased cases $t = 2$ the maximum is over all latent NLs *and* latent LLs on the case. 
+
+When there is little possibility for confusion, the prefix "inferred" is suppressed. ROC z-samples on non-diseased cases are referred to as FP z-samples and those on diseased cases as TP z-samples.
+
+Using the by now familiar cumulation procedure, FP counts are cumulated to calculate FPF and likewise TP counts are cumulated to calculate TPF.
 
 Definitions:
 
->
- -   $FPF(\zeta)$ = cumulated inferred FP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of non-diseased cases.
- -   $TPF(\zeta)$ = cumulated inferred TP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of diseased cases
+
+ -   $FPF(\zeta)$ = cumulated inferred FP counts with $h_{k_1 1} \geq \zeta$ divided by total number of non-diseased cases.
+ -   $TPF(\zeta)$ = cumulated inferred TP counts with $h_{k_2 2} \geq \zeta$ divided by total number of diseased cases. 
+
 
 Definition of ROC plot:
 
@@ -403,13 +407,6 @@ Definition of ROC plot:
  -   The ROC is the plot of inferred $TPF(\zeta)$ vs. inferred $FPF(\zeta)$.
  -   *The plot includes a straight line extension from the observed end-point to (1,1)*.
 
-
-### The inferred-ROC rating
-
-Consider a $R_{\text{FROC}}$ rating FROC study with allowed ratings $r = 1, 2, ..., R_{\text{FROC}}$. The ROC rating of a case is defined as the FROC rating of the highest rated actual mark on the case **plus 1** or 1 if the case has no marks. Since the 1 ROC rating is reserved for cases with no mark and the ratings are ordered labels, no ordering information is lost provided every other ROC rating is also "bumped up" by unity - this is the reason for the "plus one". The ROC rating scale therefore extends from $1$ to $R_{\text{FROC}} + 1$. Therefore, a $R_{\text{FROC}}$ rating FROC study corresponds to a $R_{\text{FROC}} + 1$ rating ROC study in the sense that both generate the same number $R_{\text{FROC}}$ of operating points.
-
-
-### Inferred FPF
 
 The highest z-sample ROC false positive (FP) z-sample for non-diseased case $k_1 1$ is defined by:
 
@@ -436,7 +433,7 @@ If the case has at least one latent NL mark, then $l_1 \neq \varnothing$, where 
 \end{equation}
 
 
-### Inferred TPF
+### Inferred TPF {#empirical-ROC-tpf}
 
 The inferred true positive (TP) z-sample for diseased case $k_2 2$ is defined by one of the following three equations, as explained below:
 

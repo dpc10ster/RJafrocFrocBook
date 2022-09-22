@@ -34,3 +34,8 @@ knitr::write_bib(c(
     + This book [RJafrocFrocBook](https://dpc10ster.github.io/RJafrocFrocBook/).
 
 
+## TBA Acknowledgements
+
+Dr. Xuetong Zhai
+Dataset contributors
+
