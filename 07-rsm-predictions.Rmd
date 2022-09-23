@@ -349,15 +349,19 @@ It is instructive to understand the effects of varying the RSM parameters on the
 ```{r, echo = F}
 myLocalPrint <- function(mu, lambda, nu, zeta, lesDistr)
 {
-cat("mu = ", mu, 
-    ", lambda = ", lambda, 
-    ", nu = ", nu, 
-    ", zeta = ", zeta, 
-    ", RSM-x = ", sprintf("%6.4f", RSM_xROC(zeta,lambda)),
-    ", RSM-y = ", sprintf("%6.4f", RSM_yROC(zeta,mu,lambda,nu, lesDistr = lesDistr)), 
+cat("mu =", mu, 
+    ",lambda =", lambda, 
+    ",nu =", nu, 
+    ",zeta =", zeta, 
+    ",RSM-x =", sprintf("%5.3f", RSM_xROC(zeta,lambda)),
+    ",RSM-y =", sprintf("%5.3f", RSM_yROC(zeta,mu,lambda,nu, lesDistr = lesDistr)), 
     "\n")
 }
+```
 
+
+
+```{r, echo = F}
 zeta <- 0
 mu <- 1
 lambda <- 2
