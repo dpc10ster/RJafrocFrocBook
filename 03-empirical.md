@@ -52,9 +52,15 @@ To distinguish between suspicious regions that were considered for marking but n
 -   In contrast unmarked lesions are observable events -- one knows (trivially) which lesions were not marked.
 
 
+### z-samples vs. ratings
+
+z-samples are conceptual quantities that can range from $-\infty$ to $+\infty$. Ratings are observed values typically collected as integers but any ordered set of values will do where larger values correspond to greater suspicion for disease. The conversion from z-samples to ratings is accomplished by adopting a binning rule. 
+
+
+
 ### Binning rule
 
-Recall that ROC data modeling requires the existence of a *case-dependent* decision variable, or z-sample $z$, and case-independent decision thresholds $\zeta_r$, where $r = 0, 1, ..., R_{ROC}-1$, where $R_{ROC}$ is the number of ROC study bins ^[The subscript is used to make explicit the paradigm used as otherwise it leads to confusion.] and a binning rule that if $\zeta_r \leq z < \zeta_{r+1}$ the case is rated $r + 1$. Dummy cutoffs are defined as $\zeta_0 = -\infty$ and $\zeta_{R_{ROC}} = \infty$. The z-sample applies to the whole case. To summarize:
+Recall that ROC data modeling requires the existence of a *case-dependent* decision variable, or z-sample $z$, and case-independent decision thresholds $\zeta_r$, where $r = 0, 1, ..., R_{ROC}-1$, where $R_{ROC}$ is the number of ROC study bins ^[The subscript is used to make explicit the paradigm used as otherwise it leads to confusion.] and a *binning rule* that if $\zeta_r \leq z < \zeta_{r+1}$ the case is rated $r + 1$. Dummy cutoffs are defined as $\zeta_0 = -\infty$ and $\zeta_{R_{ROC}} = \infty$. The z-sample applies to the whole case. To summarize:
 
 
 \begin{equation}
@@ -84,6 +90,7 @@ r = 1, 2, ..., R_{FROC}\\
 \right \}
 (\#eq:binning-rule-froc)
 \end{equation}
+
 
 
 ### Notation {#empirical-notation}
@@ -149,36 +156,41 @@ FROC notation is summarized in Table \@ref(tab:empirical-notation) in which *mar
   </tr>
   <tr>
    <td style="text-align:left;"> 10 </td>
+   <td style="text-align:left;"> $r_{k_t t l_s s}$ </td>
+   <td style="text-align:left;"> rating for case $k_t t$ and LL/NL mark $l_s s$ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 11 </td>
    <td style="text-align:left;"> $R_{FROC}$ </td>
    <td style="text-align:left;"> Number of FROC bins </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 11 </td>
+   <td style="text-align:left;"> 12 </td>
    <td style="text-align:left;"> $\zeta_1$ </td>
    <td style="text-align:left;"> Lowest non-dummy reporting threshold </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 12 </td>
+   <td style="text-align:left;"> 13 </td>
    <td style="text-align:left;"> $\zeta_r$ </td>
    <td style="text-align:left;"> $r$ = 2, 3, ..., non-dummy reporting thresholds </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 13 </td>
+   <td style="text-align:left;"> 14 </td>
    <td style="text-align:left;"> $\zeta_0, \zeta_{R_{FROC}+1}$ </td>
    <td style="text-align:left;"> Dummy thresholds, negative and positive infinity </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 14 </td>
+   <td style="text-align:left;"> 15 </td>
    <td style="text-align:left;"> $W_{k_2 l_2}$ </td>
    <td style="text-align:left;"> Weight of lesion $l_2 2$ in case $k_2 2$, explained later </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 15 </td>
+   <td style="text-align:left;"> 16 </td>
    <td style="text-align:left;"> $L_{max}$ </td>
    <td style="text-align:left;"> Maximum number of lesions per case in dataset </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 16 </td>
+   <td style="text-align:left;"> 17 </td>
    <td style="text-align:left;"> $L_T$ </td>
    <td style="text-align:left;"> Total number of lesions in dataset </td>
   </tr>
@@ -205,15 +217,17 @@ FROC notation is summarized in Table \@ref(tab:empirical-notation) in which *mar
 
 -   Row 9: The z-sample of a latent LL is $z_{k_2 2 l_2 2}$. Unmarked lesions are observable events assigned negative infinity ratings (the null-set notation is unnecessary).
 
--   Row 10: $R_{FROC}$ is the number of bins in the FROC study.
+-   Row 10: The rating of a mark is $r_{k_2 2 l_2 2}$. Unmarked NLs are unobservable events. Unmarked lesions are assigned negative infinity ratings.
 
--   Rows 11, 12 and 13: The cutoffs in the FROC study. The lowest threshold is $\zeta_1$. The other non-dummy thresholds are $\zeta_r$ where $r=2,3,...,R_{FROC}$. The dummy thresholds are $\zeta_0 = -\infty$ and $\zeta_{R_{FROC}+1} = \infty$.
+-   Row 11: $R_{FROC}$ is the number of bins in the FROC study.
 
--   Row 14: $W_{k_2 l_2}$ is the weight (i.e., clinical importance) of lesion $l_2 2$ in diseased case $k_2 2$. The weights of lesions in a case sum to unity: $\sum_{l_2 = 1}^{L_{k_2 2}}W_{k_2 l_2} = 1$.
+-   Rows 12, 13 and 14: The cutoffs in the FROC study. The lowest threshold is $\zeta_1$. The other non-dummy thresholds are $\zeta_r$ where $r=2,3,...,R_{FROC}$. The dummy thresholds are $\zeta_0 = -\infty$ and $\zeta_{R_{FROC}+1} = \infty$.
 
--   Row 15: $L_{max}$ is the maximum number of lesions per case in the dataset.
+-   Row 15: $W_{k_2 l_2}$ is the weight (i.e., clinical importance) of lesion $l_2 2$ in diseased case $k_2 2$. The weights of lesions in a case sum to unity: $\sum_{l_2 = 1}^{L_{k_2 2}}W_{k_2 l_2} = 1$.
 
--   Row 16: $L_T$ is the total number of lesions in the dataset.
+-   Row 16: $L_{max}$ is the maximum number of lesions per case in the dataset.
+
+-   Row 17: $L_T$ is the total number of lesions in the dataset.
 
 
 
@@ -443,17 +457,21 @@ By adopting a rule for converting the mark-rating data per case to a single rati
 
 
 
-### The inferred-ROC rating
+### The inferred-ROC z-sample {#empirical-ROC-fpf}
 
-The rating of the highest rated mark in a case, or $-\infty$ if the case has no marks, is defined as the inferred-ROC rating for the case. Inferred-ROC ratings on non-diseased cases are referred to as inferred-FP ratings and those on diseased cases as inferred-TP ratings.
 
-When there is little possibility for confusion, the prefix "inferred" is suppressed. Using the by now familiar cumulation procedure, FP counts are cumulated to calculate FPF and likewise TP counts are cumulated to calculate TPF.
+The highest ROC z-sample of a case, denoted $h_{k_t t}$, is the z-sample of the highest rated latent mark on the case or $-\infty$ if the case has no latent marks. For non-diseased cases $t = 1$ the maximum is over all latent NLs on the case. For diseased cases $t = 2$ the maximum is over all latent NLs *and* latent LLs on the case. 
+
+When there is little possibility for confusion, the prefix "inferred" is suppressed. ROC z-samples on non-diseased cases are referred to as FP z-samples and those on diseased cases as TP z-samples.
+
+Using the by now familiar cumulation procedure, FP counts are cumulated to calculate FPF and likewise TP counts are cumulated to calculate TPF.
 
 Definitions:
 
->
- -   $FPF(\zeta)$ = cumulated inferred FP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of non-diseased cases.
- -   $TPF(\zeta)$ = cumulated inferred TP counts with z-sample $\geq$ threshold $\zeta$ divided by total number of diseased cases
+
+ -   $FPF(\zeta)$ = cumulated inferred FP counts with $h_{k_1 1} \geq \zeta$ divided by total number of non-diseased cases.
+ -   $TPF(\zeta)$ = cumulated inferred TP counts with $h_{k_2 2} \geq \zeta$ divided by total number of diseased cases. 
+
 
 Definition of ROC plot:
 
@@ -462,9 +480,7 @@ Definition of ROC plot:
  -   *The plot includes a straight line extension from the observed end-point to (1,1)*.
 
 
-### Inferred FPF
-
-The highest z-sample ROC false positive (FP) rating for non-diseased case $k_1 1$ is defined by:
+The highest z-sample ROC false positive (FP) z-sample for non-diseased case $k_1 1$ is defined by:
 
 
 \begin{equation}
@@ -489,7 +505,7 @@ If the case has at least one latent NL mark, then $l_1 \neq \varnothing$, where 
 \end{equation}
 
 
-### Inferred TPF
+### Inferred TPF {#empirical-ROC-tpf}
 
 The inferred true positive (TP) z-sample for diseased case $k_2 2$ is defined by one of the following three equations, as explained below:
 
@@ -533,7 +549,7 @@ Here $\land$ is the logical AND operator. An explanation is in order. Consider E
 
 -   If $l_1 = \varnothing$ and at least one lesion is marked, then Eqn. \@ref(eq:empirical-TP2) applies, i.e., one takes the maximum z-sample over all marked LLs.
 
--   If $l_1 = \varnothing$ and no lesions are marked, then Eqn. \@ref(eq:empirical-TP3) applies; this represents an unmarked diseased case; the $-\infty$ rating assignment is justified because an unmarked diseased case is an observable event.
+-   If $l_1 = \varnothing$ and no lesions are marked, then Eqn. \@ref(eq:empirical-TP3) applies; this represents an unmarked diseased case; the $-\infty$ z-sample assignment is justified because an unmarked diseased case is an observable event.
 
 The inferred true positive fraction $\text{TPF}_r$ is defined by:
 
@@ -560,7 +576,7 @@ The abscissa of the observed end-point $FPF_1$, is defined by:
 (\#eq:empirical-fpf-repeat)
 \end{equation}
 
-Since each case gets a single FP rating, and only unmarked cases get the $-\infty$ rating, $\text{FPF}_1 \leq 1$. 
+Since each case gets a single FP z-sample, and only unmarked cases get the $-\infty$ z-sample, $\text{FPF}_1 \leq 1$. 
 
 
 The ordinate of the observed end-point $TPF_1$, is defined by:
@@ -572,12 +588,12 @@ The ordinate of the observed end-point $TPF_1$, is defined by:
 \end{equation}
 
 
-Since each case gets a single TP rating, and only unmarked cases get the $-\infty$ rating, $\text{TPF}_1 \leq 1$. 
+Since each case gets a single TP z-sample, and only unmarked cases get the $-\infty$ z-sample, $\text{TPF}_1 \leq 1$. 
 
 It follows that the observed end-point of the ROC (as is well known) satisfies the constrained end-point property: it lies below-left the (1,1) corner of the plot.
 
 >
-The upper-right corner (reached by counting all ratings $\ge -\infty$) of the ROC plot is not to be confused by the observed end-point (reached by counting all ratings $\ge \zeta_1$). 
+The upper-right corner (reached by counting all z-samples $\ge -\infty$) of the ROC plot is not to be confused by the observed end-point (reached by counting all z-samples $\ge \zeta_1$). 
 
 
 ### Illustration with a dataset {#empirical-roc-plot-illustration}
@@ -756,7 +772,7 @@ UtilFigureOfMerit(dataset04, FOM = "wAFROC")
 
 ## AFROC vs. wAFROC {#empirical-numerical-understanding}
 
-The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions can be illustrated with a fictitious small dataset consisting of $K_1 = 4$ non-diseased and $K_2 = 5$ diseased cases. The maximum number of NLs per case is two and the maximum number of lesions per case is three. The first two diseased cases have one lesion each, the third and fourth have two lesions each and the fifth has 3 lesions. Here is how we code the NL and LL ratings (`t()` is the `R` transpose operator). The negative infinities represent unmarked locations. For example, the first non-diseased case has no NL marks, the second has one mark rated 0.5, etc., and the first diseased case has one NL mark rated 1.5, etc. The first lesion in the LL array was rated 0.9. the second was rated -0.2, ..., and the 3 lesions in the fifth diseased case were rated 1, 2.5 and 1, respectively.
+The fact that the wAFROC gives equal importance to each diseased case while the AFROC gives more importance to diseased cases with more lesions can be illustrated with a fictitious small dataset consisting of $K_1 = 4$ non-diseased and $K_2 = 5$ diseased cases. The maximum number of NLs per case is two and the maximum number of lesions per case is three. The first two diseased cases have one lesion each, the third and fourth have two lesions each and the fifth has 3 lesions. Here is how we code the NL and LL z-samples (`t()` is the `R` transpose operator). The negative infinities represent unmarked locations. For example, the first non-diseased case has no NL marks, the second has one mark rated 0.5, etc., and the first diseased case has one NL mark rated 1.5, etc. The first lesion in the LL array was rated 0.9. the second was rated -0.2, ..., and the 3 lesions in the fifth diseased case were rated 1, 2.5 and 1, respectively.
 
 
 
@@ -777,7 +793,7 @@ LL <- t(array(c(0.9, -Inf, -Inf,
                   1,    2.5,  1), dim = c(3,5)))
 ```
 
-The ratings are converted to a dataset `frocData` as shown next:
+The z-samples are converted to a dataset `frocData` as shown next:
 
 
 ```r
@@ -804,14 +820,14 @@ The first and second diseased cases, which have only one lesion each, are assign
 
 
 
-### NL and LL ratings
+### NL and LL z-samples
 
-Shown next is the `NL` ratings array; it has 9 rows, corresponding to the total number of cases (the first four correspond to non-diseased cases and the rest to diseased cases) and 2 columns, corresponding to the maximum number of NLs per case.  
+Shown next is the `NL` z-samples array; it has 9 rows, corresponding to the total number of cases (the first four correspond to non-diseased cases and the rest to diseased cases) and 2 columns, corresponding to the maximum number of NLs per case.  
 
 
 
 ```
-#> NL ratings:
+#> NL z-samples:
 #>       [,1] [,2]
 #>  [1,] -Inf -Inf
 #>  [2,]  0.5 -Inf
@@ -824,12 +840,12 @@ Shown next is the `NL` ratings array; it has 9 rows, corresponding to the total 
 #>  [9,] -Inf -Inf
 ```
 
-Shown next is the `LL` ratings array; it has 5 rows, corresponding to the total number of diseased cases, and 3 columns, corresponding to the maximum number of LLs per case:
+Shown next is the `LL` z-samples array; it has 5 rows, corresponding to the total number of diseased cases, and 3 columns, corresponding to the maximum number of LLs per case:
 
 
 
 ```
-#> LL ratings:
+#> LL z-samples:
 #>      [,1] [,2] [,3]
 #> [1,]  0.9 -Inf -Inf
 #> [2,] -0.2 -Inf -Inf
@@ -860,17 +876,17 @@ The negative infinities represent missing values.
 
 ### FPF
 
-Shown next is the `FP` ratings array. Since FPs are only possible on non-diseased cases, this is a length 4 row-vector. Each value is the maximum of the two `NL` ratings for the corresponding non-diseased case. As an example, for case #3 the maximum of the two `NL` values is 0.7.   
+Shown next is the `FP` z-samples array. Since FPs are only possible on non-diseased cases, this is a length 4 row-vector. Each value is the maximum of the two `NL` z-samples for the corresponding non-diseased case. As an example, for case #3 the maximum of the two `NL` values is 0.7.   
 
 
 
 ```
-#> FP ratings:
+#> FP z-samples:
 #> [1] -Inf  0.5  0.7 -0.3
 ```
 
 
-Here are the sorted `FP` ratings. 
+Here are the sorted `FP` z-samples. 
 
 
 ```
@@ -892,7 +908,7 @@ The first non-zero `FPF` value is $0.25 = 1/4$, which occurs when a conceptual s
 
 ### LLF
 
-Here are the sorted `LL` ratings. 
+Here are the sorted `LL` z-samples. 
 
 
 
@@ -917,7 +933,7 @@ The first non-zero `LLF` value is 0.111, which occurs when the sliding threshold
 
 ### wLLF
 
-The sorted `LL` ratings array and the weights are used to construct the `wLLF` values shown next.
+The sorted `LL` z-samples array and the weights are used to construct the `wLLF` values shown next.
 
 
 
@@ -956,7 +972,7 @@ This shows that the empirical AFROC is defined by the following 6 operating poin
 
 The hand-calculations also show why the AFROC gives more importance to diseased cases with more lesions while the wAFROC does not.
 
-* Considering the AFROC, diseased case #5 with three lesions which contributes three vertical jumps to LLF totaling $3/9 = 0.333333$ ^[The jumps need not be contiguous: they will be contiguous only if the three lesion ratings are closely spaced such that they are crossed in succession, in any order, by the sliding virtual threshold; otherwise the jumps will be interspersed by jumps from lesions in other cases.]. This is larger than the contribution to LLF of diseased case #1 with one lesion $1/9 = 0.11111$. 
+* Considering the AFROC, diseased case #5 with three lesions which contributes three vertical jumps to LLF totaling $3/9 = 0.333333$ ^[The jumps need not be contiguous: they will be contiguous only if the three lesion z-samples are closely spaced such that they are crossed in succession, in any order, by the sliding virtual threshold; otherwise the jumps will be interspersed by jumps from lesions in other cases.]. This is larger than the contribution to LLF of diseased case #1 with one lesion $1/9 = 0.11111$. 
 
 * Considering the wAFROC, the three lesions on diseased case #5 contribute $1/5*0.3 + 1/5*0.4 + 1/5*0.3 = 0.2$ to wLLF, the same as diseased case #1, $1/5*1 = 0.2$. 
 
@@ -1004,7 +1020,7 @@ cat("wAFROC AUC = ",
 
 
 
-It is seen that the empirical plots consist of upward and rightward jumps starting from the origin (0,0) and ending at (1,1). Each upward jump is associated with a `LL` rating exceeding a virtual threshold. Each rightward jump is associated with a `FP` rating exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it, i.e., correct decisions are rewarded and incorrect ones are penalized. If there are only upward jumps then the empirical plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect -- the straight-line extension of the plot to (1,1) ensures that the net area is unity. If there are only horizontal jumps the operating point moves from the origin to (1,0), where none of the lesions are localized and every non-diseased case has at least one NL mark and despite the straight line extension to (1,1), the net area is zero. This represents worst possible performance. 
+It is seen that the empirical plots consist of upward and rightward jumps starting from the origin (0,0) and ending at (1,1). Each upward jump is associated with a `LL` z-sample exceeding a virtual threshold. Each rightward jump is associated with a `FP` z-sample exceeding the threshold. Upward jumps tend to increase the area under the AFROC-based plots and rightward jumps tend to decrease it, i.e., correct decisions are rewarded and incorrect ones are penalized. If there are only upward jumps then the empirical plot rises from the origin to (0,1), where all lesions are correctly localized without any generating FPs and performance is perfect -- the straight-line extension of the plot to (1,1) ensures that the net area is unity. If there are only horizontal jumps the operating point moves from the origin to (1,0), where none of the lesions are localized and every non-diseased case has at least one NL mark and despite the straight line extension to (1,1), the net area is zero. This represents worst possible performance. 
 
 ## Interpretation of AUCs {#empirical-meanings}
 
@@ -1101,7 +1117,7 @@ The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, th
 
 ## The AFROC1 plot {#empirical-AFROC1}
 
-Historically the AFROC originally used a different definition of FPF, resulting in what is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-"FP" rating on a *diseased case* as the maximum of all NL ratings on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:empirical-FP)]:
+Historically the AFROC originally used a different definition of FPF, resulting in what is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-"FP" z-sample on a *diseased case* as the maximum of all NL z-samples on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:empirical-FP)]:
 
 
 \begin{equation}

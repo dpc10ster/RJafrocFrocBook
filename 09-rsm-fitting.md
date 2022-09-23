@@ -13,7 +13,7 @@
 
 The radiological search model (RSM) is based on what is known, via eye-tracking measurements, about how radiologists look at medical images [@kundel2004modeling]. The ability of this model to predict search and lesion-classification expertise was described in TBA Chapter 17. If one could estimate search and lesion-classification expertise from clinical datasets then one would know which of them is limiting performance. This would provide insight into the decision making efficiency of observers. For this potential to be realized, one has to be able to reliably estimate parameters of the RSM from data, and this turned out to be a difficult problem. 
 
-To put progress in this area in context a brief historical background is needed. I have worked on and off on the FROC estimation problem since 2002, and two persons (Dr. Hong-Jun Yoon and Xuetong Zhai) can attest to the effort. Initial attempts focused on fitting the FROC curve, in the (subsequently shown to be mistaken) belief that this was using *all* the data. In fact unmarked non-diseased cases, which are perfect decisions, are not taken into account in the FROC plot. In addition, there are degeneracy issues, which make parameter estimation difficult except in uninteresting situations. Early work involved maximization of the FROC likelihood function. This method was applied to seven designer-level CAD datasets. With CAD data one has a large number of marks and unmarked cases are relatively rare. However, only the CAD designer knows of their existence since in the clinic only a small fraction of the marks, those whose z-samples exceed a manufacturer-selected threshold, are actually shown to the radiologist. In other words the full FROC curve, extending to the end-point, is available to the CAD algorithm designer, which makes estimation of the end-point defining parameters $\lambda', \nu'$ trivial. Estimating the remaining parameter of the RSM is then also relatively easy. 
+To put progress in this area in context a brief historical background is needed. I have worked on and off on the FROC estimation problem since 2002, and two persons (Dr. Hong-Jun Yoon and Xuetong Zhai) can attest to the effort. Initial attempts focused on fitting the FROC curve, in the (subsequently shown to be mistaken) belief that this was using *all* the data. In fact unmarked non-diseased cases, which are perfect decisions, are not taken into account in the FROC plot. In addition, there are degeneracy issues, which make parameter estimation difficult except in uninteresting situations. Early work involved maximization of the FROC likelihood function. This method was applied to seven designer-level CAD datasets. With CAD data one has a large number of marks and unmarked cases are relatively rare. However, only the CAD designer knows of their existence since in the clinic only a small fraction of the marks, those whose z-samples exceed a manufacturer-selected threshold, are actually shown to the radiologist. In other words the full FROC curve, extending to the end-point, is available to the CAD algorithm designer, which makes estimation of the end-point defining parameters $\lambda, \nu$ trivial. Estimating the remaining parameter of the RSM is then also relatively easy. 
 
 It was gradually recognized that the FROC curve based method worked only for designer level CAD data, and not for human observer data. Consequently, subsequent effort focused on ROC curve-based fitting, and this proved successful at fitting radiologist datasets, where detailed definition of the ROC curve is not available. A preliminary account of this work can be found in a conference proceeding [@RN2125]. 
 
@@ -26,10 +26,10 @@ The ability to fit RSM to clinical datasets is critical to sample size estimatio
 
 
 ## ROC Likelihood function {#rsm-fitting-roc-likelihood}
-In Chapter \@ref(rsm-pred) expressions were derived for the coordinates (x,y) of the ROC curve predicted by the RSM, see Eqn. \@ref(eq:rsm-pred-fpf) and Eqn. \@ref(eq:rsm-pred-tpf). 
+In Chapter \@ref(rsm-pred) expressions were derived for the coordinates (x,y) of the ROC curve predicted by the RSM, see Eqn. \@ref(eq:rsm-pred-fpf) and Eqn. \@ref(eq:rsm-pred-tpf2). 
 
 \begin{equation}
-x \equiv \text{FPF}\left (\zeta , \lambda'\right ) = 1 - \text{exp}\left ( -\lambda' \Phi\left ( -\zeta \right )  \right )
+x \equiv \text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
 (\#eq:rsm-fitting-fpf)
 \end{equation}
  	
@@ -37,9 +37,9 @@ x \equiv \text{FPF}\left (\zeta , \lambda'\right ) = 1 - \text{exp}\left ( -\lam
 \begin{equation}
 \left.
 \begin{aligned}
-y \equiv & \text{TPF}\left (\zeta , \mu, \lambda', \nu', \overrightarrow{f_L} \right ) =  \\
-& 1 - \text{exp}\left ( -\lambda' \Phi \left ( -\zeta \right )\right ) 
-\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu' \Phi \left ( \mu -\zeta \right ) \right )^L 
+y \equiv & \text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) =  \\
+& 1 - \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right ) 
+\sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L 
 \end{aligned}
 \right \}
 (\#eq:rsm-fitting-tpf)
@@ -68,7 +68,7 @@ $$\left ( P_{1r} \right )^{F_r}  \left ( P_{2r} \right )^{T_r}$$
 The log-likelihood function is:
 	
 \begin{equation}
-LL_{ROC} \left ( \mu, \lambda', \nu', \overrightarrow{f_L} \right )= \sum_{r=0}^{R_{FROC}} \left [F_r log \left (P_{1r}  \right ) + T_r log \left (P_{2r}  \right )  \right ] \\
+LL_{ROC} \left ( \mu, \lambda, \nu, \overrightarrow{f_L} \right )= \sum_{r=0}^{R_{FROC}} \left [F_r log \left (P_{1r}  \right ) + T_r log \left (P_{2r}  \right )  \right ] \\
 (\#eq:rsm-fitting-roc-ll2)
 \end{equation}
 
@@ -91,9 +91,9 @@ The return value `ret` is a `list` with the following elements:
 
 * `ret$mu`	The mean of the diseased distribution relative to the non-diseased one
 
-* `ret$lambdP`	The Poisson parameter describing the distribution of latent NLs per case
+* `ret$lambda`	The Poisson parameter describing the distribution of latent NLs per case
 
-* `ret$nuP`	The binomial success probability describing the distribution of latent LLs per diseased case
+* `ret$nu`	The binomial success probability describing the distribution of latent LLs per diseased case
 
 * `ret$zetas`	The RSM cutoffs, zetas or thresholds
 
@@ -129,8 +129,8 @@ The lesion distribution vector is 0.69, 0.2, 0.11. This means that fraction 0.69
 The fitted parameter values are as follows (all cutoffs excepting $\zeta_1$, the chi-square statistic - `NA` for this dataset - and the covariance matrix, are not shown):
 
 * $\mu$ = 3.658
-* $\lambda'$ = 9.935
-* $\nu'$ = 0.796
+* $\lambda$ = 9.935
+* $\nu$ = 0.796
 * $\zeta_1$ = 1.504
 * $\text{AUC}$ = 0.9064
 * $\sigma (\text{AUC})$ = 0.023
@@ -138,7 +138,7 @@ The fitted parameter values are as follows (all cutoffs excepting $\zeta_1$, the
 * $\text{NLLFin}$ = 267.27
 
 
-The relatively large separation parameter $\mu$ implies good lesion-classification performance. The large $\lambda'$ parameter implies poor search performance. On the average the observer generates 9.94 latent NL marks per image. However, because of the relatively large value of $\zeta_1$, i.e., 1.5, only fraction 0.066 of these are actually marked, resulting in 0.66 actual marks per image. Search performance depends on the numbers of latent marks, i.e., $\lambda'$ and $\nu'$, not the actual numbers of marks. 
+The relatively large separation parameter $\mu$ implies good lesion-classification performance. The large $\lambda$ parameter implies poor search performance. On the average the observer generates 9.94 latent NL marks per image. However, because of the relatively large value of $\zeta_1$, i.e., 1.5, only fraction 0.066 of these are actually marked, resulting in 0.66 actual marks per image. Search performance depends on the numbers of latent marks, i.e., $\lambda$ and $\nu$, not the actual numbers of marks. 
 
 
 The fitting program decreased the negative of the log-likelihood function from 281.4 to 267.27. A decrease in negative log-likelihood is equivalent to an increase in the likelihood, which is as expected, as the function maximizes the log-likelihood. 
@@ -192,12 +192,12 @@ P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right ) = n! \prod_{
 Since $n$ is a random integer, the probability needs to be averaged over its Poisson distribution, i.e., one is calculating the expected value, yielding:
 
 \begin{equation}
-P\left ( \overrightarrow{n} \mid \lambda', \overrightarrow{\zeta} \right ) = \text{pmf}_{\text{Poi}} \left ( n, K\lambda' \right ) P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right )
+P\left ( \overrightarrow{n} \mid \lambda, \overrightarrow{\zeta} \right ) = \text{pmf}_{\text{Poi}} \left ( n, K\lambda \right ) P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right )
 (\#eq:rsm-fitting-p-n-lambda-prime-zeta)
 \end{equation}
 
 
-In this expression $K = K_1 + K_2$ is the total number of cases. $\text{pmf}_{\text{Poi}} \left ( n, K\lambda' \right )$ of the Poisson distribution yields the probability of $n$ counts from a Poisson distribution with mean $K\lambda'$. The multiplication by the total number of cases is required because one is counting the total number of latent NLs over the entire dataset. The lower limit on $n$ is needed because $n$ cannot be smaller than $N$, the total number of observed NL counts. The left hand side of Eqn. \@ref(eq:rsm-fitting-p-n-lambda-prime-zeta) is the probability of observing the NL counts vector $\overrightarrow{n}$ as a function of RSM parameters. Not surprisingly, since NLs are sampled from a zero-mean normal distribution, the $\mu$ parameter does not enter the above expression. 
+In this expression $K = K_1 + K_2$ is the total number of cases. $\text{pmf}_{\text{Poi}} \left ( n, K\lambda \right )$ of the Poisson distribution yields the probability of $n$ counts from a Poisson distribution with mean $K\lambda$. The multiplication by the total number of cases is required because one is counting the total number of latent NLs over the entire dataset. The lower limit on $n$ is needed because $n$ cannot be smaller than $N$, the total number of observed NL counts. The left hand side of Eqn. \@ref(eq:rsm-fitting-p-n-lambda-prime-zeta) is the probability of observing the NL counts vector $\overrightarrow{n}$ as a function of RSM parameters. Not surprisingly, since NLs are sampled from a zero-mean normal distribution, the $\mu$ parameter does not enter the above expression. 
 
 ### Contribution of LLs {#rsm-fitting-froc-lls}
 Likewise, define $l$ (a non-negative random integer) the total number of latent LLs in the dataset and the LL counts vector is $\overrightarrow{l} \equiv \left (  l_0, l_1, ...,l_{R_{FROC}}, \right )$. Here $l_r$ is the number of LL counts in FROC ratings bin $r$, $l_0 = l - \sum_{r=1}^{R_{FROC}} l_r = l - L$ is the *known* number of unmarked latent LLs and $L$ is the total number of observed LLs in the dataset. The probability $P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right )$ of observing the LL counts vector $\overrightarrow{l}$ is:
@@ -212,7 +212,7 @@ The above probability needs to be averaged over the binomial distribution of l:
 
 
 \begin{equation}
-P\left ( \overrightarrow{l} \mid l, \mu, \nu', \overrightarrow{\zeta} \right ) = \sum_{l=L}^{L_{tot}}\text{pmf}_{\text{Bin}} \left ( l, L_T, \nu' \right ) P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right )
+P\left ( \overrightarrow{l} \mid l, \mu, \nu, \overrightarrow{\zeta} \right ) = \sum_{l=L}^{L_{tot}}\text{pmf}_{\text{Bin}} \left ( l, L_T, \nu \right ) P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right )
 (\#eq:rsm-fitting-p-l-mu-nu-prime-zeta)
 \end{equation}
 
@@ -220,12 +220,12 @@ P\left ( \overrightarrow{l} \mid l, \mu, \nu', \overrightarrow{\zeta} \right ) =
 In this expression $L_{tot}$ is the total number of lesions in the dataset and the lower limit on $l$ is needed because it cannot be smaller than $L$, the total number of observed LLs. Performing the two summations using Maple, multiplying the two probabilities and taking the logarithm yields the final expression for the log-likelihood function [@RN1652]: 
 
 \begin{equation}
-LL_{FROC} \equiv LL_{FROC}\left ( \overrightarrow{n}, \overrightarrow{l} \mid \mu, \lambda', \nu' \right ) \\
+LL_{FROC} \equiv LL_{FROC}\left ( \overrightarrow{n}, \overrightarrow{l} \mid \mu, \lambda, \nu \right ) \\
 = \sum_{r=1}^{R_{FROC}} \left \{ n_r log\left ( p_r \right ) + l_r log\left ( q_r \right ) \right \} \\
-+ N log\left ( \lambda' \right ) \\
-+ L log\left ( \nu' \right ) \\
-- K \lambda' \left ( 1-p_0 \right ) \\
-+ \left ( L_T - L \right ) log \left ( 1 - \nu' + \nu' \ q_0 \right )
++ N log\left ( \lambda \right ) \\
++ L log\left ( \nu \right ) \\
+- K \lambda \left ( 1-p_0 \right ) \\
++ \left ( L_T - L \right ) log \left ( 1 - \nu + \nu \ q_0 \right )
 (\#eq:rsm-fitting-froc-ll)
 \end{equation}
 
@@ -233,7 +233,7 @@ LL_{FROC} \equiv LL_{FROC}\left ( \overrightarrow{n}, \overrightarrow{l} \mid \m
 
 ### Degeneracy problems {#rsm-fitting-froc-degeneracy}
 
-The product $\lambda' \left ( 1-p_0 \right ) = \lambda'\Phi(-\zeta_1)$ reveals degeneracy in the sense that two quantities appear as a product, so that they cannot be individually separated. The effect of increasing $\lambda'$ can be counteracted by increasing $\zeta_1$; increasing $\lambda'$ yields more latent NLs but increasing $\zeta_1$ results in fewer of them being marked. The two possibilities cannot be distinguished. A similar degeneracy occurs in the term involving the product $-\nu' + \nu' \ q_0 = -\nu'(1- q_0) = -\nu' \Phi(\mu-\zeta_1)$, where increasing $\nu'$ can be counter balanced by decreasing $\mu-\zeta_1$, i.e., by increasing  $\zeta_1$. Again, the effect of increasing $\nu'$ is to produce more latent LLs, but increasing $\zeta_1$ results in fewer of them being marked. 
+The product $\lambda \left ( 1-p_0 \right ) = \lambda\Phi(-\zeta_1)$ reveals degeneracy in the sense that two quantities appear as a product, so that they cannot be individually separated. The effect of increasing $\lambda$ can be counteracted by increasing $\zeta_1$; increasing $\lambda$ yields more latent NLs but increasing $\zeta_1$ results in fewer of them being marked. The two possibilities cannot be distinguished. A similar degeneracy occurs in the term involving the product $-\nu + \nu \ q_0 = -\nu(1- q_0) = -\nu \Phi(\mu-\zeta_1)$, where increasing $\nu$ can be counter balanced by decreasing $\mu-\zeta_1$, i.e., by increasing  $\zeta_1$. Again, the effect of increasing $\nu$ is to produce more latent LLs, but increasing $\zeta_1$ results in fewer of them being marked. 
 
 *This is the fundamental problem with fitting RSM FROC curves to radiologist FROC data.*
 
@@ -244,10 +244,10 @@ In the limit $\zeta_1 \rightarrow -\infty$, $p_0 \rightarrow 0$ and $q_0 \righta
 
 \begin{equation}
 LL_{FROC}^{IDCA} = \sum_{r=1}^{R_{FROC}} \left \{ n_r log\left ( p_r \right ) + l_r log\left ( q_r \right ) \right \} \\
-+ N log\left ( \lambda' \right ) \\
-+ L log\left ( \nu' \right ) \\
-- K \lambda'  \\
-+ \left ( L_T - L \right ) log \left ( 1 - \nu'  \right )
++ N log\left ( \lambda \right ) \\
++ L log\left ( \nu \right ) \\
+- K \lambda  \\
++ \left ( L_T - L \right ) log \left ( 1 - \nu  \right )
 (\#eq:rsm-fitting-idca-ll)
 \end{equation}
 
@@ -263,13 +263,13 @@ The superscript IDCA comes from *"initial detection and candidate analysis"* [@e
 
 
 
-According to TBA Eqn. (17.30), in the limit $\zeta_1 \rightarrow -\infty$ the end-point coordinates of the FROC curve represent estimates of $\lambda', \nu'$ respectively: 
+According to TBA Eqn. (17.30), in the limit $\zeta_1 \rightarrow -\infty$ the end-point coordinates of the FROC curve represent estimates of $\lambda, \nu$ respectively: 
 
 \begin{equation}
 \left. 
 \begin{aligned}
-\lambda' = & NLF_{max} \\
-\nu' = & LLF_{max} 
+\lambda = & NLF_{max} \\
+\nu = & LLF_{max} 
 \end{aligned}
 \right \}
 (\#eq:rsm-fitting-nlf-llf-max)
@@ -325,7 +325,7 @@ LL_{ROC} = \sum_{r=1}^{R_{FROC}} \left \{ K_{1r} log\left ( p_r' \right ) + K_{2
 <p class="caption">(\#fig:rsm-fitting-fig2)The IDCA method of fitting designer-level CAD FROC data.</p>
 </div>
  
-Fig. \@ref(fig:rsm-fitting-fig2): The IDCA method of fitting designer-level CAD FROC data. In the upper half of the figure, the y-axis of the pseudo-ROC is pseudo-TPF and the x-axis is pseudo-FPF. The method is illustrated for a dataset with four FROC bins. Regarding the NLs and LLs as non-diseased and diseased cases, respectively, one constructs a table similar to Table 4.1, but this time with only four ROC bins (i.e., three non-trivial operating points). This defines the four operating points, the filled circles, including the trivial one at the upper right corner, shown in the upper half of the plot. One fits the ratings counts data using, for example, the binormal model, yielding the continuous line (based on experience the unequal variance binormal model is needed; the equal variance model does not fit as well). In practice, the operating points will not fall exactly on the fitted line. Finally, one scales (or "stretches", or multiplies) the y-axis by $\nu'$. Likewise, the x-axis is scaled by $\lambda'$. This yields the continuous line shown in the lower half of the figure. Upon adding the FROC operating points one finds that they are magically fitted by the line, which is a scaled replica of the ROC fit in the upper curve. 
+Fig. \@ref(fig:rsm-fitting-fig2): The IDCA method of fitting designer-level CAD FROC data. In the upper half of the figure, the y-axis of the pseudo-ROC is pseudo-TPF and the x-axis is pseudo-FPF. The method is illustrated for a dataset with four FROC bins. Regarding the NLs and LLs as non-diseased and diseased cases, respectively, one constructs a table similar to Table 4.1, but this time with only four ROC bins (i.e., three non-trivial operating points). This defines the four operating points, the filled circles, including the trivial one at the upper right corner, shown in the upper half of the plot. One fits the ratings counts data using, for example, the binormal model, yielding the continuous line (based on experience the unequal variance binormal model is needed; the equal variance model does not fit as well). In practice, the operating points will not fall exactly on the fitted line. Finally, one scales (or "stretches", or multiplies) the y-axis by $\nu$. Likewise, the x-axis is scaled by $\lambda$. This yields the continuous line shown in the lower half of the figure. Upon adding the FROC operating points one finds that they are magically fitted by the line, which is a scaled replica of the ROC fit in the upper curve. 
 
 Reference has already been made to the fact that it is necessary to assume $\zeta_1 = -\infty$ in order to remove the degeneracy problem. This is also evident from the fact that the uppermost point in Fig. \@ref(fig:rsm-fitting-fig2) is at (1,1). A point at the upper-right corner must correspond to $\zeta_1 = -\infty$, another confirmation of this assumption. 
 
@@ -335,8 +335,8 @@ Assuming binormal fitting is employed, yielding parameters $a$ and $b$, the equa
 \begin{equation}
 \left. 
 \begin{aligned}
-NLF(\zeta) = & \lambda' \Phi\left ( -\zeta \right ) \\
-LLF(\zeta) = & \nu' \Phi\left (a -b\zeta \right ) 
+NLF(\zeta) = & \lambda \Phi\left ( -\zeta \right ) \\
+LLF(\zeta) = & \nu \Phi\left (a -b\zeta \right ) 
 \end{aligned}
 \right \}
 (\#eq:rsm-fitting-idca-froc-nlf-llf)
@@ -347,8 +347,8 @@ The RSM predicted FROC curve is repeated below for convenience,
 \begin{equation}
 \left. 
 \begin{aligned}
-NLF(\zeta) = & \lambda' \Phi\left ( -\zeta \right ) \\
-LLF(\zeta) = & \nu' \Phi\left (\mu -\zeta \right ) 
+NLF(\zeta) = & \lambda \Phi\left ( -\zeta \right ) \\
+LLF(\zeta) = & \nu \Phi\left (\mu -\zeta \right ) 
 \end{aligned}
 \right \}
 (\#eq:rsm-fitting-idca-froc-nlf-llf-rsm)

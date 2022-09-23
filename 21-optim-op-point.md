@@ -67,8 +67,8 @@ In the following $f = 1$ denotes wAFROC-AUC optimization and $f = 2$ denotes You
 
 ```r
 muArr <- c(2)
-lambdaPArr <- c(1, 2, 5, 10)
-nuPArr <- c(0.9)
+lambdaArr <- c(1, 2, 5, 10)
+nuArr <- c(0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -326,8 +326,8 @@ lesDistrCad <- c(1)
 relWeightsCad <- c(1)
 fit <- FitRsmRoc(dsCadRocBinned, lesDistrCad)
 cat("fitted values: \nmu = ", fit$mu, 
-    "\nlambda = ", fit$lambdaP, 
-    "\nnu = ", fit$nuP, "\n")
+    "\nlambda = ", fit$lambda, 
+    "\nnu = ", fit$nu, "\n")
 #> fitted values: 
 #> mu =  2.755784 
 #> lambda =  6.778332 
@@ -364,19 +364,19 @@ Table \@ref(tab:optim-op-point-table4) summarizes the results. As compared to Yo
 <tbody>
   <tr>
    <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> 6.778 </td>
-   <td style="text-align:left;"> 1.739 </td>
-   <td style="text-align:left;"> 0.774 </td>
-   <td style="text-align:left;"> 0.815 </td>
-   <td style="text-align:left;"> (0.278, 0.679) </td>
+   <td style="text-align:left;"> 18.680 </td>
+   <td style="text-align:left;"> 2.469 </td>
+   <td style="text-align:left;"> 0.634 </td>
+   <td style="text-align:left;"> 0.672 </td>
+   <td style="text-align:left;"> (0.127, 0.362) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Youden </td>
-   <td style="text-align:left;"> 6.778 </td>
-   <td style="text-align:left;"> 1.982 </td>
-   <td style="text-align:left;"> 0.770 </td>
-   <td style="text-align:left;"> 0.798 </td>
-   <td style="text-align:left;"> (0.161, 0.627) </td>
+   <td style="text-align:left;"> 18.680 </td>
+   <td style="text-align:left;"> 2.298 </td>
+   <td style="text-align:left;"> 0.630 </td>
+   <td style="text-align:left;"> 0.686 </td>
+   <td style="text-align:left;"> (0.201, 0.399) </td>
   </tr>
 </tbody>
 </table>

@@ -1,7 +1,7 @@
 --- 
 title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
-date: "2022-09-16"
+date: "2022-09-23"
 site: bookdown::bookdown_site
 output: 
    bookdown::pdf_document: default
@@ -26,6 +26,14 @@ description: "Artificial intelligence and observer performance book based on RJa
 * The online book has been divided into 3 books.
     + The [RJafrocQuickStartBook](https://dpc10ster.github.io/RJafrocQuickStart/) book.
     + The [RJafrocRocBook](https://dpc10ster.github.io/RJafrocRocBook/) book.
-    + This book [RJafrocFrocBook](https://dpc10ster.github.io/RJafrocFrocBook/).
+    + **This book:** [RJafrocFrocBook](https://dpc10ster.github.io/RJafrocFrocBook/).
+
+
+## TBA Acknowledgements
+
+Dr. Xuetong Zhai
+Dr. Peter Phillips
+Online Latex Editor [at](https://latexeditor.lagrida.com/) 
+Dataset contributors
 
 

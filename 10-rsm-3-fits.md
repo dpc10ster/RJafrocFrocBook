@@ -100,8 +100,8 @@ All 10 composite plots for the Van Dyke dataset are shown in Appendix \@ref(rsm-
 The parameters corresponding to the RSM plots are accessed as shown next. 
 
 * `resultsArr[[1]][[1,2]]$retRsm$mu` is the RSM $\mu$ parameter for the Van Dyke dataset for treatment 1 and reader 2, 
-* `resultsArr[[1]][[1,2]]$retRsm$lambdaP` is the RSM $\lambda'$ parameter;  
-* `resultsArr[[1]][[1,2]]$retRsm$nuP` is the RSM $\nu'$ parameter; 
+* `resultsArr[[1]][[1,2]]$retRsm$lambda` is the RSM $\lambda$ parameter;  
+* `resultsArr[[1]][[1,2]]$retRsm$nu` is the RSM $\nu$ parameter; 
 * `resultsArr[[1]][[1,2]]$retRsm$zeta1` is the RSM $\zeta_1$ parameter; 
 * In general the values are accessed as `[[f]][[i,j]]`, where `f` is the dataset index, `i` is the treatment index and `j` is the reader index; 
 * For the Van Dyke dataset `f = 1` and for the Franken dataset `f = 2`.
@@ -113,8 +113,8 @@ The following displays RSM parameters for the Van Dyke dataset, treatment 1 and 
 ```
 ## RSM parameters, Van Dyke Dataset, treatment 1, reader 2: 
 ## mu =  2.201413 
-## lambdaP =  0.2569453 
-## nuP =  0.7524016 
+## lambda =  0.2569453 
+## nu =  0.7524016 
 ## zeta_1 =  -0.1097901 
 ## AUC =  0.8653694 
 ## sigma_AUC =  0.04740562 
@@ -123,7 +123,7 @@ The following displays RSM parameters for the Van Dyke dataset, treatment 1 and 
 ```
 
 
-The first four values are the fitted values for the RSM parameters $\mu$, $\lambda'$, $\nu'$ and $\zeta_1$. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood ^[The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being *minimized*, the final value is smaller than the initial value.].  
+The first four values are the fitted values for the RSM parameters $\mu$, $\lambda$, $\nu$ and $\zeta_1$. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood ^[The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being *minimized*, the final value is smaller than the initial value.].  
 
 
 Displayed next are RSM parameters for the Franken dataset, treatment 2 and reader 3:
@@ -137,8 +137,8 @@ Displayed next are RSM parameters for the Franken dataset, treatment 2 and reade
 ```
 ## RSM parameters, Franken dataset, treatment 2, reader 3: 
 ## mu =  2.641412 
-## lambdaP =  2.137379 
-## nuP =  0.784759 
+## lambda =  2.137379 
+## nu =  0.784759 
 ## zeta_1 =  -1.858565 
 ## AUC =  0.8552573 
 ## sigma_AUC =  0.03809136 
@@ -572,7 +572,7 @@ The following plots are arranged in pairs, with the left plot corresponding to t
 
 
 
-The RSM parameter values for the treatment 2 plot are: $\mu$ = 5.9346513, $\lambda'$ = 0.3809031, $\nu'$ = 0.9292484, $\zeta_1$ = 0.479145. The corresponding CBM values are $\mu$ = 5.9356142, $\alpha$ = 0.9292952, $\zeta_1$ = 1.20877. The RSM and CBM $\mu$ parameters are very close and likewise the RSM $\nu'$ and CBM $\alpha$ parameters are very close - this is because they have similar physical meanings, which is investigated later in this chapter TBA. [The CBM does not have a parameter analogous to the RSM $\lambda'$ parameter.] 
+The RSM parameter values for the treatment 2 plot are: $\mu$ = 5.9346513, $\lambda$ = 0.3809031, $\nu$ = 0.9292484, $\zeta_1$ = 0.479145. The corresponding CBM values are $\mu$ = 5.9356142, $\alpha$ = 0.9292952, $\zeta_1$ = 1.20877. The RSM and CBM $\mu$ parameters are very close and likewise the RSM $\nu$ and CBM $\alpha$ parameters are very close - this is because they have similar physical meanings, which is investigated later in this chapter TBA. [The CBM does not have a parameter analogous to the RSM $\lambda$ parameter.] 
 
 
 
@@ -583,7 +583,7 @@ The RSM parameter values for the treatment 2 plot are: $\mu$ = 5.9346513, $\lamb
 
 
 
-The RSM parameters for the treatment 1 plot are: $\mu$ = 2.2014133, $\lambda'$ = 0.2569453, $\nu'$ = 0.7524016, $\zeta_1$ = -0.1097901. The corresponding CBM values are $\mu$ = 2.7457914, $\alpha$ = 0.7931264, $\zeta_1$ = 1.1250285. 
+The RSM parameters for the treatment 1 plot are: $\mu$ = 2.2014133, $\lambda$ = 0.2569453, $\nu$ = 0.7524016, $\zeta_1$ = -0.1097901. The corresponding CBM values are $\mu$ = 2.7457914, $\alpha$ = 0.7931264, $\zeta_1$ = 1.1250285. 
 
 
 
