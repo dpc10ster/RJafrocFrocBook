@@ -103,7 +103,7 @@ Compare3ProperRocFits <- function(datasetNames,
         empOp <- UtilBinCountsOpPts(binnedRocData, trt = i, rdr = j)
         fpf <- empOp$fpf; tpf <- empOp$tpf
         compPlot_ij[[i, j]] <- gpfPlotRsmPropCbm(
-          fileName, x$retRsm$mu, x$retRsm$lambdaP, x$retRsm$nuP, 
+          fileName, x$retRsm$mu, x$retRsm$lambda, x$retRsm$nu, 
           lesDistr, c1[i, j], da[i, j],
           x$retCbm$mu, x$retCbm$alpha,
           fpf, tpf, i, j, K1, K2, c(1, length(fpf)))
@@ -129,7 +129,7 @@ Compare3ProperRocFits <- function(datasetNames,
         empOp <- UtilBinCountsOpPts(binnedRocData, trt = i, rdr = j)
         fpf <- empOp$fpf; tpf <- empOp$tpf
         compPlot_ij[[i,j]] <- gpfPlotRsmPropCbm(
-          f, x$retRsm$mu, x$retRsm$lambdaP, x$retRsm$nuP, 
+          f, x$retRsm$mu, x$retRsm$lambda, x$retRsm$nu, 
           lesDistr, c1[i, j], da[i, j],
           x$retCbm$mu, x$retCbm$alpha,
           fpf, tpf, i, j, K1, K2, c(1, length(fpf)))
@@ -149,14 +149,14 @@ Compare3ProperRocFits <- function(datasetNames,
 
 
 
-gpfPlotRsmPropCbm <- function(f, mu, lambdaP, nuP, lesDistr, c1, da, 
+gpfPlotRsmPropCbm <- function(f, mu, lambda, nu, lesDistr, c1, da, 
                               muCbm, alpha, fpf, tpf, i, j, K1, K2, ciIndx) {
   
   ret_P <- gpfPropRocOperatingCharacteristic(c1,da)
   FPF_P <- c(1, ret_P$FPF);TPF_P <- c(1, ret_P$TPF) # make sure it goes to upper-right corner
   plotProp <- data.frame(FPF = FPF_P, TPF = TPF_P, Model = "PROP")
   
-  ret_R <- gpfRsmOperatingCharacteristic (mu, lambdaP, nuP, lesDistr = lesDistr) # dpc 7/20/2022
+  ret_R <- gpfRsmOperatingCharacteristic (mu, lambda, nu, lesDistr = lesDistr) # dpc 7/20/2022
   FPF_R <- ret_R$FPF;TPF_R <- ret_R$TPF
   plotRsm <- data.frame(FPF = FPF_R, TPF = TPF_R, Model = "RSM")
   dashedRsm <- data.frame(FPF = c(FPF_R[1], 1), TPF = c(TPF_R[1], 1), Model = "RSM")
@@ -247,13 +247,13 @@ gpfCbmOperatingCharacteristic <- function(mu, alpha){
 
 
 
-gpfRsmOperatingCharacteristic <- function(mu, lambdaP, nuP, lesDistr){
+gpfRsmOperatingCharacteristic <- function(mu, lambda, nu, lesDistr){
   
   plotZeta <- seq(-4, mu+4, by = 0.1)
   
-  FPF_R <- sapply(plotZeta, RSM_xROC, lambdaP = lambdaP)
-  TPF_R <- sapply(plotZeta, RSM_yROC, mu = mu, lambdaP = lambdaP, 
-                  nuP = nuP, lesDistr = lesDistr)
+  FPF_R <- sapply(plotZeta, RSM_xROC, lambda = lambda)
+  TPF_R <- sapply(plotZeta, RSM_yROC, mu = mu, lambda = lambda, 
+                  nu = nu, lesDistr = lesDistr)
   
   return(list(FPF = FPF_R,
               TPF = TPF_R

@@ -83,8 +83,8 @@ In the following $f = 1$ denotes wAFROC-AUC optimization and $f = 2$ denotes You
 
 ```{r vary-lambda-parameters}
 muArr <- c(2)
-lambdaPArr <- c(1, 2, 5, 10)
-nuPArr <- c(0.9)
+lambdaArr <- c(1, 2, 5, 10)
+nuArr <- c(0.9)
 lesDistr <- c(0.5, 0.5)
 relWeights <- c(0.5, 0.5)
 ```
@@ -93,7 +93,7 @@ relWeights <- c(0.5, 0.5)
 
 
 ```{r do-vary-lambda, echo = FALSE}
-ret <- doOneSet(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
+ret <- doOneSet(muArr, lambdaArr, nuArr, lesDistr, relWeights)
 zetaOptArr <- ret$zetaOptArr
 nlfOptArr <- ret$nlfOptArr
 llfOptArr <- ret$llfOptArr
@@ -130,7 +130,7 @@ Table \@ref(tab:optim-op-point-table-vary-lambda) summarizes the results. The co
 
 
 ```{r optim-op-point-table-vary-lambda-contents, echo=FALSE}
-x12 <- doOneTable(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1:4,1, labelIndx = 2)
+x12 <- doOneTable(lambdaArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1:4,1, labelIndx = 2)
 ```
 
 
@@ -170,7 +170,7 @@ The third effect is illustrated by the FROC plots with superimposed operating po
 
  
 ```{r echo=FALSE}
-plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
+plotArr = plotFroc(muArr, lambdaArr, nuArr)
 ```
 
 
@@ -186,7 +186,7 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 ```{r echo=FALSE}
-plotArr = plotwAfroc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
+plotArr = plotwAfroc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
 ```
 
 
@@ -210,7 +210,7 @@ grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], nrow = 2, ncol
 
 
 ```{r echo=FALSE}
-plotArr = plotRoc(muArr, lambdaPArr, nuPArr, lesDistr, relWeights)
+plotArr = plotRoc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
 ```
 
 
@@ -292,8 +292,8 @@ lesDistrCad <- c(1)
 relWeightsCad <- c(1)
 fit <- FitRsmRoc(dsCadRocBinned, lesDistrCad)
 cat("fitted values: \nmu = ", fit$mu, 
-    "\nlambda = ", fit$lambdaP, 
-    "\nnu = ", fit$nuP, "\n")
+    "\nlambda = ", fit$lambda, 
+    "\nnu = ", fit$nu, "\n")
 ```
 
 
@@ -302,9 +302,9 @@ cat("fitted values: \nmu = ", fit$mu,
 
 ```{r optim-op-point-computations-application, cache = FALSE, echo=FALSE}
 mu <- fit$mu
-lambdaP <- fit$lambdaP
-nuP <- fit$nuP
-x <- UtilPhysical2IntrinsicRSM(mu, lambdaP, nuP)
+lambda <- fit$lambda
+nu <- fit$nu
+x <- UtilRSM2Intrinsic(mu, lambda, nu)
 lambda <- x$lambda
 nu <- x$nu
 
@@ -318,53 +318,53 @@ for (y in 1:2) {
     x <- optimize(wAFROC, 
                   interval = c(-5,5), 
                   mu, 
-                  lambdaP = lambdaP, 
-                  nuP = nuP, 
+                  lambda = lambda, 
+                  nu = nu, 
                   lesDistrCad, 
                   relWeightsCad)
     zetaOptArr1[y] <- x$minimum
     wafrocArr[y] <- -x$objective  # safe to use objective here
     rocAucArr[y] <- UtilAnalyticalAucsRSM(
       mu, 
-      lambdaP = lambdaP, 
-      nuP = nuP, 
+      lambda = lambda, 
+      nu = nu, 
       zeta1 = x$minimum, 
       lesDistrCad, 
       relWeightsCad)$aucROC
     nlfOptArr[y] <- RSM_xFROC(
       z = x$minimum, 
-      lambdaP = lambdaP)
+      lambda = lambda)
     llfOptArr[y] <- RSM_yFROC(
       z = x$minimum, 
       mu, 
-      nuP)
+      nu)
   } else if (y == 2) {
     x <- optimize(Youden, 
                   interval = c(-5,5), 
                   mu, 
-                  lambdaP = lambdaP, 
-                  nuP = nuP, 
+                  lambda = lambda, 
+                  nu = nu, 
                   lesDistrCad)
     zetaOptArr1[y] <- x$minimum
     wafrocArr[y] <- UtilAnalyticalAucsRSM(
       mu, 
-      lambdaP = lambdaP, 
-      nuP = nuP, 
+      lambda = lambda, 
+      nu = nu, 
       zeta1 = x$minimum, 
       lesDistrCad, 
       relWeightsCad)$aucwAFROC
     rocAucArr[y] <- UtilAnalyticalAucsRSM(
       mu, 
-      lambdaP = lambdaP, 
-      nuP = nuP, 
+      lambda = lambda, 
+      nu = nu, 
       zeta1 = x$minimum, 
       lesDistrCad, 
       relWeightsCad)$aucROC
     nlfOptArr[y] <- RSM_xFROC(
       z = x$minimum, 
-      lambdaP = lambdaP)
+      lambda = lambda)
     llfOptArr[y] <- RSM_yFROC(
-      z = x$minimum, mu, nuP)
+      z = x$minimum, mu, nu)
   } else stop("incorrect y")
 }
 ```
@@ -376,8 +376,8 @@ Table \@ref(tab:optim-op-point-table4) summarizes the results. As compared to Yo
 
 
 ```{r optim-op-point-table4-contents, echo=FALSE}
-x1 <- cbind("wAFROC", lambda = simplePrint(lambdaP), zeta1 = simplePrint(zetaOptArr1[1]), wAFROC = simplePrint(wafrocArr[1]), ROC = simplePrint(rocAucArr[1]), OptOpPt = OpPtStr(nlfOptArr[1], llfOptArr[1]))
-x2 <- cbind("Youden", lambda = simplePrint(lambdaP), zeta1 = simplePrint(zetaOptArr1[2]), wAFROC = simplePrint(wafrocArr[2]), ROC = simplePrint(rocAucArr[2]), OptOpPt = OpPtStr(nlfOptArr[2], llfOptArr[2]))
+x1 <- cbind("wAFROC", lambda = simplePrint(lambda), zeta1 = simplePrint(zetaOptArr1[1]), wAFROC = simplePrint(wafrocArr[1]), ROC = simplePrint(rocAucArr[1]), OptOpPt = OpPtStr(nlfOptArr[1], llfOptArr[1]))
+x2 <- cbind("Youden", lambda = simplePrint(lambda), zeta1 = simplePrint(zetaOptArr1[2]), wAFROC = simplePrint(wafrocArr[2]), ROC = simplePrint(rocAucArr[2]), OptOpPt = OpPtStr(nlfOptArr[2], llfOptArr[2]))
 x12 <- as.data.frame(rbind(x1,x2))
 colnames(x12) <- c("FOM", "$\\lambda$", "$\\zeta_1$", "$\\text{wAFROC}$", "$\\text{ROC}$", "$\\left( \\text{NLF}, \\text{LLF}\\right)$")
 ```
@@ -396,11 +396,11 @@ kbl(x12, caption = "Summary of optimization results for example CAD FROC dataset
 ```{r, echo=FALSE}
 froc <- ggplot2::ggplot()
 z <- seq(-5,zetaOptArr1[1]+5,0.1)
-xFROC <- RSM_xFROC(z, lambdaP)
-yFROC <- RSM_yFROC(z, mu, nuP) 
+xFROC <- RSM_xFROC(z, lambda)
+yFROC <- RSM_yFROC(z, mu, nu) 
 df_froc <- data.frame(NLF = xFROC, LLF = yFROC)
 froc <- froc + geom_line(data = df_froc, aes(x = NLF, y = LLF)) +
-  scale_y_continuous(limits = c(0,1)) + scale_x_continuous(limits = c(0,lambdaP))
+  scale_y_continuous(limits = c(0,1)) + scale_x_continuous(limits = c(0,lambda))
 for (y in 1:2) {
   optPt <- data.frame(
     NLF = nlfOptArr[y], 
@@ -425,7 +425,7 @@ grid.arrange(froc)
 
 
 ```{r, echo=FALSE}
-x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
+x <- UtilRSM2Intrinsic(mu, lambda = lambda, nu = nu)
 lambda <- x$lambda
 nu <- x$nu
 wafroc <- PlotRsmOperatingCharacteristics(
@@ -454,7 +454,7 @@ grid.arrange(wafroc)
 
 
 ```{r, echo=FALSE}
-x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
+x <- UtilRSM2Intrinsic(mu, lambda = lambda, nu = nu)
 lambda <- x$lambda
 nu <- x$nu
 roc <- PlotRsmOperatingCharacteristics(

@@ -25,7 +25,7 @@ Shown next is how *search performance* and *lesion-classification* performance c
 
 TBA Based on the ROC/FROC/AFROC curve predictions of the RSM, a comparison is presented between area measures that can be calculated from FROC data, leading to an important and perhaps surprising conclusion, *the FROC curve is a poor descriptor of search performance and that the AFROC/wAFROC curves are preferred*. Most applications of FROC methods, particularly in CAD, have relied on the FROC curve to measure performance.
 
-In this chapter formulae for RSM quantities are given in terms of the RSM search parameters $\lambda$ and $\nu$. The formulae can be transformed to intrinsic RSM search parameters $\lambda_i$ and $\nu_i$ using Eqn. \@ref(eq:rsm-inv-transform). 
+In this chapter formulae for RSM quantities are given in terms of the RSM search parameters $\lambda$ and $\nu$.  
 
 
 
@@ -138,7 +138,7 @@ The ordinate of the end-point is a $f_L$ weighted summation of $\text{TPF}_{\tex
 
 ## ROC curve {#rsm-pred-roc-curve}
 
-On the continuous ROC curve each case has at least one mark and the ROC decision variable is the rating of the highest rated mark $h_t$ on the case. Therefore Eqn. \@ref(eq:rsm-pred-fpf) and Eqn. \@ref(eq:rsm-pred-tpf) apply. Varying the threshold parameter $\zeta$ from $\infty$ to $-\infty$ sweeps out the continuous section of the predicted ROC curve from (0,0) to $\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$. 
+On the continuous ROC curve each case has at least one mark and the ROC decision variable is the rating of the highest rated mark $h_t$ on the case. Therefore Eqn. \@ref(eq:rsm-pred-fpf-def) and Eqn. \@ref(eq:rsm-pred-tpf-def) apply. Varying the threshold parameter $\zeta$ from $\infty$ to $-\infty$ sweeps out the continuous section of the predicted ROC curve from (0,0) to $\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )$. 
 
 
 ### Derivation of FPF {#rsm-pred-roc-curve-fpf}
@@ -454,7 +454,7 @@ No effect on FPF but TPF increases as more lesions per case means more LLs per c
 
 >A proper ROC curve has the property that it never crosses the chance diagonal and its slope never increases as the operating point moves up the ROC curve [@metz1999proper; @macmillan2004detection]. *It is shown below that the RSM predicted ROC curve, including the dashed straight line extension, is proper* ^[The statement in the print book that the "proper" property only applies to the continuous section is incorrect.]. 
 
-Consider first the continuous section which is below-left of the end-point. For convenience one abbreviates FPF and TPF to $x$ and $y$, respectively, and suppresses the dependence on model parameters. From Eqn. \@ref(eq:rsm-pred-fpf) and Eqn. \@ref(eq:rsm-pred-tpf) one can express the ROC coordinates as: 
+Consider first the continuous section which is below-left of the end-point. For convenience one abbreviates FPF and TPF to $x$ and $y$, respectively, and suppresses the dependence on model parameters. From Eqn. \@ref(eq:rsm-pred-fpf) and Eqn. \@ref(eq:rsm-pred-tpf2) one can express the ROC coordinates as: 
 
 \begin{equation}
 \left. 
@@ -653,7 +653,7 @@ A consequence of the $\zeta$ dependence is that if one uses ROC AUC as the measu
 ```{r rsm-pred-fig-auc-mu-code, echo=FALSE}
 muArr <- c(0.05,1,2,4)
 lambda <- 1
-nu <- 1
+nu <- 0.9
 L <- 1 
 lesDistr <- c(rep(0, L-1), 1)
 plotArr <- array(list(), dim = c(length(muArr)))
@@ -852,12 +852,10 @@ The end-point coordinates are (`r maxFPF`, `r maxTPF`) and the slope is `r mStLi
 
 
 ```{r}
-lambda_i <- UtilRSM2IntrinsicRSM(mu, lambda, nu)$lambda_i
-nu_i <- UtilRSM2IntrinsicRSM(mu, lambda, nu)$nu_i
 ret <- PlotRsmOperatingCharacteristics(
   mu,
-  lambda_i,
-  nu_i,
+  lambda,
+  nu,
   zeta1 = -Inf, 
   OpChType = "ROC",
   lesDistr = lesDistr,

@@ -9,110 +9,110 @@ simplePrint <- function(x) {
 
 
 wAFROC <- function (
-  zeta1, mu, lambdaP, nuP, 
+  zeta1, mu, lambda, nu, 
   lesDistr, 
   relWeights) {
   # return negative of aucwAFROC 
   # (as optimize finds minimum of function)
-  return(-UtilAnalyticalAucsRSM(mu, lambdaP = lambdaP, nuP = nuP, zeta1, lesDistr, relWeights)$aucwAFROC)
+  return(-UtilAnalyticalAucsRSM(mu, lambda = lambda, nu = nu, zeta1, lesDistr, relWeights)$aucwAFROC)
 }
 
 
-Youden <- function (zeta1, mu, lambdaP, nuP, lesDistr) {
+Youden <- function (zeta1, mu, lambda, nu, lesDistr) {
   # add sensitivity and specificity 
   # and subtract 1, i.e., Youden's index
-  x <- RSM_yROC(zeta1, mu, lambdaP, nuP, lesDistr) + 
-    (1 - RSM_xROC(zeta1, lambdaP)) - 1
+  x <- RSM_yROC(zeta1, mu, lambda, nu, lesDistr) + 
+    (1 - RSM_xROC(zeta1, lambda)) - 1
   # return negative of Youden-index 
   # (as optimize finds minimum of function)
   return(-x)
 }
 
 
-doOneSet <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
-  wAfrocArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  rocArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  zetaOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  fpfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  tpfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  nlfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
-  llfOptArr <- array(dim = c(2,length(muArr), length(lambdaPArr), length(nuPArr)))
+doOneSet <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
+  wAfrocArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
+  rocArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
+  zetaOptArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
+  fpfOptArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
+  tpfOptArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
+  nlfOptArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
+  llfOptArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
   for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
+    for (i2 in 1:length(lambdaArr)) {
+      for (i3 in 1:length(nuArr)) {
         mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
+        lambda <- lambdaArr[i2]
+        nu <- nuArr[i3]
         for (y in 1:2) {
           if (y == 1) {
             x <- optimize(wAFROC, 
                           interval = c(-5,5), 
                           mu, 
-                          lambdaP = lambdaP, 
-                          nuP = nuP, 
+                          lambda = lambda, 
+                          nu = nu, 
                           lesDistr, 
                           relWeights)
             zetaOptArr[y,i1,i2,i3] <- x$minimum
             wAfrocArr[y,i1,i2,i3] <- -x$objective # safe to use objective here
             rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
               mu, 
-              lambdaP = lambdaP, 
-              nuP = nuP, 
+              lambda = lambda, 
+              nu = nu, 
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucROC
             fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
               z = x$minimum, 
-              lambdaP = lambdaP)
+              lambda = lambda)
             tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
               z = x$minimum, 
               mu, 
-              lambdaP = lambdaP,
-              nuP = nuP,
+              lambda = lambda,
+              nu = nu,
               lesDistr = lesDistr)
             nlfOptArr[y,i1,i2,i3] <- RSM_xFROC(
               z = x$minimum, 
-              lambdaP = lambdaP)
+              lambda = lambda)
             llfOptArr[y,i1,i2,i3] <- RSM_yFROC(
               z = x$minimum, 
               mu, 
-              nuP = nuP)
+              nu = nu)
           } else if (y == 2) {
             x <- optimize(Youden, 
                           interval = c(-5,5), 
                           mu, 
-                          lambdaP = lambdaP, 
-                          nuP = nuP, 
+                          lambda = lambda, 
+                          nu = nu, 
                           lesDistr)
             zetaOptArr[y,i1,i2,i3] <- x$minimum
             wAfrocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
               mu, 
-              lambdaP = lambdaP, 
-              nuP = nuP, 
+              lambda = lambda, 
+              nu = nu, 
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucwAFROC
             rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
               mu, 
-              lambdaP = lambdaP, 
-              nuP = nuP, 
+              lambda = lambda, 
+              nu = nu, 
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucROC
             fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
               z = x$minimum, 
-              lambdaP = lambdaP)
+              lambda = lambda)
             tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
               z = x$minimum, 
               mu, 
-              lambdaP = lambdaP,
-              nuP = nuP,
+              lambda = lambda,
+              nu = nu,
               lesDistr = lesDistr)
             nlfOptArr[y,i1,i2,i3] <- RSM_xFROC(
               z = x$minimum, 
-              lambdaP = lambdaP)
+              lambda = lambda)
             llfOptArr[y,i1,i2,i3] <- RSM_yFROC(
-              z = x$minimum, mu, nuP)
+              z = x$minimum, mu, nu)
           } else stop("incorrect y")
         }
       }
@@ -131,18 +131,18 @@ doOneSet <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
 
 
 
-plotFroc <- function(muArr, lambdaPArr, nuPArr) {
+plotFroc <- function(muArr, lambdaArr, nuArr) {
   plotArr <- array(list(), dim = 8)
   i <- 1
   for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
+    for (i2 in 1:length(lambdaArr)) {
+      for (i3 in 1:length(nuArr)) {
         mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
+        lambda <- lambdaArr[i2]
+        nu <- nuArr[i3]
         z <- seq(-5,mu+5,0.1)
-        xFROC <- RSM_xFROC(z, lambdaP)
-        yFROC <- RSM_yFROC(z, mu, nuP)
+        xFROC <- RSM_xFROC(z, lambda)
+        yFROC <- RSM_yFROC(z, mu, nu)
         df_froc <- data.frame(
           NLF = xFROC, 
           LLF = yFROC)
@@ -150,9 +150,9 @@ plotFroc <- function(muArr, lambdaPArr, nuPArr) {
           df_froc, 
           aes(x = NLF, y = LLF)) + 
           geom_line() +
-          scale_x_continuous(limits = c(0,lambdaP)) + 
+          scale_x_continuous(limits = c(0,lambda)) + 
           scale_y_continuous(limits = c(0,1)) #+
-          #ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
+          #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
           # DpcBugFix 8/28/22
           # fix the following error in GitHub Actions 
           # Quitting from lines 340-341 (22-optim-op-point.Rmd) 
@@ -174,18 +174,15 @@ plotFroc <- function(muArr, lambdaPArr, nuPArr) {
 
 
 
-plotwAfroc <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
+plotwAfroc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
   plotArr <- array(list(), dim = 8)
   i <- 1
   for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
+    for (i2 in 1:length(lambdaArr)) {
+      for (i3 in 1:length(nuArr)) {
         mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
-        lambda <- x$lambda
-        nu <- x$nu
+        lambda <- lambdaArr[i2]
+        nu <- nuArr[i3]
         plotArr[[i]] <- PlotRsmOperatingCharacteristics(
           c(mu,mu),
           c(lambda,lambda),
@@ -196,7 +193,7 @@ plotwAfroc <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
           OpChType = "wAFROC",
           legendPosition = "null"
         )$wAFROCPlot +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
+          ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
         i <- i + 1
       }
     }
@@ -206,18 +203,15 @@ plotwAfroc <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
 
 
 
-plotRoc <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
+plotRoc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
   plotArr <- array(list(), dim = 8)
   i <- 1
   for (i1 in 1:length(muArr)) {
-    for (i2 in 1:length(lambdaPArr)) {
-      for (i3 in 1:length(nuPArr)) {
+    for (i2 in 1:length(lambdaArr)) {
+      for (i3 in 1:length(nuArr)) {
         mu <- muArr[i1]
-        lambdaP <- lambdaPArr[i2]
-        nuP <- nuPArr[i3]
-        x <- UtilPhysical2IntrinsicRSM(mu, lambdaP = lambdaP, nuP = nuP)
-        lambda <- x$lambda
-        nu <- x$nu
+        lambda <- lambdaArr[i2]
+        nu <- nuArr[i3]
         plotArr[[i]] <- PlotRsmOperatingCharacteristics(
           c(mu,mu),
           c(lambda,lambda),
@@ -228,7 +222,7 @@ plotRoc <- function(muArr, lambdaPArr, nuPArr, lesDistr, relWeights) {
           OpChType = "ROC",
           legendPosition = "null"
         )$ROCPlot +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nuP, ", lambda = ", lambdaP))
+          ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
         i <- i + 1
       }
     }

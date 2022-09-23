@@ -37,5 +37,8 @@ knitr::write_bib(c(
 ## TBA Acknowledgements
 
 Dr. Xuetong Zhai
+Dr. Peter Phillips
+Online Latex Editor [at](https://latexeditor.lagrida.com/) 
 Dataset contributors
+
 
