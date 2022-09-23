@@ -347,16 +347,37 @@ It is instructive to understand the effects of varying the RSM parameters on the
 #### Vary $\mu$
 
 ```{r, echo = F}
-myLocalPrint <- function(mu, lambda, nu, zeta, lesDistr)
+myLocalPrint <- function(index, mu, lambda, nu, zeta, lesDistr)
 {
-cat("mu =", mu, 
-    ",lambda =", lambda, 
-    ",nu =", nu, 
-    ",zeta =", zeta, 
-    ",RSM-x =", sprintf("%5.3f", RSM_xROC(zeta,lambda)),
-    ",RSM-y =", sprintf("%5.3f", RSM_yROC(zeta,mu,lambda,nu, lesDistr = lesDistr)), 
-    "\n")
+  if (index == 1) {
+    cat("mu =", mu, 
+        ", RSM-x =", sprintf("%6.4f", RSM_xROC(zeta,lambda)),
+        ", RSM-y =", sprintf("%6.4f", RSM_yROC(zeta,mu,lambda,nu, lesDistr = lesDistr)), 
+        "\n")
+  }
+
+  if (index == 2) {
+    cat("lambda =", lambda, 
+        ", RSM-x =", sprintf("%6.4f", RSM_xROC(zeta,lambda)),
+        ", RSM-y =", sprintf("%6.4f", RSM_yROC(zeta,mu,lambda,nu, lesDistr = lesDistr)), 
+        "\n")
+  }
+  
+  if (index == 3) {
+    cat("nu =", nu, 
+        ", RSM-x =", sprintf("%6.4f", RSM_xROC(zeta,lambda)),
+        ", RSM-y =", sprintf("%6.4f", RSM_yROC(zeta,mu,lambda,nu, lesDistr = lesDistr)), 
+        "\n")
+  }
+  
+  if (index == 4) {
+    cat("zeta =", zeta, 
+        ", RSM-x =", sprintf("%6.4f", RSM_xROC(zeta,lambda)),
+        ", RSM-y =", sprintf("%6.4f", RSM_yROC(zeta,mu,lambda,nu, lesDistr = lesDistr)), 
+        "\n")
+  }
 }
+
 ```
 
 
@@ -368,8 +389,9 @@ lambda <- 2
 nu <- 0.5
 lesDistr <- c(0.1,0.9)
 
+cat("Varying mu only; other parameters are lambda = ", lambda, ", nu = ", nu, ", zeta = ", zeta, "\n\n")
 for (mu in seq(0,5,0.5)) {
-myLocalPrint(mu, lambda, nu, zeta, lesDistr)
+myLocalPrint(1, mu, lambda, nu, zeta, lesDistr)
 }
 ```
 
@@ -385,8 +407,9 @@ mu <- 1
 lambda <- 2
 nu <- 0.5
 
+cat("Varying lambda only; other parameters are mu = ", mu, ", nu = ", nu, ", zeta = ", zeta, "\n\n")
 for (lambda in seq(0.5,5,0.5)) {
-myLocalPrint(mu, lambda, nu, zeta, lesDistr)
+  myLocalPrint(2, mu, lambda, nu, zeta, lesDistr)
 }
 ```
 
@@ -402,8 +425,9 @@ mu <- 1
 lambda <- 2
 nu <- 0.5
 
+cat("Varying nu only; other parameters are mu = ", mu, ", lambda = ", lambda, ", zeta = ", zeta, "\n\n")
 for (nu in seq(0,0.9,0.1)) {
-myLocalPrint(mu, lambda, nu, zeta, lesDistr)
+  myLocalPrint(3, mu, lambda, nu, zeta, lesDistr)
 }
 ```
 
@@ -418,8 +442,9 @@ mu <- 1
 lambda <- 2
 nu <- 0.5
 
+cat("Varying zeta only; other parameters are mu = ", mu, ", lambda = ", lambda, ", nu = ", nu, "\n\n")
 for (zeta in seq(-3,3,0.5)) {
-myLocalPrint(mu, lambda, nu, zeta, lesDistr)
+  myLocalPrint(4, mu, lambda, nu, zeta, lesDistr)
 }
 ```
 
@@ -438,12 +463,9 @@ mu <- 1
 lambda <- 2
 nu <- 0.5
 
+cat("Varying f only; other parameters are mu = ", mu, ", lambda = ", lambda, ", nu = ", nu, ", zeta = ", zeta, "\n\n")
 for (f in seq(1,0,-0.1)) {
-cat("mu = ", mu, 
-    ", lambda = ", lambda, 
-    ", nu = ", nu, 
-    ", zeta = ", zeta, 
-    ", f = ", f, 
+cat("f = ", f, 
     ", RSM-x = ", sprintf("%6.4f", RSM_xROC(zeta,lambda)),
     ", RSM-y = ", sprintf("%6.4f", RSM_yROC(zeta,mu,lambda,nu, lesDistr = c(f, 1-f))), 
     "\n")
