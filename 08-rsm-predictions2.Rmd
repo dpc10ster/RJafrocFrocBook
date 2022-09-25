@@ -28,9 +28,165 @@ In this chapter formulae for RSM quantities are given in terms of the RSM search
 
 
 
-## wAFROC curve{#rsm-pred2-wafroc-curve}
+## The RSM-predicted FROC curve {#rsm-pred2-froc-curve}
 
-The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pred-fpf) applies.
+The derivation of the FROC curve is much simpler. From the property of the Poisson distribution, namely, its mean is the $\lambda'$ parameter of the distribution, it follows that the expected number of latent NLs per case is $\lambda'$. One multiplies this by $P \left ( Z > \zeta \mid Z \sim N(0,1) \right )$, i.e., $\Phi(-\zeta)$, to obtain the expected number of latent NLs per case that is actually marked, i.e., NLF:
+
+\begin{equation}
+NLF \left ( \zeta, \lambda' \right ) = \frac{\lambda}{\mu} \Phi \left (-\zeta \right )
+(\#eq:rsm-pred2-froc-nlf)
+\end{equation}
+
+
+Diseased cases are separated into groups, each with a fixed number of $L$ lesions per case, where $L$ varies from one to $L_{max}$. For each group characterized by $L$, one seeks the fraction of the expected number of latent LLs per case divided by the total number of lesions in each case (L). Since $\nu'$ is the probability that a lesion is found, it must equal the desired fraction. Next, one multiplies by $P \left ( Z > \zeta \mid Z \sim N(\mu,1) \right )$ i.e., $\Phi(\mu - \zeta)$, to obtain the fraction that is actually marked. Finally, one performs a weighted summation over the different groups with $f_L$  as the weighting fraction. Therefore,
+
+\begin{equation}
+\left. 
+\begin{aligned}
+LLF\left ( \zeta, \mu, \nu', \overrightarrow{f_L} \right ) =& \sum_{L=1}^{L_{max}} f_L \nu'  \Phi \left ( \mu - \zeta \right )\\
+=& \nu'  \Phi \left ( \mu - \zeta \right )\\
+= \left ( 1-\text{exp}\left ( -\nu \mu \right ) \right )  \Phi \left ( \mu - \zeta \right )& 
+\end{aligned}
+\right \}
+(\#eq:rsm-pred2-froc-llf)
+\end{equation}
+
+
+Note that $LLF\left ( \zeta, \mu, \nu', \overrightarrow{f_L} \right )$ is independent of $\overrightarrow{f_L}$. Summarizing, the coordinates of the RSM-predicted point on the FROC curve are given by Eqn. \@ref(eq:rsm-pred2-froc-nlf) and Eqn. \@ref(eq:rsm-pred2-froc-llf). The FROC curve starts at (0,0) and ends at $\left ( \lambda', \nu' \right )$. The x-coordinate does not extend to arbitrarily large values and the y-coordinate does not approach unity (unless $\nu'$).  The constrained end-point property, demonstrated before for the ROC curve, also applies to the FROC curve:
+
+\begin{equation}
+\left. 
+\begin{aligned}
+NLF_{max} =& \lambda / \mu\\
+LLF_{max}=& 1 - \text{exp}(-\nu \mu))\\
+\end{aligned}
+\right \}
+(\#eq:rsm-pred2-froc-max)
+\end{equation}
+
+
+```{r rsm-pred2-froc-fig-froc-mu-code, echo=FALSE}
+muArr <- c(0.05,1,2,4)
+lambda <- 1
+nu <- 1
+L <- 1 
+lesDistr <- c(rep(0, L-1), 1)
+plotArr <- array(list(), dim = c(length(muArr)))
+for (i in 1:length(muArr)) {
+  mu <- muArr[i]
+  ret1 <- PlotRsmOperatingCharacteristics(
+    mu, lambda, nu, 
+    lesDistr = L, legendPosition  = "none",
+    llfRange = c(0,1)
+  )
+  plotArr[[i]] <- ret1$FROCPlot + ggtitle(paste0("mu = ", as.character(muArr[i])))
+}
+```
+
+
+
+```{r rsm-pred2-froc-fig-froc-mu-plots, fig.cap="RSM-predicted FROC curves for indicated values of the $\\mu$ parameter. As $\\mu$ increases the curve approaches the top left corner, in the limit it is the vertical line connecting the origin to (0,1). Notice the wide range of variation of the x-axis scaling. In top left it ranges from 0 to 20 while in bottom right it ranges from 0 to 0.2. The total area under the FROC curve actually decreases as $\\mu$ increases. Because it is not contained within the unit square, the FROC cannot be used as the basis of a meaningful figure of merit.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], ncol = 2)
+```
+
+
+ 
+## The RSM-predicted AFROC curve {#rsm-pred2-froc-afroc-curve}
+
+The AFROC x-coordinate is the same as the ROC x-coordinate and Eqn. \@ref(eq:rsm-pred-fpf) applies. The AFROC y-coordinate is identical to the FROC y-coordinate and the second Eqn. \@ref(rsm-pred2-froc) applies. The second expression on the right hand side uses the intrinsic RSM parameters. Note that the expression is independent of the number of lesions in the dataset or their distribution (unlike the AFROC, the weighted AFROC does depend on the lesion distribution  ) TBA!!. The limiting coordinates of the AFROC are: 
+
+\begin{equation}
+\left. 
+\begin{aligned}
+\text{FPF}_{\text{max}} =& 1 - \text{exp}\left (\lambda / \mu \right ) \\
+LLF_{max}=& 1 - \text{exp}(-\nu \mu))\\
+\end{aligned}
+\right \}
+(\#eq:rsm-pred2-froc-fpf-llf-max)
+\end{equation}
+
+It too has the constrained end-point property. In terms of the intrinsic RSM parameters, As $\mu$ increases starting from $0+$, $\text{FPF}_{\text{max}}$ decreases starting from $1-$, approaching $0+$ as $\mu$ approaches $\infty$. In the same limit, $\text{TPF}_{\text{max}}$ increases starting from 0, approaching $1-$. [The notation "1-" denotes a number just less than one.] 
+
+Source the file `mainRsmAFROC.R`. Note the change at line 7 with type = "AFROC", which generates AFROC plots shown in Fig. 17.4 (A-F) for the following values of  : 0.001, 1, 2, 3, 4 and 5.
+
+```{r rsm-pred2-froc-fig-afroc-mu-code, echo=FALSE}
+muArr <- c(0.05,1,2,4)
+lambda <- 1
+nu <- 1
+L <- 1 
+lesDistr <- c(rep(0, L-1), 1)
+plotArr <- array(list(), dim = c(length(muArr)))
+for (i in 1:length(muArr)) {
+  mu <- muArr[i]
+  ret1 <- PlotRsmOperatingCharacteristics(
+    mu, lambda, nu, 
+    lesDistr = L, legendPosition  = "none",
+    llfRange = c(0,1)
+  )
+  plotArr[[i]] <- ret1$AFROCPlot + ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
+}
+```
+
+
+
+```{r rsm-pred2-froc-fig-afroc-mu-plots, fig.cap="RSM-predicted AFROC curves for indicated values of the $\\mu$ parameter. As $\\mu$ increases, AFROC-AUC increases; the curve increasingly approaches the top-left corner, followed by an inaccessible dashed linear extension to (1,1). Each plot is completely contained within the unit square, which makes it easy to define a figure of merit.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], ncol = 2)
+```
+
+
+
+
+As $\mu$ increases, the area under the AFROC increases monotonically from 0 to 1. The reader should check that this is true regardless of the choices of the other parameters in the model. This is expected of a well-behaved area measure that can be used as a figure of merit. 
+
+Experiment with different values for the parameters to confirm that the following statements are true:
+
+1.	The AFROC plot is independent of the number of lesions per case. Area under AFROC is independent of  . These statements are not true for the wAFROC TBA!!. In contrast, the ROC ordinate increases with increasing numbers of lesions per case.  
+
+2.	From Eqn. \@ref(eq:rsm-pred2-froc-tpf-max) and Eqn. \@ref(eq:rsm-pred2-froc) it follows that $\text{TPF}_{\text{max}} \geq LLF_{max}$  with the equality holding in the limit $\mu \rightarrow \infty$. 
+
+The physical reason for $\text{TPF}_{\text{max}} \geq LLF_{max}$  is that the ROC gives credit for incorrect localizations on diseased cases, while the AFROC does not. This is the well-known "right for wrong reason" argument [@bunch1977free] originally advanced in 1977.
+
+3.	As   increases the AFROC curve more closely approaches the upper-left corner of the plot, denoting increasing performance and the area under the AFROC curve approaches 1, which is the best possible performance: (a)  decreases and (b)   increases, denoting decreasing numbers of incorrect decisions on non-diseased and diseased cases, respectively. 
+4.	For   and non-zero   the operating characteristic approaches the horizontal line extending from the origin to (1,0), which is the continuous section of the curve, followed by the vertical dashed line connecting (1,0) to (1,1) and AFROC-AUC approaches zero. In this limit, none of the lesions is localized and every case has at least one NL mark, which implies worst possible performance.
+5.	For   the accessible portion of the operating characteristic approaches the vertical line connecting (0,0) to (0,1), the area under which is zero. The complete AFROC curve is obtained by connecting this point to (1,1) by the dashed line and in this limit the area under the complete ROC curve approaches 1. As with the ROC, omitting the area under the dashed portion of the curve will result in a severe underestimate of true performance. 
+6.	As   decreases  decreases to zero while  stays constant, Eqn. (17.35), as the latter is independent of  . 
+7.	As   increases  stays constant (it is independent of  ) while  approaches unity. As   increases, the corresponding physical parameter  increases, approaching unity, guaranteeing that every lesion is found. AFROC-AUC approaches one.
+8.	Over the range (0,0) to  , the slope of the AFROC decreases monotonically. It is infinite at the origin and zero at the end-point. 
+
+
+### Chance level performance on AFROC {#rsm-pred2-froc-afroc-chance}
+
+There appears to be a misconception24,25 that chance level performance on an AFROC corresponds to the positive diagonal of the plot, yielding AFROC-AUC of 0.5. Fig. 17.4 (A) shows that chance level performance corresponds to the horizontal line connecting the origin to (1,0) and a vertical dashed line connecting (1,0) to (1,1) corresponding to AFROC-AUC of zero. If the lesion perceptual contrast is zero, then no lesions are found and all marks are NLs. The AFROC-AUC FOM, namely the probability that a lesion rating exceeds the ratings of NLs on non-diseased cases, see §14.2, is zero.
+
+
+### The reader who does not yield any marks {#rsm-pred2-froc-no-marks}
+
+Suppose the radiologist does not mark any case, as in §13.4.2.2, resulting in an empty data file. One possibility is that the radiologist did not interpret the cases and simply "whizzed" through them. In this situation, the radiologist is not performing the diagnostic task. The AFROC operating point is stuck at the origin and connecting the straight-line extension yields AFROC-AUC = 0.5, would be incorrect as it implies finite performance (any value greater than zero for AFROC-AUC implies some degree of expertise). All models of observer performance assume that the observer is behaving rationally10, so this possibility is not analyzable. On the other hand, there is the real possibility that the radiologist did not detect any lesions and did not mark any non-diseased case. Assuming the radiologist is behaving rationally, one needs an explanation for AFROC-AUC = 0.5. It turns out that this observer is perfect at not generating NLs on non-diseased cases, so no patient is recalled incorrectly. The radiologist needs to get some credit for this ability, and this is the explanation of AFROC-AUC = 0.5 for a rational observer. Since this radiologist's LLF = zero obviously the radiologist is far from perfect. The radiologist needs to be trained to find lesions. A suitable training set would consist of diseased cases only. The FROC data from such a dataset could be analyzed using the AFROC1 figure of merit, which could be used to measure the improvement of the radiologist in finding lesions. There is no point wasting non-diseased cases on this radiologist, as the radiologist has proven perfect performance on them by not generating NL marks on any non-diseased case.
+
+The following code, mainNoMarks.R, illustrates how this observer can be simulated.
+
+
+
+The corresponding AFROC plot, obtained by sourcing this code, is shown in Fig. 17.5.
+
+Fig. 5 here
+
+Fig. 17.5: The case of the rational observer who does not mark any image, who operates at (0,0) on the AFROC and for whom the AFROC plot consists only of the dashed straight line extension connecting the origin to (1,1) and AFROC-AUC = 0.5. This observer has better performance (specifically unit case-level specificity) than the worst observer shown in Fig. 17.4 (A) who yielded AFROC-AUC = 0 (zero sensitivity and zero specificity). [This figure was generated by sourcing file mainNoMarks.R]
+
+The explanation lies in the values of the chosen parameters. The   parameter was set to 0.001 as setting it to zero would create a divide by zero error when   is calculated. Instead one sets   to 0.000001, so  . With such small   the probability is almost zero that any case will have a NL mark – according to the Poisson distribution, the probability of no mark is  . Of course, the fact that   is close to zero means the  , so no lesion is found. 
+
+The corresponding code output is shown below.
+
+
+This tells us that FROC-AUC = 0, ROC-AUC = 0.5 and AFROC-AUC = 0.5. FROC-AUC is meaningless as the operating point is stuck at the origin and one has no idea where it is supposed to end. ROC-AUC = 0.5 means that the observer is showing chance-level performance at the task of separating non-diseased and diseased cases. The ROC paradigm does not credit the observer for avoiding marking non-diseased cases. AFROC-AUC = 0.5 credits the observer for not marking any non-diseased cases but there is no credit for unmarked lesions. The difference between the ROC and FROC paradigms, both predicting AUC = 0.5, but these have different meanings, is because FROC is a location specific paradigm but ROC is not. 
+
+
+
+
+
+## The RSM-predicted wAFROC curve{#rsm-pred2-wafroc-curve}
+
+The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pred2-fpf) applies.
 
 
 The wAFROC ordinate is calculated using:
@@ -69,7 +225,7 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)[,-1]
 * $\text{pmf}_{Bin}\left ( l, L, \nu \right )$ is the probability mass function (pmf) of the binomial distribution with success probability $\nu$ and trial size $L$, defined in Eqn. \@ref(eq:rsm-binomial-pmf). $\text{W}_{Ll}$ is the weight of lesion $l$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.3$. 
 
 
-* The wAFROC-AUC is obtained by numerically integrating the wAFROC curve defined by Eqn. \@ref(eq:rsm-pred-fpf) and Eqn. \@ref(eq:rsm-pred2-wllf) which is implemented in `UtilAnalyticalAucsRSM`.
+* The wAFROC-AUC is obtained by numerically integrating the wAFROC curve defined by Eqn. \@ref(eq:rsm-pred2-fpf) and Eqn. \@ref(eq:rsm-pred2-wllf) which is implemented in `UtilAnalyticalAucsRSM`.
 
 
 * To generate equal weights set `relWeights = 0`, as in following code:

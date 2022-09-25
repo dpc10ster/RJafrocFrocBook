@@ -151,7 +151,7 @@ plotFroc <- function(muArr, lambdaArr, nuArr) {
           aes(x = NLF, y = LLF)) + 
           geom_line() +
           scale_x_continuous(limits = c(0,lambda)) + 
-          scale_y_continuous(limits = c(0,1)) #+
+          scale_y_continuous(limits = c(0,1))
           #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
           # DpcBugFix 8/28/22
           # fix the following error in GitHub Actions 
@@ -192,7 +192,7 @@ plotwAfroc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
           relWeights,
           OpChType = "wAFROC",
           legendPosition = "null"
-        )$wAFROCPlot +
+        )$wAFROCPlot
         #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
         # DpcBugFix 9/24/22
         # fix the following error in GitHub Actions 
@@ -226,7 +226,7 @@ plotRoc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
           relWeights,
           OpChType = "ROC",
           legendPosition = "null"
-        )$ROCPlot +
+        )$ROCPlot
           #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
           # DpcBugFix 9/24/22
           # fix the following error in GitHub Actions 
