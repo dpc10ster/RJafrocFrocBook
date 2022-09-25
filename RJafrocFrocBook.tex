@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-09-23}
+\date{2022-09-25}
 
 \begin{document}
 \maketitle
@@ -154,7 +154,7 @@
 \item
   All references in this book to \texttt{RJafroc} refer to the R package with that name (case sensitive) \citep{R-RJafroc}.
 \item
-  Since its publication in 2017 \texttt{RJafroc}, on which the \texttt{R} code examples in the book depend, has evolved considerably, causing many of the examples to ``break''.
+  Since its publication in 2017 \texttt{RJafroc}, on which the \texttt{R} code examples in the print book depend, has evolved considerably, causing many of the examples to ``break'' if one uses the most current version of \texttt{RJafroc}. The code will still run if one uses \href{https://cran.r-project.org/src/contrib/Archive/RJafroc/}{\texttt{RJafroc} 0.0.1} but this is inconvenient and misses out on many of the software improvements made since the print book appeared.
 \item
   This gives me the opportunity to update the print book.
 \item
@@ -175,8 +175,11 @@
 \section{TBA Acknowledgements}\label{tba-acknowledgements}}
 
 Dr.~Xuetong Zhai
+
 Dr.~Peter Phillips
+
 Online Latex Editor \href{https://latexeditor.lagrida.com/}{at}
+
 Dataset contributors
 
 \hypertarget{part-froc-paradigm}{%
@@ -770,7 +773,7 @@ The above formalism should not obscure the fact that the futility of extrapolati
 \hypertarget{empirical-froc-plot-illustration}{%
 \subsection{Illustration with a dataset}\label{empirical-froc-plot-illustration}}
 
-The following plot uses \texttt{dataset04} \citep{zanca2009evaluation} in \texttt{RJafroc} to illustrate an empirical FROC plot. This dataset has \(L_{max} = 3\), \(\max{(N_{k_tt}})= 3\) and a 5-point rating scale was employed. The following plot applies to reader 1 in modality (treatment) 1 only. The full dataset has 5 modalities and 4 readers.
+The following plot uses \texttt{dataset04} \citep{zanca2009evaluation} to illustrate an empirical FROC plot. This dataset has \(L_{max} = 3\), \(\max{(N_{k_tt}})= 3\) and a 5-point rating scale was employed. The following plot applies to reader 1 in modality (treatment) 1 only. The full dataset has 5 modalities and 4 readers.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2426,22 +2429,21 @@ This chapter has described a statistical parameterization of the Nodine-Kundel m
 The next chapter explores the ROC curve predictions of the radiological search model.
 
 \hypertarget{rsm-pred}{%
-\chapter{ROC curve predictions of the RSM}\label{rsm-pred}}
+\chapter{ROC predictions of the RSM}\label{rsm-pred}}
 
 \hypertarget{rsm-pred-how-much-finished}{%
 \section{TBA How much finished}\label{rsm-pred-how-much-finished}}
 
 90\%
-took out Wagner review
 
 \hypertarget{rsm-pred-intro}{%
 \section{TBA Introduction}\label{rsm-pred-intro}}
 
-The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes the ROC curve predictions of the RSM. The starting point is a general characteristic of all RSM predicted operating characteristics, namely they have the constrained end-point property. Derived next is the predicted \emph{inferred ROC} curve followed by the predicted FROC and AFROC curves.
+The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes the ROC curve and related predictions of the RSM. The next chapter will describe the FROC and wAFROC curve predictions.
 
-Shown next is how \emph{search performance} and \emph{lesion-classification} performance can be measured from the inferred ROC curve. Search performance is the ability to find lesions while avoiding finding non-lesions, and lesion-classification performance is the ability, having found a suspicious region, to correctly classify it. Lesion-classification is different from (case) classification performance, i.e., distinguishing between diseased and non-diseased cases, which is measured by the area AUC under the ROC curve.
+The inferred-ROC z-sample and the end-point of the ROC are defined and expressions in terms of RSM parameters are derived. Derived next is the predicted \emph{inferred ROC} curve and the probability density functions of the inferred-ROC z-samples for non-diseased and diseased cases. Integrating the total area under the predicted ROC yields ROC-AUC.
 
-TBA Based on the ROC/FROC/AFROC curve predictions of the RSM, a comparison is presented between area measures that can be calculated from FROC data, leading to an important and perhaps surprising conclusion, \emph{the FROC curve is a poor descriptor of search performance and that the AFROC/wAFROC curves are preferred}. Most applications of FROC methods, particularly in CAD, have relied on the FROC curve to measure performance.
+Since the ROC is a basic measure of performance, numerical examples are given showing the behavior of the operating point as parameters of the RSM are varied.
 
 In this chapter formulae for RSM quantities are given in terms of the RSM search parameters \(\lambda\) and \(\nu\).
 
@@ -2590,7 +2592,7 @@ The conditioning notation in Eqn. \eqref{eq:rsm-pred-fpf-zeta-n} reflects the fa
 \label{eq:rsm-pred-fpf-zeta-before-maple}
 \end{equation}
 
-The infinite summations, see below, are easier performed using symbolic algebra software such as \(\text{Maple}^{TM}\). Inclusion in the summation of \(n = 0\), which evaluates to zero, is done to make it easier for Maple to evaluate the summation in closed form. Otherwise one may need to simplify the Maple-generated result. The \texttt{Maple} code is shown below (Maple 17, Waterloo Maple Inc.).
+The infinite summations, see below, are easier performed using symbolic algebra software such as \(\text{Maple}^{TM}\). Inclusion in the summation of \(n = 0\), which evaluates to zero, is done to make it easier for \(\text{Maple}^{TM}\) to evaluate the summation in closed form. Otherwise one may need to simplify the \(\text{Maple}^{TM}\)-generated result. The \(\text{Maple}^{TM}\) code is shown below (Maple 17, Waterloo Maple Inc.).
 
 \begin{verbatim}
 # Maple Code
@@ -2599,7 +2601,8 @@ phi := proc (t, mu) exp(-(1/2)*(t-mu)^2)/sqrt(2*Pi) end:
 PHI := proc (c, mu) local t; int(phi(t, mu), t = -infinity .. c) end: 
 Poisson := proc (n, lambda) lambda^n*exp(-lambda)/factorial(n) end: 
 Bin := proc (l, L, nu) binomial(L, l)*nu^l*(1-nu)^(L-l) end:
-FPF := proc(zeta,lambda) sum(Poisson(n,lambda)*(1 - PHI(zeta,0)^n), n=0..infinity);end:
+FPF := proc(zeta,lambda) sum(Poisson(n,lambda)*
+(1 - PHI(zeta,0)^n), n=0..infinity);end:
 FPF(zeta, lambda);   
 \end{verbatim}
 
@@ -2651,7 +2654,7 @@ P\left ( h_2 \geq \zeta \mid \mu, n, l, L \right ) \\
 =& 1 - \left [ \Phi\left ( \zeta \right ) \right ]^n \left [ \Phi\left ( \zeta - \mu\right ) \right ]^l
 \end{aligned}
 \right \}
-(\#eq:rsm-pred-tpf-vary_nl)
+\label{eq:rsm-pred-tpf-vary-nl}
 \end{equation}
 
 One averages over the distributions of \(n\) and \(l\) to obtain the desired ROC-ordinate:
@@ -2666,7 +2669,7 @@ One averages over the distributions of \(n\) and \(l\) to obtain the desired ROC
 \label{eq:rsm-pred-tpf-double-summation}
 \end{equation}
 
-This can be evaluated using Maple yielding:
+This can be evaluated using \(\text{Maple}^{TM}\) yielding:
 
 \begin{equation}
 \left.
@@ -2706,204 +2709,18 @@ The \texttt{R} implementation follows:
 \NormalTok{  Lmax <-}\StringTok{ }\KeywordTok{length}\NormalTok{(lesDistr)}
 \NormalTok{  x <-}\StringTok{ }\DecValTok{1}
   \ControlFlowTok{for}\NormalTok{ (L }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{Lmax ) \{}
-\NormalTok{    x <-}\StringTok{ }\NormalTok{x }\OperatorTok{-}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{lambda }\OperatorTok{*}\StringTok{ }\KeywordTok{pnorm}\NormalTok{(}\OperatorTok{-}\NormalTok{zeta)) }\OperatorTok{*}\StringTok{ }\NormalTok{lesDistr[L] }\OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{nu }\OperatorTok{*}\StringTok{ }\KeywordTok{pnorm}\NormalTok{(mu }\OperatorTok{-}\StringTok{ }\NormalTok{zeta))}\OperatorTok{^}\NormalTok{L}
+\NormalTok{    x <-}\StringTok{ }\NormalTok{x }\OperatorTok{-}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{lambda }\OperatorTok{*}\StringTok{ }\KeywordTok{pnorm}\NormalTok{(}\OperatorTok{-}\NormalTok{zeta)) }\OperatorTok{*}\StringTok{ }
+\StringTok{      }\NormalTok{lesDistr[L] }\OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{nu }\OperatorTok{*}\StringTok{ }\KeywordTok{pnorm}\NormalTok{(mu }\OperatorTok{-}\StringTok{ }\NormalTok{zeta))}\OperatorTok{^}\NormalTok{L}
 \NormalTok{  \}}
   \KeywordTok{return}\NormalTok{(x)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{comparing-tpf-formula-to-rjafroc-functions}{%
-\subsection{\texorpdfstring{Comparing TPF formula to \texttt{RJafroc} functions}{Comparing TPF formula to RJafroc functions}}\label{comparing-tpf-formula-to-rjafroc-functions}}
-
-A hand calculation is shown and compared to the value yielded by the function \texttt{RSM\_yROC}. The RSM parameters and the value of \(\zeta\) are:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{zeta <-}\StringTok{ }\DecValTok{1}
-\NormalTok{mu <-}\StringTok{ }\DecValTok{2}
-\NormalTok{lambda <-}\StringTok{ }\DecValTok{1}
-\NormalTok{nu <-}\StringTok{ }\FloatTok{0.9}
-\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-The \texttt{lesDistr} vector corresponds to \(f_L\) and specifies \(L_{max} = 2\) and 50 percent of diseased cases have one lesion per case and the rest have two lesions per case.
-
-Direct implementation of Eqn. \eqref{eq:rsm-pred-tpf2} followed by usage of the function \texttt{RSM\_yROC} follows:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\DecValTok{1}\OperatorTok{-}
-\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{lambda}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(}\OperatorTok{-}\NormalTok{zeta))}\OperatorTok{*}
-\NormalTok{(lesDistr[}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{nu}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(mu}\OperatorTok{-}\NormalTok{zeta))}\OperatorTok{+}
-\NormalTok{lesDistr[}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{nu}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(mu}\OperatorTok{-}\NormalTok{zeta))}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 0.8712655
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{RSM_yROC}\NormalTok{(zeta,mu,lambda,nu, }\DataTypeTok{lesDistr =}\NormalTok{ lesDistr))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 0.8712655
-\end{verbatim}
-
-The two values are identical.
-
-\hypertarget{effect-on-operating-point-of-varying-rsm-parameters}{%
-\subsection{Effect on operating point of varying RSM parameters}\label{effect-on-operating-point-of-varying-rsm-parameters}}
-
-It is instructive to understand the effects of varying the RSM parameters on the operating point on the ROC curve.
-
-\hypertarget{vary-mu}{%
-\subsubsection{\texorpdfstring{Vary \(\mu\)}{Vary \textbackslash mu}}\label{vary-mu}}
-
-\begin{verbatim}
-## mu =  0 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.7862 
-## mu =  0.5 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8342 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8676 
-## mu =  1.5 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8862 
-## mu =  2 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8946 
-## mu =  2.5 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8977 
-## mu =  3 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8986 
-## mu =  3.5 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8988 
-## mu =  4 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8988 
-## mu =  4.5 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8988 
-## mu =  5 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8988
-\end{verbatim}
-
-The abscissa is independent of \(\mu\) (because this parameter has no effect on non-diseased cases) and the ordinate is an increasing function of \(\mu\) (as expected for increasing separation of the LL and NL distributions; the LLs on diseased cases are rated higher causing the distribution of \(h_2\) to shift to higher values).
-
-\hypertarget{vary-lambda}{%
-\subsubsection{\texorpdfstring{Vary \(\lambda\)}{Vary \textbackslash lambda}}\label{vary-lambda}}
-
-\begin{verbatim}
-## mu =  1 , lambda =  0.5 , nu =  0.5 , zeta =  0 , RSM-x =  0.2212 , RSM-y =  0.7196 
-## mu =  1 , lambda =  1 , nu =  0.5 , zeta =  0 , RSM-x =  0.3935 , RSM-y =  0.7817 
-## mu =  1 , lambda =  1.5 , nu =  0.5 , zeta =  0 , RSM-x =  0.5276 , RSM-y =  0.8300 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8676 
-## mu =  1 , lambda =  2.5 , nu =  0.5 , zeta =  0 , RSM-x =  0.7135 , RSM-y =  0.8969 
-## mu =  1 , lambda =  3 , nu =  0.5 , zeta =  0 , RSM-x =  0.7769 , RSM-y =  0.9197 
-## mu =  1 , lambda =  3.5 , nu =  0.5 , zeta =  0 , RSM-x =  0.8262 , RSM-y =  0.9374 
-## mu =  1 , lambda =  4 , nu =  0.5 , zeta =  0 , RSM-x =  0.8647 , RSM-y =  0.9513 
-## mu =  1 , lambda =  4.5 , nu =  0.5 , zeta =  0 , RSM-x =  0.8946 , RSM-y =  0.9621 
-## mu =  1 , lambda =  5 , nu =  0.5 , zeta =  0 , RSM-x =  0.9179 , RSM-y =  0.9705
-\end{verbatim}
-
-The abscissa increases with \(\lambda\) (more NLs on non-diseased cases are generated causing the distribution of \(h_1\) to shift to higher values) and the ordinate also increases with \(\lambda\) (more NLs on diseased cases are generated causing the distribution of \(h_2\) to shift to higher values - recall that on diseased cases the highest z-sample is the maximum of NL and LL z-samples, whichever is highest).
-
-\hypertarget{vary-nu}{%
-\subsubsection{\texorpdfstring{Vary \(\nu\)}{Vary \textbackslash nu}}\label{vary-nu}}
-
-\begin{verbatim}
-## mu =  1 , lambda =  2 , nu =  0 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.6321 
-## mu =  1 , lambda =  2 , nu =  0.1 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.6886 
-## mu =  1 , lambda =  2 , nu =  0.2 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.7404 
-## mu =  1 , lambda =  2 , nu =  0.3 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.7875 
-## mu =  1 , lambda =  2 , nu =  0.4 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8299 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8676 
-## mu =  1 , lambda =  2 , nu =  0.6 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.9006 
-## mu =  1 , lambda =  2 , nu =  0.7 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.9289 
-## mu =  1 , lambda =  2 , nu =  0.8 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.9526 
-## mu =  1 , lambda =  2 , nu =  0.9 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.9716
-\end{verbatim}
-
-No effect on the abscissa as \(\nu\) increases (this parameter has no effect on non-diseased case sampling) and the ordinate increases with \(\nu\) (more LLs on diseased cases, as more lesions are localized, causing the distribution of \(h_2\) to shift to higher values).
-
-\hypertarget{vary-zeta}{%
-\subsubsection{\texorpdfstring{Vary \(\zeta\)}{Vary \textbackslash zeta}}\label{vary-zeta}}
-
-\begin{verbatim}
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  -3 , RSM-x =  0.8643 , RSM-y =  0.9627 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  -2.5 , RSM-x =  0.8630 , RSM-y =  0.9623 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  -2 , RSM-x =  0.8584 , RSM-y =  0.9610 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  -1.5 , RSM-x =  0.8453 , RSM-y =  0.9570 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  -1 , RSM-x =  0.8141 , RSM-y =  0.9467 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  -0.5 , RSM-x =  0.7492 , RSM-y =  0.9224 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , RSM-x =  0.6321 , RSM-y =  0.8676 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0.5 , RSM-x =  0.4605 , RSM-y =  0.7568 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  1 , RSM-x =  0.2719 , RSM-y =  0.5768 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  1.5 , RSM-x =  0.1251 , RSM-y =  0.3628 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  2 , RSM-x =  0.0445 , RSM-y =  0.1831 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  2.5 , RSM-x =  0.0123 , RSM-y =  0.0740 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  3 , RSM-x =  0.0027 , RSM-y =  0.0241
-\end{verbatim}
-
-Increasing \(\zeta\) causes the operating point to move down the ROC.
-
-\hypertarget{vary-f_l}{%
-\subsubsection{\texorpdfstring{Vary \(f_L\)}{Vary f\_L}}\label{vary-f_l}}
-
-The \texttt{lesDist} vector is defined as \((f, (1-f))\) where f is varied from 1 (only cases with one lesion per case) to 0 (only cases with two lesions per case):
-
-\begin{verbatim}
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  1 , RSM-x =  0.6321 , RSM-y =  0.7869 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0.9 , RSM-x =  0.6321 , RSM-y =  0.7958 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0.8 , RSM-x =  0.6321 , RSM-y =  0.8048 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0.7 , RSM-x =  0.6321 , RSM-y =  0.8138 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0.6 , RSM-x =  0.6321 , RSM-y =  0.8227 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0.5 , RSM-x =  0.6321 , RSM-y =  0.8317 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0.4 , RSM-x =  0.6321 , RSM-y =  0.8407 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0.3 , RSM-x =  0.6321 , RSM-y =  0.8496 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0.2 , RSM-x =  0.6321 , RSM-y =  0.8586 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0.1 , RSM-x =  0.6321 , RSM-y =  0.8676 
-## mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0 , f =  0 , RSM-x =  0.6321 , RSM-y =  0.8765
-\end{verbatim}
-
-No effect on FPF but TPF increases as more lesions per case means more LLs per case and the distribution of \(h_2\) moves to higher values.
-
-\hypertarget{rsm-pred-roc-curve-proper}{%
-\section{Proper ROC curve}\label{rsm-pred-roc-curve-proper}}
-
-\begin{quote}
-A proper ROC curve has the property that it never crosses the chance diagonal and its slope never increases as the operating point moves up the ROC curve \citep{metz1999proper, macmillan2004detection}. \emph{It is shown below that the RSM predicted ROC curve, including the dashed straight line extension, is proper} \footnote{The statement in the print book that the ``proper'' property only applies to the continuous section is incorrect.}.
-\end{quote}
-
-Consider first the continuous section which is below-left of the end-point. For convenience one abbreviates FPF and TPF to \(x\) and \(y\), respectively, and suppresses the dependence on model parameters. From Eqn. \eqref{eq:rsm-pred-fpf} and Eqn. \eqref{eq:rsm-pred-tpf2} one can express the ROC coordinates as:
-
-\begin{equation}
-\left. 
-\begin{aligned}
-x\left ( \zeta \right ) =& 1 - G\left ( \zeta \right )\\
-y\left ( \zeta \right ) =& 1 - F\left ( \zeta \right ) G\left ( \zeta \right ) 
-\end{aligned}
-\right \}
-\label{eq:rsm-pred-f-g}
-\end{equation}
-
-where:
-
-\begin{equation}
-\left. 
-\begin{aligned}
-G\left ( \zeta \right ) =& \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right )\\
-F\left ( \zeta \right ) =& \sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L 
-\end{aligned}
-\right \}
-\label{eq:rsm-pred-fg-defs}
-\end{equation}
-
-\begin{quote}
-These equations have the same structure as \citep{swensson1996unified} Eqns. 1 and 2 and the logic used there to demonstrate that ROC curves predicted by Swensson's LROC model is proper also applies to the present situation.
-\end{quote}
-
-Specifically, since the \(\Phi\) function ranges between 0 and 1 and \(0 \leq \nu \leq 1\), it follows that \(F\left ( \zeta \right ) \leq 1\). Therefore \(y\left ( \zeta \right ) \geq x\left ( \zeta \right )\) and the ROC curve is constrained to the upper half of the ROC space, namely the portion above the chance diagonal. Additionally, the more general constraint shown by Swensson applies, namely the slope of the ROC curve at any operating point (x, y) cannot be less than the slope of the dashed straight line connecting (x, y) and \(\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )\), the coordinates of the RSM end-point. This implies that the slope decreases monotonically and also rules out curves with ``hooks''.
-
-\begin{quote}
-In Appendix 1 \ref{rsm-pred-appendix1} it is shown analytically that the slope is continuous at the end-point transition from the continuous curve to the dashed straight line. In Appendix 2 \ref{rsm-pred-appendix2} the slope near the end-point is examined numerically to resolve an apparent paradox, namely the ROC plot can appear discontinuous at the end-point when in fact no discontinuity exists.
-\end{quote}
-
 \hypertarget{rsm-pred-roc-curve-pdfs}{%
-\section{ROC decision variable pdfs}\label{rsm-pred-roc-curve-pdfs}}
+\subsection{ROC decision variable pdfs}\label{rsm-pred-roc-curve-pdfs}}
 
-In TBA (binormal-model-pdf-curves-appendix-1) the pdf functions were derived for non-diseased and diseased cases for the unequal variance binormal ROC model. The procedure was to take the derivative of the appropriate cumulative distribution function (CDF) with respect to \(\zeta\). An identical procedure is used for the RSM.
+In the ROC \href{https://dpc10ster.github.io/RJafrocRocBook/}{book}, pdf functions were derived for non-diseased and diseased cases for the unequal variance binormal ROC model. The procedure was to take the derivative of the appropriate \emph{cumulative distribution function} (CDF) with respect to \(\zeta\). An identical procedure is used for the RSM.
 
 The CDF for non-diseased cases is the complement of FPF. The pdf for non-diseased cases is given by:
 
@@ -2912,16 +2729,16 @@ The CDF for non-diseased cases is the complement of FPF. The pdf for non-disease
 \label{eq:rsm-pred-pdf-n}
 \end{equation}
 
-Similarly, for diseased cases,
+For diseased cases,
 
 \begin{equation}
 \text{pdf}_D\left ( \zeta \right ) = \frac{\partial }{\partial \zeta} \left ( 1-\text{TPF}\left (\zeta , \mu, \lambda, \nu, \overrightarrow{f_L} \right ) \right ) 
 \label{eq:rsm-pred-pdf-d}
 \end{equation}
 
-Both expressions can be evaluated using Maple. The pdfs are implemented in the \texttt{RJafroc} function \texttt{PlotRsmOperatingCharacteristics()}.
+Both expressions can be evaluated using \(\text{Maple}^{TM}\). The pdfs are implemented in the \texttt{RJafroc} function \texttt{PlotRsmOperatingCharacteristics()}.
 
-The integrals of the pdfs (non-diseased followed by diseased) over the entire allowed range are given by (note the vertical bar notation, meaning the difference of two limiting values):
+The integrals of the pdfs (non-diseased followed by diseased) over the entire allowed range are given by (note the vertical bar notation, meaning the difference of two limiting values of \(\zeta\)):
 
 \begin{equation}
 \left. 
@@ -2946,7 +2763,7 @@ The integrals of the pdfs (non-diseased followed by diseased) over the entire al
 In other words, they evaluate to the coordinates of the predicted end-point, \emph{each of which is less than unity}. The reason is that the integration is along the \emph{continuous} section of the ROC curve and does not include the contribution along the dashed straight line extension from \(\left ( \text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )\) to (1,1). The latter contributions correspond to cases with no marks, i.e., \(1 - \text{FPF}_{\text{max}}\) for non-diseased cases and \(1 - \text{TPF}_{\text{max}}\) for diseased cases. Adding these contributions to the integrals along the continuous section yields unity for both types of cases. \footnote{The original RSM publications \citep{chakraborty2006search, chakraborty2006roc} unnecessarily introduced Dirac delta functions to force the integrals to be unity. The explanation given here should clarify the issue.}
 
 \hypertarget{rsm-pred-roc-curve-auc}{%
-\section{ROC AUC}\label{rsm-pred-roc-curve-auc}}
+\subsection{ROC AUC}\label{rsm-pred-roc-curve-auc}}
 
 It is possible to numerically perform the integration under the RSM-ROC curve to get AUC:
 
@@ -3008,6 +2825,285 @@ Experimenting with different parameter combinations reveals the following behavi
   ROC AUC increases as \texttt{lesDistr} is weighted towards more lesions per case. For example, \texttt{lesDistr\ \textless{}-\ c(0,\ 0,\ 1)} (all cases have 3 lesions per case) will yield higher performance than \texttt{lesDistr\ \textless{}-\ c(1,\ 0,\ 0)} (all cases have one lesion per case).
 \end{itemize}
 
+\hypertarget{comparing-tpf-formula-to-rjafroc-functions}{%
+\subsection{\texorpdfstring{Comparing TPF formula to \texttt{RJafroc} functions}{Comparing TPF formula to RJafroc functions}}\label{comparing-tpf-formula-to-rjafroc-functions}}
+
+A hand calculation is shown and compared to the value yielded by the function \texttt{RSM\_yROC}. The RSM parameters and the value of \(\zeta\) are:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zeta <-}\StringTok{ }\DecValTok{1}
+\NormalTok{mu <-}\StringTok{ }\DecValTok{2}
+\NormalTok{lambda <-}\StringTok{ }\DecValTok{1}
+\NormalTok{nu <-}\StringTok{ }\FloatTok{0.9}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{lesDistr} vector corresponds to \(f_L\) and specifies \(L_{max} = 2\) and 50 percent of diseased cases have one lesion per case and the rest have two lesions per case.
+
+Direct implementation of Eqn. \eqref{eq:rsm-pred-tpf2} followed by usage of the function \texttt{RSM\_yROC} follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cat}\NormalTok{(}\DecValTok{1}\OperatorTok{-}
+\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{lambda}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(}\OperatorTok{-}\NormalTok{zeta))}\OperatorTok{*}
+\NormalTok{(lesDistr[}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{nu}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(mu}\OperatorTok{-}\NormalTok{zeta))}\OperatorTok{+}
+\NormalTok{lesDistr[}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{nu}\OperatorTok{*}\KeywordTok{pnorm}\NormalTok{(mu}\OperatorTok{-}\NormalTok{zeta))}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 0.8712655
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cat}\NormalTok{(}\KeywordTok{RSM_yROC}\NormalTok{(zeta,mu,lambda,nu, }\DataTypeTok{lesDistr =}\NormalTok{ lesDistr))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 0.8712655
+\end{verbatim}
+
+The two values are identical.
+
+\hypertarget{effect-on-operating-point-of-varying-rsm-parameters}{%
+\subsection{Effect on operating point of varying RSM parameters}\label{effect-on-operating-point-of-varying-rsm-parameters}}
+
+It is instructive to understand the effects of varying the RSM parameters on the operating point on the ROC curve.
+
+\hypertarget{vary-mu}{%
+\subsubsection{\texorpdfstring{Vary \(\mu\)}{Vary \textbackslash mu}}\label{vary-mu}}
+
+\begin{verbatim}
+## lesDistr =  0.1 0.9
+\end{verbatim}
+
+\begin{verbatim}
+## Varying mu only: 
+## Other parameters are lambda =  2 , nu =  0.5 , zeta =  0
+\end{verbatim}
+
+\begin{verbatim}
+## mu = 0 , RSM-x = 0.6321 , RSM-y = 0.7862 
+## mu = 0.5 , RSM-x = 0.6321 , RSM-y = 0.8342 
+## mu = 1 , RSM-x = 0.6321 , RSM-y = 0.8676 
+## mu = 1.5 , RSM-x = 0.6321 , RSM-y = 0.8862 
+## mu = 2 , RSM-x = 0.6321 , RSM-y = 0.8946 
+## mu = 2.5 , RSM-x = 0.6321 , RSM-y = 0.8977 
+## mu = 3 , RSM-x = 0.6321 , RSM-y = 0.8986 
+## mu = 3.5 , RSM-x = 0.6321 , RSM-y = 0.8988 
+## mu = 4 , RSM-x = 0.6321 , RSM-y = 0.8988 
+## mu = 4.5 , RSM-x = 0.6321 , RSM-y = 0.8988 
+## mu = 5 , RSM-x = 0.6321 , RSM-y = 0.8988
+\end{verbatim}
+
+The abscissa is independent of \(\mu\) (because this parameter has no effect on non-diseased cases) and the ordinate is an increasing function of \(\mu\) (as expected for increasing separation of the LL and NL distributions; the LLs on diseased cases are rated higher causing the distribution of \(h_2\) to shift to higher values).
+
+\hypertarget{vary-lambda}{%
+\subsubsection{\texorpdfstring{Vary \(\lambda\)}{Vary \textbackslash lambda}}\label{vary-lambda}}
+
+\begin{verbatim}
+## lesDistr =  0.1 0.9
+\end{verbatim}
+
+\begin{verbatim}
+## Varying lambda only: 
+## Other parameters are mu =  1 , nu =  0.5 , zeta =  0
+\end{verbatim}
+
+\begin{verbatim}
+## lambda = 0.5 , RSM-x = 0.2212 , RSM-y = 0.7196 
+## lambda = 1 , RSM-x = 0.3935 , RSM-y = 0.7817 
+## lambda = 1.5 , RSM-x = 0.5276 , RSM-y = 0.8300 
+## lambda = 2 , RSM-x = 0.6321 , RSM-y = 0.8676 
+## lambda = 2.5 , RSM-x = 0.7135 , RSM-y = 0.8969 
+## lambda = 3 , RSM-x = 0.7769 , RSM-y = 0.9197 
+## lambda = 3.5 , RSM-x = 0.8262 , RSM-y = 0.9374 
+## lambda = 4 , RSM-x = 0.8647 , RSM-y = 0.9513 
+## lambda = 4.5 , RSM-x = 0.8946 , RSM-y = 0.9621 
+## lambda = 5 , RSM-x = 0.9179 , RSM-y = 0.9705
+\end{verbatim}
+
+The abscissa increases with \(\lambda\) (more NLs on non-diseased cases are generated causing the distribution of \(h_1\) to shift to higher values) and the ordinate also increases with \(\lambda\) (more NLs on diseased cases are generated causing the distribution of \(h_2\) to shift to higher values - recall that on diseased cases the highest z-sample is the maximum of NL and LL z-samples, whichever is highest).
+
+\hypertarget{vary-nu}{%
+\subsubsection{\texorpdfstring{Vary \(\nu\)}{Vary \textbackslash nu}}\label{vary-nu}}
+
+\begin{verbatim}
+## lesDistr =  0.1 0.9
+\end{verbatim}
+
+\begin{verbatim}
+## Varying nu only: 
+## Other parameters are mu =  1 , lambda =  2 , zeta =  0
+\end{verbatim}
+
+\begin{verbatim}
+## nu = 0 , RSM-x = 0.6321 , RSM-y = 0.6321 
+## nu = 0.1 , RSM-x = 0.6321 , RSM-y = 0.6886 
+## nu = 0.2 , RSM-x = 0.6321 , RSM-y = 0.7404 
+## nu = 0.3 , RSM-x = 0.6321 , RSM-y = 0.7875 
+## nu = 0.4 , RSM-x = 0.6321 , RSM-y = 0.8299 
+## nu = 0.5 , RSM-x = 0.6321 , RSM-y = 0.8676 
+## nu = 0.6 , RSM-x = 0.6321 , RSM-y = 0.9006 
+## nu = 0.7 , RSM-x = 0.6321 , RSM-y = 0.9289 
+## nu = 0.8 , RSM-x = 0.6321 , RSM-y = 0.9526 
+## nu = 0.9 , RSM-x = 0.6321 , RSM-y = 0.9716
+\end{verbatim}
+
+No effect on the abscissa as \(\nu\) increases (this parameter has no effect on non-diseased case sampling) and the ordinate increases with \(\nu\) (more LLs on diseased cases, as more lesions are localized, causing the distribution of \(h_2\) to shift to higher values).
+
+\hypertarget{vary-zeta}{%
+\subsubsection{\texorpdfstring{Vary \(\zeta\)}{Vary \textbackslash zeta}}\label{vary-zeta}}
+
+\begin{verbatim}
+## lesDistr =  0.1 0.9
+\end{verbatim}
+
+\begin{verbatim}
+## Varying zeta only: 
+## Other parameters are mu =  1 , lambda =  2 , nu =  0.5
+\end{verbatim}
+
+\begin{verbatim}
+## zeta = -3 , RSM-x = 0.8643 , RSM-y = 0.9627 
+## zeta = -2.5 , RSM-x = 0.8630 , RSM-y = 0.9623 
+## zeta = -2 , RSM-x = 0.8584 , RSM-y = 0.9610 
+## zeta = -1.5 , RSM-x = 0.8453 , RSM-y = 0.9570 
+## zeta = -1 , RSM-x = 0.8141 , RSM-y = 0.9467 
+## zeta = -0.5 , RSM-x = 0.7492 , RSM-y = 0.9224 
+## zeta = 0 , RSM-x = 0.6321 , RSM-y = 0.8676 
+## zeta = 0.5 , RSM-x = 0.4605 , RSM-y = 0.7568 
+## zeta = 1 , RSM-x = 0.2719 , RSM-y = 0.5768 
+## zeta = 1.5 , RSM-x = 0.1251 , RSM-y = 0.3628 
+## zeta = 2 , RSM-x = 0.0445 , RSM-y = 0.1831 
+## zeta = 2.5 , RSM-x = 0.0123 , RSM-y = 0.0740 
+## zeta = 3 , RSM-x = 0.0027 , RSM-y = 0.0241
+\end{verbatim}
+
+Increasing \(\zeta\) causes the operating point to move down the ROC.
+
+\hypertarget{vary-f_l}{%
+\subsubsection{\texorpdfstring{Vary \(f_L\)}{Vary f\_L}}\label{vary-f_l}}
+
+The \texttt{lesDist} vector is defined as \((f, (1-f))\) where f is varied from 1 (only cases with one lesion per case) to 0 (only cases with two lesions per case):
+
+\begin{verbatim}
+## lesDistr =  (f, 1-f)
+\end{verbatim}
+
+\begin{verbatim}
+## Varying f only: 
+## Other parameters are mu =  1 , lambda =  2 , nu =  0.5 , zeta =  0
+\end{verbatim}
+
+\begin{verbatim}
+## f =  1 , RSM-x =  0.6321 , RSM-y =  0.7869 
+## f =  0.9 , RSM-x =  0.6321 , RSM-y =  0.7958 
+## f =  0.8 , RSM-x =  0.6321 , RSM-y =  0.8048 
+## f =  0.7 , RSM-x =  0.6321 , RSM-y =  0.8138 
+## f =  0.6 , RSM-x =  0.6321 , RSM-y =  0.8227 
+## f =  0.5 , RSM-x =  0.6321 , RSM-y =  0.8317 
+## f =  0.4 , RSM-x =  0.6321 , RSM-y =  0.8407 
+## f =  0.3 , RSM-x =  0.6321 , RSM-y =  0.8496 
+## f =  0.2 , RSM-x =  0.6321 , RSM-y =  0.8586 
+## f =  0.1 , RSM-x =  0.6321 , RSM-y =  0.8676 
+## f =  0 , RSM-x =  0.6321 , RSM-y =  0.8765
+\end{verbatim}
+
+No effect on FPF but TPF increases as more lesions per case means more LLs per case and the distribution of \(h_2\) moves to higher values.
+
+\hypertarget{rsm-pred-roc-curves}{%
+\subsection{Sample ROC curves}\label{rsm-pred-roc-curves}}
+
+\begin{figure}
+\centering
+\includegraphics{07-rsm-predictions_files/figure-latex/rsm-pred-fig-auc-mu-plots-1.pdf}
+\caption{\label{fig:rsm-pred-fig-auc-mu-plots}ROC curves for indicated values of the \(\mu\) parameter. Notice the transition, as \(\mu\) increases, from near chance level performance to almost perfect performancea as the end-point moves from near (1,1) to near (0,1).}
+\end{figure}
+
+Fig. \ref{fig:rsm-pred-fig-auc-mu-plots} displays ROC curves for indicated values of \(\mu\). The remaining RSM model parameters are \(\lambda = 1\), \(\nu = 1\) and \(\zeta = -\infty\) and there is one lesion per diseased case.
+
+The following are evident from these figures:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  As \(\mu\) increases the ROC curve more closely approaches the upper-left corner of the ROC plot. This signifies increasing performance and the area under the ROC and AFROC curves approach unity. The end-point abscissa decreases, meaning increasing numbers of unmarked non-diseased cases, i.e., more perfect decisions on non-diseased cases. The end-point ordinate increases, meaning decreasing numbers of unmarked lesions, i.e., more good decisions on diseased cases.
+\item
+  For \(\mu\) close to zero the operating characteristic approaches the chance diagonal and the area under the ROC curve approaches 0.5.
+\item
+  The area under the ROC increases monotonically from 0.5 to 1 as \(\mu\) increases from zero to infinity.
+\item
+  For large \(\mu\) the accessible portion of the operating characteristic approaches the vertical line connecting (0,0) to (0,1), the area under which is zero. The complete ROC curve is obtained by connecting this point to (1,1) by the dashed line and in this limit the area under the complete ROC curve approaches unity. Omitting the area under the dashed portion of the curve will result in a severe underestimate of true performance.
+\item
+  As \(L_{max}\) increases (allowed values are 1, 2, 3, etc.) the area under the ROC curve increases, approaching unity and \(\text{TPF}_{\text{max}}\) approaches unity. With more lesions per diseased case, the chances are higher that at least one of them will be found and marked. However, \(\text{FPF}_{\text{max}}\) remains constant as determined by the constant value of \(\lambda = \frac{\lambda}{\mu}\), Eqn. \eqref{eq:rsm-pred-fpf-max}
+\item
+  As \(\lambda\) decreases \(\text{FPF}_{\text{max}}\) decreases to zero and \(\text{TPF}_{\text{max}}\) decreases. The decrease in \(\text{TPF}_{\text{max}}\) is consistent with the fact that, with fewer NLs, there is less chance of a NL being rated higher than a LL, and one is completely dependent on at least one lesion being found.
+\item
+  As \(\nu\) increases \(\text{FPF}_{\text{max}}\) stays constant at the value determined by \(\lambda\) and \(\mu\), while \(\text{TPF}_{\text{max}}\) approaches unity. The corresponding physical parameter \(\nu\) increases approaching unity, guaranteeing every lesion will be found.
+\end{enumerate}
+
+\hypertarget{rsm-pred-pdf-curves}{%
+\subsection{Sample RSM pdf curves}\label{rsm-pred-pdf-curves}}
+
+\begin{figure}
+\centering
+\includegraphics{07-rsm-predictions_files/figure-latex/rsm-pred-fig-pdf-mu-plots-1.pdf}
+\caption{\label{fig:rsm-pred-fig-pdf-mu-plots}RSM pdf curves for indicated values of the \(\mu\) parameter. The solid curve corresponds to diseased cases and the dotted curve corresponds to non-diseased cases.}
+\end{figure}
+
+Fig. \ref{fig:rsm-pred-fig-pdf-mu-plots} shows pdf plots for the same values of parameters as in Fig. \ref{fig:rsm-pred-fig-auc-mu-plots}.
+
+Consider the plot of the pdfs for \(\mu = 1\). Since the integral of a pdf function over an interval amounts to counting the fraction of events occurring in the interval, it should be evident that the area under the non-diseased pdf equals \(\text{FPF}_{\text{max}}\) and that under the diseased pdf equals \(\text{TPF}_{\text{max}}\). For the chosen value \(\lambda = 1\) one has \(\text{FPF}_{\text{max}} = 1 - e^{-\lambda} = 0.632\). The area under the non-diseased pdf is less than unity because it is missing the contribution of non-diseased cases with no marks, the probability of which is \(e^{-\lambda} = e^{-1} = 0.368\). Equivalently, it is missing the area under the dashed straight line segment of the ROC curve. Likewise, the area under the diseased pdf equals \(\text{TPF}_{\text{max}}\), Eqn. \eqref{eq:rsm-pred-tpf-max}, which is also less than unity. For the chosen values of \(\mu = \lambda = \nu = L = 1\) it equals \(\text{TPF}_{\text{max}} = 1 - e^{-\lambda} e^{-\nu} = 0.865\). This area is somewhat larger than that under the non-diseased pdf, as is evident from visual examination of the plot. A greater fraction of diseased cases generate marks than do non-diseased cases, consistent with the presence of lesions in diseased cases. The complement of 0.865 is due to diseased cases with no marks, which account for a fraction 0.135 of diseased cases. To summarize, the pdf's do not integrate to unity for the reason that the integrals account only for the continuous section of the ROC curve and do not include cases with zero latent marks that do not generate z-samples. The effect becomes more exaggerated for higher values of \(\mu\) as this causes \(\text{FPF}_{\text{max}}\) to further decrease.
+
+The plot in Fig. \ref{fig:rsm-pred-fig-pdf-mu-plots} labeled \(\mu = 0.05\) may be surprising. Since it corresponds to a small value of \(\mu\), one may expect both pdfs to overlap and be centered at zero. Instead, while they do overlap, the shape is distinctly non-Gaussian and centered at approximately 1.8. This is because the small value of \(\mu\) results in a large value of the \(\lambda\) parameter, since \(\lambda = \lambda / \mu = 20\). The highest of a large number of samples from the unit normal distribution is not normal and is peaked at a value above zero \citep{fisher1928limiting}.
+
+\hypertarget{rsm-pred-roc-curve-proper}{%
+\section{Proper ROC curve}\label{rsm-pred-roc-curve-proper}}
+
+\begin{quote}
+A proper ROC curve has the property that it never crosses the chance diagonal and its slope never increases as the operating point moves up the ROC curve \citep{metz1999proper, macmillan2004detection}. \emph{It is shown below that the RSM predicted ROC curve, including the dashed straight line extension, is proper} \footnote{The statement in the print book that the ``proper'' property only applies to the continuous section is incorrect.}.
+\end{quote}
+
+Consider first the continuous section which is below-left of the end-point. For convenience one abbreviates FPF and TPF to \(x\) and \(y\), respectively, and suppresses the dependence on model parameters. From Eqn. \eqref{eq:rsm-pred-fpf} and Eqn. \eqref{eq:rsm-pred-tpf2} one can express the ROC coordinates as:
+
+\begin{equation}
+\left. 
+\begin{aligned}
+x\left ( \zeta \right ) =& 1 - G\left ( \zeta \right )\\
+y\left ( \zeta \right ) =& 1 - F\left ( \zeta \right ) G\left ( \zeta \right ) 
+\end{aligned}
+\right \}
+\label{eq:rsm-pred-f-g}
+\end{equation}
+
+where:
+
+\begin{equation}
+\left. 
+\begin{aligned}
+G\left ( \zeta \right ) =& \text{exp}\left ( -\lambda \Phi \left ( -\zeta \right )\right )\\
+F\left ( \zeta \right ) =& \sum_{L=1}^{L_{max}} f_L  \left ( 1 - \nu \Phi \left ( \mu -\zeta \right ) \right )^L 
+\end{aligned}
+\right \}
+\label{eq:rsm-pred-fg-defs}
+\end{equation}
+
+\begin{quote}
+These equations have the same structure as \citep{swensson1996unified} Eqns. 1 and 2 and the logic used there to demonstrate that ROC curves predicted by Swensson's LROC model is proper also applies to the present situation.
+\end{quote}
+
+Specifically, since the \(\Phi\) function ranges between 0 and 1 and \(0 \leq \nu \leq 1\), it follows that \(F\left ( \zeta \right ) \leq 1\). Therefore \(y\left ( \zeta \right ) \geq x\left ( \zeta \right )\) and the ROC curve is constrained to the upper half of the ROC space, namely the portion above the chance diagonal. Additionally, the more general constraint shown by Swensson applies, namely the slope of the ROC curve at any operating point (x, y) cannot be less than the slope of the dashed straight line connecting (x, y) and \(\left (\text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )\), the coordinates of the RSM end-point. This implies that the slope decreases monotonically and also rules out curves with ``hooks''.
+
+\begin{quote}
+In Appendix 1 \ref{rsm-pred-appendix1} it is shown analytically that the slope is continuous at the end-point transition from the continuous curve to the dashed straight line. In Appendix 2 \ref{rsm-pred-appendix2} the slope near the end-point is examined numerically to resolve an apparent paradox, namely the ROC plot can appear discontinuous at the end-point when in fact no discontinuity exists.
+\end{quote}
+
 \hypertarget{rsm-pred-roc-curve-aucs-zeta1}{%
 \section{\texorpdfstring{\(\zeta\) dependence of ROC AUC}{\textbackslash zeta dependence of ROC AUC}}\label{rsm-pred-roc-curve-aucs-zeta1}}
 
@@ -3059,53 +3155,6 @@ Clearly the red curve has higher AUC. The specific values are 0.9591597 for the 
 \end{figure}
 
 A consequence of the \(\zeta\) dependence is that if one uses ROC AUC as the measure of performance, the optimal threshold is \(\zeta = -\infty\). In particular, a CAD algorithm that generates FROC data should show all generated marks to the radiologist, which is clearly incorrect and is not adopted by any CAD designer. Selecting the optimal value of the reporting threshold is addressed in Chapter \ref{optim-op-point}.
-
-\hypertarget{rsm-pred-roc-curves}{%
-\section{Example ROC curves}\label{rsm-pred-roc-curves}}
-
-\begin{figure}
-\centering
-\includegraphics{07-rsm-predictions_files/figure-latex/rsm-pred-fig-auc-mu-plots-1.pdf}
-\caption{\label{fig:rsm-pred-fig-auc-mu-plots}ROC curves for indicated values of the \(\mu\) parameter. Notice the transition, as \(\mu\) increases, from near chance level performance to almost perfect performancea as the end-point moves from near (1,1) to near (0,1).}
-\end{figure}
-
-Fig. \ref{fig:rsm-pred-fig-auc-mu-plots} displays ROC curves for indicated values of \(\mu\). The remaining RSM model parameters are \(\lambda = 1\), \(\nu = 1\) and \(\zeta = -\infty\) and there is one lesion per diseased case.
-
-The following are evident from these figures:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  As \(\mu\) increases the ROC curve more closely approaches the upper-left corner of the ROC plot. This signifies increasing performance and the area under the ROC and AFROC curves approach unity. The end-point abscissa decreases, meaning increasing numbers of unmarked non-diseased cases, i.e., more perfect decisions on non-diseased cases. The end-point ordinate increases, meaning decreasing numbers of unmarked lesions, i.e., more good decisions on diseased cases.
-\item
-  For \(\mu\) close to zero the operating characteristic approaches the chance diagonal and the area under the ROC curve approaches 0.5.
-\item
-  The area under the ROC increases monotonically from 0.5 to 1 as \(\mu\) increases from zero to infinity.
-\item
-  For large \(\mu\) the accessible portion of the operating characteristic approaches the vertical line connecting (0,0) to (0,1), the area under which is zero. The complete ROC curve is obtained by connecting this point to (1,1) by the dashed line and in this limit the area under the complete ROC curve approaches unity. Omitting the area under the dashed portion of the curve will result in a severe underestimate of true performance.
-\item
-  As \(L_{max}\) increases (allowed values are 1, 2, 3, etc.) the area under the ROC curve increases, approaching unity and \(\text{TPF}_{\text{max}}\) approaches unity. With more lesions per diseased case, the chances are higher that at least one of them will be found and marked. However, \(\text{FPF}_{\text{max}}\) remains constant as determined by the constant value of \(\lambda = \frac{\lambda}{\mu}\), Eqn. \eqref{eq:rsm-pred-fpf-max}
-\item
-  As \(\lambda\) decreases \(\text{FPF}_{\text{max}}\) decreases to zero and \(\text{TPF}_{\text{max}}\) decreases. The decrease in \(\text{TPF}_{\text{max}}\) is consistent with the fact that, with fewer NLs, there is less chance of a NL being rated higher than a LL, and one is completely dependent on at least one lesion being found.
-\item
-  As \(\nu\) increases \(\text{FPF}_{\text{max}}\) stays constant at the value determined by \(\lambda\) and \(\mu\), while \(\text{TPF}_{\text{max}}\) approaches unity. The corresponding physical parameter \(\nu\) increases approaching unity, guaranteeing every lesion will be found.
-\end{enumerate}
-
-\hypertarget{rsm-pred-pdf-curves}{%
-\section{Example RSM pdf curves}\label{rsm-pred-pdf-curves}}
-
-\begin{figure}
-\centering
-\includegraphics{07-rsm-predictions_files/figure-latex/rsm-pred-fig-pdf-mu-plots-1.pdf}
-\caption{\label{fig:rsm-pred-fig-pdf-mu-plots}RSM pdf curves for indicated values of the \(\mu\) parameter. The solid curve corresponds to diseased cases and the dotted curve corresponds to non-diseased cases.}
-\end{figure}
-
-Fig. \ref{fig:rsm-pred-fig-pdf-mu-plots} shows pdf plots for the same values of parameters as in Fig. \ref{fig:rsm-pred-fig-auc-mu-plots}.
-
-Consider the plot of the pdfs for \(\mu = 1\). Since the integral of a pdf function over an interval amounts to counting the fraction of events occurring in the interval, it should be evident that the area under the non-diseased pdf equals \(\text{FPF}_{\text{max}}\) and that under the diseased pdf equals \(\text{TPF}_{\text{max}}\). For the chosen value \(\lambda = 1\) one has \(\text{FPF}_{\text{max}} = 1 - e^{-\lambda} = 0.632\). The area under the non-diseased pdf is less than unity because it is missing the contribution of non-diseased cases with no marks, the probability of which is \(e^{-\lambda} = e^{-1} = 0.368\). Equivalently, it is missing the area under the dashed straight line segment of the ROC curve. Likewise, the area under the diseased pdf equals \(\text{TPF}_{\text{max}}\), Eqn. \eqref{eq:rsm-pred-tpf-max}, which is also less than unity. For the chosen values of \(\mu = \lambda = \nu = L = 1\) it equals \(\text{TPF}_{\text{max}} = 1 - e^{-\lambda} e^{-\nu} = 0.865\). This area is somewhat larger than that under the non-diseased pdf, as is evident from visual examination of the plot. A greater fraction of diseased cases generate marks than do non-diseased cases, consistent with the presence of lesions in diseased cases. The complement of 0.865 is due to diseased cases with no marks, which account for a fraction 0.135 of diseased cases. To summarize, the pdf's do not integrate to unity for the reason that the integrals account only for the continuous section of the ROC curve and do not include cases with zero latent marks that do not generate z-samples. The effect becomes more exaggerated for higher values of \(\mu\) as this causes \(\text{FPF}_{\text{max}}\) to further decrease.
-
-The plot in Fig. \ref{fig:rsm-pred-fig-pdf-mu-plots} labeled \(\mu = 0.05\) may be surprising. Since it corresponds to a small value of \(\mu\), one may expect both pdfs to overlap and be centered at zero. Instead, while they do overlap, the shape is distinctly non-Gaussian and centered at approximately 1.8. This is because the small value of \(\mu\) results in a large value of the \(\lambda\) parameter, since \(\lambda = \lambda / \mu = 20\). The highest of a large number of samples from the unit normal distribution is not normal and is peaked at a value above zero \citep{fisher1928limiting}.
 
 \hypertarget{rsm-pred-discussion-summary}{%
 \section{TBA Discussion / Summary}\label{rsm-pred-discussion-summary}}
@@ -3309,83 +3358,6 @@ The next code section displays 3 plots.
 
 The solid black line is the plot, using multiple precision arithmetic, of slope of the ROC curve vs.~\(\zeta\). The dashed blue line is the slope using standard precision arithmetic. The horizontal dashed red line is the slope of the straight line connecting the end-point to (1,1), i.e., 0.4935272. Standard precision arithmetic breaks down below \(\zeta \approx -6\) rapidly falling to illegal values \texttt{Nan} (above \(\zeta \approx -5\) there is little difference between standard and multiple precision). The multiple precision curve approaches the slope of the straight line as \(\zeta\) approaches -20. This confirms numerically the continuity of the slope of the ROC at the end-point.
 
-\hypertarget{rsm-pred-wafroc-curve}{%
-\section{Appendix 3: wAFROC curve}\label{rsm-pred-wafroc-curve}}
-
-The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \eqref{eq:rsm-pred-fpf} applies.
-
-The wAFROC ordinate is calculated using:
-
-\begin{equation} 
-\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l=1}^{L} \text{W}_{Ll} \, l \, \text{pmf}_{Bin}\left ( l, L, \nu \right )
-\label{eq:rsm-pred-wllf}
-\end{equation}
-
-\begin{itemize}
-\item
-  \(\overrightarrow{f_L}\) is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted \texttt{lesDistr}. For example, the array \texttt{lesDistr\ =\ c(0.1,\ 0.4,\ 0.4,\ 0.1)} defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions.
-\item
-  \(L_{max}\) is the maximum number of lesions per case in the dataset. In the preceding example \(L_{max} = 4\).
-\item
-  \(\mathbf{W}\) is the (lower triangular) square matrix with \(L_{max}\) rows and columns containing the weights, where each row sums to unity. The relative lesion weights are denoted in the code \texttt{relWeights}. For example, \texttt{relWeights\ =\ \ c(0.2,\ 0.3,\ 0.1,\ 0.5)} whose meaning is as follows:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    On cases with one lesion the lesion weight is unity.
-  \item
-    On cases with two lesions the relative weights are 0.2 and 0.3. Since these do not add up to unity, the actual weights are 0.4 and 0.6.
-  \item
-    On cases with three lesions the relative weights are 0.2, 0.3 and 0.1. The actual weights are 1/3, 1/2 and 1/6.
-  \item
-    On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.2, 0.3, 0.1 and 0.4.
-  \end{itemize}
-\item
-  The function \texttt{UtilLesionWeightsMatrixLesDistr} calculates the matrix given \texttt{lesDistr} and \texttt{relWeights}. For example:
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
-\NormalTok{relWeights =}\StringTok{  }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.4}\NormalTok{)}
-\KeywordTok{UtilLesionWeightsMatrixLesDistr}\NormalTok{(lesDistr, relWeights)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##           [,1] [,2]      [,3] [,4]
-## [1,] 1.0000000 -Inf      -Inf -Inf
-## [2,] 0.4000000  0.6      -Inf -Inf
-## [3,] 0.3333333  0.5 0.1666667 -Inf
-## [4,] 0.2000000  0.3 0.1000000  0.4
-\end{verbatim}
-
-\begin{itemize}
-\item
-  It is necessary to label the lesions properly so that the correct weights are used. This is done using the \texttt{lesionID} field in the Excel input file. For example, \texttt{lesionID\ =\ 3} for the one with relative weight 0.1. Since \(\mathbf{W}\) is independent of cases, the lesion characteristics (which determine clinical outcome) of \texttt{lesionID\ =\ 1} on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix \(\mathbf{W}\).
-\item
-  \(\text{pmf}_{Bin}\left ( l, L, \nu \right )\) is the probability mass function (pmf) of the binomial distribution with success probability \(\nu\) and trial size \(L\), defined in Eqn. \eqref{eq:rsm-binomial-pmf}. \(\text{W}_{Ll}\) is the weight of lesion \(l\) in cases with \(L\) lesions; for example \(\text{W}_{42} = 0.3\).
-\item
-  The wAFROC-AUC is obtained by numerically integrating the wAFROC curve defined by Eqn. \eqref{eq:rsm-pred-fpf} and Eqn. \eqref{eq:rsm-pred-wllf} which is implemented in \texttt{UtilAnalyticalAucsRSM}.
-\item
-  To generate equal weights set \texttt{relWeights\ =\ 0}, as in following code:
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
-\KeywordTok{UtilLesionWeightsMatrixLesDistr}\NormalTok{(lesDistr, }\DataTypeTok{relWeights =} \DecValTok{0}\NormalTok{)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##           [,1]      [,2]      [,3] [,4]
-## [1,] 1.0000000      -Inf      -Inf -Inf
-## [2,] 0.5000000 0.5000000      -Inf -Inf
-## [3,] 0.3333333 0.3333333 0.3333333 -Inf
-## [4,] 0.2500000 0.2500000 0.2500000 0.25
-\end{verbatim}
-
 \hypertarget{rsm-sc}{%
 \chapter{Search and classification performances}\label{rsm-sc}}
 
@@ -3423,7 +3395,7 @@ In Fig. \ref{fig:rsm-sc-performance-from-roc-curve}, plot (a) is a typical ROC c
 
 \begin{figure}
 \centering
-\includegraphics{08-rsm-search_files/figure-latex/rsm-sc-performance-from-roc-curve-1.pdf}
+\includegraphics{10-rsm-search_files/figure-latex/rsm-sc-performance-from-roc-curve-1.pdf}
 \caption{\label{fig:rsm-sc-performance-from-roc-curve}Relation of search performance to the end-point of the ROC curve. Plot (a) is for conventional ROC models while plot (b) is for the RSM.}
 \end{figure}
 
@@ -3652,7 +3624,7 @@ Because the RSM contains 3 parameters, which is one more that conventionql ROC m
 
 Shown next is the fitted plot. Error bars (exact 95\% confidence intervals) are shown for the lowest and highest operating points.
 
-\includegraphics{09-rsm-fitting_files/figure-latex/unnamed-chunk-2-1.pdf}
+\includegraphics{11-rsm-fitting_files/figure-latex/unnamed-chunk-2-1.pdf}
 
 The fitted ROC curve is proper: it's slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is 0.906 which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.
 
@@ -3965,7 +3937,7 @@ In the following we focus on just two ROC datasets which have been widely used i
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{10-rsm-3-fits_files/figure-latex/unnamed-chunk-2-1.pdf}
+\includegraphics{12-rsm-3-fits_files/figure-latex/unnamed-chunk-2-1.pdf}
 
 The plot is labeled \texttt{D2,\ i\ =\ 1,\ j\ =\ 2}, meaning the second dataset in the \texttt{datasetNames} array, i.e., \texttt{datasetNames{[}2{]}}, the second treatment and the second reader. It contains 3 plots:
 
@@ -4202,7 +4174,7 @@ As an example, for the Van Dyke dataset, \texttt{slopes\$p1{[}{[}2{]}{]}} which 
 
 \begin{figure}
 \centering
-\includegraphics{10-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-2-1.pdf}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-2-1.pdf}
 \caption{\label{fig:rsm-3-fits-plots-2}Van Dyke dataset: Left plot is PROPROC-AUC vs.~RSM-AUC with the superposed constrained linear fit. The number of data points is \texttt{nPts} = 10. Right plot is CBM-AUC vs.~RSM-AUC.}
 \end{figure}
 
@@ -4210,7 +4182,7 @@ The next plot shows corresponding plots for the Franken dataset in which there a
 
 \begin{figure}
 \centering
-\includegraphics{10-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-3-1.pdf}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-3-1.pdf}
 \caption{\label{fig:rsm-3-fits-plots-3}Similar to previous plot, for Franken dataset.}
 \end{figure}
 
@@ -4249,7 +4221,7 @@ The CI for \(m_{PR \bullet}\) is slightly above unity, while that for \(m_{CR \b
 
 \begin{figure}
 \centering
-\includegraphics{10-rsm-3-fits_files/figure-latex/rsm-3-fits-histo-slopes-1.pdf}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-histo-slopes-1.pdf}
 \caption{\label{fig:rsm-3-fits-histo-slopes}Histograms of slope PROPROC AUC vs.~RSM AUC (left) and slope CBM AUC vs.~RSM AUC (right).}
 \end{figure}
 
@@ -4352,13 +4324,13 @@ The following plots are arranged in pairs, with the left plot corresponding to t
 
 \begin{figure}
 \centering
-\includegraphics{10-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-1-1.pdf}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-1-1.pdf}
 \caption{\label{fig:rsm-3-fits-plots-1-1}Composite plots in both treatments for Van Dyke dataset, reader 1.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{10-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-2-1.pdf}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-2-1.pdf}
 \caption{\label{fig:rsm-3-fits-plots-1-2}Composite plots in both treatments for Van Dyke dataset, reader 2. For treatment 2 the RSM and PROPROC fits are indistinguishable.}
 \end{figure}
 
@@ -4366,7 +4338,7 @@ The RSM parameter values for the treatment 2 plot are: \(\mu\) = 5.9346513, \(\l
 
 \begin{figure}
 \centering
-\includegraphics{10-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-3-1.pdf}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-3-1.pdf}
 \caption{\label{fig:rsm-3-fits-plots-1-3}Composite plots in both treatments for Van Dyke dataset, reader 3.}
 \end{figure}
 
@@ -4374,13 +4346,13 @@ The RSM parameters for the treatment 1 plot are: \(\mu\) = 2.2014133, \(\lambda\
 
 \begin{figure}
 \centering
-\includegraphics{10-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-4-1.pdf}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-4-1.pdf}
 \caption{\label{fig:rsm-3-fits-plots-1-4}Composite plots in both treatments for Van Dyke dataset, reader 4. For treatment 2 the 3 plots are indistinguishable and each one has AUC = 1. The degeneracy is due to all operating points being on the axes of the unit square.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{10-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-5-1.pdf}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-5-1.pdf}
 \caption{\label{fig:rsm-3-fits-plots-1-5}Composite plots in both treatments for Van Dyke dataset, reader 5.}
 \end{figure}
 
@@ -5181,7 +5153,7 @@ Background on the radiological search model (RSM) is provided in Chapter \ref{rs
 
 In the following sections each of the first three parameters is varied in turn and the corresponding optimal \(\zeta_1\) determined by maximizing one of two figures of merit (FOMs), namely, the wAFROC-AUC and the Youden-index. The value maximizing wAFROC-AUC is denoted \(\zeta_{1} \left ( 1, \mu, \lambda, \nu \right )\) and that maximizing the Youden-index is denoted \(\zeta_{1} \left ( 2, \mu, \lambda, \nu \right )\).
 
-The wAFROC figure of merit is implemented in the \texttt{RJafroc} function \texttt{UtilAnalyticalAucsRSM}. It is calculated using Eqn. \eqref{eq:rsm-pred-wllf}.
+The wAFROC figure of merit is implemented in the \texttt{RJafroc} function \texttt{UtilAnalyticalAucsRSM}.
 
 The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function \texttt{RSM\_yROC} and specificity is the complement of \texttt{RSM\_xROC}.
 
