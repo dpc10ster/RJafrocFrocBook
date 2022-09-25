@@ -351,7 +351,7 @@ The above formalism should not obscure the fact that the futility of extrapolati
 
 ### Illustration with a dataset {#empirical-froc-plot-illustration}
 
-The following plot uses `dataset04` [@zanca2009evaluation] in `RJafroc` to illustrate an empirical FROC plot. This dataset has $L_{max} = 3$, $\max{(N_{k_tt}})= 3$ and a 5-point rating scale was employed. The following plot applies to reader 1 in modality (treatment) 1 only. The full dataset has 5 modalities and 4 readers.
+The following plot uses `dataset04` [@zanca2009evaluation] to illustrate an empirical FROC plot. This dataset has $L_{max} = 3$, $\max{(N_{k_tt}})= 3$ and a 5-point rating scale was employed. The following plot applies to reader 1 in modality (treatment) 1 only. The full dataset has 5 modalities and 4 readers.
 
 
 ```{r, echo=TRUE}

@@ -193,7 +193,12 @@ plotwAfroc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
           OpChType = "wAFROC",
           legendPosition = "null"
         )$wAFROCPlot +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
+        #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
+        # DpcBugFix 9/24/22
+        # fix the following error in GitHub Actions 
+        # Quitting from lines 378-379 (22-optim-op-point.Rmd) 
+        # Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  : 
+        #     polygon edge not found
         i <- i + 1
       }
     }
@@ -222,8 +227,13 @@ plotRoc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
           OpChType = "ROC",
           legendPosition = "null"
         )$ROCPlot +
-          ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
-        i <- i + 1
+          #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
+          # DpcBugFix 9/24/22
+          # fix the following error in GitHub Actions 
+          # Quitting from lines 378-379 (22-optim-op-point.Rmd) 
+          # Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  : 
+          #     polygon edge not found
+          i <- i + 1
       }
     }
   }

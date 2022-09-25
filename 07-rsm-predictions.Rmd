@@ -1,4 +1,4 @@
-# ROC curve predictions of the RSM {#rsm-pred}
+# ROC predictions of the RSM {#rsm-pred}
 
 
 ```{r setup, include=FALSE}
@@ -13,17 +13,17 @@ library(Rmpfr)
 
 
 ## TBA How much finished {#rsm-pred-how-much-finished}
-80%
-Take out AFROC, move to next chapter along with FROC
+90%
 
 
 ## TBA Introduction {#rsm-pred-intro}
 
-The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes the ROC curve predictions of the RSM. The starting point is a general characteristic of all RSM predicted operating characteristics, namely they have the constrained end-point property. Derived next is the predicted *inferred ROC* curve followed by the predicted FROC and AFROC curves. 
+The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes the ROC curve and related predictions of the RSM. The next chapter will describe the FROC and wAFROC curve predictions. 
 
-Shown next is how *search performance* and *lesion-classification* performance can be measured from the inferred ROC curve. Search performance is the ability to find lesions while avoiding finding non-lesions, and lesion-classification performance is the ability, having found a suspicious region, to correctly classify it. Lesion-classification is different from (case) classification performance, i.e., distinguishing between diseased and non-diseased cases, which is measured by the area AUC under the ROC curve. 
+The inferred-ROC z-sample and the end-point of the ROC are defined and expressions in terms of RSM parameters are derived. Derived next is the predicted *inferred ROC* curve and the probability density functions of the inferred-ROC z-samples for non-diseased and diseased cases. Integrating the total area under the predicted ROC yields ROC-AUC. 
 
-TBA Based on the ROC/FROC/AFROC curve predictions of the RSM, a comparison is presented between area measures that can be calculated from FROC data, leading to an important and perhaps surprising conclusion, *the FROC curve is a poor descriptor of search performance and that the AFROC/wAFROC curves are preferred*. Most applications of FROC methods, particularly in CAD, have relied on the FROC curve to measure performance.
+Since the ROC is a basic measure of performance, numerical examples are given showing the behavior of the operating point as parameters of the RSM are varied.
+
 
 In this chapter formulae for RSM quantities are given in terms of the RSM search parameters $\lambda$ and $\nu$.  
 
@@ -961,57 +961,4 @@ suppressWarnings(print(plots))
 
 
 The solid black line is the plot, using multiple precision arithmetic, of slope of the ROC curve vs. $\zeta$. The dashed blue line is the slope using standard precision arithmetic. The horizontal dashed red line is the slope of the straight line connecting the end-point to (1,1), i.e., 0.4935272. Standard precision arithmetic breaks down below $\zeta \approx -6$ rapidly falling to illegal values `Nan` (above $\zeta \approx -5$ there is little difference between standard and multiple precision). The multiple precision curve approaches the slope of the straight line as $\zeta$ approaches -20. This confirms numerically the continuity of the slope of the ROC at the end-point.  
-
-## Appendix 3: wAFROC curve{#rsm-pred-wafroc-curve}
-
-The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pred-fpf) applies.
-
-
-The wAFROC ordinate is calculated using:
-
-
-\begin{equation} 
-\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l=1}^{L} \text{W}_{Ll} \, l \, \text{pmf}_{Bin}\left ( l, L, \nu \right )
-(\#eq:rsm-pred-wllf)
-\end{equation}
-
-
-* $\overrightarrow{f_L}$ is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted `lesDistr`. For example, the array `lesDistr = c(0.1, 0.4, 0.4, 0.1)`  defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions. 
-
-* $L_{max}$ is the maximum number of lesions per case in the dataset. In the preceding example $L_{max} = 4$.
-
-* $\mathbf{W}$ is the (lower triangular) square matrix with $L_{max}$ rows and columns containing the weights, where each row sums to unity. The relative lesion weights are denoted in the code `relWeights`. For example, `relWeights =  c(0.2, 0.3, 0.1, 0.5)` whose meaning is as follows:
-
-    + On cases with one lesion the lesion weight is unity.
-    + On cases with two lesions the relative weights are 0.2 and 0.3. Since these do not add up to unity, the actual weights are 0.4 and 0.6. 
-    + On cases with three lesions the relative weights are 0.2, 0.3 and 0.1. The actual weights are 1/3, 1/2 and 1/6.
-    + On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.2, 0.3, 0.1 and 0.4.
-    
-
-* The function `UtilLesionWeightsMatrixLesDistr` calculates the matrix given `lesDistr` and `relWeights`. For example:
-
-```{r, echo=TRUE}
-lesDistr <- c(0.6, 0.2, 0.1, 0.1)
-relWeights =  c(0.2, 0.3, 0.1, 0.4)
-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)[,-1]
-```
-
-
-* It is necessary to label the lesions properly so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the one with relative weight 0.1. Since $\mathbf{W}$ is independent of cases, the lesion characteristics (which determine clinical outcome) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix $\mathbf{W}$. 
-
-
-* $\text{pmf}_{Bin}\left ( l, L, \nu \right )$ is the probability mass function (pmf) of the binomial distribution with success probability $\nu$ and trial size $L$, defined in Eqn. \@ref(eq:rsm-binomial-pmf). $\text{W}_{Ll}$ is the weight of lesion $l$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.3$. 
-
-
-* The wAFROC-AUC is obtained by numerically integrating the wAFROC curve defined by Eqn. \@ref(eq:rsm-pred-fpf) and Eqn. \@ref(eq:rsm-pred-wllf) which is implemented in `UtilAnalyticalAucsRSM`.
-
-
-* To generate equal weights set `relWeights = 0`, as in following code:
-
-
-```{r}
-lesDistr <- c(0.6, 0.2, 0.1, 0.1)
-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights = 0)[,-1]
-```
-
 
