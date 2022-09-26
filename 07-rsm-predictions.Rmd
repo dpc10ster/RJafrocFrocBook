@@ -264,7 +264,7 @@ This can be evaluated using $\text{Maple}^{TM}$ yielding:
 \left ( 1 - \nu \Phi \left ( \mu - \zeta \right ) \right )^L
 \end{aligned}
 \right \}
-(\#eq:rsm-pred-tpf1)
+(\#eq:rsm-pred-tpf)
 \end{equation}
 
 
@@ -272,7 +272,7 @@ This can be evaluated using $\text{Maple}^{TM}$ yielding:
 
 ### Variable number of lesions per case {#rsm-pred-tpf-varying-lesions}
 
-To extend the results to varying numbers of lesions per diseased case, one averages the right hand side of \@ref(eq:rsm-pred-tpf1) over the fraction of diseased cases with $L$ lesions:
+To extend the results to varying numbers of lesions per diseased case, one averages the right hand side of \@ref(eq:rsm-pred-tpf) over the fraction of diseased cases with $L$ lesions:
 
 
 \begin{equation}
@@ -833,14 +833,15 @@ Using the following result:
 \begin{equation}
 \left. 
 \begin{aligned}
-& \lim_{\zeta \rightarrow -\infty} \frac{\phi\left ( \mu-\zeta \right )}{\phi\left ( -\zeta \right )} \\ 
-=&\lim_{\zeta \rightarrow -\infty} \frac{\frac{1}{\sqrt{2\pi}}\text{exp}\left ( \frac{\left (\mu-\zeta  \right )^2}{2} \right )}{\frac{1}{\sqrt{2\pi}}\text{exp}\left ( \frac{-\zeta^2}{2} \right )} \\
-=& \lim_{\zeta \rightarrow -\infty} \text{exp}\left ( \frac{\mu\zeta-\mu^2}{2}  \right ) \\
+& \lim_{\zeta \rightarrow -\infty} \frac{\phi \left ( \mu-\zeta \right )}{\phi\left ( -\zeta \right )} \\ 
+=&\lim_{\zeta \rightarrow -\infty} \frac{\text{exp}\left ( \frac{-\left (\mu-\zeta  \right )^2}{2} \right )}{\text{exp}\left ( \frac{-\zeta^2}{2} \right )} \\
+=& \lim_{\zeta \rightarrow -\infty} \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right ) \\
 =& 0
 \end{aligned}
 \right \} 
 (\#eq:rsm-pred-slope-eq5)
 \end{equation}
+
 
 it follows that:
 

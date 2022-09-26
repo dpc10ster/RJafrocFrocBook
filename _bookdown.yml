@@ -10,6 +10,7 @@ rmd_files: [
   "05-visual-search.Rmd",
   "06-rsm.Rmd",
   "07-rsm-predictions.Rmd",
+  "08-rsm-predictions2.Rmd",
   "10-rsm-search.Rmd",
   "11-rsm-fitting.Rmd",
   "12-rsm-3-fits.Rmd",
