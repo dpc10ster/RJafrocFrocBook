@@ -119,6 +119,7 @@ eq:rsm-pred2-afroc-slope
 eq:rsm-pred2-afroc-slope3
 fig:rsm-pred2-afroc-plots
 eq:rsm-pred2-wllf
+fig:rsm-pred2-wafroc-plots
 eq:rsm-sc-FPF-TPF-max
 fig:rsm-sc-performance-from-roc-curve
 eq:rsm-sc-perp-distance
@@ -221,6 +222,7 @@ fig:optim-op-point-low-performance-vary-nu-vary-all-froc
 fig:optim-op-point-low-performance-vary-nu-vary-all-wafroc
 fig:optim-op-point-low-performance-vary-nu-vary-all-roc
 fig:datasets-datasets
+rationale-and-organization
 tba-acknowledgements
 froc-paradigm
 froc-paradigm-how-much-finished
@@ -361,6 +363,7 @@ examples
 rsm-pred2-froc-afroc-chance
 rsm-pred2-no-marks
 rsm-pred2-wafroc-curve
+examples-1
 rsm-pred2-discussion-summary
 rsm-sc
 rsm-sc-how-much-finished

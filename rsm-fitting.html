@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-09-26" />
+<meta name="date" content="2022-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,7 +140,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="preface.html"><a href="preface.html#tba-acknowledgements"><i class="fa fa-check"></i><b>0.1</b> TBA Acknowledgements</a></li>
+<li class="chapter" data-level="0.1" data-path="preface.html"><a href="preface.html#rationale-and-organization"><i class="fa fa-check"></i><b>0.1</b> Rationale and Organization</a></li>
+<li class="chapter" data-level="0.2" data-path="preface.html"><a href="preface.html#tba-acknowledgements"><i class="fa fa-check"></i><b>0.2</b> TBA Acknowledgements</a></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
 <li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
@@ -289,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="rsm-pred2.html"><a href="rsm-pred2.html"><i class="fa fa-check"></i><b>6</b> FROC/wAFROC predictions of the RSM</a><ul>
 <li class="chapter" data-level="6.1" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> TBA How much finished</a></li>
-<li class="chapter" data-level="6.2" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-intro"><i class="fa fa-check"></i><b>6.2</b> TBA Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-intro"><i class="fa fa-check"></i><b>6.2</b> Introduction</a></li>
 <li class="chapter" data-level="6.3" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-froc-curve"><i class="fa fa-check"></i><b>6.3</b> The RSM-predicted FROC curve</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="rsm-pred2.html"><a href="rsm-pred2.html#slopes-near-origin-and-end-point"><i class="fa fa-check"></i><b>6.3.1</b> Slopes near origin and end-point</a></li>
 <li class="chapter" data-level="6.3.2" data-path="rsm-pred2.html"><a href="rsm-pred2.html#example-plots"><i class="fa fa-check"></i><b>6.3.2</b> Example plots</a></li>
@@ -300,8 +301,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4.3" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-froc-afroc-chance"><i class="fa fa-check"></i><b>6.4.3</b> Chance level performance on AFROC</a></li>
 <li class="chapter" data-level="6.4.4" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-no-marks"><i class="fa fa-check"></i><b>6.4.4</b> The reader who does not yield any marks</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-wafroc-curve"><i class="fa fa-check"></i><b>6.5</b> The RSM-predicted wAFROC curve</a></li>
-<li class="chapter" data-level="6.6" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-discussion-summary"><i class="fa fa-check"></i><b>6.6</b> TBA Discussion / Summary</a></li>
+<li class="chapter" data-level="6.5" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-wafroc-curve"><i class="fa fa-check"></i><b>6.5</b> The RSM-predicted wAFROC curve</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="rsm-pred2.html"><a href="rsm-pred2.html#examples-1"><i class="fa fa-check"></i><b>6.5.1</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-discussion-summary"><i class="fa fa-check"></i><b>6.6</b> Discussion / Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rsm-sc.html"><a href="rsm-sc.html"><i class="fa fa-check"></i><b>7</b> Search and classification performances</a><ul>
 <li class="chapter" data-level="7.1" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished</a></li>
@@ -520,9 +523,9 @@ LL_{ROC} \left ( \mu, \lambda, \nu, \overrightarrow{f_L} \right )= \sum_{r=0}^{R
 <ul>
 <li>The following example uses the <em>first</em> treatment in <code>dataset04</code>; this is a 5 treatment 4 radiologist FROC dataset <span class="citation">(Zanca et al. <a href="#ref-zanca2009evaluation" role="doc-biblioref">2009</a>)</span> consisting of 200 cases acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using <code>DfBinDataset()</code>. The number of parameters to be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.</li>
 </ul>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="rsm-fitting.html#cb92-1"></a>rocData &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dataset04)</span>
-<span id="cb92-2"><a href="rsm-fitting.html#cb92-2"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">UtilLesionDistrVector</span>(dataset04)</span>
-<span id="cb92-3"><a href="rsm-fitting.html#cb92-3"></a>ret &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(rocData, <span class="dt">lesDistr =</span> lesDistr)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="rsm-fitting.html#cb99-1"></a>rocData &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dataset04)</span>
+<span id="cb99-2"><a href="rsm-fitting.html#cb99-2"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">UtilLesionDistrVector</span>(dataset04)</span>
+<span id="cb99-3"><a href="rsm-fitting.html#cb99-3"></a>ret &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(rocData, <span class="dt">lesDistr =</span> lesDistr)</span></code></pre></div>
 <p>The lesion distribution vector is 0.69, 0.2, 0.11. This means that fraction 0.69 of each diseased case contains one lesion, fraction 0.2 contains two lesions and fraction 0.11 contains three lesions. Since the fitted curve depends on the lesion distribution the fitting function needs to know this distribution.<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a></p>
 <p>The fitted parameter values are as follows (all cutoffs excepting <span class="math inline">\(\zeta_1\)</span>, the chi-square statistic - <code>NA</code> for this dataset - and the covariance matrix, are not shown):</p>
 <ul>

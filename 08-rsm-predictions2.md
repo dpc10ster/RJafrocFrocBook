@@ -5,12 +5,15 @@
 
 
 ## TBA How much finished {#rsm-pred2-how-much-finished}
-10%
+97%
+<!-- # lesDistr is needed because one of its elements could be zero -->
+<!-- # e.g. c(0.6, 0.3, 0, 0.1) means there are no diseased cases -->
+<!-- # in the dataset with 3 lesions; I am not quite sure about this  -->
 
 
-## TBA Introduction {#rsm-pred2-intro}
+## Introduction {#rsm-pred2-intro}
 
-The preceding chapter described the radiological search model (RSM) for FROC data and the ROC curve and other related implications of this model. This chapter describes the FROC and wAFROC curve predictions of the RSM. We show that these curves also have the constrained end-point property. 
+The preceding chapter described the radiological search model (RSM) for FROC data and the ROC curve and other implications of the RSM. This chapter describes the FROC, AFROC and wAFROC curve predictions of the RSM. Also discussed here are the slopes of these plots near the origin and the end-point, which brings out interesting properties not discussed in the 2017 print book. 
 
 
 
@@ -290,7 +293,7 @@ The wAFROC ordinate is calculated using:
 
 * $L_{max}$ is the maximum number of lesions per case in the dataset. In the preceding example $L_{max} = 4$.
 
-* $\mathbf{W}$ is the (lower triangular) square matrix with $L_{max}$ rows and columns containing the weights, where each row sums to unity. The relative lesion weights are denoted in the code `relWeights`. For example, `relWeights =  c(0.2, 0.3, 0.1, 0.5)` whose meaning is as follows:
+* $\mathbf{W}$ is the (lower triangular) square matrix with $L_{max}$ rows and columns containing the weights, where each row sums to unity, see example below (the unused matrix elements are set to $-\infty$). The relative lesion weights are denoted in the code `relWeights`. For example, `relWeights =  c(0.2, 0.3, 0.1, 0.5)` whose meaning is as follows:
 
     + On cases with one lesion the lesion weight is unity.
     + On cases with two lesions the relative weights are 0.2 and 0.3. Since these do not add up to unity, the actual weights are 0.4 and 0.6. 
@@ -319,13 +322,13 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)[,-1]
 * It is necessary to label the lesions properly so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the one with relative weight 0.1. Since $\mathbf{W}$ is independent of cases, the lesion characteristics (which determine clinical outcome) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix $\mathbf{W}$. 
 
 
-* $\text{pmf}_{Bin}\left ( l_2, L, \nu \right )$ is the probability mass function (pmf) of the binomial distribution with success probability $\nu$ and trial size $L$, defined in Eqn. \@ref(eq:rsm-binomial-pmf). $\text{W}_{Ll_2}$ is the weight of lesion $l_2$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.3$. 
+* $\text{pmf}_{Bin}\left ( l_2, L, \nu \right )$ is the probability mass function (pmf) of the binomial distribution with success probability $\nu$ and trial size $L$. $\text{W}_{Ll_2}$ is the weight of lesion $l_2$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.3$. 
 
 
 * Eqn. \@ref(eq:rsm-pred2-wllf) is implemented in `UtilAnalyticalAucsRSM`.
 
 
-* To generate equal weights set `relWeights = 0`, as in following code:
+* To generate equal weights set `relWeights = 0` as in following code:
 
 
 
@@ -343,24 +346,112 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights = 0)[,-1]
 ```
 
 
-## TBA Discussion / Summary {#rsm-pred2-discussion-summary}
-This chapter has described FROC, AFROC and wAFROC curves predicted by the radiological search model (RSM). All RSM curves share the constrained end-point property that makes them qualitatively different from previous ROC models. In my experience, it is a property that most researchers in this field have difficulty understanding. There is too much history going back to the early 1940s, of the ROC curve extending from (0,0) to (1,1) that one has to let go of, and this can be difficult. 
+### Examples
 
-I am not aware of any direct evidence that radiologists can move the operating point continuously in the range (0,0) to (1,1) in search tasks, so the existence of such an ROC is tantamount to an assumption. Algorithmic observers that do not involve the element of search can extend continuously to (1,1). An example of an algorithmic observer not involving search is a diagnostic test that rates the results of a laboratory measurement, e.g., the A1C measure of blood glucose  for presence of a disease. If A1C ≥ 6.5% the patient is diagnosed as diabetic. By moving the threshold from infinity to –infinity, and assuming a large population of patients, one can trace out the entire ROC curve from the origin to (1,1). This is because every patient yields an A1C value. Now imagine that some finite fraction of the test results are "lost in the mail"; then the ROC curve, calculated over all patients, would have the constrained end-point property, albeit due to an unreasonable cause.
 
-The situation in medical imaging involving search tasks is more realistic. Not every case yields a decision variable. There is a reasonable cause for this – to render a decision variable sample the radiologist must find something suspicious to report, and if none is found, there is no decision variable to report. The ROC curve calculated over all patients would exhibit the constrained end-point property, even in the limit of an infinite number of patients. If calculated over only those patients that yielded at least one mark, the ROC curve would extend from (0,0) to (1,1) but then one would be ignoring the cases with no marks -- these represent correct decisions and unmarked diseased cases represent incorrect decisions.
 
-ROC, FROC and AFROC curves were derived (wAFROC is implemented in the Rjafroc). These were used to demonstrate that the FROC is a poor descriptor of performance. Since almost all work to date, including some by me TBA 47,48, has used FROC curves to measure performance, this is going to be difficulty for some to accept. The examples in Fig. 17.6 (A- F) and Fig. 17.7 (A-B) should convince one that the FROC curve is indeed a poor measure of performance. The only situation where one can safely use the FROC curve is if the two modalities produce curves extending over the same NLF range. This can happen with two variants of a CAD algorithm, but rarely with radiologist observers.
+>
+* Shown below are wAFROC curves for the same parameter values used to demonstrate the FROC curves shown in Fig. \@ref(fig:rsm-pred2-froc-plots). 
+* Note that it is necessary to specify `lesDistr` when requesting a wAFROC plot. A dataset with a maximum of 4 lesions per diseased case is assumed, with `lesDistr <- c(0.6, 0.2, 0.1, 0.1)`.
 
-A unique feature is that the RSM provides measures of search and lesion-classification performance. It bears repeating that search performance is the ability to find lesions while avoiding finding non-lesions. Search performance can be determined from the position of the ROC end-point (which in turn is determined by RSM-based fitting of ROC data, Chapter 19). The perpendicular distance between the end-point and the chance diagonal is, apart from a factor of 1.414, a measure of search performance. All ROC models that predict continuous curves extending to (1,1), imply zero search performance. 
 
-Lesion-classification performance is measured by the AUC value corresponding to the   parameter. Lesion-classification performance is the ability to discriminate between LLs and NLs, not between diseased and non-diseased cases: the latter is measured by RSM-AUC. There is a close analogy between the two ways of measuring lesion-classification performance and CAD used to find lesions in screening mammography vs. CAD used in the diagnostic context to determine if a lesion found at screening is actually malignant. The former is termed CADe, for CAD detection, which in my opinion, is slightly misleading as at screening lesions are found not detected ("detection" is "discover or identify the presence or existence of something ", correct localization is not necessarily implied; the more precise term is "localize"). In the diagnostic context one has CADx, for CAD diagnostic, i.e., given a specific region of the image, is the region malignant? 
 
-Search and lesion-classification performance can be used as "diagnostic aids" to optimize performance of a reader. For example, is search performance is low, then training using mainly non-diseased cases is called for, so the resident learns the different variants of non-diseased tissues that can appear to be true lesions. If lesion-classification performance is low then training with diseased cases only is called for, so the resident learns the distinguishing features characterizing true lesions from non-diseased tissues that fake true lesions.
 
-Finally, evidence for the RSM is summarized. Its correspondence to the empirical Kundel-Nodine model of visual search that is grounded in eye-tracking measurements. It reduces in the limit of large  , which guarantees that every case will yield a decision variable sample, to the binormal model; the predicted pdfs in this limit are not strictly normal, but deviations from normality would require very large sample size to demonstrate. Examples were given where even with 1200 cases the binormal model provides statistically good fits, as judged by the chi-square goodness of fit statistic, Table 17.2. Since the binormal model has proven quite successful in describing a large body of data, it satisfying that the RSM can mimic it in the limit of large  . The RSM explains most empirical results regarding binormal model fits: the common finding that b < 1; that b decreases with increasing lesion pSNR (large   and / or  ); and the finding that the difference in means divided by the difference in standard deviations is fairly constant for a fixed experimental situation, Table 17.3. The RSM explains data degeneracy, especially for radiologists with high expertise.
 
-The contaminated binormal model2-4 (CBM), Chapter 20, which models the diseased distribution as having two peaks, one at zero and the other at a constrained value, also explains the empirical observation that b-parameter < 1 and data degeneracy. Because it allows the ROC curve to go continuously to (1,1), CBM does not completely account for search performance – it accounts for search when it comes to finding lesions, but not for avoiding finding non-lesions.
 
-I do not want to leave the impression that RSM is the ultimate model. The current model does not predict satisfaction of search (SOS) effects27-29. Attempts to incorporate SOS effects in the RSM are in the early research stage. As stated earlier, the RSM is a first-order model: a lot of interesting science remains to be uncovered.
+<div class="figure">
+<img src="08-rsm-predictions2_files/figure-html/rsm-pred2-wafroc-plots-1.png" alt="RSM-predicted wAFROC curves for the same parameter values used in the earlier AFROC plot. Top left: $\mu = 0.0001$, $\lambda = 1$ and $\nu = 0.2$. Top right: $\mu = 1$, $\lambda = 2$ and $\nu = 0.5$. Bottom left: $\mu = 2$, $\lambda = 3$ and $\nu = 0.7$. Bottom right: $\mu = 4$, $\lambda = 4$ and $\nu = 0.9$. As $\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve." width="672" />
+<p class="caption">(\#fig:rsm-pred2-wafroc-plots)RSM-predicted wAFROC curves for the same parameter values used in the earlier AFROC plot. Top left: $\mu = 0.0001$, $\lambda = 1$ and $\nu = 0.2$. Top right: $\mu = 1$, $\lambda = 2$ and $\nu = 0.5$. Bottom left: $\mu = 2$, $\lambda = 3$ and $\nu = 0.7$. Bottom right: $\mu = 4$, $\lambda = 4$ and $\nu = 0.9$. As $\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.</p>
+</div>
 
+>
+Comparison of the wAFROC plots in Fig. \@ref(fig:rsm-pred2-wafroc-plots) to those in Fig. \@ref(fig:rsm-pred2-afroc-plots), particularly the bottom-right panels, should convince the reader that the wAFROC curves are slightly above the corresponding AFROC plots. This is tested by the following code: 
+
+
+
+```r
+for (i in 1:4) {
+  cat(i, all(plotArrwAfroc[[i]]$data$wLLF >= plotArrAfroc[[i]]$data$LLF), "\n")
+}
+```
+
+```
+## 1 FALSE 
+## 2 TRUE 
+## 3 TRUE 
+## 4 TRUE
+```
+
+
+The `FALSE` value corresponds to $\mu = 0.001$ and the last one corresponds to $\mu = 4$. 
+
+
+>
+If one sets `relWeights = 0` thereby ensuring equal weights of all lesions, as in the following code, the wAFROC and AFROC wLLF values become identical.
+
+
+
+```r
+plotArrwAfrocZero <- array(list(), dim = c(length(lambdaArr)))
+for (i in 1:length(lambdaArr)) {
+  mu <- muArr[i]
+  lambda <- lambdaArr[i]
+  nu <- nuArr[i]
+  ret1 <- PlotRsmOperatingCharacteristics(
+    mu, lambda, nu,
+    lesDistr = lesDistr,
+    relWeights = 0,
+    OpChType = "wAFROC",
+    legendPosition  = "none"
+  )
+  plotArrwAfrocZero[[i]] <- ret1$wAFROCPlot
+}
+```
+
+
+
+
+
+
+```r
+for (i in 1:4) {
+  cat(i, all(plotArrwAfrocZero[[i]]$data$wLLF <= plotArrAfroc[[i]]$data$LLF), "\n")
+}
+```
+
+```
+## 1 FALSE 
+## 2 FALSE 
+## 3 FALSE 
+## 4 FALSE
+```
+
+
+
+
+```r
+for (i in 1:4) {
+  cat(i, all(plotArrwAfrocZero[[i]]$data$wLLF >= plotArrAfroc[[i]]$data$LLF), "\n")
+}
+```
+
+```
+## 1 FALSE 
+## 2 FALSE 
+## 3 FALSE 
+## 4 FALSE
+```
+
+
+Both tests $\ge$ and $\le$ yield `FALSE` implying they are equal (testing for equality does not yield `TRUE` due to numerical issues).
+
+
+
+## Discussion / Summary {#rsm-pred2-discussion-summary}
+This chapter has described FROC, AFROC and wAFROC curves predicted by the radiological search model (RSM). All RSM curves share the constrained end-point property that makes them qualitatively different from predictions of all other ROC models. In my experience it is a property that most researchers in this field have difficulty understanding. There is too much history going back to the early 1940s of the ROC curve extending continuously from (0,0) to (1,1). 
+
+I am not aware of any evidence that radiologists can move the operating point *continuously* in the range (0,0) to (1,1) in search tasks, so the existence of such an ROC is an assumption. Algorithmic observers that do not involve search can extend continuously to (1,1). An example is a diagnostic test that rates the results of a laboratory measurement, e.g., the A1C measure of blood glucose  for presence of a disease. If $A1C \ge 0.065$ the patient is diagnosed as diabetic. By moving the threshold from infinity to –infinity, and assuming a large population of patients, one can trace out the entire ROC curve from the origin to (1,1). *This is because every patient yields an A1C value.* Now imagine that some finite fraction of the test results are "lost in the mail"; then the ROC curve, calculated over all patients, would have the constrained end-point property, albeit due to an unreasonable cause.
+
+The situation in medical imaging involving search tasks is more realistic. *Not every case yields a decision variable.* There is a reasonable cause for this – to render a decision variable sample the radiologist must find something suspicious to report, and if none is found, there is no decision variable to report. The ROC curve calculated over all patients would exhibit the constrained end-point property, even in the limit of an infinite number of patients. If calculated over only those patients that yielded at least one mark, the ROC curve would extend from (0,0) to (1,1) but then one would be ignoring all cases with no marks. For non-diseased cases these represent correct decisions and for diseased cases they represent incorrect decisions and ignoring them should raise concern regarding validity of the analysis.
+
+Attention reverts in the next chapter to the ROC where we show that important aspects of the search mechanism are contained in the position of the end-point. 
