@@ -372,10 +372,6 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights = 0)[,-1]
 >
 * Shown below are wAFROC curves for the same parameter values used to demonstrate the FROC curves shown in Fig. \@ref(fig:rsm-pred2-froc-plots). 
 * Note that it is necessary to specify `lesDistr` when requesting a wAFROC plot. A dataset with a maximum of 4 lesions per diseased case is assumed, with `lesDistr <- c(0.6, 0.2, 0.1, 0.1)`.
-* Note that each wAFROC curve needs to be completed by a straight line extending from the end-point to (1,1). This line is inaccessible to the observer (except for the (1,1) point trivially obtained by cumulating all cases, including those with no marks) but is necessary to fully account for all decisions (an analogous situation was encountered in connection with the RSM predicted ROC curve). 
-* Notice that the wAFROC curve is concave-up for very small value of $\mu$, see top-left plot in Fig. \@ref(fig:rsm-pred2-afroc-plots). For technical reasons I have used a small non-zero value $\mu = 0.0001$ as $\mu = 0$ will generate an error message in the software.  
-* Each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.
-* As $\mu$ increases, the area under the wAFROC (including that under the straight line extension) increases monotonically from 0 to 1. The reader should check that this is true regardless of the choices of the other parameters in the model. This is expected of a well-behaved area measure that can be used as a figure of merit. 
 
 
 ```{r rsm-pred2-wafroc-plots-code, echo=FALSE}
@@ -397,11 +393,11 @@ for (i in 1:length(lambdaArr)) {
 
 
 
-```{r rsm-pred2-wafroc-plots, fig.cap="RSM-predicted AFROC curves for the same parameter values used in the earlier FROC plot. Top left: $\\mu = 0.0001$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.", fig.show='hold', echo=FALSE}
+```{r rsm-pred2-wafroc-plots, fig.cap="RSM-predicted wAFROC curves for the same parameter values used in the earlier AFROC plot. Top left: $\\mu = 0.0001$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArrwAfroc[[1]],plotArrwAfroc[[2]],plotArrwAfroc[[3]],plotArrwAfroc[[4]], ncol = 2)
 ```
 
-
+>
 Comparison of the wAFROC plots in Fig. \@ref(fig:rsm-pred2-wafroc-plots) to those in Fig. \@ref(fig:rsm-pred2-afroc-plots), particularly the bottom-right panels, should convince the reader that the wAFROC curves are slightly above the corresponding AFROC plots. This is tested by the following code: 
 
 
@@ -415,7 +411,8 @@ for (i in 1:4) {
 The `FALSE` value corresponds to $\mu = 0.001$ and the last one corresponds to $\mu = 4$. 
 
 
-If one sets `relWeights = 0`, as in the following code, thereby ensuring equal weights of all lesions, then the wAFROC and AFROC values are identical.
+>
+If one sets `relWeights = 0` thereby ensuring equal weights of all lesions, as in the following code, the wAFROC and AFROC wLLF values become identical.
 
 
 ```{r , echo=TRUE}
@@ -431,7 +428,7 @@ for (i in 1:length(lambdaArr)) {
     OpChType = "wAFROC",
     legendPosition  = "none"
   )
-  plotArrwAfrocZero[[i]] <- ret1$wAFROCPlot #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
+  plotArrwAfrocZero[[i]] <- ret1$wAFROCPlot
 }
 ```
 
@@ -454,7 +451,7 @@ for (i in 1:4) {
 ```
 
 
-Testing for exact equality does not yield `TRUE` due to numerical issues.
+Both tests $\ge$ and $\le$ yield `FALSE` implying they are equal (testing for equality does not yield `TRUE` due to numerical issues).
 
 
 
