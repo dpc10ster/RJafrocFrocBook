@@ -12,7 +12,7 @@ library(gridExtra)
 
 
 ## TBA How much finished {#rsm-pred2-how-much-finished}
-95%
+97%
 <!-- # lesDistr is needed because one of its elements could be zero -->
 <!-- # e.g. c(0.6, 0.3, 0, 0.1) means there are no diseased cases -->
 <!-- # in the dataset with 3 lesions; I am not quite sure about this  -->
@@ -122,7 +122,7 @@ This expression leads to the following conclusions:
 A few FROC plots are shown below which illustrate the statements just made in the previous section.
 
 
-```{r rsm-pred2-froc-fig-froc-mu-code, echo=FALSE}
+```{r rsm-pred2-froc-plots-code, echo=FALSE}
 muArr <- c(0.0001,1,2,4)
 lambdaArr <- c(1,2,3,4)
 nuArr <- c(0.2,0.5,0.7,0.9)
@@ -257,8 +257,8 @@ This expression leads to the following conclusions:
 
 
 
-```{r rsm-pred2-froc-fig-afroc-mu-code, echo=FALSE}
-plotArr <- array(list(), dim = c(length(lambdaArr)))
+```{r rsm-pred2-afroc-plots-code, echo=FALSE}
+plotArrAfroc <- array(list(), dim = c(length(lambdaArr)))
 for (i in 1:length(lambdaArr)) {
   mu <- muArr[i]
   lambda <- lambdaArr[i]
@@ -268,14 +268,14 @@ for (i in 1:length(lambdaArr)) {
     OpChType = "AFROC",
     legendPosition  = "none"
   )
-  plotArr[[i]] <- ret1$AFROCPlot #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
+  plotArrAfroc[[i]] <- ret1$AFROCPlot #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
 }
 ```
 
 
 
 ```{r rsm-pred2-afroc-plots, fig.cap="RSM-predicted AFROC curves for the same parameter values used in the earlier FROC plot. Top left: $\\mu = 0.0001$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.", fig.show='hold', echo=FALSE}
-grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], ncol = 2)
+grid.arrange(plotArrAfroc[[1]],plotArrAfroc[[2]],plotArrAfroc[[3]],plotArrAfroc[[4]], ncol = 2)
 ```
 
 
@@ -378,8 +378,8 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights = 0)[,-1]
 * As $\mu$ increases, the area under the wAFROC (including that under the straight line extension) increases monotonically from 0 to 1. The reader should check that this is true regardless of the choices of the other parameters in the model. This is expected of a well-behaved area measure that can be used as a figure of merit. 
 
 
-```{r rsm-pred2-froc-fig-wafroc-mu-code, echo=FALSE}
-plotArr <- array(list(), dim = c(length(lambdaArr)))
+```{r rsm-pred2-wafroc-plots-code, echo=FALSE}
+plotArrwAfroc <- array(list(), dim = c(length(lambdaArr)))
 for (i in 1:length(lambdaArr)) {
   mu <- muArr[i]
   lambda <- lambdaArr[i]
@@ -387,18 +387,74 @@ for (i in 1:length(lambdaArr)) {
   ret1 <- PlotRsmOperatingCharacteristics(
     mu, lambda, nu,
     lesDistr = lesDistr,
+    relWeights = relWeights,
     OpChType = "wAFROC",
     legendPosition  = "none"
   )
-  plotArr[[i]] <- ret1$wAFROCPlot #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
+  plotArrwAfroc[[i]] <- ret1$wAFROCPlot #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
 }
 ```
 
 
 
 ```{r rsm-pred2-wafroc-plots, fig.cap="RSM-predicted AFROC curves for the same parameter values used in the earlier FROC plot. Top left: $\\mu = 0.0001$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.", fig.show='hold', echo=FALSE}
-grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], ncol = 2)
+grid.arrange(plotArrwAfroc[[1]],plotArrwAfroc[[2]],plotArrwAfroc[[3]],plotArrwAfroc[[4]], ncol = 2)
 ```
+
+
+Comparison of the wAFROC plots in Fig. \@ref(fig:rsm-pred2-wafroc-plots) to those in Fig. \@ref(fig:rsm-pred2-afroc-plots), particularly the bottom-right panels, should convince the reader that the wAFROC curves are slightly above the corresponding AFROC plots. This is tested by the following code: 
+
+
+```{r echo=T}
+for (i in 1:4) {
+  cat(i, all(plotArrwAfroc[[i]]$data$wLLF >= plotArrAfroc[[i]]$data$LLF), "\n")
+}
+```
+
+
+The `FALSE` value corresponds to $\mu = 0.001$ and the last one corresponds to $\mu = 4$. 
+
+
+If one sets `relWeights = 0`, as in the following code, thereby ensuring equal weights of all lesions, then the wAFROC and AFROC values are identical.
+
+
+```{r , echo=TRUE}
+plotArrwAfrocZero <- array(list(), dim = c(length(lambdaArr)))
+for (i in 1:length(lambdaArr)) {
+  mu <- muArr[i]
+  lambda <- lambdaArr[i]
+  nu <- nuArr[i]
+  ret1 <- PlotRsmOperatingCharacteristics(
+    mu, lambda, nu,
+    lesDistr = lesDistr,
+    relWeights = 0,
+    OpChType = "wAFROC",
+    legendPosition  = "none"
+  )
+  plotArrwAfrocZero[[i]] <- ret1$wAFROCPlot #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
+}
+```
+
+
+
+
+
+```{r echo=T}
+for (i in 1:4) {
+  cat(i, all(plotArrwAfrocZero[[i]]$data$wLLF <= plotArrAfroc[[i]]$data$LLF), "\n")
+}
+```
+
+
+
+```{r echo=T}
+for (i in 1:4) {
+  cat(i, all(plotArrwAfrocZero[[i]]$data$wLLF >= plotArrAfroc[[i]]$data$LLF), "\n")
+}
+```
+
+
+Testing for exact equality does not yield `TRUE` due to numerical issues.
 
 
 
