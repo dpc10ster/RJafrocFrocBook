@@ -111,7 +111,7 @@ This expression leads to the following conclusions:
 
 
 >
-* The slope of the AFROC near the end-point, corresponding to $\zeta = -\infty$, is zero provided $\mu \ne 0$, in which case the slope is $\frac{\nu}{\lambda}$. 
+* The slope of the FROC near the end-point, corresponding to $\zeta = -\infty$, is zero provided $\mu \ne 0$, in which case the slope is $\frac{\nu}{\lambda}$. 
 * The slope near the origin, corresponding to $\zeta = +\infty$, is $\infty$ except when $\mu = 0$ in which case the slope is $\frac{\nu}{\lambda}$. 
 * For $\mu = 0$ the entire FROC curve is a straight line extending from the origin to $\frac{\nu}{\lambda}$. 
 
@@ -148,6 +148,44 @@ for (i in 1:length(lambdaArr)) {
 ```{r rsm-pred2-froc-plots, fig.cap="RSM-predicted FROC curves. Top left: $\\mu = 0.0001$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], ncol = 2)
 ```
+
+
+
+### Example plots after reparameterization
+
+TBA A few FROC plots are shown below which illustrate the statements just made in the previous section.
+
+
+```{r rsm-pred2-froc-plots-code1, echo=T}
+muArr <- c(0.0001,1,2,4)
+lambda_i <- 2
+nu_i <- 0.5
+plotArr <- array(list(), dim = c(length(lambdaArr)))
+for (i in 1:length(lambdaArr)) {
+  mu <- muArr[i]
+  ret <- UtilIntrinsic2RSM(mu, lambda_i = lambda_i, nu_i = nu_i)
+  lambda <- ret$lambda
+  nu <- ret$nu
+  cat("lambda = ", lambda, ", nu = ", nu, "\n")
+  ret1 <- PlotRsmOperatingCharacteristics(
+    mu, lambda, nu,
+    OpChType = "FROC",
+    legendPosition  = "none",
+    nlfRange = c(0,4),
+    llfRange = c(0,1)
+  )
+  plotArr[[i]] <- ret1$FROCPlot 
+  #+ ggtitle(paste0("mu = ", as.character(muArr[i])))
+}
+```
+
+
+
+```{r rsm-pred2-froc-plots1, fig.cap="RSM-predicted FROC curves in terms of intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.0001$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$.", fig.show='hold', echo=FALSE}
+suppressWarnings(grid.arrange(plotArr[[1]],plotArr[[2]],plotArr[[3]],plotArr[[4]], ncol = 2))
+```
+
+
 
 ## The RSM-predicted AFROC curve {#rsm-pred2-froc-afroc-curve}
 
@@ -295,6 +333,33 @@ The reason $\text{TPF}_{\text{max}} \geq \text{LLF}_{max}$ is because the ROC gi
 5.	For $\mu \to \infty$ the accessible portion of the operating characteristic approaches the vertical line connecting (0,0) to (0,1), the area under which is zero. The complete AFROC curve is obtained by connecting this point to (1,1) by the dashed line and in this limit the area under the complete ROC curve approaches 1. As with the ROC, omitting the area under the dashed portion of the curve will result in a severe underestimate of true performance. 
 6.	As $\lambda \to 0$ decreases $\text{FPF}_{\text{max}} \to 0$ while $\text{LLF}_{\text{max}}$ stays constant, as the latter is independent of $\lambda$. 
 7.	As $\nu$ increases $\text{FPF}_{\text{max}}$ stays constant while $\text{LLF}_{\text{max}} \to 1$. In this limit every lesion is found. AFROC-AUC approaches unity.
+
+
+### Example plots after reparameterization
+
+
+```{r rsm-pred2-afroc-plots-code1, echo=FALSE}
+plotArrAfroc <- array(list(), dim = c(length(lambdaArr)))
+for (i in 1:length(lambdaArr)) {
+  mu <- muArr[i]
+  ret <- UtilIntrinsic2RSM(mu, lambda_i = lambda_i, nu_i = nu_i)
+  lambda <- ret$lambda  
+  nu <- ret$nu
+  ret1 <- PlotRsmOperatingCharacteristics(
+    mu, lambda, nu, 
+    OpChType = "AFROC",
+    legendPosition  = "none"
+  )
+  plotArrAfroc[[i]] <- ret1$AFROCPlot #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
+}
+```
+
+
+
+```{r rsm-pred2-afroc-plots1, fig.cap="RSM-predicted AFROC curves in terms of intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.0001$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$. TBA TBA. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArrAfroc[[1]],plotArrAfroc[[2]],plotArrAfroc[[3]],plotArrAfroc[[4]], ncol = 2)
+```
+
 
 
 
