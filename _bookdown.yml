@@ -20,7 +20,10 @@ rmd_files: [
   "90-datasets.Rmd",
   "99-references.Rmd",
 ]
-clean: [packages.bib, myRefs.bbl]
+
+
+
+clean: [packages.bib]
 new_session: yes
 language:
   label:
