@@ -18,6 +18,7 @@ Two fundamental parameters of ROC models are needed (1) to accommodate the avera
 
 
 ## The radiological search model {#rsm-details}
+
 The radiological search model (RSM) for the free-response paradigm is a statistical parameterization of the Nodine-Kundel model. It consists of:
 
 * A *search stage* in which suspicious regions, i.e., the latent marks, are identified via peripheral vision. The total number of latent marks on a case is random non-negative integer and in fact some cases may have zero latent marks, a fact that will turn out to have important consequences for the shapes of all RSM predicted operating characteristics.
@@ -101,6 +102,7 @@ By choosing $R$ large enough the preceding discrete rating model is applicable t
 
 
 ## Physical interpretation of RSM parameters {#rsm-parameter-interpretations}
+
 The parameters have the following meanings:
 
 ### The $\mu$ parameter {#rsm-mu-parameter}
@@ -303,6 +305,7 @@ For reader 1, the estimate of the binomial success probability is 0.490 with 95%
 
 
 ## Model re-parameterization {#rsm-re-parameterization}
+
 While the parameters $\mu$, $\lambda$ and $\nu$ are physically meaningful a little thought reveals that they cannot be varied independently of each other. Rather, $\mu$ is the *intrinsic* parameter whose value, together with two other intrinsic parameters $\lambda_i$ and $\nu_i$, determine $\lambda$ and $\nu$, respectively. The following is a convenient re-parameterization ^[The need for the first re-parameterization, involving $\nu$, was foreseen in the original search model papers [@chakraborty2006search; @chakraborty2006roc] but the need for the second re-parameterization (involving $\lambda$) was discovered more recently.]:
 
 
