@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-09-29}
+\date{2022-10-01}
 
 \begin{document}
 \maketitle
@@ -2190,10 +2190,10 @@ The parameter \(\mu\) is termed the \emph{classification} parameter.
 
 By choosing \(R\) large enough the preceding discrete rating model is applicable to quasi-continuous z-samples.
 
-\hypertarget{rsm-parameter-interpretations}{%
-\section{Physical interpretation of RSM parameters}\label{rsm-parameter-interpretations}}
+\hypertarget{rsm-parameter-physical-meanings}{%
+\section{Physical meanings of the RSM parameters}\label{rsm-parameter-physical-meanings}}
 
-The parameters have the following meanings:
+The parameters have the following physical meanings:
 
 \hypertarget{rsm-mu-parameter}{%
 \subsection{\texorpdfstring{The \(\mu\) parameter}{The \textbackslash mu parameter}}\label{rsm-mu-parameter}}
@@ -2384,15 +2384,17 @@ As a more complicated but clinically realistic example, consider a dataset with 
 
 For reader 1, the estimate of the binomial success probability is 0.490 with 95\% confidence interval (0.391, 0.590); for reader 2 the corresponding estimates are 0.933 and (0.866, 0.973).
 
-\hypertarget{rsm-re-parameterization}{%
-\section{Model re-parameterization}\label{rsm-re-parameterization}}
+\hypertarget{rsm-intrinsic-parameters}{%
+\section{Intrinsic RSM parameters}\label{rsm-intrinsic-parameters}}
 
-While the parameters \(\mu\), \(\lambda\) and \(\nu\) are physically meaningful a little thought reveals that they cannot be varied independently of each other. Rather, \(\mu\) is the \emph{intrinsic} parameter whose value, together with two other intrinsic parameters \(\lambda_i\) and \(\nu_i\), determine \(\lambda\) and \(\nu\), respectively. The following is a convenient re-parameterization \footnote{The need for the first re-parameterization, involving \(\nu\), was foreseen in the original search model papers \citep{chakraborty2006search, chakraborty2006roc} but the need for the second re-parameterization (involving \(\lambda\)) was discovered more recently.}:
+While the parameters \(\lambda\) and \(\nu\) are physically meaningful a little thought reveals that they must depend on \(\mu\). From the solar-analogy described in Section \ref{froc-paradigm-solar-analogy} we know that if \(\mu = 0\) the lesions have zero contrast and therefore cannot be found by the search mechanism implying \(\nu = 0\). Moreover attempting to find these zero contrast lesions must generate a large number of non-lesion localizations implying \(\lambda = \infty\).
+
+The following is a simple model of the \(\mu\) dependence of \(\lambda\) and \(\nu\). The model re-parameterizes the \emph{physical} parameters \(\lambda\) and \(\nu\) in terms of \emph{intrinsic} parameters \(\lambda_i\) and \(\nu_i\) that are \(\mu\) independent\footnote{The need for the first re-parameterization, involving \(\nu\), was foreseen in the original search model papers \citep{chakraborty2006search, chakraborty2006roc} but the need for the second re-parameterization (involving \(\lambda\)) became evident more recently.}:
 
 \begin{equation}
 \left. 
 \begin{aligned}
-\nu =& 1 - exp\left ( - \mu \nu_i \right ) \\
+\nu =& 1 - \text{exp}\left ( - \mu \nu_i \right ) \\
 \lambda =& \frac{\lambda_i}{\mu}
 \end{aligned}
 \right \}
@@ -2411,20 +2413,20 @@ The inverse transformations are:
 \label{eq:rsm-inv-transform}
 \end{equation}
 
-The parameter limits are as follows: \(0 \le \nu \le 1\), \(\lambda \ge 0\), \(\mu \ge 0\), \(\lambda_i \ge 0\) and \(\nu_i \ge 0\).
+The intrinsic parameters obey \(\lambda_i \ge 0\) and \(\nu_i \ge 0\).
 
-Since it determines \(\nu\), the \(\nu_i\) parameter can be considered as the intrinsic (i.e., \(\mu\)-independent) ability to find lesions; specifically, it is the rate of increase of \(\nu\) with \(\mu\) at small \(\mu\):
+Since it determines \(\nu\), the \(\nu_i\) parameter can be considered as the intrinsic (i.e., \(\mu\)-independent) ability to find lesions; specifically, \emph{it is the rate of increase of \(\nu\) with \(\mu\) at small \(\mu\)}:
 
 \begin{equation} 
 \nu_i = \left (\frac{\partial \nu}{\partial \mu}  \right )_{\mu = 0}
 \label{eq:rsm-nup-limit}
 \end{equation}
 
-According to Eqn. \eqref{eq:rsm-transform}, as \(\mu \rightarrow \infty\), \(\nu \rightarrow 1\) and conversely, as \(\mu \rightarrow 0\), \(\nu \rightarrow 0\). The dependence of \(\nu\) on \(\mu\) is consistent with the fact that higher contrast lesions are easier to find. A non-expert is expected to find a high contrast lesion whereas a low contrast lesion will be more difficult to find even by expert observers.
+According to Eqn. \eqref{eq:rsm-transform}, as \(\mu \rightarrow \infty\), \(\nu \rightarrow 1\) and conversely, as \(\mu \rightarrow 0\), \(\nu \rightarrow 0\). The dependence of \(\nu\) on \(\mu\) is consistent with the fact that higher contrast lesions are easier to find. A non-expert is expected to find a high contrast lesion whereas a low contrast lesion will be more difficult to find even by an expert observer.
 
-The analogy to finding the sun in Chapter \ref{froc-paradigm-solar-analogy} is instructive: objects with very high perceptual SNR are certain to be found.
+The analogy to finding the sun in Chapter \ref{froc-paradigm-solar-analogy} is instructive: objects with very high perceptual contrast are certain to be found.
 
-According to Eqn. \eqref{eq:rsm-transform} the value of \(\mu\) also determines \(\lambda\): as \(\mu \rightarrow \infty\), \(\lambda \rightarrow 0\), and conversely, as \(\mu \rightarrow 0\), \(\lambda \rightarrow \infty\). Here too the sun analogy is instructive. Since the sun has very high contrast, there is no reason for the observer to search for other suspicious regions which have no possibility of resembling the sun. On the other hand, attempting to locate a faint star, possibly hidden by clouds, can generate latent NLs, because the expected small SNR from the faint real star could be comparable to that from a number of regions in the near background.
+According to Eqn. \eqref{eq:rsm-transform} the value of \(\mu\) also determines \(\lambda\): as \(\mu \rightarrow \infty\), \(\lambda \rightarrow 0\), and conversely, as \(\mu \rightarrow 0\), \(\lambda \rightarrow \infty\). Here too the solar analogy is instructive. Since the sun has very high contrast, there is no reason for the observer to search for other suspicious regions which have no possibility of resembling it. On the other hand, attempting to locate a faint star, possibly hidden by clouds, can generate false sightings because the expected small contrast from the faint real star could be comparable to that from a number of regions in the nearby background.
 
 \hypertarget{rsm-discussion-summary}{%
 \section{Discussion / Summary}\label{rsm-discussion-summary}}
@@ -3371,7 +3373,7 @@ The solid black line is the plot, using multiple precision arithmetic, of slope 
 
 70\%
 Need to move lambda, nu parameterization to appendix; too distracting
-standard vs.~intrinsic; edit chapter 4
+physical vs.~intrinsic; edit chapter 4
 
 \hypertarget{rsm-pred2-intro}{%
 \section{TBA Introduction}\label{rsm-pred2-intro}}
@@ -3454,7 +3456,7 @@ The following code shows how to generate FROC plots using the intrinsic \(\lambd
 ## lambda =  0.5 , nu =  0.8646647
 \end{verbatim}
 
-The parameter values are listed above. Note the very large value (2000) of \(\lambda\) for \(\mu = 0.0001\): this arises from \(\lambda = \lambda_i/\mu\). The corresponding very small value of \(\nu\) (4.999875e-05) follows from \(\nu = 1 - exp\left ( - \mu \nu_i \right )\). The function \texttt{UtilIntrinsic2RSM()} implements Eqn. \eqref{eq:rsm-transform}) which contains both of these transformations from intrinsic to standard RSM parameters.
+The parameter values are listed above. Note the very large value (2000) of \(\lambda\) for \(\mu = 0.0001\): this arises from \(\lambda = \lambda_i/\mu\). The corresponding very small value of \(\nu\) (4.999875e-05) follows from \(\nu = 1 - exp\left ( - \mu \nu_i \right )\). The function \texttt{UtilIntrinsic2RSM()} implements Eqn. \eqref{eq:rsm-transform}) which contains both of these transformations from intrinsic to physical RSM parameters.
 
 As \(\mu\) increases \(\lambda\) decreases, subject to the constraint \(\lambda > 0\), and \(\nu\) increases, subject to the constraint \(0 \le \nu \le 1\).
 
@@ -3695,10 +3697,12 @@ Attention reverts in the next chapter to the ROC where we show that important as
 \hypertarget{appendix}{%
 \section{Appendix}\label{appendix}}
 
-\hypertarget{froc-curve-slopes-near-origin-and-end-point}{%
-\subsection{FROC curve slopes near origin and end-point}\label{froc-curve-slopes-near-origin-and-end-point}}
+Unlike the previous plots which used the \emph{intrinsic} parameters \(\lambda_i, \nu_i\), the plots shown here are for arbitrary choices of RSM \emph{physical} parameters \(\lambda, \nu\). This can lead to peculiar predictions arising from physically unreasonable choices of parameters.
 
-We abbreviate:
+\hypertarget{slope-of-the-froc-curve}{%
+\subsection{Slope of the FROC curve}\label{slope-of-the-froc-curve}}
+
+We abbreviate \(\text{NLF} \to f\) and \(\text{LLF} \to g\). These are given by:
 
 \begin{equation}
 \left. 
@@ -3726,7 +3730,7 @@ This expression can be simplified as follows:
 \begin{equation}
 \left. 
 \begin{aligned}
-\frac{dh}{dg} =& \frac{\nu}{\lambda}  \frac{\phi \left ( \mu-\zeta \right )}{\phi\left ( -\zeta \right )} \\ 
+\frac{dh}{dg}  
 =& \frac{\nu}{\lambda}  \frac{\text{exp}\left ( \frac{-\left (\mu-\zeta  \right )^2}{2} \right )}{\text{exp}\left ( \frac{-\zeta^2}{2} \right )} \\
 =& \frac{\nu}{\lambda} \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right ) \\
 \end{aligned}
@@ -3740,27 +3744,40 @@ This expression leads to the following conclusions:
 \begin{itemize}
 \tightlist
 \item
-  The slope of the FROC near the end-point, corresponding to \(\zeta = -\infty\), is zero provided \(\mu \ne 0\), in which case the slope is \(\frac{\nu}{\lambda}\).
+  The slope of the FROC near the end-point, corresponding to \(\zeta = -\infty\), is zero provided \(\mu \ne 0\).
 \item
-  The slope near the origin, corresponding to \(\zeta = +\infty\), is \(\infty\) except when \(\mu = 0\) in which case the slope is \(\frac{\nu}{\lambda}\).
+  The slope near the origin, corresponding to \(\zeta = +\infty\), is \(\infty\) provided \(\mu \ne 0\).
 \item
-  For \(\mu = 0\) the entire FROC curve is a straight line extending from the origin to \(\frac{\nu}{\lambda}\).
+  For \(\mu = 0\) the FROC curve is a straight line extending from the origin to \(\frac{\nu}{\lambda}\).
 \end{itemize}
 \end{quote}
 
-\hypertarget{froc-plots-using-standard-lambda-nu-parameters}{%
-\subsection{\texorpdfstring{FROC plots using standard \(\lambda, \nu\) parameters}{FROC plots using standard \textbackslash lambda, \textbackslash nu parameters}}\label{froc-plots-using-standard-lambda-nu-parameters}}
+\emph{The last prediction is physically unreasonable.} For zero contrast lesions the observer should not be able to localize any lesions at finite NLF. The unreasonable prediction is occurring because one is feeding the RSM unrealistic parameters. As stated earlier, for zero \(\mu\) one expects \(\lambda = \infty\) and \(\nu = 0\), not \(\lambda = 1\) and \(\nu = 0.2\), as in the top-left panel plot below.
+
+In terms of intrinsic parameters, Eqn. \eqref{eq:rsm-pred2-froc-slope} reduces to:
+
+\begin{equation}
+\left. 
+\begin{aligned}
+\frac{dh}{dg} =& \frac{\nu}{\lambda} \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right ) \\
+=& \mu \left( \frac{1 - \text{exp}\left ( - \mu \nu_i \right ) }{\lambda_i} \right) \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right )\\
+\end{aligned} 
+\right \} 
+\label{eq:rsm-pred2-froc-slope}
+\end{equation}
+
+It is seen using this parameterization that if \(\mu = 0\) the slope of the FROC curve is zero regardless of the value of \(\zeta\), see top-left panel in Fig. \ref{fig:rsm-pred2-froc-plots-lambdai-nui}.
 
 A few FROC plots are shown below which illustrate the statements just made in the previous section.
 
 \begin{figure}
 \centering
 \includegraphics{08-rsm-predictions2_files/figure-latex/rsm-pred2-froc-plots-lambda-nu-1.pdf}
-\caption{\label{fig:rsm-pred2-froc-plots-lambda-nu}RSM-predicted FROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.0001\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\).}
+\caption{\label{fig:rsm-pred2-froc-plots-lambda-nu}RSM-predicted FROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.0001\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\). The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters \(\lambda =1, \nu = 0.2\) for small \(\mu\).}
 \end{figure}
 
-\hypertarget{afroc-curve-slopes-near-origin-and-end-point}{%
-\subsection{AFROC curve slopes near origin and end-point}\label{afroc-curve-slopes-near-origin-and-end-point}}
+\hypertarget{slope-of-the-afroc-curve}{%
+\subsection{Slope of the AFROC curve}\label{slope-of-the-afroc-curve}}
 
 We abbreviate:
 
@@ -3809,17 +3826,14 @@ This expression leads to the following conclusions:
 \item
   The slope near the origin, corresponding to \(\zeta = +\infty\), is \(\infty\) except when \(\mu = 0\) in which case the slope is \(\frac{\nu}{\lambda}\).
 \item
-  For \(\mu = 0\) the slope of the AFROC curve increases as the end-point is approached, i.e., the FROC curve is concave up.
+  For \(\mu = 0\) the slope of the AFROC curve increases as the end-point is approached, i.e., the FROC curve is concave up, see top-left panel below. The unreasonable prediction is due to the unreasonable choice of parameters.
 \end{itemize}
 \end{quote}
-
-\hypertarget{afroc-plots-using-standard-lambda-nu-parameters}{%
-\subsection{\texorpdfstring{AFROC plots using standard \(\lambda, \nu\) parameters}{AFROC plots using standard \textbackslash lambda, \textbackslash nu parameters}}\label{afroc-plots-using-standard-lambda-nu-parameters}}
 
 \begin{figure}
 \centering
 \includegraphics{08-rsm-predictions2_files/figure-latex/rsm-pred2-afroc-plots-lambda-nu-1.pdf}
-\caption{\label{fig:rsm-pred2-afroc-plots-lambda-nu}RSM-predicted AFROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.0001\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\). As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.}
+\caption{\label{fig:rsm-pred2-afroc-plots-lambda-nu}RSM-predicted AFROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.0001\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\). As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters \(\lambda =1, \nu = 0.2\) for small \(\mu\).}
 \end{figure}
 
 The reader should experiment with different values for the parameters to confirm that the following statements are true:
@@ -3829,15 +3843,7 @@ The reader should experiment with different values for the parameters to confirm
 \item
   The AFROC plot is independent of the number of lesions per case. This is not true for the wAFROC, as will shortly become clear, and for the ROC: the ROC ordinate increases with increasing numbers of lesions per case.
 \item
-  From Eqn. \eqref{eq:rsm-pred2-froc-end-point} and \eqref{eq:rsm-pred-tpf} it follows that \(\text{TPF}_{\text{max}} \geq \text{LLF}_{max}\) with the equality holding in the limit \(\mu \rightarrow \infty\).
-\end{enumerate}
-
-The reason \(\text{TPF}_{\text{max}} \geq \text{LLF}_{max}\) is because the ROC gives credit for incorrect localizations on diseased cases, while the AFROC does not. This is the well-known ``right for wrong reason'' argument \citep{bunch1977free}, originally advanced in 1977, against usage of the ROC for localization tasks.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
-\tightlist
+  From Eqn. \eqref{eq:rsm-pred2-froc-end-point} and \eqref{eq:rsm-pred-tpf} it follows that \(\text{TPF}_{\text{max}} \geq \text{LLF}_{max}\) with the equality holding in the limit \(\mu \rightarrow \infty\). The reason is that the ROC gives credit for incorrect localizations on diseased cases, while the AFROC does not. This is the well-known ``right for wrong reason'' argument \citep{bunch1977free}, originally advanced in 1977, against usage of the ROC for localization tasks.
 \item
   As \(\mu\) increases the AFROC curve more closely approaches the upper-left corner of the plot and the area under the AFROC curve approaches 1, which is the best possible performance: (a) \(\text{FPF}_{\text{max}}\) decreases and (b) \(\text{LLF}_{\text{max}}\) increases, meaning decreasing numbers of incorrect decisions on non-diseased and diseased cases, respectively.
 \item
@@ -3850,8 +3856,20 @@ The reason \(\text{TPF}_{\text{max}} \geq \text{LLF}_{max}\) is because the ROC 
   As \(\nu\) increases \(\text{FPF}_{\text{max}}\) stays constant while \(\text{LLF}_{\text{max}} \to 1\). In this limit every lesion is found. AFROC-AUC approaches unity.
 \end{enumerate}
 
-\hypertarget{wafroc-plots-using-standard-lambda-nu-parameters}{%
-\subsection{\texorpdfstring{wAFROC plots using standard \(\lambda, \nu\) parameters}{wAFROC plots using standard \textbackslash lambda, \textbackslash nu parameters}}\label{wafroc-plots-using-standard-lambda-nu-parameters}}
+TBA
+
+\begin{equation}
+\left. 
+\begin{aligned}
+\frac{dh}{dg} =& \frac{\mu \left( \frac{1 - \text{exp}\left ( - \mu \nu_i \right ) }{\lambda_i} \right) \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right )}{\text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )}\\ 
+=& \mu \left( \frac{1 - \text{exp}\left ( - \mu \nu_i \right ) }{\lambda_i} \right) \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right) + \frac{\lambda_i}{\mu} \Phi\left ( -\zeta \right ) \right )\\ 
+\end{aligned}
+\right \} 
+\label{eq:rsm-pred2-afroc-slope4}
+\end{equation}
+
+\hypertarget{wafroc-plots-using-physical-lambda-nu-parameters}{%
+\subsection{\texorpdfstring{wAFROC plots using physical \(\lambda, \nu\) parameters}{wAFROC plots using physical \textbackslash lambda, \textbackslash nu parameters}}\label{wafroc-plots-using-physical-lambda-nu-parameters}}
 
 \begin{figure}
 \centering

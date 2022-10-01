@@ -122,6 +122,7 @@ eq:rsm-pred2-afroc-gh
 eq:rsm-pred2-afroc-slope
 eq:rsm-pred2-afroc-slope3
 fig:rsm-pred2-afroc-plots-lambda-nu
+eq:rsm-pred2-afroc-slope4
 fig:rsm-pred2-wafroc-plots-lambda-nu
 eq:rsm-sc-FPF-TPF-max
 fig:rsm-sc-performance-from-roc-curve
@@ -320,11 +321,11 @@ rsm-how-much-finished
 rsm-intro
 rsm-details
 rsm-assumptions
-rsm-parameter-interpretations
+rsm-parameter-physical-meanings
 rsm-mu-parameter
 rsm-summary-lambda-parameter
 rsm-summary-nu-parameter
-rsm-re-parameterization
+rsm-intrinsic-parameters
 rsm-discussion-summary
 rsm-pred
 rsm-pred-how-much-finished
@@ -370,11 +371,9 @@ wafroc-plots-intrinsic-lambda_i-nu_i-parameters
 formulae-3
 rsm-pred2-discussion-summary
 appendix
-froc-curve-slopes-near-origin-and-end-point
-froc-plots-using-standard-lambda-nu-parameters
-afroc-curve-slopes-near-origin-and-end-point
-afroc-plots-using-standard-lambda-nu-parameters
-wafroc-plots-using-standard-lambda-nu-parameters
+slope-of-the-froc-curve
+slope-of-the-afroc-curve
+wafroc-plots-using-physical-lambda-nu-parameters
 wafroc-curves-are-generally-above-the-afroc-curves
 rsm-sc
 rsm-sc-how-much-finished

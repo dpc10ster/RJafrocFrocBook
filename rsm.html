@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-09-29" />
+<meta name="date" content="2022-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -254,12 +254,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>4.2</b> Introduction</a></li>
 <li class="chapter" data-level="4.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>4.3</b> The radiological search model</a></li>
 <li class="chapter" data-level="4.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>4.4</b> RSM assumptions</a></li>
-<li class="chapter" data-level="4.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-interpretations"><i class="fa fa-check"></i><b>4.5</b> Physical interpretation of RSM parameters</a><ul>
+<li class="chapter" data-level="4.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>4.5</b> Physical meanings of the RSM parameters</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>4.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
 <li class="chapter" data-level="4.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-parameter"><i class="fa fa-check"></i><b>4.5.2</b> The <span class="math inline">\(\lambda\)</span> parameter</a></li>
 <li class="chapter" data-level="4.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>4.5.3</b> The <span class="math inline">\(\nu\)</span> parameter</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="rsm.html"><a href="rsm.html#rsm-re-parameterization"><i class="fa fa-check"></i><b>4.6</b> Model re-parameterization</a></li>
+<li class="chapter" data-level="4.6" data-path="rsm.html"><a href="rsm.html#rsm-intrinsic-parameters"><i class="fa fa-check"></i><b>4.6</b> Intrinsic RSM parameters</a></li>
 <li class="chapter" data-level="4.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>4.7</b> Discussion / Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="rsm-pred.html"><a href="rsm-pred.html"><i class="fa fa-check"></i><b>5</b> ROC predictions of the RSM</a><ul>
@@ -307,12 +307,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-discussion-summary"><i class="fa fa-check"></i><b>6.6</b> Discussion / Summary</a></li>
 <li class="chapter" data-level="6.7" data-path="rsm-pred2.html"><a href="rsm-pred2.html#appendix"><i class="fa fa-check"></i><b>6.7</b> Appendix</a><ul>
-<li class="chapter" data-level="6.7.1" data-path="rsm-pred2.html"><a href="rsm-pred2.html#froc-curve-slopes-near-origin-and-end-point"><i class="fa fa-check"></i><b>6.7.1</b> FROC curve slopes near origin and end-point</a></li>
-<li class="chapter" data-level="6.7.2" data-path="rsm-pred2.html"><a href="rsm-pred2.html#froc-plots-using-standard-lambda-nu-parameters"><i class="fa fa-check"></i><b>6.7.2</b> FROC plots using standard <span class="math inline">\(\lambda, \nu\)</span> parameters</a></li>
-<li class="chapter" data-level="6.7.3" data-path="rsm-pred2.html"><a href="rsm-pred2.html#afroc-curve-slopes-near-origin-and-end-point"><i class="fa fa-check"></i><b>6.7.3</b> AFROC curve slopes near origin and end-point</a></li>
-<li class="chapter" data-level="6.7.4" data-path="rsm-pred2.html"><a href="rsm-pred2.html#afroc-plots-using-standard-lambda-nu-parameters"><i class="fa fa-check"></i><b>6.7.4</b> AFROC plots using standard <span class="math inline">\(\lambda, \nu\)</span> parameters</a></li>
-<li class="chapter" data-level="6.7.5" data-path="rsm-pred2.html"><a href="rsm-pred2.html#wafroc-plots-using-standard-lambda-nu-parameters"><i class="fa fa-check"></i><b>6.7.5</b> wAFROC plots using standard <span class="math inline">\(\lambda, \nu\)</span> parameters</a></li>
-<li class="chapter" data-level="6.7.6" data-path="rsm-pred2.html"><a href="rsm-pred2.html#wafroc-curves-are-generally-above-the-afroc-curves"><i class="fa fa-check"></i><b>6.7.6</b> wAFROC curves are generally above the AFROC curves</a></li>
+<li class="chapter" data-level="6.7.1" data-path="rsm-pred2.html"><a href="rsm-pred2.html#slope-of-the-froc-curve"><i class="fa fa-check"></i><b>6.7.1</b> Slope of the FROC curve</a></li>
+<li class="chapter" data-level="6.7.2" data-path="rsm-pred2.html"><a href="rsm-pred2.html#slope-of-the-afroc-curve"><i class="fa fa-check"></i><b>6.7.2</b> Slope of the AFROC curve</a></li>
+<li class="chapter" data-level="6.7.3" data-path="rsm-pred2.html"><a href="rsm-pred2.html#wafroc-plots-using-physical-lambda-nu-parameters"><i class="fa fa-check"></i><b>6.7.3</b> wAFROC plots using physical <span class="math inline">\(\lambda, \nu\)</span> parameters</a></li>
+<li class="chapter" data-level="6.7.4" data-path="rsm-pred2.html"><a href="rsm-pred2.html#wafroc-curves-are-generally-above-the-afroc-curves"><i class="fa fa-check"></i><b>6.7.4</b> wAFROC curves are generally above the AFROC curves</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rsm-sc.html"><a href="rsm-sc.html"><i class="fa fa-check"></i><b>7</b> Search and classification performances</a><ul>
@@ -527,9 +525,9 @@ z_{l_22} \sim N \left ( \mu, 1 \right )
 <p><strong>Rating assigned to unmarked sites:</strong> Unmarked LLs are assigned the zero rating (or any rating lower than the lowest allowed FROC-1 rating). Note that even lesions that were not found by the search stage, and therefore do not qualify as latent LLs, are assigned the zero rating. This is because they represent observable events (and less suspicious than the lowest allowed FROC-1 rating). In contrast, unmarked latent NLs are unobservable events. Unlike lesions there is no a-priori reader-independent list of non-lesion locations; what constitutes a NL is reader dependent, see Fig. <a href="visual-search.html#fig:visual-search-eye-tracking">3.5</a>.</p>
 <p>By choosing <span class="math inline">\(R\)</span> large enough the preceding discrete rating model is applicable to quasi-continuous z-samples.</p>
 </div>
-<div id="rsm-parameter-interpretations" class="section level2 hasAnchor">
-<h2><span class="header-section-number">4.5</span> Physical interpretation of RSM parameters<a href="rsm.html#rsm-parameter-interpretations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The parameters have the following meanings:</p>
+<div id="rsm-parameter-physical-meanings" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.5</span> Physical meanings of the RSM parameters<a href="rsm.html#rsm-parameter-physical-meanings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The parameters have the following physical meanings:</p>
 <div id="rsm-mu-parameter" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.5.1</span> The <span class="math inline">\(\mu\)</span> parameter<a href="rsm.html#rsm-mu-parameter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <span class="math inline">\(\mu\)</span> parameter is the lesion <em>perceptual signal to noise ratio pSNR</em>, as described in (print book) Chapter 12.5.2, between latent NLs and latent LLs. For white noise background this is similar to the physical SNR <span class="citation">(Chakraborty <a href="#ref-chakraborty1997computer" role="doc-biblioref">1997</a>)</span> after correction for the non-linear response of the visual system to visual stimuli <span class="citation">(Siddiqui et al. <a href="#ref-siddiqui2005discrete" role="doc-biblioref">2005</a>)</span>. For clinical backgrounds pSNR is determined by the competition for the observer’s foveal attention from other regions that could be mistaken for lesions.</p>
@@ -613,13 +611,14 @@ z_{l_22} \sim N \left ( \mu, 1 \right )
 <p>For reader 1, the estimate of the binomial success probability is 0.490 with 95% confidence interval (0.391, 0.590); for reader 2 the corresponding estimates are 0.933 and (0.866, 0.973).</p>
 </div>
 </div>
-<div id="rsm-re-parameterization" class="section level2 hasAnchor">
-<h2><span class="header-section-number">4.6</span> Model re-parameterization<a href="rsm.html#rsm-re-parameterization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>While the parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> are physically meaningful a little thought reveals that they cannot be varied independently of each other. Rather, <span class="math inline">\(\mu\)</span> is the <em>intrinsic</em> parameter whose value, together with two other intrinsic parameters <span class="math inline">\(\lambda_i\)</span> and <span class="math inline">\(\nu_i\)</span>, determine <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span>, respectively. The following is a convenient re-parameterization:<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a></p>
+<div id="rsm-intrinsic-parameters" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.6</span> Intrinsic RSM parameters<a href="rsm.html#rsm-intrinsic-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>While the parameters <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> are physically meaningful a little thought reveals that they must depend on <span class="math inline">\(\mu\)</span>. From the solar-analogy described in Section <a href="froc-paradigm.html#froc-paradigm-solar-analogy">1.6</a> we know that if <span class="math inline">\(\mu = 0\)</span> the lesions have zero contrast and therefore cannot be found by the search mechanism implying <span class="math inline">\(\nu = 0\)</span>. Moreover attempting to find these zero contrast lesions must generate a large number of non-lesion localizations implying <span class="math inline">\(\lambda = \infty\)</span>.</p>
+<p>The following is a simple model of the <span class="math inline">\(\mu\)</span> dependence of <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span>. The model re-parameterizes the <em>physical</em> parameters <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> in terms of <em>intrinsic</em> parameters <span class="math inline">\(\lambda_i\)</span> and <span class="math inline">\(\nu_i\)</span> that are <span class="math inline">\(\mu\)</span> independent<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>:</p>
 <p><span class="math display" id="eq:rsm-transform">\[\begin{equation}
 \left. 
 \begin{aligned}
-\nu =&amp; 1 - exp\left ( - \mu \nu_i \right ) \\
+\nu =&amp; 1 - \text{exp}\left ( - \mu \nu_i \right ) \\
 \lambda =&amp; \frac{\lambda_i}{\mu}
 \end{aligned}
 \right \}
@@ -635,15 +634,15 @@ z_{l_22} \sim N \left ( \mu, 1 \right )
 \right \}
 \tag{4.10}
 \end{equation}\]</span></p>
-<p>The parameter limits are as follows: <span class="math inline">\(0 \le \nu \le 1\)</span>, <span class="math inline">\(\lambda \ge 0\)</span>, <span class="math inline">\(\mu \ge 0\)</span>, <span class="math inline">\(\lambda_i \ge 0\)</span> and <span class="math inline">\(\nu_i \ge 0\)</span>.</p>
-<p>Since it determines <span class="math inline">\(\nu\)</span>, the <span class="math inline">\(\nu_i\)</span> parameter can be considered as the intrinsic (i.e., <span class="math inline">\(\mu\)</span>-independent) ability to find lesions; specifically, it is the rate of increase of <span class="math inline">\(\nu\)</span> with <span class="math inline">\(\mu\)</span> at small <span class="math inline">\(\mu\)</span>:</p>
+<p>The intrinsic parameters obey <span class="math inline">\(\lambda_i \ge 0\)</span> and <span class="math inline">\(\nu_i \ge 0\)</span>.</p>
+<p>Since it determines <span class="math inline">\(\nu\)</span>, the <span class="math inline">\(\nu_i\)</span> parameter can be considered as the intrinsic (i.e., <span class="math inline">\(\mu\)</span>-independent) ability to find lesions; specifically, <em>it is the rate of increase of <span class="math inline">\(\nu\)</span> with <span class="math inline">\(\mu\)</span> at small <span class="math inline">\(\mu\)</span></em>:</p>
 <p><span class="math display" id="eq:rsm-nup-limit">\[\begin{equation} 
 \nu_i = \left (\frac{\partial \nu}{\partial \mu}  \right )_{\mu = 0}
 \tag{4.11}
 \end{equation}\]</span></p>
-<p>According to Eqn. <a href="rsm.html#eq:rsm-transform">(4.9)</a>, as <span class="math inline">\(\mu \rightarrow \infty\)</span>, <span class="math inline">\(\nu \rightarrow 1\)</span> and conversely, as <span class="math inline">\(\mu \rightarrow 0\)</span>, <span class="math inline">\(\nu \rightarrow 0\)</span>. The dependence of <span class="math inline">\(\nu\)</span> on <span class="math inline">\(\mu\)</span> is consistent with the fact that higher contrast lesions are easier to find. A non-expert is expected to find a high contrast lesion whereas a low contrast lesion will be more difficult to find even by expert observers.</p>
-<p>The analogy to finding the sun in Chapter <a href="froc-paradigm.html#froc-paradigm-solar-analogy">1.6</a> is instructive: objects with very high perceptual SNR are certain to be found.</p>
-<p>According to Eqn. <a href="rsm.html#eq:rsm-transform">(4.9)</a> the value of <span class="math inline">\(\mu\)</span> also determines <span class="math inline">\(\lambda\)</span>: as <span class="math inline">\(\mu \rightarrow \infty\)</span>, <span class="math inline">\(\lambda \rightarrow 0\)</span>, and conversely, as <span class="math inline">\(\mu \rightarrow 0\)</span>, <span class="math inline">\(\lambda \rightarrow \infty\)</span>. Here too the sun analogy is instructive. Since the sun has very high contrast, there is no reason for the observer to search for other suspicious regions which have no possibility of resembling the sun. On the other hand, attempting to locate a faint star, possibly hidden by clouds, can generate latent NLs, because the expected small SNR from the faint real star could be comparable to that from a number of regions in the near background.</p>
+<p>According to Eqn. <a href="rsm.html#eq:rsm-transform">(4.9)</a>, as <span class="math inline">\(\mu \rightarrow \infty\)</span>, <span class="math inline">\(\nu \rightarrow 1\)</span> and conversely, as <span class="math inline">\(\mu \rightarrow 0\)</span>, <span class="math inline">\(\nu \rightarrow 0\)</span>. The dependence of <span class="math inline">\(\nu\)</span> on <span class="math inline">\(\mu\)</span> is consistent with the fact that higher contrast lesions are easier to find. A non-expert is expected to find a high contrast lesion whereas a low contrast lesion will be more difficult to find even by an expert observer.</p>
+<p>The analogy to finding the sun in Chapter <a href="froc-paradigm.html#froc-paradigm-solar-analogy">1.6</a> is instructive: objects with very high perceptual contrast are certain to be found.</p>
+<p>According to Eqn. <a href="rsm.html#eq:rsm-transform">(4.9)</a> the value of <span class="math inline">\(\mu\)</span> also determines <span class="math inline">\(\lambda\)</span>: as <span class="math inline">\(\mu \rightarrow \infty\)</span>, <span class="math inline">\(\lambda \rightarrow 0\)</span>, and conversely, as <span class="math inline">\(\mu \rightarrow 0\)</span>, <span class="math inline">\(\lambda \rightarrow \infty\)</span>. Here too the solar analogy is instructive. Since the sun has very high contrast, there is no reason for the observer to search for other suspicious regions which have no possibility of resembling it. On the other hand, attempting to locate a faint star, possibly hidden by clouds, can generate false sightings because the expected small contrast from the faint real star could be comparable to that from a number of regions in the nearby background.</p>
 </div>
 <div id="rsm-discussion-summary" class="section level2 hasAnchor">
 <h2><span class="header-section-number">4.7</span> Discussion / Summary<a href="rsm.html#rsm-discussion-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -673,7 +672,7 @@ z_{l_22} \sim N \left ( \mu, 1 \right )
 <li id="fn21"><p>Since the RSM is a parametric model one does not need the four subscript notation needed to account for case and location dependence necessary to describe observed data, as in Chapter <a href="empirical.html#empirical">2</a>. This allows for simpler notation, as the reader may have noticed, unencumbered by 4 subscripts as in <span class="math inline">\(z_{k_ttl_ss}\)</span> in Table <a href="empirical.html#empirical-notation">2.3.5</a>.<a href="rsm.html#fnref21" class="footnote-back">↩︎</a></p></li>
 <li id="fn22"><p>It can be measured via eye-tracking apparatus. This time it is only necessary to cluster the marks and classify each mark as a latent NL or latent LL according to the adopted acceptance radius. An eye-tracking based estimate would be the total number of latent NLs in the dataset divided by the total number of cases.<a href="rsm.html#fnref22" class="footnote-back">↩︎</a></p></li>
 <li id="fn23"><p>It too can be measured via eye-tracking apparatus performed on a radiologist. An eye-tracking based estimate would be the total number of latent LLs in the dataset divided by the total number of lesions.<a href="rsm.html#fnref23" class="footnote-back">↩︎</a></p></li>
-<li id="fn24"><p>The need for the first re-parameterization, involving <span class="math inline">\(\nu\)</span>, was foreseen in the original search model papers <span class="citation">(Dev P Chakraborty <a href="#ref-chakraborty2006search" role="doc-biblioref">2006</a>; DP Chakraborty <a href="#ref-chakraborty2006roc" role="doc-biblioref">2006</a>)</span> but the need for the second re-parameterization (involving <span class="math inline">\(\lambda\)</span>) was discovered more recently.<a href="rsm.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p>The need for the first re-parameterization, involving <span class="math inline">\(\nu\)</span>, was foreseen in the original search model papers <span class="citation">(Dev P Chakraborty <a href="#ref-chakraborty2006search" role="doc-biblioref">2006</a>; DP Chakraborty <a href="#ref-chakraborty2006roc" role="doc-biblioref">2006</a>)</span> but the need for the second re-parameterization (involving <span class="math inline">\(\lambda\)</span>) became evident more recently.<a href="rsm.html#fnref24" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-09-29" />
+<meta name="date" content="2022-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -254,12 +254,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>4.2</b> Introduction</a></li>
 <li class="chapter" data-level="4.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>4.3</b> The radiological search model</a></li>
 <li class="chapter" data-level="4.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>4.4</b> RSM assumptions</a></li>
-<li class="chapter" data-level="4.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-interpretations"><i class="fa fa-check"></i><b>4.5</b> Physical interpretation of RSM parameters</a><ul>
+<li class="chapter" data-level="4.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>4.5</b> Physical meanings of the RSM parameters</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>4.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
 <li class="chapter" data-level="4.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-parameter"><i class="fa fa-check"></i><b>4.5.2</b> The <span class="math inline">\(\lambda\)</span> parameter</a></li>
 <li class="chapter" data-level="4.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>4.5.3</b> The <span class="math inline">\(\nu\)</span> parameter</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="rsm.html"><a href="rsm.html#rsm-re-parameterization"><i class="fa fa-check"></i><b>4.6</b> Model re-parameterization</a></li>
+<li class="chapter" data-level="4.6" data-path="rsm.html"><a href="rsm.html#rsm-intrinsic-parameters"><i class="fa fa-check"></i><b>4.6</b> Intrinsic RSM parameters</a></li>
 <li class="chapter" data-level="4.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>4.7</b> Discussion / Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="rsm-pred.html"><a href="rsm-pred.html"><i class="fa fa-check"></i><b>5</b> ROC predictions of the RSM</a><ul>
@@ -307,12 +307,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="rsm-pred2.html"><a href="rsm-pred2.html#rsm-pred2-discussion-summary"><i class="fa fa-check"></i><b>6.6</b> Discussion / Summary</a></li>
 <li class="chapter" data-level="6.7" data-path="rsm-pred2.html"><a href="rsm-pred2.html#appendix"><i class="fa fa-check"></i><b>6.7</b> Appendix</a><ul>
-<li class="chapter" data-level="6.7.1" data-path="rsm-pred2.html"><a href="rsm-pred2.html#froc-curve-slopes-near-origin-and-end-point"><i class="fa fa-check"></i><b>6.7.1</b> FROC curve slopes near origin and end-point</a></li>
-<li class="chapter" data-level="6.7.2" data-path="rsm-pred2.html"><a href="rsm-pred2.html#froc-plots-using-standard-lambda-nu-parameters"><i class="fa fa-check"></i><b>6.7.2</b> FROC plots using standard <span class="math inline">\(\lambda, \nu\)</span> parameters</a></li>
-<li class="chapter" data-level="6.7.3" data-path="rsm-pred2.html"><a href="rsm-pred2.html#afroc-curve-slopes-near-origin-and-end-point"><i class="fa fa-check"></i><b>6.7.3</b> AFROC curve slopes near origin and end-point</a></li>
-<li class="chapter" data-level="6.7.4" data-path="rsm-pred2.html"><a href="rsm-pred2.html#afroc-plots-using-standard-lambda-nu-parameters"><i class="fa fa-check"></i><b>6.7.4</b> AFROC plots using standard <span class="math inline">\(\lambda, \nu\)</span> parameters</a></li>
-<li class="chapter" data-level="6.7.5" data-path="rsm-pred2.html"><a href="rsm-pred2.html#wafroc-plots-using-standard-lambda-nu-parameters"><i class="fa fa-check"></i><b>6.7.5</b> wAFROC plots using standard <span class="math inline">\(\lambda, \nu\)</span> parameters</a></li>
-<li class="chapter" data-level="6.7.6" data-path="rsm-pred2.html"><a href="rsm-pred2.html#wafroc-curves-are-generally-above-the-afroc-curves"><i class="fa fa-check"></i><b>6.7.6</b> wAFROC curves are generally above the AFROC curves</a></li>
+<li class="chapter" data-level="6.7.1" data-path="rsm-pred2.html"><a href="rsm-pred2.html#slope-of-the-froc-curve"><i class="fa fa-check"></i><b>6.7.1</b> Slope of the FROC curve</a></li>
+<li class="chapter" data-level="6.7.2" data-path="rsm-pred2.html"><a href="rsm-pred2.html#slope-of-the-afroc-curve"><i class="fa fa-check"></i><b>6.7.2</b> Slope of the AFROC curve</a></li>
+<li class="chapter" data-level="6.7.3" data-path="rsm-pred2.html"><a href="rsm-pred2.html#wafroc-plots-using-physical-lambda-nu-parameters"><i class="fa fa-check"></i><b>6.7.3</b> wAFROC plots using physical <span class="math inline">\(\lambda, \nu\)</span> parameters</a></li>
+<li class="chapter" data-level="6.7.4" data-path="rsm-pred2.html"><a href="rsm-pred2.html#wafroc-curves-are-generally-above-the-afroc-curves"><i class="fa fa-check"></i><b>6.7.4</b> wAFROC curves are generally above the AFROC curves</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="rsm-sc.html"><a href="rsm-sc.html"><i class="fa fa-check"></i><b>7</b> Search and classification performances</a><ul>
@@ -459,7 +457,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">The RJafroc Froc Book</h1>
 <p class="author"><em>Dev P. Chakraborty, PhD</em></p>
-<p class="date"><em>2022-09-29</em></p>
+<p class="date"><em>2022-10-01</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="preface.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
