@@ -455,7 +455,7 @@ This expression leads to the following conclusions (using the intrisic parameter
 * For $\mu = 0$ the slope of the AFROC is zero regardless of the value of $\zeta$, see top-left panel in Fig. \@ref(fig:rsm-pred2-froc-plots-lambdai-nui). 
 
 
-Using the physical parameters the last conclusion changes to an unreasonable one:
+If using physical parameters the last conclusion changes to an unreasonable one:
 
 >
 * For $\mu = 0$ the slope of the AFROC curve increases as the end-point is approached, i.e., the FROC curve is concave up, see top-left panel in Fig. \@ref(fig:rsm-pred2-afroc-plots-lambda-nu). The unreasonable prediction is due to the unreasonable choice of parameters.
@@ -488,7 +488,7 @@ grid.arrange(plotArr_AFROC_lambda_nu[[1]],plotArr_AFROC_lambda_nu[[2]],plotArr_A
 
 
 
-
+TBA
 
 The reader should experiment with different values for the parameters to confirm that the following statements are true:
 
