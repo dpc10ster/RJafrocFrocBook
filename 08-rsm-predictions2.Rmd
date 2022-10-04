@@ -30,7 +30,6 @@ Also discussed here are the slopes of these plots near the origin and the end-po
 
 ## RSM-predicted FROC curve {#rsm-pred2-froc-curve}
 
-### Formulae
 
 From a property of the Poisson distribution, namely its mean equals the $\lambda$ parameter of the distribution, it follows that the expected number of *latent* NLs per case is $\lambda$. One multiplies this by the probability that a z-sample from $N(0,1)$ exceeds $\zeta$, i.e. by $\Phi(-\zeta)$, to obtain the expected number of *marked* NLs per case, i.e., NLF:
 
@@ -40,7 +39,7 @@ From a property of the Poisson distribution, namely its mean equals the $\lambda
 \end{equation}
 
 
-To calculate $\text{LLF}$ one separates diseased cases into groups, each with a fixed number of $L$ lesions per case, where $L$ varies from one to $L_{max}$. For each group the expected number of latent LLs per diseased case divided by L must equal $\nu$, as $\nu$ is the probability that a lesion is found. One multiplies by the probability that a z-sample from $N(\mu,1)$ exceeds $\zeta$ i.e., by $\Phi(\mu - \zeta)$, to obtain the fraction of lesions that are actually marked. Finally, one performs a weighted summation over the different groups with $f_L$  as the weighting factor. Therefore,
+To calculate $\text{LLF}$ one separates diseased cases into groups, each with a fixed number of $L$ lesions per case, where $L$ varies from one to $L_{max}$. For each group the expected number of latent LLs per diseased case divided by L must equal $\nu$, as $\nu$ is the probability that a lesion is found. One multiplies by the probability that a z-sample from $N(\mu,1)$ exceeds $\zeta$ i.e., by $\Phi(\mu - \zeta)$, to obtain the fraction of lesions that are actually marked. Finally, one performs a weighted summation over the different groups with $f_L$  as the weighting factor (recall that $f_L$ is the fraction of diseased cases with $L$ lesions). Therefore,
 
 \begin{equation}
 \left. 
@@ -53,8 +52,9 @@ To calculate $\text{LLF}$ one separates diseased cases into groups, each with a 
 \end{equation}
 
 
+Note that the expression for LLF is independent of the number of lesions in the dataset or their distribution.
 
-Summarizing, the coordinates of the RSM-predicted operating point on the FROC curve for threshold $\zeta$ are given by Eqn. \@ref(eq:rsm-pred2-nlf) and Eqn. \@ref(eq:rsm-pred2-llf). The FROC curve starts at (0,0) and ends at $\left ( \lambda, \nu \right )$. The x-coordinate does not extend to arbitrarily large values and the y-coordinate does not approach unity (unless $\nu = 1$).  The constrained end-point property, demonstrated previously for the ROC curve, also applies to the FROC curve:
+The coordinates of the RSM-predicted operating point on the FROC curve for threshold $\zeta$ are given by Eqn. \@ref(eq:rsm-pred2-nlf) and Eqn. \@ref(eq:rsm-pred2-llf). The FROC curve starts at (0,0) and ends at $\left ( \lambda, \nu \right )$ -- the end-point. The x-coordinate does not extend to arbitrarily large values and the y-coordinate does not approach unity (unless $\nu = 1$).  The constrained end-point property, demonstrated previously for the ROC curve, also applies to the FROC curve:
 
 \begin{equation}
 \left. 
@@ -67,11 +67,26 @@ Summarizing, the coordinates of the RSM-predicted operating point on the FROC cu
 \end{equation}
 
 
+The clear connection between $\lambda$ and $\nu$ and the FROC end-point is the reason they are called the *physical* RSM parameters. For reasons explained in Section \@ref(froc-paradigm-solar-analogy) the physical parameters are not the best way of thinking about predicted RSM curves. Basically they hide an inherent $\mu$ dependence - ignoring this can lead to poor choices of RSM parameters as shown in Appendix \@ref(rsm-pred2-appendix-slope-froc). Intrinsic parameters were introduced in Section \@ref(rsm-intrinsic-parameters) which takes into account this dependence. For convenience the transformations between physical and intrinsic parameters are repeated here:
+
+\begin{equation}
+\left. 
+\begin{aligned}
+\nu =& 1 - \text{exp}\left ( - \mu \nu_i \right ) \\
+\lambda =& \frac{\lambda_i}{\mu}
+\end{aligned}
+\right \}
+(\#eq:rsm-pred2-transform)
+\end{equation}
+
+
+The predicted FROC, AFROC and wAFROC curves that follow use the intrinsic $\lambda_i, \nu_i$ parameters. 
+
 
 ### FROC plots using intrinsic $\lambda_i, \nu_i$ parameters
 
 
-The following code shows how to generate FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.0001,1,2,4)` (for technical reasons the value 0 is not allowed). A list array `plotArr_FROC_lambdai_nui` is created to contain the four plots. The intrinsic intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `UtilIntrinsic2RSM()` and the values are printed out using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`: this function accepts the parameters $\mu, \lambda, \nu$ and `opChType = "FROC"`. Online help on this function is available [here](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code `plotArr_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created list-array. 
+The following code shows how to generate FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.0001,1,2,4)` (to avoid a divide by zero error the value $\mu=0$ is not allowed). A `list` array `plotArr_FROC_lambdai_nui` is created to contain the four plots. The intrinsic intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `UtilIntrinsic2RSM()`which implements Eqn. \@ref(eq:rsm-pred2-transform)). The parameters are printed using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`. Online help on this function is [available](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code `plotArr_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created `list` array. 
 
 
 
@@ -99,38 +114,34 @@ for (i in 1:length(muArr)) {
 ```
 
 
-The parameter values are listed above. Note the very large value (2000) of $\lambda$ for $\mu = 0.0001$: this arises from $\lambda = \lambda_i/\mu$. The corresponding very small value of $\nu$ (4.999875e-05) follows from $\nu = 1 - exp\left ( - \mu \nu_i \right )$. The function `UtilIntrinsic2RSM()` implements Eqn. \@ref(eq:rsm-transform)) which contains both of these transformations from intrinsic to physical RSM parameters.
+The parameter values are listed above. Note the very large value (2000) of $\lambda$ for $\mu = 0.0001$: this arises from $\lambda = \lambda_i/\mu$. The corresponding very small value of $\nu$ (4.999875e-05) follows from $\nu = 1 - exp\left ( - \mu \nu_i \right )$. 
 
-As $\mu$ increases $\lambda$ decreases, subject to the constraint $\lambda > 0$, and $\nu$ increases, subject to the constraint $0 \le \nu \le 1$. 
-
-
-The following code is required to display the 4 plots.
+The following code displays the 4 plots.
 
 
-```{r rsm-pred2-froc-plots-lambdai-nui, fig.cap="RSM-predicted FROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.0001$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$. Each plot is **not** contained within the unit square which makes it impossible to define the AUC as a figure of merit.", fig.show='hold', echo=TRUE}
-suppressWarnings(grid.arrange(plotArr_FROC_lambdai_nui[[1]],
+```{r rsm-pred2-froc-plots-lambdai-nui, fig.cap="RSM-predicted FROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.0001$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$. Each plot is **not** contained within the unit square which makes it impossible to define the FROC-AUC as a figure of merit.", fig.show='hold', echo=TRUE}
+suppressWarnings(grid.arrange(
+plotArr_FROC_lambdai_nui[[1]],
 plotArr_FROC_lambdai_nui[[2]],
 plotArr_FROC_lambdai_nui[[3]],
 plotArr_FROC_lambdai_nui[[4]], ncol = 2))
 ```
 
 
-Because $\lambda = 2000$ defines the end-point abscissa and $\nu = 5 \times 10^{-5}$ defines the end-point ordinate, the FROC curve hugs the x-axis approaching $(2000, 5 \times 10^{-5})$. This is the chance line FROC for very small $mu$. 
 
-> Recall the solar analogy in Chapter \@ref(froc-paradigm-solar-analogy). When lesion contrast is very low the search mechanism has low chance of finding lesions (small LLF) and generates large numbers of NLs in attempting to do so (large NLF). 
+> 
+* In the top-left plot, because $\lambda = 2000$ defines the end-point abscissa and $\nu = 5 \times 10^{-5}$ defines the end-point ordinate, the FROC curve hugs the x-axis approaching $(2000, 5 \times 10^{-5})$. This is the chance line FROC for very small $\mu$. 
+* Recall the solar analogy in Section \@ref(froc-paradigm-solar-analogy). When lesion contrast is very low the search mechanism has little chance of finding lesions (leading to small LLF) and generates large numbers of NLs in attempting to do so (leading to large NLF). 
+* Increasing $\mu$ to 1 decreases $\lambda$ to 2 and simultaneously increases $\nu$ to 0.393. The new end-point $(2,0.393)$ is evident in the upper-right plot. 
+* Further increase in $\mu$ decreases the abscissa of the end-point and increases the ordinate and the end-point approaches the top-left corner of the FROC plot. 
+* The perfect performance FROC curve is the vertical line connecting the origin to (0,1). It occurs when $\mu = \infty$.
 
-
-Increasing $\mu$ to 1 has the effect of decreasing $\lambda$ to 2 and simultaneously increasing $\nu$ to 0.393. These define the coordinates of the end-point in the upper-right plot. 
-
->Further increases in $\mu$ decreases the abscissa of the end-point and increases the ordinate - in other words, as $\mu$ increases, the end-point approaches the top-left corner of the FROC plot. 
 
 
 ## RSM-predicted AFROC curve {#rsm-pred2-froc-afroc-curve}
 
 
-### Formulae
-
-The AFROC x-coordinate is the same as the ROC x-coordinate and Eqn. \@ref(eq:rsm-pred-fpf) applies. The AFROC y-coordinate is identical to the FROC y-coordinate and Eqn. \@ref(eq:rsm-pred2-llf) applies. Note that the expression is independent of the number of lesions in the dataset or their distribution (unlike the AFROC the weighted AFROC does depend on the lesion distribution). 
+The AFROC x-coordinate is the same as the ROC x-coordinate and Eqn. \@ref(eq:rsm-pred-fpf) applies. The AFROC y-coordinate is identical to the FROC y-coordinate and Eqn. \@ref(eq:rsm-pred2-llf) applies. Like the FROC the AFROC is independent of the number of lesions in the dataset or their distribution. 
 
 
 \begin{equation}
@@ -210,7 +221,6 @@ Suppose the radiologist does not mark any case. One possibility is that the radi
 
 ## RSM-predicted wAFROC curve{#rsm-pred2-wafroc-curve}
 
-### Formulae
 
 The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pred-fpf) applies. The wAFROC ordinate is calculated using:
 
@@ -264,8 +274,6 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights = 0)[,-1]
 
 ### wAFROC plots intrinsic $\lambda_i, \nu_i$ parameters
 
-### Formulae
-
 
 >
 * Shown below are wAFROC curves for the same parameter values used to display the AFROC curves shown in Fig. \@ref(fig:rsm-pred2-afroc-plots-lambda-nu). 
@@ -311,85 +319,63 @@ The situation in medical imaging involving search tasks is more realistic. *Not 
 Attention reverts in the next chapter to the ROC where we show that important aspects of the search mechanism are contained in the position of the end-point. 
 
 
-## Appendix
+## Appendix {#rsm-pred2-appendix}
 
 Unlike the previous plots which used the *intrinsic* parameters $\lambda_i, \nu_i$, the plots shown here are for arbitrary choices of RSM *physical* parameters $\lambda, \nu$. This can lead to peculiar predictions arising from physically unreasonable choices of parameters.
 
 
-### Slope of the FROC curve
+### Slope of the FROC curve {#rsm-pred2-appendix-slope-froc}
 
-We abbreviate $\text{NLF} \to f$ and $\text{LLF} \to g$. These are given by:
+Expressions for LLF and NLF were given above. Taking the derivatives of these functions with respect to $\zeta$ the slope of the FROC is given by (in terms of physical parameters):
 
-
-\begin{equation}
-\left. 
-\begin{aligned}
-g =& \lambda \Phi\left ( -\zeta \right ) \\
-h =& \nu \Phi\left (\mu -\zeta \right )
-\end{aligned}
-\right \}
-(\#eq:rsm-pred2-froc-gh)
-\end{equation}
-
-
-Taking the derivatives of these functions with respect to $\zeta$ the slope of the FROC is given by:
 
 
 \begin{equation}
 \left. 
 \begin{aligned}
-\frac{dh}{dg} =& \frac{\nu}{\lambda}\frac{\phi \left ( \mu-\zeta \right )}{\phi\left ( -\zeta \right )} 
+\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( NLF \right)}  
+=& \frac{\nu}{\lambda}  \frac{\phi\left( \mu-\zeta \right)}{\phi\left( -\zeta \right)} \\
+=& \frac{\nu}{\lambda}  \frac{\text{exp}\left ( \frac{-\left (\mu-\zeta  \right )^2}{2} \right )}{\text{exp}\left ( \frac{-\zeta^2}{2} \right )} \\
+=& \frac{\nu}{\lambda} \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)\right ) \\
 \end{aligned}
 \right \} 
-(\#eq:rsm-pred2-froc-dhdg)
+(\#eq:rsm-pred2-froc-slope1)
 \end{equation}
 
 
-This expression can be simplified as follows:
+
+Converting to intrinsic parameters leads to the following expression for the slope:
+
+
 
 \begin{equation}
 \left. 
 \begin{aligned}
-\frac{dh}{dg}  
-=& \frac{\nu}{\lambda}  \frac{\text{exp}\left ( \frac{-\left (\mu-\zeta  \right )^2}{2} \right )}{\text{exp}\left ( \frac{-\zeta^2}{2} \right )} \\
-=& \frac{\nu}{\lambda} \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right ) \\
+\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( NLF \right)}  
+=& \mu \left( \frac{1 - \text{exp}\left ( - \mu \nu_i \right ) }{\lambda_i} \right) \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right )
 \end{aligned}
 \right \} 
 (\#eq:rsm-pred2-froc-slope)
 \end{equation}
 
 
-
-This expression leads to the following conclusions:
+Eqn. \@ref(eq:rsm-pred2-froc-slope) leads to the following conclusions (recall $\mu \ge 0$):
 
 
 
 >
-* The slope of the FROC near the end-point, corresponding to $\zeta = -\infty$, is zero provided $\mu \ne 0$. 
+* The slope of the FROC near the end-point, corresponding to $\zeta = -\infty$, is zero. 
 * The slope near the origin, corresponding to $\zeta = +\infty$, is $\infty$ provided $\mu \ne 0$.
-* For $\mu = 0$ the FROC curve is a straight line extending from the origin to $\frac{\nu}{\lambda}$. 
+* For $\mu = 0$ the slope of the FROC is zero regardless of the value of $\zeta$, see top-left panel in Fig. \@ref(fig:rsm-pred2-froc-plots-lambdai-nui). 
 
 
-*The last prediction is physically unreasonable.* For zero contrast lesions the observer should not be able to localize any lesions at finite NLF. The unreasonable prediction is occurring because one is feeding the RSM unrealistic parameters. As stated earlier, for zero $\mu$ one expects $\lambda = \infty$ and $\nu = 0$, not $\lambda = 1$ and $\nu = 0.2$, as in the top-left panel plot below.
+If instead we had used Eqn. \@ref(eq:rsm-pred2-froc-slope1) and regarded $\lambda$ and $\nu$ as independent of $\mu$, the last conclusion would change to: 
 
-In terms of intrinsic parameters, Eqn. \@ref(eq:rsm-pred2-froc-slope) reduces to:
-
-
-\begin{equation}
-\left. 
-\begin{aligned}
-\frac{dh}{dg} =& \frac{\nu}{\lambda} \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right ) \\
-=& \mu \left( \frac{1 - \text{exp}\left ( - \mu \nu_i \right ) }{\lambda_i} \right) \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right )\\
-\end{aligned} 
-\right \} 
-(\#eq:rsm-pred2-froc-slope)
-\end{equation}
+>
+* For $\mu = 0$ the slope of the FROC is non-zero and equal to $\frac{\nu}{\lambda}$. In fact the entire FROC is then predicted to be a straight line extending from the origin to $(\lambda, \nu)$, as in the top-left plot in Fig. \@ref(fig:rsm-pred2-froc-plots-lambda-nu) corresponding to $\mu=0$, $\lambda = 1$ and $\nu = 0.2$. This is unreasonable. For zero contrast lesions the observer should not be able to localize any lesions at finite NLF. The unreasonable prediction is occurring because one is using unrealistic values for the RSM parameters. For zero $\mu$ one expects $\lambda = \infty$ and $\nu = 0$, not $\lambda = 1$ and $\nu = 0.2$.
 
 
-It is seen using this parameterization that if $\mu = 0$ the slope of the FROC curve is zero regardless of the value of $\zeta$, see top-left panel in Fig. \@ref(fig:rsm-pred2-froc-plots-lambdai-nui).
-
-
-A few FROC plots are shown below which illustrate the statements just made in the previous section.
+FROC plots are shown below which illustrate the statements just made.
 
 
 ```{r rsm-pred2-froc-plots-lambda-nu-code, echo=FALSE}
@@ -427,27 +413,14 @@ grid.arrange(plotArr_FROC_lambda_nu[[1]],plotArr_FROC_lambda_nu[[2]],plotArr_FRO
 
 ### Slope of the AFROC curve
 
-We abbreviate:
+The AFROC ordinate is LLF and the abscissa is FPF. Expressions for both were given above. Taking the derivatives of these functions with respect to $\zeta$ the slope of the AFROC is given by:
 
 
 \begin{equation}
 \left. 
 \begin{aligned}
-g =& 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right ) \\
-h =& \nu  \Phi \left ( \mu - \zeta \right )
-\end{aligned}
-\right \}
-(\#eq:rsm-pred2-afroc-gh)
-\end{equation}
-
-
-Taking the derivatives of these functions with respect to $\zeta$ the slope of the AFROC is given by:
-
-
-\begin{equation}
-\left. 
-\begin{aligned}
-\frac{dh}{dg} =& \frac{\nu \phi \left ( \mu-\zeta \right )}{\text{exp}\left( -\lambda \Phi\left(- \zeta \right)\left( \lambda\phi\left( -\zeta \right)  \right) \right)} 
+\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( FPF \right)} 
+=& \frac{\nu \phi \left ( \mu-\zeta \right )}{\text{exp}\left( -\lambda \Phi\left(- \zeta \right)\left( \lambda\phi\left( -\zeta \right)  \right) \right)} 
 \end{aligned}
 \right \} 
 (\#eq:rsm-pred2-afroc-slope)
@@ -461,8 +434,9 @@ This expression can be simplified as follows:
 \begin{equation}
 \left. 
 \begin{aligned}
-\frac{dh}{dg} =& \frac{\left( \frac{\nu}{\lambda}  \frac{\phi \left ( \mu-\zeta \right )}{\phi\left ( -\zeta \right )} \right)}{\text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )}\\ 
-\frac{dh}{dg} =& \frac{\text{slope}_{\text{FROC}}}{1-\text{FPF}\left (\zeta , \lambda\right )}\\ 
+\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( FPF \right)} 
+=& \frac{\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( NLF \right)}}{\text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )}\\ 
+=& \frac{\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( NLF \right)}}{1-FPF\left( \lambda, \zeta \right)}\\ 
 \end{aligned}
 \right \} 
 (\#eq:rsm-pred2-afroc-slope3)
@@ -470,16 +444,21 @@ This expression can be simplified as follows:
 
 
 
-Where $\text{slope}_{\text{FROC}}$ is the slope of the FROC, Eqn. \@ref(eq:rsm-pred2-froc-slope). Since $0 \le \text{FPF} \le \text{FPF}_{\text{max}}$ and $\text{FPF}$ increases as $\zeta$ decreases, the slope of the AFROC equals that of the FROC at the origin and subsequently increases over that of the FROC as the end-point is approached. 
+The numerator is the slope of the FROC, Eqn. \@ref(eq:rsm-pred2-froc-slope). Since $0 \le \text{FPF} \le \text{FPF}_{\text{max}}$ and $\text{FPF}$ increases as $\zeta$ decreases, the slope of the AFROC equals that of the FROC at the origin and subsequently increases over that of the FROC as the end-point is approached. 
 
-This expression leads to the following conclusions:
-
+This expression leads to the following conclusions (using the intrisic parameters):
 
 
 >
-* The slope of the AFROC near the end-point, corresponding to $\zeta = -\infty$, is zero except when $\mu \ne 0$ in which case the slope is $\frac{\nu}{\lambda \left( 1-\text{FPF}_{\text{max}} \right)}$. 
-* The slope near the origin, corresponding to $\zeta = +\infty$, is $\infty$ except when $\mu = 0$ in which case the slope is $\frac{\nu}{\lambda}$. 
-* For $\mu = 0$ the slope of the AFROC curve increases as the end-point is approached, i.e., the FROC curve is concave up, see top-left panel below. The unreasonable prediction is due to the unreasonable choice of parameters.
+* The slope of the AFROC near the end-point, corresponding to $\zeta = -\infty$, is zero provided $\mu \ne 0$. 
+* The slope near the origin, corresponding to $\zeta = +\infty$, is $\infty$ provided $\mu \ne 0$.
+* For $\mu = 0$ the slope of the AFROC is zero regardless of the value of $\zeta$, see top-left panel in Fig. \@ref(fig:rsm-pred2-froc-plots-lambdai-nui). 
+
+
+Using the physical parameters the last conclusion changes to an unreasonable one:
+
+>
+* For $\mu = 0$ the slope of the AFROC curve increases as the end-point is approached, i.e., the FROC curve is concave up, see top-left panel in Fig. \@ref(fig:rsm-pred2-afroc-plots-lambda-nu). The unreasonable prediction is due to the unreasonable choice of parameters.
 
 
 
