@@ -135,7 +135,7 @@ p_FROC_lambdai_nui[[4]], ncol = 2))
 
 > 
 * In the top-left plot, because $\lambda = 200$ defines the end-point abscissa and $\nu = 5 \times 10^{-3}$ defines the end-point ordinate, the FROC curve hugs the x-axis approaching $(200, 5 \times 10^{-3})$. This is the chance line FROC for very small $\mu$. 
-* Recall the solar analogy in Section \@ref(froc-paradigm-solar-analogy). When lesion contrast is very low the search mechanism has little chance of finding lesions (leading to small LLF) and generates large numbers of NLs in attempting to do so (leading to large NLF). 
+* Recall the solar analogy in Section \@ref(froc-paradigm-solar-analogy). When lesion contrast is low the search mechanism has little chance of finding lesions (leading to small LLF) and generates many NLs in attempting to do so (leading to large NLF). 
 * Increasing $\mu$ to 1 decreases $\lambda$ to 2 and simultaneously increases $\nu$ to 0.393. The new end-point $(2,0.393)$ is evident in the upper-right plot. 
 * Further increase in $\mu$ decreases the abscissa of the end-point and increases the ordinate and the end-point approaches the top-left corner of the FROC plot. 
 * The perfect performance FROC curve is the vertical line connecting the origin to (0,1). It occurs when $\mu = \infty$.
@@ -177,7 +177,7 @@ The end-point of the AFROC is defined by:
 \end{equation}
 
 
-Like the ROC it has the constrained end-point property (the end-point lies within the unit square). This makes it easy, using the AFROC-AUC, to defined a valid figure of merit. 
+Like the ROC it has the constrained end-point property (the end-point lies within the unit square). 
 
 
 ### AFROC plots using intrinsic $\lambda_i, \nu_i$ parameters
@@ -210,7 +210,7 @@ grid.arrange(p_AFROC_lambdai_nui[[1]],p_AFROC_lambdai_nui[[2]],p_AFROC_lambdai_n
 
 
 >
-* Each AFROC curve needs to be completed by a straight line extending from the end-point to (1,1). This line is inaccessible to the observer (except for the (1,1) point trivially obtained by cumulating all cases) but is necessary to fully account for all decisions (an analogous situation was encountered in connection with the RSM predicted ROC curve).
+* Each AFROC curve needs to be completed by a (dashed) straight line extending from the end-point to (1,1). A dashed line is used to distinguish it from the continous curve that is accessible to the observer. The dashed line is inaccessible to the observer (except for the (1,1) point trivially accessed by cumulating all cases) but is necessary to fully account for all decisions (an analogous situation was encountered in connection with the RSM predicted ROC curve).
 * Since each plot is contained within the unit square it is easy to define the net AUC as a performance metric.
 * The AFROC plot is independent of the number of lesions per case. This is not true for the wAFROC, as will shortly become clear, or the ROC (as the ROC ordinate increases with increasing numbers of lesions per case).
 * From Eqn. \@ref(eq:rsm-pred2-froc-end-point) and \@ref(eq:rsm-pred-tpf) it follows that $\text{TPF}_{\text{max}} \geq \text{LLF}_{max}$  with the equality holding in the limit $\mu \rightarrow \infty$. The reason is that the ROC gives credit for incorrect localizations on diseased cases, while the AFROC does not. This is the well-known "right for wrong reason" argument [@bunch1977free], originally advanced in 1977, against usage of the ROC for localization tasks.
@@ -224,7 +224,7 @@ grid.arrange(p_AFROC_lambdai_nui[[1]],p_AFROC_lambdai_nui[[2]],p_AFROC_lambdai_n
 
 ### Case of the reader who does not make any marks {#rsm-pred2-no-marks}
 
-Suppose the radiologist does not mark any case. One possibility is that the radiologist did not interpret the cases and simply "whizzed" through them. Even though the radiologist is not performing the diagnostic task and the AFROC operating point is stuck at the origin one would still be justified in making the straight-line extension to (1,1) which yields AFROC-AUC = 0.5, which implies finite performance (any value greater than zero for AFROC-AUC implies some degree of expertise). This is because the observer is correct on every non-diseased case (any mark on such a case would be incorrect) and deserves credit for these correct decisions. The situation is somewhat similar to an ROC study in which all cases are diagnosed as non-diseased - the observer is correct on all non-diseased cases and is rewarded with 100 percent specificity. 
+Suppose the radiologist does not mark any case. One possibility is that the radiologist did not interpret the cases and simply "whizzed" through them. Even though the radiologist is not performing the diagnostic task and the AFROC operating point is stuck at the origin one would still be justified in making the straight-line extension to (1,1) which yields AFROC-AUC = 0.5, which implies finite performance (any value greater than zero for AFROC-AUC implies some degree of expertise). This is because the observer is correct in not marking any non-diseased case (any mark on such a case would be incorrect) and deserves credit for correct decisions on non-diseased cases. The situation is somewhat similar to an ROC study in which all cases are diagnosed as non-diseased - the observer is correct on all non-diseased cases and is rewarded with 100 percent specificity. 
 
 
 
@@ -242,19 +242,13 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pr
 
 
 * The Binomial probability mass function $\text{pmf}_{Bin}$ was defined in Eqn. \@ref(eq:rsm-binomial-pmf).
-
 * $\overrightarrow{f_L}$ is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted `lesDistr`. For example, the array `lesDistr = c(0.1, 0.4, 0.4, 0.1)`  defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions. 
-
 * $L_{max}$ is the maximum number of lesions per case in the dataset. In the preceding example $L_{max} = 4$.
-
-* $\mathbf{W}$ is the (lower triangular) square matrix with $L_{max}$ rows and columns containing the weights, where each row sums to unity, see example below (the unused matrix elements are set to $-\infty$). The relative lesion weights are denoted in the code `relWeights`. For example, `relWeights =  c(0.2, 0.3, 0.1, 0.5)` whose meaning is as follows:
-
+* $\mathbf{W}$ is the (lower triangular) square matrix with $L_{max}$ rows and columns containing the weights, where each row (excluding cells set to $-\infty$) sums to unity, see example below (the unused matrix elements are set to $-\infty$). The relative lesion weights are denoted in the code `relWeights`. For example, `relWeights =  c(0.2, 0.3, 0.1, 0.5)` whose meaning is as follows:
     + On cases with one lesion the lesion weight is unity.
     + On cases with two lesions the relative weights are 0.2 and 0.3. Since these do not add up to unity, the actual weights are 0.4 and 0.6. 
     + On cases with three lesions the relative weights are 0.2, 0.3 and 0.1. The actual weights are 1/3, 1/2 and 1/6.
     + On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.2, 0.3, 0.1 and 0.4.
-    
-
 * The function `UtilLesionWeightsMatrixLesDistr` calculates the matrix given `lesDistr` and `relWeights`. For example:
 
 ```{r, echo=TRUE}
@@ -264,15 +258,9 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)[,-1]
 ```
 
 
-* It is necessary to label the lesions properly so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the one with relative weight 0.1. Since $\mathbf{W}$ is independent of cases, the lesion characteristics (which determine clinical outcome) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix $\mathbf{W}$. 
-
-
+* It is necessary to label the lesions properly so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the one with relative weight 0.1. Since $\mathbf{W}$ is independent of cases, the lesion characteristics (which determine clinical outcome/importance) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix $\mathbf{W}$. 
 * $\text{pmf}_{Bin}\left ( l_2, L, \nu \right )$ is the probability mass function (pmf) of the binomial distribution with success probability $\nu$ and trial size $L$. $\text{W}_{Ll_2}$ is the weight of lesion $l_2$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.3$. 
-
-
 * Eqn. \@ref(eq:rsm-pred2-wllf) is implemented in `UtilAnalyticalAucsRSM`.
-
-
 * To generate equal weights set `relWeights = 0` as in following code:
 
 
