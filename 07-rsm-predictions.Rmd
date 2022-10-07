@@ -77,9 +77,9 @@ This behavior is distinct from conventional ROC models where the entire curve, e
 
 ### The abscissa of the ROC end-point {#rsm-pred-constrained-end-point-abscissa}
 
-Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of $h_1$ and with an appropriately low $\zeta$ it will be marked. The probability of *zero* latent NLs, see Eqn. \@ref(eq:rsm-poisson-pmf), is:  
+Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of $h_1$ and with an appropriately low $\zeta$ it will be marked. The probability of *zero* latent NLs, see Eqn. \@ref(eq:rsm-poisson-PMF), is:  
 
-$$\text{pmf}_{Poi} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )$$.
+$$\text{PMF}_{Pois} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )$$.
 
 The probability that the case has *at least one* latent NL is the complement of the above probability. At sufficiently low $\zeta$ each of these cases yields a marked non-disease case. Therefore, the maximum continuously accessible abscissa of the ROC, i.e., $\text{FPF}_{\text{max}}$, is: 
 
@@ -92,7 +92,7 @@ The probability that the case has *at least one* latent NL is the complement of 
 
 ### The ordinate of the ROC end-point {#rsm-pred-constrained-end-point-ordinate}
 
-A diseased case has no marks, even for very low $\zeta$, if it has zero latent NLs, the probability of which is $\text{exp}(-\lambda)$, and it has zero latent LLs, the probability of which is, see Eqn. \@ref(eq:rsm-binomial-pmf), $\text{pmf}_{Bin} \left ( 0, L, \nu \right )= (1 - \nu)^L$. 
+A diseased case has no marks, even for very low $\zeta$, if it has zero latent NLs, the probability of which is $\text{exp}(-\lambda)$, and it has zero latent LLs, the probability of which is, see Eqn. \@ref(eq:rsm-binomial-PMF), $\text{PMF}_{B} \left ( 0, L, \nu \right )= (1 - \nu)^L$. 
 
 Here $L$ is the number of lesions in each diseased case. 
 
@@ -159,10 +159,10 @@ Consider the set of non-diseased cases with $n$ latent NLs each, where $n > 0$. 
 
 
 
-The conditioning notation in Eqn. \@ref(eq:rsm-pred-fpf-zeta-n) reflects the fact that this expression applies specifically to non-diseased cases each with $n$ latent NLs. To obtain $\text{FPF}_{\text{max}}$ one performs a Poisson pmf-weighted summation of $\text{FPF}\left (\zeta \mid n \right )$ over $n$ from 0 to $\infty$ (the inclusion of the $n = 0$ term is explained below):    
+The conditioning notation in Eqn. \@ref(eq:rsm-pred-fpf-zeta-n) reflects the fact that this expression applies specifically to non-diseased cases each with $n$ latent NLs. To obtain $\text{FPF}_{\text{max}}$ one performs a Poissson PMF-weighted summation of $\text{FPF}\left (\zeta \mid n \right )$ over $n$ from 0 to $\infty$ (the inclusion of the $n = 0$ term is explained below):    
 
 \begin{equation}
-\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{pmf}_{\text{Poi}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
+\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{PMF}_{\text{Pois}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
 (\#eq:rsm-pred-fpf-zeta-before-maple)
 \end{equation}
 
@@ -174,9 +174,9 @@ The infinite summations, see below, are easier performed using symbolic algebra 
 restart;
 phi := proc (t, mu) exp(-(1/2)*(t-mu)^2)/sqrt(2*Pi) end: 
 PHI := proc (c, mu) local t; int(phi(t, mu), t = -infinity .. c) end: 
-Poisson := proc (n, lambda) lambda^n*exp(-lambda)/factorial(n) end: 
-Bin := proc (l, L, nu) binomial(L, l)*nu^l*(1-nu)^(L-l) end:
-FPF := proc(zeta,lambda) sum(Poisson(n,lambda)*
+Poissson := proc (n, lambda) lambda^n*exp(-lambda)/factorial(n) end: 
+B := proc (l, L, nu) binomial(L, l)*nu^l*(1-nu)^(L-l) end:
+FPF := proc(zeta,lambda) sum(Poissson(n,lambda)*
 (1 - PHI(zeta,0)^n), n=0..infinity);end:
 FPF(zeta, lambda);   
 ```
@@ -245,8 +245,8 @@ One averages over the distributions of $n$ and $l$ to obtain the desired ROC-ord
 \begin{equation}
 \left.
 \begin{aligned}
-\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =& \sum_{n=0}^{\infty} \text{pmf}_{Poi}(n,\lambda) \\
-&\times \sum_{l=0}^{L} \text{pmf}_{Bin}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
+\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =& \sum_{n=0}^{\infty} \text{PMF}_{Pois}(n,\lambda) \\
+&\times \sum_{l=0}^{L} \text{PMF}_{B}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
 \end{aligned}
 \right \}
 (\#eq:rsm-pred-tpf-double-summation)
@@ -707,11 +707,11 @@ Specifically, since the $\Phi$ function ranges between 0 and 1 and $0 \leq \nu \
 
 ## $\zeta$ dependence of ROC AUC {#rsm-pred-roc-curve-aucs-zeta1}
 
-When it comes to predicted ROC AUC there is an important difference between conventional ROC models and the RSM. The former has no dependence on $\zeta$. This is because in the ROC model every case yields a rating, no matter how low the z-sample, implying that effectively $\zeta = -\infty$. The lack of $\zeta$ dependence is demonstrated by the help page for function `UtilAucBinormal`, shown below, which depends on only two parameters, $a$ and $b$ (the two-parameter dependence is also true for other ROC models implemented in `RJafroc`, e.g., `UtilAucCBM` and `UtilAucPROPROC`). 
+When it comes to predicted ROC AUC there is an important difference between conventional ROC models and the RSM. The former has no dependence on $\zeta$. This is because in the ROC model every case yields a rating, no matter how low the z-sample, implying that effectively $\zeta = -\infty$. The lack of $\zeta$ dependence is demonstrated by the help page for function `UtilAucBormal`, shown below, which depends on only two parameters, $a$ and $b$ (the two-parameter dependence is also true for other ROC models implemented in `RJafroc`, e.g., `UtilAucCBM` and `UtilAucPROPROC`). 
 
 
 
-```{r rsm-pred-binorml-help, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Help page for `RJafroc` function `UtilAucBinormal`."}
+```{r rsm-pred-binorml-help, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Help page for `RJafroc` function `UtilAucBormal`."}
 knitr::include_graphics("images/rsm-pred/util-aucs-binormal.png")
 ``` 
 

@@ -42,20 +42,23 @@ From a property of the Poisson distribution, namely its mean equals the $\lambda
 \end{equation}
 
 
-To calculate $\text{LLF}$ one separates diseased cases into groups, each with a fixed number of $L$ lesions per case, where $L$ varies from one to $L_{max}$. For each group the expected number of latent LLs per diseased case divided by $L$ equals $\nu$, as $\nu$ is the probability that a lesion is a latent site. One multiplies $\nu$ by the probability that a z-sample from $N(\mu,1)$ exceeds $\zeta$ i.e., by $\Phi(\mu - \zeta)$, to obtain the fraction of lesions that are actually marked. Finally, one performs a weighted summation over the different groups with $f_L$  as the weighting factor (recall that $f_L$ is the fraction of diseased cases with $L$ lesions). Therefore,
+One calculate $\text{LLF}$ as follows: 
 
-\begin{equation}
+
+\begin{equation} 
 \left. 
 \begin{aligned}
-\text{LLF}\left ( \zeta, \mu, \nu \right ) =& \sum_{L=1}^{L_{max}} f_L \, \, \nu \,\, \Phi \left ( \mu - \zeta \right )\\
-=& \nu  \Phi \left ( \mu - \zeta \right )\\
+\text{LLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L} \right ) 
+=& \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} \sum_{l_2=0}^{L}  \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )\\
+=&\Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} L \,\nu\\
+=&\nu \,\Phi\left ( \mu - \zeta \right )
 \end{aligned}
 \right \}
 (\#eq:rsm-pred2-llf)
 \end{equation}
 
 
-Note that the expression for LLF is independent of the number of lesions in the dataset or their distribution.
+The inner summation is over all cases with $L$ lesions; one calculates the expectation value of $l_2$ (the number of lesions that are latent LLs) using the binomial distribution; one divides by $L$ to get the average fraction of LLs on cases with $L$ lesions; finally one performs an average using the distribution $f_L$ of cases with $L$ lesions. Note that the final expression for LLF is independent of the number of lesions in the dataset or their distribution.
 
 The coordinates of the RSM-predicted operating point on the FROC curve for threshold $\zeta$ are given by Eqn. \@ref(eq:rsm-pred2-nlf) and Eqn. \@ref(eq:rsm-pred2-llf). The FROC curve starts at (0,0) and ends at $\left ( \lambda, \nu \right )$ -- the end-point. The end-point is defined by:  
 
@@ -236,12 +239,26 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pr
 
 
 \begin{equation} 
-\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l_2=1}^{L} \text{W}_{Ll_2} \, \text{pmf}_{Bin}\left ( l_2, L, \nu \right )
+\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l_2=1}^{L} \text{W}_{Ll_2} \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )
 (\#eq:rsm-pred2-wllf)
 \end{equation}
 
 
-* The Binomial probability mass function $\text{pmf}_{Bin}$ was defined in Eqn. \@ref(eq:rsm-binomial-pmf).
+
+This equation is implemented in `UtilAnalyticalAucsRSM`. Help is available [here](https://dpc10ster.github.io/RJafroc/reference/UtilAnalyticalAucsRSM.html).
+
+
+
+The binomial probability mass function $\text{PMF}_{B}$ was defined in Eqn. \@ref(eq:rsm-binomial-PMF). For convenience it is repeated here:
+
+
+\begin{equation} 
+\text{PMF}_{B}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
+(\#eq:rsm-pred2-PMF-binomial)
+\end{equation}
+
+For L = 1 it reduces to $\nu$ and 
+
 * $\overrightarrow{f_L}$ is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted `lesDistr`. For example, the array `lesDistr = c(0.1, 0.4, 0.4, 0.1)`  defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions. 
 * $L_{max}$ is the maximum number of lesions per case in the dataset. In the preceding example $L_{max} = 4$.
 * $\mathbf{W}$ is the (lower triangular) square matrix with $L_{max}$ rows and columns containing the weights, where each row (excluding cells set to $-\infty$) sums to unity, see example below (the unused matrix elements are set to $-\infty$). The relative lesion weights are denoted in the code `relWeights`. For example, `relWeights =  c(0.2, 0.3, 0.1, 0.5)` whose meaning is as follows:
@@ -259,8 +276,7 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)[,-1]
 
 
 * It is necessary to label the lesions properly so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the one with relative weight 0.1. Since $\mathbf{W}$ is independent of cases, the lesion characteristics (which determine clinical outcome/importance) of `lesionID = 1` on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix $\mathbf{W}$. 
-* $\text{pmf}_{Bin}\left ( l_2, L, \nu \right )$ is the probability mass function (pmf) of the binomial distribution with success probability $\nu$ and trial size $L$. $\text{W}_{Ll_2}$ is the weight of lesion $l_2$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.3$. 
-* Eqn. \@ref(eq:rsm-pred2-wllf) is implemented in `UtilAnalyticalAucsRSM`.
+* $\text{PMF}_{B}\left ( l_2, L, \nu \right )$ is the probability mass function (PMF) of the binomial distribution with success probability $\nu$ and trial size $L$. $\text{W}_{Ll_2}$ is the weight of lesion $l_2$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.3$. 
 * To generate equal weights set `relWeights = 0` as in following code:
 
 
