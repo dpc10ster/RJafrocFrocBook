@@ -245,19 +245,20 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pr
 
 
 
-This equation is implemented in `UtilAnalyticalAucsRSM`. Help is available [here](https://dpc10ster.github.io/RJafroc/reference/UtilAnalyticalAucsRSM.html).
+This equation is implemented in `UtilAnalyticalAucsRSM`. Help is available [here](https://dpc10ster.github.io/RJafroc/reference/UtilAnalyticalAucsRSM.html). A simple R-implementation is shown below:
 
+```
+wLLF <- 0
+for (L in 1:L_max){
+  wLLF_L <- 0
+  for (l_2 in 1:L){
+    wLLF_L <- wLLF_L + W[L, l_2+1] * l_2 * dbinom(l_2, L, nu)
+  }
+  wLLF <- wLLF +  f_L[L] * wLLF_L
+}
+wLLF <- wLLF * pnorm(mu - zeta)
+```
 
-
-The binomial probability mass function $\text{PMF}_{B}$ was defined in Eqn. \@ref(eq:rsm-binomial-PMF). For convenience it is repeated here:
-
-
-\begin{equation} 
-\text{PMF}_{B}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
-(\#eq:rsm-pred2-PMF-binomial)
-\end{equation}
-
-For L = 1 it reduces to $\nu$ and 
 
 * $\overrightarrow{f_L}$ is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted `lesDistr`. For example, the array `lesDistr = c(0.1, 0.4, 0.4, 0.1)`  defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions. 
 * $L_{max}$ is the maximum number of lesions per case in the dataset. In the preceding example $L_{max} = 4$.
