@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-10-01}
+\date{2022-10-07}
 
 \begin{document}
 \maketitle
@@ -2123,32 +2123,32 @@ The radiological search model (RSM) for the free-response paradigm is a statisti
 \hypertarget{rsm-assumptions}{%
 \section{RSM assumptions}\label{rsm-assumptions}}
 
-\textbf{Assumption 1:} The number of latent NLs, \(l_1 \geq 0\), is sampled from the Poisson distribution \(\text{Poi}()\) with mean \(\lambda\):
+\textbf{Assumption 1:} The number of latent NLs, \(l_1 \geq 0\), is sampled from the Poissson distribution \(\text{Pois}()\) with mean \(\lambda\):
 
 \begin{equation} 
-l_1 \sim \text{Poi}\left ( \lambda \right ) 
+l_1 \sim \text{Pois}\left ( \lambda \right ) 
 \label{eq:rsm-poisson-sampling}
 \end{equation}
 
-The probability mass function (pmf) of the Poisson distribution is defined by:
+The probability mass function (PMF) of the Poissson distribution is defined by:
 
 \begin{equation} 
-\text{pmf}_{Poi}\left ( l_1, \lambda \right ) = exp\left ( -\lambda \right ) \frac{{(\lambda)^{l_1}}}{l_1!}
-\label{eq:rsm-poisson-pmf}
+\text{PMF}_{Pois}\left ( l_1, \lambda \right ) = exp\left ( -\lambda \right ) \frac{{(\lambda)^{l_1}}}{l_1!}
+\label{eq:rsm-poisson-PMF}
 \end{equation}
 
-\textbf{Assumption 2:} The number of latent LLs, \(l_2\), where \(0 \leq l_2 \leq L\) (since the number of latent LLs cannot exceed the number of lesions) is sampled from the binomial distribution \(\text{Bin}()\) with success probability \(\nu\) and trial size \(L\):
+\textbf{Assumption 2:} The number of latent LLs, \(l_2\), where \(0 \leq l_2 \leq L\) (since the number of latent LLs cannot exceed the number of lesions) is sampled from the binomial distribution \(\text{B}\) with success probability \(\nu\) and trial size \(L\):
 
 \begin{equation} 
-l_2 \sim \text{Bin}\left ( L, \nu \right ) 
+l_2 \sim \text{B}\left ( L, \nu \right ) 
 \label{eq:rsm-binomial-sampling}
 \end{equation}
 
-The probability mass function (pmf) of the binomial distribution is defined by:
+The probability mass function (PMF) of the binomial distribution is defined by:
 
 \begin{equation} 
-\text{pmf}_{Bin}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
-\label{eq:rsm-binomial-pmf}
+\text{PMF}_{B}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
+\label{eq:rsm-binomial-PMF}
 \end{equation}
 
 \begin{quote}
@@ -2182,7 +2182,7 @@ The probability density function \(\phi\left ( z | \mu \right )\) of the normal 
 The parameter \(\mu\) is termed the \emph{classification} parameter.
 \end{quote}
 
-\textbf{Binning rule:} In an FROC study with R ratings, the observer adopts \(R\) ordered cutoffs \(\zeta_r\), where \(\left ( r = 1, 2, ..., R \right )\). Defining \(\zeta_0 = -\infty\) and \(\zeta_{R+1} = \infty\), then if \(\zeta_r \leq z_{l_ss} < \zeta_{r+1}\) the corresponding latent site is marked and rated in bin \(r\), and if \(z_{l_ss} \leq \zeta_1\) the site is not marked. (\(R\) is the number of FROC bins.)
+\textbf{Bning rule:} In an FROC study with R ratings, the observer adopts \(R\) ordered cutoffs \(\zeta_r\), where \(\left ( r = 1, 2, ..., R \right )\). Defining \(\zeta_0 = -\infty\) and \(\zeta_{R+1} = \infty\), then if \(\zeta_r \leq z_{l_ss} < \zeta_{r+1}\) the corresponding latent site is marked and rated in bin \(r\), and if \(z_{l_ss} \leq \zeta_1\) the site is not marked. (\(R\) is the number of FROC bins.)
 
 \textbf{Mark location:} The location of the mark is assumed to be at the exact center of the latent site that exceeded a cutoff and an infinitely precise proximity criterion is adopted. Consequently, there is no confusing a mark made because of a latent LL z-sample exceeding the cutoff with one made because of a latent NL z-sample exceeding the cutoff. Therefore, any mark made because of a latent NL z-sample that satisfies \(\zeta_r \leq z_{l_11} < \zeta_{r+1}\) will be scored as a non-lesion localization (NL) and rated \(r\). Likewise, any mark made because of a latent LL z-sample that satisfies \(\zeta_r \leq z_{l_22} < \zeta_{r+1}\) will be scored as a lesion-localization (LL) and rated \(r\).
 
@@ -2216,7 +2216,7 @@ The \(\lambda\) parameter determines the tendency of the observer to generate la
 
 I have found it best to illustrate sampling to non-statistics majors with numerical examples. Consider two observers, one with \(\lambda = 1\) and the other with \(\lambda = 2\). While one cannot predict the exact number of latent NLs on any specific case, the value of \(\lambda\) determines the average number of latent NLs.
 
-The following code illustrates Poisson sampling, estimation of the mean and confidence interval for 100 samples from two Poisson distributions. The number of samples has been set to \(K_1=100\) (the first argument to \texttt{rpois()} is the number of non-diseased cases; the second argument is the value of \(\lambda\)).
+The following code illustrates Poissson sampling, estimation of the mean and confidence interval for 100 samples from two Poissson distributions. The number of samples has been set to \(K_1=100\) (the first argument to \texttt{rpois()} is the number of non-diseased cases; the second argument is the value of \(\lambda\)).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2250,7 +2250,7 @@ The following code illustrates Poisson sampling, estimation of the mean and conf
 ## Rdr. 2: 95% CI =  [ 1.751026 2.318599 ]
 \end{verbatim}
 
-For reader 1 the estimate of the Poisson parameter (the mean parameter of the Poisson distribution is frequently referred to as the Poisson parameter) is 1.01 with 95\% confidence interval (0.823, 1.227); for reader 2 the corresponding estimates are 2.02 and (1.751, 2.319). As the number of cases increases, the confidence interval shrinks. For example, with 10000 cases, i.e., 100 times the value in the previous example:
+For reader 1 the estimate of the Poissson parameter (the mean parameter of the Poissson distribution is frequently referred to as the Poissson parameter) is 1.01 with 95\% confidence interval (0.823, 1.227); for reader 2 the corresponding estimates are 2.02 and (1.751, 2.319). As the number of cases increases, the confidence interval shrinks. For example, with 10000 cases, i.e., 100 times the value in the previous example:
 
 \begin{verbatim}
 ## K1 =  10000 , lambda 1st reader =  1 , lambda 2nd reader =  2
@@ -2272,7 +2272,7 @@ For reader 1 the estimate of the Poisson parameter (the mean parameter of the Po
 ## Rdr. 2: 95% CI =  [ 1.978335 2.033955 ]
 \end{verbatim}
 
-This time for reader 1, the estimate of the Poisson parameter is 1.01 with 95\% confidence interval (0.986, 1.025); for reader 2 the corresponding estimate is 2.01 with 95\% confidence interval (1.978, 2.034). The width of the confidence interval is inversely proportional to the square root of the number of cases (the example below is for reader 1):
+This time for reader 1, the estimate of the Poissson parameter is 1.01 with 95\% confidence interval (0.986, 1.025); for reader 2 the corresponding estimate is 2.01 with 95\% confidence interval (1.978, 2.034). The width of the confidence interval is inversely proportional to the square root of the number of cases (the example below is for reader 1):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2509,9 +2509,9 @@ This behavior is distinct from conventional ROC models where the entire curve, e
 \hypertarget{rsm-pred-constrained-end-point-abscissa}{%
 \subsection{The abscissa of the ROC end-point}\label{rsm-pred-constrained-end-point-abscissa}}
 
-Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of \(h_1\) and with an appropriately low \(\zeta\) it will be marked. The probability of \emph{zero} latent NLs, see Eqn. \eqref{eq:rsm-poisson-pmf}, is:
+Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of \(h_1\) and with an appropriately low \(\zeta\) it will be marked. The probability of \emph{zero} latent NLs, see Eqn. \eqref{eq:rsm-poisson-PMF}, is:
 
-\[\text{pmf}_{Poi} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )\].
+\[\text{PMF}_{Pois} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )\].
 
 The probability that the case has \emph{at least one} latent NL is the complement of the above probability. At sufficiently low \(\zeta\) each of these cases yields a marked non-disease case. Therefore, the maximum continuously accessible abscissa of the ROC, i.e., \(\text{FPF}_{\text{max}}\), is:
 
@@ -2523,7 +2523,7 @@ The probability that the case has \emph{at least one} latent NL is the complemen
 \hypertarget{rsm-pred-constrained-end-point-ordinate}{%
 \subsection{The ordinate of the ROC end-point}\label{rsm-pred-constrained-end-point-ordinate}}
 
-A diseased case has no marks, even for very low \(\zeta\), if it has zero latent NLs, the probability of which is \(\text{exp}(-\lambda)\), and it has zero latent LLs, the probability of which is, see Eqn. \eqref{eq:rsm-binomial-pmf}, \(\text{pmf}_{Bin} \left ( 0, L, \nu \right )= (1 - \nu)^L\).
+A diseased case has no marks, even for very low \(\zeta\), if it has zero latent NLs, the probability of which is \(\text{exp}(-\lambda)\), and it has zero latent LLs, the probability of which is, see Eqn. \eqref{eq:rsm-binomial-PMF}, \(\text{PMF}_{B} \left ( 0, L, \nu \right )= (1 - \nu)^L\).
 
 Here \(L\) is the number of lesions in each diseased case.
 
@@ -2592,10 +2592,10 @@ Consider the set of non-diseased cases with \(n\) latent NLs each, where \(n > 0
 \label{eq:rsm-pred-fpf-zeta-n}
 \end{equation}
 
-The conditioning notation in Eqn. \eqref{eq:rsm-pred-fpf-zeta-n} reflects the fact that this expression applies specifically to non-diseased cases each with \(n\) latent NLs. To obtain \(\text{FPF}_{\text{max}}\) one performs a Poisson pmf-weighted summation of \(\text{FPF}\left (\zeta \mid n \right )\) over \(n\) from 0 to \(\infty\) (the inclusion of the \(n = 0\) term is explained below):
+The conditioning notation in Eqn. \eqref{eq:rsm-pred-fpf-zeta-n} reflects the fact that this expression applies specifically to non-diseased cases each with \(n\) latent NLs. To obtain \(\text{FPF}_{\text{max}}\) one performs a Poissson PMF-weighted summation of \(\text{FPF}\left (\zeta \mid n \right )\) over \(n\) from 0 to \(\infty\) (the inclusion of the \(n = 0\) term is explained below):
 
 \begin{equation}
-\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{pmf}_{\text{Poi}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
+\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{PMF}_{\text{Pois}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
 \label{eq:rsm-pred-fpf-zeta-before-maple}
 \end{equation}
 
@@ -2606,9 +2606,9 @@ The infinite summations, see below, are easier performed using symbolic algebra 
 restart;
 phi := proc (t, mu) exp(-(1/2)*(t-mu)^2)/sqrt(2*Pi) end: 
 PHI := proc (c, mu) local t; int(phi(t, mu), t = -infinity .. c) end: 
-Poisson := proc (n, lambda) lambda^n*exp(-lambda)/factorial(n) end: 
-Bin := proc (l, L, nu) binomial(L, l)*nu^l*(1-nu)^(L-l) end:
-FPF := proc(zeta,lambda) sum(Poisson(n,lambda)*
+Poissson := proc (n, lambda) lambda^n*exp(-lambda)/factorial(n) end: 
+B := proc (l, L, nu) binomial(L, l)*nu^l*(1-nu)^(L-l) end:
+FPF := proc(zeta,lambda) sum(Poissson(n,lambda)*
 (1 - PHI(zeta,0)^n), n=0..infinity);end:
 FPF(zeta, lambda);   
 \end{verbatim}
@@ -2669,8 +2669,8 @@ One averages over the distributions of \(n\) and \(l\) to obtain the desired ROC
 \begin{equation}
 \left.
 \begin{aligned}
-\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =& \sum_{n=0}^{\infty} \text{pmf}_{Poi}(n,\lambda) \\
-&\times \sum_{l=0}^{L} \text{pmf}_{Bin}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
+\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =& \sum_{n=0}^{\infty} \text{PMF}_{Pois}(n,\lambda) \\
+&\times \sum_{l=0}^{L} \text{PMF}_{B}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
 \end{aligned}
 \right \}
 \label{eq:rsm-pred-tpf-double-summation}
@@ -3114,7 +3114,7 @@ In Appendix 1 \ref{rsm-pred-appendix1} it is shown analytically that the slope i
 \hypertarget{rsm-pred-roc-curve-aucs-zeta1}{%
 \section{\texorpdfstring{\(\zeta\) dependence of ROC AUC}{\textbackslash zeta dependence of ROC AUC}}\label{rsm-pred-roc-curve-aucs-zeta1}}
 
-When it comes to predicted ROC AUC there is an important difference between conventional ROC models and the RSM. The former has no dependence on \(\zeta\). This is because in the ROC model every case yields a rating, no matter how low the z-sample, implying that effectively \(\zeta = -\infty\). The lack of \(\zeta\) dependence is demonstrated by the help page for function \texttt{UtilAucBinormal}, shown below, which depends on only two parameters, \(a\) and \(b\) (the two-parameter dependence is also true for other ROC models implemented in \texttt{RJafroc}, e.g., \texttt{UtilAucCBM} and \texttt{UtilAucPROPROC}).
+When it comes to predicted ROC AUC there is an important difference between conventional ROC models and the RSM. The former has no dependence on \(\zeta\). This is because in the ROC model every case yields a rating, no matter how low the z-sample, implying that effectively \(\zeta = -\infty\). The lack of \(\zeta\) dependence is demonstrated by the help page for function \texttt{UtilAucBormal}, shown below, which depends on only two parameters, \(a\) and \(b\) (the two-parameter dependence is also true for other ROC models implemented in \texttt{RJafroc}, e.g., \texttt{UtilAucCBM} and \texttt{UtilAucPROPROC}).
 
 \begin{figure}
 
@@ -3122,7 +3122,7 @@ When it comes to predicted ROC AUC there is an important difference between conv
 
 }
 
-\caption{Help page for `RJafroc` function `UtilAucBinormal`.}\label{fig:rsm-pred-binorml-help}
+\caption{Help page for `RJafroc` function `UtilAucBormal`.}\label{fig:rsm-pred-binorml-help}
 \end{figure}
 
 In contrast, in addition to the basic RSM parameters, i.e., \(\mu\), \(\lambda\) and \(\nu\), the rsm-pred have an additional dependence on \(\zeta\). This is because the value of \(\zeta\) determines the location of the end-point. The \(\zeta\) dependence is demonstrated next for the ROC plots, but it is true for all RSM predictions.
@@ -3378,36 +3378,39 @@ physical vs.~intrinsic; edit chapter 4
 \hypertarget{rsm-pred2-intro}{%
 \section{TBA Introduction}\label{rsm-pred2-intro}}
 
-The preceding chapter described the radiological search model (RSM) and the predicted ROC curve. This chapter describes the FROC, AFROC and wAFROC curve predictions of the RSM. This chapter brings out the need for using reasonable values of the parameters.
+The preceding chapter described the ROC curve predicted by the radiological search model (RSM). This chapter describes the FROC, AFROC and wAFROC curve predictions.
+
+This chapter brings out the need for using reasonable values of the parameters.
 
 Also discussed here are the slopes of these plots near the origin and the end-point, which brings out interesting properties not discussed in the 2017 print book.
 
 \hypertarget{rsm-pred2-froc-curve}{%
 \section{RSM-predicted FROC curve}\label{rsm-pred2-froc-curve}}
 
-\hypertarget{formulae}{%
-\subsection{Formulae}\label{formulae}}
-
-From a property of the Poisson distribution, namely its mean equals the \(\lambda\) parameter of the distribution, it follows that the expected number of \emph{latent} NLs per case is \(\lambda\). One multiplies this by the probability that a z-sample from \(N(0,1)\) exceeds \(\zeta\), i.e.~by \(\Phi(-\zeta)\), to obtain the expected number of \emph{marked} NLs per case, i.e., NLF:
+From a property of the Poisson distribution, namely its mean equals the \(\lambda\) parameter of the distribution, it follows that the expected number of \emph{latent} NLs per case is \(\lambda\). Recalling that NL z-samples are distributed as N(0,1), one multiplies \(\lambda\) by the probability that a z-sample from \(N(0,1)\) exceeds \(\zeta\), i.e.~by \(\Phi(-\zeta)\), to obtain the expected number of \emph{marked} NLs per case, i.e., NLF:
 
 \begin{equation}
 \text{NLF} \left ( \zeta, \lambda \right ) = \lambda \Phi \left (-\zeta \right )
 \label{eq:rsm-pred2-nlf}
 \end{equation}
 
-To calculate \(\text{LLF}\) one separates diseased cases into groups, each with a fixed number of \(L\) lesions per case, where \(L\) varies from one to \(L_{max}\). For each group the expected number of latent LLs per diseased case divided by L must equal \(\nu\), as \(\nu\) is the probability that a lesion is found. One multiplies by the probability that a z-sample from \(N(\mu,1)\) exceeds \(\zeta\) i.e., by \(\Phi(\mu - \zeta)\), to obtain the fraction of lesions that are actually marked. Finally, one performs a weighted summation over the different groups with \(f_L\) as the weighting factor. Therefore,
+One calculate \(\text{LLF}\) as follows:
 
-\begin{equation}
+\begin{equation} 
 \left. 
 \begin{aligned}
-\text{LLF}\left ( \zeta, \mu, \nu \right ) =& \sum_{L=1}^{L_{max}} f_L \, \, \nu \,\, \Phi \left ( \mu - \zeta \right )\\
-=& \nu  \Phi \left ( \mu - \zeta \right )\\
+\text{LLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L} \right ) 
+=& \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} \sum_{l_2=0}^{L}  \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )\\
+=&\Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} L \,\nu\\
+=&\nu \,\Phi\left ( \mu - \zeta \right )
 \end{aligned}
 \right \}
 \label{eq:rsm-pred2-llf}
 \end{equation}
 
-Summarizing, the coordinates of the RSM-predicted operating point on the FROC curve for threshold \(\zeta\) are given by Eqn. \eqref{eq:rsm-pred2-nlf} and Eqn. \eqref{eq:rsm-pred2-llf}. The FROC curve starts at (0,0) and ends at \(\left ( \lambda, \nu \right )\). The x-coordinate does not extend to arbitrarily large values and the y-coordinate does not approach unity (unless \(\nu = 1\)). The constrained end-point property, demonstrated previously for the ROC curve, also applies to the FROC curve:
+The inner summation is over all cases with \(L\) lesions; one calculates the expectation value of \(l_2\) (the number of lesions that are latent LLs) using the binomial distribution; one divides by \(L\) to get the average fraction of LLs on cases with \(L\) lesions; finally one performs an average using the distribution \(f_L\) of cases with \(L\) lesions. Note that the final expression for LLF is independent of the number of lesions in the dataset or their distribution.
+
+The coordinates of the RSM-predicted operating point on the FROC curve for threshold \(\zeta\) are given by Eqn. \eqref{eq:rsm-pred2-nlf} and Eqn. \eqref{eq:rsm-pred2-llf}. The FROC curve starts at (0,0) and ends at \(\left ( \lambda, \nu \right )\) -- the end-point. The end-point is defined by:
 
 \begin{equation}
 \left. 
@@ -3419,17 +3422,33 @@ Summarizing, the coordinates of the RSM-predicted operating point on the FROC cu
 \label{eq:rsm-pred2-froc-end-point}
 \end{equation}
 
+The end-point is not constrained to lie within the unit-square, rather it is \emph{semi-constrained}: while the ordinate cannot exceed unity the abscissa can.
+
+The clear connection between \(\lambda\) and \(\nu\) and the FROC end-point is the reason they are called the \emph{physical} RSM parameters. For reasons explained in Section \ref{froc-paradigm-solar-analogy} the physical parameters are not the best way of parameterizing predicted RSM curves. This is because they hide an inherent \(\mu\) dependence - ignoring this can lead to poor choices of RSM parameters as shown in Appendix \ref{rsm-pred2-froc-physical-parameters}. Intrinsic parameters were introduced in Section \ref{rsm-intrinsic-parameters} which take into account this dependence. For convenience the transformations between physical and intrinsic parameters are reproduced here:
+
+\begin{equation}
+\left. 
+\begin{aligned}
+\nu =& 1 - \text{exp}\left ( - \mu \nu_i \right ) \\
+\lambda =& \frac{\lambda_i}{\mu}
+\end{aligned}
+\right \}
+\label{eq:rsm-pred2-transform}
+\end{equation}
+
+The predicted FROC, AFROC and wAFROC curves that follow use the intrinsic \(\lambda_i, \nu_i\) parameters.
+
 \hypertarget{froc-plots-using-intrinsic-lambda_i-nu_i-parameters}{%
 \subsection{\texorpdfstring{FROC plots using intrinsic \(\lambda_i, \nu_i\) parameters}{FROC plots using intrinsic \textbackslash lambda\_i, \textbackslash nu\_i parameters}}\label{froc-plots-using-intrinsic-lambda_i-nu_i-parameters}}
 
-The following code shows how to generate FROC plots using the intrinsic \(\lambda_i = 2\) and \(\nu_i = 0.5\) parameters for 4 values of \(\mu\) contained in the array \texttt{muArr\ \textless{}-\ c(0.0001,1,2,4)} (for technical reasons the value 0 is not allowed). A list array \texttt{plotArr\_FROC\_lambdai\_nui} is created to contain the four plots. The intrinsic intrinsic \(\lambda_i, \nu_i\) parameters are converted to \(\lambda, \nu\) using the function \texttt{UtilIntrinsic2RSM()} and the values are printed out using the \texttt{cat()} function. The plots are generated using \texttt{PlotRsmOperatingCharacteristics()}: this function accepts the parameters \(\mu, \lambda, \nu\) and \texttt{opChType\ =\ "FROC"}. Online help on this function is available \href{https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html}{here}. The code \texttt{plotArr\_FROC\_lambdai\_nui{[}{[}i{]}{]}\ \textless{}-\ ret1\$FROCPlot} saves the plot to the previously created list-array.
+The following code shows how to generate FROC plots using the intrinsic \(\lambda_i = 2\) and \(\nu_i = 0.5\) parameters for 4 values of \(\mu\) contained in the array \texttt{muArr\ \textless{}-\ c(0.01,1,2,4)} (to avoid a divide by zero error the value \(\mu=0\) is not allowed). A \texttt{list} array \texttt{p\_FROC\_lambdai\_nui} \footnote{Notation: \texttt{p\_} stands for a plot array, \texttt{FROC} stands for type of plot (also allowed are \texttt{AFROC} and \texttt{wAFROC}), \texttt{lambdai} stands for \(\lambda_i\) and \texttt{nui} stands for \(\nu_i\) (also allowed are \texttt{lambda} for \(\lambda\) and \texttt{nu} for \(\nu\) ).} is created to hold the four plots. The intrinsic intrinsic \(\lambda_i, \nu_i\) parameters are converted to \(\lambda, \nu\) using the function \texttt{UtilIntrinsic2RSM()}which implements Eqn. \eqref{eq:rsm-pred2-transform}). The parameters are printed using the \texttt{cat()} function. The plots are generated using \texttt{PlotRsmOperatingCharacteristics()}. Online help on this function is \href{https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html}{available}. The code \texttt{p\_FROC\_lambdai\_nui{[}{[}i{]}{]}\ \textless{}-\ ret1\$FROCPlot} saves the plot to the previously created \texttt{list} array.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.0001}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.01}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{)}
 \NormalTok{lambda_i <-}\StringTok{ }\DecValTok{2}
 \NormalTok{nu_i <-}\StringTok{ }\FloatTok{0.5}
-\NormalTok{plotArr_FROC_lambdai_nui <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\KeywordTok{list}\NormalTok{(), }\DataTypeTok{dim =} \KeywordTok{c}\NormalTok{(}\KeywordTok{length}\NormalTok{(muArr)))}
+\NormalTok{p_FROC_lambdai_nui <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\KeywordTok{list}\NormalTok{(), }\DataTypeTok{dim =} \KeywordTok{c}\NormalTok{(}\KeywordTok{length}\NormalTok{(muArr)))}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(muArr)) \{}
 \NormalTok{  mu <-}\StringTok{ }\NormalTok{muArr[i]}
 \NormalTok{  ret <-}\StringTok{ }\KeywordTok{UtilIntrinsic2RSM}\NormalTok{(mu, }\DataTypeTok{lambda_i =}\NormalTok{ lambda_i, }\DataTypeTok{nu_i =}\NormalTok{ nu_i)}
@@ -3443,71 +3462,73 @@ The following code shows how to generate FROC plots using the intrinsic \(\lambd
     \DataTypeTok{nlfRange =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{4}\NormalTok{),}
     \DataTypeTok{llfRange =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)}
 \NormalTok{  )}
-\NormalTok{  plotArr_FROC_lambdai_nui[[i]] <-}\StringTok{ }\NormalTok{ret1}\OperatorTok{$}\NormalTok{FROCPlot }
+\NormalTok{  p_FROC_lambdai_nui[[i]] <-}\StringTok{ }\NormalTok{ret1}\OperatorTok{$}\NormalTok{FROCPlot }
   \CommentTok{#+ ggtitle(paste0("mu = ", as.character(muArr[i])))}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## lambda =  20000 , nu =  4.999875e-05 
+## lambda =  200 , nu =  0.004987521 
 ## lambda =  2 , nu =  0.3934693 
 ## lambda =  1 , nu =  0.6321206 
 ## lambda =  0.5 , nu =  0.8646647
 \end{verbatim}
 
-The parameter values are listed above. Note the very large value (2000) of \(\lambda\) for \(\mu = 0.0001\): this arises from \(\lambda = \lambda_i/\mu\). The corresponding very small value of \(\nu\) (4.999875e-05) follows from \(\nu = 1 - exp\left ( - \mu \nu_i \right )\). The function \texttt{UtilIntrinsic2RSM()} implements Eqn. \eqref{eq:rsm-transform}) which contains both of these transformations from intrinsic to physical RSM parameters.
-
-As \(\mu\) increases \(\lambda\) decreases, subject to the constraint \(\lambda > 0\), and \(\nu\) increases, subject to the constraint \(0 \le \nu \le 1\).
-
-The following code is required to display the 4 plots.
+The following code displays the 4 plots.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{suppressWarnings}\NormalTok{(}\KeywordTok{grid.arrange}\NormalTok{(plotArr_FROC_lambdai_nui[[}\DecValTok{1}\NormalTok{]],}
-\NormalTok{plotArr_FROC_lambdai_nui[[}\DecValTok{2}\NormalTok{]],}
-\NormalTok{plotArr_FROC_lambdai_nui[[}\DecValTok{3}\NormalTok{]],}
-\NormalTok{plotArr_FROC_lambdai_nui[[}\DecValTok{4}\NormalTok{]], }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{))}
+\KeywordTok{suppressWarnings}\NormalTok{(}\KeywordTok{grid.arrange}\NormalTok{(}
+\NormalTok{p_FROC_lambdai_nui[[}\DecValTok{1}\NormalTok{]],}
+\NormalTok{p_FROC_lambdai_nui[[}\DecValTok{2}\NormalTok{]],}
+\NormalTok{p_FROC_lambdai_nui[[}\DecValTok{3}\NormalTok{]],}
+\NormalTok{p_FROC_lambdai_nui[[}\DecValTok{4}\NormalTok{]], }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 \centering
 \includegraphics{08-rsm-predictions2_files/figure-latex/rsm-pred2-froc-plots-lambdai-nui-1.pdf}
-\caption{\label{fig:rsm-pred2-froc-plots-lambdai-nui}RSM-predicted FROC curves using intrinsic parameters \(\lambda_i = 2\) and \(\nu_i = 0.5\). Top left: \(\mu = 0.0001\); Top right: \(\mu = 1\); Bottom left: \(\mu = 2\); Bottom right: \(\mu = 4\). Each plot is \textbf{not} contained within the unit square which makes it impossible to define the AUC as a figure of merit.}
+\caption{\label{fig:rsm-pred2-froc-plots-lambdai-nui}RSM-predicted FROC curves using intrinsic parameters \(\lambda_i = 2\) and \(\nu_i = 0.5\). Top left: \(\mu = 0.01\); Top right: \(\mu = 1\); Bottom left: \(\mu = 2\); Bottom right: \(\mu = 4\). Each plot is \textbf{not} contained within the unit square which makes it impossible to define the FROC-AUC as a figure of merit.}
 \end{figure}
 
-Because \(\lambda = 2000\) defines the end-point abscissa and \(\nu = 5 \times 10^{-5}\) defines the end-point ordinate, the FROC curve hugs the x-axis approaching \((2000, 5 \times 10^{-5})\). This is the chance line FROC for very small \(mu\).
-
 \begin{quote}
-Recall the solar analogy in Chapter \ref{froc-paradigm-solar-analogy}. When lesion contrast is very low the search mechanism has low chance of finding lesions (small LLF) and generates large numbers of NLs in attempting to do so (large NLF).
-\end{quote}
-
-Increasing \(\mu\) to 1 has the effect of decreasing \(\lambda\) to 2 and simultaneously increasing \(\nu\) to 0.393. These define the coordinates of the end-point in the upper-right plot.
-
-\begin{quote}
-Further increases in \(\mu\) decreases the abscissa of the end-point and increases the ordinate - in other words, as \(\mu\) increases, the end-point approaches the top-left corner of the FROC plot.
+\begin{itemize}
+\tightlist
+\item
+  In the top-left plot, because \(\lambda = 200\) defines the end-point abscissa and \(\nu = 5 \times 10^{-3}\) defines the end-point ordinate, the FROC curve hugs the x-axis approaching \((200, 5 \times 10^{-3})\). This is the chance line FROC for very small \(\mu\).
+\item
+  Recall the solar analogy in Section \ref{froc-paradigm-solar-analogy}. When lesion contrast is low the search mechanism has little chance of finding lesions (leading to small LLF) and generates many NLs in attempting to do so (leading to large NLF).
+\item
+  Increasing \(\mu\) to 1 decreases \(\lambda\) to 2 and simultaneously increases \(\nu\) to 0.393. The new end-point \((2,0.393)\) is evident in the upper-right plot.
+\item
+  Further increase in \(\mu\) decreases the abscissa of the end-point and increases the ordinate and the end-point approaches the top-left corner of the FROC plot.
+\item
+  The perfect performance FROC curve is the vertical line connecting the origin to (0,1). It occurs when \(\mu = \infty\).
+\item
+  Other characteristics of FROC curves (e.g., slopes at the origin and the end-point) and differences between intrinsic and physical parameterizations of this curve, are explored in Appendix \ref{rsm-pred2-froc-physical-parameters}.
+\item
+  Since the FROC end-point is not constrained to lie within the unit square it is not possible, using the FROC-AUC, to defined a valid figure of merit.
+\end{itemize}
 \end{quote}
 
 \hypertarget{rsm-pred2-froc-afroc-curve}{%
 \section{RSM-predicted AFROC curve}\label{rsm-pred2-froc-afroc-curve}}
 
-\hypertarget{formulae-1}{%
-\subsection{Formulae}\label{formulae-1}}
-
-The AFROC x-coordinate is the same as the ROC x-coordinate and Eqn. \eqref{eq:rsm-pred-fpf} applies. The AFROC y-coordinate is identical to the FROC y-coordinate and Eqn. \eqref{eq:rsm-pred2-llf} applies. Note that the expression is independent of the number of lesions in the dataset or their distribution (unlike the AFROC the weighted AFROC does depend on the lesion distribution).
+The AFROC x-coordinate is the same as the ROC x-coordinate and Eqn. \eqref{eq:rsm-pred-fpf} applies. The AFROC y-coordinate is identical to the FROC y-coordinate and Eqn. \eqref{eq:rsm-pred2-llf} applies. Therefore:
 
 \begin{equation}
 \left. 
 \begin{aligned}
-\text{FPF}\left (\zeta , \lambda\right ) =& 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )\\
-\text{LLF}\left( \zeta, \mu, \nu \right) =& \nu  \Phi \left ( \mu - \zeta \right )
+&\text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )\\
+&\text{LLF}\left( \zeta, \mu, \nu \right) = \nu  \Phi \left ( \mu - \zeta \right )
 \end{aligned}
 \right \}
 \label{eq:rsm-pred2-afroc}
 \end{equation}
 
-The end-point of the AFROC are:
+The end-point of the AFROC is defined by:
 
 \begin{equation}
 \left. 
@@ -3519,68 +3540,77 @@ The end-point of the AFROC are:
 \label{eq:rsm-pred2-afroc-end-point}
 \end{equation}
 
-It too has the constrained end-point property.
+Like the ROC it has the constrained end-point property (the end-point lies within the unit square).
 
 \hypertarget{afroc-plots-using-intrinsic-lambda_i-nu_i-parameters}{%
 \subsection{\texorpdfstring{AFROC plots using intrinsic \(\lambda_i, \nu_i\) parameters}{AFROC plots using intrinsic \textbackslash lambda\_i, \textbackslash nu\_i parameters}}\label{afroc-plots-using-intrinsic-lambda_i-nu_i-parameters}}
 
-\begin{quote}
-\begin{itemize}
-\tightlist
-\item
-  Shown below are AFROC curves for the same parameter values used to demonstrate the FROC curves shown in Fig. \ref{fig:rsm-pred2-froc-plots-lambdai-nui}.
-\end{itemize}
-\end{quote}
+Shown below are AFROC curves for the same parameter values used to demonstrate the preceding FROC curves.
 
 \begin{figure}
 \centering
 \includegraphics{08-rsm-predictions2_files/figure-latex/rsm-pred2-afroc-plots-lambdai-nui-1.pdf}
-\caption{\label{fig:rsm-pred2-afroc-plots-lambdai-nui}RSM-predicted AFROC curves using intrinsic parameters \(\lambda_i = 2\) and \(\nu_i = 0.5\). Top left: \(\mu = 0.0001\); Top right: \(\mu = 1\); Bottom left: \(\mu = 2\); Bottom right: \(\mu = 4\). TBA TBA. As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.}
+\caption{\label{fig:rsm-pred2-afroc-plots-lambdai-nui}RSM-predicted AFROC curves using intrinsic parameters \(\lambda_i = 2\) and \(\nu_i = 0.5\). Top left: \(\mu = 0.01\); Top right: \(\mu = 1\); Bottom left: \(\mu = 2\); Bottom right: \(\mu = 4\). TBA TBA. As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.}
 \end{figure}
 
 \begin{quote}
 \begin{itemize}
 \tightlist
 \item
-  The top-left panel is the AFROC corresponding to very small \(\mu\). The continuous section extends from (0,0) to (1,0) which has zero AUC, and the dashed line extends from (1,0) to (1,1) which also has zero AUC. This is the chance line AFROC with AUC = 0.
+  Each AFROC curve needs to be completed by a (dashed) straight line extending from the end-point to (1,1). A dashed line is used to distinguish it from the continous curve that is accessible to the observer. The dashed line is inaccessible to the observer (except for the (1,1) point trivially accessed by cumulating all cases) but is necessary to fully account for all decisions (an analogous situation was encountered in connection with the RSM predicted ROC curve).
 \item
-  As \(\mu\) increases the continuous section of the AFROC approaches the upper left corner and AFROC-AUC increases. Since each plot is contained within the unit square it is easy to define the net AUC as a performance metric.
+  Since each plot is contained within the unit square it is easy to define the net AUC as a performance metric.
 \item
-  Each AFROC curve needs to be completed by a straight line extending from the end-point to (1,1). This line is inaccessible to the observer (except for the (1,1) point trivially obtained by cumulating all cases, including those with no marks) but is necessary to fully account for all decisions (an analogous situation was encountered in connection with the RSM predicted ROC curve).
+  The AFROC plot is independent of the number of lesions per case. This is not true for the wAFROC, as will shortly become clear, or the ROC (as the ROC ordinate increases with increasing numbers of lesions per case).
 \item
-  Each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.
+  From Eqn. \eqref{eq:rsm-pred2-froc-end-point} and \eqref{eq:rsm-pred-tpf} it follows that \(\text{TPF}_{\text{max}} \geq \text{LLF}_{max}\) with the equality holding in the limit \(\mu \rightarrow \infty\). The reason is that the ROC gives credit for incorrect localizations on diseased cases, while the AFROC does not. This is the well-known ``right for wrong reason'' argument \citep{bunch1977free}, originally advanced in 1977, against usage of the ROC for localization tasks.
 \item
-  As \(\mu\) increases, the area under the AFROC (including that under the straight line extension) increases monotonically from 0 to 1. This is expected of a well-behaved area measure that can be used as a figure of merit.
+  As \(\mu\) increases the AFROC curve more closely approaches the upper-left corner of the plot and the area under the AFROC curve, including that under the straight line extension, approaches 1, which is the best possible performance.
+\item
+  For \(\mu \to 0\) and fixed \(\lambda_i\) and \(\nu_i\) the operating characteristic approaches the horizontal line extending from the origin to (1,0), which is the continuous section of the curve, followed by the vertical dashed line connecting (1,0) to (1,1); AFROC-AUC approaches zero. In this limit, no lesion is localized and every case has at least one NL mark, representing worst possible performance.
+\item
+  For \(\mu \to \infty\) the accessible portion of the operating characteristic approaches the vertical line connecting (0,0) to (0,1), the area under which is zero. The complete AFROC curve is obtained by connecting this point to (1,1) by the dashed line and in this limit the area under the complete ROC curve approaches 1. As with the ROC, omitting the area under the dashed portion of the curve will result in a severe underestimate of true performance.
+\item
+  wAFROC curves are generally above the AFROC curves, see Section @ref(\#rsm-pred2-wafroc-above-afroc).
+\item
+  Other characteristics of AFROC curves (e.g., slope) and differences between intrinsic and physical parameterizations, are explored in Appendix \ref{rsm-pred2-afroc-physical-parameters}.
 \end{itemize}
 \end{quote}
 
 \hypertarget{rsm-pred2-no-marks}{%
 \subsection{Case of the reader who does not make any marks}\label{rsm-pred2-no-marks}}
 
-Suppose the radiologist does not mark any case. One possibility is that the radiologist did not interpret the cases and simply ``whizzed'' through them. Even though the radiologist is not performing the diagnostic task and the AFROC operating point is stuck at the origin one would still be justified in making the straight-line extension to (1,1) which yields AFROC-AUC = 0.5, which implies finite performance (any value greater than zero for AFROC-AUC implies some degree of expertise). This is because the observer is correct on every non-diseased case (any mark on such a case would be incorrect) and deserves credit for these correct decisions. The situation is somewhat similar to an ROC study in which all cases are diagnosed as non-diseased - the observer is correct on all non-diseased cases and is rewarded with 100 percent specificity.
+Suppose the radiologist does not mark any case. One possibility is that the radiologist did not interpret the cases and simply ``whizzed'' through them. Even though the radiologist is not performing the diagnostic task and the AFROC operating point is stuck at the origin one would still be justified in making the straight-line extension to (1,1) which yields AFROC-AUC = 0.5, which implies finite performance (any value greater than zero for AFROC-AUC implies some degree of expertise). This is because the observer is correct in not marking any non-diseased case (any mark on such a case would be incorrect) and deserves credit for correct decisions on non-diseased cases. The situation is somewhat similar to an ROC study in which all cases are diagnosed as non-diseased - the observer is correct on all non-diseased cases and is rewarded with 100 percent specificity.
 
 \hypertarget{rsm-pred2-wafroc-curve}{%
 \section{RSM-predicted wAFROC curve}\label{rsm-pred2-wafroc-curve}}
 
-\hypertarget{formulae-2}{%
-\subsection{Formulae}\label{formulae-2}}
-
 The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \eqref{eq:rsm-pred-fpf} applies. The wAFROC ordinate is calculated using:
 
 \begin{equation} 
-\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l_2=1}^{L} \text{W}_{Ll_2} \, \text{pmf}_{Bin}\left ( l_2, L, \nu \right )
+\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l_2=1}^{L} \text{W}_{Ll_2} \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )
 \label{eq:rsm-pred2-wllf}
 \end{equation}
 
+This equation is implemented in \texttt{UtilAnalyticalAucsRSM}. Help is available \href{https://dpc10ster.github.io/RJafroc/reference/UtilAnalyticalAucsRSM.html}{here}.
+
+The binomial probability mass function \(\text{PMF}_{B}\) was defined in Eqn. \eqref{eq:rsm-binomial-PMF}. For convenience it is repeated here:
+
+\begin{equation} 
+\text{PMF}_{B}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
+\label{eq:rsm-pred2-PMF-binomial}
+\end{equation}
+
+For L = 1 it reduces to \(\nu\) and
+
 \begin{itemize}
-\item
-  The Binomial probability mass function \(\text{pmf}_{Bin}\) was defined in Eqn. \eqref{eq:rsm-binomial-pmf}.
+\tightlist
 \item
   \(\overrightarrow{f_L}\) is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted \texttt{lesDistr}. For example, the array \texttt{lesDistr\ =\ c(0.1,\ 0.4,\ 0.4,\ 0.1)} defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions.
 \item
   \(L_{max}\) is the maximum number of lesions per case in the dataset. In the preceding example \(L_{max} = 4\).
 \item
-  \(\mathbf{W}\) is the (lower triangular) square matrix with \(L_{max}\) rows and columns containing the weights, where each row sums to unity, see example below (the unused matrix elements are set to \(-\infty\)). The relative lesion weights are denoted in the code \texttt{relWeights}. For example, \texttt{relWeights\ =\ \ c(0.2,\ 0.3,\ 0.1,\ 0.5)} whose meaning is as follows:
+  \(\mathbf{W}\) is the (lower triangular) square matrix with \(L_{max}\) rows and columns containing the weights, where each row (excluding cells set to \(-\infty\)) sums to unity, see example below (the unused matrix elements are set to \(-\infty\)). The relative lesion weights are denoted in the code \texttt{relWeights}. For example, \texttt{relWeights\ =\ \ c(0.2,\ 0.3,\ 0.1,\ 0.5)} whose meaning is as follows:
 
   \begin{itemize}
   \tightlist
@@ -3614,12 +3644,11 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \eqref{eq:rsm-p
 \end{verbatim}
 
 \begin{itemize}
+\tightlist
 \item
-  It is necessary to label the lesions properly so that the correct weights are used. This is done using the \texttt{lesionID} field in the Excel input file. For example, \texttt{lesionID\ =\ 3} for the one with relative weight 0.1. Since \(\mathbf{W}\) is independent of cases, the lesion characteristics (which determine clinical outcome) of \texttt{lesionID\ =\ 1} on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix \(\mathbf{W}\).
+  It is necessary to label the lesions properly so that the correct weights are used. This is done using the \texttt{lesionID} field in the Excel input file. For example, \texttt{lesionID\ =\ 3} for the one with relative weight 0.1. Since \(\mathbf{W}\) is independent of cases, the lesion characteristics (which determine clinical outcome/importance) of \texttt{lesionID\ =\ 1} on cases with one lesion or on cases with 4 lesions are assumed to be identical. In other words this example assumes that the lesions fall into one of 4 groups, with clinical outcomes as in the weights matrix \(\mathbf{W}\).
 \item
-  \(\text{pmf}_{Bin}\left ( l_2, L, \nu \right )\) is the probability mass function (pmf) of the binomial distribution with success probability \(\nu\) and trial size \(L\). \(\text{W}_{Ll_2}\) is the weight of lesion \(l_2\) in cases with \(L\) lesions; for example \(\text{W}_{42} = 0.3\).
-\item
-  Eqn. \eqref{eq:rsm-pred2-wllf} is implemented in \texttt{UtilAnalyticalAucsRSM}.
+  \(\text{PMF}_{B}\left ( l_2, L, \nu \right )\) is the probability mass function (PMF) of the binomial distribution with success probability \(\nu\) and trial size \(L\). \(\text{W}_{Ll_2}\) is the weight of lesion \(l_2\) in cases with \(L\) lesions; for example \(\text{W}_{42} = 0.3\).
 \item
   To generate equal weights set \texttt{relWeights\ =\ 0} as in following code:
 \end{itemize}
@@ -3642,9 +3671,6 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \eqref{eq:rsm-p
 \hypertarget{wafroc-plots-intrinsic-lambda_i-nu_i-parameters}{%
 \subsection{\texorpdfstring{wAFROC plots intrinsic \(\lambda_i, \nu_i\) parameters}{wAFROC plots intrinsic \textbackslash lambda\_i, \textbackslash nu\_i parameters}}\label{wafroc-plots-intrinsic-lambda_i-nu_i-parameters}}
 
-\hypertarget{formulae-3}{%
-\subsection{Formulae}\label{formulae-3}}
-
 \begin{quote}
 \begin{itemize}
 \tightlist
@@ -3657,7 +3683,7 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \eqref{eq:rsm-p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{plotArr_wAFROC_lambdai_nui <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\KeywordTok{list}\NormalTok{(), }\DataTypeTok{dim =} \KeywordTok{c}\NormalTok{(}\KeywordTok{length}\NormalTok{(muArr)))}
+\NormalTok{p_wAFROC_lambdai_nui <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\KeywordTok{list}\NormalTok{(), }\DataTypeTok{dim =} \KeywordTok{c}\NormalTok{(}\KeywordTok{length}\NormalTok{(muArr)))}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(muArr)) \{}
 \NormalTok{  mu <-}\StringTok{ }\NormalTok{muArr[i]}
 \NormalTok{  ret <-}\StringTok{ }\KeywordTok{UtilIntrinsic2RSM}\NormalTok{(mu, }\DataTypeTok{lambda_i =}\NormalTok{ lambda_i, }\DataTypeTok{nu_i =}\NormalTok{ nu_i)}
@@ -3670,7 +3696,7 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \eqref{eq:rsm-p
     \DataTypeTok{OpChType =} \StringTok{"wAFROC"}\NormalTok{,}
     \DataTypeTok{legendPosition  =} \StringTok{"none"}
 \NormalTok{  )}
-\NormalTok{  plotArr_wAFROC_lambdai_nui[[i]] <-}\StringTok{ }\NormalTok{ret1}\OperatorTok{$}\NormalTok{wAFROCPlot }
+\NormalTok{  p_wAFROC_lambdai_nui[[i]] <-}\StringTok{ }\NormalTok{ret1}\OperatorTok{$}\NormalTok{wAFROCPlot }
   \CommentTok{#+ ggtitle(paste0("mu = ", as.character(muArr[i]), }
   \CommentTok{#+ ", AUC = ", format(ret1$aucAFROC, digits = 3)))}
 \NormalTok{\}}
@@ -3680,7 +3706,7 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \eqref{eq:rsm-p
 \begin{figure}
 \centering
 \includegraphics{08-rsm-predictions2_files/figure-latex/rsm-pred2-wafroc-plots-lambdai-nui-1.pdf}
-\caption{\label{fig:rsm-pred2-wafroc-plots-lambdai-nui}RSM-predicted wAFROC curves using intrinsic parameters \(\lambda_i = 2\) and \(\nu_i = 0.5\). Top left: \(\mu = 0.0001\). Top right: \(\mu = 1\). Bottom left: \(\mu = 2\). Bottom right: \(\mu = 4\). As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square making it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.}
+\caption{\label{fig:rsm-pred2-wafroc-plots-lambdai-nui}RSM-predicted wAFROC curves using intrinsic parameters \(\lambda_i = 2\) and \(\nu_i = 0.5\). Top left: \(\mu = 0.01\). Top right: \(\mu = 1\). Bottom left: \(\mu = 2\). Bottom right: \(\mu = 4\). As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square making it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.}
 \end{figure}
 
 \hypertarget{rsm-pred2-discussion-summary}{%
@@ -3694,127 +3720,112 @@ The situation in medical imaging involving search tasks is more realistic. \emph
 
 Attention reverts in the next chapter to the ROC where we show that important aspects of the search mechanism are contained in the position of the end-point.
 
-\hypertarget{appendix}{%
-\section{Appendix}\label{appendix}}
+\hypertarget{rsm-pred2-appendix}{%
+\section{Appendix}\label{rsm-pred2-appendix}}
 
 Unlike the previous plots which used the \emph{intrinsic} parameters \(\lambda_i, \nu_i\), the plots shown here are for arbitrary choices of RSM \emph{physical} parameters \(\lambda, \nu\). This can lead to peculiar predictions arising from physically unreasonable choices of parameters.
 
-\hypertarget{slope-of-the-froc-curve}{%
-\subsection{Slope of the FROC curve}\label{slope-of-the-froc-curve}}
+\hypertarget{rsm-pred2-froc-physical-parameters}{%
+\subsection{Slope of the FROC curve}\label{rsm-pred2-froc-physical-parameters}}
 
-We abbreviate \(\text{NLF} \to f\) and \(\text{LLF} \to g\). These are given by:
-
-\begin{equation}
-\left. 
-\begin{aligned}
-g =& \lambda \Phi\left ( -\zeta \right ) \\
-h =& \nu \Phi\left (\mu -\zeta \right )
-\end{aligned}
-\right \}
-\label{eq:rsm-pred2-froc-gh}
-\end{equation}
-
-Taking the derivatives of these functions with respect to \(\zeta\) the slope of the FROC is given by:
+Expressions for LLF and NLF were given above. Taking the derivatives of these functions with respect to \(\zeta\) the slope of the FROC is given by (in terms of physical parameters):
 
 \begin{equation}
 \left. 
 \begin{aligned}
-\frac{dh}{dg} =& \frac{\nu}{\lambda}\frac{\phi \left ( \mu-\zeta \right )}{\phi\left ( -\zeta \right )} 
+\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( NLF \right)}  
+=& \frac{\nu}{\lambda}  \frac{\phi\left( \mu-\zeta \right)}{\phi\left( -\zeta \right)} \\
 \end{aligned}
 \right \} 
-\label{eq:rsm-pred2-froc-dhdg}
+\label{eq:rsm-pred2-froc-slope1}
 \end{equation}
 
-This expression can be simplified as follows:
+With some simplification this yields:
 
 \begin{equation}
 \left. 
 \begin{aligned}
-\frac{dh}{dg}  
+\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( NLF \right)}  
 =& \frac{\nu}{\lambda}  \frac{\text{exp}\left ( \frac{-\left (\mu-\zeta  \right )^2}{2} \right )}{\text{exp}\left ( \frac{-\zeta^2}{2} \right )} \\
-=& \frac{\nu}{\lambda} \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right ) \\
+=& \frac{\nu}{\lambda} \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)\right ) \\
 \end{aligned}
 \right \} 
-\label{eq:rsm-pred2-froc-slope}
+\label{eq:rsm-pred2-froc-slope2}
 \end{equation}
 
-This expression leads to the following conclusions:
+Converting to intrinsic parameters leads to the following expression for the slope:
+
+\begin{equation}
+\left. 
+\begin{aligned}
+\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( NLF \right)}  
+=& \mu \left( \frac{1 - \text{exp}\left ( - \mu \nu_i \right ) }{\lambda_i} \right) \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right )
+\end{aligned}
+\right \} 
+\label{eq:rsm-pred2-froc-slope3}
+\end{equation}
+
+Eqn. \eqref{eq:rsm-pred2-froc-slope3} leads to the following conclusions (recall \(\mu \ge 0\)):
 
 \begin{quote}
 \begin{itemize}
 \tightlist
 \item
-  The slope of the FROC near the end-point, corresponding to \(\zeta = -\infty\), is zero provided \(\mu \ne 0\).
+  The slope of the FROC near the end-point, corresponding to \(\zeta = -\infty\), is zero.
 \item
   The slope near the origin, corresponding to \(\zeta = +\infty\), is \(\infty\) provided \(\mu \ne 0\).
 \item
-  For \(\mu = 0\) the FROC curve is a straight line extending from the origin to \(\frac{\nu}{\lambda}\).
+  For \(\mu = 0\) the slope of the FROC is zero regardless of the value of \(\zeta\), see top-left panel in Fig. \ref{fig:rsm-pred2-froc-plots-lambdai-nui}.
 \end{itemize}
 \end{quote}
 
-\emph{The last prediction is physically unreasonable.} For zero contrast lesions the observer should not be able to localize any lesions at finite NLF. The unreasonable prediction is occurring because one is feeding the RSM unrealistic parameters. As stated earlier, for zero \(\mu\) one expects \(\lambda = \infty\) and \(\nu = 0\), not \(\lambda = 1\) and \(\nu = 0.2\), as in the top-left panel plot below.
+If instead we had used Eqn. \eqref{eq:rsm-pred2-froc-slope2} and regarded \(\lambda\) and \(\nu\) as independent of \(\mu\), the last conclusion would change to:
 
-In terms of intrinsic parameters, Eqn. \eqref{eq:rsm-pred2-froc-slope} reduces to:
+\begin{quote}
+\begin{itemize}
+\tightlist
+\item
+  For \(\mu = 0\) the slope of the FROC is non-zero and equal to \(\frac{\nu}{\lambda}\). In fact the entire FROC is then predicted to be a straight line extending from the origin to \((\lambda, \nu)\), as in the top-left plot in Fig. \ref{fig:rsm-pred2-froc-plots-lambda-nu} corresponding to \(\mu=0\), \(\lambda = 1\) and \(\nu = 0.2\). This is unreasonable. For zero contrast lesions the observer should not be able to localize any lesions at finite NLF. The unreasonable prediction is occurring because one is using unrealistic values for the RSM parameters. For zero \(\mu\) one expects \(\lambda = \infty\) and \(\nu = 0\), not \(\lambda = 1\) and \(\nu = 0.2\).
+\end{itemize}
+\end{quote}
 
-\begin{equation}
-\left. 
-\begin{aligned}
-\frac{dh}{dg} =& \frac{\nu}{\lambda} \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right ) \\
-=& \mu \left( \frac{1 - \text{exp}\left ( - \mu \nu_i \right ) }{\lambda_i} \right) \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right )\\
-\end{aligned} 
-\right \} 
-\label{eq:rsm-pred2-froc-slope}
-\end{equation}
-
-It is seen using this parameterization that if \(\mu = 0\) the slope of the FROC curve is zero regardless of the value of \(\zeta\), see top-left panel in Fig. \ref{fig:rsm-pred2-froc-plots-lambdai-nui}.
-
-A few FROC plots are shown below which illustrate the statements just made in the previous section.
+FROC plots are shown below which illustrate the statements just made.
 
 \begin{figure}
 \centering
 \includegraphics{08-rsm-predictions2_files/figure-latex/rsm-pred2-froc-plots-lambda-nu-1.pdf}
-\caption{\label{fig:rsm-pred2-froc-plots-lambda-nu}RSM-predicted FROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.0001\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\). The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters \(\lambda =1, \nu = 0.2\) for small \(\mu\).}
+\caption{\label{fig:rsm-pred2-froc-plots-lambda-nu}RSM-predicted FROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.01\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\). The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters \(\lambda =1, \nu = 0.2\) for small \(\mu\).}
 \end{figure}
 
-\hypertarget{slope-of-the-afroc-curve}{%
-\subsection{Slope of the AFROC curve}\label{slope-of-the-afroc-curve}}
+\hypertarget{rsm-pred2-afroc-physical-parameters}{%
+\subsection{Slope of the AFROC curve}\label{rsm-pred2-afroc-physical-parameters}}
 
-We abbreviate:
-
-\begin{equation}
-\left. 
-\begin{aligned}
-g =& 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right ) \\
-h =& \nu  \Phi \left ( \mu - \zeta \right )
-\end{aligned}
-\right \}
-\label{eq:rsm-pred2-afroc-gh}
-\end{equation}
-
-Taking the derivatives of these functions with respect to \(\zeta\) the slope of the AFROC is given by:
+The AFROC ordinate is LLF and the abscissa is FPF. Expressions for both were given above. Taking the derivatives of these functions with respect to \(\zeta\) the slope of the AFROC is given by (henceforth by slope of AFROC I mean the slope of the continuous section of the AFROC):
 
 \begin{equation}
 \left. 
 \begin{aligned}
-\frac{dh}{dg} =& \frac{\nu \phi \left ( \mu-\zeta \right )}{\text{exp}\left( -\lambda \Phi\left(- \zeta \right)\left( \lambda\phi\left( -\zeta \right)  \right) \right)} 
+\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( FPF \right)} 
+=& \frac{\nu \phi \left ( \mu-\zeta \right )}{\text{exp}\left( -\lambda \Phi\left(- \zeta \right)\left( \lambda\phi\left( -\zeta \right)  \right) \right)} 
 \end{aligned}
 \right \} 
 \label{eq:rsm-pred2-afroc-slope}
 \end{equation}
 
-This expression can be simplified as follows:
+Using Eqn. \eqref{eq:rsm-pred2-froc-slope1} the slope of the AFROC can be expressed in terms of the slope of the FROC:
 
 \begin{equation}
 \left. 
 \begin{aligned}
-\frac{dh}{dg} =& \frac{\left( \frac{\nu}{\lambda}  \frac{\phi \left ( \mu-\zeta \right )}{\phi\left ( -\zeta \right )} \right)}{\text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )}\\ 
-\frac{dh}{dg} =& \frac{\text{slope}_{\text{FROC}}}{1-\text{FPF}\left (\zeta , \lambda\right )}\\ 
+\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( FPF \right)} 
+=& \frac{\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( NLF \right)}}{\text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )}\\ 
+=& \frac{\frac{\frac{\partial }{\partial \zeta}\left( LLF \right)}{\frac{\partial }{\partial \zeta}\left( NLF \right)}}{1-FPF\left( \lambda, \zeta \right)}\\ 
 \end{aligned}
 \right \} 
 \label{eq:rsm-pred2-afroc-slope3}
 \end{equation}
 
-Where \(\text{slope}_{\text{FROC}}\) is the slope of the FROC, Eqn. \eqref{eq:rsm-pred2-froc-slope}. Since \(0 \le \text{FPF} \le \text{FPF}_{\text{max}}\) and \(\text{FPF}\) increases as \(\zeta\) decreases, the slope of the AFROC equals that of the FROC at the origin and subsequently increases over that of the FROC as the end-point is approached.
+Since \(0 \le \text{FPF} \le \text{FPF}_{\text{max}}\) and \(\text{FPF}\) increases as \(\zeta\) decreases, the slope of the AFROC equals that of the FROC at the origin and subsequently increases over that of the FROC as the end-point is approached.
 
 This expression leads to the following conclusions:
 
@@ -3822,72 +3833,52 @@ This expression leads to the following conclusions:
 \begin{itemize}
 \tightlist
 \item
-  The slope of the AFROC near the end-point, corresponding to \(\zeta = -\infty\), is zero except when \(\mu \ne 0\) in which case the slope is \(\frac{\nu}{\lambda \left( 1-\text{FPF}_{\text{max}} \right)}\).
+  The slope of the AFROC near the end-point, corresponding to \(\zeta = -\infty\), is zero provided \(\mu \ne 0\).
 \item
-  The slope near the origin, corresponding to \(\zeta = +\infty\), is \(\infty\) except when \(\mu = 0\) in which case the slope is \(\frac{\nu}{\lambda}\).
+  The slope near the origin, corresponding to \(\zeta = +\infty\), is \(\infty\) provided \(\mu \ne 0\).
 \item
-  For \(\mu = 0\) the slope of the AFROC curve increases as the end-point is approached, i.e., the FROC curve is concave up, see top-left panel below. The unreasonable prediction is due to the unreasonable choice of parameters.
+  For \(\mu = 0\) the slope of the AFROC is zero regardless of the value of \(\zeta\), see top-left panel in Fig. \ref{fig:rsm-pred2-afroc-plots-lambdai-nui}.
+\end{itemize}
+\end{quote}
+
+If using physical parameters the last conclusion changes to:
+
+\begin{quote}
+\begin{itemize}
+\tightlist
+\item
+  For \(\mu = 0\) the slope of the AFROC curve increases as the end-point is approached, i.e., the FROC curve is concave up, see top-left panel in Fig. \ref{fig:rsm-pred2-afroc-plots-lambda-nu}. The unreasonable prediction is due to the unreasonable choice of parameters.
 \end{itemize}
 \end{quote}
 
 \begin{figure}
 \centering
 \includegraphics{08-rsm-predictions2_files/figure-latex/rsm-pred2-afroc-plots-lambda-nu-1.pdf}
-\caption{\label{fig:rsm-pred2-afroc-plots-lambda-nu}RSM-predicted AFROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.0001\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\). As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters \(\lambda =1, \nu = 0.2\) for small \(\mu\).}
+\caption{\label{fig:rsm-pred2-afroc-plots-lambda-nu}RSM-predicted AFROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.01\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\). As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters \(\lambda =1, \nu = 0.2\) for small \(\mu\).}
 \end{figure}
 
-The reader should experiment with different values for the parameters to confirm that the following statements are true:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  The AFROC plot is independent of the number of lesions per case. This is not true for the wAFROC, as will shortly become clear, and for the ROC: the ROC ordinate increases with increasing numbers of lesions per case.
-\item
-  From Eqn. \eqref{eq:rsm-pred2-froc-end-point} and \eqref{eq:rsm-pred-tpf} it follows that \(\text{TPF}_{\text{max}} \geq \text{LLF}_{max}\) with the equality holding in the limit \(\mu \rightarrow \infty\). The reason is that the ROC gives credit for incorrect localizations on diseased cases, while the AFROC does not. This is the well-known ``right for wrong reason'' argument \citep{bunch1977free}, originally advanced in 1977, against usage of the ROC for localization tasks.
-\item
-  As \(\mu\) increases the AFROC curve more closely approaches the upper-left corner of the plot and the area under the AFROC curve approaches 1, which is the best possible performance: (a) \(\text{FPF}_{\text{max}}\) decreases and (b) \(\text{LLF}_{\text{max}}\) increases, meaning decreasing numbers of incorrect decisions on non-diseased and diseased cases, respectively.
-\item
-  For \(\mu \to 0, \nu \to 0\) and \(\lambda \to \infty\) the operating characteristic approaches the horizontal line extending from the origin to (1,0), which is the continuous section of the curve, followed by the vertical dashed line connecting (1,0) to (1,1) and AFROC-AUC approaches zero. In this limit, no lesion is localized and every case has at least one NL mark, which implies worst possible performance.
-\item
-  For \(\mu \to \infty\) the accessible portion of the operating characteristic approaches the vertical line connecting (0,0) to (0,1), the area under which is zero. The complete AFROC curve is obtained by connecting this point to (1,1) by the dashed line and in this limit the area under the complete ROC curve approaches 1. As with the ROC, omitting the area under the dashed portion of the curve will result in a severe underestimate of true performance.
-\item
-  As \(\lambda \to 0\) decreases \(\text{FPF}_{\text{max}} \to 0\) while \(\text{LLF}_{\text{max}}\) stays constant, as the latter is independent of \(\lambda\).
-\item
-  As \(\nu\) increases \(\text{FPF}_{\text{max}}\) stays constant while \(\text{LLF}_{\text{max}} \to 1\). In this limit every lesion is found. AFROC-AUC approaches unity.
-\end{enumerate}
-
-TBA
-
-\begin{equation}
-\left. 
-\begin{aligned}
-\frac{dh}{dg} =& \frac{\mu \left( \frac{1 - \text{exp}\left ( - \mu \nu_i \right ) }{\lambda_i} \right) \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right)  \right )}{\text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )}\\ 
-=& \mu \left( \frac{1 - \text{exp}\left ( - \mu \nu_i \right ) }{\lambda_i} \right) \text{exp}\left (-\frac{1}{2} \left( \mu^2 - 2\mu\zeta \right) + \frac{\lambda_i}{\mu} \Phi\left ( -\zeta \right ) \right )\\ 
-\end{aligned}
-\right \} 
-\label{eq:rsm-pred2-afroc-slope4}
-\end{equation}
-
-\hypertarget{wafroc-plots-using-physical-lambda-nu-parameters}{%
-\subsection{\texorpdfstring{wAFROC plots using physical \(\lambda, \nu\) parameters}{wAFROC plots using physical \textbackslash lambda, \textbackslash nu parameters}}\label{wafroc-plots-using-physical-lambda-nu-parameters}}
+\hypertarget{rsm-pred2-wafroc-physical-parameters}{%
+\subsection{\texorpdfstring{wAFROC plots using physical \(\lambda, \nu\) parameters}{wAFROC plots using physical \textbackslash lambda, \textbackslash nu parameters}}\label{rsm-pred2-wafroc-physical-parameters}}
 
 \begin{figure}
 \centering
 \includegraphics{08-rsm-predictions2_files/figure-latex/rsm-pred2-wafroc-plots-lambda-nu-1.pdf}
-\caption{\label{fig:rsm-pred2-wafroc-plots-lambda-nu}RSM-predicted wAFROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.0001\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\). As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.}
+\caption{\label{fig:rsm-pred2-wafroc-plots-lambda-nu}RSM-predicted wAFROC curves using \(\lambda, \nu\) paramterization. Top left: \(\mu = 0.01\), \(\lambda = 1\) and \(\nu = 0.2\). Top right: \(\mu = 1\), \(\lambda = 2\) and \(\nu = 0.5\). Bottom left: \(\mu = 2\), \(\lambda = 3\) and \(\nu = 0.7\). Bottom right: \(\mu = 4\), \(\lambda = 4\) and \(\nu = 0.9\). As \(\mu\) increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.}
 \end{figure}
 
-\hypertarget{wafroc-curves-are-generally-above-the-afroc-curves}{%
-\subsection{wAFROC curves are generally above the AFROC curves}\label{wafroc-curves-are-generally-above-the-afroc-curves}}
+\hypertarget{rsm-pred2-wafroc-above-afroc}{%
+\subsection{wAFROC curves are generally above the AFROC curves}\label{rsm-pred2-wafroc-above-afroc}}
 
 \begin{quote}
-Comparison of the wAFROC plots in Fig. \ref{fig:rsm-pred2-wafroc-plots-lambda-nu} to those in Fig. \ref{fig:rsm-pred2-afroc-plots-lambda-nu}, particularly the bottom-right panels, should convince the reader that the wAFROC curves are slightly above the corresponding AFROC plots. This is tested by the following code:
+Comparison of the wAFROC plots in Fig. \ref{fig:rsm-pred2-wafroc-plots-lambda-nu} to those in Fig. \ref{fig:rsm-pred2-afroc-plots-lambda-nu}, particularly the bottom-right panels, should convince the reader that the wAFROC curves are slightly above the corresponding AFROC plots (this can also be seen, but less obviously so, by comparing the bottom right panels in Fig. \ref{fig:rsm-pred2-wafroc-plots-lambdai-nui} to those in Fig. \ref{fig:rsm-pred2-afroc-plots-lambdai-nui}). This is tested numerically by the following code which also shows how to acces the values:
 \end{quote}
+
+The following code compares wAFROC \texttt{wLLF} values to corresponding AFROC \texttt{LLF} values. If all of the former are greater than or equal to all of the latter, the \texttt{all()} function yields \texttt{TRUE}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{) \{}
-  \KeywordTok{cat}\NormalTok{(i, }\KeywordTok{all}\NormalTok{(plotArr_wAFROC_lambda_nu[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{wLLF }\OperatorTok{>=}\StringTok{ }\NormalTok{plotArr_AFROC_lambda_nu[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{LLF), }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \KeywordTok{cat}\NormalTok{(i, }\KeywordTok{all}\NormalTok{(p_wAFROC_lambda_nu[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{wLLF }\OperatorTok{>=}\StringTok{ }\NormalTok{p_AFROC_lambda_nu[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{LLF), }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -3899,11 +3890,13 @@ Comparison of the wAFROC plots in Fig. \ref{fig:rsm-pred2-wafroc-plots-lambda-nu
 ## 4 TRUE
 \end{verbatim}
 
-The \texttt{FALSE} value corresponds to \(\mu = 0.001\) and the last one corresponds to \(\mu = 4\).
+The \texttt{FALSE} value corresponds to \(\mu = 0.01\), likely a numerical issue associated with commparing very small values. The remaining \(\mu\) values yield \texttt{TRUE}.
 
 \begin{quote}
-If one sets \texttt{relWeights\ =\ 0} thereby ensuring equal weights of all lesions, as in the following code, the wAFROC and AFROC wLLF values become identical.
+If one sets \texttt{relWeights\ =\ 0} thereby ensuring equal weights of all lesions, as in the following code, the AFROC-LLF and wAFROC-wLLF values become identical:
 \end{quote}
+
+In the following code we set \texttt{relWeights\ =\ 0} to ensure equal weighting of all lesions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3924,10 +3917,12 @@ If one sets \texttt{relWeights\ =\ 0} thereby ensuring equal weights of all lesi
 \end{Highlighting}
 \end{Shaded}
 
+For equal weights the following code tests if wAFROC \texttt{wLLF} values are less than or equal to the corresponding AFROC \texttt{LLF} values. (In \texttt{plotArrwAfrocZero} the Zero refers to zero weights).
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{) \{}
-  \KeywordTok{cat}\NormalTok{(i, }\KeywordTok{all}\NormalTok{(plotArrwAfrocZero[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{wLLF }\OperatorTok{<=}\StringTok{ }\NormalTok{plotArr_AFROC_lambda_nu[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{LLF), }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \KeywordTok{cat}\NormalTok{(i, }\KeywordTok{all}\NormalTok{(plotArrwAfrocZero[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{wLLF }\OperatorTok{<=}\StringTok{ }\NormalTok{p_AFROC_lambda_nu[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{LLF), }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -3939,10 +3934,12 @@ If one sets \texttt{relWeights\ =\ 0} thereby ensuring equal weights of all lesi
 ## 4 FALSE
 \end{verbatim}
 
+For equal weights the following code tests if wAFROC \texttt{wLLF} values are greaater than or equal to the corresponding AFROC \texttt{LLF} values.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{) \{}
-  \KeywordTok{cat}\NormalTok{(i, }\KeywordTok{all}\NormalTok{(plotArrwAfrocZero[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{wLLF }\OperatorTok{>=}\StringTok{ }\NormalTok{plotArr_AFROC_lambda_nu[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{LLF), }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \KeywordTok{cat}\NormalTok{(i, }\KeywordTok{all}\NormalTok{(plotArrwAfrocZero[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{wLLF }\OperatorTok{>=}\StringTok{ }\NormalTok{p_AFROC_lambda_nu[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{LLF), }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -3954,22 +3951,7 @@ If one sets \texttt{relWeights\ =\ 0} thereby ensuring equal weights of all lesi
 ## 4 FALSE
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{) \{}
-  \KeywordTok{cat}\NormalTok{(i, }\KeywordTok{all}\NormalTok{(plotArrwAfrocZero[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{wLLF }\OperatorTok{==}\StringTok{ }\NormalTok{plotArr_AFROC_lambda_nu[[i]]}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{LLF), }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 1 FALSE 
-## 2 FALSE 
-## 3 FALSE 
-## 4 FALSE
-\end{verbatim}
-
-Both tests \(\ge\) and \(\le\) yield \texttt{FALSE} implying they are equal (testing for equality does not yield \texttt{TRUE} due to numerical issues).
+Both tests yield \texttt{FALSE} implying the arrays are equal (testing for strict equality does not yield \texttt{TRUE} due to numerical issues).
 
 \hypertarget{rsm-sc}{%
 \chapter{Search and classification performances}\label{rsm-sc}}
@@ -4167,7 +4149,7 @@ The return value \texttt{ret} is a \texttt{list} with the following elements:
 \item
   \texttt{ret\$mu} The mean of the diseased distribution relative to the non-diseased one
 \item
-  \texttt{ret\$lambda} The Poisson parameter describing the distribution of latent NLs per case
+  \texttt{ret\$lambda} The Poissson parameter describing the distribution of latent NLs per case
 \item
   \texttt{ret\$nu} The binomial success probability describing the distribution of latent LLs per diseased case
 \item
@@ -4194,7 +4176,7 @@ The return value \texttt{ret} is a \texttt{list} with the following elements:
 \begin{itemize}
 \tightlist
 \item
-  The following example uses the \emph{first} treatment in \texttt{dataset04}; this is a 5 treatment 4 radiologist FROC dataset \citep{zanca2009evaluation} consisting of 200 cases acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using \texttt{DfBinDataset()}. The number of parameters to be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.
+  The following example uses the \emph{first} treatment in \texttt{dataset04}; this is a 5 treatment 4 radiologist FROC dataset \citep{zanca2009evaluation} consisting of 200 cases acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using \texttt{DfBDataset()}. The number of parameters to be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.
 \end{itemize}
 
 \begin{Shaded}
@@ -4277,14 +4259,14 @@ P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right ) = n! \prod_{
 \label{eq:rsm-fitting-pnvector}
 \end{equation}
 
-Since \(n\) is a random integer, the probability needs to be averaged over its Poisson distribution, i.e., one is calculating the expected value, yielding:
+Since \(n\) is a random integer, the probability needs to be averaged over its Poissson distribution, i.e., one is calculating the expected value, yielding:
 
 \begin{equation}
-P\left ( \overrightarrow{n} \mid \lambda, \overrightarrow{\zeta} \right ) = \text{pmf}_{\text{Poi}} \left ( n, K\lambda \right ) P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right )
+P\left ( \overrightarrow{n} \mid \lambda, \overrightarrow{\zeta} \right ) = \text{PMF}_{\text{Pois}} \left ( n, K\lambda \right ) P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right )
 \label{eq:rsm-fitting-p-n-lambda-prime-zeta}
 \end{equation}
 
-In this expression \(K = K_1 + K_2\) is the total number of cases. \(\text{pmf}_{\text{Poi}} \left ( n, K\lambda \right )\) of the Poisson distribution yields the probability of \(n\) counts from a Poisson distribution with mean \(K\lambda\). The multiplication by the total number of cases is required because one is counting the total number of latent NLs over the entire dataset. The lower limit on \(n\) is needed because \(n\) cannot be smaller than \(N\), the total number of observed NL counts. The left hand side of Eqn. \eqref{eq:rsm-fitting-p-n-lambda-prime-zeta} is the probability of observing the NL counts vector \(\overrightarrow{n}\) as a function of RSM parameters. Not surprisingly, since NLs are sampled from a zero-mean normal distribution, the \(\mu\) parameter does not enter the above expression.
+In this expression \(K = K_1 + K_2\) is the total number of cases. \(\text{PMF}_{\text{Pois}} \left ( n, K\lambda \right )\) of the Poissson distribution yields the probability of \(n\) counts from a Poissson distribution with mean \(K\lambda\). The multiplication by the total number of cases is required because one is counting the total number of latent NLs over the entire dataset. The lower limit on \(n\) is needed because \(n\) cannot be smaller than \(N\), the total number of observed NL counts. The left hand side of Eqn. \eqref{eq:rsm-fitting-p-n-lambda-prime-zeta} is the probability of observing the NL counts vector \(\overrightarrow{n}\) as a function of RSM parameters. Not surprisingly, since NLs are sampled from a zero-mean normal distribution, the \(\mu\) parameter does not enter the above expression.
 
 \hypertarget{rsm-fitting-froc-lls}{%
 \subsection{Contribution of LLs}\label{rsm-fitting-froc-lls}}
@@ -4299,7 +4281,7 @@ P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right ) = l! \p
 The above probability needs to be averaged over the binomial distribution of l:
 
 \begin{equation}
-P\left ( \overrightarrow{l} \mid l, \mu, \nu, \overrightarrow{\zeta} \right ) = \sum_{l=L}^{L_{tot}}\text{pmf}_{\text{Bin}} \left ( l, L_T, \nu \right ) P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right )
+P\left ( \overrightarrow{l} \mid l, \mu, \nu, \overrightarrow{\zeta} \right ) = \sum_{l=L}^{L_{tot}}\text{PMF}_{\text{B}} \left ( l, L_T, \nu \right ) P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right )
 \label{eq:rsm-fitting-p-l-mu-nu-prime-zeta}
 \end{equation}
 

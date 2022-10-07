@@ -91,7 +91,7 @@ The return value `ret` is a `list` with the following elements:
 
 * `ret$mu`	The mean of the diseased distribution relative to the non-diseased one
 
-* `ret$lambda`	The Poisson parameter describing the distribution of latent NLs per case
+* `ret$lambda`	The Poissson parameter describing the distribution of latent NLs per case
 
 * `ret$nu`	The binomial success probability describing the distribution of latent LLs per diseased case
 
@@ -114,7 +114,7 @@ The return value `ret` is a `list` with the following elements:
 
 ## `FitRsmROC` usage example {#rsm-fitting-fitrsmroc-usage-example}
 
-* The following example uses the *first* treatment in `dataset04`; this is a 5 treatment 4 radiologist FROC dataset [@zanca2009evaluation] consisting of 200 cases acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using `DfBinDataset()`. The number of parameters to be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.
+* The following example uses the *first* treatment in `dataset04`; this is a 5 treatment 4 radiologist FROC dataset [@zanca2009evaluation] consisting of 200 cases acquired on a 5-point integer scale, i.e., it is already binned. If not one needs to bin the dataset using `DfBDataset()`. The number of parameters to be estimated increases with the number of bins: for each additional bin one needs to estimate an additional cutoff parameter.
 
 
 
@@ -189,15 +189,15 @@ P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right ) = n! \prod_{
 (\#eq:rsm-fitting-pnvector)
 \end{equation}
 
-Since $n$ is a random integer, the probability needs to be averaged over its Poisson distribution, i.e., one is calculating the expected value, yielding:
+Since $n$ is a random integer, the probability needs to be averaged over its Poissson distribution, i.e., one is calculating the expected value, yielding:
 
 \begin{equation}
-P\left ( \overrightarrow{n} \mid \lambda, \overrightarrow{\zeta} \right ) = \text{pmf}_{\text{Poi}} \left ( n, K\lambda \right ) P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right )
+P\left ( \overrightarrow{n} \mid \lambda, \overrightarrow{\zeta} \right ) = \text{PMF}_{\text{Pois}} \left ( n, K\lambda \right ) P\left ( \overrightarrow{n} \mid n, \overrightarrow{\zeta} \right )
 (\#eq:rsm-fitting-p-n-lambda-prime-zeta)
 \end{equation}
 
 
-In this expression $K = K_1 + K_2$ is the total number of cases. $\text{pmf}_{\text{Poi}} \left ( n, K\lambda \right )$ of the Poisson distribution yields the probability of $n$ counts from a Poisson distribution with mean $K\lambda$. The multiplication by the total number of cases is required because one is counting the total number of latent NLs over the entire dataset. The lower limit on $n$ is needed because $n$ cannot be smaller than $N$, the total number of observed NL counts. The left hand side of Eqn. \@ref(eq:rsm-fitting-p-n-lambda-prime-zeta) is the probability of observing the NL counts vector $\overrightarrow{n}$ as a function of RSM parameters. Not surprisingly, since NLs are sampled from a zero-mean normal distribution, the $\mu$ parameter does not enter the above expression. 
+In this expression $K = K_1 + K_2$ is the total number of cases. $\text{PMF}_{\text{Pois}} \left ( n, K\lambda \right )$ of the Poissson distribution yields the probability of $n$ counts from a Poissson distribution with mean $K\lambda$. The multiplication by the total number of cases is required because one is counting the total number of latent NLs over the entire dataset. The lower limit on $n$ is needed because $n$ cannot be smaller than $N$, the total number of observed NL counts. The left hand side of Eqn. \@ref(eq:rsm-fitting-p-n-lambda-prime-zeta) is the probability of observing the NL counts vector $\overrightarrow{n}$ as a function of RSM parameters. Not surprisingly, since NLs are sampled from a zero-mean normal distribution, the $\mu$ parameter does not enter the above expression. 
 
 ### Contribution of LLs {#rsm-fitting-froc-lls}
 Likewise, define $l$ (a non-negative random integer) the total number of latent LLs in the dataset and the LL counts vector is $\overrightarrow{l} \equiv \left (  l_0, l_1, ...,l_{R_{FROC}}, \right )$. Here $l_r$ is the number of LL counts in FROC ratings bin $r$, $l_0 = l - \sum_{r=1}^{R_{FROC}} l_r = l - L$ is the *known* number of unmarked latent LLs and $L$ is the total number of observed LLs in the dataset. The probability $P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right )$ of observing the LL counts vector $\overrightarrow{l}$ is:
@@ -212,7 +212,7 @@ The above probability needs to be averaged over the binomial distribution of l:
 
 
 \begin{equation}
-P\left ( \overrightarrow{l} \mid l, \mu, \nu, \overrightarrow{\zeta} \right ) = \sum_{l=L}^{L_{tot}}\text{pmf}_{\text{Bin}} \left ( l, L_T, \nu \right ) P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right )
+P\left ( \overrightarrow{l} \mid l, \mu, \nu, \overrightarrow{\zeta} \right ) = \sum_{l=L}^{L_{tot}}\text{PMF}_{\text{B}} \left ( l, L_T, \nu \right ) P\left ( \overrightarrow{l} \mid l, \mu, \overrightarrow{\zeta} \right )
 (\#eq:rsm-fitting-p-l-mu-nu-prime-zeta)
 \end{equation}
 

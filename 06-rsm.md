@@ -32,34 +32,34 @@ The radiological search model (RSM) for the free-response paradigm is a statisti
 
 ## RSM assumptions {#rsm-assumptions}
 
-**Assumption 1:** The number of latent NLs, $l_1 \geq 0$, is sampled from the Poisson distribution $\text{Poi}()$ with mean $\lambda$:
+**Assumption 1:** The number of latent NLs, $l_1 \geq 0$, is sampled from the Poissson distribution $\text{Pois}()$ with mean $\lambda$:
 
 \begin{equation} 
-l_1 \sim \text{Poi}\left ( \lambda \right ) 
+l_1 \sim \text{Pois}\left ( \lambda \right ) 
 (\#eq:rsm-poisson-sampling)
 \end{equation}
 
 
-The probability mass function (pmf) of the Poisson distribution is defined by:
+The probability mass function (PMF) of the Poissson distribution is defined by:
 
 \begin{equation} 
-\text{pmf}_{Poi}\left ( l_1, \lambda \right ) = exp\left ( -\lambda \right ) \frac{{(\lambda)^{l_1}}}{l_1!}
-(\#eq:rsm-poisson-pmf)
+\text{PMF}_{Pois}\left ( l_1, \lambda \right ) = exp\left ( -\lambda \right ) \frac{{(\lambda)^{l_1}}}{l_1!}
+(\#eq:rsm-poisson-PMF)
 \end{equation}
 
-**Assumption 2:** The number of latent LLs, $l_2$, where $0 \leq l_2 \leq L$ (since the number of latent LLs cannot exceed the number of lesions) is sampled from the binomial distribution $\text{Bin}()$ with success probability $\nu$ and trial size $L$: 
+**Assumption 2:** The number of latent LLs, $l_2$, where $0 \leq l_2 \leq L$ (since the number of latent LLs cannot exceed the number of lesions) is sampled from the binomial distribution $\text{B}$ with success probability $\nu$ and trial size $L$: 
 
 
 \begin{equation} 
-l_2 \sim \text{Bin}\left ( L, \nu \right ) 
+l_2 \sim \text{B}\left ( L, \nu \right ) 
 (\#eq:rsm-binomial-sampling)
 \end{equation}
 
-The probability mass function (pmf) of the binomial distribution is defined by:
+The probability mass function (PMF) of the binomial distribution is defined by:
 
 \begin{equation} 
-\text{pmf}_{Bin}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
-(\#eq:rsm-binomial-pmf)
+\text{PMF}_{B}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
+(\#eq:rsm-binomial-PMF)
 \end{equation}
 
 > Collectively $\lambda$ and $\nu$ are termed the *search* parameters.
@@ -92,7 +92,7 @@ The probability density function $\phi\left ( z | \mu \right )$ of the normal di
 > The parameter $\mu$ is termed the *classification* parameter.
 
 
-**Binning rule:** In an FROC study with R ratings, the observer adopts $R$ ordered cutoffs $\zeta_r$, where $\left ( r = 1, 2, ..., R \right )$. Defining  $\zeta_0 = -\infty$ and $\zeta_{R+1} = \infty$, then if $\zeta_r \leq z_{l_ss} < \zeta_{r+1}$ the corresponding latent site is marked and rated in bin $r$, and if $z_{l_ss} \leq \zeta_1$ the site is not marked. ($R$ is the number of FROC bins.)
+**Bning rule:** In an FROC study with R ratings, the observer adopts $R$ ordered cutoffs $\zeta_r$, where $\left ( r = 1, 2, ..., R \right )$. Defining  $\zeta_0 = -\infty$ and $\zeta_{R+1} = \infty$, then if $\zeta_r \leq z_{l_ss} < \zeta_{r+1}$ the corresponding latent site is marked and rated in bin $r$, and if $z_{l_ss} \leq \zeta_1$ the site is not marked. ($R$ is the number of FROC bins.)
 
 **Mark location:** The location of the mark is assumed to be at the exact center of the latent site that exceeded a cutoff and an infinitely precise proximity criterion is adopted. Consequently, there is no confusing a mark made because of a latent LL z-sample exceeding the cutoff with one made because of a latent NL z-sample exceeding the cutoff. Therefore, any mark made because of a latent NL z-sample that satisfies $\zeta_r \leq z_{l_11} < \zeta_{r+1}$ will be scored as a non-lesion localization (NL) and rated $r$. Likewise, any mark made because of a latent LL z-sample that satisfies $\zeta_r \leq z_{l_22} < \zeta_{r+1}$ will be scored as a lesion-localization (LL) and rated $r$. 
 
@@ -127,7 +127,7 @@ The $\lambda$ parameter determines the tendency of the observer to generate late
 I have found it best to illustrate sampling to non-statistics majors with numerical examples. Consider two observers, one with $\lambda = 1$ and the other with $\lambda = 2$. While one cannot predict the exact number of latent NLs on any specific case, the value of $\lambda$ determines the average number of latent NLs. 
  
 
-The following code illustrates Poisson sampling, estimation of the mean and confidence interval for 100 samples from two Poisson distributions. The number of samples has been set to $K_1=100$ (the first argument to `rpois()` is the number of non-diseased cases; the second argument is the value of $\lambda$).
+The following code illustrates Poissson sampling, estimation of the mean and confidence interval for 100 samples from two Poissson distributions. The number of samples has been set to $K_1=100$ (the first argument to `rpois()` is the number of non-diseased cases; the second argument is the value of $\lambda$).
 
 
 
@@ -163,7 +163,7 @@ ret21 <- poisson.exact(sum(samples2),K1)
 ```
 
 
-For reader 1 the estimate of the Poisson parameter (the mean parameter of the Poisson distribution is frequently referred to as the Poisson parameter) is 1.01 with 95% confidence interval (0.823, 1.227); for reader 2 the corresponding estimates are 2.02 and (1.751, 2.319). As the number of cases increases, the confidence interval shrinks. For example, with 10000 cases, i.e., 100 times the value in the previous example:
+For reader 1 the estimate of the Poissson parameter (the mean parameter of the Poissson distribution is frequently referred to as the Poissson parameter) is 1.01 with 95% confidence interval (0.823, 1.227); for reader 2 the corresponding estimates are 2.02 and (1.751, 2.319). As the number of cases increases, the confidence interval shrinks. For example, with 10000 cases, i.e., 100 times the value in the previous example:
 
 
 
@@ -189,7 +189,7 @@ For reader 1 the estimate of the Poisson parameter (the mean parameter of the Po
 ## Rdr. 2: 95% CI =  [ 1.978335 2.033955 ]
 ```
 
-This time for reader 1, the estimate of the Poisson parameter is 1.01 with 95% confidence interval (0.986, 1.025); for reader 2 the corresponding estimate is 2.01 with 95% confidence interval (1.978, 2.034). The width of the confidence interval is inversely proportional to the square root of the number of cases (the example below is for reader 1):
+This time for reader 1, the estimate of the Poissson parameter is 1.01 with 95% confidence interval (0.986, 1.025); for reader 2 the corresponding estimate is 2.01 with 95% confidence interval (1.978, 2.034). The width of the confidence interval is inversely proportional to the square root of the number of cases (the example below is for reader 1):
 
 
 
