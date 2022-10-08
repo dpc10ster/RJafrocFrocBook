@@ -154,6 +154,7 @@ p_FROC_lambdai_nui[[4]], ncol = 2))
 The AFROC x-coordinate is the same as the ROC x-coordinate and Eqn. \@ref(eq:rsm-pred-fpf) applies. The AFROC y-coordinate is identical to the FROC y-coordinate and Eqn. \@ref(eq:rsm-pred2-llf) applies. Therefore: 
 
 
+
 \begin{equation}
 \left. 
 \begin{aligned}
