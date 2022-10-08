@@ -551,6 +551,30 @@ grid.arrange(p_wAFROC_lambda_nu[[1]],p_wAFROC_lambda_nu[[2]],p_wAFROC_lambda_nu[
 ```
 
 
+### ROC curves are generally above the AFROC curves {#rsm-pred2-roc-above-afroc}
+
+
+Using previous equations for the ROC TPF and the AFROC LLF, one has:
+
+
+\begin{equation}
+\left.
+\begin{aligned}
+& \text{TPF}-\text{LLF} \\
+&= 1 - \text{exp}\left ( - \lambda \Phi \left ( - \zeta \right )\right )
+\left ( 1 - \nu \Phi \left ( \mu - \zeta \right ) \right )^L - \nu  \Phi \left ( \mu - \zeta \right )\\
+&= 1 - \nu  \Phi \left ( \mu - \zeta \right )- \text{exp}\left ( - \lambda \Phi \left ( - \zeta \right )\right )
+\left ( 1  - \nu \Phi \left ( \mu - \zeta \right ) \right )^L \\
+&= \left( 1 - \nu  \Phi \left ( \mu - \zeta \right ) \right)\left[ 1 - \text{exp}\left ( - \lambda \Phi \left ( - \zeta \right )\right ) 
+\left ( 1  - \nu \Phi \left ( \mu - \zeta \right ) \right )^{L-1}  \right]\\
+& \ge0
+\end{aligned}
+\right \}
+(\#eq:rsm-pred-roc-above-afroc)
+\end{equation}
+
+
+
 ### wAFROC curves are generally above the AFROC curves {#rsm-pred2-wafroc-above-afroc}
 
 >
