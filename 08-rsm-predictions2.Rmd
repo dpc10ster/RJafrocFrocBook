@@ -246,13 +246,15 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pr
 
 
 
-This equation is implemented in `UtilAnalyticalAucsRSM`. Help is available [here](https://dpc10ster.github.io/RJafroc/reference/UtilAnalyticalAucsRSM.html). A simple R-implementation is shown below:
+This equation is implemented in `UtilAnalyticalAucsRSM`. Help is available [here](https://dpc10ster.github.io/RJafroc/reference/UtilAnalyticalAucsRSM.html). A skeleton code is shown below:
 
 ```
+W <-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)
 wLLF <- 0
 for (L in 1:L_max){
   wLLF_L <- 0
   for (l_2 in 1:L){
+    # W has an extra column that must be skipped, hence W[L, l_2+1]
     wLLF_L <- wLLF_L + W[L, l_2+1] * l_2 * dbinom(l_2, L, nu)
   }
   wLLF <- wLLF +  f_L[L] * wLLF_L
@@ -263,7 +265,8 @@ wLLF <- wLLF * pnorm(mu - zeta)
 
 * $\overrightarrow{f_L}$ is the normalized histogram of the lesion distribution for the diseased cases. In the software it is denoted `lesDistr`. For example, the array `lesDistr = c(0.1, 0.4, 0.4, 0.1)`  defines a dataset in which 10 percent of the cases contain one lesion, 40 percent contain 2 lesions, 40 percent contain 3 lesions and 10 percent contain 4 lesions. 
 * $L_{max}$ is the maximum number of lesions per case in the dataset. In the preceding example $L_{max} = 4$.
-* $\mathbf{W}$ is the (lower triangular) square matrix with $L_{max}$ rows and columns containing the weights, where each row (excluding cells set to $-\infty$) sums to unity, see example below (the unused matrix elements are set to $-\infty$). The relative lesion weights are denoted in the code `relWeights`. For example, `relWeights =  c(0.2, 0.3, 0.1, 0.5)` whose meaning is as follows:
+* $\mathbf{W}$ is the (lower triangular) square weights matrix with $L_{max}$ rows and columns, where each row (excluding cells set to $-\infty$) sums to unity, see example below (the unused matrix elements are set to $-\infty$). In Eqn. \@ref(eq:rsm-pred2-wllf) the index $l_2$ in $W_{Ll_2}$ ranges from 1 to L. 
+* The relative lesion weights are denoted in the code `relWeights`. For example, `relWeights =  c(0.2, 0.3, 0.1, 0.5)` whose meaning is as follows:
     + On cases with one lesion the lesion weight is unity.
     + On cases with two lesions the relative weights are 0.2 and 0.3. Since these do not add up to unity, the actual weights are 0.4 and 0.6. 
     + On cases with three lesions the relative weights are 0.2, 0.3 and 0.1. The actual weights are 1/3, 1/2 and 1/6.
