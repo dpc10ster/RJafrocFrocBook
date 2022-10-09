@@ -12,10 +12,11 @@ library(gridExtra)
 
 
 ## TBA How much finished {#rsm-pred2-how-much-finished}
-70%
-Need to move lambda, nu parameterization to appendix; too distracting
-physical vs. intrinsic; edit chapter 4
+90%
+Work on intro and discussion
 
+<!-- Need to move lambda, nu parameterization to appendix; too distracting -->
+<!-- physical vs. intrinsic; edit chapter 4 -->
 <!-- # lesDistr is needed because one of its elements could be zero -->
 <!-- # e.g. c(0.6, 0.3, 0, 0.1) means there are no diseased cases -->
 <!-- # in the dataset with 3 lesions; I am not quite sure about this  -->
@@ -95,12 +96,12 @@ The predicted FROC, AFROC and wAFROC curves that follow use the intrinsic $\lamb
 ### FROC plots using intrinsic $\lambda_i, \nu_i$ parameters
 
 
-The following code shows how to generate FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.01,1,2,4)` (to avoid a divide by zero error the value $\mu=0$ is not allowed). A `list` array `p_FROC_lambdai_nui` ^[Notation: `p_` stands for a plot array, `FROC` stands for type of plot (also allowed are `AFROC` and `wAFROC`), `lambdai` stands for $\lambda_i$ and `nui` stands for $\nu_i$ (also allowed are `lambda` for $\lambda$ and `nu` for $\nu$ ).] is created to hold the four plots. The intrinsic intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `UtilIntrinsic2RSM()`which implements Eqn. \@ref(eq:rsm-pred2-transform)). The parameters are printed using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`. Online help on this function is [available](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code `p_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created `list` array. 
+The following code shows how to generate FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.1,1,2,4)` (to avoid a divide by zero error the value $\mu=0$ is not allowed). A `list` array `p_FROC_lambdai_nui` ^[Notation: `p_` stands for a plot array, `FROC` stands for type of plot (also allowed are `AFROC` and `wAFROC`), `lambdai` stands for $\lambda_i$ and `nui` stands for $\nu_i$ (also allowed are `lambda` for $\lambda$ and `nu` for $\nu$ ).] is created to hold the four plots. The intrinsic intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `UtilIntrinsic2RSM()`which implements Eqn. \@ref(eq:rsm-pred2-transform)). The parameters are printed using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`. Online help on this function is [available](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code `p_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created `list` array. 
 
 
 
 ```{r rsm-pred2-froc-plots-lambdai-nui-code, echo=T}
-muArr <- c(0.01,1,2,4)
+muArr <- c(0.1,1,2,4)
 lambda_i <- 2
 nu_i <- 0.5
 p_FROC_lambdai_nui <- array(list(), dim = c(length(muArr)))
@@ -109,7 +110,7 @@ for (i in 1:length(muArr)) {
   ret <- UtilIntrinsic2RSM(mu, lambda_i = lambda_i, nu_i = nu_i)
   lambda <- ret$lambda
   nu <- ret$nu
-  cat("lambda = ", lambda, ", nu = ", nu, "\n")
+  cat(sprintf("lambda = %6.3f, nu = %4.3f", lambda, nu), "\n")
   ret1 <- PlotRsmOperatingCharacteristics(
     mu, lambda, nu,
     OpChType = "FROC",
@@ -126,7 +127,7 @@ for (i in 1:length(muArr)) {
 The following code displays the 4 plots.
 
 
-```{r rsm-pred2-froc-plots-lambdai-nui, fig.cap="RSM-predicted FROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.01$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$. Each plot is **not** contained within the unit square which makes it impossible to define the FROC-AUC as a figure of merit.", fig.show='hold', echo=TRUE}
+```{r rsm-pred2-froc-plots-lambdai-nui, fig.cap="RSM-predicted FROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.1$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$. Each plot is **not** contained within the unit square which makes it impossible to define the FROC-AUC as a figure of merit.", fig.show='hold', echo=TRUE}
 suppressWarnings(grid.arrange(
 p_FROC_lambdai_nui[[1]],
 p_FROC_lambdai_nui[[2]],
@@ -137,7 +138,7 @@ p_FROC_lambdai_nui[[4]], ncol = 2))
 
 
 > 
-* In the top-left plot, because $\lambda = 200$ defines the end-point abscissa and $\nu = 5 \times 10^{-3}$ defines the end-point ordinate, the FROC curve hugs the x-axis approaching $(200, 5 \times 10^{-3})$. This is the chance line FROC for very small $\mu$. 
+* In the top-left plot, because $\lambda = 20$ defines the end-point abscissa and $\nu = 4.9 \times 10^{-2}$ defines the end-point ordinate, the FROC curve hugs the x-axis approaching $(20, 4.9 \times 10^{-2})$. This is the chance line FROC for very small $\mu$. 
 * Recall the solar analogy in Section \@ref(froc-paradigm-solar-analogy). When lesion contrast is low the search mechanism has little chance of finding lesions (leading to small LLF) and generates many NLs in attempting to do so (leading to large NLF). 
 * Increasing $\mu$ to 1 decreases $\lambda$ to 2 and simultaneously increases $\nu$ to 0.393. The new end-point $(2,0.393)$ is evident in the upper-right plot. 
 * Further increase in $\mu$ decreases the abscissa of the end-point and increases the ordinate and the end-point approaches the top-left corner of the FROC plot. 
@@ -208,7 +209,7 @@ for (i in 1:length(muArr)) {
 
 
 
-```{r rsm-pred2-afroc-plots-lambdai-nui, fig.cap="RSM-predicted AFROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.01$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$. TBA TBA. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.", fig.show='hold', echo=FALSE}
+```{r rsm-pred2-afroc-plots-lambdai-nui, fig.cap="RSM-predicted AFROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.1$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$. TBA TBA. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit.", fig.show='hold', echo=FALSE}
 grid.arrange(p_AFROC_lambdai_nui[[1]],p_AFROC_lambdai_nui[[2]],p_AFROC_lambdai_nui[[3]],p_AFROC_lambdai_nui[[4]], ncol = 2)
 ```
 
@@ -321,7 +322,7 @@ for (i in 1:length(muArr)) {
 
 
 
-```{r rsm-pred2-wafroc-plots-lambdai-nui, fig.cap="RSM-predicted wAFROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.01$. Top right: $\\mu = 1$. Bottom left: $\\mu = 2$. Bottom right: $\\mu = 4$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square making it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.", fig.show='hold', echo=FALSE}
+```{r rsm-pred2-wafroc-plots-lambdai-nui, fig.cap="RSM-predicted wAFROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.1$. Top right: $\\mu = 1$. Bottom left: $\\mu = 2$. Bottom right: $\\mu = 4$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square making it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.", fig.show='hold', echo=FALSE}
 grid.arrange(p_wAFROC_lambdai_nui[[1]],p_wAFROC_lambdai_nui[[2]],p_wAFROC_lambdai_nui[[3]],p_wAFROC_lambdai_nui[[4]], ncol = 2)
 ```
 
@@ -410,7 +411,7 @@ FROC plots are shown below which illustrate the statements just made.
 
 
 ```{r rsm-pred2-froc-plots-lambda-nu-code, echo=FALSE}
-muArr <- c(0.01,1,2,4)
+muArr <- c(0.1,1,2,4)
 lambdaArr <- c(1,2,3,4)
 nuArr <- c(0.2,0.5,0.7,0.9)
 p_FROC_lambda_nu <- array(list(), dim = c(length(muArr)))
@@ -432,7 +433,7 @@ for (i in 1:length(muArr)) {
 
 
 
-```{r rsm-pred2-froc-plots-lambda-nu, fig.cap="RSM-predicted FROC curves using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.01$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters $\\lambda =1, \\nu = 0.2$ for small $\\mu$.", fig.show='hold', echo=FALSE}
+```{r rsm-pred2-froc-plots-lambda-nu, fig.cap="RSM-predicted FROC curves using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.1$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters $\\lambda =1, \\nu = 0.2$ for small $\\mu$.", fig.show='hold', echo=FALSE}
 grid.arrange(p_FROC_lambda_nu[[1]],p_FROC_lambda_nu[[2]],p_FROC_lambda_nu[[3]],p_FROC_lambda_nu[[4]], ncol = 2)
 ```
 
@@ -513,7 +514,7 @@ for (i in 1:length(lambdaArr)) {
 
 
 
-```{r rsm-pred2-afroc-plots-lambda-nu, fig.cap="RSM-predicted AFROC curves  using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.01$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters $\\lambda =1, \\nu = 0.2$ for small $\\mu$.", fig.show='hold', echo=FALSE}
+```{r rsm-pred2-afroc-plots-lambda-nu, fig.cap="RSM-predicted AFROC curves  using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.1$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters $\\lambda =1, \\nu = 0.2$ for small $\\mu$.", fig.show='hold', echo=FALSE}
 grid.arrange(p_AFROC_lambda_nu[[1]],p_AFROC_lambda_nu[[2]],p_AFROC_lambda_nu[[3]],p_AFROC_lambda_nu[[4]], ncol = 2)
 ```
 
@@ -546,7 +547,7 @@ for (i in 1:length(lambdaArr)) {
 
 
 
-```{r rsm-pred2-wafroc-plots-lambda-nu, fig.cap="RSM-predicted wAFROC curves using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.01$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.", fig.show='hold', echo=FALSE}
+```{r rsm-pred2-wafroc-plots-lambda-nu, fig.cap="RSM-predicted wAFROC curves using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.1$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1) and each plot is contained within the unit square which makes it easy to define the AUC as a figure of merit. Each wAFROC curve is slightly above the corresponding AFROC curve.", fig.show='hold', echo=FALSE}
 grid.arrange(p_wAFROC_lambda_nu[[1]],p_wAFROC_lambda_nu[[2]],p_wAFROC_lambda_nu[[3]],p_wAFROC_lambda_nu[[4]], ncol = 2)
 ```
 
@@ -574,11 +575,19 @@ Using previous equations for the ROC TPF and the AFROC LLF, one has:
 \end{equation}
 
 
+The final inequality follows from the facts that:
 
-### wAFROC curves are generally above the AFROC curves {#rsm-pred2-wafroc-above-afroc}
+* $1 - \nu  \Phi \left ( \mu - \zeta \right )$ is non-negative and less than or equal to one, and so are any integer powers of this quantity.
+* $\text{exp}\left ( - \lambda \Phi \left ( - \zeta \right )\right )$ is non-negative and less than one. 
+* The equality is achieved when $\zeta = +\infty$, i.e., at the origin, or if $\mu = \infty$ (since in either case the $\Phi$ function evaluates to zero).
+
+
+
+### wAFROC curves are generally above the AFROC curves except for small $\mu$ {#rsm-pred2-wafroc-above-afroc}
 
 >
-Comparison of the wAFROC plots in Fig. \@ref(fig:rsm-pred2-wafroc-plots-lambda-nu) to those in Fig. \@ref(fig:rsm-pred2-afroc-plots-lambda-nu), particularly the bottom-right panels, should convince the reader that the wAFROC curves are slightly above the corresponding AFROC plots (this can also be seen, but less obviously so, by comparing the bottom right panels in Fig. \@ref(fig:rsm-pred2-wafroc-plots-lambdai-nui) to those in Fig. \@ref(fig:rsm-pred2-afroc-plots-lambdai-nui)). This is tested numerically by the following code which also shows how to acces the values:
+* Comparison of the wAFROC plots in Fig. \@ref(fig:rsm-pred2-wafroc-plots-lambda-nu) to those in Fig. \@ref(fig:rsm-pred2-afroc-plots-lambda-nu), particularly the bottom-right panels, should convince the reader that the wAFROC curves are slightly above the corresponding AFROC plots (this can also be seen, but less obviously so, by comparing the bottom right panels in Fig. \@ref(fig:rsm-pred2-wafroc-plots-lambdai-nui) to those in Fig. \@ref(fig:rsm-pred2-afroc-plots-lambdai-nui)). This is tested numerically by the following code which also shows how to acces the values:
+* Based on numerical comparisons, such as those coded below, the wAFROC plot is generally slightly above the AFROC plot, as long as $\mu$ is not too small.
 
 
 The following code compares wAFROC `wLLF` values to corresponding AFROC `LLF` values. If all of the former are greater than or equal to all of the latter, the `all()` function yields `TRUE`.
@@ -586,23 +595,25 @@ The following code compares wAFROC `wLLF` values to corresponding AFROC `LLF` va
 
 ```{r echo=T}
 for (i in 1:4) {
-  cat(i, all(p_wAFROC_lambda_nu[[i]]$data$wLLF >= p_AFROC_lambda_nu[[i]]$data$LLF), "\n")
+  comparison <- all(p_wAFROC_lambda_nu[[i]]$data$wLLF 
+                    >= p_AFROC_lambda_nu[[i]]$data$LLF)
+  cat(sprintf("mu = %6.3f, comparison = %5s", muArr[i], comparison), "\n")
 }
 ```
 
 
-The `FALSE` value corresponds to $\mu = 0.01$, likely a numerical issue associated with commparing very small values. The remaining $\mu$ values yield `TRUE`.
+The `FALSE` value corresponds to very small $\mu = 0.1$. The remaining $\mu$ values yield `TRUE`.
 
+
+### Equal weight wAFROC curves are identical to AFROC curves {#rsm-pred2-wafroc-above-afroc-zero-weights}
 
 >
-If one sets `relWeights = 0` thereby ensuring equal weights of all lesions, as in the following code, the AFROC-LLF and wAFROC-wLLF values become identical:
-
-
-In the following code we set `relWeights = 0` to ensure equal weighting of all lesions.
+* If one sets `relWeights = 0` thereby ensuring equal weights of all lesions, as in the following code, the AFROC-LLF and wAFROC-wLLF values become identical:
+* In the following code we set `relWeights = 0` to ensure equal weighting of all lesions. In `p_wAfroc0` the `Zero` refers to zero weights.
 
 
 ```{r , echo=TRUE}
-plotArrwAfrocZero <- array(list(), dim = c(length(lambdaArr)))
+p_wAfroc0 <- array(list(), dim = c(length(lambdaArr)))
 for (i in 1:length(lambdaArr)) {
   mu <- muArr[i]
   lambda <- lambdaArr[i]
@@ -614,33 +625,23 @@ for (i in 1:length(lambdaArr)) {
     OpChType = "wAFROC",
     legendPosition  = "none"
   )
-  plotArrwAfrocZero[[i]] <- ret1$wAFROCPlot
+  p_wAfroc0[[i]] <- ret1$wAFROCPlot
 }
 ```
 
 
 
-For equal weights the following code tests if wAFROC `wLLF` values are less than or equal to the corresponding AFROC `LLF` values. (In `plotArrwAfrocZero` the Zero refers to zero weights).
+In the following code we test numerically, for each value of $\mu$, if *all of the absolute values of the differences between the two arrays* are smaller than $1e-07$.
 
 
 ```{r echo=T}
 for (i in 1:4) {
-  cat(i, all(plotArrwAfrocZero[[i]]$data$wLLF <= p_AFROC_lambda_nu[[i]]$data$LLF), "\n")
+  comparison <- all(abs(p_wAfroc0[[i]]$data$wLLF - 
+                          p_AFROC_lambda_nu[[i]]$data$LLF) < 1e-7)
+  cat(sprintf("mu = %6.3f, comparison = %5s", muArr[i], comparison), "\n")
 }
 ```
 
-
-For equal weights the following code tests if wAFROC `wLLF` values are greaater than or equal to the corresponding AFROC `LLF` values.
-
-
-```{r echo=T}
-for (i in 1:4) {
-  cat(i, all(plotArrwAfrocZero[[i]]$data$wLLF >= p_AFROC_lambda_nu[[i]]$data$LLF), "\n")
-}
-```
-
-
-Both tests yield `FALSE` implying the arrays are equal (testing for strict equality does not yield `TRUE` due to numerical issues).
 
 
 
