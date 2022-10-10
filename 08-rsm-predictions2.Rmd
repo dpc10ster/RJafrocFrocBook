@@ -409,7 +409,7 @@ If instead we had used Eqn. \@ref(eq:rsm-other-predictions-froc-slope2) and rega
 >
 * For $\mu = 0$ the slope of the FROC is non-zero and equal to $\frac{\nu}{\lambda}$. In fact the entire FROC is then predicted to be a straight line extending from the origin to $(\lambda, \nu)$, as in the top-left plot in Fig. \@ref(fig:rsm-other-predictions-froc-plots-lambda-nu) corresponding to $\mu=0$, $\lambda = 1$ and $\nu = 0.2$. This is unreasonable. For zero contrast lesions the observer should not be able to localize any lesions at finite NLF. The unreasonable prediction is occurring because one is using unrealistic values for the RSM parameters. For zero $\mu$ one expects $\lambda = \infty$ and $\nu = 0$, not $\lambda = 1$ and $\nu = 0.2$.
 
-### FROC plots $\lambda, $\nu$ parameterization
+### FROC plots $\lambda, \nu$ parameterization
 
 FROC plots are shown below which illustrate the statements just made.
 
@@ -524,7 +524,7 @@ grid.arrange(p_AFROC_lambda_nu[[1]],p_AFROC_lambda_nu[[2]],p_AFROC_lambda_nu[[3]
 
 
 
-### wAFROC plots $\lambda, $\nu$ parameterization {#rsm-other-predictions-wafroc-physical-parameters}
+### wAFROC plots $\lambda, \nu$ parameterization {#rsm-other-predictions-wafroc-physical-parameters}
 
 
 ```{r rsm-other-predictions-wafroc-plots-lambda-nu-code, echo=FALSE}
@@ -552,10 +552,9 @@ grid.arrange(p_wAFROC_lambda_nu[[1]],p_wAFROC_lambda_nu[[2]],p_wAFROC_lambda_nu[
 
 
 
-### ROC curves are generally above the AFROC curves {#rsm-other-predictions-roc-above-afroc}
+### ROC curves above AFROC curves {#rsm-other-predictions-roc-above-afroc}
 
-
-Using previous equations for the ROC-TPF and the AFROC-LLF, and focusing on cases with $L$ lesions, one has:
+Since they share a common x-axis one can compare the relative position of ROC and AFROC curves for the same parameter values, i.e., does one lie above or below the other. Using previous equations for the ROC-TPF and the AFROC-LLF, and focusing on cases with $L$ lesions, one has:
 
 
 \begin{equation}
@@ -587,3 +586,88 @@ The basic reason why TPF is greater than LLF is that the ROC gives credit for in
 
 
 <!-- Took out relative ordering of wAFROC and AFROC curves; moved to R directory under rsm-predictions -->
+### wAFROC curves above AFROC curves? {#rsm-other-predictions-wafroc-above-afroc}
+
+The following expression follows for the difference between wLLF and LLF:
+
+
+\begin{equation} 
+\left.
+\begin{aligned}
+\text{wLLF}-\text{LLF}
+= \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L  \sum_{l_2=1}^{L} \left( \text{W}_{Ll_2} -\frac{1}{L} \right) \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )
+\end{aligned}
+\right \}
+(\#eq:rsm-other-predictions-wllf-llf)
+\end{equation}
+
+
+Since for equally weighted lesions each lesion weight is $\frac{1}{L}$, this equation shows immediately that for equally weighted lesions the difference is zero:
+
+
+\begin{equation} 
+\left| \text{wLLF} \right|_\text{equal weights} -\text{LLF} = 0
+(\#eq:rsm-other-predictions-wllf-llf-eq-weights)
+\end{equation}
+
+
+
+
+```{r echo=FALSE}
+computeDiff <- function(nu, lesDistr, relWeights) {
+  W <-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)
+  wLLF <- 0
+  for (L in 1:length(lesDistr)){
+    wLLF_L <- 0
+    for (l_2 in 1:L){
+      # W has an extra column that must be skipped, hence W[L, l_2+1]
+      wLLF_L <- wLLF_L + (W[L, l_2+1] - 1/L) * l_2 * dbinom(l_2, L, nu)
+    }
+    wLLF <- wLLF +  lesDistr[L] * wLLF_L
+  }
+  cat(sprintf("nu = %5.1f, diff = %6.2f", nu, wLLF),"\n")
+}
+```
+
+
+
+```{r}
+relWeights =  c(0.01, 0.04, 0.05, 0.9)
+lesDistr <- c(0.1, 0.1, 0.1, 0.7)
+for (nu in seq(0.1,0.9,0.1)) 
+  computeDiff(nu, lesDistr, relWeights)
+```
+
+
+
+
+```{r}
+relWeights =  c(0.9, 0.04, 0.05, 0.01)
+lesDistr <- c(0.1, 0.1, 0.1, 0.7)
+for (nu in seq(0.1,0.9,0.1)) 
+  computeDiff(nu, lesDistr, relWeights)
+```
+
+
+
+```{r}
+relWeights =  c(0.9, 0.04, 0.05, 0.01)
+lesDistr <- c(0.7, 0.1, 0.1, 0.1)
+for (nu in seq(0.1,0.9,0.1)) 
+  computeDiff(nu, lesDistr, relWeights)
+```
+
+
+
+```{r}
+relWeights =  c(0.9, 0.04, 0.05, 0.01)
+lesDistr <- c(0.7, 0.1, 0.1, 0.1)
+for (nu in seq(0.1,0.9,0.1)) 
+  computeDiff(nu, lesDistr, relWeights)
+```
+
+>
+* Comparison of the wAFROC plots in Fig. \@ref(fig:rsm-other-predictions-wafroc-plots-lambda-nu) to those in Fig. \@ref(fig:rsm-other-predictions-afroc-plots-lambda-nu), particularly the bottom-right panels, should convince the reader that the wAFROC curves are slightly above the corresponding AFROC plots (this can also be seen, but less obviously so, by comparing the bottom right panels in Fig. \@ref(fig:rsm-other-predictions-wafroc-plots-lambdai-nui) to those in Fig. \@ref(fig:rsm-other-predictions-afroc-plots-lambdai-nui)). This is tested numerically by the following code which also shows how to acces the values:
+* Based on numerical comparisons, such as those coded below, the wAFROC plot is generally slightly above the AFROC plot, as long as $\mu$ is not too small.
+
+
