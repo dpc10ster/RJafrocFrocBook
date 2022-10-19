@@ -59,25 +59,12 @@ We calculate $\text{LLF}$ as follows:
 \end{equation}
 
 
-The inner summation is over all cases with $L$ lesions; one calculates the expectation value of $l_2$ (the number of lesions that are latent LLs) using the binomial distribution; one divides by $L$ to get the average fraction of LLs on cases with $L$ lesions; finally one performs an average using the distribution $f_L$ of cases with $L$ lesions. Note that the final expression for LLF is independent of the number of lesions in the dataset or their distribution.
+The inner summation is over all cases with $L$ lesions. One calculates the expected value of $l_2$ (the number of lesions that are latent LLs) using the binomial distribution of $l_2$; one divides by $L$ to get the average fraction of LLs on cases with $L$ lesions; one performs an average using the distribution $f_L$ of cases with $L$ lesions; since LL z-samples are distributed as $N(\mu,1)$, one multiplies by the probability that a z-sample from $N(\mu,1)$ exceeds $\zeta$, i.e. by $\Phi(\mu-\zeta)$, to obtain the expected number of *marked* LLs per case, i.e., LLF. Note that the final expression for LLF is independent of the number of lesions in the dataset or their distribution.
 
-The coordinates of the RSM-predicted operating point on the FROC curve for threshold $\zeta$ are given by Eqn. \@ref(eq:rsm-other-predictions-nlf) and Eqn. \@ref(eq:rsm-other-predictions-llf). The FROC curve starts at (0,0) and ends at $\left ( \lambda, \nu \right )$ -- the end-point. The end-point is defined by:  
-
-\begin{equation}
-\left. 
-\begin{aligned}
-\text{NLF}_{\text{max}} =& \lambda \\
-\text{LLF}_{\text{max}} =& \nu\\
-\end{aligned}
-\right \}
-(\#eq:rsm-other-predictions-froc-end-point)
-\end{equation}
+The coordinates of the RSM-predicted operating point on the FROC curve for threshold $\zeta$ are given by Eqn. \@ref(eq:rsm-other-predictions-nlf) and Eqn. \@ref(eq:rsm-other-predictions-llf). The FROC curve starts at (0,0) and ends at $\left ( \lambda, \nu \right )$ -- the end-point. The end-point is not constrained to lie within the unit-square, rather it is *semi-constrained*: while the maximum ordinate, i.e., $\nu$, cannot exceed unity the maximum abscissa, i.e., $\lambda$, can.
 
 
-The end-point is not constrained to lie within the unit-square, rather it is *semi-constrained*: while the maximum ordinate $\nu$ cannot exceed unity the maximum abscissa $\lambda$ can.
-
-
-The clear connection between $\lambda$ and $\nu$ and the FROC end-point is the reason they are called the *physical* RSM parameters. For reasons explained in Section \@ref(froc-paradigm-solar-analogy) the physical parameters are not the best way of parameterizing predicted RSM curves. This is because they hide an inherent $\mu$ dependence - ignoring this can lead to unreasonable choices of RSM parameters as shown in Appendix \@ref(rsm-other-predictions-froc-physical-parameters). Intrinsic parameters were introduced in Section \@ref(rsm-intrinsic-parameters) which take into account this dependence. For convenience the transformations between physical and intrinsic parameters are reproduced here:
+The clear connection between $\lambda$ and $\nu$ and the FROC end-point is the reason they are called the *physical* RSM parameters. For reasons explained in Section \@ref(froc-paradigm-solar-analogy) the physical parameters are not the best way of parameterizing predicted RSM curves: they hide an inherent $\mu$ dependence ignoring which can lead to unreasonable choices of RSM parameters (see Appendix \@ref(rsm-other-predictions-froc-physical-parameters)). Intrinsic parameters $\lambda_i, \nu_i$ were introduced in Section \@ref(rsm-intrinsic-parameters) which are independent of $\mu$. For convenience the transformations between physical and intrinsic parameters are reproduced here:
 
 \begin{equation}
 \left. 
@@ -96,7 +83,7 @@ The predicted FROC, AFROC and wAFROC curves that follow use the intrinsic $\lamb
 ### FROC plots $\lambda_i, \nu_i$ parameterization
 
 
-The following code shows how to generate FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.1,1,2,4)` (to avoid a divide by zero error the value $\mu=0$ is not allowed). A `list` array `p_FROC_lambdai_nui` ^[Notation: `p_` stands for a plot array, `FROC` stands for type of plot (also allowed are `AFROC` and `wAFROC`), `lambdai` stands for $\lambda_i$ and `nui` stands for $\nu_i$ (also allowed are `lambda` for $\lambda$ and `nu` for $\nu$ ).] is created to hold the four plots. The intrinsic intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `UtilIntrinsic2RSM()`which implements Eqn. \@ref(eq:rsm-other-predictions-transform)). The parameters are printed using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`. Online help on this function is [available](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code `p_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created `list` array. 
+The following code generates FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.1,1,2,4)` (to avoid a divide by zero error the value $\mu=0$ is not allowed). A `list` array `p_FROC_lambdai_nui` ^[Notation: `p_` stands for a plot array, `FROC` stands for type of plot (also allowed are `AFROC` and `wAFROC`), `lambdai` stands for $\lambda_i$ and `nui` stands for $\nu_i$ (also allowed are `lambda` for $\lambda$ and `nu` for $\nu$ ).] is created to hold the four plots. The intrinsic intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `UtilIntrinsic2RSM()`which implements Eqn. \@ref(eq:rsm-other-predictions-transform)). The parameters are printed using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`. Online help on this function is [available](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code `p_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created `list` array. 
 
 
 
@@ -127,7 +114,7 @@ for (i in 1:length(muArr)) {
 The following code displays the 4 plots.
 
 
-```{r rsm-other-predictions-froc-plots-lambdai-nui, fig.cap="RSM-predicted FROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.1$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$. Each plot is **not** contained within the unit square which makes it impossible to define the FROC-AUC as a figure of merit.", fig.show='hold', echo=TRUE}
+```{r rsm-other-predictions-froc-plots-lambdai-nui, fig.cap="RSM-predicted FROC curves using intrinsic parameters $\\lambda_i = 2$ and $\\nu_i = 0.5$. Top left: $\\mu = 0.1$; Top right: $\\mu = 1$; Bottom left: $\\mu = 2$; Bottom right: $\\mu = 4$. Some plots are **not** contained within the unit square which makes it impossible to use the FROC-AUC as a figure of merit.", fig.show='hold', echo=TRUE}
 suppressWarnings(grid.arrange(
 p_FROC_lambdai_nui[[1]],
 p_FROC_lambdai_nui[[2]],
@@ -138,8 +125,7 @@ p_FROC_lambdai_nui[[4]], ncol = 2))
 
 
 > 
-* In the top-left plot, because $\lambda = 20$ defines the end-point abscissa and $\nu = 0.049$ defines the end-point ordinate, the FROC curve hugs the x-axis approaching $(20, 0.049)$. This is the chance line FROC for small $\mu$. 
-* Recall the solar analogy in Section \@ref(froc-paradigm-solar-analogy). When lesion contrast is low the search mechanism has little chance of finding lesions (leading to small LLF) and generates many NLs in attempting to do so (leading to large NLF). 
+* In the top-left plot, because $\lambda = 20$ defines the end-point abscissa and $\nu = 0.049$ defines the end-point ordinate, the FROC curve is close to the x-axis ending at $(20, 0.049)$. For small $\mu$ this is close to the chance line FROC. Recall the solar analogy in Section \@ref(froc-paradigm-solar-analogy). When lesion contrast is low the search mechanism has little chance of finding lesions (leading to small LLF) and generates many NLs in attempting to do so (leading to large NLF). 
 * Increasing $\mu$ to 1 decreases $\lambda$ to 2 and simultaneously increases $\nu$ to 0.393. The new end-point $(2,0.393)$ is evident in the upper-right plot. 
 * Further increase in $\mu$ decreases the abscissa of the end-point and increases the ordinate and the end-point approaches the top-left corner of the FROC plot. 
 * The perfect performance FROC curve is the vertical line connecting the origin to (0,1). It occurs when $\mu = \infty$.
