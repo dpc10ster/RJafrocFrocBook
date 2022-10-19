@@ -15,8 +15,6 @@ library(gridExtra)
 90%
 Work on intro and discussion
 
-<!-- Need to move lambda, nu parameterization to appendix; too distracting -->
-<!-- physical vs. intrinsic; edit chapter 4 -->
 <!-- # lesDistr is needed because one of its elements could be zero -->
 <!-- # e.g. c(0.6, 0.3, 0, 0.1) means there are no diseased cases -->
 <!-- # in the dataset with 3 lesions; I am not quite sure about this  -->
@@ -24,7 +22,9 @@ Work on intro and discussion
 
 ## TBA Introduction {#rsm-other-predictions-intro}
 
-The preceding chapter described the ROC curve and related quantities predicted by the radiological search model (RSM). This chapter describes the FROC, AFROC and wAFROC curve predictions. 
+Chapter \@ref(empirical) described ROC, FROC, AFROC and wAFROC empirical plots and illustrated them using an actual FROC dataset. Chapter \@ref(rsm-predictions) described the ROC curve and related quantities predicted by the radiological search model (RSM). This chapter describes the FROC, AFROC and wAFROC curve predictions of the RSM. 
+
+Use of a parametric model allows greater scrutiny of the predictions, for example the limiting slopes of the plots at the origin and the end-point, which is impossible using empirical plots.
 
 
 This chapter brings out the need for using reasonable values of the parameters. 
@@ -83,7 +83,7 @@ The predicted FROC, AFROC and wAFROC curves that follow use the intrinsic $\lamb
 ### FROC plots $\lambda_i, \nu_i$ parameterization
 
 
-The following code generates FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.1,1,2,4)` (to avoid a divide by zero error the value $\mu=0$ is not allowed). A `list` array `p_FROC_lambdai_nui` ^[Notation: `p_` stands for a plot array, `FROC` stands for type of plot (also allowed are `AFROC` and `wAFROC`), `lambdai` stands for $\lambda_i$ and `nui` stands for $\nu_i$ (also allowed are `lambda` for $\lambda$ and `nu` for $\nu$ ).] is created to hold the four plots. The intrinsic intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `UtilIntrinsic2RSM()`which implements Eqn. \@ref(eq:rsm-other-predictions-transform)). The parameters are printed using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`. Online help on this function is [available](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code `p_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created `list` array. 
+The following code generates FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.1,1,2,4)` (to avoid a divide by zero error the value $\mu=0$ is not allowed). A `list` array `p_FROC_lambdai_nui` is created to hold the four plots^[Notation: `p_` stands for a plot array, `FROC` stands for type of plot (also allowed are `AFROC` and `wAFROC`), `lambdai` stands for $\lambda_i$ and `nui` stands for $\nu_i$ (also allowed are `lambda` for $\lambda$ and `nu` for $\nu$ ).]. The intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `UtilIntrinsic2RSM()`which implements Eqn. \@ref(eq:rsm-other-predictions-transform)). The parameters are displayed using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`. Online help on this function is [available](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code-line `p_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created `list` array. 
 
 
 
@@ -138,7 +138,7 @@ p_FROC_lambdai_nui[[4]], ncol = 2))
 ## RSM-predicted AFROC curve {#rsm-other-predictions-froc-afroc-curve}
 
 
-The AFROC x-coordinate is the same as the ROC x-coordinate and Eqn. \@ref(eq:rsm-pred-fpf) applies. The AFROC y-coordinate is identical to the FROC y-coordinate and Eqn. \@ref(eq:rsm-other-predictions-llf) applies. Therefore: 
+The AFROC x-coordinate is the same as the ROC x-coordinate and Eqn. \@ref(eq:rsm-predictions-fpf) applies. The AFROC y-coordinate is identical to the FROC y-coordinate and Eqn. \@ref(eq:rsm-other-predictions-llf) applies. Therefore: 
 
 
 
@@ -222,7 +222,7 @@ Suppose the radiologist does not mark any case. One possibility is that the radi
 ## RSM-predicted wAFROC curve{#rsm-other-predictions-wafroc-curve}
 
 
-The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pred-fpf) applies. The wAFROC ordinate is calculated using:
+The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-predictions-fpf) applies. The wAFROC ordinate is calculated using:
 
 
 \begin{equation} 
@@ -336,7 +336,7 @@ Unlike the previous plots which used the *intrinsic* parameters $\lambda_i, \nu_
 
 ### Slope of the FROC curve {#rsm-other-predictions-froc-physical-parameters}
 
-Expressions for LLF and NLF were given above. Taking the derivatives of these functions with respect to $\zeta$ the slope of the FROC is given by (in terms of physical parameters):
+Expressions for LLF and NLF were given above. Taking the derivatives of these functions with respect to $\zeta$ the slope of the FROC is given by:
 
 
 
@@ -391,14 +391,14 @@ Eqn. \@ref(eq:rsm-other-predictions-froc-slope3) leads to the following conclusi
 * For $\mu = 0$ the slope of the FROC is zero regardless of the value of $\zeta$, see top-left panel in Fig. \@ref(fig:rsm-other-predictions-froc-plots-lambdai-nui). 
 
 
-If instead we had used Eqn. \@ref(eq:rsm-other-predictions-froc-slope2) and regarded $\lambda$ and $\nu$ as independent of $\mu$, the last conclusion would change to: 
+If instead we had used Eqn. \@ref(eq:rsm-other-predictions-froc-slope2) the last conclusion would change to: 
 
 >
-* For $\mu = 0$ the slope of the FROC is non-zero and equal to $\frac{\nu}{\lambda}$. In fact the entire FROC is then predicted to be a straight line extending from the origin to $(\lambda, \nu)$, as in the top-left plot in Fig. \@ref(fig:rsm-other-predictions-froc-plots-lambda-nu) corresponding to $\mu=0$, $\lambda = 1$ and $\nu = 0.2$. This is unreasonable. For zero contrast lesions the observer should not be able to localize any lesions at finite NLF. The unreasonable prediction is occurring because one is using unrealistic values for the RSM parameters. For zero $\mu$ one expects $\lambda = \infty$ and $\nu = 0$, not $\lambda = 1$ and $\nu = 0.2$.
+* For $\mu = 0$ the FROC is predicted to be a straight line extending from the origin to $(\lambda, \nu)$, as in the top-left plot in Fig. \@ref(fig:rsm-other-predictions-froc-plots-lambda-nu) corresponding to $\mu=0$, $\lambda = 1$ and $\nu = 0.2$. This is unreasonable since for zero contrast lesions the observer should not be able to localize any lesions at finite NLF. The unreasonable prediction is occurring because one is using unrealistic values for the RSM parameters. For zero $\mu$ one expects $\lambda = \infty$ and $\nu = 0$, not $\lambda = 1$ and $\nu = 0.2$.
 
 ### FROC plots $\lambda, \nu$ parameterization
 
-FROC plots are shown below which illustrate the statements just made.
+FROC plots are shown below illustrating the statements just made.
 
 
 ```{r rsm-other-predictions-froc-plots-lambda-nu-code, echo=FALSE}
@@ -410,6 +410,7 @@ for (i in 1:length(muArr)) {
   mu <- muArr[i]
   lambda <- lambdaArr[i]
   nu <- nuArr[i]
+  cat(sprintf("mu = %6.3f, lambda = %6.3f, nu = %4.3f", mu, lambda, nu), "\n")
   ret1 <- PlotRsmOperatingCharacteristics(
     mu, lambda, nu,
     OpChType = "FROC",
@@ -424,7 +425,7 @@ for (i in 1:length(muArr)) {
 
 
 
-```{r rsm-other-predictions-froc-plots-lambda-nu, fig.cap="RSM-predicted FROC curves using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.1$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters $\\lambda =1, \\nu = 0.2$ for small $\\mu$.", fig.show='hold', echo=FALSE}
+```{r rsm-other-predictions-froc-plots-lambda-nu, fig.cap="RSM-predicted FROC curves using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.1$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. The top-left panel is an unrealistic prediction because of unrealistic parameters $\\lambda =1, \\nu = 0.2$ for small $\\mu$.", fig.show='hold', echo=FALSE}
 grid.arrange(p_FROC_lambda_nu[[1]],p_FROC_lambda_nu[[2]],p_FROC_lambda_nu[[3]],p_FROC_lambda_nu[[4]], ncol = 2)
 ```
 
@@ -436,7 +437,7 @@ grid.arrange(p_FROC_lambda_nu[[1]],p_FROC_lambda_nu[[2]],p_FROC_lambda_nu[[3]],p
 
 ### Slope of the AFROC curve {#rsm-other-predictions-afroc-physical-parameters}
 
-The AFROC ordinate is LLF and the abscissa is FPF. Expressions for both were given above. Taking the derivatives of these functions with respect to $\zeta$ the slope of the AFROC is given by (henceforth by slope of AFROC I mean the slope of the continuous section of the AFROC):
+The AFROC ordinate is LLF and the abscissa is FPF. Expressions for both were given above. Taking the derivatives of these functions with respect to $\zeta$ the slope of the continuous section of the AFROC is given by:
 
 
 \begin{equation}
@@ -467,9 +468,9 @@ Using Eqn. \@ref(eq:rsm-other-predictions-froc-slope1) the slope of the AFROC ca
 
 
 
-Since $0 \le \text{FPF} \le \text{FPF}_{\text{max}}$ and $\text{FPF}$ increases as $\zeta$ decreases, the slope of the AFROC equals that of the FROC at the origin and subsequently increases over that of the FROC as the end-point is approached. 
+The numerator is the slope of the FROC. Since $0 \le \text{FPF} \le \text{FPF}_{\text{max}}$ and $\text{FPF}$ increases as $\zeta$ decreases, the slope of the AFROC equals that of the FROC at the origin and subsequently increases over that of the FROC as the end-point is approached. 
 
-This expression leads to the following conclusions:
+This expression leads to the following conclusions, if using intrinsic parameterization:
 
 
 >
@@ -494,18 +495,21 @@ for (i in 1:length(lambdaArr)) {
   mu <- muArr[i]
   lambda <- lambdaArr[i]
   nu <- nuArr[i]
+  cat(sprintf("mu = %6.3f, lambda = %6.3f, nu = %4.3f", mu, lambda, nu), "\n")
   ret1 <- PlotRsmOperatingCharacteristics(
     mu, lambda, nu, 
     OpChType = "AFROC",
     legendPosition  = "none"
   )
-  p_AFROC_lambda_nu[[i]] <- ret1$AFROCPlot #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
+  p_AFROC_lambda_nu[[i]] <- ret1$AFROCPlot 
+  #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", 
+  #+ format(ret1$aucAFROC, digits = 3)))
 }
 ```
 
 
 
-```{r rsm-other-predictions-afroc-plots-lambda-nu, fig.cap="RSM-predicted AFROC curves  using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.1$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1). Since each plot is contained within the unit square its AUC is a valid figure of merit. The top-left panel is an unrealistic prediction because of the supplied unrealistic parameters $\\lambda =1, \\nu = 0.2$ for small $\\mu$.", fig.show='hold', echo=FALSE}
+```{r rsm-other-predictions-afroc-plots-lambda-nu, fig.cap="RSM-predicted AFROC curves, $\\lambda, \\nu$ paramterization, using same parameter choices as in preceding plot. Note the unrealistic concave up feature of the top-left plot due to unrealistic choices of parameters.", fig.show='hold', echo=FALSE}
 grid.arrange(p_AFROC_lambda_nu[[1]],p_AFROC_lambda_nu[[2]],p_AFROC_lambda_nu[[3]],p_AFROC_lambda_nu[[4]], ncol = 2)
 ```
 
@@ -520,6 +524,7 @@ for (i in 1:length(lambdaArr)) {
   mu <- muArr[i]
   lambda <- lambdaArr[i]
   nu <- nuArr[i]
+  cat(sprintf("mu = %6.3f, lambda = %6.3f, nu = %4.3f", mu, lambda, nu), "\n")
   ret1 <- PlotRsmOperatingCharacteristics(
     mu, lambda, nu,
     lesDistr = lesDistr,
@@ -527,19 +532,21 @@ for (i in 1:length(lambdaArr)) {
     OpChType = "wAFROC",
     legendPosition  = "none"
   )
-  p_wAFROC_lambda_nu[[i]] <- ret1$wAFROCPlot #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucAFROC, digits = 3)))
+  p_wAFROC_lambda_nu[[i]] <- ret1$wAFROCPlot 
+  #+ ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", 
+  #+ format(ret1$aucAFROC, digits = 3)))
 }
 ```
 
 
 
-```{r rsm-other-predictions-wafroc-plots-lambda-nu, fig.cap="RSM-predicted wAFROC curves using $\\lambda, \\nu$ paramterization. Top left: $\\mu = 0.1$, $\\lambda = 1$ and $\\nu = 0.2$. Top right: $\\mu = 1$, $\\lambda = 2$ and $\\nu = 0.5$. Bottom left: $\\mu = 2$, $\\lambda = 3$ and $\\nu = 0.7$. Bottom right: $\\mu = 4$, $\\lambda = 4$ and $\\nu = 0.9$. As $\\mu$ increases the curve approaches the top-left corner. Each curve includes an inaccessible dashed linear extension to (1,1). Since each plot is contained within the unit square its AUC is a valid figure of merit.", fig.show='hold', echo=FALSE}
+```{r rsm-other-predictions-wafroc-plots-lambda-nu, fig.cap="RSM-predicted wAFROC curves, $\\lambda, \\nu$ paramterization, using same parameter choices as in preceding plot. Note the unrealistic concave up feature of the top-left plot due to unrealistic choices of parameters.", fig.show='hold', echo=FALSE}
 grid.arrange(p_wAFROC_lambda_nu[[1]],p_wAFROC_lambda_nu[[2]],p_wAFROC_lambda_nu[[3]],p_wAFROC_lambda_nu[[4]], ncol = 2)
 ```
 
 
 
-### ROC curves above AFROC curves {#rsm-other-predictions-roc-above-afroc}
+### ROC curves are above AFROC curves {#rsm-other-predictions-roc-above-afroc}
 
 Since they share a common x-axis one can compare the relative position of ROC and AFROC curves for the same parameter values, i.e., does one lie above or below the other. Using previous equations for the ROC-TPF and the AFROC-LLF, and focusing on cases with $L$ lesions, one has:
 
@@ -557,7 +564,7 @@ Since they share a common x-axis one can compare the relative position of ROC an
 & \ge0
 \end{aligned}
 \right \}
-(\#eq:rsm-pred-roc-above-afroc)
+(\#eq:rsm-predictions-roc-above-afroc)
 \end{equation}
 
 
@@ -573,7 +580,7 @@ The basic reason why TPF is greater than LLF is that the ROC gives credit for in
 
 
 <!-- Took out relative ordering of wAFROC and AFROC curves; moved to R directory under rsm-predictions -->
-### wAFROC curves above AFROC curves? {#rsm-other-predictions-wafroc-above-afroc}
+### Are wAFROC curves above AFROC curves? {#rsm-other-predictions-wafroc-above-afroc}
 
 The following expression follows for the difference between wLLF and LLF:
 
@@ -589,7 +596,7 @@ The following expression follows for the difference between wLLF and LLF:
 \end{equation}
 
 
-Since for equally weighted lesions each lesion weight is $\frac{1}{L}$, this equation shows immediately that for equally weighted lesions the difference is zero:
+Since for equally weighted lesions each lesion weight is $\frac{1}{L}$, this equation shows immediately that for equally weighted lesions the difference is zero, i.e., *for equally weighted lesions the wAFROC and the AFROC are identical*:
 
 
 \begin{equation} 
@@ -598,60 +605,63 @@ Since for equally weighted lesions each lesion weight is $\frac{1}{L}$, this equ
 \end{equation}
 
 
+In the general case the two curves are not identical although, for realistic datasets, the differences tend to be small. For cases with L lesions the probability mass function of the binomial distribution is peaked near $l_2 =L\nu$. If the weights array $W_{Ll_2}$ is likewise peaked near $l_2 =L\nu$ the difference tends to be positive, i.e., the wAFROC is above the AFROC. Otherwise the difference can be negative. 
+
+<!-- These statements are illustrated below.  -->
 
 
-```{r echo=FALSE}
-computeDiff <- function(nu, lesDistr, relWeights) {
-  W <-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)
-  wLLF <- 0
-  for (L in 1:length(lesDistr)){
-    wLLF_L <- 0
-    for (l_2 in 1:L){
-      # W has an extra column that must be skipped, hence W[L, l_2+1]
-      wLLF_L <- wLLF_L + (W[L, l_2+1] - 1/L) * l_2 * dbinom(l_2, L, nu)
-    }
-    wLLF <- wLLF +  lesDistr[L] * wLLF_L
-  }
-  cat(sprintf("nu = %5.1f, diff = %6.2f", nu, wLLF),"\n")
-}
-```
-
-
-
-```{r}
-relWeights =  c(0.01, 0.04, 0.05, 0.9)
-lesDistr <- c(0.1, 0.1, 0.1, 0.7)
-for (nu in seq(0.1,0.9,0.1)) 
-  computeDiff(nu, lesDistr, relWeights)
-```
+<!-- ```{r echo=FALSE} -->
+<!-- computeDiff <- function(nu, lesDistr, relWeights) { -->
+<!--   W <-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights) -->
+<!--   wLLF <- 0 -->
+<!--   for (L in 1:length(lesDistr)){ -->
+<!--     wLLF_L <- 0 -->
+<!--     for (l_2 in 1:L){ -->
+<!--       # W has an extra column that must be skipped, hence W[L, l_2+1] -->
+<!--       wLLF_L <- wLLF_L + (W[L, l_2+1] - 1/L) * l_2 * dbinom(l_2, L, nu) -->
+<!--     } -->
+<!--     wLLF <- wLLF +  lesDistr[L] * wLLF_L -->
+<!--   } -->
+<!--   cat(sprintf("nu = %5.1f, diff = %6.2f", nu, wLLF),"\n") -->
+<!-- } -->
+<!-- ``` -->
 
 
 
-
-```{r}
-relWeights =  c(0.9, 0.04, 0.05, 0.01)
-lesDistr <- c(0.1, 0.1, 0.1, 0.7)
-for (nu in seq(0.1,0.9,0.1)) 
-  computeDiff(nu, lesDistr, relWeights)
-```
-
-
-
-```{r}
-relWeights =  c(0.9, 0.04, 0.05, 0.01)
-lesDistr <- c(0.7, 0.1, 0.1, 0.1)
-for (nu in seq(0.1,0.9,0.1)) 
-  computeDiff(nu, lesDistr, relWeights)
-```
+<!-- ```{r} -->
+<!-- relWeights =  c(0.01, 0.04, 0.05, 0.9) -->
+<!-- lesDistr <- c(0.1, 0.1, 0.1, 0.7) -->
+<!-- for (nu in seq(0.1,0.9,0.1))  -->
+<!--   computeDiff(nu, lesDistr, relWeights) -->
+<!-- ``` -->
 
 
 
-```{r}
-relWeights =  c(0.9, 0.04, 0.05, 0.01)
-lesDistr <- c(0.7, 0.1, 0.1, 0.1)
-for (nu in seq(0.1,0.9,0.1)) 
-  computeDiff(nu, lesDistr, relWeights)
-```
+
+<!-- ```{r} -->
+<!-- relWeights =  c(0.9, 0.04, 0.05, 0.01) -->
+<!-- lesDistr <- c(0.1, 0.1, 0.1, 0.7) -->
+<!-- for (nu in seq(0.1,0.9,0.1))  -->
+<!--   computeDiff(nu, lesDistr, relWeights) -->
+<!-- ``` -->
+
+
+
+<!-- ```{r} -->
+<!-- relWeights =  c(0.9, 0.04, 0.05, 0.01) -->
+<!-- lesDistr <- c(0.7, 0.1, 0.1, 0.1) -->
+<!-- for (nu in seq(0.1,0.9,0.1))  -->
+<!--   computeDiff(nu, lesDistr, relWeights) -->
+<!-- ``` -->
+
+
+
+<!-- ```{r} -->
+<!-- relWeights =  c(0.9, 0.04, 0.05, 0.01) -->
+<!-- lesDistr <- c(0.7, 0.1, 0.1, 0.1) -->
+<!-- for (nu in seq(0.1,0.9,0.1))  -->
+<!--   computeDiff(nu, lesDistr, relWeights) -->
+<!-- ``` -->
 
 
 

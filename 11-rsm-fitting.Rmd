@@ -35,7 +35,7 @@ The ability to fit RSM to clinical datasets is critical to sample size estimatio
 
 
 ## ROC Likelihood function {#rsm-fitting-roc-likelihood}
-In Chapter \@ref(rsm-pred) expressions were derived for the coordinates (x,y) of the ROC curve predicted by the RSM, see Eqn. \@ref(eq:rsm-pred-fpf) and Eqn. \@ref(eq:rsm-pred-tpf2). 
+In Chapter \@ref(rsm-predictions) expressions were derived for the coordinates (x,y) of the ROC curve predicted by the RSM, see Eqn. \@ref(eq:rsm-predictions-fpf) and Eqn. \@ref(eq:rsm-predictions-tpf2). 
 
 \begin{equation}
 x \equiv \text{FPF}\left (\zeta , \lambda\right ) = 1 - \text{exp}\left ( -\lambda \Phi\left ( -\zeta \right )  \right )
