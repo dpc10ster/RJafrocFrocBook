@@ -13,7 +13,9 @@
 
 ## TBA Introduction {#rsm-sc-intro}
 
-The preceding chapter described the radiological search model (RSM) for FROC data. This chapter describes predictions of the RSM and how they compare with evidence. The starting point is the inferred ROC curve. While mathematically rather complicated, the results are important because they are needed to derive the ROC-likelihood function, which is used to estimate RSM parameters from ROC data in TBA Chapter 19. The preceding sentence should lead the inquisitive reader to the question: *since the ROC paradigm ignores search, how is it possible to derive parameters of a model of search from the ROC curve?* The answer is that the *shape* of the ROC curve contains information about the RSM parameters. It is fundamentally different from predictions of all conventional ROC models: binormal [@RN1081], contaminated binormal model [@RN1501], bigamma [@RN100] and proper ROC [@metz1999proper], namely it has a *constrained end-point property*, while all other models predict that the *end-point*, namely the uppermost non-trivial point on the ROC, reached at infinitely low reporting threshold, is (1,1), while the RSM predicts it does not reach (1,1). The nature of search is such that the limiting end-point is constrained to be below and to the left of (1,1). This key difference, allows one to estimate search parameters from ROC data. Next, the RSM is used to predict FROC and AFROC curves. Two following sections show how search performance and lesion-classification performance can be quantified from the location of the ROC end-point. Search performance is the ability to find lesions while avoiding finding non-lesions, and lesion-classification performance is the ability, having found a suspicious region, to correctly classify it; if classified as a NL it would not be marked (in the mind of the observer every mark is a potential LL, albeit at different confidence levels). Note that lesion-classification is different from classification between diseased and non-diseased cases, which is measured by the ROC-AUC. Based on the ROC/FROC/AFROC curve predictions of the RSM, a comparison is presented between area measures that can be calculated from FROC data, and this leads to an important conclusion, namely the FROC curve is a poor descriptor of search performance and that the AFROC/wAFROC are preferred. This will come as a surprise (shock?) to most researchers somewhat familiar with this field, since the overwhelming majority of users of FROC methods, particularly in CAD, have relied on the FROC curve. Finally, evidence for the validity of the RSM is presented. 
+The preceding two chapters described the ROC and other predictions of the radiological search model (RSM). 
+
+This chapter describes two key performance metrics that can be derived from the predicted ROC curve and related to RSM parameters. These are search and classification performances. 
 
 ## Location of ROC end-point {#rsm-sc-end-point}
 
@@ -22,8 +24,8 @@ From the previous chapter the coordinates of the end-point are given by:
 \begin{equation}
 \left. 
 \begin{aligned}
-&\text{FPF}_{\text{max}} = 1 - exp\left (\lambda \right ) \\
-&\text{TPF}_{\text{max}} \left ( \mu, \lambda, \nu, L \right ) = 1 - \sum_{L=1}^{L_{max}}f_L\text{exp} \left ( - \lambda \right ) \left ( 1 - \nu \right )^L
+&\text{FPF}_{\text{max}} = 1 - \text{exp}\left (\lambda \right ) \\
+&\text{TPF}_{\text{max}} = 1 - \text{exp} \left ( - \lambda \right )\sum_{L=1}^{L_{max}}f_L \left ( 1 - \nu \right )^L
 \end{aligned}
 \right \}
 (\#eq:rsm-sc-FPF-TPF-max)
@@ -34,18 +36,30 @@ From the previous chapter the coordinates of the end-point are given by:
 
 ## Quantifying search performance {#rsm-sc-quantifying}
 
-Qualitatively, search performance is the ability to find lesions while not finding non-lesions. To arrive at a quantitative definition of search performance consider the location of the ROC end-point. 
+Qualitatively, search performance is the ability to find lesions while not finding non-lesions. To arrive at a quantitative definition of search performance consider the location of the ROC end-point defined above. 
 
-In Fig. \@ref(fig:rsm-sc-performance-from-roc-curve), plot (a) is a typical ROC curve predicted by models that do not account for search. The end-point is at (1,1), the filled circle, i.e., by adopting a sufficiently low reporting threshold the observer can continuously move the operating point to (1,1). 
+In Fig. \@ref(fig:rsm-sc-performance-from-roc-curve), plot (a) is a typical ROC curve predicted by models that do not account for search, specifically the biormal model. The end-point is at (1,1), the filled circle, i.e., by adopting a sufficiently low reporting threshold the observer can continuously move the operating point to (1,1). The curve labeled (b) is a typical RSM-predicted ROC curve. The end-point, the filled square, is downwards and left shifted relative to (1,1). The chance diagonal is labeled c. 
+
+The specific parameter values are shown next:
+
+
+
+```r
+a <- 2; b <- 1 # binormal model
+mu <- 2; lambda_i <- 2; nu_i <- 1 # rsm
+lesDistr <- c(1) # one lesion per dis. case
+```
+
+
 
 
 <div class="figure">
-<img src="10-rsm-search_files/figure-html/rsm-sc-performance-from-roc-curve-1.png" alt="Relation of search performance to the end-point of the ROC curve. Plot (a) is for conventional ROC models while plot (b) is for the RSM." width="672" />
-<p class="caption">(\#fig:rsm-sc-performance-from-roc-curve)Relation of search performance to the end-point of the ROC curve. Plot (a) is for conventional ROC models while plot (b) is for the RSM.</p>
+<img src="10-rsm-search_files/figure-html/rsm-sc-performance-from-roc-curve-1.png" alt="Relation of search performance to the end-point of the ROC curve. Plot (a) is using the binormal model while plot (b) is using a RSM predicted curve. The chance diagonal is labeled c. The filled square is the end-point of the RSM predicted curve while the filled dot is the end-point of the binormal predicted curve. The distance of the filled square from the chance diagonal, labeled $d_S$, is a measure of search performance." width="672" />
+<p class="caption">(\#fig:rsm-sc-performance-from-roc-curve)Relation of search performance to the end-point of the ROC curve. Plot (a) is using the binormal model while plot (b) is using a RSM predicted curve. The chance diagonal is labeled c. The filled square is the end-point of the RSM predicted curve while the filled dot is the end-point of the binormal predicted curve. The distance of the filled square from the chance diagonal, labeled $d_S$, is a measure of search performance.</p>
 </div>
 
 
-The curve labeled (b) is a typical RSM-predicted ROC curve. The end-point is down-left shifted relative to (1,1), the filled square. The observer cannot move the operating point continuously to (1,1). *The location of the end-point, in particular how far it is from (1,1), measures search performance.* Higher search performance is characterized by the end-point moving upwards and to the left, in the limit to (0,1), corresponding to perfect search performance. 
+*The location of the end-point, in particular how far it is from (1,1), is a measure of search performance.* Higher search performance is characterized by the end-point moving upwards and to the left, in the limit to (0,1), corresponding to perfect search performance. It is more convenient to use a distance measure as defined next:
 
 
 **Definition**: The perpendicular distance, $d_S$, from the end-point to the chance diagonal, plot (c), multiplied by $\sqrt{2}$, is a quantitative measure of search performance $S$.  
@@ -71,7 +85,9 @@ S=\exp\left ( -\lambda \right )\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu  \r
 Eqn. \@ref(eq:rsm-sc-search-performance) shows search performance is the product of two terms: the probability $\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu  \right )^L  \right )$ of finding at least one lesion times the probability $\exp\left ( -\lambda \right )$ of not finding non-lesions. This puts into mathematical form the qualitative definition of search performance as the ability to find lesions while avoiding finding non-lesions. 
 
 
-Example: consider $\lambda = 0$ and $\nu = 1$. The end-point is (0,1). The perpendicular distance from (0,1) to the chance diagonal is $\frac{1}{\sqrt{2}}$, which multiplied by $\sqrt{2}$ yields $S = 1$. The same value is obtained using Eqn. \@ref(eq:rsm-sc-search-performance). Since no NLs are found and all lesions are found, the observer never makes a mistake. One cannot improve over perfect performance: the observer simply marks all suspiciuos regions found by search regardless of their z-samples. 
+Example: consider $\lambda = 0$ and $\nu = 1$. (In terms of intrinsic parameters this occurs when $\mu = \infty$.) The end-point is (0,1). The perpendicular distance from (0,1) to the chance diagonal is $\frac{1}{\sqrt{2}}$, which multiplied by $\sqrt{2}$ yields $S = 1$. The same value is obtained using Eqn. \@ref(eq:rsm-sc-search-performance). Since no NLs are found and all lesions are found, the observer never makes a mistake. One cannot improve over perfect performance and the observer does not need to use the z-sample information: he simply marks all suspicious regions found by search regardless of their z-samples. 
+
+Search performance ranges from zero to one: $0 \le S \le 1$. The lower limit is reached if $\lambda = \infty$ or $\nu = 0$. (In terms of intrinsic parameters this occurs when $\mu = 0$.)
 
 
 ## Quantifying lesion-classification performance {#rsm-sc-performance}
@@ -85,7 +101,7 @@ C=\Phi\left ( \frac{\mu}{\sqrt{2}} \right )
 \end{equation}
 
 
-Since $\mu \ge 0$ it follows that $C$ ranges from 0.5 to 1.
+Since $\mu \ge 0$ it follows that $C$ ranges from 0.5 to 1: $0.5 \le C \le 1$. The lower limit occurs when $\mu = 0$ and the upper limit occurs when $\mu = \infty$.
 
 
 ## TBA Lesion-classification performance and the 2AFC LKE task  {#rsm-sc-search-classification-2afc-lke}

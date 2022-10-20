@@ -5,6 +5,7 @@
 
 
 ## TBA How much finished {#rsm-3-fits-how-much-finished}
+
 85%
 
 
@@ -23,9 +24,9 @@ This chapter compares these methods by fitting the to 14 multiple-treatment mult
 Both RSM and CBM are implemented in `RJafroc`. `PROPROC` is implemented in Windows software ^[OR DBM-MRMC 2.5, Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.] available [here](https://perception.lab.uiowa.edu/OR-DBM-MRMC-252), last accessed 1/4/21.
 
 
-## Application to two datasets {#rsm-3-fits-applications}
+## Application to datasets {#rsm-3-fits-applications}
 
-The RSM, PROPROC and CBM algorithms were applied to the 14 datasets described in Chapter \@ref(datasets). 
+The RSM, PROPROC and CBM algorithms were applied to datasets described in Chapter \@ref(datasets). 
 
 
 
@@ -39,7 +40,7 @@ datasetNames <-
 ```
 
 
-In the following we focus on just two ROC datasets which have been widely used in the literature to illustrate ROC methodological advances, namely the Van Dyke (VD) and the Franken (FR) datasets.
+In the following we focus on just two ROC datasets (these have been widely used in the literature to illustrate ROC analysis methodology advances) namely the Van Dyke (VD) and the Franken (FR) datasets.
 
 
 
