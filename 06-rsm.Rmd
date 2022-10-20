@@ -8,8 +8,9 @@ library(exactci)
 
 
 ## How much finished {#rsm-how-much-finished}
+
 99%
-Switch to $\mu$, $\lambda$ and $\nu$ and do away with prime parameter? Yes
+<!-- Switch to $\mu$, $\lambda$ and $\nu$ and do away with prime parameter? Yes -->
 
 
 
@@ -294,16 +295,19 @@ Since it determines $\nu$, the $\nu_i$ parameter can be considered as the intrin
 \end{equation}
 
 
-According to Eqn. \@ref(eq:rsm-transform), as $\mu \rightarrow \infty$, $\nu \rightarrow 1$ and conversely, as $\mu \rightarrow 0$, $\nu \rightarrow 0$. The dependence of $\nu$ on $\mu$ is consistent with the fact that higher contrast lesions are easier to find. A non-expert is expected to find a high contrast lesion whereas a low contrast lesion will be more difficult to find even by an expert observer. 
+According to Eqn. \@ref(eq:rsm-transform), as $\mu \rightarrow \infty$, $\nu \rightarrow 1$ and conversely, as $\mu \rightarrow 0$, $\nu \rightarrow 0$. The solar analogy in Section \@ref(froc-paradigm-solar-analogy) is instructive. The dependence of $\nu$ on $\mu$ is consistent with the fact that higher contrast lesions are easier to find. A non-expert is expected to find a high contrast lesion whereas a low contrast lesion will be more difficult to find even by an expert observer. 
 
-The analogy to finding the sun in Chapter \@ref(froc-paradigm-solar-analogy) is instructive: objects with very high perceptual contrast are certain to be found.
-
-According to Eqn. \@ref(eq:rsm-transform) the value of $\mu$ also determines $\lambda$: as $\mu \rightarrow \infty$, $\lambda \rightarrow 0$, and conversely, as $\mu \rightarrow 0$, $\lambda \rightarrow \infty$. Here too the solar analogy is instructive. Since the sun has very high contrast, there is no reason for the observer to search for other suspicious regions which have no possibility of resembling it. On the other hand, attempting to locate a faint star, possibly hidden by clouds, can generate false sightings because the expected small contrast from the faint real star could be comparable to that from a number of regions in the nearby background.
+According to Eqn. \@ref(eq:rsm-transform) the value of $\mu$ also determines $\lambda$: as $\mu \rightarrow \infty$, $\lambda \rightarrow 0$, and conversely, as $\mu \rightarrow 0$, $\lambda \rightarrow \infty$. Here too the solar analogy in Section \@ref(froc-paradigm-solar-analogy) is instructive. Since the sun has very high contrast, there is no reason for the observer to search for other suspicious regions which have no possibility of resembling it. On the other hand, attempting to locate a faint star can generate many false sightings because the expected small contrast from the faint real star could be comparable to that from a number of regions in the nearby background.
 
 
-## Discussion / Summary {#rsm-discussion-summary}
+## Summary {#rsm-discussion-summary}
 
-This chapter has described a statistical parameterization of the Nodine-Kundel model. The 3-parameter model (plus $\zeta_1$) of search accommodates key aspects of the process: search: finding lesions and finding non-lesions. These are characterized by the two search parameters $\lambda$ and $\nu$. The ability to correctly rate a lesion higher than a NL is characterized by the third (classification) parameter of the model $\mu$. While the 2 search parameters have relatively simple physical meanings they depend on $\mu$. Consequently, it is necessary to introduce intrinsic parameters $\lambda_i$ and $\nu_i$ which are independent of $\mu$. 
+This chapter has described a statistical parameterization of the Nodine-Kundel model of visual search. The model accounts for key aspects of the process: 
+
+* Search: finding lesions and finding non-lesions. These are characterized by the two search parameters $\lambda$ and $\nu$. 
+* Classification: The ability to correctly rate a lesion higher than a NL is characterized by the third (classification) parameter of the model $\mu$. 
+
+While the 2 search parameters have relatively simple physical meanings they depend on $\mu$. Consequently, it is necessary to introduce intrinsic parameters $\lambda_i$ and $\nu_i$ which are independent of $\mu$. 
 
 
 The next chapter explores the ROC curve predictions of the radiological search model.

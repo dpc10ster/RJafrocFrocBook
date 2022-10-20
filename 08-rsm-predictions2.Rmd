@@ -12,8 +12,11 @@ library(gridExtra)
 
 
 ## TBA How much finished {#rsm-other-predictions-how-much-finished}
-90%
-Work on intro and discussion
+
+95%
+Work on intro
+Need better word than constrained
+  finite? discontinuous? end-point-discontinuity?
 
 <!-- # lesDistr is needed because one of its elements could be zero -->
 <!-- # e.g. c(0.6, 0.3, 0, 0.1) means there are no diseased cases -->
@@ -24,16 +27,11 @@ Work on intro and discussion
 
 Chapter \@ref(empirical) described ROC, FROC, AFROC and wAFROC empirical plots and illustrated them using an actual FROC dataset. Chapter \@ref(rsm-predictions) described the ROC curve and related quantities predicted by the radiological search model (RSM). This chapter describes the FROC, AFROC and wAFROC curve predictions of the RSM. 
 
-Use of a parametric model allows greater scrutiny of the predictions, for example the limiting slopes of the plots at the origin and the end-point, which is impossible using empirical plots.
+Use of a parametric model allows greater insight into the RSM predictions, for example the limiting slopes of the plots at the origin and the end-point, than is possible with empirical plots. Systematic variation of the parameters quantifies some of the expectations based on the solar analogy in Section \@ref(froc-paradigm-solar-analogy). This chapter also illustrates the need for using reasonable values of the parameters - this is achieved using the intrinsic $\lambda_i, \nu_i$ parameters, described in Section \@ref(rsm-intrinsic-parameters). While the physical parameters $\lambda, \nu$ are easier to understand as relate immediately to the FROC plot end-point, assigning arbitrary values to them can lead to unrealistic predictions.
 
 
-This chapter brings out the need for using reasonable values of the parameters. 
-
-
-Also discussed here are the slopes of these plots near the origin and the end-point, which brings out interesting properties not discussed in the 2017 print book. 
 
 ## RSM-predicted FROC curve {#rsm-other-predictions-froc-curve}
-
 
 From a property of the Poisson distribution, namely its mean equals the $\lambda$ parameter of the distribution, it follows that the expected number of *latent* NLs per case is $\lambda$. Recalling that NL z-samples are distributed as N(0,1), one multiplies $\lambda$ by the probability that a z-sample from $N(0,1)$ exceeds $\zeta$, i.e. by $\Phi(-\zeta)$, to obtain the expected number of *marked* NLs per case, i.e., NLF:
 
@@ -168,7 +166,7 @@ The end-point of the AFROC is defined by:
 \end{equation}
 
 
-Like the ROC the AFROC has the constrained end-point property (i.e., the end-point lies within the unit square). 
+Like the ROC the AFROC has the constrained end-point property (i.e., the end-point lies within the unit square) which makes its AUC a valid performance metric. 
 
 
 ### AFROC plots $\lambda_i, \nu_i$ parameterization
@@ -319,19 +317,18 @@ grid.arrange(p_wAFROC_lambdai_nui[[1]],p_wAFROC_lambdai_nui[[2]],p_wAFROC_lambda
 
 
 
-## Discussion / Summary {#rsm-other-predictions-discussion-summary}
-This chapter has described FROC, AFROC and wAFROC curves predicted by the radiological search model (RSM). All RSM curves share the constrained end-point property that makes them qualitatively different from predictions of all other ROC models. In my experience it is a property that most researchers in this field have difficulty understanding. There is too much history going back to the early 1940s of the ROC curve extending continuously from (0,0) to (1,1). 
+## Comments on end-point-discontinuity property {#rsm-other-predictions-comments}
 
-I am not aware of any evidence that radiologists can move the operating point *continuously* in the range (0,0) to (1,1) in search tasks, so the existence of such an ROC is an assumption. Algorithmic observers that do not involve search can extend continuously to (1,1). An example is a diagnostic test that rates the results of a laboratory measurement, e.g., the A1C measure of blood glucose  for presence of a disease. If $A1C \ge 0.065$ the patient is diagnosed as diabetic. By moving the threshold from infinity to –infinity, and assuming a large population of patients, one can trace out the entire ROC curve from the origin to (1,1). *This is because every patient yields an A1C value.* Now imagine that some finite fraction of the test results are "lost in the mail"; then the ROC curve, calculated over all patients, would have the constrained end-point property, albeit due to an unreasonable cause.
+RSM predicted ROC, AFROC and wAFROC curves share the end-point-discontinuity property (not extending continuously to (1,1)) that makes them qualitatively different from predictions of all other observer performance models that I am aware of. In my experience this is a property that most researchers in this field have difficulty with. There is simply too much history going back to the early 1940s of the ROC curve extending continuously from (0,0) to (1,1). 
 
-The situation in medical imaging involving search tasks is more realistic. *Not every case yields a decision variable.* There is a reasonable cause for this – to render a decision variable sample the radiologist must find something suspicious to report, and if none is found, there is no decision variable to report. The ROC curve calculated over all patients would exhibit the constrained end-point property, even in the limit of an infinite number of patients. If calculated over only those patients that yielded at least one mark, the ROC curve would extend from (0,0) to (1,1) but then one would be ignoring all cases with no marks. For non-diseased cases these represent correct decisions and for diseased cases they represent incorrect decisions and ignoring them should raise concern regarding validity of the analysis.
+I am not aware of any empirical evidence that observers can actually operate *continuously* in the range (0,0) to (1,1) *in search tasks*, so the existence of such an ROC is an assumption. In contrast the ROC of an (algorithmic) observer in a *non-search task* can extend continuously to (1,1). Consider a diagnostic test that rates the results of a laboratory measurement, e.g., the A1C measure of blood glucose for presence of a disease. If $A1C \ge 0.065$ the patient is diagnosed as diabetic. By moving the threshold from $+\infty$ to $-\infty$, and assuming a large population of patients, one can trace out the entire ROC curve from the origin to (1,1). *This is because every patient yields an A1C value.* Now imagine that some finite fraction of the test results are "lost in the mail"; then the ROC curve, calculated over all patients, will have the end-point-discontinuity property, albeit due to an unreasonable cause.
 
-Attention reverts in the next chapter to the ROC where we show that important aspects of the search mechanism are contained in the position of the end-point. 
+The situation in medical imaging involving search tasks is more realistic. *Not every case yields a decision variable.* There is a reasonable cause for this – to render a decision variable sample the radiologist must find something suspicious to report, and if none is found, there is no decision variable to report. The ROC curve calculated over all patients would exhibit the end-point-discontinuity property, even in the limit of an infinite number of patients. If calculated over only those patients that yielded at least one mark, the ROC curve would extend from (0,0) to (1,1) but then one would be ignoring all cases with no marks. For non-diseased cases these represent correct decisions and for diseased cases they represent incorrect decisions and ignoring all cases with no marks should raise concern regarding validity of the analysis.
 
 
 ## Appendix {#rsm-other-predictions-appendix}
 
-Unlike the previous plots which used the *intrinsic* parameters $\lambda_i, \nu_i$, the plots shown here are for arbitrary choices of RSM *physical* parameters $\lambda, \nu$. This can lead to peculiar predictions arising from physically unreasonable choices of parameters.
+Unlike the previous plots which used the *intrinsic* parameters $\lambda_i, \nu_i$, the plots shown here are for arbitrary choices of RSM *physical* parameters $\lambda, \nu$. This can lead to peculiar predictions arising from physically unreasonable parameter values.
 
 
 ### Slope of the FROC curve {#rsm-other-predictions-froc-physical-parameters}
