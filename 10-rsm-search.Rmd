@@ -15,12 +15,13 @@ library(grid)
 
 70%
 Intro
+Discussion
 
 
 
-## TBA Introduction {#rsm-sc-intro}
+## Introduction {#rsm-sc-intro}
 
-The preceding two chapters described the ROC and other predictions of the radiological search model (RSM). This chapter describes two key performance metrics, These are search and Lesion-classification performances, that can be derived from the end-point of the predicted ROC curve and relates them to RSM parameters. We start by recapitulating the formulae for the location of the RSM-predicted end-point. 
+The preceding two chapters described the ROC and other predictions of the radiological search model (RSM). This chapter describes two key performance metrics, *search and lesion-classification performances*, that can be derived from the end-point of the predicted ROC curve. We start by recapitulating the formulae for the location of the RSM-predicted end-point. 
 
 ## Location of ROC end-point {#rsm-sc-end-point}
 
