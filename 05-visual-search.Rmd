@@ -65,16 +65,16 @@ The terms "expected" and "unexpected" imply expertise dependent expectations reg
 Instead of recognition (as used by Kundel and Nodine) I prefer the term "search", as in "searching for and finding" a lesion.
 
 
-## Search vs. classification {#visual-search-search-classification}
+## Search vs. lesion classification {#visual-search-search-classification}
 
-Since template perturbations can occur at different locations in the images, the ability to selectively recognize them is related to search expertise. A non-expert can trivially recognize any and all perturbations that may be present by claiming all regions in the image are perturbed. Search expertise is the selective ability to find clinically relevant perturbations that are actually present while minimizing false findings. 
+Since template perturbations can occur at different locations in the images, the ability to selectively recognize them is related to search expertise. A non-expert can trivially recognize any and all perturbations that may be present by claiming all regions in the image are perturbed. Search expertise is the selective ability to find clinically relevant perturbations that are actually present while minimizing false findings. Two important terms are introduced here using FROC terminology:
 
->In FROC terminology search expertise is the ability to find latent LLs while minimizing latent NLs. 
+>
+Search (or finding) expertise is the ability to find latent LLs while minimizing finding latent NLs.
+>
+Lesion-classification (or recognition) expertise is the ability to mark LLs while not marking NLs. 
 
-
->Classification expertise is the ability to correctly classify a found suspicious region as malignant or benign. 
-
-The skills required to recognize a nodule in a chest x-ray are different from that required to recognize a low-contrast circular or Gaussian shaped artificial nodule against a background of random noise (or even an anthropomorphic phantom). In the former instance the skills of the radiologist are relevant. In the latter instance search skills possessed by the radiologist are rendered irrelevant. This is the reason why having radiologists interpret random noise images and pretending that this somehow makes it “clinically relevant” is a waste. One might as well used undergraduates with good eyesight, motivation and training. This paragraph also argues against phantoms as stand-ins for clinical images for "clinical" performance assessment. Phantoms are fine in the quality control context, but they do not allow radiologists the opportunity to exercise their skills.
+The skills required to find and recognize a nodule in a chest x-ray are different from those required to find and recognize a low-contrast circular or Gaussian shaped artificial nodule against a background of random noise (or even an anthropomorphic phantom). In the former instance the skills of the radiologist are relevant while in the latter they are not. This is the reason why having radiologists interpret random noise images and claiming that this somehow makes it “clinically relevant” is incorrect. One might as well use anyone with good eyesight, motivation and training. This paragraph also argues against phantoms as stand-ins for clinical images for "clinical" performance assessment. Phantoms are fine in the quality control context but they do not allow radiologists the opportunity to exercise their skills.
  
 
 ## The Kundel - Nodine search model {#visual-search-kundel-nodine-model}
@@ -98,13 +98,13 @@ knitr::include_graphics("images/15-visual-search/kundel-nodine.png")
 
 ### Stage 1: Search {#visual-search-glancing-global-impression}
 
-The search stage is brief, typically lasting about 100 - 300 ms, too short for detailed foveal examination. Instead peripheral vision is responsible for identification of perturbations. It results in a *global impression or gestalt*, that identifies perturbations from the generic non-diseased template. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in [@nodine1987using]. Perturbations are flagged for subsequent feature analysis, in other words *search tells the visual system where to look more closely*. 
+The search stage is brief, typically lasting about 100 - 300 ms, which is too short for detailed foveal examination. Instead peripheral vision is responsible for identification of perturbations. The result is a *global impression or gestalt*, that identifies perturbations from the generic non-diseased template. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in [@nodine1987using]. Perturbations are flagged for subsequent feature analysis, described below, in other words *search tells the visual system where to look more closely*. In the computer aided detection (CAD) context this stage is termed *initial detection* [@edwards2002maximum]. 
 
 ### Stage 2: Feature analysis {#visual-search-scanning-local-feature-analysis}
 
-During feature analysis the observer analyzes each suspicious region (found by the search stage) for evidence of disease: in principle he calculates the probability of malignancy for each region. For those readers of this book familiar with how computer aided detection (CAD) algorithms work this stage corresponds to the feature analysis stage of CAD where regions found by search, termed *initial detections* in the CAD literature [@edwards2002maximum], are analyzed to calculate a probability of malignancy. 
+Having found a set of suspicious regions the observer analyzes each region for evidence of disease: in principle he calculates the probability of malignancy for each region. In the CAD context this is termed *candidate analysis*, aka the feature analysis stage, where each region found by the initial detection stage is analyzed to calculate a probability of malignancy (and marked if the probability exceeds some algorithm-designer selected value). 
 
-The essential point that emerges is that decisions are made at a *finite*, relatively small, number of regions. Attention units are not uniformly distributed through the image in raster-scan fashion; rather the global impression identifies a smaller set of regions that require detailed scanning.
+An essential point that emerges is that decisions (to mark or not mark) are made at a *finite*, relatively small, number of regions. Attention units are not uniformly distributed through the image in raster-scan fashion; rather the global impression identifies a smaller set of regions that require detailed scanning.
 
 
 ### Example {#visual-search-example}
