@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-10-20}
+\date{2022-10-23}
 
 \begin{document}
 \maketitle
@@ -192,7 +192,7 @@ Dataset contributors
 \addcontentsline{toc}{part}{FROC paradigm}
 
 \hypertarget{froc-paradigm}{%
-\chapter{The FROC paradigm and search}\label{froc-paradigm}}
+\chapter{The FROC paradigm and visual search}\label{froc-paradigm}}
 
 \hypertarget{froc-paradigm-how-much-finished}{%
 \section{How much finished}\label{froc-paradigm-how-much-finished}}
@@ -2007,7 +2007,7 @@ Image interpretation in radiology is not fundamentally different. It involves gr
 \end{figure}
 
 \hypertarget{visual-search-recognition-detection}{%
-\section{Search vs.~detection}\label{visual-search-recognition-detection}}
+\section{Lesion-localization vs.~detection}\label{visual-search-recognition-detection}}
 
 The process of grouping and labeling parts of an image is termed \emph{recognition}. Recognition is distinct from detection, which is deciding about the presence of something that is unexpected or the absence of something that is expected, in other words, a deviation from what is expected. An example of detecting the presence of something that is unexpected would be a lung nodule and an example of detecting the absence of something that is expected would be an image of a patient with a missing rib (yes, it does occur, even excluding the biblical Adam).
 
@@ -2016,19 +2016,19 @@ The terms ``expected'' and ``unexpected'' imply expertise dependent expectations
 Instead of recognition (as used by Kundel and Nodine) I prefer the term ``search'', as in ``searching for and finding'' a lesion.
 
 \hypertarget{visual-search-search-classification}{%
-\section{Search vs.~classification}\label{visual-search-search-classification}}
+\section{Lesion-localization vs.~lesion-classification}\label{visual-search-search-classification}}
 
-Since template perturbations can occur at different locations in the images, the ability to selectively recognize them is related to search expertise. A non-expert can trivially recognize any and all perturbations that may be present by claiming all regions in the image are perturbed. Search expertise is the selective ability to find clinically relevant perturbations that are actually present while minimizing false findings.
+Since template perturbations can occur at different locations in the images, the ability to selectively recognize them is related to search expertise. \footnote{A non-expert can trivially recognize any and all perturbations that may be present by claiming all regions in the image are perturbed.} Lesion-localization expertise is the selective ability to locate clinically relevant perturbations that are actually present while minimizing false localizations.
 
-\begin{quote}
-In FROC terminology search expertise is the ability to find latent LLs while minimizing latent NLs.
-\end{quote}
+Two important terms are introduced using FROC terminology:
 
 \begin{quote}
-Classification expertise is the ability to correctly classify a found suspicious region as malignant or benign.
+Lesion-localization (or finding) expertise is the ability to find latent LLs while minimizing finding latent NLs.
+
+Lesion-classification (or recognition) expertise is the ability to mark LLs while not marking NLs.
 \end{quote}
 
-The skills required to recognize a nodule in a chest x-ray are different from that required to recognize a low-contrast circular or Gaussian shaped artificial nodule against a background of random noise (or even an anthropomorphic phantom). In the former instance the skills of the radiologist are relevant. In the latter instance search skills possessed by the radiologist are rendered irrelevant. This is the reason why having radiologists interpret random noise images and pretending that this somehow makes it ``clinically relevant'' is a waste. One might as well used undergraduates with good eyesight, motivation and training. This paragraph also argues against phantoms as stand-ins for clinical images for ``clinical'' performance assessment. Phantoms are fine in the quality control context, but they do not allow radiologists the opportunity to exercise their skills.
+The skills required to find and recognize a nodule in a chest x-ray are different from those required to find and recognize a low-contrast circular or Gaussian shaped artificial nodule against a background of random noise (or even an anthropomorphic phantom). In the former instance the skills of the radiologist are relevant while in the latter they are not. This is the reason why having radiologists interpret random noise images and claiming that this somehow makes it ``clinically relevant'' is incorrect. One might as well use anyone with good eyesight, motivation and training. This paragraph also argues against phantoms as stand-ins for clinical images for ``clinical'' performance assessment. Phantoms are fine in the quality control context but they do not allow radiologists the opportunity to exercise their skills.
 
 \hypertarget{visual-search-kundel-nodine-model}{%
 \section{The Kundel - Nodine search model}\label{visual-search-kundel-nodine-model}}
@@ -2041,34 +2041,23 @@ Assuming the task has been defined (and based on eye-tracking recordings obtaine
 \begin{itemize}
 \tightlist
 \item
-  Stage 1: \emph{Search}
+  Lesion-localization* or finding the locations of suspicious regions.
 \item
-  Stage 2: \emph{Feature analysis}
+  Lesion-classification* or determining the classification (malignant or benign) of each found suspicious region.
 \end{itemize}
 \end{quote}
 
-This is illustrated in Fig. \ref{fig:visual-search-kundel-nodine} from one of the Kundel Nodine publications (they use ``glancing'' and ``scanning'' for my terms ``search'' and ``feature analysis'').
-
-\begin{figure}
-
-{\centering \includegraphics[width=300pt]{images/15-visual-search/kundel-nodine} 
-
-}
-
-\caption{The Kundel-Nodine model of radiological search. The glancing stage corresponds to search in my terminology while scanning corresponds to feature analysis.}\label{fig:visual-search-kundel-nodine}
-\end{figure}
-
 \hypertarget{visual-search-glancing-global-impression}{%
-\subsection{Stage 1: Search}\label{visual-search-glancing-global-impression}}
+\subsection{Lesion-localization}\label{visual-search-glancing-global-impression}}
 
-The search stage is brief, typically lasting about 100 - 300 ms, too short for detailed foveal examination. Instead peripheral vision is responsible for identification of perturbations. It results in a \emph{global impression or gestalt}, that identifies perturbations from the generic non-diseased template. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in \citep{nodine1987using}. Perturbations are flagged for subsequent feature analysis, in other words \emph{search tells the visual system where to look more closely}.
+The search stage is brief, typically lasting about 100 - 300 ms, which is too short for detailed foveal examination. Instead peripheral vision is responsible for identification of perturbations. The result is a global impression or gestalt, that identifies perturbations from the generic non-diseased template. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in \citep{nodine1987using}. Perturbations are flagged for subsequent feature analysis, described below, in other words \emph{search tells the visual system where to look more closely}. In the computer aided detection (CAD) context this stage is termed \emph{initial detection} \citep{edwards2002maximum}.
 
 \hypertarget{visual-search-scanning-local-feature-analysis}{%
-\subsection{Stage 2: Feature analysis}\label{visual-search-scanning-local-feature-analysis}}
+\subsection{Lesion-classification}\label{visual-search-scanning-local-feature-analysis}}
 
-During feature analysis the observer analyzes each suspicious region (found by the search stage) for evidence of disease: in principle he calculates the probability of malignancy for each region. For those readers of this book familiar with how computer aided detection (CAD) algorithms work this stage corresponds to the feature analysis stage of CAD where regions found by search, termed \emph{initial detections} in the CAD literature \citep{edwards2002maximum}, are analyzed to calculate a probability of malignancy.
+Having found a set of suspicious regions the observer analyzes each region for evidence of disease: in principle he calculates the probability of malignancy for each region. In the CAD context this is termed \emph{candidate analysis}, aka the feature analysis stage, where each region found by the initial detection stage is analyzed to calculate a probability of malignancy (and marked if the probability exceeds some algorithm-designer selected value).
 
-The essential point that emerges is that decisions are made at a \emph{finite}, relatively small, number of regions. Attention units are not uniformly distributed through the image in raster-scan fashion; rather the global impression identifies a smaller set of regions that require detailed scanning.
+An essential point that emerges is that decisions (to mark or not mark) are made at a \emph{finite}, relatively small, number of regions. Attention units are not uniformly distributed through the image in raster-scan fashion; rather the global impression identifies a smaller set of regions that require detailed scanning.
 
 \hypertarget{visual-search-example}{%
 \subsection{Example}\label{visual-search-example}}
@@ -3946,25 +3935,25 @@ Since for equally weighted lesions each lesion weight is \(\frac{1}{L}\), this e
 
 In the general case the two curves are not identical although, for realistic datasets, the differences tend to be small. For cases with L lesions the probability mass function of the binomial distribution is peaked near \(l_2 =L\nu\). If the weights array \(W_{Ll_2}\) is likewise peaked near \(l_2 =L\nu\) the difference tends to be positive, i.e., the wAFROC is above the AFROC. Otherwise the difference can be negative.
 
-\hypertarget{rsm-sc}{%
-\chapter{Search and classification performances}\label{rsm-sc}}
+\hypertarget{rsm-search-classification}{%
+\chapter{Lesion localization and classification performances}\label{rsm-search-classification}}
 
-\hypertarget{rsm-sc-how-much-finished}{%
-\section{TBA How much finished}\label{rsm-sc-how-much-finished}}
+\hypertarget{rsm-search-classification-how-much-finished}{%
+\section{How much finished}\label{rsm-search-classification-how-much-finished}}
 
-10\%
+99\%
 
-\hypertarget{rsm-sc-intro}{%
-\section{TBA Introduction}\label{rsm-sc-intro}}
+\hypertarget{rsm-search-classification-intro}{%
+\section{Introduction}\label{rsm-search-classification-intro}}
 
-The preceding two chapters described the ROC and other predictions of the radiological search model (RSM).
+The preceding two chapters described predictions of the radiological search model (RSM). This chapter describes two performance measures, namely \emph{lesion-localization and lesion-classification performances}, that can be derived from the predicted ROC. These performances were introduced conceptually in Section \ref{visual-search-search-classification} and this chapter deals with relating them to the RSM parameters.
 
-This chapter describes two key performance metrics that can be derived from the predicted ROC curve and related to RSM parameters. These are search and classification performances.
+Recall the the search process involves two stages: (1) finding suspicious regions and (2) correctly classifying each suspicious region as either a lesion (in which case the region is marked and rated) or a non-lesion (in which case the region is not marked). The first stage is the lesion-localization task while the second stage is the lesion-classification task. Performance in the lesion-localization task is measured by the ability to mark lesions while minimizing marking non-lesions. Performance in the classification task is the ability, having found a suspicious region, to correctly recognize it as a lesion (to be marked and rated) or a non-lesion (to be ignored). The aim of this chapter is to quantify these two abilities.
 
-\hypertarget{rsm-sc-end-point}{%
-\section{Location of ROC end-point}\label{rsm-sc-end-point}}
+\hypertarget{rsm-search-classification-quantifying}{%
+\section{Quantifying lesion-localization performance}\label{rsm-search-classification-quantifying}}
 
-From the previous chapter the coordinates of the end-point are given by:
+From Chapter \ref{rsm-predictions} the coordinates of the RSM-predicted ROC end-point are given by:
 
 \begin{equation}
 \left. 
@@ -3973,17 +3962,14 @@ From the previous chapter the coordinates of the end-point are given by:
 &\text{TPF}_{\text{max}} = 1 - \text{exp} \left ( - \lambda \right )\sum_{L=1}^{L_{max}}f_L \left ( 1 - \nu \right )^L
 \end{aligned}
 \right \}
-\label{eq:rsm-sc-FPF-TPF-max}
+\label{eq:rsm-search-classification-FPF-TPF-max}
 \end{equation}
 
-\hypertarget{rsm-sc-quantifying}{%
-\section{Quantifying search performance}\label{rsm-sc-quantifying}}
+Qualitatively, lesion-localization performance is the ability to mark lesions while not marking non-lesions. To arrive at a quantitative definition consider the location of the ROC end-point.
 
-Qualitatively, search performance is the ability to find lesions while not finding non-lesions. To arrive at a quantitative definition of search performance consider the location of the ROC end-point defined above.
+In Fig. \ref{fig:rsm-search-classification-performance-from-roc-curve} curve (a) is a typical ROC curve predicted by models that do not account for lesion-localization, specifically the binormal model is considered here. The corresponding end-point is at (1,1), the filled circle, i.e., by adopting a sufficiently low reporting threshold the observer can continuously move the operating point to (1,1). The curve labeled (b) is a typical RSM-predicted ROC curve. The corresponding end-point, the filled square, is downwards and left shifted relative to (1,1). The chance diagonal is the straight line labeled (c).
 
-In Fig. \ref{fig:rsm-sc-performance-from-roc-curve}, plot (a) is a typical ROC curve predicted by models that do not account for search, specifically the biormal model. The end-point is at (1,1), the filled circle, i.e., by adopting a sufficiently low reporting threshold the observer can continuously move the operating point to (1,1). The curve labeled (b) is a typical RSM-predicted ROC curve. The end-point, the filled square, is downwards and left shifted relative to (1,1). The chance diagonal is labeled c.~
-
-The specific parameter values are shown next:
+The specific parameter values used in the illustration are shown next:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3995,80 +3981,51 @@ The specific parameter values are shown next:
 
 \begin{figure}
 \centering
-\includegraphics{10-rsm-search_files/figure-latex/rsm-sc-performance-from-roc-curve-1.pdf}
-\caption{\label{fig:rsm-sc-performance-from-roc-curve}Relation of search performance to the end-point of the ROC curve. Plot (a) is using the binormal model while plot (b) is using a RSM predicted curve. The chance diagonal is labeled c.~The filled square is the end-point of the RSM predicted curve while the filled dot is the end-point of the binormal predicted curve. The distance of the filled square from the chance diagonal, labeled \(d_S\), is a measure of search performance.}
+\includegraphics{10-rsm-search-classification_files/figure-latex/rsm-search-classification-performance-from-roc-curve-1.pdf}
+\caption{\label{fig:rsm-search-classification-performance-from-roc-curve}Relation of lesion-localization performance to the end-point of the ROC curve. Plot (a) is using the binormal model while plot (b) is using a RSM predicted curve. The chance diagonal is labeled c.~The filled square is the end-point of the RSM predicted curve while the filled dot is the end-point of the binormal predicted curve. The distance of the filled square from the chance diagonal, labeled \(d_S\), is a measure of lesion-localization performance.}
 \end{figure}
 
-\emph{The location of the end-point, in particular how far it is from (1,1), is a measure of search performance.} Higher search performance is characterized by the end-point moving upwards and to the left, in the limit to (0,1), corresponding to perfect search performance. It is more convenient to use a distance measure as defined next:
+\emph{The location of the end-point, in particular how far it is from (1,1), is a measure of lesion-localization performance.} Higher lesion-localization performance is characterized by the end-point moving upwards and to the left, in the limit to (0,1), corresponding to perfect lesion-localization performance. It is more convenient to use a distance measure as defined next:
 
-\textbf{Definition}: The perpendicular distance, \(d_S\), from the end-point to the chance diagonal, plot (c), multiplied by \(\sqrt{2}\), is a quantitative measure of search performance \(S\).
+\textbf{Definition}
+\textgreater The perpendicular distance, \(d_S\), from the end-point to the chance diagonal, plot (c), multiplied by \(\sqrt{2}\), is the quantitative measure of lesion-localization performance denoted by \(L_L\).
 
-Using \href{https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line\#Line_defined_by_an_equation}{geometry} and Eqn. \eqref{eq:rsm-sc-FPF-TPF-max}, it follows that:
-
-\begin{equation} 
-S=\sqrt{2}d_S=\text{TPF}_{\text{max}}-\text{FPF}_{\text{max}}
-\label{eq:rsm-sc-perp-distance}
-\end{equation}
-
-Therefore, search performance \(S\) is given by:
+Using \href{https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line\#Line_defined_by_an_equation}{geometry} and Eqn. \eqref{eq:rsm-search-classification-FPF-TPF-max}, it follows that:
 
 \begin{equation} 
-S=\exp\left ( -\lambda \right )\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu  \right )^L  \right )
-\label{eq:rsm-sc-search-performance}
+L_L=\sqrt{2}d_S=\text{TPF}_{\text{max}}-\text{FPF}_{\text{max}}
+\label{eq:rsm-search-classification-perp-distance}
 \end{equation}
 
-Eqn. \eqref{eq:rsm-sc-search-performance} shows search performance is the product of two terms: the probability \(\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu \right )^L \right )\) of finding at least one lesion times the probability \(\exp\left ( -\lambda \right )\) of not finding non-lesions. This puts into mathematical form the qualitative definition of search performance as the ability to find lesions while avoiding finding non-lesions.
+Therefore, lesion-localization performance \(L_L\) is given by:
 
-Example: consider \(\lambda = 0\) and \(\nu = 1\). (In terms of intrinsic parameters this occurs when \(\mu = \infty\).) The end-point is (0,1). The perpendicular distance from (0,1) to the chance diagonal is \(\frac{1}{\sqrt{2}}\), which multiplied by \(\sqrt{2}\) yields \(S = 1\). The same value is obtained using Eqn. \eqref{eq:rsm-sc-search-performance}. Since no NLs are found and all lesions are found, the observer never makes a mistake. One cannot improve over perfect performance and the observer does not need to use the z-sample information: he simply marks all suspicious regions found by search regardless of their z-samples.
+\begin{equation} 
+L_L=\exp\left ( -\lambda \right )\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu  \right )^L  \right )
+\label{eq:rsm-search-classification-search-performance}
+\end{equation}
 
-Search performance ranges from zero to one: \(0 \le S \le 1\). The lower limit is reached if \(\lambda = \infty\) or \(\nu = 0\). (In terms of intrinsic parameters this occurs when \(\mu = 0\).)
+Eqn. \eqref{eq:rsm-search-classification-search-performance} shows lesion-localization performance is the product of two terms: the probability \(\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu \right )^L \right )\) of finding at least one lesion times the probability \(\exp\left ( -\lambda \right )\) of not finding non-lesions. This puts into mathematical form the qualitative definition of lesion-localization performance as the ability to find lesions while avoiding finding non-lesions.
 
-\hypertarget{rsm-sc-performance}{%
-\section{Quantifying lesion-classification performance}\label{rsm-sc-performance}}
+Example: consider \(\lambda = 0\) and \(\nu = 1\). (In terms of intrinsic parameters this occurs when \(\mu = \infty\).) The end-point is (0,1). The perpendicular distance from (0,1) to the chance diagonal is \(\frac{1}{\sqrt{2}}\), which multiplied by \(\sqrt{2}\) yields \(L_L = 1\). The same value is obtained using Eqn. \eqref{eq:rsm-search-classification-search-performance}. Since no NLs are found and all lesions are found, the observer never makes a mistake. One cannot improve over perfect performance and the observer does not need to use the z-sample information: he simply marks all suspicious regions found by the search mechanism regardless of their z-samples.
 
-Lesion-classification performance \(C\) measures the ability, having found a suspicious region, to correctly classify it as a lesion, i.e., mark the location of the lesion resulting in a LL event. It is distinct from \emph{case-classification} performance, ROC AUC, which measures the ability to distinguish between diseased and non-diseased cases. In contrast \emph{lesion-classification} performance is a measure of the ability to distinguish between diseased and non-diseased regions, i.e., between latent NLs and latent LLs. Lesion-classification performance \(C\) is determined by the \(\mu\) parameter of the RSM and is defined by the implied ROC-area of two unit variance normal distributions separated by \(\mu\).
+Search performance ranges from zero to one: \(0 \le L_L \le 1\). The lower limit is reached if \(\lambda = \infty\) or \(\nu = 0\). (In terms of intrinsic parameters this occurs when \(\mu = 0\).)
+
+\hypertarget{rsm-search-classification-performance}{%
+\section{Quantifying lesion-classification performance}\label{rsm-search-classification-performance}}
+
+Lesion-classification performance \(L_C\) measures the ability, having found a suspicious region, to correctly classify it as a lesion, i.e., mark the location of the lesion resulting in a LL event. It is distinct from \emph{case-classification} performance, ROC AUC, which measures the ability to distinguish between diseased and non-diseased cases. In contrast \emph{lesion-classification} performance is a measure of the ability to distinguish between diseased and non-diseased regions, i.e., between latent NLs and latent LLs. \(L_C\) is determined by the \(\mu\) parameter of the RSM and is defined by the implied ROC-area of two unit variance normal distributions separated by \(\mu\) (see \href{https://dpc10ster.github.io/RJafrocRocBook/binormal-model.html\#binormal-model-d-prime}{formula} for d' measure in RJafrocRocBook).
 
 \begin{equation}
-C=\Phi\left ( \frac{\mu}{\sqrt{2}} \right )
-\label{eq:rsm-sc-classification-performance}
+L_C=\Phi\left ( \frac{\mu}{\sqrt{2}} \right )
+\label{eq:rsm-search-classification-classification-performance}
 \end{equation}
 
-Since \(\mu \ge 0\) it follows that \(C\) ranges from 0.5 to 1: \(0.5 \le C \le 1\). The lower limit occurs when \(\mu = 0\) and the upper limit occurs when \(\mu = \infty\).
+Since \(\mu \ge 0\) it follows that \(L_C\) ranges from 0.5 to 1: \(0.5 \le L_C \le 1\). The lower limit occurs when \(\mu = 0\) and the upper limit occurs when \(\mu = \infty\).
 
-\hypertarget{rsm-sc-search-classification-2afc-lke}{%
-\section{TBA Lesion-classification performance and the 2AFC LKE task}\label{rsm-sc-search-classification-2afc-lke}}
+\hypertarget{rsm-search-classification-discussion}{%
+\section{Discussion}\label{rsm-search-classification-discussion}}
 
-It should be obvious that lesion-classification performance is similar to what is measured using the location-known-exactly (LKE) paradigm. In this paradigm, one uses 2AFC methods as in TBA Fig. 4.3, but one could use the ratings method as long as the lesion is cued (i.e., pointed to). On diseased cases, the lesion is cued, but to control for false positives, one must also cue a similar region on non-diseased cases, as in TBA Fig. 4.3. In that figure, the lesion, present in one of the two images, is always in the center of one of the two fields. Sometimes cross hairs are used to indicate where the observer should be looking. The probability of a correct choice in the 2AFC task is , i.e., AUC conditioned on the (possible) position of the lesion being cued. Since the lesion is cued, search performance of the observer is irrelevant, and one expects . The reason for the inequality is that on a non-diseased case, the location being cued, in all likelihood, does not correspond to a latent NL found by the observer's search mechanism. Latent NLs are more suspicious for disease than other locations in the case. measures the separation parameter between latent NLs and LLs. The separation parameter between latent LLs and a researcher chosen location is likely to be larger. This is because latent NLs are more suspicious for disease than a researcher chosen location. It is known that performance under this condition exceeds that in a free-search 2AFC or ROC study, denoted AUC, where the lesion is not cued and it could be anywhere. This should be obvious -- pointing to the possible location of the lesion takes out the need for searching the rest of the image, which introduces the possibility of not finding the lesion and / or finding non-lesions. One expects the following ordering: . is expected to be the least, as there is uncertainty about possible lesion location. is expected to be next in order, as now uncertainty has been reduced, and the observer's task is to pick between two cued locations, one a latent NL and the other a latent LL. is expected to be highest, as now the observer's task is to pick between two cued locations, one a latent LL and the other a researcher chosen location, most likely not a latent NL. Data supporting the expected inequality is presented in §19.5.4.6.
-
-\hypertarget{rsm-sc-search-classification-significance}{%
-\section{Significance}\label{rsm-sc-search-classification-significance}}
-
-The ability to quantify search and lesion-classification performance from a single paradigm (ROC) study is highly significant, going well-beyond modeling the ROC curve. ROC-AUC measures how well an observer is able to separate two groups of patients, a group of diseased patients from a group of non-diseased patients. While important, it does not inform us about how the observer goes about doing this and what is limiting the observer's performance.
-
-In contrast, the search and lesion-classification measures described above can be used as an optimization-aid in determining what is limiting performance. If search performance \(S\) is poor it indicates that the observer needs to be trained on more \emph{non-diseased} cases to learn the variants of non-diseased anatomy so as not to confuse them for lesions. On the other hand, if lesion-classification performance \(C\) is poor, then one needs to train the observer using images where the location of a possible lesion is cued, and the observer's task is to determine if the cued location is a real lesion. In breast CAD since the designer level ROC curve goes almost all the way to (1,1) implying poor search performance. Therefore more research is needed on improving CAD's search performance. In contrast lCAD's esion-classification performance could actually be quite good, because CAD has access to the pixel values and the ability to apply complex algorithms to properly classify lesions as benign or malignant.
-
-To realize these benefits one needs a way of estimating the ROC end-point shown. TBA Chapter 19 describes RSM based curve fitting which determines all parameters of the RSM, thereby determining the location of the end-point TBA.
-
-\hypertarget{rsm-sc-discussion-summary}{%
-\section{Discussion / Summary}\label{rsm-sc-discussion-summary}}
-
-TBA This chapter has detailed ROC, FROC and AFROC curves predicted by the radiological search model (RSM). All RSM-predicted curves share the constrained end-point property that is qualitatively different from previous ROC models. In my experience, it is a property that most researchers in this field have difficulty accepting. There is too much history going back to the early 1940s, of the ROC curve extending from (0,0) to (1,1) that one has to let go of, and this can be difficult.
-
-TBA I am not aware of any direct evidence that radiologists can move the operating point continuously in the range (0,0) to (1,1) in search tasks, so the existence of such an ROC is tantamount to an assumption. Algorithmic observers that do not involve the element of search can extend continuously to (1,1). An example of an algorithmic observer not involving search is a diagnostic test that rates the results of a laboratory measurement, e.g., the A1C measure of blood glucose for presence of a disease. If A1C ≥ 6.5\% the patient is diagnosed as diabetic. By moving the threshold from infinity to --infinity, and assuming a large population of patients, one can trace out the entire ROC curve from the origin to (1,1). This is because every patient yields an A1C value. Now imagine that some finite fraction of the test results are ``lost in the mail''; then the ROC curve, calculated over all patients, would have the constrained end-point property, albeit due to an unreasonable cause.
-
-The situation in medical imaging involving search tasks is qualitatively different. Not every case yields a decision variable. There is a reasonable cause for this -- to render a decision variable sample the radiologist must find something suspicious to report, and if none is found, there is no decision variable to report. The ROC curve calculated over all patients would exhibit the constrained end-point property, even in the limit of an infinite number of patients. If calculated over only those patients that yielded at least one mark, the ROC curve would extend from (0,0) to (1,1) but then one would be ignoring the cases with no marks, which represent valuable information: unmarked non-diseased cases represent perfect decisions and unmarked diseased cases represent worst-case decisions.
-
-RSM-predicted ROC, FROC and AFROC curves were derived (wAFROC is implemented in the Rjafroc). These were used to demonstrate that the FROC is a poor descriptor of performance. Since almost all work to date, including some by me 47,48, has used FROC curves to measure performance, this is going to be difficulty for some to accept. The examples in Fig. 17.6 (A- F) and Fig. 17.7 (A-B) should convince one that the FROC curve is indeed a poor measure of performance. The only situation where one can safely use the FROC curve is if the two modalities produce curves extending over the same NLF range. This can happen with two variants of a CAD algorithm, but rarely with radiologist observers.
-
-A unique feature is that the RSM provides measures of search and lesion-classification performance. It bears repeating that search performance is the ability to find lesions while avoiding finding non-lesions. Search performance can be determined from the position of the ROC end-point (which in turn is determined by RSM-based fitting of ROC data, Chapter 19). The perpendicular distance between the end-point and the chance diagonal is, apart from a factor of 1.414, a measure of search performance. All ROC models that predict continuous curves extending to (1,1), imply zero search performance.
-
-Lesion-classification performance is measured by the AUC value corresponding to the parameter. Lesion-classification performance is the ability to discriminate between LLs and NLs, not between diseased and non-diseased cases: the latter is measured by RSM-AUC. There is a close analogy between the two ways of measuring lesion-classification performance and CAD used to find lesions in screening mammography vs.~CAD used in the diagnostic context to determine if a lesion found at screening is actually malignant. The former is termed CADe, for CAD detection, which in my opinion, is slightly misleading as at screening lesions are found not detected (``detection'' is ``discover or identify the presence or existence of something'', correct localization is not necessarily implied; the more precise term is ``localize''). In the diagnostic context one has CADx, for CAD diagnostic, i.e., given a specific region of the image, is the region malignant?
-
-Search and lesion-classification performance can be used as ``diagnostic aids'' to optimize performance of a reader. For example, is search performance is low, then training using mainly non-diseased cases is called for, so the resident learns the different variants of non-diseased tissues that can appear to be true lesions. If lesion-classification performance is low then training with diseased cases only is called for, so the resident learns the distinguishing features characterizing true lesions from non-diseased tissues that fake true lesions.
-
-Finally, evidence for the RSM is summarized. Its correspondence to the empirical Kundel-Nodine model of visual search that is grounded in eye-tracking measurements. It reduces in the limit of large , which guarantees that every case will yield a decision variable sample, to the binormal model; the predicted pdfs in this limit are not strictly normal, but deviations from normality would require very large sample size to demonstrate. Examples were given where even with 1200 cases the binormal model provides statistically good fits, as judged by the chi-square goodness of fit statistic, Table 17.2. Since the binormal model has proven quite successful in describing a large body of data, it satisfying that the RSM can mimic it in the limit of large . The RSM explains most empirical results regarding binormal model fits: the common finding that b \textless{} 1; that b decreases with increasing lesion pSNR (large and / or ); and the finding that the difference in means divided by the difference in standard deviations is fairly constant for a fixed experimental situation, Table 17.3. The RSM explains data degeneracy, especially for radiologists with high expertise.
-
-The contaminated binormal model2-4 (CBM), Chapter 20, which models the diseased distribution as having two peaks, one at zero and the other at a constrained value, also explains the empirical observation that b-parameter \textless{} 1 and data degeneracy. Because it allows the ROC curve to go continuously to (1,1), CBM does not completely account for search performance -- it accounts for search when it comes to finding lesions, but not for avoiding finding non-lesions.
+We have shown that the RSM parameters determine lesion-localization and lesion-classification performances. In the next chapter it will be shown that these parameters can be estimated from ROC/FROC data. Therefore the results of this chapter should be of interest to researchers in the area of computer aided detection -- CAD -- algorithm design, because they yield information about which stage -- lesion-localization or lesion-classification -- is limiting performance. If lesion-localization performance is low then the observer is having difficulty finding lesions while minimizing finding non-lesions \footnote{We repeat that a non-expert can trivally ``find'' all lesions by marking all regions in the image.}. In the CAD context, the \emph{initial detection} stage needs to be further optimized. If lesion-classification performance is low the observer is finding lesions efficiently but is having difficulty correctly classifying the found lesions. In the CAD context, the \emph{candidate analysis} stage needs to be further optimized. Of course, for this to be realized one needs a method for estimating the RSM parameters. This is the subject of the next chapter.
 
 \hypertarget{rsm-fitting}{%
 \chapter{RSM fitting}\label{rsm-fitting}}

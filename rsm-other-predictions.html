@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-10-20" />
+<meta name="date" content="2022-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="rsm-predictions.html"/>
-<link rel="next" href="rsm-sc.html"/>
+<link rel="next" href="rsm-search-classification.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -144,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.2" data-path="preface.html"><a href="preface.html#tba-acknowledgements"><i class="fa fa-check"></i><b>0.2</b> TBA Acknowledgements</a></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
-<li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and search</a><ul>
+<li class="chapter" data-level="1" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>1</b> The FROC paradigm and visual search</a><ul>
 <li class="chapter" data-level="1.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-how-much-finished"><i class="fa fa-check"></i><b>1.1</b> How much finished</a></li>
 <li class="chapter" data-level="1.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>1.2</b> Introduction</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-outline"><i class="fa fa-check"></i><b>1.2.1</b> Chapter outline</a></li>
@@ -240,11 +240,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-how-much-finished"><i class="fa fa-check"></i><b>3.1</b> How much finished</a></li>
 <li class="chapter" data-level="3.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-intro"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
 <li class="chapter" data-level="3.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-grouping-labeling-rois"><i class="fa fa-check"></i><b>3.3</b> Grouping and labeling ROIs</a></li>
-<li class="chapter" data-level="3.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>3.4</b> Search vs. detection</a></li>
-<li class="chapter" data-level="3.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>3.5</b> Search vs. classification</a></li>
+<li class="chapter" data-level="3.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>3.4</b> Lesion-localization vs. detection</a></li>
+<li class="chapter" data-level="3.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>3.5</b> Lesion-localization vs. lesion-classification</a></li>
 <li class="chapter" data-level="3.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>3.6</b> The Kundel - Nodine search model</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>3.6.1</b> Stage 1: Search</a></li>
-<li class="chapter" data-level="3.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>3.6.2</b> Stage 2: Feature analysis</a></li>
+<li class="chapter" data-level="3.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>3.6.1</b> Lesion-localization</a></li>
+<li class="chapter" data-level="3.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>3.6.2</b> Lesion-classification</a></li>
 <li class="chapter" data-level="3.6.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-example"><i class="fa fa-check"></i><b>3.6.3</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="visual-search.html"><a href="visual-search.html#visual-search-references"><i class="fa fa-check"></i><b>3.7</b> References</a></li>
@@ -311,15 +311,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-above-afroc"><i class="fa fa-check"></i><b>6.7.6</b> Are wAFROC curves above AFROC curves?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="rsm-sc.html"><a href="rsm-sc.html"><i class="fa fa-check"></i><b>7</b> Search and classification performances</a><ul>
-<li class="chapter" data-level="7.1" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished</a></li>
-<li class="chapter" data-level="7.2" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-intro"><i class="fa fa-check"></i><b>7.2</b> TBA Introduction</a></li>
-<li class="chapter" data-level="7.3" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-end-point"><i class="fa fa-check"></i><b>7.3</b> Location of ROC end-point</a></li>
-<li class="chapter" data-level="7.4" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-quantifying"><i class="fa fa-check"></i><b>7.4</b> Quantifying search performance</a></li>
-<li class="chapter" data-level="7.5" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-performance"><i class="fa fa-check"></i><b>7.5</b> Quantifying lesion-classification performance</a></li>
-<li class="chapter" data-level="7.6" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-search-classification-2afc-lke"><i class="fa fa-check"></i><b>7.6</b> TBA Lesion-classification performance and the 2AFC LKE task</a></li>
-<li class="chapter" data-level="7.7" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-search-classification-significance"><i class="fa fa-check"></i><b>7.7</b> Significance</a></li>
-<li class="chapter" data-level="7.8" data-path="rsm-sc.html"><a href="rsm-sc.html#rsm-sc-discussion-summary"><i class="fa fa-check"></i><b>7.8</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="7" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html"><i class="fa fa-check"></i><b>7</b> Lesion localization and classification performances</a><ul>
+<li class="chapter" data-level="7.1" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> How much finished</a></li>
+<li class="chapter" data-level="7.2" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-intro"><i class="fa fa-check"></i><b>7.2</b> Introduction</a></li>
+<li class="chapter" data-level="7.3" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-quantifying"><i class="fa fa-check"></i><b>7.3</b> Quantifying lesion-localization performance</a></li>
+<li class="chapter" data-level="7.4" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-performance"><i class="fa fa-check"></i><b>7.4</b> Quantifying lesion-classification performance</a></li>
+<li class="chapter" data-level="7.5" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-discussion"><i class="fa fa-check"></i><b>7.5</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>8</b> RSM fitting</a><ul>
 <li class="chapter" data-level="8.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> TBA How much finished</a></li>
@@ -503,7 +500,7 @@ finite? discontinuous? end-point-discontinuity?</p>
 <p>The predicted FROC, AFROC and wAFROC curves that follow use the intrinsic <span class="math inline">\(\lambda_i, \nu_i\)</span> parameters.</p>
 <div id="froc-plots-lambda_i-nu_i-parameterization" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.3.1</span> FROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization<a href="rsm-other-predictions.html#froc-plots-lambda_i-nu_i-parameterization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The following code generates FROC plots using the intrinsic <span class="math inline">\(\lambda_i = 2\)</span> and <span class="math inline">\(\nu_i = 0.5\)</span> parameters for 4 values of <span class="math inline">\(\mu\)</span> contained in the array <code>muArr &lt;- c(0.1,1,2,4)</code> (to avoid a divide by zero error the value <span class="math inline">\(\mu=0\)</span> is not allowed). A <code>list</code> array <code>p_FROC_lambdai_nui</code> is created to hold the four plots<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>. The intrinsic <span class="math inline">\(\lambda_i, \nu_i\)</span> parameters are converted to <span class="math inline">\(\lambda, \nu\)</span> using the function <code>UtilIntrinsic2RSM()</code>which implements Eqn. <a href="rsm-other-predictions.html#eq:rsm-other-predictions-transform">(6.3)</a>). The parameters are displayed using the <code>cat()</code> function. The plots are generated using <code>PlotRsmOperatingCharacteristics()</code>. Online help on this function is <a href="https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html">available</a>. The code-line <code>p_FROC_lambdai_nui[[i]] &lt;- ret1$FROCPlot</code> saves the plot to the previously created <code>list</code> array.</p>
+<p>The following code generates FROC plots using the intrinsic <span class="math inline">\(\lambda_i = 2\)</span> and <span class="math inline">\(\nu_i = 0.5\)</span> parameters for 4 values of <span class="math inline">\(\mu\)</span> contained in the array <code>muArr &lt;- c(0.1,1,2,4)</code> (to avoid a divide by zero error the value <span class="math inline">\(\mu=0\)</span> is not allowed). A <code>list</code> array <code>p_FROC_lambdai_nui</code> is created to hold the four plots<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>. The intrinsic <span class="math inline">\(\lambda_i, \nu_i\)</span> parameters are converted to <span class="math inline">\(\lambda, \nu\)</span> using the function <code>UtilIntrinsic2RSM()</code>which implements Eqn. <a href="rsm-other-predictions.html#eq:rsm-other-predictions-transform">(6.3)</a>). The parameters are displayed using the <code>cat()</code> function. The plots are generated using <code>PlotRsmOperatingCharacteristics()</code>. Online help on this function is <a href="https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html">available</a>. The code-line <code>p_FROC_lambdai_nui[[i]] &lt;- ret1$FROCPlot</code> saves the plot to the previously created <code>list</code> array.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="rsm-other-predictions.html#cb88-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>)</span>
 <span id="cb88-2"><a href="rsm-other-predictions.html#cb88-2"></a>lambda_i &lt;-<span class="st"> </span><span class="dv">2</span></span>
 <span id="cb88-3"><a href="rsm-other-predictions.html#cb88-3"></a>nu_i &lt;-<span class="st"> </span><span class="fl">0.5</span></span>
@@ -922,8 +919,8 @@ FIGURE 6.6: RSM-predicted wAFROC curves, <span class="math inline">\(\lambda, \n
 </div>
 <div class="footnotes">
 <hr />
-<ol start="28">
-<li id="fn28"><p>Notation: <code>p_</code> stands for a plot array, <code>FROC</code> stands for type of plot (also allowed are <code>AFROC</code> and <code>wAFROC</code>), <code>lambdai</code> stands for <span class="math inline">\(\lambda_i\)</span> and <code>nui</code> stands for <span class="math inline">\(\nu_i\)</span> (also allowed are <code>lambda</code> for <span class="math inline">\(\lambda\)</span> and <code>nu</code> for <span class="math inline">\(\nu\)</span> ).<a href="rsm-other-predictions.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<ol start="29">
+<li id="fn29"><p>Notation: <code>p_</code> stands for a plot array, <code>FROC</code> stands for type of plot (also allowed are <code>AFROC</code> and <code>wAFROC</code>), <code>lambdai</code> stands for <span class="math inline">\(\lambda_i\)</span> and <code>nui</code> stands for <span class="math inline">\(\nu_i\)</span> (also allowed are <code>lambda</code> for <span class="math inline">\(\lambda\)</span> and <code>nu</code> for <span class="math inline">\(\nu\)</span> ).<a href="rsm-other-predictions.html#fnref29" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -932,7 +929,7 @@ FIGURE 6.6: RSM-predicted wAFROC curves, <span class="math inline">\(\lambda, \n
         </div>
       </div>
 <a href="rsm-predictions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rsm-sc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rsm-search-classification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
