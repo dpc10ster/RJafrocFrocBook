@@ -55,7 +55,7 @@ knitr::include_graphics("images/15-visual-search/chest-imageB.png")
 
 
 
-## Search vs. detection {#visual-search-recognition-detection}
+## Lesion-localization vs. detection {#visual-search-recognition-detection}
 
 The process of grouping and labeling parts of an image is termed *recognition*. Recognition is distinct from detection, which is deciding about the presence of something that is unexpected or the absence of something that is expected, in other words, a deviation from what is expected. An example of detecting the presence of something that is unexpected would be a lung nodule and an example of detecting the absence of something that is expected would be an image of a patient with a missing rib (yes, it does occur, even excluding the biblical Adam). 
 
@@ -65,12 +65,14 @@ The terms "expected" and "unexpected" imply expertise dependent expectations reg
 Instead of recognition (as used by Kundel and Nodine) I prefer the term "search", as in "searching for and finding" a lesion.
 
 
-## Search vs. lesion classification {#visual-search-search-classification}
+## Lesion-localization vs. lesion-classification {#visual-search-search-classification}
 
-Since template perturbations can occur at different locations in the images, the ability to selectively recognize them is related to search expertise. A non-expert can trivially recognize any and all perturbations that may be present by claiming all regions in the image are perturbed. Search expertise is the selective ability to find clinically relevant perturbations that are actually present while minimizing false findings. Two important terms are introduced here using FROC terminology:
+Since template perturbations can occur at different locations in the images, the ability to selectively recognize them is related to search expertise. ^[A non-expert can trivially recognize any and all perturbations that may be present by claiming all regions in the image are perturbed.] Lesion-localization expertise is the selective ability to locate clinically relevant perturbations that are actually present while minimizing false localizations. 
+
+Two important terms are introduced using FROC terminology:
 
 >
-Search (or finding) expertise is the ability to find latent LLs while minimizing finding latent NLs.
+Lesion-localization (or finding) expertise is the ability to find latent LLs while minimizing finding latent NLs.
 >
 Lesion-classification (or recognition) expertise is the ability to mark LLs while not marking NLs. 
 
@@ -84,23 +86,16 @@ The Kundel-Nodine model [@kundel2007holistic; @kundel2004modeling] is a schema o
 Assuming the task has been defined (and based on eye-tracking recordings obtained on radiologists while they interpreted clinical images) Kundel and Nodine proposed the following schema for the diagnostic interpretation process. It consists of two stages: 
 
 >
-* Stage 1: *Search*
-* Stage 2: *Feature analysis*
-
-
-This is illustrated in Fig. \@ref(fig:visual-search-kundel-nodine) from one of the Kundel Nodine publications (they use "glancing" and "scanning" for my terms "search" and "feature analysis").
-
-```{r visual-search-kundel-nodine, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="The Kundel-Nodine model of radiological search. The glancing stage corresponds to search in my terminology while scanning corresponds to feature analysis."}
-knitr::include_graphics("images/15-visual-search/kundel-nodine.png")
-``` 
+* Lesion-localization* or finding the locations of suspicious regions.
+* Lesion-classification* or determining the classification (malignant or benign) of each found suspicious region.
 
 
 
-### Stage 1: Search {#visual-search-glancing-global-impression}
+### Lesion-localization {#visual-search-glancing-global-impression}
 
-The search stage is brief, typically lasting about 100 - 300 ms, which is too short for detailed foveal examination. Instead peripheral vision is responsible for identification of perturbations. The result is a *global impression or gestalt*, that identifies perturbations from the generic non-diseased template. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in [@nodine1987using]. Perturbations are flagged for subsequent feature analysis, described below, in other words *search tells the visual system where to look more closely*. In the computer aided detection (CAD) context this stage is termed *initial detection* [@edwards2002maximum]. 
+The search stage is brief, typically lasting about 100 - 300 ms, which is too short for detailed foveal examination. Instead peripheral vision is responsible for identification of perturbations. The result is a global impression or gestalt, that identifies perturbations from the generic non-diseased template. It is remarkable that radiologists can make reasonably accurate interpretations from information obtained in a brief glance, see Fig. 6 in [@nodine1987using]. Perturbations are flagged for subsequent feature analysis, described below, in other words *search tells the visual system where to look more closely*. In the computer aided detection (CAD) context this stage is termed *initial detection* [@edwards2002maximum]. 
 
-### Stage 2: Feature analysis {#visual-search-scanning-local-feature-analysis}
+### Lesion-classification {#visual-search-scanning-local-feature-analysis}
 
 Having found a set of suspicious regions the observer analyzes each region for evidence of disease: in principle he calculates the probability of malignancy for each region. In the CAD context this is termed *candidate analysis*, aka the feature analysis stage, where each region found by the initial detection stage is analyzed to calculate a probability of malignancy (and marked if the probability exceeds some algorithm-designer selected value). 
 

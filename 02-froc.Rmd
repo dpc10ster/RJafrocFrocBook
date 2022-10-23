@@ -1,6 +1,6 @@
 # (PART\*) FROC paradigm {-}
 
-# The FROC paradigm and search {#froc-paradigm}
+# The FROC paradigm and visual search {#froc-paradigm}
 
 
 ```{r setup, include = FALSE}
