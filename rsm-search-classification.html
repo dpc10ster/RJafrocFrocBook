@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-10-23" />
+<meta name="date" content="2022-10-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,19 +319,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-discussion"><i class="fa fa-check"></i><b>7.5</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>8</b> RSM fitting</a><ul>
-<li class="chapter" data-level="8.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="8.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> How much finished</a></li>
 <li class="chapter" data-level="8.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-intro"><i class="fa fa-check"></i><b>8.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="8.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-roc-likelihood"><i class="fa fa-check"></i><b>8.3</b> ROC Likelihood function</a></li>
-<li class="chapter" data-level="8.4" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-implementation"><i class="fa fa-check"></i><b>8.4</b> <code>FitRsmROC</code> implementation</a></li>
+<li class="chapter" data-level="8.4" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-implementation"><i class="fa fa-check"></i><b>8.4</b> Implementation</a></li>
 <li class="chapter" data-level="8.5" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example"><i class="fa fa-check"></i><b>8.5</b> <code>FitRsmROC</code> usage example</a></li>
-<li class="chapter" data-level="8.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>8.6</b> TBA Discussion / Summary</a></li>
-<li class="chapter" data-level="8.7" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-likelihood"><i class="fa fa-check"></i><b>8.7</b> Appendix 1: FROC likelihood function</a><ul>
-<li class="chapter" data-level="8.7.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-nls"><i class="fa fa-check"></i><b>8.7.1</b> Contribution of NLs</a></li>
-<li class="chapter" data-level="8.7.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-lls"><i class="fa fa-check"></i><b>8.7.2</b> Contribution of LLs</a></li>
-<li class="chapter" data-level="8.7.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-degeneracy"><i class="fa fa-check"></i><b>8.7.3</b> Degeneracy problems</a></li>
-</ul></li>
-<li class="chapter" data-level="8.8" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-idca"><i class="fa fa-check"></i><b>8.8</b> Appendix 2: IDCA Likelihood function</a></li>
-<li class="chapter" data-level="8.9" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-references"><i class="fa fa-check"></i><b>8.9</b> References</a></li>
+<li class="chapter" data-level="8.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>8.6</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="8.7" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-references"><i class="fa fa-check"></i><b>8.7</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>9</b> Three proper ROC fits</a><ul>
 <li class="chapter" data-level="9.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> TBA How much finished</a></li>
@@ -485,8 +479,10 @@ FIGURE 7.1: Relation of lesion-localization performance to the end-point of the 
 </p>
 </div>
 <p><em>The location of the end-point, in particular how far it is from (1,1), is a measure of lesion-localization performance.</em> Higher lesion-localization performance is characterized by the end-point moving upwards and to the left, in the limit to (0,1), corresponding to perfect lesion-localization performance. It is more convenient to use a distance measure as defined next:</p>
-<p><strong>Definition</strong>
-&gt;The perpendicular distance, <span class="math inline">\(d_S\)</span>, from the end-point to the chance diagonal, plot (c), multiplied by <span class="math inline">\(\sqrt{2}\)</span>, is the quantitative measure of lesion-localization performance denoted by <span class="math inline">\(L_L\)</span>.</p>
+<p><strong>Definition</strong></p>
+<blockquote>
+<p>The perpendicular distance, <span class="math inline">\(d_S\)</span>, from the end-point to the chance diagonal, plot (c), multiplied by <span class="math inline">\(\sqrt{2}\)</span>, is the quantitative measure of lesion-localization performance denoted by <span class="math inline">\(L_L\)</span>.</p>
+</blockquote>
 <p>Using <a href="https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_an_equation">geometry</a> and Eqn. <a href="rsm-search-classification.html#eq:rsm-search-classification-FPF-TPF-max">(7.1)</a>, it follows that:</p>
 <p><span class="math display" id="eq:rsm-search-classification-perp-distance">\[\begin{equation} 
 L_L=\sqrt{2}d_S=\text{TPF}_{\text{max}}-\text{FPF}_{\text{max}}
@@ -503,7 +499,11 @@ L_L=\exp\left ( -\lambda \right )\left (1-\sum_{L=1}^{L_{max}}f_L\left ( 1-\nu  
 </div>
 <div id="rsm-search-classification-performance" class="section level2 hasAnchor">
 <h2><span class="header-section-number">7.4</span> Quantifying lesion-classification performance<a href="rsm-search-classification.html#rsm-search-classification-performance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Lesion-classification performance <span class="math inline">\(L_C\)</span> measures the ability, having found a suspicious region, to correctly classify it as a lesion, i.e., mark the location of the lesion resulting in a LL event. It is distinct from <em>case-classification</em> performance, ROC AUC, which measures the ability to distinguish between diseased and non-diseased cases. In contrast <em>lesion-classification</em> performance is a measure of the ability to distinguish between diseased and non-diseased regions, i.e., between latent NLs and latent LLs. <span class="math inline">\(L_C\)</span> is determined by the <span class="math inline">\(\mu\)</span> parameter of the RSM and is defined by the implied ROC-area of two unit variance normal distributions separated by <span class="math inline">\(\mu\)</span> (see <a href="https://dpc10ster.github.io/RJafrocRocBook/binormal-model.html#binormal-model-d-prime">formula</a> for d’ measure in RJafrocRocBook).</p>
+<p>Lesion-classification performance <span class="math inline">\(L_C\)</span> measures the ability, having found a suspicious region, to correctly classify it as a lesion, i.e., mark the location of the lesion resulting in a LL event. It is distinct from <em>case-classification</em> performance, ROC AUC, which measures the ability to distinguish between diseased and non-diseased cases. In contrast <em>lesion-classification</em> performance is a measure of the ability to distinguish between diseased and non-diseased regions, i.e., between latent NLs and latent LLs. <span class="math inline">\(L_C\)</span> is determined by the <span class="math inline">\(\mu\)</span> parameter of the RSM.</p>
+<p><strong>Definition</strong></p>
+<blockquote>
+<p><span class="math inline">\(L_C\)</span> is defined by the implied ROC-area of two unit variance normal distributions separated by <span class="math inline">\(\mu\)</span> (see <a href="https://dpc10ster.github.io/RJafrocRocBook/binormal-model.html#binormal-model-d-prime">formula</a> for d’ measure in RJafrocRocBook).</p>
+</blockquote>
 <p><span class="math display" id="eq:rsm-search-classification-classification-performance">\[\begin{equation}
 L_C=\Phi\left ( \frac{\mu}{\sqrt{2}} \right )
 \tag{7.4}

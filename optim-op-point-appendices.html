@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-10-23" />
+<meta name="date" content="2022-10-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,19 +319,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-discussion"><i class="fa fa-check"></i><b>7.5</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>8</b> RSM fitting</a><ul>
-<li class="chapter" data-level="8.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="8.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> How much finished</a></li>
 <li class="chapter" data-level="8.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-intro"><i class="fa fa-check"></i><b>8.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="8.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-roc-likelihood"><i class="fa fa-check"></i><b>8.3</b> ROC Likelihood function</a></li>
-<li class="chapter" data-level="8.4" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-implementation"><i class="fa fa-check"></i><b>8.4</b> <code>FitRsmROC</code> implementation</a></li>
+<li class="chapter" data-level="8.4" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-implementation"><i class="fa fa-check"></i><b>8.4</b> Implementation</a></li>
 <li class="chapter" data-level="8.5" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example"><i class="fa fa-check"></i><b>8.5</b> <code>FitRsmROC</code> usage example</a></li>
-<li class="chapter" data-level="8.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>8.6</b> TBA Discussion / Summary</a></li>
-<li class="chapter" data-level="8.7" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-likelihood"><i class="fa fa-check"></i><b>8.7</b> Appendix 1: FROC likelihood function</a><ul>
-<li class="chapter" data-level="8.7.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-nls"><i class="fa fa-check"></i><b>8.7.1</b> Contribution of NLs</a></li>
-<li class="chapter" data-level="8.7.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-lls"><i class="fa fa-check"></i><b>8.7.2</b> Contribution of LLs</a></li>
-<li class="chapter" data-level="8.7.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-degeneracy"><i class="fa fa-check"></i><b>8.7.3</b> Degeneracy problems</a></li>
-</ul></li>
-<li class="chapter" data-level="8.8" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-froc-idca"><i class="fa fa-check"></i><b>8.8</b> Appendix 2: IDCA Likelihood function</a></li>
-<li class="chapter" data-level="8.9" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-references"><i class="fa fa-check"></i><b>8.9</b> References</a></li>
+<li class="chapter" data-level="8.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>8.6</b> Discussion / Summary</a></li>
+<li class="chapter" data-level="8.7" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-references"><i class="fa fa-check"></i><b>8.7</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>9</b> Three proper ROC fits</a><ul>
 <li class="chapter" data-level="9.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> TBA How much finished</a></li>
@@ -454,11 +448,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="optim-op-point-vary-nu" class="section level2 hasAnchor">
 <h2><span class="header-section-number">12.1</span> Appendix I: Varying <span class="math inline">\(\nu\)</span> optimizations<a href="optim-op-point-appendices.html#optim-op-point-vary-nu" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For <span class="math inline">\(\mu = 2\)</span> and <span class="math inline">\(\lambda = 1\)</span> optimizations were performed for <span class="math inline">\(\nu = 0.6, 0.7, 0.8, 0.9\)</span>.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="optim-op-point-appendices.html#cb122-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>)</span>
-<span id="cb122-2"><a href="optim-op-point-appendices.html#cb122-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb122-3"><a href="optim-op-point-appendices.html#cb122-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
-<span id="cb122-4"><a href="optim-op-point-appendices.html#cb122-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb122-5"><a href="optim-op-point-appendices.html#cb122-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="optim-op-point-appendices.html#cb123-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>)</span>
+<span id="cb123-2"><a href="optim-op-point-appendices.html#cb123-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb123-3"><a href="optim-op-point-appendices.html#cb123-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
+<span id="cb123-4"><a href="optim-op-point-appendices.html#cb123-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb123-5"><a href="optim-op-point-appendices.html#cb123-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <div id="summary-table-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.1.1</span> Summary table<a href="optim-op-point-appendices.html#summary-table-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -703,11 +697,11 @@ FIGURE 12.3: ROC plots for the two optimization methods. The color coding is as 
 <div id="optim-op-point-vary-mu" class="section level2 hasAnchor">
 <h2><span class="header-section-number">12.2</span> Appendix II: Varying <span class="math inline">\(\mu\)</span> optimizations<a href="optim-op-point-appendices.html#optim-op-point-vary-mu" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\nu = 0.9\)</span> optimizations were performed for <span class="math inline">\(\mu = 1, 2, 3, 4\)</span>.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="optim-op-point-appendices.html#cb123-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb123-2"><a href="optim-op-point-appendices.html#cb123-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb123-3"><a href="optim-op-point-appendices.html#cb123-3"></a>nuPArr &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
-<span id="cb123-4"><a href="optim-op-point-appendices.html#cb123-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb123-5"><a href="optim-op-point-appendices.html#cb123-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="optim-op-point-appendices.html#cb124-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb124-2"><a href="optim-op-point-appendices.html#cb124-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb124-3"><a href="optim-op-point-appendices.html#cb124-3"></a>nuPArr &lt;-<span class="st"> </span><span class="fl">0.9</span></span>
+<span id="cb124-4"><a href="optim-op-point-appendices.html#cb124-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb124-5"><a href="optim-op-point-appendices.html#cb124-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <div id="summary-table-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.2.1</span> Summary table<a href="optim-op-point-appendices.html#summary-table-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -941,11 +935,11 @@ FIGURE 12.6: ROC plots for the two optimization methods. The color coding is as 
 <h2><span class="header-section-number">12.3</span> Appendix III: Limiting situations<a href="optim-op-point-appendices.html#optim-op-point-limiting-situations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="optim-op-point-high-performance-vary-mu" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.3.1</span> High performance vary mu<a href="optim-op-point-appendices.html#optim-op-point-high-performance-vary-mu" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="optim-op-point-appendices.html#cb124-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb124-2"><a href="optim-op-point-appendices.html#cb124-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
-<span id="cb124-3"><a href="optim-op-point-appendices.html#cb124-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb124-4"><a href="optim-op-point-appendices.html#cb124-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb124-5"><a href="optim-op-point-appendices.html#cb124-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="optim-op-point-appendices.html#cb125-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb125-2"><a href="optim-op-point-appendices.html#cb125-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
+<span id="cb125-3"><a href="optim-op-point-appendices.html#cb125-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb125-4"><a href="optim-op-point-appendices.html#cb125-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb125-5"><a href="optim-op-point-appendices.html#cb125-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <div id="summary-table-4" class="section level4 hasAnchor">
 <h4><span class="header-section-number">12.3.1.1</span> Summary table<a href="optim-op-point-appendices.html#summary-table-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1168,11 +1162,11 @@ FIGURE 12.9: ROC plots for the two optimization methods. The color coding is as 
 </div>
 <div id="optim-op-point-low-performance-vary-mu" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.3.2</span> Low performance vary mu<a href="optim-op-point-appendices.html#optim-op-point-low-performance-vary-mu" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="optim-op-point-appendices.html#cb125-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb125-2"><a href="optim-op-point-appendices.html#cb125-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>)</span>
-<span id="cb125-3"><a href="optim-op-point-appendices.html#cb125-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>)</span>
-<span id="cb125-4"><a href="optim-op-point-appendices.html#cb125-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb125-5"><a href="optim-op-point-appendices.html#cb125-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="optim-op-point-appendices.html#cb126-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb126-2"><a href="optim-op-point-appendices.html#cb126-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>)</span>
+<span id="cb126-3"><a href="optim-op-point-appendices.html#cb126-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>)</span>
+<span id="cb126-4"><a href="optim-op-point-appendices.html#cb126-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb126-5"><a href="optim-op-point-appendices.html#cb126-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <div id="summary-table-5" class="section level4 hasAnchor">
 <h4><span class="header-section-number">12.3.2.1</span> Summary table<a href="optim-op-point-appendices.html#summary-table-5" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1395,11 +1389,11 @@ FIGURE 12.12: ROC plots for the two optimization methods. The color coding is as
 </div>
 <div id="optim-op-point-high-performance-vary-lambda" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.3.3</span> High performance vary lambda<a href="optim-op-point-appendices.html#optim-op-point-high-performance-vary-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="optim-op-point-appendices.html#cb126-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>)</span>
-<span id="cb126-2"><a href="optim-op-point-appendices.html#cb126-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
-<span id="cb126-3"><a href="optim-op-point-appendices.html#cb126-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">10</span>)</span>
-<span id="cb126-4"><a href="optim-op-point-appendices.html#cb126-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb126-5"><a href="optim-op-point-appendices.html#cb126-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="optim-op-point-appendices.html#cb127-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>)</span>
+<span id="cb127-2"><a href="optim-op-point-appendices.html#cb127-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
+<span id="cb127-3"><a href="optim-op-point-appendices.html#cb127-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">10</span>)</span>
+<span id="cb127-4"><a href="optim-op-point-appendices.html#cb127-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb127-5"><a href="optim-op-point-appendices.html#cb127-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <div id="summary-table-6" class="section level4 hasAnchor">
 <h4><span class="header-section-number">12.3.3.1</span> Summary table<a href="optim-op-point-appendices.html#summary-table-6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1622,11 +1616,11 @@ FIGURE 12.15: ROC plots for the two optimization methods. The color coding is as
 </div>
 <div id="optim-op-point-low-performance-vary-lambda" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.3.4</span> Low performance vary lambda<a href="optim-op-point-appendices.html#optim-op-point-low-performance-vary-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="optim-op-point-appendices.html#cb127-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb127-2"><a href="optim-op-point-appendices.html#cb127-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.2</span>)</span>
-<span id="cb127-3"><a href="optim-op-point-appendices.html#cb127-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
-<span id="cb127-4"><a href="optim-op-point-appendices.html#cb127-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb127-5"><a href="optim-op-point-appendices.html#cb127-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="optim-op-point-appendices.html#cb128-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb128-2"><a href="optim-op-point-appendices.html#cb128-2"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.2</span>)</span>
+<span id="cb128-3"><a href="optim-op-point-appendices.html#cb128-3"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb128-4"><a href="optim-op-point-appendices.html#cb128-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb128-5"><a href="optim-op-point-appendices.html#cb128-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <div id="summary-table-7" class="section level4 hasAnchor">
 <h4><span class="header-section-number">12.3.4.1</span> Summary table<a href="optim-op-point-appendices.html#summary-table-7" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1849,11 +1843,11 @@ FIGURE 12.18: ROC plots for the two optimization methods. The color coding is as
 </div>
 <div id="optim-op-point-high-performance-vary-nu" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.3.5</span> High performance vary nu<a href="optim-op-point-appendices.html#optim-op-point-high-performance-vary-nu" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="optim-op-point-appendices.html#cb128-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>)</span>
-<span id="cb128-2"><a href="optim-op-point-appendices.html#cb128-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb128-3"><a href="optim-op-point-appendices.html#cb128-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
-<span id="cb128-4"><a href="optim-op-point-appendices.html#cb128-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb128-5"><a href="optim-op-point-appendices.html#cb128-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="optim-op-point-appendices.html#cb129-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>)</span>
+<span id="cb129-2"><a href="optim-op-point-appendices.html#cb129-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb129-3"><a href="optim-op-point-appendices.html#cb129-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
+<span id="cb129-4"><a href="optim-op-point-appendices.html#cb129-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb129-5"><a href="optim-op-point-appendices.html#cb129-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <div id="summary-table-8" class="section level4 hasAnchor">
 <h4><span class="header-section-number">12.3.5.1</span> Summary table<a href="optim-op-point-appendices.html#summary-table-8" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -2076,11 +2070,11 @@ FIGURE 12.21: ROC plots for the two optimization methods. The color coding is as
 </div>
 <div id="optim-op-point-low-performance-vary-nu" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.3.6</span> Low performance vary nu<a href="optim-op-point-appendices.html#optim-op-point-low-performance-vary-nu" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="optim-op-point-appendices.html#cb129-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb129-2"><a href="optim-op-point-appendices.html#cb129-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>)</span>
-<span id="cb129-3"><a href="optim-op-point-appendices.html#cb129-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>)</span>
-<span id="cb129-4"><a href="optim-op-point-appendices.html#cb129-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb129-5"><a href="optim-op-point-appendices.html#cb129-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="optim-op-point-appendices.html#cb130-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
+<span id="cb130-2"><a href="optim-op-point-appendices.html#cb130-2"></a>lambdaPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>)</span>
+<span id="cb130-3"><a href="optim-op-point-appendices.html#cb130-3"></a>nuPArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>)</span>
+<span id="cb130-4"><a href="optim-op-point-appendices.html#cb130-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb130-5"><a href="optim-op-point-appendices.html#cb130-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <div id="summary-table-9" class="section level4 hasAnchor">
 <h4><span class="header-section-number">12.3.6.1</span> Summary table<a href="optim-op-point-appendices.html#summary-table-9" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table class="table" style="margin-left: auto; margin-right: auto;">

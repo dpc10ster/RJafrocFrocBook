@@ -62,7 +62,9 @@ lesDistr <- c(1) # one lesion per dis. case
 
 
 **Definition** 
->The perpendicular distance, $d_S$, from the end-point to the chance diagonal, plot (c), multiplied by $\sqrt{2}$, is the quantitative measure of lesion-localization performance denoted by $L_L$.  
+
+>
+The perpendicular distance, $d_S$, from the end-point to the chance diagonal, plot (c), multiplied by $\sqrt{2}$, is the quantitative measure of lesion-localization performance denoted by $L_L$.  
 
 
 Using [geometry](https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_an_equation) and Eqn. \@ref(eq:rsm-search-classification-FPF-TPF-max), it follows that: 
@@ -92,7 +94,12 @@ Search performance ranges from zero to one: $0 \le L_L \le 1$. The lower limit i
 
 ## Quantifying lesion-classification performance {#rsm-search-classification-performance}
 
-Lesion-classification performance $L_C$ measures the ability, having found a suspicious region, to correctly classify it as a lesion, i.e., mark the location of the lesion resulting in a LL event. It is distinct from *case-classification* performance, ROC AUC, which measures the ability to distinguish between diseased and non-diseased cases. In contrast *lesion-classification* performance is a measure of the ability to distinguish between diseased and non-diseased regions, i.e., between latent NLs and latent LLs. $L_C$ is determined by the $\mu$ parameter of the RSM and is defined by the implied ROC-area of two unit variance normal distributions separated by $\mu$ (see [formula](https://dpc10ster.github.io/RJafrocRocBook/binormal-model.html#binormal-model-d-prime) for d' measure in RJafrocRocBook). 
+Lesion-classification performance $L_C$ measures the ability, having found a suspicious region, to correctly classify it as a lesion, i.e., mark the location of the lesion resulting in a LL event. It is distinct from *case-classification* performance, ROC AUC, which measures the ability to distinguish between diseased and non-diseased cases. In contrast *lesion-classification* performance is a measure of the ability to distinguish between diseased and non-diseased regions, i.e., between latent NLs and latent LLs. $L_C$ is determined by the $\mu$ parameter of the RSM.
+
+**Definition**
+
+>
+$L_C$ is defined by the implied ROC-area of two unit variance normal distributions separated by $\mu$ (see [formula](https://dpc10ster.github.io/RJafrocRocBook/binormal-model.html#binormal-model-d-prime) for d' measure in RJafrocRocBook). 
 
 
 \begin{equation}
