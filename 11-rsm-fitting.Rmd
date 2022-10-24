@@ -13,15 +13,15 @@ library(here)
 ```
 
 
-## TBA How much finished {#rsm-fitting-how-much-finished}
+## How much finished {#rsm-fitting-how-much-finished}
 
-10%
+99%
 
 
 
 ## TBA Introduction {#rsm-fitting-intro}
 
-Early work, reported in the 2017 print book, revealed that an FROC curve based estimation method worked only for designer level CAD data and not for human observer data. Subsequent effort focused on ROC curve-based fitting, and this proved successful at fitting radiologist datasets where detailed definition of the ROC curve is not available. An preliminary account of this work can be found in a conference proceeding [@RN2125]. 
+Early work, reported in my 2017 print book, revealed that an FROC curve based estimation method worked only for designer level CAD data and not for human observer data. Subsequent effort focused on ROC curve-based fitting, and this proved successful at fitting radiologist datasets where detailed definition of the ROC curve is not available. An preliminary account of this work can be found in a conference proceeding [@RN2125]. 
 
 The reader should be surprised to learn that the ROC curve based fitting works, *which implies that one does not even need FROC data to estimate RSM parameters.* I have previously stated that the ROC paradigm ignores search, so how can one estimate search-model parameters from ROC data? The reason is that the *shape* of the RSM-predicted ROC curve and the *location* of the end-point depend on the RSM parameters.
 
@@ -82,7 +82,7 @@ The return value `ret` is a `list` with the following elements:
 * `ret$NLLFin`	The final value of negative log-likelihood.
 * `ret$ChisqrFitStats`	The chisquare goodness of fit (if it can be calculated).
 * `ret$covMat`	The covariance matrix of the parameters (if it can be calculated).
-* `ret$fittedPlot`	A `ggplot2` object containing the fitted plots along with the empirical operating points and error bars.
+* `ret$fittedPlot`	A `ggplot` object containing the fitted plots along with the empirical operating points and error bars.
 
 
 ## `FitRsmROC` usage example {#rsm-fitting-fitrsmroc-usage-example}
@@ -117,7 +117,7 @@ The relatively large separation parameter $\mu$ implies good lesion-classificati
 The fitting program decreased the negative of the log-likelihood function from `r round(ret$NLLIni,2)` to `r round(ret$NLLFin,2)`. A decrease in negative log-likelihood is equivalent to an increase in the likelihood, which is as expected, as the function maximizes the log-likelihood. 
 
 
-Because the RSM contains 3 parameters, which is one more that conventional ROC models, the chisquare goodness of fit statistic usually cannot be calculated, except for large datasets - the criterion of 5 counts in each bin for true positives and false positives is usually hard to meet.
+Because the RSM contains 3 parameters, which is one more than conventional ROC models, the chisquare goodness of fit statistic usually cannot be calculated, except for large datasets - the criterion of 5 counts in each bin for true positives and false positives is usually hard to meet. Using the [method](https://dpc10ster.github.io/RJafrocRocBook/binormal-model.html#binormal-model-curve-fitting-validation-appendix-5) described in RJafrocRocBook the degrees of freedom is $\text{df} = R_{FROC} - 3$.^[The expansive form of the relevant equation is $R_{FROC} + R_{FROC} - (3 + R_{FROC}) = R_{FROC} - 3$]
 
 
 Shown next is the fitted plot. Error bars (exact 95% confidence intervals) are shown for the lowest and highest operating points.
@@ -128,13 +128,16 @@ print(ret$fittedPlot)
 ```
 
 
-The fitted ROC curve is proper: it's slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. TBA The area under the proper ROC is `r round(ret$AUC,3)` which will be shown in a subsequent chapter to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.
+The fitted ROC curve is proper: it's slope decreases monotonically as one moves up the curve thereby ruling out hooks such as are predicted by the binormal model. The area under the proper ROC (calculated by numerical integration of the RSM-predicted curve) is `r round(ret$AUC,3)` which will be shown in a subsequent chapter TBA to be identical to that yielded by other proper ROC fitting methods and higher than the binormal model fitted value.
 
 
-## TBA Discussion / Summary {#rsm-fitting-discussion-summary}
-Over the years, there have been several attempts at fitting FROC data. Prior to the RSM-based ROC curve approach described in this chapter, all methods were aimed at fitting FROC curves, in the mistaken belief that this approach was using all the data. The earliest was my FROCFIT software 36. This was followed by Swensson's approach 37, subsequently shown to be equivalent to my earlier work, as far as predicting the FROC curve was concerned 11. In the meantime, CAD developers, who relied heavily on the FROC curve to evaluate their algorithms, developed an empirical approach that was subsequently put on a formal basis in the IDCA method 12. 
+## Discussion / Summary {#rsm-fitting-discussion-summary}
 
-This chapter describes an approach to fitting ROC curves, instead of FROC curves, using the RSM. On the face of it, fitting the ROC curve seems to be ignoring much of the data. As an example, the ROC rating on a non-diseased case is the rating of the highest-rated mark on that image, or negative infinity if the case has no marks. If the case has several NL marks, only the highest rated one is used. In fact the highest rated mark contains information about the other marks on the case, namely they were all rated lower. There is a statistical term for this, namely sufficiency 38. As an example, the highest of a number of samples from a uniform distribution is a sufficient statistic, i.e., it contains all the information contained in the observed samples. While not quite the same for normally distributed values, neglect of the NLs rated lower is not as bad as might seem at first. 
+Over the years, there have been several attempts at fitting FROC data. Prior to the RSM-based ROC curve approach described in this chapter, all methods were aimed at fitting FROC curves in the mistaken belief that this approach was using all the data. The earliest was my FROCFIT software [@chakraborty1989maximum]. This was followed by Swensson's approach [@swensson1996unified], subsequently shown to be equivalent to my earlier work, as far as predicting the FROC curve was concerned [@chakraborty2008operating]. In the meantime, CAD developers, who relied heavily on the FROC curve to evaluate their algorithms, developed an empirical approach that was subsequently put on a formal basis in the IDCA (initial detection and candidate analysis) method [@edwards2002maximum]. While this method works with CAD data it fails with radiologist data -- the reason is that it assumes $\zeta_1 = -\infty$ which is not true for radiologists (this is discussed in my 2017 print book).
+
+This chapter describes an approach to fitting ROC curves using the RSM. On the face of it fitting the ROC curve seems to be ignoring much of the data. For example the ROC rating on a non-diseased case is the rating of the highest-rated mark on that image, or negative infinity if the case has no marks. If the case has several NL marks, only the highest rated one is used. In fact the highest rated mark contains information about the other marks on the case, namely they were all rated lower. The statistical term for this is *sufficiency* [@larsen2005introduction]. As an example, the highest of a number of samples from a uniform distribution is a sufficient statistic, i.e., it contains all the information contained in the observed samples. While not quite the same for normally distributed values, neglect of the NLs rated lower is not as bad as might seem at first. 
+
+The next chapter describes application of the RSM and other available proper ROC fitting methods to a number of datasets.
 
 ## References {#rsm-fitting-references}
 
