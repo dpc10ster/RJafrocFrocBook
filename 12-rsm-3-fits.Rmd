@@ -32,9 +32,9 @@ There are three methods for fitting proper curves to ROC datasets:
 * The PROPROC (proper ROC) model described in TBA Chapter 20. 
 * The CBM (contaminated binormal model) described in TBA Chapter 20. 
 
-This chapter compares these methods by fitting the to 14 multiple-treatment multiple-reader datasets described in Chapter \@ref(datasets). ^[Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.]
+This chapter compares these methods by fitting them to 14 multiple-treatment multiple-reader datasets described in Chapter \@ref(datasets). ^[Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.]
 
-Both RSM and CBM are implemented in `RJafroc`. `PROPROC` is implemented in Windows software ^[OR DBM-MRMC 2.5, Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.] available [here](https://perception.lab.uiowa.edu/OR-DBM-MRMC-252), last accessed 1/4/21.
+Both RSM and CBM are implemented in `RJafroc`. `PROPROC` is implemented in Windows software OR DBM-MRMC 2.5 ^[Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.] that was available [here](https://perception.lab.uiowa.edu/software), last accessed 1/4/21.
 
 
 ## Application to datasets {#rsm-3-fits-applications}
@@ -118,6 +118,42 @@ The parameters corresponding to the RSM plots are accessed as shown next.
 * In general the values are accessed as `[[f]][[i,j]]`, where `f` is the dataset index, `i` is the treatment index and `j` is the reader index; 
 * For the Van Dyke dataset `f = 1` and for the Franken dataset `f = 2`.
 
+From the previous chapter the RSM parameters can be used to calculate lesion-localization and lesion-classification performances, namely $L_L$ and $L_C$ respectively. 
+
+
+```{r echo=FALSE}
+LesionLocLesionCls <- function(mu, lambda, nu, lesDistr) {
+  temp <- 0
+  for (L in 1:length(lesDistr)) {
+    temp <- temp + lesDistr[L] * (1 - nu)^L
+  }
+  L_L <- exp(-lambda) * (1 - temp)
+  L_C <- pnorm(mu/sqrt(2))
+  return(list(
+    L_L = L_L,
+    L_C = L_C
+  ))
+}
+```
+
+
+
+```{r echo=FALSE}
+mu <- resultsArr[[1]][[1,2]]$retRsm$mu
+lambda <- resultsArr[[1]][[1,2]]$retRsm$lambda
+nu <- resultsArr[[1]][[1,2]]$retRsm$nu
+f <- 2
+fileName <- datasetNames[f]
+theData <- get(sprintf("dataset%02d", f)) # the datasets already exist as R objects
+lesDistr <- UtilLesionDistrVector(theData) # RSM ROC fitting needs to know lesDistr
+
+ret <- LesionLocLesionCls(mu, lambda, nu, lesDistr)
+L_L <- ret$L_L
+L_C <- ret$L_C
+  
+cat(sprintf("L_L = %7.3f, L_C = %7.3f", L_L, L_C), "\n")
+```
+
 The following displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:
 
 
@@ -159,6 +195,22 @@ cat("RSM parameters, Franken dataset, treatment 2, reader 3:",
 "\nNLLfin = ", resultsArr[[f]][[i,j]]$retRsm$NLLFin)
 ```
 
+
+```{r echo=FALSE}
+mu <- resultsArr[[2]][[1,2]]$retRsm$mu
+lambda <- resultsArr[[2]][[1,2]]$retRsm$lambda
+nu <- resultsArr[[1]][[2,2]]$retRsm$nu
+f <- 3
+fileName <- datasetNames[f]
+theData <- get(sprintf("dataset%02d", f)) # the datasets already exist as R objects
+lesDistr <- UtilLesionDistrVector(theData) # RSM ROC fitting needs to know lesDistr
+
+ret <- LesionLocLesionCls(mu, lambda, nu, lesDistr)
+L_L <- ret$L_L
+L_C <- ret$L_C
+  
+cat(sprintf("L_L = %7.3f, L_C = %7.3f", L_L, L_C), "\n")
+```
 
 
 ## CBM parameters {#rsm-3-fits-cbm-parameters}
