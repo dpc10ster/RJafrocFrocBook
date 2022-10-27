@@ -42,6 +42,7 @@ Both RSM and CBM are implemented in `RJafroc`. `PROPROC` is implemented in Windo
 The RSM, PROPROC and CBM algorithms were applied to datasets described in Chapter \@ref(datasets). 
 
 
+
 ```{r, echo = TRUE}
 datasetNames <-  
   c("TONY", "VD", "FR", 
@@ -50,6 +51,7 @@ datasetNames <-
   "RUS", "DOB1", "DOB2", 
   "DOB3", "FZR")
 ```
+
 
 
 In the following we focus on just two ROC datasets (these have been widely used in the literature to illustrate ROC analysis methodology advances) namely the Van Dyke (VD) and the Franken (FR) datasets.
@@ -61,19 +63,16 @@ source(here("R/compare-3-fits/Compare3ProperRocFits.R"))
 ```
 
 
-```{r rsm-3-fits-code-f2, echo=TRUE, cache=FALSE}
+```{r rsm-3-fits-code-f2, echo=TRUE}
+# VD dataset
+ret <- Compare3ProperRocFits(datasetNames, which(datasetNames == "VD"))
+plotsVD <- ret$allPlots
+resultsVD <- ret$allResults
 
-results <- array(list(), dim = 2)
-
-results[[1]] <- Compare3ProperRocFits(datasetNames, 2) # VD dataset
-results[[2]] <- Compare3ProperRocFits(datasetNames, 3) # FR dataset
-
-resultsArr <- plotArr <- array(list(), dim = 2)
-
-for (i in 1:2) {
-  plotArr[[i]] <- results[[i]]$allPlots
-  resultsArr[[i]] <- results[[i]]$allResults
-}
+# FR dataset
+ret <- Compare3ProperRocFits(datasetNames, which(datasetNames == "FR"))
+plotsFR <- ret$allPlots
+resultsFR <- ret$allResults
 ```
 
 
@@ -84,23 +83,27 @@ for (i in 1:2) {
 
 ## Composite plots {#rsm-3-fits-composite-plots}
 
-* The `plotArr` list contains plots for the two datasets. The Van Dyke plots are in `plotArr[[1]]` and the Franken in `plotArr[[2]]`. The double bracket is `R`-usage to index `lists`.
+* The `plotArr` list contains plots for the two datasets. The Van Dyke plots are in `plotsVD` and the Franken in `plotsFR`. 
 * The Van Dyke dataset contains $I \times J = 2 \times 5 = 10$ composite plots. 
 * The Franken dataset contains $I \times J = 2 \times 4 = 8$ composite plots. 
-* The following shows how to display the composite plot for the Van Dyke dataset for treatment 1 and reader 2. 
+
+
+The following code shows how to display the composite plot for the Van Dyke dataset for treatment 1 and reader 2, i.e., i = 1 and j = 2. 
 
 
 ```{r}
-plotArr[[1]][[1,2]]
+plotsVD[[1,2]]
 ```
 
 
-The plot is labeled `D2, i = 1, j = 2`, meaning the second dataset in the `datasetNames` array, i.e., `datasetNames[2]`, the second treatment and the second reader. It contains 3 plots:
+It contains 3 fitted curves:
 
 * The RSM fitted curve is in black. 
 * The PROPROC fitted curve is in red. 
 * The CBM fitted curve is in blue. 
-* Three operating points from the binned data are shown as well as 95% confidence intervals for the lowest and uppermost operating points. 
+
+
+Three operating points from the binned data are shown as well as exact 95% confidence intervals for the lowest and uppermost operating points. 
 
 
 All 10 composite plots for the Van Dyke dataset are shown in Appendix \@ref(rsm-3-fits-representative-plots-van-dyke).
@@ -109,19 +112,21 @@ All 10 composite plots for the Van Dyke dataset are shown in Appendix \@ref(rsm-
 
 ## RSM parameters {#rsm-3-fits-rsm-parameters}
 
-The parameters corresponding to the RSM plots are accessed as shown next. 
+The parameters corresponding to the RSM plots for the Van Dyke dataset are accessed as shown next. 
 
-* `resultsArr[[1]][[1,2]]$retRsm$mu` is the RSM $\mu$ parameter for the Van Dyke dataset for treatment 1 and reader 2, 
-* `resultsArr[[1]][[1,2]]$retRsm$lambda` is the RSM $\lambda$ parameter;  
-* `resultsArr[[1]][[1,2]]$retRsm$nu` is the RSM $\nu$ parameter; 
-* `resultsArr[[1]][[1,2]]$retRsm$zeta1` is the RSM $\zeta_1$ parameter; 
-* In general the values are accessed as `[[f]][[i,j]]`, where `f` is the dataset index, `i` is the treatment index and `j` is the reader index; 
-* For the Van Dyke dataset `f = 1` and for the Franken dataset `f = 2`.
-
-From the previous chapter the RSM parameters can be used to calculate lesion-localization and lesion-classification performances, namely $L_L$ and $L_C$ respectively. 
+* `resultsVD[[i,j]]$retRsm$mu` is the RSM $\mu$ parameter for the Van Dyke dataset for treatment i and reader j; 
+* `resultsVD[[i,j]]$retRsm$lambda` is the RSM $\lambda$ parameter;  
+* `resultsVD[[i,j]]$retRsm$nu` is the RSM $\nu$ parameter; 
+* `resultsVD[[i,j]]$retRsm$zeta1` is the RSM $\zeta_1$ parameter; 
+* In general the values are accessed as `resultsVD[[i,j]]`, where `i` is the treatment index and `j` is the reader index; 
 
 
-```{r echo=FALSE}
+For the Franken dataset the values are accessed as `resultsFR[[i,j]]`.
+
+From the previous chapter the RSM parameters can be used to calculate lesion-localization and lesion-classification performances, namely $L_L$ and $L_C$ respectively. The following function calculates these values: 
+
+
+```{r echo=TRUE}
 LesionLocLesionCls <- function(mu, lambda, nu, lesDistr) {
   temp <- 0
   for (L in 1:length(lesDistr)) {
@@ -139,9 +144,9 @@ LesionLocLesionCls <- function(mu, lambda, nu, lesDistr) {
 
 
 ```{r echo=FALSE}
-mu <- resultsArr[[1]][[1,2]]$retRsm$mu
-lambda <- resultsArr[[1]][[1,2]]$retRsm$lambda
-nu <- resultsArr[[1]][[1,2]]$retRsm$nu
+mu <- resultsVD[[1,2]]$retRsm$mu
+lambda <- resultsVD[[1,2]]$retRsm$lambda
+nu <- resultsVD[[1,2]]$retRsm$nu
 f <- 2
 fileName <- datasetNames[f]
 theData <- get(sprintf("dataset%02d", f)) # the datasets already exist as R objects
@@ -151,23 +156,22 @@ ret <- LesionLocLesionCls(mu, lambda, nu, lesDistr)
 L_L <- ret$L_L
 L_C <- ret$L_C
   
-cat(sprintf("L_L = %7.3f, L_C = %7.3f", L_L, L_C), "\n")
+cat(sprintf("VD data i=1 j=2:  L_L = %7.3f, L_C = %7.3f", L_L, L_C), "\n")
 ```
 
 The following displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:
 
 
 ```{r, echo=FALSE}
-f <- 1;i <- 1; j <- 2
-cat("RSM parameters, Van Dyke Dataset, treatment 1, reader 2:",
-"\nmu = ",        resultsArr[[f]][[i,j]]$retRsm$mu,
-"\nlambda = ",   resultsArr[[f]][[i,j]]$retRsm$lambda,
-"\nnu = ",       resultsArr[[f]][[i,j]]$retRsm$nu,
-"\nzeta_1 = ",    as.numeric(resultsArr[[f]][[i,j]]$retRsm$zetas[1]),
-"\nAUC = ",       resultsArr[[f]][[i,j]]$retRsm$AUC,
-"\nsigma_AUC = ", as.numeric(resultsArr[[f]][[i,j]]$retRsm$StdAUC),
-"\nNLLini = ",    resultsArr[[f]][[i,j]]$retRsm$NLLIni,
-"\nNLLfin = ",    resultsArr[[f]][[i,j]]$retRsm$NLLFin)
+cat("RSM parameters, Van Dyke Dataset, i=1, j=2:",
+"\nmu = ",        resultsVD[[1,2]]$retRsm$mu,
+"\nlambda = ",   resultsVD[[1,2]]$retRsm$lambda,
+"\nnu = ",       resultsVD[[1,2]]$retRsm$nu,
+"\nzeta_1 = ",    as.numeric(resultsVD[[1,2]]$retRsm$zetas[1]),
+"\nAUC = ",       resultsVD[[1,2]]$retRsm$AUC,
+"\nsigma_AUC = ", as.numeric(resultsVD[[1,2]]$retRsm$StdAUC),
+"\nNLLini = ",    resultsVD[[1,2]]$retRsm$NLLIni,
+"\nNLLfin = ",    resultsVD[[1,2]]$retRsm$NLLFin)
 ```
 
 
@@ -177,29 +181,24 @@ The first four values are the fitted values for the RSM parameters $\mu$, $\lamb
 Displayed next are RSM parameters for the Franken dataset, treatment 2 and reader 3:
 
 
-```{r, echo=FALSE}
-f <- 2;i <- 2; j <- 3
-```
-
-
 
 ```{r, echo=FALSE}
-cat("RSM parameters, Franken dataset, treatment 2, reader 3:",
-"\nmu = ", resultsArr[[f]][[i,j]]$retRsm$mu,
-"\nlambda = ", resultsArr[[f]][[i,j]]$retRsm$lambda,
-"\nnu = ", resultsArr[[f]][[i,j]]$retRsm$nu,
-"\nzeta_1 = ", as.numeric(resultsArr[[f]][[i,j]]$retRsm$zetas[1]),
-"\nAUC = ", resultsArr[[f]][[i,j]]$retRsm$AUC,
-"\nsigma_AUC = ", as.numeric(resultsArr[[f]][[i,j]]$retRsm$StdAUC),
-"\nNLLini = ", resultsArr[[f]][[i,j]]$retRsm$NLLIni,
-"\nNLLfin = ", resultsArr[[f]][[i,j]]$retRsm$NLLFin)
+cat("RSM parameters, Franken dataset, i=2, j=3:",
+"\nmu = ", resultsFR[[2,3]]$retRsm$mu,
+"\nlambda = ", resultsFR[[2,3]]$retRsm$lambda,
+"\nnu = ", resultsFR[[2,3]]$retRsm$nu,
+"\nzeta_1 = ", as.numeric(resultsFR[[2,3]]$retRsm$zetas[1]),
+"\nAUC = ", resultsFR[[2,3]]$retRsm$AUC,
+"\nsigma_AUC = ", as.numeric(resultsFR[[2,3]]$retRsm$StdAUC),
+"\nNLLini = ", resultsFR[[2,3]]$retRsm$NLLIni,
+"\nNLLfin = ", resultsFR[[2,3]]$retRsm$NLLFin)
 ```
 
 
 ```{r echo=FALSE}
-mu <- resultsArr[[2]][[1,2]]$retRsm$mu
-lambda <- resultsArr[[2]][[1,2]]$retRsm$lambda
-nu <- resultsArr[[1]][[2,2]]$retRsm$nu
+mu <- resultsFR[[2,3]]$retRsm$mu
+lambda <- resultsFR[[2,3]]$retRsm$lambda
+nu <- resultsFR[[2,2]]$retRsm$nu
 f <- 3
 fileName <- datasetNames[f]
 theData <- get(sprintf("dataset%02d", f)) # the datasets already exist as R objects
@@ -209,7 +208,7 @@ ret <- LesionLocLesionCls(mu, lambda, nu, lesDistr)
 L_L <- ret$L_L
 L_C <- ret$L_C
   
-cat(sprintf("L_L = %7.3f, L_C = %7.3f", L_L, L_C), "\n")
+cat(sprintf("FR data i=2, j=3:  L_L = %7.3f, L_C = %7.3f", L_L, L_C), "\n")
 ```
 
 
@@ -217,47 +216,43 @@ cat(sprintf("L_L = %7.3f, L_C = %7.3f", L_L, L_C), "\n")
 
 The parameters of the CBM plots are accessed as shown next. 
 
-* `resultsArr[[f]][[i,j]]$retCbm$mu` is the CBM $\mu$ parameter; 
-* `resultsArr[[f]][[i,j]]$retCbm$alpha` is the CBM $\alpha$ parameter;   
-* `as.numeric(resultsArr[[f]][[i,j]]$retCbm$zetas[1])` is the CBM $\zeta_1$ parameter, the threshold corresponding to the highest non-trivial operating point; 
-* `resultsArr[[f]][[i,j]]$retCbm$AUC` is the CBM AUC; 
-* `as.numeric(resultsArr[[f]][[i,j]]$retCbm$StdAUC)` is the standard deviation of the CBM AUC;
-* `resultsArr[[f]][[i,j]]$retCbm$NLLIni` is the initial negative log-likelihood value;
-* `rresultsArr[[f]][[i,j]]$retCbm$NLLFin)` is the final negative log-likelihood value.
+* `results[[i,j]]$retCbm$mu` is the CBM $\mu$ parameter for treatment i and reader j; 
+* `results[[i,j]]$retCbm$alpha` is the CBM $\alpha$ parameter;   
+* `as.numeric(results[[i,j]]$retCbm$zetas[1])` is the CBM $\zeta_1$ parameter, the threshold corresponding to the highest non-trivial operating point; 
+* `results[[i,j]]$retCbm$AUC` is the CBM AUC; 
+* `as.numeric(results[[i,j]]$retCbm$StdAUC)` is the standard deviation of the CBM AUC;
+* `results[[i,j]]$retCbm$NLLIni` is the initial negative log-likelihood value;
+* `rresults[[i,j]]$retCbm$NLLFin)` is the final negative log-likelihood value.
 
 The next example displays CBM parameters and AUC etc. for the Van Dyke dataset, treatment 1 and reader 2:
 
 
 ```{r, echo=FALSE}
-f <- 1;i <- 1; j <- 2
-cat("CBM parameters, Van Dyke Dataset, treatment 1, reader 2:",
-"\nmu = ",         resultsArr[[f]][[i,j]]$retCbm$mu,
-"\nalpha = ",      resultsArr[[f]][[i,j]]$retCbm$alpha,
-"\nzeta_1 = ",     as.numeric(resultsArr[[f]][[i,j]]$retCbm$zetas[1]),
-"\nAUC = ",        resultsArr[[f]][[i,j]]$retCbm$AUC,
-"\nsigma_AUC = ",  as.numeric(resultsArr[[f]][[i,j]]$retCbm$StdAUC),
-"\nNLLini = ",     resultsArr[[f]][[i,j]]$retCbm$NLLIni,
-"\nNLLfin = ",     resultsArr[[f]][[i,j]]$retCbm$NLLFin)
+i <- 1; j <- 2
+cat("CBM parameters, Van Dyke Dataset, i=1, j=2:",
+"\nmu = ",         resultsVD[[i,j]]$retCbm$mu,
+"\nalpha = ",      resultsVD[[i,j]]$retCbm$alpha,
+"\nzeta_1 = ",     as.numeric(resultsVD[[i,j]]$retCbm$zetas[1]),
+"\nAUC = ",        resultsVD[[i,j]]$retCbm$AUC,
+"\nsigma_AUC = ",  as.numeric(resultsVD[[i,j]]$retCbm$StdAUC),
+"\nNLLini = ",     resultsVD[[i,j]]$retCbm$NLLIni,
+"\nNLLfin = ",     resultsVD[[i,j]]$retCbm$NLLFin)
 ```
 
 
 The next example displays CBM parameters for the Franken dataset, treatment 2 and reader 3:
 
 
-```{r, echo=FALSE}
-f <- 2;i <- 2; j <- 3
-```
-
 
 ```{r, echo=FALSE}
-cat("CBM parameters, Franken dataset, treatment 2, reader 3:",
-"\nmu = ",         resultsArr[[f]][[i,j]]$retCbm$mu,
-"\nalpha = ",      resultsArr[[f]][[i,j]]$retCbm$alpha,
-"\nzeta_1 = ",     as.numeric(resultsArr[[f]][[i,j]]$retCbm$zetas[1]),
-"\nAUC = ",        resultsArr[[f]][[i,j]]$retCbm$AUC,
-"\nsigma_AUC = ",  as.numeric(resultsArr[[f]][[i,j]]$retCbm$StdAUC),
-"\nNLLini = ",     resultsArr[[f]][[i,j]]$retCbm$NLLIni,
-"\nNLLfin = ",     resultsArr[[f]][[i,j]]$retCbm$NLLFin)
+cat("CBM parameters, Franken dataset, i=2, j=3:",
+"\nmu = ",         resultsFR[[i,j]]$retCbm$mu,
+"\nalpha = ",      resultsFR[[i,j]]$retCbm$alpha,
+"\nzeta_1 = ",     as.numeric(resultsFR[[i,j]]$retCbm$zetas[1]),
+"\nAUC = ",        resultsFR[[i,j]]$retCbm$AUC,
+"\nsigma_AUC = ",  as.numeric(resultsFR[[i,j]]$retCbm$StdAUC),
+"\nNLLini = ",     resultsFR[[i,j]]$retCbm$NLLIni,
+"\nNLLfin = ",     resultsFR[[i,j]]$retCbm$NLLFin)
 ```
 
 
@@ -267,12 +262,12 @@ The first three values are the fitted values for the CBM parameters $\mu$, $\alp
 ## PROPROC parameters {#rsm-3-fits-proproc-parameters}
 
 
-`PROPROC` displayed parameters are accessed as follows: 
+For the VD dataet the `PROPROC` displayed parameters are accessed as follows: 
 
 
-* `resultsArr[[f]][[i,j]]$c1` is the PROPROC $c$ parameter; 
-* `resultsArr[[f]][[i,j]]$da` is the PROPROC $d_a$ parameter;   
-* `resultsArr[[f]][[i,j]]$aucProp` is the PROPROC AUC; 
+* `resultsVD[[i,j]]$c1` is the PROPROC $c$ parameter for treatment i and reader j; 
+* `resultsVD[[i,j]]$da` is the PROPROC $d_a$ parameter;   
+* `resultsVD[[i,j]]$aucProp` is the PROPROC AUC; 
 
 Other statistics, such as standard error of AUC, are not provided by PROPROC software.
 
@@ -280,11 +275,10 @@ The next example displays PROPROC parameters for the Van Dyke dataset, treatment
 
 
 ```{r, echo=FALSE}
-f <- 1;i <- 1; j <- 2
-cat("PROPROC parameters, Van Dyke Dataset, treatment 1, reader 2:",
-"\nc = ",     resultsArr[[f]][[i,j]]$c1,
-"\nd_a = ",   resultsArr[[f]][[i,j]]$da,
-"\nAUC = ",   resultsArr[[f]][[i,j]]$aucProp)
+cat("PROPROC parameters, Van Dyke Dataset, i=1, j=2:",
+"\nc = ",     resultsVD[[1,2]]$c1,
+"\nd_a = ",   resultsVD[[1,2]]$da,
+"\nAUC = ",   resultsVD[[1,2]]$aucProp)
 ```
 
 
@@ -293,16 +287,12 @@ The values are identical to those listed for treatment 1 and reader 2 in Fig. \@
 The next example displays PROPROC parameters for the Franken dataset, treatment 2 and reader 3:
 
 
-```{r, echo=FALSE}
-f <- 2;i <- 2; j <- 3
-```
-
 
 ```{r, echo=FALSE}
-cat("PROPROC parameters, Franken dataset, treatment 2, reader 3:",
-"\nc = ", resultsArr[[f]][[i,j]]$c1,
-"\nd_a = ", resultsArr[[f]][[i,j]]$da,
-"\nAUC = ", resultsArr[[f]][[i,j]]$aucProp)
+cat("PROPROC parameters, Franken dataset, i=2, j=3:",
+"\nc = ", resultsVD[[2,3]]$c1,
+"\nd_a = ", resultsVD[[2,3]]$da,
+"\nAUC = ", resultsVD[[2,3]]$aucProp)
 ```
 
 
@@ -313,11 +303,9 @@ The next section provides an overview of the most salient findings from analyzin
 
 ## Overview of findings {#rsm-3-fits-overview}
 
-With 14 datasets the total number of individual modality-reader combinations is 236: in other words, there are 236 datasets to *each* of which three fitting algorithms were applied. 
+With 14 datasets the total number of individual modality-reader combinations is 236: in other words, there are 236 datasets to *each* of which the three fitting algorithms were applied. 
 
-It is easy to be overwhelmed by the numbers and this section summarizes an important conclusion: 
-
-*The three fitting methods are consistent with a single method-independent AUC*.
+It is easy to be overwhelmed by the numbers so this section summarizes an important conclusion: **The three fitting algorithms are consistent with a single algorithm-independent AUC**.
 
 
 If the AUCs of the three methods are identical the following relations hold with each slope $\text{m}_{PR}$ and $\text{m}_{CR}$ equal to unity: 
@@ -326,10 +314,10 @@ If the AUCs of the three methods are identical the following relations hold with
 \begin{equation}
 \left. 
 \begin{aligned}
-\text{AUC}_{PRO} =& \text{m}_{PR} \text{AUC}_{PRO}  \\
-\text{AUC}_{CBM} =& \text{m}_{CR} \text{AUC}_{PRO} \\
-\text{m}_{PR}    =& 1 \\
-\text{m}_{CR}    =& 1
+\text{AUC}_{\text{PRO}} =& \text{m}_{PR} \text{AUC}_{\text{PRO}}  \\
+\text{AUC}_{\text{CBM}} =& \text{m}_{CR} \text{AUC}_{\text{PRO}} \\
+\text{m}_{\text{PR}}    =& 1 \\
+\text{m}_{\text{CR}}    =& 1
 \end{aligned}
 \right \}
 (\#eq:rsm-3-fits-slopes-equation1)
@@ -346,10 +334,10 @@ For each dataset the plot of PROPROC AUC vs. RSM AUC should be linear with zero 
 
 ### Slopes {#rsm-3-fits-slopes}
 
-* Denote PROPROC AUC for dataset $f$, treatment $i$ and reader $j$ by $\text{AUC}^{PRO}_{fij}$. Likewise, the corresponding RSM and CBM values are denoted by $\text{AUC}^{RSM}_{fij}$ and $\text{AUC}^{CBM}_{fij}$, respectively. 
+* Denote PROPROC AUC for dataset $f$, where $f=1,2,...,14$, treatment $i$ and reader $j$ by $\text{AUC}^{\text{PRO}}_{fij}$. Likewise, the corresponding RSM and CBM values are denoted by $\text{AUC}^{\text{RSM}}_{fij}$ and $\text{AUC}^{\text{CBM}}_{fij}$, respectively. 
 
-* For a given dataset the slope of the PROPROC values vs. the RSM values is denoted $\text{m}_{PR,f}$. 
-* The (grand) average over all datasets is denoted $m^{PR}_\bullet$. Likewise, the (grand) average of the CBM AUC vs. the RSM slopes is denoted $m^{CR}_\bullet$. 
+* For a given dataset the slope of the PROPROC values vs. the RSM values is denoted $\text{m}_{\text{PR},f}$. 
+* The (grand) average over all datasets is denoted $\text{m}^{\text{PR}}_\bullet$. Likewise, the (grand) average of the CBM AUC vs. the RSM slopes is denoted $\text{m}^{\text{CR}}_\bullet$. 
 
 An analysis was conducted to determine the average slopes and bootstrap confidence intervals. 
 
@@ -372,13 +360,13 @@ slopeCI <- slopesAucsConvVsRsmCI(datasetNames)
 
 The call to function `slopesConvVsRsm()` returns `slopes`, which contains, for each of 14 datasets, four `lists`: two plots and two slopes. For example:
 
-* PRO vs. RSM: `slopes$p1[[2]]` is the plot of $\text{AUC}^{PRO}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$ for all treatments and readers in the Van Dyke dataset. The plot for dataset $f, f = 1, 2, ...14$ is accessed as `slopes$p1[[f]]` which yields the plot of $\text{AUC}^{PRO}_{f \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{f \bullet \bullet}$.
-* CBM vs. RSM: `slopes$p2[[2]]` is the plot of $\text{AUC}^{CBM}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$ for for all treatments and readers in the Van Dyke dataset. The plot for dataset $f$ is accessed as `slopes$p2[[f]]`.
+* PRO vs. RSM: `slopes$p1[[2]]` is the plot of $\text{AUC}^{\text{PRO}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$ for all treatments and readers in the Van Dyke dataset. The plot for dataset $f, f = 1, 2, ...14$ is accessed as `slopes$p1[[f]]` which yields the plot of $\text{AUC}^{\text{PRO}}_{f \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{f \bullet \bullet}$.
+* CBM vs. RSM: `slopes$p2[[2]]` is the plot of $\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$ for for all treatments and readers in the Van Dyke dataset. The plot for dataset $f$ is accessed as `slopes$p2[[f]]`.
 * PRO vs. RSM: `slopes$m_pro_rsm` has two columns, each of length 14, the slopes $\text{m}_{PR,f}$ for the datasets (indexed by $f$) and the corresponding $R^2$ values, where $R^2$ is the fraction of variance explained by the constrained straight line fit. The first column is `slopes$m_pro_rsm[[1]]` and the second column is `slopes$m_pro_rsm[[2]]`.
 * CBM vs. RSM: `slopes$m_cbm_rsm` has two columns, each of length 14, the slopes $\text{m}_{CR,f}$ for the datasets and the corresponding $R^2$ values. The first column is `slopes$m_cbm_rsm[[1]]` and the second column is `slopes$m_cbm_rsm[[2]]`.
 
 
-As an example, for the Van Dyke dataset, `slopes$p1[[2]]` which is shown in the left in Fig. \@ref(fig:rsm-3-fits-plots-2), is the plot of $\text{AUC}^{PRO}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$. Shown in the right is `slopes$p2[[2]]`, the plot of $\text{AUC}^{CBM}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$. Each plot has the constrained linear fit superposed on the $2\times5 = 10$ data points; each data point represents a distinct modality-reader combination. 
+As an example, for the Van Dyke dataset, `slopes$p1[[2]]` which is shown in the left in Fig. \@ref(fig:rsm-3-fits-plots-2), is the plot of $\text{AUC}^{\text{PRO}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$. Shown in the right is `slopes$p2[[2]]`, the plot of $\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$. Each plot has the constrained linear fit superposed on the $2\times5 = 10$ data points; each data point represents a distinct modality-reader combination. 
 
 
 ```{r rsm-3-fits-plots-2, fig.cap="Van Dyke dataset: Left plot is PROPROC-AUC vs. RSM-AUC with the superposed constrained linear fit. The number of data points is `nPts` = 10. Right plot is CBM-AUC vs. RSM-AUC.", fig.show='hold', echo=FALSE}
@@ -401,13 +389,13 @@ grid.arrange(slopes$p1[[3]], slopes$p2[[3]], ncol = 2)
 
 The call to `slopesAucsConvVsRsmCI` returns `slopeCI`, containing the results of the bootstrap analysis (the bullet symbols $\bullet$ denote grand averages over 14 datasets):
 
-* `slopeCI$cislopeProRsm` 95-percent confidence interval for $m_{PR \bullet}$
-* `slopeCI$cislopeCbmRsm` 95-percent confidence interval for $m_{CR \bullet}$
-* `slopeCI$histSlopeProRsm` histogram of 200 bootstrap values of $m_{PR \bullet}$
-* `slopeCI$histSlopeCbmRsm` histogram of 200 bootstrap values of $m_{CR \bullet}$
-* `slopeCI$ciAvgAucRsm` confidence interval from 200 bootstrap values of $\text{AUC}^{RSM}_\bullet$
-* `slopeCI$ciAvgAucPro` confidence interval for 200 bootstrap values of $\text{AUC}^{PRO}_\bullet$
-* `slopeCI$ciAvgAucCbm` confidence interval for 200 bootstrap values of $\text{AUC}^{CBM}_\bullet$
+* `slopeCI$cislopeProRsm` 95-percent confidence interval for $\text{m}_{\text{PR} \bullet}$
+* `slopeCI$cislopeCbmRsm` 95-percent confidence interval for $\text{m}_{\text{CR} \bullet}$
+* `slopeCI$histSlopeProRsm` histogram of 200 bootstrap values of $\text{m}_{\text{PR} \bullet}$
+* `slopeCI$histSlopeCbmRsm` histogram of 200 bootstrap values of $\text{m}_{\text{CR} \bullet}$
+* `slopeCI$ciAvgAucRsm` confidence interval from 200 bootstrap values of $\text{AUC}^{\text{RSM}}_\bullet$
+* `slopeCI$ciAvgAucPro` confidence interval for 200 bootstrap values of $\text{AUC}^{\text{PRO}}_\bullet$
+* `slopeCI$ciAvgAucCbm` confidence interval for 200 bootstrap values of $\text{AUC}^{\text{CBM}}_\bullet$
 
 As examples,
 
@@ -420,7 +408,7 @@ print(df)
 ```
 
 
-The CI for $m_{PR \bullet}$ is slightly above unity, while that for $m_{CR \bullet}$ is slightly below. Shown next is the histogram plot for $m_{PR \bullet}$ (left plot) and $m_{CR \bullet}$ (right plot). Quantiles of these histograms were used to compute the confidence intervals cited above. 
+The CI for $text{m}_{\text{PR} \bullet}$ is slightly above unity, while that for $text{m}_{\text{CR} \bullet}$ is slightly below. Shown next is the histogram plot for $text{m}_{\text{PR} \bullet}$ (left plot) and $text{m}_{\text{CR} \bullet}$ (right plot). Quantiles of these histograms were used to compute the previously cited confidence intervals. 
 
 
 ```{r rsm-3-fits-histo-slopes, fig.cap="Histograms of slope PROPROC AUC vs. RSM AUC (left) and slope CBM AUC vs. RSM AUC (right).", fig.show='hold', echo=FALSE}
@@ -436,7 +424,6 @@ grid.arrange(p1,p2, ncol=2, widths = c(1,1),
 ### Summary of slopes and confidence intervals {#rsm-3-fits-slopes-confidence-intervals-summary}
 
 ```{r rsm-3-fits-confidence-intervals3, cache=FALSE, echo=FALSE}
-
 x <- cbind(slopes$m_pro_rsm, slopes$m_cbm_rsm)
 x <- rbind(x, apply(x,2, mean))
 x  <- round(x, digits = 4)
@@ -513,8 +500,8 @@ The following plots are arranged in pairs, with the left plot corresponding to t
 
 
 ```{r rsm-3-fits-plots-1-1, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 1.", fig.show='hold', echo=FALSE}
-p1 <- plotArr[[1]][[1,1]]
-p2 <- plotArr[[1]][[2,1]]
+p1 <- plotsVD[[1,1]]
+p2 <- plotsVD[[2,1]]
 gA <- ggplotGrob(p1)
 gB <- ggplotGrob(p2)
 #grid::grid.newpage()
@@ -526,8 +513,8 @@ grid.arrange(gA,gB, ncol=2, widths = c(1,1),
 
 
 ```{r rsm-3-fits-plots-1-2, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 2. For treatment 2 the RSM and PROPROC fits are indistinguishable.", fig.show='hold', echo=FALSE}
-p1 <- plotArr[[1]][[1,2]]
-p2 <- plotArr[[1]][[2,2]]
+p1 <- plotsVD[[1,2]]
+p2 <- plotsVD[[2,2]]
 gA <- ggplotGrob(p1)
 gB <- ggplotGrob(p2)
 #grid::grid.newpage()
@@ -539,13 +526,13 @@ grid.arrange(gA,gB, ncol=2, widths = c(1,1),
 
 
 
-The RSM parameter values for the treatment 2 plot are: $\mu$ = `r resultsArr[[1]][[7]]$retRsm$mu`, $\lambda$ = `r resultsArr[[1]][[7]]$retRsm$lambda`, $\nu$ = `r resultsArr[[1]][[7]]$retRsm$nu`, $\zeta_1$ = `r resultsArr[[1]][[7]]$retRsm$zetas[1]`. The corresponding CBM values are $\mu$ = `r resultsArr[[1]][[7]]$retCbm$mu`, $\alpha$ = `r resultsArr[[1]][[7]]$retCbm$alpha`, $\zeta_1$ = `r resultsArr[[1]][[7]]$retCbm$zetas[1]`. The RSM and CBM $\mu$ parameters are very close and likewise the RSM $\nu$ and CBM $\alpha$ parameters are very close - this is because they have similar physical meanings, which is investigated later in this chapter TBA. [The CBM does not have a parameter analogous to the RSM $\lambda$ parameter.] 
+The RSM parameter values for the treatment 2 plot are: $\mu$ = `r resultsVD[[2,2]]$retRsm$mu`, $\lambda$ = `r resultsVD[[2,2]]$retRsm$lambda`, $\nu$ = `r resultsVD[[2,2]]$retRsm$nu`, $\zeta_1$ = `r resultsVD[[2,2]]$retRsm$zetas[1]`. The corresponding CBM values are $\mu$ = `r resultsVD[[2,2]]$retCbm$mu`, $\alpha$ = `r resultsVD[[2,2]]$retCbm$alpha`, $\zeta_1$ = `r resultsVD[[2,2]]$retCbm$zetas[1]`. The RSM and CBM $\mu$ parameters are close and likewise the RSM $\nu$ and CBM $\alpha$ parameters are close - this is because they have similar physical meanings, which is investigated later in this chapter TBA. [The CBM does not have a parameter analogous to the RSM $\lambda$ parameter.] 
 
 
 
 ```{r rsm-3-fits-plots-1-3, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 3.", fig.show='hold', echo=FALSE}
-p1 <- plotArr[[1]][[1,3]]
-p2 <- plotArr[[1]][[2,3]]
+p1 <- plotsVD[[1,3]]
+p2 <- plotsVD[[2,3]]
 gA <- ggplotGrob(p1)
 gB <- ggplotGrob(p2)
 #grid::grid.newpage()
@@ -557,13 +544,13 @@ grid.arrange(gA,gB, ncol=2, widths = c(1,1),
 
 
 
-The RSM parameters for the treatment 1 plot are: $\mu$ = `r resultsArr[[1]][[3]]$retRsm$mu`, $\lambda$ = `r resultsArr[[1]][[3]]$retRsm$lambda`, $\nu$ = `r resultsArr[[1]][[3]]$retRsm$nu`, $\zeta_1$ = `r resultsArr[[1]][[3]]$retRsm$zetas[1]`. The corresponding CBM values are $\mu$ = `r resultsArr[[1]][[3]]$retCbm$mu`, $\alpha$ = `r resultsArr[[1]][[3]]$retCbm$alpha`, $\zeta_1$ = `r resultsArr[[1]][[3]]$retCbm$zetas[1]`. 
+The RSM parameters for the treatment 1 plot are: $\mu$ = `r resultsVD[[1,3]]$retRsm$mu`, $\lambda$ = `r resultsVD[[1,3]]$retRsm$lambda`, $\nu$ = `r resultsVD[[1,3]]$retRsm$nu`, $\zeta_1$ = `r resultsVD[[1,3]]$retRsm$zetas[1]`. The corresponding CBM values are $\mu$ = `r resultsVD[[1,3]]$retCbm$mu`, $\alpha$ = `r resultsVD[[1,3]]$retCbm$alpha`, $\zeta_1$ = `r resultsVD[[1,3]]$retCbm$zetas[1]`. 
 
 
 
 ```{r rsm-3-fits-plots-1-4, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 4. For treatment 2 the 3 plots are indistinguishable and each one has AUC = 1. The degeneracy is due to all operating points being on the axes of the unit square.", fig.show='hold', echo=FALSE}
-p1 <- plotArr[[1]][[1,4]]
-p2 <- plotArr[[1]][[2,4]]
+p1 <- plotsVD[[1,4]]
+p2 <- plotsVD[[2,4]]
 gA <- ggplotGrob(p1)
 gB <- ggplotGrob(p2)
 #grid::grid.newpage()
@@ -575,8 +562,8 @@ grid.arrange(gA,gB, ncol=2, widths = c(1,1),
 
 
 ```{r rsm-3-fits-plots-1-5, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 5.", fig.show='hold', echo=FALSE}
-p1 <- plotArr[[1]][[1,5]]
-p2 <- plotArr[[1]][[2,5]]
+p1 <- plotsVD[[1,5]]
+p2 <- plotsVD[[2,5]]
 gA <- ggplotGrob(p1)
 gB <- ggplotGrob(p2)
 #grid::grid.newpage()
