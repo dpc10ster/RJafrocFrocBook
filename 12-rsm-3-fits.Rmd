@@ -34,10 +34,13 @@ There are three methods for fitting proper curves to ROC datasets:
 
 This chapter compares these methods by fitting them to 14 multiple-treatment multiple-reader datasets described in Chapter \@ref(datasets). ^[Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.]
 
-Both RSM and CBM are implemented in `RJafroc`. `PROPROC` is implemented in Windows software OR DBM-MRMC 2.5 ^[Sept. 04, 2014; the version used in this chapter is no longer distributed.] that was available [here](https://perception.lab.uiowa.edu/software), last accessed 1/4/21.
+
 
 
 ## Application to datasets {#rsm-3-fits-applications}
+
+Both RSM and CBM are implemented in `RJafroc`. `PROPROC` is implemented in Windows software OR DBM-MRMC 2.5 ^[Sept. 04, 2014; the version used in this chapter is no longer distributed.] that was available [here](https://perception.lab.uiowa.edu/software), last accessed 1/4/21.
+
 
 The RSM, PROPROC and CBM algorithms were applied to datasets described in Chapter \@ref(datasets). 
 
@@ -54,7 +57,10 @@ datasetNames <-
 
 
 
-In the following we focus, for now, on just two ROC datasets (these have been widely used in the literature to illustrate ROC analysis methodology advances) namely the Van Dyke (VD) and the Franken (FR) datasets. Illustrative examples are shown for treatment 1 and reader 2 for the Van Dyke dataset and for treatment 2 and reader 3 for the Franken dataset. 
+These are abbreviations for "TONY", "Van Dyke", "Franken", "Federica", "Thompson", "Magnus", "Lucy Warren", "Penedo", "Nico-CAD-ROC", "Ruschin", "Dobbins-1", "Dobbins-2", "Dobbins-3", "Federica Real Roc". These datasets are included with `RJafroc` and the corresponding objects are named `datasetXX`, where XX is an integer ranging from 1 to 14.
+
+
+In the following we focus, for now, on just two ROC datasets (these have been widely used in the literature to illustrate ROC analysis methodology advances) namely the Van Dyke (VD) and the Franken (FR) datasets. Illustrative examples are shown for treatment 1 and reader 2 for the Van Dyke dataset and for treatment 2 and reader 3 for the Franken dataset. Plots for all treatment-reader combinations for these two datasets are in Appendix \@ref(rsm-3-fits-representative-plots-van-dyke) and Appendix \@ref(rsm-3-fits-representative-plots-franken).
 
 
 
