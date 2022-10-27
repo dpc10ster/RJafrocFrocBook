@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-10-24" />
+<meta name="date" content="2022-10-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -458,8 +458,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The PROPROC (proper ROC) model described in TBA Chapter 20.</li>
 <li>The CBM (contaminated binormal model) described in TBA Chapter 20.</li>
 </ul>
-<p>This chapter compares these methods by fitting the to 14 multiple-treatment multiple-reader datasets described in Chapter <a href="datasets.html#datasets">13</a>.<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a></p>
-<p>Both RSM and CBM are implemented in <code>RJafroc</code>. <code>PROPROC</code> is implemented in Windows software<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a> available <a href="https://perception.lab.uiowa.edu/OR-DBM-MRMC-252">here</a>, last accessed 1/4/21.</p>
+<p>This chapter compares these methods by fitting them to 14 multiple-treatment multiple-reader datasets described in Chapter <a href="datasets.html#datasets">13</a>.<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a></p>
+<p>Both RSM and CBM are implemented in <code>RJafroc</code>. <code>PROPROC</code> is implemented in Windows software OR DBM-MRMC 2.5<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a> that was available <a href="https://perception.lab.uiowa.edu/software">here</a>, last accessed 1/4/21.</p>
 </div>
 <div id="rsm-3-fits-applications" class="section level2 hasAnchor">
 <h2><span class="header-section-number">9.3</span> Application to datasets<a href="rsm-3-fits.html#rsm-3-fits-applications" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -471,17 +471,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb103-5"><a href="rsm-3-fits.html#cb103-5"></a>  <span class="st">&quot;RUS&quot;</span>, <span class="st">&quot;DOB1&quot;</span>, <span class="st">&quot;DOB2&quot;</span>, </span>
 <span id="cb103-6"><a href="rsm-3-fits.html#cb103-6"></a>  <span class="st">&quot;DOB3&quot;</span>, <span class="st">&quot;FZR&quot;</span>)</span></code></pre></div>
 <p>In the following we focus on just two ROC datasets (these have been widely used in the literature to illustrate ROC analysis methodology advances) namely the Van Dyke (VD) and the Franken (FR) datasets.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="rsm-3-fits.html#cb104-1"></a>results &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
-<span id="cb104-2"><a href="rsm-3-fits.html#cb104-2"></a></span>
-<span id="cb104-3"><a href="rsm-3-fits.html#cb104-3"></a>results[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">2</span>) <span class="co"># VD dataset</span></span>
-<span id="cb104-4"><a href="rsm-3-fits.html#cb104-4"></a>results[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="dv">3</span>) <span class="co"># FR dataset</span></span>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="rsm-3-fits.html#cb104-1"></a><span class="co"># VD dataset</span></span>
+<span id="cb104-2"><a href="rsm-3-fits.html#cb104-2"></a>ret &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="kw">which</span>(datasetNames <span class="op">==</span><span class="st"> &quot;VD&quot;</span>))</span>
+<span id="cb104-3"><a href="rsm-3-fits.html#cb104-3"></a>plotsVD &lt;-<span class="st"> </span>ret<span class="op">$</span>allPlots</span>
+<span id="cb104-4"><a href="rsm-3-fits.html#cb104-4"></a>resultsVD &lt;-<span class="st"> </span>ret<span class="op">$</span>allResults</span>
 <span id="cb104-5"><a href="rsm-3-fits.html#cb104-5"></a></span>
-<span id="cb104-6"><a href="rsm-3-fits.html#cb104-6"></a>resultsArr &lt;-<span class="st"> </span>plotArr &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">list</span>(), <span class="dt">dim =</span> <span class="dv">2</span>)</span>
-<span id="cb104-7"><a href="rsm-3-fits.html#cb104-7"></a></span>
-<span id="cb104-8"><a href="rsm-3-fits.html#cb104-8"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) {</span>
-<span id="cb104-9"><a href="rsm-3-fits.html#cb104-9"></a>  plotArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allPlots</span>
-<span id="cb104-10"><a href="rsm-3-fits.html#cb104-10"></a>  resultsArr[[i]] &lt;-<span class="st"> </span>results[[i]]<span class="op">$</span>allResults</span>
-<span id="cb104-11"><a href="rsm-3-fits.html#cb104-11"></a>}</span></code></pre></div>
+<span id="cb104-6"><a href="rsm-3-fits.html#cb104-6"></a><span class="co"># FR dataset</span></span>
+<span id="cb104-7"><a href="rsm-3-fits.html#cb104-7"></a>ret &lt;-<span class="st"> </span><span class="kw">Compare3ProperRocFits</span>(datasetNames, <span class="kw">which</span>(datasetNames <span class="op">==</span><span class="st"> &quot;FR&quot;</span>))</span>
+<span id="cb104-8"><a href="rsm-3-fits.html#cb104-8"></a>plotsFR &lt;-<span class="st"> </span>ret<span class="op">$</span>allPlots</span>
+<span id="cb104-9"><a href="rsm-3-fits.html#cb104-9"></a>resultsFR &lt;-<span class="st"> </span>ret<span class="op">$</span>allResults</span></code></pre></div>
 <ul>
 <li>The supporting code is in the function <code>Compare3ProperRocFits()</code> located at <code>R/compare-3-fits/Compare3ProperRocFits.R</code>.</li>
 <li>The analyzed results file locations are shown in Section <a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results">9.10.2</a>.</li>
@@ -491,36 +489,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="rsm-3-fits-composite-plots" class="section level2 hasAnchor">
 <h2><span class="header-section-number">9.4</span> Composite plots<a href="rsm-3-fits.html#rsm-3-fits-composite-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>The <code>plotArr</code> list contains plots for the two datasets. The Van Dyke plots are in <code>plotArr[[1]]</code> and the Franken in <code>plotArr[[2]]</code>. The double bracket is <code>R</code>-usage to index <code>lists</code>.</li>
+<li>The <code>plotArr</code> list contains plots for the two datasets. The Van Dyke plots are in <code>plotsVD</code> and the Franken in <code>plotsFR</code>.</li>
 <li>The Van Dyke dataset contains <span class="math inline">\(I \times J = 2 \times 5 = 10\)</span> composite plots.</li>
 <li>The Franken dataset contains <span class="math inline">\(I \times J = 2 \times 4 = 8\)</span> composite plots.</li>
-<li>The following shows how to display the composite plot for the Van Dyke dataset for treatment 1 and reader 2.</li>
 </ul>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="rsm-3-fits.html#cb105-1"></a>plotArr[[<span class="dv">1</span>]][[<span class="dv">1</span>,<span class="dv">2</span>]]</span></code></pre></div>
+<p>The following code shows how to display the composite plot for the Van Dyke dataset for treatment 1 and reader 2, i.e., i = 1 and j = 2.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="rsm-3-fits.html#cb105-1"></a>plotsVD[[<span class="dv">1</span>,<span class="dv">2</span>]]</span></code></pre></div>
 <p><img src="12-rsm-3-fits_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>The plot is labeled <code>D2, i = 1, j = 2</code>, meaning the second dataset in the <code>datasetNames</code> array, i.e., <code>datasetNames[2]</code>, the second treatment and the second reader. It contains 3 plots:</p>
+<p>It contains 3 fitted curves:</p>
 <ul>
 <li>The RSM fitted curve is in black.</li>
 <li>The PROPROC fitted curve is in red.</li>
 <li>The CBM fitted curve is in blue.</li>
-<li>Three operating points from the binned data are shown as well as 95% confidence intervals for the lowest and uppermost operating points.</li>
 </ul>
+<p>Three operating points from the binned data are shown as well as exact 95% confidence intervals for the lowest and uppermost operating points.</p>
 <p>All 10 composite plots for the Van Dyke dataset are shown in Appendix <a href="rsm-3-fits.html#rsm-3-fits-representative-plots-van-dyke">9.10.3</a>.</p>
 </div>
 <div id="rsm-3-fits-rsm-parameters" class="section level2 hasAnchor">
 <h2><span class="header-section-number">9.5</span> RSM parameters<a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The parameters corresponding to the RSM plots are accessed as shown next.</p>
+<p>The parameters corresponding to the RSM plots for the Van Dyke dataset are accessed as shown next.</p>
 <ul>
-<li><code>resultsArr[[1]][[1,2]]$retRsm$mu</code> is the RSM <span class="math inline">\(\mu\)</span> parameter for the Van Dyke dataset for treatment 1 and reader 2,</li>
-<li><code>resultsArr[[1]][[1,2]]$retRsm$lambda</code> is the RSM <span class="math inline">\(\lambda\)</span> parameter;<br />
+<li><code>resultsVD[[i,j]]$retRsm$mu</code> is the RSM <span class="math inline">\(\mu\)</span> parameter for the Van Dyke dataset for treatment i and reader j;</li>
+<li><code>resultsVD[[i,j]]$retRsm$lambda</code> is the RSM <span class="math inline">\(\lambda\)</span> parameter;<br />
 </li>
-<li><code>resultsArr[[1]][[1,2]]$retRsm$nu</code> is the RSM <span class="math inline">\(\nu\)</span> parameter;</li>
-<li><code>resultsArr[[1]][[1,2]]$retRsm$zeta1</code> is the RSM <span class="math inline">\(\zeta_1\)</span> parameter;</li>
-<li>In general the values are accessed as <code>[[f]][[i,j]]</code>, where <code>f</code> is the dataset index, <code>i</code> is the treatment index and <code>j</code> is the reader index;</li>
-<li>For the Van Dyke dataset <code>f = 1</code> and for the Franken dataset <code>f = 2</code>.</li>
+<li><code>resultsVD[[i,j]]$retRsm$nu</code> is the RSM <span class="math inline">\(\nu\)</span> parameter;</li>
+<li><code>resultsVD[[i,j]]$retRsm$zeta1</code> is the RSM <span class="math inline">\(\zeta_1\)</span> parameter;</li>
+<li>In general the values are accessed as <code>resultsVD[[i,j]]</code>, where <code>i</code> is the treatment index and <code>j</code> is the reader index;</li>
 </ul>
+<p>For the Franken dataset the values are accessed as <code>resultsFR[[i,j]]</code>.</p>
+<p>From the previous chapter the RSM parameters can be used to calculate lesion-localization and lesion-classification performances, namely <span class="math inline">\(L_L\)</span> and <span class="math inline">\(L_C\)</span> respectively. The following function calculates these values:</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="rsm-3-fits.html#cb106-1"></a>LesionLocLesionCls &lt;-<span class="st"> </span><span class="cf">function</span>(mu, lambda, nu, lesDistr) {</span>
+<span id="cb106-2"><a href="rsm-3-fits.html#cb106-2"></a>  temp &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb106-3"><a href="rsm-3-fits.html#cb106-3"></a>  <span class="cf">for</span> (L <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(lesDistr)) {</span>
+<span id="cb106-4"><a href="rsm-3-fits.html#cb106-4"></a>    temp &lt;-<span class="st"> </span>temp <span class="op">+</span><span class="st"> </span>lesDistr[L] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>nu)<span class="op">^</span>L</span>
+<span id="cb106-5"><a href="rsm-3-fits.html#cb106-5"></a>  }</span>
+<span id="cb106-6"><a href="rsm-3-fits.html#cb106-6"></a>  L_L &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambda) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>temp)</span>
+<span id="cb106-7"><a href="rsm-3-fits.html#cb106-7"></a>  L_C &lt;-<span class="st"> </span><span class="kw">pnorm</span>(mu<span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">2</span>))</span>
+<span id="cb106-8"><a href="rsm-3-fits.html#cb106-8"></a>  <span class="kw">return</span>(<span class="kw">list</span>(</span>
+<span id="cb106-9"><a href="rsm-3-fits.html#cb106-9"></a>    <span class="dt">L_L =</span> L_L,</span>
+<span id="cb106-10"><a href="rsm-3-fits.html#cb106-10"></a>    <span class="dt">L_C =</span> L_C</span>
+<span id="cb106-11"><a href="rsm-3-fits.html#cb106-11"></a>  ))</span>
+<span id="cb106-12"><a href="rsm-3-fits.html#cb106-12"></a>}</span></code></pre></div>
+<pre><code>## VD data i=1 j=2:  L_L =   0.582, L_C =   0.940</code></pre>
 <p>The following displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:</p>
-<pre><code>## RSM parameters, Van Dyke Dataset, treatment 1, reader 2: 
+<pre><code>## RSM parameters, Van Dyke Dataset, i=1, j=2: 
 ## mu =  2.201413 
 ## lambda =  0.2569453 
 ## nu =  0.7524016 
@@ -531,7 +543,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## NLLfin =  85.86244</code></pre>
 <p>The first four values are the fitted values for the RSM parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\zeta_1\)</span>. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood.<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
 <p>Displayed next are RSM parameters for the Franken dataset, treatment 2 and reader 3:</p>
-<pre><code>## RSM parameters, Franken dataset, treatment 2, reader 3: 
+<pre><code>## RSM parameters, Franken dataset, i=2, j=3: 
 ## mu =  2.641412 
 ## lambda =  2.137379 
 ## nu =  0.784759 
@@ -540,22 +552,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sigma_AUC =  0.03809136 
 ## NLLini =  132.6265 
 ## NLLfin =  127.9418</code></pre>
+<pre><code>## FR data i=2, j=3:  L_L =   0.115, L_C =   0.969</code></pre>
 </div>
 <div id="rsm-3-fits-cbm-parameters" class="section level2 hasAnchor">
 <h2><span class="header-section-number">9.6</span> CBM parameters<a href="rsm-3-fits.html#rsm-3-fits-cbm-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The parameters of the CBM plots are accessed as shown next.</p>
 <ul>
-<li><code>resultsArr[[f]][[i,j]]$retCbm$mu</code> is the CBM <span class="math inline">\(\mu\)</span> parameter;</li>
-<li><code>resultsArr[[f]][[i,j]]$retCbm$alpha</code> is the CBM <span class="math inline">\(\alpha\)</span> parameter;<br />
+<li><code>results[[i,j]]$retCbm$mu</code> is the CBM <span class="math inline">\(\mu\)</span> parameter for treatment i and reader j;</li>
+<li><code>results[[i,j]]$retCbm$alpha</code> is the CBM <span class="math inline">\(\alpha\)</span> parameter;<br />
 </li>
-<li><code>as.numeric(resultsArr[[f]][[i,j]]$retCbm$zetas[1])</code> is the CBM <span class="math inline">\(\zeta_1\)</span> parameter, the threshold corresponding to the highest non-trivial operating point;</li>
-<li><code>resultsArr[[f]][[i,j]]$retCbm$AUC</code> is the CBM AUC;</li>
-<li><code>as.numeric(resultsArr[[f]][[i,j]]$retCbm$StdAUC)</code> is the standard deviation of the CBM AUC;</li>
-<li><code>resultsArr[[f]][[i,j]]$retCbm$NLLIni</code> is the initial negative log-likelihood value;</li>
-<li><code>rresultsArr[[f]][[i,j]]$retCbm$NLLFin)</code> is the final negative log-likelihood value.</li>
+<li><code>as.numeric(results[[i,j]]$retCbm$zetas[1])</code> is the CBM <span class="math inline">\(\zeta_1\)</span> parameter, the threshold corresponding to the highest non-trivial operating point;</li>
+<li><code>results[[i,j]]$retCbm$AUC</code> is the CBM AUC;</li>
+<li><code>as.numeric(results[[i,j]]$retCbm$StdAUC)</code> is the standard deviation of the CBM AUC;</li>
+<li><code>results[[i,j]]$retCbm$NLLIni</code> is the initial negative log-likelihood value;</li>
+<li><code>rresults[[i,j]]$retCbm$NLLFin)</code> is the final negative log-likelihood value.</li>
 </ul>
 <p>The next example displays CBM parameters and AUC etc. for the Van Dyke dataset, treatment 1 and reader 2:</p>
-<pre><code>## CBM parameters, Van Dyke Dataset, treatment 1, reader 2: 
+<pre><code>## CBM parameters, Van Dyke Dataset, i=1, j=2: 
 ## mu =  2.745791 
 ## alpha =  0.7931264 
 ## zeta_1 =  1.125028 
@@ -564,52 +577,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## NLLini =  86.23289 
 ## NLLfin =  85.88459</code></pre>
 <p>The next example displays CBM parameters for the Franken dataset, treatment 2 and reader 3:</p>
-<pre><code>## CBM parameters, Franken dataset, treatment 2, reader 3: 
-## mu =  2.340719 
-## alpha =  0.7860465 
-## zeta_1 =  -1.144089 
-## AUC =  0.8545476 
-## sigma_AUC =  0.03825439 
-## NLLini =  131.8453 
-## NLLfin =  128.0437</code></pre>
+<pre><code>## CBM parameters, Franken dataset, i=2, j=3: 
+## mu =  2.324116 
+## alpha =  0.8796571 
+## zeta_1 =  -0.5599662 
+## AUC =  0.8957135 
+## sigma_AUC =  0.03223745 
+## NLLini =  98.30823 
+## NLLfin =  97.82786</code></pre>
 <p>The first three values are the fitted values for the CBM parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\zeta_1\)</span>. The next value is the AUC under the fitted CBM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood.</p>
 </div>
 <div id="rsm-3-fits-proproc-parameters" class="section level2 hasAnchor">
 <h2><span class="header-section-number">9.7</span> PROPROC parameters<a href="rsm-3-fits.html#rsm-3-fits-proproc-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><code>PROPROC</code> displayed parameters are accessed as follows:</p>
+<p>For the VD dataet the <code>PROPROC</code> displayed parameters are accessed as follows:</p>
 <ul>
-<li><code>resultsArr[[f]][[i,j]]$c1</code> is the PROPROC <span class="math inline">\(c\)</span> parameter;</li>
-<li><code>resultsArr[[f]][[i,j]]$da</code> is the PROPROC <span class="math inline">\(d_a\)</span> parameter;<br />
+<li><code>resultsVD[[i,j]]$c1</code> is the PROPROC <span class="math inline">\(c\)</span> parameter for treatment i and reader j;</li>
+<li><code>resultsVD[[i,j]]$da</code> is the PROPROC <span class="math inline">\(d_a\)</span> parameter;<br />
 </li>
-<li><code>resultsArr[[f]][[i,j]]$aucProp</code> is the PROPROC AUC;</li>
+<li><code>resultsVD[[i,j]]$aucProp</code> is the PROPROC AUC;</li>
 </ul>
 <p>Other statistics, such as standard error of AUC, are not provided by PROPROC software.</p>
 <p>The next example displays PROPROC parameters for the Van Dyke dataset, treatment 1 and reader 2:</p>
-<pre><code>## PROPROC parameters, Van Dyke Dataset, treatment 1, reader 2: 
+<pre><code>## PROPROC parameters, Van Dyke Dataset, i=1, j=2: 
 ## c =  -0.2809004 
 ## d_a =  1.731472 
 ## AUC =  0.8910714</code></pre>
 <p>The values are identical to those listed for treatment 1 and reader 2 in Fig. <a href="rsm-3-fits.html#fig:rsm-3-fits-proproc-output-van-dyke">9.6</a>.</p>
 <p>The next example displays PROPROC parameters for the Franken dataset, treatment 2 and reader 3:</p>
-<pre><code>## PROPROC parameters, Franken dataset, treatment 2, reader 3: 
-## c =  -0.3551936 
-## d_a =  1.401807 
-## AUC =  0.8541372</code></pre>
+<pre><code>## PROPROC parameters, Franken dataset, i=2, j=3: 
+## c =  -0.3299822 
+## d_a =  2.078543 
+## AUC =  0.9304317</code></pre>
 <p>The next section provides an overview of the most salient findings from analyzing the datasets.</p>
 </div>
 <div id="rsm-3-fits-overview" class="section level2 hasAnchor">
 <h2><span class="header-section-number">9.8</span> Overview of findings<a href="rsm-3-fits.html#rsm-3-fits-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>With 14 datasets the total number of individual modality-reader combinations is 236: in other words, there are 236 datasets to <em>each</em> of which three fitting algorithms were applied.</p>
-<p>It is easy to be overwhelmed by the numbers and this section summarizes an important conclusion:</p>
-<p><em>The three fitting methods are consistent with a single method-independent AUC</em>.</p>
+<p>With 14 datasets the total number of individual modality-reader combinations is 236: in other words, there are 236 datasets to <em>each</em> of which the three fitting algorithms were applied.</p>
+<p>It is easy to be overwhelmed by the numbers so this section summarizes an important conclusion: <strong>The three fitting algorithms are consistent with a single algorithm-independent AUC</strong>.</p>
 <p>If the AUCs of the three methods are identical the following relations hold with each slope <span class="math inline">\(\text{m}_{PR}\)</span> and <span class="math inline">\(\text{m}_{CR}\)</span> equal to unity:</p>
 <p><span class="math display" id="eq:rsm-3-fits-slopes-equation1">\[\begin{equation}
 \left. 
 \begin{aligned}
-\text{AUC}_{PRO} =&amp; \text{m}_{PR} \text{AUC}_{PRO}  \\
-\text{AUC}_{CBM} =&amp; \text{m}_{CR} \text{AUC}_{PRO} \\
-\text{m}_{PR}    =&amp; 1 \\
-\text{m}_{CR}    =&amp; 1
+\text{AUC}_{\text{PRO}} =&amp; \text{m}_{PR} \text{AUC}_{\text{PRO}}  \\
+\text{AUC}_{\text{CBM}} =&amp; \text{m}_{CR} \text{AUC}_{\text{PRO}} \\
+\text{m}_{\text{PR}}    =&amp; 1 \\
+\text{m}_{\text{CR}}    =&amp; 1
 \end{aligned}
 \right \}
 \tag{9.1}
@@ -624,22 +636,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="rsm-3-fits-slopes" class="section level3 hasAnchor">
 <h3><span class="header-section-number">9.8.1</span> Slopes<a href="rsm-3-fits.html#rsm-3-fits-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Denote PROPROC AUC for dataset <span class="math inline">\(f\)</span>, treatment <span class="math inline">\(i\)</span> and reader <span class="math inline">\(j\)</span> by <span class="math inline">\(\text{AUC}^{PRO}_{fij}\)</span>. Likewise, the corresponding RSM and CBM values are denoted by <span class="math inline">\(\text{AUC}^{RSM}_{fij}\)</span> and <span class="math inline">\(\text{AUC}^{CBM}_{fij}\)</span>, respectively.</p></li>
-<li><p>For a given dataset the slope of the PROPROC values vs. the RSM values is denoted <span class="math inline">\(\text{m}_{PR,f}\)</span>.</p></li>
-<li><p>The (grand) average over all datasets is denoted <span class="math inline">\(m^{PR}_\bullet\)</span>. Likewise, the (grand) average of the CBM AUC vs. the RSM slopes is denoted <span class="math inline">\(m^{CR}_\bullet\)</span>.</p></li>
+<li><p>Denote PROPROC AUC for dataset <span class="math inline">\(f\)</span>, where <span class="math inline">\(f=1,2,...,14\)</span>, treatment <span class="math inline">\(i\)</span> and reader <span class="math inline">\(j\)</span> by <span class="math inline">\(\text{AUC}^{\text{PRO}}_{fij}\)</span>. Likewise, the corresponding RSM and CBM values are denoted by <span class="math inline">\(\text{AUC}^{\text{RSM}}_{fij}\)</span> and <span class="math inline">\(\text{AUC}^{\text{CBM}}_{fij}\)</span>, respectively.</p></li>
+<li><p>For a given dataset the slope of the PROPROC values vs. the RSM values is denoted <span class="math inline">\(\text{m}_{\text{PR},f}\)</span>.</p></li>
+<li><p>The (grand) average over all datasets is denoted <span class="math inline">\(\text{m}^{\text{PR}}_\bullet\)</span>. Likewise, the (grand) average of the CBM AUC vs. the RSM slopes is denoted <span class="math inline">\(\text{m}^{\text{CR}}_\bullet\)</span>.</p></li>
 </ul>
 <p>An analysis was conducted to determine the average slopes and bootstrap confidence intervals.</p>
 <p>The code for calculating the average slopes is in <code>R/compare-3-fits/slopesConvVsRsm.R</code> and that for the bootstrap confidence intervals is in <code>R/compare-3-fits/slopesAucsConvVsRsmCI.R</code>.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="rsm-3-fits.html#cb112-1"></a>slopes &lt;-<span class="st"> </span><span class="kw">slopesConvVsRsm</span>(datasetNames)</span>
-<span id="cb112-2"><a href="rsm-3-fits.html#cb112-2"></a>slopeCI &lt;-<span class="st"> </span><span class="kw">slopesAucsConvVsRsmCI</span>(datasetNames)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="rsm-3-fits.html#cb115-1"></a>slopes &lt;-<span class="st"> </span><span class="kw">slopesConvVsRsm</span>(datasetNames)</span>
+<span id="cb115-2"><a href="rsm-3-fits.html#cb115-2"></a>slopeCI &lt;-<span class="st"> </span><span class="kw">slopesAucsConvVsRsmCI</span>(datasetNames)</span></code></pre></div>
 <p>The call to function <code>slopesConvVsRsm()</code> returns <code>slopes</code>, which contains, for each of 14 datasets, four <code>lists</code>: two plots and two slopes. For example:</p>
 <ul>
-<li>PRO vs. RSM: <code>slopes$p1[[2]]</code> is the plot of <span class="math inline">\(\text{AUC}^{PRO}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span> for all treatments and readers in the Van Dyke dataset. The plot for dataset <span class="math inline">\(f, f = 1, 2, ...14\)</span> is accessed as <code>slopes$p1[[f]]</code> which yields the plot of <span class="math inline">\(\text{AUC}^{PRO}_{f \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{f \bullet \bullet}\)</span>.</li>
-<li>CBM vs. RSM: <code>slopes$p2[[2]]</code> is the plot of <span class="math inline">\(\text{AUC}^{CBM}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span> for for all treatments and readers in the Van Dyke dataset. The plot for dataset <span class="math inline">\(f\)</span> is accessed as <code>slopes$p2[[f]]</code>.</li>
+<li>PRO vs. RSM: <code>slopes$p1[[2]]</code> is the plot of <span class="math inline">\(\text{AUC}^{\text{PRO}}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span> for all treatments and readers in the Van Dyke dataset. The plot for dataset <span class="math inline">\(f, f = 1, 2, ...14\)</span> is accessed as <code>slopes$p1[[f]]</code> which yields the plot of <span class="math inline">\(\text{AUC}^{\text{PRO}}_{f \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{f \bullet \bullet}\)</span>.</li>
+<li>CBM vs. RSM: <code>slopes$p2[[2]]</code> is the plot of <span class="math inline">\(\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span> for for all treatments and readers in the Van Dyke dataset. The plot for dataset <span class="math inline">\(f\)</span> is accessed as <code>slopes$p2[[f]]</code>.</li>
 <li>PRO vs. RSM: <code>slopes$m_pro_rsm</code> has two columns, each of length 14, the slopes <span class="math inline">\(\text{m}_{PR,f}\)</span> for the datasets (indexed by <span class="math inline">\(f\)</span>) and the corresponding <span class="math inline">\(R^2\)</span> values, where <span class="math inline">\(R^2\)</span> is the fraction of variance explained by the constrained straight line fit. The first column is <code>slopes$m_pro_rsm[[1]]</code> and the second column is <code>slopes$m_pro_rsm[[2]]</code>.</li>
 <li>CBM vs. RSM: <code>slopes$m_cbm_rsm</code> has two columns, each of length 14, the slopes <span class="math inline">\(\text{m}_{CR,f}\)</span> for the datasets and the corresponding <span class="math inline">\(R^2\)</span> values. The first column is <code>slopes$m_cbm_rsm[[1]]</code> and the second column is <code>slopes$m_cbm_rsm[[2]]</code>.</li>
 </ul>
-<p>As an example, for the Van Dyke dataset, <code>slopes$p1[[2]]</code> which is shown in the left in Fig. <a href="rsm-3-fits.html#fig:rsm-3-fits-plots-2">9.1</a>, is the plot of <span class="math inline">\(\text{AUC}^{PRO}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span>. Shown in the right is <code>slopes$p2[[2]]</code>, the plot of <span class="math inline">\(\text{AUC}^{CBM}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span>. Each plot has the constrained linear fit superposed on the <span class="math inline">\(2\times5 = 10\)</span> data points; each data point represents a distinct modality-reader combination.</p>
+<p>As an example, for the Van Dyke dataset, <code>slopes$p1[[2]]</code> which is shown in the left in Fig. <a href="rsm-3-fits.html#fig:rsm-3-fits-plots-2">9.1</a>, is the plot of <span class="math inline">\(\text{AUC}^{\text{PRO}}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span>. Shown in the right is <code>slopes$p2[[2]]</code>, the plot of <span class="math inline">\(\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}\)</span> vs. <span class="math inline">\(\text{AUC}^{RSM}_{2 \bullet \bullet}\)</span>. Each plot has the constrained linear fit superposed on the <span class="math inline">\(2\times5 = 10\)</span> data points; each data point represents a distinct modality-reader combination.</p>
 <div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-2"></span>
 <img src="12-rsm-3-fits_files/figure-html/rsm-3-fits-plots-2-1.png" alt="Van Dyke dataset: Left plot is PROPROC-AUC vs. RSM-AUC with the superposed constrained linear fit. The number of data points is `nPts` = 10. Right plot is CBM-AUC vs. RSM-AUC." width="672" />
 <p class="caption">
@@ -658,19 +670,19 @@ FIGURE 9.2: Similar to previous plot, for Franken dataset.
 <h3><span class="header-section-number">9.8.2</span> Confidence intervals<a href="rsm-3-fits.html#rsm-3-fits-confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The call to <code>slopesAucsConvVsRsmCI</code> returns <code>slopeCI</code>, containing the results of the bootstrap analysis (the bullet symbols <span class="math inline">\(\bullet\)</span> denote grand averages over 14 datasets):</p>
 <ul>
-<li><code>slopeCI$cislopeProRsm</code> 95-percent confidence interval for <span class="math inline">\(m_{PR \bullet}\)</span></li>
-<li><code>slopeCI$cislopeCbmRsm</code> 95-percent confidence interval for <span class="math inline">\(m_{CR \bullet}\)</span></li>
-<li><code>slopeCI$histSlopeProRsm</code> histogram of 200 bootstrap values of <span class="math inline">\(m_{PR \bullet}\)</span></li>
-<li><code>slopeCI$histSlopeCbmRsm</code> histogram of 200 bootstrap values of <span class="math inline">\(m_{CR \bullet}\)</span></li>
-<li><code>slopeCI$ciAvgAucRsm</code> confidence interval from 200 bootstrap values of <span class="math inline">\(\text{AUC}^{RSM}_\bullet\)</span></li>
-<li><code>slopeCI$ciAvgAucPro</code> confidence interval for 200 bootstrap values of <span class="math inline">\(\text{AUC}^{PRO}_\bullet\)</span></li>
-<li><code>slopeCI$ciAvgAucCbm</code> confidence interval for 200 bootstrap values of <span class="math inline">\(\text{AUC}^{CBM}_\bullet\)</span></li>
+<li><code>slopeCI$cislopeProRsm</code> 95-percent confidence interval for <span class="math inline">\(\text{m}_{\text{PR} \bullet}\)</span></li>
+<li><code>slopeCI$cislopeCbmRsm</code> 95-percent confidence interval for <span class="math inline">\(\text{m}_{\text{CR} \bullet}\)</span></li>
+<li><code>slopeCI$histSlopeProRsm</code> histogram of 200 bootstrap values of <span class="math inline">\(\text{m}_{\text{PR} \bullet}\)</span></li>
+<li><code>slopeCI$histSlopeCbmRsm</code> histogram of 200 bootstrap values of <span class="math inline">\(\text{m}_{\text{CR} \bullet}\)</span></li>
+<li><code>slopeCI$ciAvgAucRsm</code> confidence interval from 200 bootstrap values of <span class="math inline">\(\text{AUC}^{\text{RSM}}_\bullet\)</span></li>
+<li><code>slopeCI$ciAvgAucPro</code> confidence interval for 200 bootstrap values of <span class="math inline">\(\text{AUC}^{\text{PRO}}_\bullet\)</span></li>
+<li><code>slopeCI$ciAvgAucCbm</code> confidence interval for 200 bootstrap values of <span class="math inline">\(\text{AUC}^{\text{CBM}}_\bullet\)</span></li>
 </ul>
 <p>As examples,</p>
 <pre><code>##           m-PR      m-CR
 ## 2.5%  1.005092 0.9919886
 ## 97.5% 1.012285 0.9966149</code></pre>
-<p>The CI for <span class="math inline">\(m_{PR \bullet}\)</span> is slightly above unity, while that for <span class="math inline">\(m_{CR \bullet}\)</span> is slightly below. Shown next is the histogram plot for <span class="math inline">\(m_{PR \bullet}\)</span> (left plot) and <span class="math inline">\(m_{CR \bullet}\)</span> (right plot). Quantiles of these histograms were used to compute the confidence intervals cited above.</p>
+<p>The CI for <span class="math inline">\(text{m}_{\text{PR} \bullet}\)</span> is slightly above unity, while that for <span class="math inline">\(text{m}_{\text{CR} \bullet}\)</span> is slightly below. Shown next is the histogram plot for <span class="math inline">\(text{m}_{\text{PR} \bullet}\)</span> (left plot) and <span class="math inline">\(text{m}_{\text{CR} \bullet}\)</span> (right plot). Quantiles of these histograms were used to compute the previously cited confidence intervals.</p>
 <div class="figure"><span style="display:block;" id="fig:rsm-3-fits-histo-slopes"></span>
 <img src="12-rsm-3-fits_files/figure-html/rsm-3-fits-histo-slopes-1.png" alt="Histograms of slope PROPROC AUC vs. RSM AUC (left) and slope CBM AUC vs. RSM AUC (right)." width="672" />
 <p class="caption">
@@ -1045,14 +1057,14 @@ FIGURE 9.8: Composite plots in both treatments for Van Dyke dataset, reader 1.
 FIGURE 9.9: Composite plots in both treatments for Van Dyke dataset, reader 2. For treatment 2 the RSM and PROPROC fits are indistinguishable.
 </p>
 </div>
-<p>The RSM parameter values for the treatment 2 plot are: <span class="math inline">\(\mu\)</span> = 5.9346513, <span class="math inline">\(\lambda\)</span> = 0.3809031, <span class="math inline">\(\nu\)</span> = 0.9292484, <span class="math inline">\(\zeta_1\)</span> = 0.479145. The corresponding CBM values are <span class="math inline">\(\mu\)</span> = 5.9356142, <span class="math inline">\(\alpha\)</span> = 0.9292952, <span class="math inline">\(\zeta_1\)</span> = 1.20877. The RSM and CBM <span class="math inline">\(\mu\)</span> parameters are very close and likewise the RSM <span class="math inline">\(\nu\)</span> and CBM <span class="math inline">\(\alpha\)</span> parameters are very close - this is because they have similar physical meanings, which is investigated later in this chapter TBA. [The CBM does not have a parameter analogous to the RSM <span class="math inline">\(\lambda\)</span> parameter.]</p>
+<p>The RSM parameter values for the treatment 2 plot are: <span class="math inline">\(\mu\)</span> = 5.767237, <span class="math inline">\(\lambda\)</span> = 2.7212621, <span class="math inline">\(\nu\)</span> = 0.8021718, <span class="math inline">\(\zeta_1\)</span> = -1.5717303. The corresponding CBM values are <span class="math inline">\(\mu\)</span> = 5.4464738, <span class="math inline">\(\alpha\)</span> = 0.8023609, <span class="math inline">\(\zeta_1\)</span> = -1.4253826. The RSM and CBM <span class="math inline">\(\mu\)</span> parameters are close and likewise the RSM <span class="math inline">\(\nu\)</span> and CBM <span class="math inline">\(\alpha\)</span> parameters are close - this is because they have similar physical meanings, which is investigated later in this chapter TBA. [The CBM does not have a parameter analogous to the RSM <span class="math inline">\(\lambda\)</span> parameter.]</p>
 <div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-1-3"></span>
 <img src="12-rsm-3-fits_files/figure-html/rsm-3-fits-plots-1-3-1.png" alt="Composite plots in both treatments for Van Dyke dataset, reader 3." width="672" />
 <p class="caption">
 FIGURE 9.10: Composite plots in both treatments for Van Dyke dataset, reader 3.
 </p>
 </div>
-<p>The RSM parameters for the treatment 1 plot are: <span class="math inline">\(\mu\)</span> = 2.2014133, <span class="math inline">\(\lambda\)</span> = 0.2569453, <span class="math inline">\(\nu\)</span> = 0.7524016, <span class="math inline">\(\zeta_1\)</span> = -0.1097901. The corresponding CBM values are <span class="math inline">\(\mu\)</span> = 2.7457914, <span class="math inline">\(\alpha\)</span> = 0.7931264, <span class="math inline">\(\zeta_1\)</span> = 1.1250285.</p>
+<p>The RSM parameters for the treatment 1 plot are: <span class="math inline">\(\mu\)</span> = 3.1527627, <span class="math inline">\(\lambda\)</span> = 9.9986154, <span class="math inline">\(\nu\)</span> = 0.9899933, <span class="math inline">\(\zeta_1\)</span> = 1.1733988. The corresponding CBM values are <span class="math inline">\(\mu\)</span> = 2.1927712, <span class="math inline">\(\alpha\)</span> = 0.98, <span class="math inline">\(\zeta_1\)</span> = -0.5168848.</p>
 <div class="figure"><span style="display:block;" id="fig:rsm-3-fits-plots-1-4"></span>
 <img src="12-rsm-3-fits_files/figure-html/rsm-3-fits-plots-1-4-1.png" alt="Composite plots in both treatments for Van Dyke dataset, reader 4. For treatment 2 the 3 plots are indistinguishable and each one has AUC = 1. The degeneracy is due to all operating points being on the axes of the unit square." width="672" />
 <p class="caption">
@@ -1085,7 +1097,7 @@ FIGURE 9.12: Composite plots in both treatments for Van Dyke dataset, reader 5.
 <hr />
 <ol start="33">
 <li id="fn33"><p>Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.<a href="rsm-3-fits.html#fnref33" class="footnote-back">↩︎</a></p></li>
-<li id="fn34"><p>OR DBM-MRMC 2.5, Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.<a href="rsm-3-fits.html#fnref34" class="footnote-back">↩︎</a></p></li>
+<li id="fn34"><p>Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.<a href="rsm-3-fits.html#fnref34" class="footnote-back">↩︎</a></p></li>
 <li id="fn35"><p>The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being <em>minimized</em>, the final value is smaller than the initial value.<a href="rsm-3-fits.html#fnref35" class="footnote-back">↩︎</a></p></li>
 <li id="fn36"><p>In accordance with R-package policies white-spaces in the original <code>PROPROC</code> output file names have been removed.<a href="rsm-3-fits.html#fnref36" class="footnote-back">↩︎</a></p></li>
 <li id="fn37"><p>The <code>VD.lrc</code> file in this directory is the Van Dyke data formatted for input to OR DBM-MRMC 2.5.<a href="rsm-3-fits.html#fnref37" class="footnote-back">↩︎</a></p></li>
