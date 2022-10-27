@@ -859,4 +859,3 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 
 
 
-## References {#optim-op-point-appendices-references}

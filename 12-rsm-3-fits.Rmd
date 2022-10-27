@@ -34,7 +34,7 @@ There are three methods for fitting proper curves to ROC datasets:
 
 This chapter compares these methods by fitting them to 14 multiple-treatment multiple-reader datasets described in Chapter \@ref(datasets). ^[Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.]
 
-Both RSM and CBM are implemented in `RJafroc`. `PROPROC` is implemented in Windows software OR DBM-MRMC 2.5 ^[Sept. 04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.] that was available [here](https://perception.lab.uiowa.edu/software), last accessed 1/4/21.
+Both RSM and CBM are implemented in `RJafroc`. `PROPROC` is implemented in Windows software OR DBM-MRMC 2.5 ^[Sept. 04, 2014; the version used in this chapter is no longer distributed.] that was available [here](https://perception.lab.uiowa.edu/software), last accessed 1/4/21.
 
 
 ## Application to datasets {#rsm-3-fits-applications}
@@ -66,19 +66,19 @@ source(here("R/compare-3-fits/Compare3ProperRocFits.R"))
 ```{r rsm-3-fits-code-f2, echo=TRUE}
 # VD dataset
 ret <- Compare3ProperRocFits(datasetNames, which(datasetNames == "VD"))
-plotsVD <- ret$allPlots
 resultsVD <- ret$allResults
+plotsVD <- ret$allPlots
 
 # FR dataset
 ret <- Compare3ProperRocFits(datasetNames, which(datasetNames == "FR"))
-plotsFR <- ret$allPlots
 resultsFR <- ret$allResults
+plotsFR <- ret$allPlots
 ```
 
 
 * The supporting code is in the function `Compare3ProperRocFits()` located at `R/compare-3-fits/Compare3ProperRocFits.R`. 
 * The analyzed results file locations are shown in Section \@ref(rsm-3-fits-pre-analyzed-results).
-* The fitted parameter results are contained in `resultsArr` and the composite plots (i.e., 3 combined plots corresponding to the three proper ROC fitting algorithms for each treatment and reader) are contained in `plotArr`. 
+* The fitted parameters are contained in `resultsVD` and `resultsFR; the composite plots (i.e., 3 overlaid plots corresponding to the three proper ROC fitting algorithms) for each treatment and reader, are contained in `plotsVD` and `plotsFR`. 
 
 
 ## Composite plots {#rsm-3-fits-composite-plots}
@@ -408,7 +408,7 @@ print(df)
 ```
 
 
-The CI for $text{m}_{\text{PR} \bullet}$ is slightly above unity, while that for $text{m}_{\text{CR} \bullet}$ is slightly below. Shown next is the histogram plot for $text{m}_{\text{PR} \bullet}$ (left plot) and $text{m}_{\text{CR} \bullet}$ (right plot). Quantiles of these histograms were used to compute the previously cited confidence intervals. 
+The CI for $\text{m}_{\text{PR} \bullet}$ is slightly above unity, while that for $\text{m}_{\text{CR} \bullet}$ is slightly below. Shown next is the histogram plot for $\text{m}_{\text{PR} \bullet}$ (left plot) and $\text{m}_{\text{CR} \bullet}$ (right plot). Quantiles of these histograms were used to compute the previously cited confidence intervals. 
 
 
 ```{r rsm-3-fits-histo-slopes, fig.cap="Histograms of slope PROPROC AUC vs. RSM AUC (left) and slope CBM AUC vs. RSM AUC (right).", fig.show='hold', echo=FALSE}
@@ -574,6 +574,4 @@ grid.arrange(gA,gB, ncol=2, widths = c(1,1),
 ```
 
 
-
-## References {#rsm-3-fits-references}
 

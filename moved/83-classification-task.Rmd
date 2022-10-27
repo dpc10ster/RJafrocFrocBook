@@ -194,4 +194,5 @@ print(UtilFigureOfMerit(x, FOM = "wAFROC1"))
 
 ## Discussion {#classification-tasks-discussion}
 
-## References {#classification-tasks--references}
+
+

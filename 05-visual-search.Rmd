@@ -118,6 +118,3 @@ knitr::include_graphics("images/15-visual-search/eye-tracking-4-images.png")
 
 
 
-
-## References {#visual-search-references}
-

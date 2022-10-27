@@ -513,6 +513,5 @@ In hindsight, I should never have introduced the delta functions and simply acce
 Regarding Dr. Wagner's second point, it would require effort to sort out whether forcing the observer to guess will fill in the dashed portion of the curve. Given the bad consequences of guessing I believe that in the clinical situation, the radiologist will never guess. If the radiologist sees nothing to report, nothing will be reported. 
 
 
-## References {#rsm-evidence-references}
 
 

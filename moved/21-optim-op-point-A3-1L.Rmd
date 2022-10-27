@@ -314,4 +314,5 @@ grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, n
 #grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
 
-## References {#optim-op-point-low-performance-vary-mu-references}
+
+

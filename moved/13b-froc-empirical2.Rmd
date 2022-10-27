@@ -633,4 +633,3 @@ The preceding detailed example illustrates a key point: *The total number of lat
 
 TBA
 
-## References {#empirical-examples-references}

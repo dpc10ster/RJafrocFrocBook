@@ -114,4 +114,3 @@ TBA
 The primary aim of this chapter was to develop expressions for AUCs as functions of ratings. Unlike the ROC, the AFROC and wAFROC figures of merit are represented by quasi-Wilcoxon like constructs, not the well-known Wilcoxon statistic.
 
 
-## References {#computing-aucs-references}

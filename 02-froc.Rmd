@@ -219,4 +219,3 @@ The FROC paradigm is often misunderstood. Some of this has to do with loose term
 
 The FROC plot is historically the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset that have evolved over the years.
 
-## References {#froc-paradigm-references}

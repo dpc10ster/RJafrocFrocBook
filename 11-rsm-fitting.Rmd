@@ -139,6 +139,5 @@ This chapter describes an approach to fitting ROC curves using the RSM. On the f
 
 The next chapter describes application of the RSM and other available proper ROC fitting methods to a number of datasets.
 
-## References {#rsm-fitting-references}
 
 

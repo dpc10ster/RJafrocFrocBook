@@ -34,5 +34,5 @@ R(T) is read as "reader nested within treatment" [@RN2508].
 \end{equation}
 
 
-## References {#SplitPlotChapter-references}
+
 

@@ -480,4 +480,5 @@ The reason is that in panels B and C the respective AUCs are depressed due to hi
 
 ## Discussion {#froc-vs-wafroc-Discussion}
 
-## References {#froc-vs-wafroc-references}
+
+
