@@ -54,7 +54,7 @@ datasetNames <-
 
 
 
-In the following we focus on just two ROC datasets (these have been widely used in the literature to illustrate ROC analysis methodology advances) namely the Van Dyke (VD) and the Franken (FR) datasets.
+In the following we focus, for now, on just two ROC datasets (these have been widely used in the literature to illustrate ROC analysis methodology advances) namely the Van Dyke (VD) and the Franken (FR) datasets. Illustrative examples are shown for treatment 1 and reader 2 for the Van Dyke dataset and for treatment 2 and reader 3 for the Franken dataset. 
 
 
 
@@ -91,7 +91,7 @@ plotsFR <- ret$allPlots
 The following code shows how to display the composite plot for the Van Dyke dataset for treatment 1 and reader 2, i.e., i = 1 and j = 2. 
 
 
-```{r}
+```{r rsm-3-fits-plots-vd-12, fig.cap="Composite plots for Van Dyke dataset for treatment = 1, reader 2.", fig.show='hold', echo=TRUE}
 plotsVD[[1,2]]
 ```
 
@@ -109,6 +109,19 @@ Three operating points from the binned data are shown as well as exact 95% confi
 All 10 composite plots for the Van Dyke dataset are shown in Appendix \@ref(rsm-3-fits-representative-plots-van-dyke).
 
 
+The next example shows composite plots for the Franken dataset for treatment = 2 and reader = 3.
+
+
+```{r rsm-3-fits-plots-fr-23, fig.cap="Composite plots for Franken dataset for treatment = 2, reader 3.", fig.show='hold', echo=FALSE}
+plotsFR[[2,3]]
+```
+
+
+Note that the RSM end-point is almost at the upper right corner, implying lower lesion-localization performance.
+
+
+All 10 composite plots for the Franken dataset are shown in Appendix \@ref(rsm-3-fits-representative-plots-franken).
+
 
 ## RSM parameters {#rsm-3-fits-rsm-parameters}
 
@@ -118,10 +131,27 @@ The parameters corresponding to the RSM plots for the Van Dyke dataset are acces
 * `resultsVD[[i,j]]$retRsm$lambda` is the RSM $\lambda$ parameter;  
 * `resultsVD[[i,j]]$retRsm$nu` is the RSM $\nu$ parameter; 
 * `resultsVD[[i,j]]$retRsm$zeta1` is the RSM $\zeta_1$ parameter; 
-* In general the values are accessed as `resultsVD[[i,j]]`, where `i` is the treatment index and `j` is the reader index; 
 
 
-For the Franken dataset the values are accessed as `resultsFR[[i,j]]`.
+### RSM parameters Van Dyke dataset i = 1, j= 2
+
+The following displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:
+
+
+```{r, echo=FALSE}
+cat("RSM parameters, Van Dyke Dataset, i=1, j=2:",
+"\nmu = ",        resultsVD[[1,2]]$retRsm$mu,
+"\nlambda = ",   resultsVD[[1,2]]$retRsm$lambda,
+"\nnu = ",       resultsVD[[1,2]]$retRsm$nu,
+"\nzeta_1 = ",    as.numeric(resultsVD[[1,2]]$retRsm$zetas[1]),
+"\nAUC = ",       resultsVD[[1,2]]$retRsm$AUC,
+"\nsigma_AUC = ", as.numeric(resultsVD[[1,2]]$retRsm$StdAUC),
+"\nNLLini = ",    resultsVD[[1,2]]$retRsm$NLLIni,
+"\nNLLfin = ",    resultsVD[[1,2]]$retRsm$NLLFin)
+```
+
+
+The first four values are the fitted values for the RSM parameters $\mu$, $\lambda$, $\nu$ and $\zeta_1$. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood ^[The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since in fact negative log-likelihood is being *minimized*, the final value is smaller than the initial value.].  
 
 From the previous chapter the RSM parameters can be used to calculate lesion-localization and lesion-classification performances, namely $L_L$ and $L_C$ respectively. The following function calculates these values: 
 
@@ -142,12 +172,14 @@ LesionLocLesionCls <- function(mu, lambda, nu, lesDistr) {
 ```
 
 
+The function is used as follows:
 
-```{r echo=FALSE}
+
+```{r echo=TRUE}
 mu <- resultsVD[[1,2]]$retRsm$mu
 lambda <- resultsVD[[1,2]]$retRsm$lambda
 nu <- resultsVD[[1,2]]$retRsm$nu
-f <- 2
+f <- which(datasetNames == "VD")
 fileName <- datasetNames[f]
 theData <- get(sprintf("dataset%02d", f)) # the datasets already exist as R objects
 lesDistr <- UtilLesionDistrVector(theData) # RSM ROC fitting needs to know lesDistr
@@ -159,23 +191,12 @@ L_C <- ret$L_C
 cat(sprintf("VD data i=1 j=2:  L_L = %7.3f, L_C = %7.3f", L_L, L_C), "\n")
 ```
 
-The following displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:
 
 
-```{r, echo=FALSE}
-cat("RSM parameters, Van Dyke Dataset, i=1, j=2:",
-"\nmu = ",        resultsVD[[1,2]]$retRsm$mu,
-"\nlambda = ",   resultsVD[[1,2]]$retRsm$lambda,
-"\nnu = ",       resultsVD[[1,2]]$retRsm$nu,
-"\nzeta_1 = ",    as.numeric(resultsVD[[1,2]]$retRsm$zetas[1]),
-"\nAUC = ",       resultsVD[[1,2]]$retRsm$AUC,
-"\nsigma_AUC = ", as.numeric(resultsVD[[1,2]]$retRsm$StdAUC),
-"\nNLLini = ",    resultsVD[[1,2]]$retRsm$NLLIni,
-"\nNLLfin = ",    resultsVD[[1,2]]$retRsm$NLLFin)
-```
+### RSM parameters Franken dataset i = 2, j= 3
 
 
-The first four values are the fitted values for the RSM parameters $\mu$, $\lambda$, $\nu$ and $\zeta_1$. The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood ^[The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being *minimized*, the final value is smaller than the initial value.].  
+For the Franken dataset the values are accessed as `resultsFR[[i,j]]`.
 
 
 Displayed next are RSM parameters for the Franken dataset, treatment 2 and reader 3:
@@ -195,11 +216,14 @@ cat("RSM parameters, Franken dataset, i=2, j=3:",
 ```
 
 
+Shown next are the lesion-localization and lesion-classification performances for this dataset.
+
+
 ```{r echo=FALSE}
 mu <- resultsFR[[2,3]]$retRsm$mu
 lambda <- resultsFR[[2,3]]$retRsm$lambda
-nu <- resultsFR[[2,2]]$retRsm$nu
-f <- 3
+nu <- resultsFR[[2,3]]$retRsm$nu
+f <- which(datasetNames == "FR")
 fileName <- datasetNames[f]
 theData <- get(sprintf("dataset%02d", f)) # the datasets already exist as R objects
 lesDistr <- UtilLesionDistrVector(theData) # RSM ROC fitting needs to know lesDistr
@@ -212,6 +236,10 @@ cat(sprintf("FR data i=2, j=3:  L_L = %7.3f, L_C = %7.3f", L_L, L_C), "\n")
 ```
 
 
+While the lesion-classification performances are similar for the two examples, the lesion-localization performances are different, with the Van Dyke dataset showing a greater value. This is evident from the location of the end-points in the two plots shown in Fig. \@ref(fig:rsm-3-fits-plots-vd-12) and Fig.  \@ref(fig:rsm-3-fits-plots-fr-23) (an end-point closer to the top-left corner implies greater lesion-localization performance).
+
+
+
 ## CBM parameters {#rsm-3-fits-cbm-parameters}
 
 The parameters of the CBM plots are accessed as shown next. 
@@ -222,7 +250,7 @@ The parameters of the CBM plots are accessed as shown next.
 * `results[[i,j]]$retCbm$AUC` is the CBM AUC; 
 * `as.numeric(results[[i,j]]$retCbm$StdAUC)` is the standard deviation of the CBM AUC;
 * `results[[i,j]]$retCbm$NLLIni` is the initial negative log-likelihood value;
-* `rresults[[i,j]]$retCbm$NLLFin)` is the final negative log-likelihood value.
+* `results[[i,j]]$retCbm$NLLFin)` is the final negative log-likelihood value.
 
 The next example displays CBM parameters and AUC etc. for the Van Dyke dataset, treatment 1 and reader 2:
 
@@ -494,12 +522,12 @@ knitr::include_graphics("images/compare-3-fits/RSM6.png")
 
 
 
-### Plots for Van Dyke dataset {#rsm-3-fits-representative-plots-van-dyke}
+### Plots for the Van Dyke dataset {#rsm-3-fits-representative-plots-van-dyke}
 
 The following plots are arranged in pairs, with the left plot corresponding to treatment 1 and the right to treatment 2. 
 
 
-```{r rsm-3-fits-plots-1-1, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 1.", fig.show='hold', echo=FALSE}
+```{r rsm-3-fits-plots-vd-1-1, fig.cap="Composite plots in both treatments for the Van Dyke dataset, reader 1.", fig.show='hold', echo=FALSE}
 p1 <- plotsVD[[1,1]]
 p2 <- plotsVD[[2,1]]
 gA <- ggplotGrob(p1)
@@ -512,7 +540,7 @@ grid.arrange(gA,gB, ncol=2, widths = c(1,1),
 ```
 
 
-```{r rsm-3-fits-plots-1-2, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 2. For treatment 2 the RSM and PROPROC fits are indistinguishable.", fig.show='hold', echo=FALSE}
+```{r rsm-3-fits-plots-vd-1-2, fig.cap="Composite plots in both treatments for the Van Dyke dataset, reader 2. For treatment 2 the RSM and PROPROC fits are indistinguishable.", fig.show='hold', echo=FALSE}
 p1 <- plotsVD[[1,2]]
 p2 <- plotsVD[[2,2]]
 gA <- ggplotGrob(p1)
@@ -530,7 +558,7 @@ The RSM parameter values for the treatment 2 plot are: $\mu$ = `r resultsVD[[2,2
 
 
 
-```{r rsm-3-fits-plots-1-3, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 3.", fig.show='hold', echo=FALSE}
+```{r rsm-3-fits-plots-vd-1-3, fig.cap="Composite plots in both treatments for the Van Dyke dataset, reader 3.", fig.show='hold', echo=FALSE}
 p1 <- plotsVD[[1,3]]
 p2 <- plotsVD[[2,3]]
 gA <- ggplotGrob(p1)
@@ -548,7 +576,7 @@ The RSM parameters for the treatment 1 plot are: $\mu$ = `r resultsVD[[1,3]]$ret
 
 
 
-```{r rsm-3-fits-plots-1-4, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 4. For treatment 2 the 3 plots are indistinguishable and each one has AUC = 1. The degeneracy is due to all operating points being on the axes of the unit square.", fig.show='hold', echo=FALSE}
+```{r rsm-3-fits-plots-vd-1-4, fig.cap="Composite plots in both treatments for the Van Dyke dataset, reader 4. For treatment 2 the 3 plots are indistinguishable and each one has AUC = 1. The degeneracy is due to all operating points being on the axes of the unit square.", fig.show='hold', echo=FALSE}
 p1 <- plotsVD[[1,4]]
 p2 <- plotsVD[[2,4]]
 gA <- ggplotGrob(p1)
@@ -561,7 +589,7 @@ grid.arrange(gA,gB, ncol=2, widths = c(1,1),
 ```
 
 
-```{r rsm-3-fits-plots-1-5, fig.cap="Composite plots in both treatments for Van Dyke dataset, reader 5.", fig.show='hold', echo=FALSE}
+```{r rsm-3-fits-plots-vd-1-5, fig.cap="Composite plots in both treatments for the Van Dyke dataset, reader 5.", fig.show='hold', echo=FALSE}
 p1 <- plotsVD[[1,5]]
 p2 <- plotsVD[[2,5]]
 gA <- ggplotGrob(p1)
@@ -572,6 +600,75 @@ gB <- ggplotGrob(p2)
 grid.arrange(gA,gB, ncol=2, widths = c(1,1), 
              heights=unit(c(4), c("in")))
 ```
+
+
+
+
+
+
+### Plots for the Franken dataset {#rsm-3-fits-representative-plots-franken}
+
+The following plots are arranged in pairs, with the left plot corresponding to treatment 1 and the right to treatment 2. These plots apply to the Franken dataset. 
+
+
+```{r rsm-3-fits-plots-fr-1-1, fig.cap="Composite plots in both treatments for the Franken dataset, reader 1.", fig.show='hold', echo=FALSE}
+p1 <- plotsFR[[1,1]]
+p2 <- plotsFR[[2,1]]
+gA <- ggplotGrob(p1)
+gB <- ggplotGrob(p2)
+#grid::grid.newpage()
+#grid::grid.draw(cbind(gA, gB))
+# see R/learn/_grid.arrange.Rmd
+grid.arrange(gA,gB, ncol=2, widths = c(1,1), 
+             heights=unit(c(4), c("in")))
+```
+
+
+```{r rsm-3-fits-plots-fr-1-2, fig.cap="Composite plots in both treatments for the Franken dataset, reader 2.", fig.show='hold', echo=FALSE}
+p1 <- plotsFR[[1,2]]
+p2 <- plotsFR[[2,2]]
+gA <- ggplotGrob(p1)
+gB <- ggplotGrob(p2)
+#grid::grid.newpage()
+#grid::grid.draw(cbind(gA, gB))
+# see R/learn/_grid.arrange.Rmd
+grid.arrange(gA,gB, ncol=2, widths = c(1,1), 
+             heights=unit(c(4), c("in")))
+```
+
+
+
+
+
+```{r rsm-3-fits-plots-fr-1-3, fig.cap="Composite plots in both treatments for the Franken dataset, reader 3.", fig.show='hold', echo=FALSE}
+p1 <- plotsFR[[1,3]]
+p2 <- plotsFR[[2,3]]
+gA <- ggplotGrob(p1)
+gB <- ggplotGrob(p2)
+#grid::grid.newpage()
+#grid::grid.draw(cbind(gA, gB))
+# see R/learn/_grid.arrange.Rmd
+grid.arrange(gA,gB, ncol=2, widths = c(1,1), 
+             heights=unit(c(4), c("in")))
+```
+
+
+
+
+
+```{r rsm-3-fits-plots-fr-1-4, fig.cap="Composite plots in both treatments for the Franken dataset, reader 4.", fig.show='hold', echo=FALSE}
+p1 <- plotsFR[[1,4]]
+p2 <- plotsFR[[2,4]]
+gA <- ggplotGrob(p1)
+gB <- ggplotGrob(p2)
+#grid::grid.newpage()
+#grid::grid.draw(cbind(gA, gB))
+# see R/learn/_grid.arrange.Rmd
+grid.arrange(gA,gB, ncol=2, widths = c(1,1), 
+             heights=unit(c(4), c("in")))
+```
+
+
 
 
 
