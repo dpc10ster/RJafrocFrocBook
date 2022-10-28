@@ -1340,4 +1340,3 @@ relWeights <- c(0.5, 0.5)
 
 
 
-## References {#optim-op-point-appendices-references}

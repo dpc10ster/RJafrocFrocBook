@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-10-27}
+\date{2022-10-28}
 
 \begin{document}
 \maketitle
@@ -430,9 +430,6 @@ The FROC paradigm is often misunderstood. Some of this has to do with loose term
 \end{itemize}
 
 The FROC plot is historically the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset that have evolved over the years.
-
-\hypertarget{froc-paradigm-references}{%
-\section{References}\label{froc-paradigm-references}}
 
 \hypertarget{empirical}{%
 \chapter{Empirical plots from FROC data}\label{empirical}}
@@ -1944,9 +1941,6 @@ This is similar to the above expression for AFROC1 except for the presence of th
 
 A and B are as defined in Eqn. \eqref{eq:empirical-computational-afroc1ab}.
 
-\hypertarget{empirical-references}{%
-\section{References}\label{empirical-references}}
-
 \hypertarget{part-the-radiological-search-model-rsm}{%
 \part*{The radiological search model (RSM)}\label{part-the-radiological-search-model-rsm}}
 \addcontentsline{toc}{part}{The radiological search model (RSM)}
@@ -2076,9 +2070,6 @@ The inexperienced observer finds more suspicious regions than does the expert ma
 
 \caption{Eye-tracking recordings for a two-view digital mammogram. The top row is an inexperienced observer while the bottom row is an expert radiologist. The left column shows MLO views while the right column shows CC views.}\label{fig:visual-search-eye-tracking}
 \end{figure}
-
-\hypertarget{visual-search-references}{%
-\section{References}\label{visual-search-references}}
 
 \hypertarget{rsm}{%
 \chapter{The radiological search model (RSM)}\label{rsm}}
@@ -4047,7 +4038,7 @@ We have shown that the RSM parameters determine lesion-localization and lesion-c
 \hypertarget{rsm-fitting-intro}{%
 \section{TBA Introduction}\label{rsm-fitting-intro}}
 
-Early work, reported in my 2017 print book, revealed that an FROC curve based estimation method worked only for designer level CAD data and not for human observer data. Subsequent effort focused on ROC curve-based fitting, and this proved successful at fitting radiologist datasets where detailed definition of the ROC curve is not available. An preliminary account of this work can be found in a conference proceeding \citep{RN2125}.
+Early work, reported in my 2017 print book, revealed that an FROC curve based estimation method worked only for designer level CAD data and not for human observer data. Subsequent effort focused on ROC curve-based fitting, and this proved successful at fitting radiologist datasets where detailed definition of the ROC curve is not available. A preliminary account of this work can be found in a conference proceeding \citep{chakraborty2011estimating}.
 
 The reader should be surprised to learn that the ROC curve based fitting works, \emph{which implies that one does not even need FROC data to estimate RSM parameters.} I have previously stated that the ROC paradigm ignores search, so how can one estimate search-model parameters from ROC data? The reason is that the \emph{shape} of the RSM-predicted ROC curve and the \emph{location} of the end-point depend on the RSM parameters.
 
@@ -4190,9 +4181,6 @@ This chapter describes an approach to fitting ROC curves using the RSM. On the f
 
 The next chapter describes application of the RSM and other available proper ROC fitting methods to a number of datasets.
 
-\hypertarget{rsm-fitting-references}{%
-\section{References}\label{rsm-fitting-references}}
-
 \hypertarget{rsm-3-fits}{%
 \chapter{Three proper ROC fits}\label{rsm-3-fits}}
 
@@ -4220,10 +4208,12 @@ There are three methods for fitting proper curves to ROC datasets:
 
 This chapter compares these methods by fitting them to 14 multiple-treatment multiple-reader datasets described in Chapter \ref{datasets}. \footnote{Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.}
 
-Both RSM and CBM are implemented in \texttt{RJafroc}. \texttt{PROPROC} is implemented in Windows software OR DBM-MRMC 2.5 \footnote{Sept.~04, 2014; the version used in this chapter is no longer distributed but is available from me upon request.} that was available \href{https://perception.lab.uiowa.edu/software}{here}, last accessed 1/4/21.
+The motivation for this work was a serendipitous finding \citep{chakraborty2011estimating} that PROPROC fitted ROC AUCs and RSM fitted ROC AUCs were identical for some datasets. This led to extending that work to include CBM and more datasets.
 
 \hypertarget{rsm-3-fits-applications}{%
 \section{Application to datasets}\label{rsm-3-fits-applications}}
+
+Both RSM and CBM are implemented in \texttt{RJafroc}. \texttt{PROPROC} is implemented in Windows software OR DBM-MRMC 2.5 \footnote{Sept.~04, 2014; the version used in this chapter is no longer distributed.} that was available \href{https://perception.lab.uiowa.edu/software}{here}, last accessed 1/4/21.
 
 The RSM, PROPROC and CBM algorithms were applied to datasets described in Chapter \ref{datasets}.
 
@@ -4238,19 +4228,21 @@ The RSM, PROPROC and CBM algorithms were applied to datasets described in Chapte
 \end{Highlighting}
 \end{Shaded}
 
-In the following we focus on just two ROC datasets (these have been widely used in the literature to illustrate ROC analysis methodology advances) namely the Van Dyke (VD) and the Franken (FR) datasets.
+These are abbreviations for ``TONY'', ``Van Dyke'', ``Franken'', ``Federica'', ``Thompson'', ``Magnus'', ``Lucy Warren'', ``Penedo'', ``Nico-CAD-ROC'', ``Ruschin'', ``Dobbins-1'', ``Dobbins-2'', ``Dobbins-3'', ``Federica Real Roc''. These datasets are included with \texttt{RJafroc} and the corresponding objects are named \texttt{datasetXX}, where XX is an integer ranging from 1 to 14.
+
+In the following we focus, for now, on just two ROC datasets (these have been widely used in the literature to illustrate ROC analysis methodology advances) namely the Van Dyke (VD) and the Franken (FR) datasets. Illustrative examples are shown for treatment 1 and reader 2 for the Van Dyke dataset and for treatment 2 and reader 3 for the Franken dataset. Plots for all treatment-reader combinations for these two datasets are in Appendix \ref{rsm-3-fits-representative-plots-van-dyke} and Appendix \ref{rsm-3-fits-representative-plots-franken}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# VD dataset}
 \NormalTok{ret <-}\StringTok{ }\KeywordTok{Compare3ProperRocFits}\NormalTok{(datasetNames, }\KeywordTok{which}\NormalTok{(datasetNames }\OperatorTok{==}\StringTok{ "VD"}\NormalTok{))}
-\NormalTok{plotsVD <-}\StringTok{ }\NormalTok{ret}\OperatorTok{$}\NormalTok{allPlots}
 \NormalTok{resultsVD <-}\StringTok{ }\NormalTok{ret}\OperatorTok{$}\NormalTok{allResults}
+\NormalTok{plotsVD <-}\StringTok{ }\NormalTok{ret}\OperatorTok{$}\NormalTok{allPlots}
 
 \CommentTok{# FR dataset}
 \NormalTok{ret <-}\StringTok{ }\KeywordTok{Compare3ProperRocFits}\NormalTok{(datasetNames, }\KeywordTok{which}\NormalTok{(datasetNames }\OperatorTok{==}\StringTok{ "FR"}\NormalTok{))}
-\NormalTok{plotsFR <-}\StringTok{ }\NormalTok{ret}\OperatorTok{$}\NormalTok{allPlots}
 \NormalTok{resultsFR <-}\StringTok{ }\NormalTok{ret}\OperatorTok{$}\NormalTok{allResults}
+\NormalTok{plotsFR <-}\StringTok{ }\NormalTok{ret}\OperatorTok{$}\NormalTok{allPlots}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4261,7 +4253,7 @@ In the following we focus on just two ROC datasets (these have been widely used 
 \item
   The analyzed results file locations are shown in Section \ref{rsm-3-fits-pre-analyzed-results}.
 \item
-  The fitted parameter results are contained in \texttt{resultsArr} and the composite plots (i.e., 3 combined plots corresponding to the three proper ROC fitting algorithms for each treatment and reader) are contained in \texttt{plotArr}.
+  The fitted parameters are contained in \texttt{resultsVD} and \texttt{resultsFR;\ the\ composite\ plots\ (i.e.,\ 3\ overlaid\ plots\ corresponding\ to\ the\ three\ proper\ ROC\ fitting\ algorithms)\ for\ each\ treatment\ and\ reader,\ are\ contained\ in}plotsVD\texttt{and}plotsFR`.
 \end{itemize}
 
 \hypertarget{rsm-3-fits-composite-plots}{%
@@ -4285,7 +4277,11 @@ The following code shows how to display the composite plot for the Van Dyke data
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{12-rsm-3-fits_files/figure-latex/unnamed-chunk-2-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-vd-12-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-vd-12}Composite plots for Van Dyke dataset for treatment = 1, reader 2.}
+\end{figure}
 
 It contains 3 fitted curves:
 
@@ -4303,6 +4299,18 @@ Three operating points from the binned data are shown as well as exact 95\% conf
 
 All 10 composite plots for the Van Dyke dataset are shown in Appendix \ref{rsm-3-fits-representative-plots-van-dyke}.
 
+The next example shows composite plots for the Franken dataset for treatment = 2 and reader = 3.
+
+\begin{figure}
+\centering
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-fr-23-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-fr-23}Composite plots for Franken dataset for treatment = 2, reader 3.}
+\end{figure}
+
+Note that the RSM end-point is almost at the upper right corner, implying lower lesion-localization performance.
+
+All 10 composite plots for the Franken dataset are shown in Appendix \ref{rsm-3-fits-representative-plots-franken}.
+
 \hypertarget{rsm-3-fits-rsm-parameters}{%
 \section{RSM parameters}\label{rsm-3-fits-rsm-parameters}}
 
@@ -4318,11 +4326,26 @@ The parameters corresponding to the RSM plots for the Van Dyke dataset are acces
   \texttt{resultsVD{[}{[}i,j{]}{]}\$retRsm\$nu} is the RSM \(\nu\) parameter;
 \item
   \texttt{resultsVD{[}{[}i,j{]}{]}\$retRsm\$zeta1} is the RSM \(\zeta_1\) parameter;
-\item
-  In general the values are accessed as \texttt{resultsVD{[}{[}i,j{]}{]}}, where \texttt{i} is the treatment index and \texttt{j} is the reader index;
 \end{itemize}
 
-For the Franken dataset the values are accessed as \texttt{resultsFR{[}{[}i,j{]}{]}}.
+\hypertarget{rsm-parameters-van-dyke-dataset-i-1-j-2}{%
+\subsection{RSM parameters Van Dyke dataset i = 1, j= 2}\label{rsm-parameters-van-dyke-dataset-i-1-j-2}}
+
+The following displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:
+
+\begin{verbatim}
+## RSM parameters, Van Dyke Dataset, i=1, j=2: 
+## mu =  2.201413 
+## lambda =  0.2569453 
+## nu =  0.7524016 
+## zeta_1 =  -0.1097901 
+## AUC =  0.8653694 
+## sigma_AUC =  0.04740562 
+## NLLini =  96.48516 
+## NLLfin =  85.86244
+\end{verbatim}
+
+The first four values are the fitted values for the RSM parameters \(\mu\), \(\lambda\), \(\nu\) and \(\zeta_1\). The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood \footnote{The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since in fact negative log-likelihood is being \emph{minimized}, the final value is smaller than the initial value.}.
 
 From the previous chapter the RSM parameters can be used to calculate lesion-localization and lesion-classification performances, namely \(L_L\) and \(L_C\) respectively. The following function calculates these values:
 
@@ -4343,25 +4366,34 @@ From the previous chapter the RSM parameters can be used to calculate lesion-loc
 \end{Highlighting}
 \end{Shaded}
 
+The function is used as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu <-}\StringTok{ }\NormalTok{resultsVD[[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]]}\OperatorTok{$}\NormalTok{retRsm}\OperatorTok{$}\NormalTok{mu}
+\NormalTok{lambda <-}\StringTok{ }\NormalTok{resultsVD[[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]]}\OperatorTok{$}\NormalTok{retRsm}\OperatorTok{$}\NormalTok{lambda}
+\NormalTok{nu <-}\StringTok{ }\NormalTok{resultsVD[[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]]}\OperatorTok{$}\NormalTok{retRsm}\OperatorTok{$}\NormalTok{nu}
+\NormalTok{f <-}\StringTok{ }\KeywordTok{which}\NormalTok{(datasetNames }\OperatorTok{==}\StringTok{ "VD"}\NormalTok{)}
+\NormalTok{fileName <-}\StringTok{ }\NormalTok{datasetNames[f]}
+\NormalTok{theData <-}\StringTok{ }\KeywordTok{get}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"dataset%02d"}\NormalTok{, f)) }\CommentTok{# the datasets already exist as R objects}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{UtilLesionDistrVector}\NormalTok{(theData) }\CommentTok{# RSM ROC fitting needs to know lesDistr}
+
+\NormalTok{ret <-}\StringTok{ }\KeywordTok{LesionLocLesionCls}\NormalTok{(mu, lambda, nu, lesDistr)}
+\NormalTok{L_L <-}\StringTok{ }\NormalTok{ret}\OperatorTok{$}\NormalTok{L_L}
+\NormalTok{L_C <-}\StringTok{ }\NormalTok{ret}\OperatorTok{$}\NormalTok{L_C}
+  
+\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"VD data i=1 j=2:  L_L = %7.3f, L_C = %7.3f"}\NormalTok{, L_L, L_C), }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
 ## VD data i=1 j=2:  L_L =   0.582, L_C =   0.940
 \end{verbatim}
 
-The following displays RSM parameters for the Van Dyke dataset, treatment 1 and reader 2:
+\hypertarget{rsm-parameters-franken-dataset-i-2-j-3}{%
+\subsection{RSM parameters Franken dataset i = 2, j= 3}\label{rsm-parameters-franken-dataset-i-2-j-3}}
 
-\begin{verbatim}
-## RSM parameters, Van Dyke Dataset, i=1, j=2: 
-## mu =  2.201413 
-## lambda =  0.2569453 
-## nu =  0.7524016 
-## zeta_1 =  -0.1097901 
-## AUC =  0.8653694 
-## sigma_AUC =  0.04740562 
-## NLLini =  96.48516 
-## NLLfin =  85.86244
-\end{verbatim}
-
-The first four values are the fitted values for the RSM parameters \(\mu\), \(\lambda\), \(\nu\) and \(\zeta_1\). The next value is the AUC under the fitted RSM curve followed by its standard error. The last two values are the initial and final values of negative log-likelihood \footnote{The initial value is calculated using initial estimates of parameters and the final value is that resulting from the log-likelihood maximization procedure. Since negative log-likelihood is being \emph{minimized}, the final value is smaller than the initial value.}.
+For the Franken dataset the values are accessed as \texttt{resultsFR{[}{[}i,j{]}{]}}.
 
 Displayed next are RSM parameters for the Franken dataset, treatment 2 and reader 3:
 
@@ -4377,9 +4409,13 @@ Displayed next are RSM parameters for the Franken dataset, treatment 2 and reade
 ## NLLfin =  127.9418
 \end{verbatim}
 
+Shown next are the lesion-localization and lesion-classification performances for this dataset.
+
 \begin{verbatim}
-## FR data i=2, j=3:  L_L =   0.115, L_C =   0.969
+## FR data i=2, j=3:  L_L =   0.093, L_C =   0.969
 \end{verbatim}
+
+While the lesion-classification performances are similar for the two examples, the lesion-localization performances are different, with the Van Dyke dataset showing a greater value. This is evident from the location of the end-points in the two plots shown in Fig. \ref{fig:rsm-3-fits-plots-vd-12} and Fig. \ref{fig:rsm-3-fits-plots-fr-23} (an end-point closer to the top-left corner implies greater lesion-localization performance).
 
 \hypertarget{rsm-3-fits-cbm-parameters}{%
 \section{CBM parameters}\label{rsm-3-fits-cbm-parameters}}
@@ -4401,7 +4437,7 @@ The parameters of the CBM plots are accessed as shown next.
 \item
   \texttt{results{[}{[}i,j{]}{]}\$retCbm\$NLLIni} is the initial negative log-likelihood value;
 \item
-  \texttt{rresults{[}{[}i,j{]}{]}\$retCbm\$NLLFin)} is the final negative log-likelihood value.
+  \texttt{results{[}{[}i,j{]}{]}\$retCbm\$NLLFin)} is the final negative log-likelihood value.
 \end{itemize}
 
 The next example displays CBM parameters and AUC etc. for the Van Dyke dataset, treatment 1 and reader 2:
@@ -4484,9 +4520,7 @@ If the AUCs of the three methods are identical the following relations hold with
 \left. 
 \begin{aligned}
 \text{AUC}_{\text{PRO}} =& \text{m}_{PR} \text{AUC}_{\text{PRO}}  \\
-\text{AUC}_{\text{CBM}} =& \text{m}_{CR} \text{AUC}_{\text{PRO}} \\
-\text{m}_{\text{PR}}    =& 1 \\
-\text{m}_{\text{CR}}    =& 1
+\text{AUC}_{\text{CBM}} =& \text{m}_{CR} \text{AUC}_{\text{PRO}}
 \end{aligned}
 \right \}
 \label{eq:rsm-3-fits-slopes-equation1}
@@ -4538,17 +4572,17 @@ The call to function \texttt{slopesConvVsRsm()} returns \texttt{slopes}, which c
 \item
   CBM vs.~RSM: \texttt{slopes\$p2{[}{[}2{]}{]}} is the plot of \(\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}\) vs.~\(\text{AUC}^{RSM}_{2 \bullet \bullet}\) for for all treatments and readers in the Van Dyke dataset. The plot for dataset \(f\) is accessed as \texttt{slopes\$p2{[}{[}f{]}{]}}.
 \item
-  PRO vs.~RSM: \texttt{slopes\$m\_pro\_rsm} has two columns, each of length 14, the slopes \(\text{m}_{PR,f}\) for the datasets (indexed by \(f\)) and the corresponding \(R^2\) values, where \(R^2\) is the fraction of variance explained by the constrained straight line fit. The first column is \texttt{slopes\$m\_pro\_rsm{[}{[}1{]}{]}} and the second column is \texttt{slopes\$m\_pro\_rsm{[}{[}2{]}{]}}.
+  PRO vs.~RSM: \texttt{slopes\$m\_pro\_rsm} has two columns, each of length 14, the slopes \(\text{m}_{PR,f}\) for the datasets (indexed by \(f\)) and the corresponding \(R^2\) values, where \(R^2\) is the fraction of variance explained by the zero-intercept straight line fit. The first column is \texttt{slopes\$m\_pro\_rsm{[}{[}1{]}{]}} and the second column is \texttt{slopes\$m\_pro\_rsm{[}{[}2{]}{]}}.
 \item
   CBM vs.~RSM: \texttt{slopes\$m\_cbm\_rsm} has two columns, each of length 14, the slopes \(\text{m}_{CR,f}\) for the datasets and the corresponding \(R^2\) values. The first column is \texttt{slopes\$m\_cbm\_rsm{[}{[}1{]}{]}} and the second column is \texttt{slopes\$m\_cbm\_rsm{[}{[}2{]}{]}}.
 \end{itemize}
 
-As an example, for the Van Dyke dataset, \texttt{slopes\$p1{[}{[}2{]}{]}} which is shown in the left in Fig. \ref{fig:rsm-3-fits-plots-2}, is the plot of \(\text{AUC}^{\text{PRO}}_{2 \bullet \bullet}\) vs.~\(\text{AUC}^{RSM}_{2 \bullet \bullet}\). Shown in the right is \texttt{slopes\$p2{[}{[}2{]}{]}}, the plot of \(\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}\) vs.~\(\text{AUC}^{RSM}_{2 \bullet \bullet}\). Each plot has the constrained linear fit superposed on the \(2\times5 = 10\) data points; each data point represents a distinct modality-reader combination.
+As an example, for the Van Dyke dataset, \texttt{slopes\$p1{[}{[}2{]}{]}} which is shown in the left in Fig. \ref{fig:rsm-3-fits-plots-2}, is the plot of \(\text{AUC}^{\text{PRO}}_{2 \bullet \bullet}\) vs.~\(\text{AUC}^{RSM}_{2 \bullet \bullet}\). Shown in the right is \texttt{slopes\$p2{[}{[}2{]}{]}}, the plot of \(\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}\) vs.~\(\text{AUC}^{RSM}_{2 \bullet \bullet}\). Each plot has the zero-intercept linear fit superposed on the \(2\times5 = 10\) data points; each data point represents a distinct modality-reader combination.
 
 \begin{figure}
 \centering
 \includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-2-1.pdf}
-\caption{\label{fig:rsm-3-fits-plots-2}Van Dyke dataset: Left plot is PROPROC-AUC vs.~RSM-AUC with the superposed constrained linear fit. The number of data points is \texttt{nPts} = 10. Right plot is CBM-AUC vs.~RSM-AUC.}
+\caption{\label{fig:rsm-3-fits-plots-2}Van Dyke dataset: Left plot is PROPROC-AUC vs.~RSM-AUC with the superposed zero-intercept linear fit. The number of data points is \texttt{nPts} = 10. Right plot is CBM-AUC vs.~RSM-AUC.}
 \end{figure}
 
 The next plot shows corresponding plots for the Franken dataset in which there are \(2\times 4 = 8\) points in each plot.
@@ -4590,7 +4624,7 @@ As examples,
 ## 97.5% 1.012285 0.9966149
 \end{verbatim}
 
-The CI for \(text{m}_{\text{PR} \bullet}\) is slightly above unity, while that for \(text{m}_{\text{CR} \bullet}\) is slightly below. Shown next is the histogram plot for \(text{m}_{\text{PR} \bullet}\) (left plot) and \(text{m}_{\text{CR} \bullet}\) (right plot). Quantiles of these histograms were used to compute the previously cited confidence intervals.
+The CI for \(\text{m}_{\text{PR} \bullet}\) is slightly above unity, while that for \(\text{m}_{\text{CR} \bullet}\) is slightly below. Shown next is the histogram plot for \(\text{m}_{\text{PR} \bullet}\) (left plot) and \(\text{m}_{\text{CR} \bullet}\) (right plot). Quantiles of these histograms were used to compute the previously cited confidence intervals.
 
 \begin{figure}
 \centering
@@ -4603,7 +4637,7 @@ The CI for \(text{m}_{\text{PR} \bullet}\) is slightly above unity, while that f
 
 \begin{table}[H]
 
-\caption{\label{tab:rsm-3-fits-slopes-table1}Summary of slopes and correlations for the two constrained fits: PROPROC AUC vs. RSM AUC and CBM AUC vs. RSM AUC. The average of each slope equals unity to within 0.6 percent.}
+\caption{\label{tab:rsm-3-fits-slopes-table1}Summary of slopes and correlations for the two zero-intercept fits: PROPROC AUC vs. RSM AUC and CBM AUC vs. RSM AUC. The average of each slope equals unity to within 0.6 percent.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllll}
@@ -4634,10 +4668,19 @@ CI & (1.005, 1.012) & NA & (0.992, 0.997) & NA\\
 \end{tabular}}
 \end{table}
 
-In Table \ref{tab:rsm-3-fits-slopes-table1} the second column, labeled \(\text{m}_{PR}\), shows slopes of straight lines, constrained to go through the origin, to PROPROC AUC vs.~RSM AUC values, for each of the 14 datasets, as labeled in the fits column. The third column, labeled \(R^2_{PR}\), lists the square of the correlation coefficient for each fit. The fourth and fifth columns list the corresponding values for the CBM AUC vs.~RSM AUC fits. The second last row lists the grand averages (AVG) and the last row lists the 95 percent confidence intervals.
+In Table \ref{tab:rsm-3-fits-slopes-table1} the second column, labeled \(\text{m}_{PR}\), shows slopes of straight lines, zero-intercept to go through the origin, to PROPROC AUC vs.~RSM AUC values, for each of the 14 datasets, as labeled in the fits column. The third column, labeled \(R^2_{PR}\), lists the square of the correlation coefficient for each fit. The fourth and fifth columns list the corresponding values for the CBM AUC vs.~RSM AUC fits. The second last row lists the grand averages (AVG) and the last row lists the 95 percent confidence intervals.
 
 \hypertarget{rsm-3-fits-discussion-summary}{%
-\section{TBA Discussion / Summary}\label{rsm-3-fits-discussion-summary}}
+\section{Reason for equal AUCs / Summary}\label{rsm-3-fits-discussion-summary}}
+
+We find that all three proper ROC methods yield almost the same AUC. The reason is that the proper ROC is a consequence of using a decision variable that is equivalent (in the arbitrary monotonic increasing transformations sense, see below) to a likelihood ratio. Proper ROC fitting is discussed in \href{https://dpc10ster.github.io/RJafrocRocBook/proper-roc-models.html\#proper-roc-models-likelihood-ratio-theorem1}{RJafrocRocBook}. The likelihood ratio \(l(z)\) is defined as the ratio of the diseased pdf to the non-diseased pdf:
+
+\begin{equation}    
+l(z) \equiv \frac{\text{pdf}_D(z)}{\text{pdf}_N(z)}
+\label{eq:rsm-3-fits-l-z}
+\end{equation}
+
+There is a theorem\citep{barrett2013foundations} that an observer who uses the likelihood ratio \(l(z)\) or any monotone increasing transformation of it as the decision variable, has optimal performance, i.e., maximum ROC-AUC. To use the terminology of \citep{barrett2013foundations} any observer using the likelihood ratio as the decision variable is an ideal observer (Section 13.2.6 ibid). However, \textbf{different ideal observers must yield the same AUC as otherwise one observer would be ``more ideal'' than another}. Different models of fitting proper ROCs represent different approaches to modeling the decision variable and the likelihood ratio, but while the curves can have different shapes (the slope of the ROC curve at a given point equals the likelihood ratio calculated at that point) their AUCs must agree. This explains the empirical observation of this chapter that RSM, PROPROC and CBM all yield the same AUCs as summarized in Table \ref{tab:rsm-3-fits-slopes-table1}.
 
 \hypertarget{rsm-3-fits-appendices}{%
 \section{Appendices}\label{rsm-3-fits-appendices}}
@@ -4691,46 +4734,72 @@ The following screen shot shows the pre-analyzed files created by the function \
 \end{figure}
 
 \hypertarget{rsm-3-fits-representative-plots-van-dyke}{%
-\subsection{Plots for Van Dyke dataset}\label{rsm-3-fits-representative-plots-van-dyke}}
+\subsection{Plots for the Van Dyke dataset}\label{rsm-3-fits-representative-plots-van-dyke}}
 
 The following plots are arranged in pairs, with the left plot corresponding to treatment 1 and the right to treatment 2.
 
 \begin{figure}
 \centering
-\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-1-1.pdf}
-\caption{\label{fig:rsm-3-fits-plots-1-1}Composite plots in both treatments for Van Dyke dataset, reader 1.}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-vd-1-1-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-vd-1-1}Composite plots in both treatments for the Van Dyke dataset, reader 1.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-2-1.pdf}
-\caption{\label{fig:rsm-3-fits-plots-1-2}Composite plots in both treatments for Van Dyke dataset, reader 2. For treatment 2 the RSM and PROPROC fits are indistinguishable.}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-vd-1-2-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-vd-1-2}Composite plots in both treatments for the Van Dyke dataset, reader 2. For treatment 2 the RSM and PROPROC fits are indistinguishable.}
 \end{figure}
 
 The RSM parameter values for the treatment 2 plot are: \(\mu\) = 5.767237, \(\lambda\) = 2.7212621, \(\nu\) = 0.8021718, \(\zeta_1\) = -1.5717303. The corresponding CBM values are \(\mu\) = 5.4464738, \(\alpha\) = 0.8023609, \(\zeta_1\) = -1.4253826. The RSM and CBM \(\mu\) parameters are close and likewise the RSM \(\nu\) and CBM \(\alpha\) parameters are close - this is because they have similar physical meanings, which is investigated later in this chapter TBA. {[}The CBM does not have a parameter analogous to the RSM \(\lambda\) parameter.{]}
 
 \begin{figure}
 \centering
-\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-3-1.pdf}
-\caption{\label{fig:rsm-3-fits-plots-1-3}Composite plots in both treatments for Van Dyke dataset, reader 3.}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-vd-1-3-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-vd-1-3}Composite plots in both treatments for the Van Dyke dataset, reader 3.}
 \end{figure}
 
 The RSM parameters for the treatment 1 plot are: \(\mu\) = 3.1527627, \(\lambda\) = 9.9986154, \(\nu\) = 0.9899933, \(\zeta_1\) = 1.1733988. The corresponding CBM values are \(\mu\) = 2.1927712, \(\alpha\) = 0.98, \(\zeta_1\) = -0.5168848.
 
 \begin{figure}
 \centering
-\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-4-1.pdf}
-\caption{\label{fig:rsm-3-fits-plots-1-4}Composite plots in both treatments for Van Dyke dataset, reader 4. For treatment 2 the 3 plots are indistinguishable and each one has AUC = 1. The degeneracy is due to all operating points being on the axes of the unit square.}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-vd-1-4-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-vd-1-4}Composite plots in both treatments for the Van Dyke dataset, reader 4. For treatment 2 the 3 plots are indistinguishable and each one has AUC = 1. The degeneracy is due to all operating points being on the axes of the unit square.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-1-5-1.pdf}
-\caption{\label{fig:rsm-3-fits-plots-1-5}Composite plots in both treatments for Van Dyke dataset, reader 5.}
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-vd-1-5-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-vd-1-5}Composite plots in both treatments for the Van Dyke dataset, reader 5.}
 \end{figure}
 
-\hypertarget{rsm-3-fits-references}{%
-\section{References}\label{rsm-3-fits-references}}
+\hypertarget{rsm-3-fits-representative-plots-franken}{%
+\subsection{Plots for the Franken dataset}\label{rsm-3-fits-representative-plots-franken}}
+
+The following plots are arranged in pairs, with the left plot corresponding to treatment 1 and the right to treatment 2. These plots apply to the Franken dataset.
+
+\begin{figure}
+\centering
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-fr-1-1-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-fr-1-1}Composite plots in both treatments for the Franken dataset, reader 1.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-fr-1-2-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-fr-1-2}Composite plots in both treatments for the Franken dataset, reader 2.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-fr-1-3-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-fr-1-3}Composite plots in both treatments for the Franken dataset, reader 3.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{12-rsm-3-fits_files/figure-latex/rsm-3-fits-plots-fr-1-4-1.pdf}
+\caption{\label{fig:rsm-3-fits-plots-fr-1-4}Composite plots in both treatments for the Franken dataset, reader 4.}
+\end{figure}
 
 \hypertarget{part-cad-applications}{%
 \part*{CAD applications}\label{part-cad-applications}}
@@ -5479,9 +5548,6 @@ TBA
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{standalone-cad-radiologists-references}{%
-\section{References}\label{standalone-cad-radiologists-references}}
-
 \hypertarget{optim-op-point}{%
 \chapter{Optimal operating point}\label{optim-op-point}}
 
@@ -5789,9 +5855,6 @@ This is due to two reinforcing effects: performance goes down with increasing nu
 The FROC plots also illustrate the decrease in \(\text{LLF} \left ( f, \mu, \lambda, \nu \right )\) with increasing \(\lambda\): the black dots move to smaller ordinates, as do the red dots, which would seem to imply decreasing performance. However, the accompanying change in \(\text{NLF} \left ( f, \mu, \lambda, \nu \right )\) rules out an unambiguous determination of the direction of the change in overall performance based on the FROC.
 
 TBA For very low performance, defined as \(0.5 < \text{ROC-AUC} < 0.6\), the Youden-index method chooses a lower threshold compared to wAFROC optimization, resulting in a higher operating point on the FROC, greater ROC-AUC but sharply lower wAFROC-AUC. The difference between the two methods increases as \(\text{ROC-AUC} \rightarrow 0.5\). In this limit the wAFROC method severely limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.
-
-\hypertarget{optim-op-point-references}{%
-\section{References}\label{optim-op-point-references}}
 
 \hypertarget{optim-op-point-appendices}{%
 \chapter{Optimal operating point appendices}\label{optim-op-point-appendices}}
@@ -6431,9 +6494,6 @@ FOM & $\nu$ & $\zeta_1$ & $\text{wAFROC}$ & $\text{ROC}$ & $\left( \text{NLF}, \
 \caption{\label{fig:optim-op-point-low-performance-vary-nu-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
 \end{figure}
 
-\hypertarget{optim-op-point-appendices-references}{%
-\section{References}\label{optim-op-point-appendices-references}}
-
 \hypertarget{part-datasets}{%
 \part*{DATASETS}\label{part-datasets}}
 \addcontentsline{toc}{part}{DATASETS}
@@ -6460,7 +6520,7 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 \begin{itemize}
 \tightlist
 \item
-  \texttt{dataset01} ``TONY'' FROC dataset \citep{RN2125}
+  \texttt{dataset01} ``TONY'' FROC dataset \citep{chakraborty2011estimating}
 \end{itemize}
 
 \begin{verbatim}
@@ -6638,9 +6698,6 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL   : num [1:2, 1:4, 1:100, 1] 6 5 6 4 5 5 5 5 5 4 ...
 ##  $ LL_IL: logi NA
 \end{verbatim}
-
-\hypertarget{datasets-references}{%
-\section{References}\label{datasets-references}}
 
   \bibliography{packages.bib,myRefs.bib}
 

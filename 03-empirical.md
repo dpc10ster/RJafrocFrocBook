@@ -1861,4 +1861,3 @@ This is similar to the above expression for AFROC1 except for the presence of th
 
 A and B are as defined in Eqn. \@ref(eq:empirical-computational-afroc1ab).
 
-## References {#empirical-references}

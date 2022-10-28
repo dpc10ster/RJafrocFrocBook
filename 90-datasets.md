@@ -20,7 +20,7 @@ The datasets are embedded in `RJafroc`. They can be viewed in the help file of t
 
 The datasets are identified in the code by dataset`dd` (where `dd` is an integer in the range `01` to `14`) as follows:
 
-* `dataset01` "TONY" FROC dataset [@RN2125]
+* `dataset01` "TONY" FROC dataset [@chakraborty2011estimating]
 
 
 ```
@@ -177,6 +177,6 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 
 
 
-## References {#datasets-references}
+
 
 

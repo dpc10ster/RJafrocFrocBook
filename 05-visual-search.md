@@ -120,6 +120,3 @@ The inexperienced observer finds more suspicious regions than does the expert ma
 
 
 
-
-## References {#visual-search-references}
-

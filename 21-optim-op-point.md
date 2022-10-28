@@ -447,4 +447,4 @@ The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lamb
 TBA For very low performance, defined as $0.5 < \text{ROC-AUC} < 0.6$, the Youden-index method chooses a lower threshold compared to wAFROC optimization, resulting in a higher operating point on the FROC, greater ROC-AUC but sharply lower wAFROC-AUC. The difference between the two methods increases as $\text{ROC-AUC} \rightarrow 0.5$. In this limit the wAFROC method severely limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.  
 
 
-## References {#optim-op-point-references}
+
