@@ -23,7 +23,7 @@ knitr::include_graphics("images/compare-3-fits/datasets.png")
 
 The datasets are identified in the code by dataset`dd` (where `dd` is an integer in the range `01` to `14`) as follows:
 
-* `dataset01` "TONY" FROC dataset [@RN2125]
+* `dataset01` "TONY" FROC dataset [@chakraborty2011estimating]
 
 ```{r, echo=FALSE}
 str(dataset01$ratings)

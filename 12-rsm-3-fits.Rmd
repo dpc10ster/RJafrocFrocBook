@@ -32,7 +32,9 @@ There are three methods for fitting proper curves to ROC datasets:
 * The PROPROC (proper ROC) model described in TBA Chapter 20. 
 * The CBM (contaminated binormal model) described in TBA Chapter 20. 
 
-This chapter compares these methods by fitting them to 14 multiple-treatment multiple-reader datasets described in Chapter \@ref(datasets). ^[Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.]
+This chapter compares these methods by fitting them to 14 multiple-treatment multiple-reader datasets described in Chapter \@ref(datasets). ^[Comparing the RSM to the binormal model would be inappropriate, as the latter does not predict proper ROCs.] 
+
+The motivation for this work was a serendipitous finding [@chakraborty2011estimating] that PROPROC fitted ROC AUCs and RSM fitted ROC AUCs were identical for some datasets. This led to extending that work to include CBM and more datasets. 
 
 
 

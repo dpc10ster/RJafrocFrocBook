@@ -21,7 +21,7 @@ library(here)
 
 ## TBA Introduction {#rsm-fitting-intro}
 
-Early work, reported in my 2017 print book, revealed that an FROC curve based estimation method worked only for designer level CAD data and not for human observer data. Subsequent effort focused on ROC curve-based fitting, and this proved successful at fitting radiologist datasets where detailed definition of the ROC curve is not available. An preliminary account of this work can be found in a conference proceeding [@RN2125]. 
+Early work, reported in my 2017 print book, revealed that an FROC curve based estimation method worked only for designer level CAD data and not for human observer data. Subsequent effort focused on ROC curve-based fitting, and this proved successful at fitting radiologist datasets where detailed definition of the ROC curve is not available. A preliminary account of this work can be found in a conference proceeding [@chakraborty2011estimating]. 
 
 The reader should be surprised to learn that the ROC curve based fitting works, *which implies that one does not even need FROC data to estimate RSM parameters.* I have previously stated that the ROC paradigm ignores search, so how can one estimate search-model parameters from ROC data? The reason is that the *shape* of the RSM-predicted ROC curve and the *location* of the end-point depend on the RSM parameters.
 
