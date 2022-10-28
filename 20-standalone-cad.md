@@ -19,15 +19,16 @@ output:
 10%
 
 
-## Abstract {#standalone-cad-radiologists-abstract}
+## Overview {#standalone-cad-radiologists-overview}
 
-Computer aided detection (CAD) research for screening mammography has so far focused on measuring performance of radiologists with and without CAD. Typically a group of radiologists interpret a set of images with and without CAD assist. Standalone performance of CAD algorithms is rarely measured. The stated reason for this is that in the clinic CAD is never used alone, rather it is always used with radiologists. For this reason interest has been focused on the incremental improvement afforded by CAD. 
+Computer aided detection (CAD) research for screening mammography has focused on measuring performance of radiologists with and without CAD: a group of radiologists interpret a set of images with and without CAD assist. Standalone performance of CAD algorithms is rarely measured. The stated reason for this is that in the clinic CAD is never used alone, rather it is always used with radiologists. 
 
-Another reason for the lack of focus on standalone CAD performance is the lack of clear methodology for measuring standalone CAD performance. This chapter extends the methodology used in a recent study of standalone performance. The method is termed random-reader fixed case (1T-RRFC), since it only accounts for reader variability but does not account for case-variability. The extension includes the effect of case-sampling variability. Since in the proposed method CAD is treated as an additional reader within a single treatment, the method is termed one-treatment random-reader random-case (1T-RRRC) analysis. The new method is based on existing methodology allowing comparison of the average performance of readers in a single treatment to a specified value. The key modification is to regard the difference in performance between radiologists and CAD as a figure of merit, to which the existing work is then directly applicable. The 1T-RRRC method was compared to 1T-RRFC. It was also compared to an unorthodox usage of conventional ROC (receiver operating characteristic) analysis software, termed 2T-RRRC analysis, which involves replicating the CAD ratings as many times as there are radiologists, to in effect simulate a second treatment, i.e., CAD is regarded as the second treatment. The proposed 1T-RRRC analysis has 3 random parameters as compared to 6 parameters in 2T-RRRC and one parameter in 1T-RRFC. As expected, since one is including an additional source of variability, both RRRC analyses (1T and 2T) yielded larger p-values and wider confidence intervals as compared to 1T-RRFC. For the F-statistic, degrees of freedom and p-value, both 1T-RRRC and 2T-RRRC analyses yielded exactly the same results. However, 2T-RRRC model parameter estimates were unrealistic; for example, it yields zero between-reader variance, whereas 1T-RRRC yielded the expected non-zero value. All three methods are implemented in an open-source `R` package `RJafroc.`
+Another reason for the lack of focus on standalone CAD performance is the lack of a clear method for measuring standalone CAD performance. This chapter extends the method used in a recent study of standalone CAD performance [@hupse2013standalone], termed one-treatment random-reader fixed case or **1T-RRFC** analysis, since CAD is treated as an additional reader within a single treatment and since it only accounts for reader variability but does not account for case-variability. 
 
-## Keywords {#standalone-cad-radiologists-ker-words}
+The extension described in this chapter includes the effect of case-sampling variability and is hence termed one-treatment random-reader random-case or **1T-RRRC** analysis. The method is based on an existing method allowing comparison of the average performance of readers in a single treatment to a specified value. The key modification is to regard the difference in performance between radiologists over CAD as a figure of merit to which the existing work is directly applicable. The 1T-RRRC method is compared to 1T-RRFC. 
 
-Technology assessment, computer-aided detection (CAD), screening mammography, standalone performance, single-treatment multi-reader ROC analysis.
+The 1T-RRRC method is also compared to an unorthodox usage of conventional multiple-treatment multiple-reader method, termed **2T-RRRC** analysis, which involves replicating the CAD ratings as many times as there are radiologists, in effect simulating a second treatment, i.e., CAD is regarded as the second treatment (with identical readers within this treatment) to which existing methods (DBM or OR, as described in [RJafrocRocBook](https://dpc10ster.github.io/RJafrocRocBook/dbm-analysis-significance-testing.html)) is applied. 
+`
 
 ## Introduction {#standalone-cad-radiologists-introduction}
 
@@ -35,7 +36,7 @@ In the US the majority of screening mammograms are analyzed by computer aided de
 
 Clinical CAD systems sometimes only report the locations of suspicious regions, i.e., it may not provide ratings. However, a (continuous variable) malignancy index for every CAD-found suspicious region is available to the algorithm designer [@edwards2002maximum]. Standalone performance, i.e., performance of designer-level CAD by itself, regarded as an algorithmic reader, vs. radiologists, is rarely measured. In breast cancer screening I am aware of only one study [@hupse2013standalone] where standalone performance was measured. [Standalone performance has been measured in CAD for computed tomography colonography, chest radiography and three dimensional ultrasound [@hein2010computeraided; @summers2008performance; @taylor2006computerassisted; @deBoo2011computeraided; @tan2012computeraided]].
 
-One possible reason for not measuring standalone performance of CAD is the lack of an accepted assessment methodology for such measurements. The purpose of this work is to remove that impediment.
+One possible reason for not measuring standalone performance of CAD is the lack of an accepted assessment method for such measurements. The purpose of this work is to remove that impediment.
 It describes a method for comparing standalone performance of designer-level CAD to radiologists interpreting the same cases and compares the method to those described in two recent publications [@hupse2013standalone; @kooi2016comparison].
 
 ## Methods {#standalone-cad-radiologists-methods}
@@ -909,6 +910,9 @@ For an analysis method to be considered statistically valid it needs to be teste
 
 ## Discussion {#standalone-cad-radiologists-discussion}
 
+The proposed 1T-RRRC analysis has 3 random parameters as compared to 6 parameters in 2T-RRRC and one parameter in 1T-RRFC. As expected, since one is including an additional source of variability, both RRRC analyses (1T and 2T) yielded larger p-values and wider confidence intervals as compared to 1T-RRFC. For the F-statistic, degrees of freedom and p-value, both 1T-RRRC and 2T-RRRC analyses yielded exactly the same results. However, 2T-RRRC model parameter estimates were unrealistic; for example, it yields zero between-reader variance, whereas 1T-RRRC yielded the expected non-zero value. All three methods are implemented in an open-source `R` package `RJafroc.
+
+
 TBA TODOLAST The argument often made for not measuring standalone performance is that since CAD will be used only as a second reader, it is only necessary to measure performance of radiologists without and with CAD. It has been stated [@nishikawa2011fundamental]: 
 
 >High stand-alone performance is neither a necessary nor a sufficient condition for CAD to be truly useful clinically. 
@@ -923,7 +927,7 @@ The paradigm used to collect the observer performance data - e.g., receiver oper
 
 While there is consensus that CAD works for microcalcifications, for masses its performance is controversial27,28. Two large clinical studies TBA 29,30 (222,135 and 684,956 women, respectively) showed that CAD actually had a detrimental effect on patient outcome. A more recent large clinical study has confirmed the negative view of CAD31 and there has been a call for ending Medicare reimbursement for CAD interpretations32.
 
-In my opinion standalone performance is the most direct measure of CAD performance. Lack of clear-cut methodology to assess standalone CAD performance may have limited past CAD research. The current work hopoefully removes that impediment. Going forward, assessment of standalone performance of CAD vs. expert radiologists is strongly encouraged.
+In my opinion standalone performance is the most direct measure of CAD performance. Lack of a clear-cut method to assess standalone CAD performance may have limited past CAD research. The current work hopoefully removes that impediment. Going forward, assessment of standalone performance of CAD vs. expert radiologists is strongly encouraged.
 
 
 ## Appendix 1 {#standalone-cad-radiologists-appendix1}

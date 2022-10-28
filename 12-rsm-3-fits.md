@@ -6,7 +6,7 @@
 
 ## TBA How much finished {#rsm-3-fits-how-much-finished}
 
-85%
+99%
 
 
 ## TBA Introduction {#rsm-3-fits-intro}
@@ -597,7 +597,7 @@ l(z) \equiv \frac{\text{pdf}_D(z)}{\text{pdf}_N(z)}
 \end{equation}
 
 
-There is a theorem[@barrett2013foundations] that an observer who uses the likelihood ratio $l(z)$ or any monotone increasing transformation of it as the decision variable, has optimal performance, i.e., maximum ROC-AUC. To use the terminology of [@barrett2013foundations] any observer using the likelihood ratio as the decision variable is an ideal observer (Section 13.2.6 ibid). However, **different ideal observers must yield the same AUC as otherwise one observer would be "more ideal" than another**. Different models of fitting proper ROCs represent different approaches to modeling the decision variable and the likelihood ratio, but while the curves can have different shapes (the slope of the ROC curve at a given point equals the likelihood ratio calculated at that point) their AUCs must agree. This explains the empirical observation of this chapter that RSM, PROPROC and CBM all yield the same AUCs as summarized in Table \@ref(tab:rsm-3-fits-slopes-table1).
+There is a theorem [@barrett2013foundations] that an observer who uses the likelihood ratio $l(z)$ or any monotone increasing transformation of it as the decision variable, has optimal performance, i.e., maximum ROC-AUC. To use the terminology of [@barrett2013foundations] any observer using the likelihood ratio as the decision variable is an ideal observer (Section 13.2.6 ibid). However, **different ideal observers must yield the same AUC as otherwise one observer would be "more ideal" than another**. Different models of fitting proper ROCs represent different approaches to modeling the decision variable and the likelihood ratio, but while the curves can have different shapes (the slope of the ROC curve at a given point equals the likelihood ratio calculated at that point) their AUCs must agree. This explains the empirical observation of this chapter that RSM, PROPROC and CBM all yield the same AUCs as summarized in Table \@ref(tab:rsm-3-fits-slopes-table1).
 
 
 ## Appendices {#rsm-3-fits-appendices}
