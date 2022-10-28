@@ -351,9 +351,7 @@ If the AUCs of the three methods are identical the following relations hold with
 \left. 
 \begin{aligned}
 \text{AUC}_{\text{PRO}} =& \text{m}_{PR} \text{AUC}_{\text{PRO}}  \\
-\text{AUC}_{\text{CBM}} =& \text{m}_{CR} \text{AUC}_{\text{PRO}} \\
-\text{m}_{\text{PR}}    =& 1 \\
-\text{m}_{\text{CR}}    =& 1
+\text{AUC}_{\text{CBM}} =& \text{m}_{CR} \text{AUC}_{\text{PRO}}
 \end{aligned}
 \right \}
 (\#eq:rsm-3-fits-slopes-equation1)
@@ -398,14 +396,14 @@ The call to function `slopesConvVsRsm()` returns `slopes`, which contains, for e
 
 * PRO vs. RSM: `slopes$p1[[2]]` is the plot of $\text{AUC}^{\text{PRO}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$ for all treatments and readers in the Van Dyke dataset. The plot for dataset $f, f = 1, 2, ...14$ is accessed as `slopes$p1[[f]]` which yields the plot of $\text{AUC}^{\text{PRO}}_{f \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{f \bullet \bullet}$.
 * CBM vs. RSM: `slopes$p2[[2]]` is the plot of $\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$ for for all treatments and readers in the Van Dyke dataset. The plot for dataset $f$ is accessed as `slopes$p2[[f]]`.
-* PRO vs. RSM: `slopes$m_pro_rsm` has two columns, each of length 14, the slopes $\text{m}_{PR,f}$ for the datasets (indexed by $f$) and the corresponding $R^2$ values, where $R^2$ is the fraction of variance explained by the constrained straight line fit. The first column is `slopes$m_pro_rsm[[1]]` and the second column is `slopes$m_pro_rsm[[2]]`.
+* PRO vs. RSM: `slopes$m_pro_rsm` has two columns, each of length 14, the slopes $\text{m}_{PR,f}$ for the datasets (indexed by $f$) and the corresponding $R^2$ values, where $R^2$ is the fraction of variance explained by the zero-intercept straight line fit. The first column is `slopes$m_pro_rsm[[1]]` and the second column is `slopes$m_pro_rsm[[2]]`.
 * CBM vs. RSM: `slopes$m_cbm_rsm` has two columns, each of length 14, the slopes $\text{m}_{CR,f}$ for the datasets and the corresponding $R^2$ values. The first column is `slopes$m_cbm_rsm[[1]]` and the second column is `slopes$m_cbm_rsm[[2]]`.
 
 
-As an example, for the Van Dyke dataset, `slopes$p1[[2]]` which is shown in the left in Fig. \@ref(fig:rsm-3-fits-plots-2), is the plot of $\text{AUC}^{\text{PRO}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$. Shown in the right is `slopes$p2[[2]]`, the plot of $\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$. Each plot has the constrained linear fit superposed on the $2\times5 = 10$ data points; each data point represents a distinct modality-reader combination. 
+As an example, for the Van Dyke dataset, `slopes$p1[[2]]` which is shown in the left in Fig. \@ref(fig:rsm-3-fits-plots-2), is the plot of $\text{AUC}^{\text{PRO}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$. Shown in the right is `slopes$p2[[2]]`, the plot of $\text{AUC}^{\text{CBM}}_{2 \bullet \bullet}$ vs. $\text{AUC}^{RSM}_{2 \bullet \bullet}$. Each plot has the zero-intercept linear fit superposed on the $2\times5 = 10$ data points; each data point represents a distinct modality-reader combination. 
 
 
-```{r rsm-3-fits-plots-2, fig.cap="Van Dyke dataset: Left plot is PROPROC-AUC vs. RSM-AUC with the superposed constrained linear fit. The number of data points is `nPts` = 10. Right plot is CBM-AUC vs. RSM-AUC.", fig.show='hold', echo=FALSE}
+```{r rsm-3-fits-plots-2, fig.cap="Van Dyke dataset: Left plot is PROPROC-AUC vs. RSM-AUC with the superposed zero-intercept linear fit. The number of data points is `nPts` = 10. Right plot is CBM-AUC vs. RSM-AUC.", fig.show='hold', echo=FALSE}
 grid.arrange(slopes$p1[[2]], slopes$p2[[2]], ncol = 2)
 ```
 
@@ -477,15 +475,24 @@ colnames(x) <- c("$\\text{m}_{PR}$", "$R^2_{PR}$", "$\\text{m}_{CR}$", "$R^2_{CR
 
 
 ```{r rsm-3-fits-slopes-table1, echo=FALSE}
-kbl(x, caption = "Summary of slopes and correlations for the two constrained fits: PROPROC AUC vs. RSM AUC and CBM AUC vs. RSM AUC. The average of each slope equals unity to within 0.6 percent.", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(x, caption = "Summary of slopes and correlations for the two zero-intercept fits: PROPROC AUC vs. RSM AUC and CBM AUC vs. RSM AUC. The average of each slope equals unity to within 0.6 percent.", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
 ```
 
 
-In Table \@ref(tab:rsm-3-fits-slopes-table1) the second column, labeled $\text{m}_{PR}$, shows slopes of straight lines, constrained to go through the origin, to PROPROC AUC vs. RSM AUC values, for each of the 14 datasets, as labeled in the fits column. The third column, labeled $R^2_{PR}$, lists the square of the correlation coefficient for each fit. The fourth and fifth columns list the corresponding values for the CBM AUC vs. RSM AUC fits. The second last row lists the grand averages (AVG) and the last row lists the 95 percent confidence intervals.
+In Table \@ref(tab:rsm-3-fits-slopes-table1) the second column, labeled $\text{m}_{PR}$, shows slopes of straight lines, zero-intercept to go through the origin, to PROPROC AUC vs. RSM AUC values, for each of the 14 datasets, as labeled in the fits column. The third column, labeled $R^2_{PR}$, lists the square of the correlation coefficient for each fit. The fourth and fifth columns list the corresponding values for the CBM AUC vs. RSM AUC fits. The second last row lists the grand averages (AVG) and the last row lists the 95 percent confidence intervals.
 
 
-## TBA Discussion / Summary {#rsm-3-fits-discussion-summary}
+## Reason for equal AUCs / Summary {#rsm-3-fits-discussion-summary}
 
+We find that all three proper ROC methods yield almost the same AUC. The reason is that the proper ROC is a consequence of using a decision variable that is equivalent (in the arbitrary monotonic increasing transformations sense, see below) to a likelihood ratio. Proper ROC fitting is discussed in [RJafrocRocBook](https://dpc10ster.github.io/RJafrocRocBook/proper-roc-models.html#proper-roc-models-likelihood-ratio-theorem1). The likelihood ratio $l(z)$ is defined as the ratio of the diseased pdf to the non-diseased pdf:
+
+\begin{equation}	
+l(z) \equiv \frac{\text{pdf}_D(z)}{\text{pdf}_N(z)}
+(\#eq:rsm-3-fits-l-z)
+\end{equation}
+
+
+There is a theorem[@barrett2013foundations] that an observer who uses the likelihood ratio $l(z)$ or any monotone increasing transformation of it as the decision variable, has optimal performance, i.e., maximum ROC-AUC. To use the terminology of [@barrett2013foundations] any observer using the likelihood ratio as the decision variable is an ideal observer (Section 13.2.6 ibid). However, **different ideal observers must yield the same AUC as otherwise one observer would be "more ideal" than another**. Different models of fitting proper ROCs represent different approaches to modeling the decision variable and the likelihood ratio, but while the curves can have different shapes (the slope of the ROC curve at a given point equals the likelihood ratio calculated at that point) their AUCs must agree. This explains the empirical observation of this chapter that RSM, PROPROC and CBM all yield the same AUCs as summarized in Table \@ref(tab:rsm-3-fits-slopes-table1).
 
 
 ## Appendices {#rsm-3-fits-appendices}
