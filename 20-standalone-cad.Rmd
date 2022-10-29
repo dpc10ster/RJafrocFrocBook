@@ -459,7 +459,7 @@ return(stresc(ret))
 
 ```{r allCellsSigTest, echo=FALSE}
 allCells <- array("", dim = c(2,12,11))
-TF <- TRUE
+TF <- FALSE
 
 allCells[1,1,] <- do_one_ST_RRFC_1T (RRFC_1T_PCL_0_05,"PCL_0_05","1T-RRFC")  
 allCells[1,2,] <- do_one_ST_RRRC_2T (RRRC_2T_PCL_0_05,"PCL_0_05","2T-RRRC")  
@@ -489,14 +489,17 @@ Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing
 
 
 ```{r standalone-cad-table2, echo=FALSE}
-cells = array(dim = c(12,11))
+cells <- array(dim = c(12,11))
+
+captionStr <- "Significance testing results of the analyses for an LROC dataset. Three sets of results, namely RRRC, 2T-RRRC and 1T-RRRC, are shown for each figure of merit (FOM). Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence intervals than the corresponding row labeled 1T-RRFC. [$\\theta_0$ = FOM CAD; $\\theta_{\\bullet}$ = average FOM of radiologists; $\\psi_{\\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\\psi_{\\bullet} = 0$.]"
+
 
 for (j in 1:12) cells[j,]  <- allCells[1,j,]
 
 df <- as.data.frame(cells, stringsAsFactors = FALSE)
 colnames(df) <-c("FOM", "Analysis", "$\\theta_0$", "$CI_{\\theta_0}$", "$\\theta_{\\bullet}$", "$CI_{\\theta_{\\bullet}}$", "$\\psi_{\\bullet}$", "$CI_{\\psi_{\\bullet}}$",  "F", "ddf", "p")
 # escape = FALSE is critical in getting Math right
-kbl(df, caption = "Significance testing results of the analyses for an LROC dataset. Three sets of results, namely RRRC, 2T-RRRC and 1T-RRRC, are shown for each figure of merit (FOM). Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence intervals than the corresponding row labeled 1T-RRFC. [$\\theta_0$ = FOM CAD; $\\theta_{\\bullet}$ = average FOM of radiologists; $\\psi_{\\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\\psi_{\\bullet} = 0$.]", booktabs = TRUE, escape = FALSE) %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
