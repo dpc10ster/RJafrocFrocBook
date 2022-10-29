@@ -483,7 +483,7 @@ allCells[1,12,] <- do_one_ST_RRRC_1T (RRRC_1T_AUC,"Wilcoxon","1T-RRRC")
 
 ## Results {#standalone-cad-radiologists-results}
 
-The three methods, in historical order 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof. Karssemeijer for making this dataset available).
+The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof. Karssemeijer for making this dataset available).
 
 Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing results corresponding to the three analyses.
 
