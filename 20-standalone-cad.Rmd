@@ -339,7 +339,7 @@ Apart from fixed effects, the model in Eqn. \@ref(eq:standalone-cad-1t-psi) cont
 Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model, which contains only one random parameter, namely $\sigma_R^2$. 
 [One expects identical estimates of $\sigma_R^2$ using 1T-RRFC, 2T-RRRC or 1T-RRRC analyses.]
 
-## Software implementation {#standalone-cad-radiologists-computational-details}
+## Implementation {#standalone-cad-radiologists-computational-details}
 
 The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in `RJafroc`. 
 
@@ -529,22 +529,22 @@ allCells[1,12,] <- do_one_ST_RRRC_1T (RRRC_1T_AUC,"Wilcoxon","1T-RRRC")
 
 ## Results {#standalone-cad-radiologists-results}
 
-The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof. Karssemeijer for making this dataset available).
-
-Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing results corresponding to the three analyses.
+The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof. Karssemeijer for making this dataset available), Table \@ref(tab:standalone-cad-table2).
 
 
 ```{r standalone-cad-table2, echo=FALSE}
 cells <- array(dim = c(12,11))
 
-captionStr <- "Significance testing results of the analyses for an LROC dataset. Three sets of results, namely RRRC, 2T-RRRC and 1T-RRRC, are shown for each figure of merit (FOM). Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence intervals than the corresponding row labeled 1T-RRFC. [$\\theta_0$ = FOM CAD; $\\theta_{\\bullet}$ = average FOM of radiologists; $\\psi_{\\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\\psi_{\\bullet} = 0$.]"
+captionStr <- "Significance testing results for an LROC dataset. For each figure of merit (FOM) shown are results of RRRC, 2T-RRRC and 1T-RRRC analyses. Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence interval than the corresponding row labeled RRFC. [$\\theta_0$ = FOM CAD; $\\theta_{\\bullet}$ = average FOM of radiologists; $\\psi_{\\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\\psi_{\\bullet} = 0$.]"
 
 
 for (j in 1:12) cells[j,]  <- allCells[1,j,]
 
 df <- as.data.frame(cells, stringsAsFactors = FALSE)
-colnames(df) <-c("FOM", "Analysis", "$\\theta_0$", "$CI_{\\theta_0}$", "$\\theta_{\\bullet}$", "$CI_{\\theta_{\\bullet}}$", "$\\psi_{\\bullet}$", "$CI_{\\psi_{\\bullet}}$",  "F", "ddf", "p")
+colnames(df) <-c("FOM", "Analysis", "theta_0", "$CI_{\\theta_0}$", "theta_dot", "$CI_{\\theta_{\\bullet}}$", "psi_dot", "$CI_{\\psi_{\\bullet}}$",  "F", "ddf", "p")
 # escape = FALSE is critical in getting Math right
+df <- collapse_rows_df(collapse_rows_df(collapse_rows_df(collapse_rows_df(df,FOM),theta_0),theta_dot),psi_dot)
+
 kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(3), valign = "middle") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
