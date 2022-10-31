@@ -3,15 +3,6 @@
 # Standalone CAD vs. Radiologists {#standalone-cad-radiologists}
 
 
----
-output:
-  rmarkdown::pdf_document:
-    fig_caption: yes        
-    includes:  
-      in_header: R/learn/my_header.tex
----
-
-
 ```{r setup, include = FALSE}
   knitr::opts_chunk$set(
   collapse = TRUE,
@@ -21,12 +12,65 @@ output:
   library(ggplot2)
   library(kableExtra)
   library(seqinr)
+  library(dplyr)
   library(here)
 ```
 
 
 ## TBA How much finished {#standalone-cad-radiologists-how-much-finished}
-10%
+50%
+
+Table 2 does not center properly in pdf
+
+Table 2 is too wide
+
+collapse_rows not working even in this example:
+
+### This does not work
+
+```{r}
+df <- data.frame(C1 = c(rep("a", 10), rep("b", 5)),
+                 C2 = c(rep("c", 7), rep("d", 3), rep("c", 2), rep("d", 3)),
+                 C3 = 1:15,
+                 C4 = sample(c(0,1), 15, replace = TRUE))
+```
+
+
+
+```{r}
+kbl(df, align = "c") %>%
+  kable_paper(full_width = F) %>%
+  column_spec(1, bold = T) %>%
+  collapse_rows(columns = 1:2, valign = "top")
+```
+
+
+### This works!
+
+
+Define this function:
+
+```{r}
+collapse_rows_df <- function(df, variable){
+  group_var <- enquo(variable)
+  df %>%
+    group_by(!! group_var) %>%
+    mutate(groupRow = 1:n()) %>%
+    ungroup() %>%
+    mutate(!!quo_name(group_var) := ifelse(groupRow == 1, as.character(!! group_var), "")) %>%
+    select(-c(groupRow))
+}
+```
+
+
+Now apply it:
+
+```{r}
+kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
+  kable_paper(full_width = F) %>%
+  column_spec(1, bold = T) %>%
+  collapse_rows(columns = 1:2, valign = "top")
+```  
 
 
 ## Introduction {#standalone-cad-radiologists-introduction}
@@ -47,6 +91,8 @@ The 1T-RRRC method is also compared to an unorthodox usage of conventional multi
 `
 
 ## Methods {#standalone-cad-radiologists-methods}
+
+
 
 Summarized are two recent studies of CAD vs. radiologists in mammography. This is followed by comments on the methods used in the two studies. The second study used multi-treatment multi-reader receiver operating characteristic (ROC) software in an unorthodox way. A statistical model and analysis method is described that avoids the unorthodox usage of ROC software and has fewer model parameters.
 
@@ -499,7 +545,7 @@ for (j in 1:12) cells[j,]  <- allCells[1,j,]
 df <- as.data.frame(cells, stringsAsFactors = FALSE)
 colnames(df) <-c("FOM", "Analysis", "$\\theta_0$", "$CI_{\\theta_0}$", "$\\theta_{\\bullet}$", "$CI_{\\theta_{\\bullet}}$", "$\\psi_{\\bullet}$", "$CI_{\\psi_{\\bullet}}$",  "F", "ddf", "p")
 # escape = FALSE is critical in getting Math right
-kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(3), valign = "middle") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
