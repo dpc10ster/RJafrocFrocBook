@@ -541,10 +541,13 @@ captionStr <- "Significance testing results for an LROC dataset. For each figure
 for (j in 1:12) cells[j,]  <- allCells[1,j,]
 
 df <- as.data.frame(cells, stringsAsFactors = FALSE)
-colnames(df) <-c("FOM", "Analysis", "theta_0", "$CI_{\\theta_0}$", "theta_dot", "$CI_{\\theta_{\\bullet}}$", "psi_dot", "$CI_{\\psi_{\\bullet}}$",  "F", "ddf", "p")
-# escape = FALSE is critical in getting Math right
-df <- collapse_rows_df(collapse_rows_df(collapse_rows_df(collapse_rows_df(df,FOM),theta_0),theta_dot),psi_dot)
+colnames(df) <-c("C1", "Analysis", "C3", "$CI_{\\theta_0}$", "C5", "$CI_{\\theta_{\\bullet}}$", "C7", "$CI_{\\psi_{\\bullet}}$",  "F", "ddf", "p")
 
+df <- collapse_rows_df(collapse_rows_df(collapse_rows_df(collapse_rows_df(df,C1),C3),C5),C7)
+
+colnames(df) <-c("FOM", "Analysis", "$\\theta_0$", "$CI_{\\theta_0}$", "$\\theta_{\\bullet}$", "$CI_{\\theta_{\\bullet}}$", "$\\psi_{\\bullet}$", "$CI_{\\psi_{\\bullet}}$",  "F", "ddf", "p")
+
+# escape = FALSE is critical in getting Math right
 kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(3), valign = "middle") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
