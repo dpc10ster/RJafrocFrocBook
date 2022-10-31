@@ -11,7 +11,6 @@
   library(RJafroc)
   library(ggplot2)
   library(kableExtra)
-  library(seqinr)
   library(dplyr)
   library(here)
 ```
@@ -401,15 +400,15 @@ do_one_ST_RRFC_1T <- function(x,fom,method){
 
 dig <- 3
 ciRad <- paste0("(", 
-                format(x$CIAvgRadFom[1], scientific = TF, digits = dig),
+                format(x$CIAvgRadFom[1], scientific = TF, digits = 2),
                 ",",
-                format(x$CIAvgRadFom[2], scientific = TF, digits = dig),
+                format(x$CIAvgRadFom[2], scientific = TF, digits = 2),
                 ")")
 
 ciDif <- paste0("(", 
-                format(x$CIAvgDiffFom[1], scientific = TF, digits = dig),
+                format(x$CIAvgDiffFom[1], scientific = TF, digits = 2),
                 ",",
-                format(x$CIAvgDiffFom[2], scientific = TF, digits = dig)
+                format(x$CIAvgDiffFom[2], scientific = TF, digits = 2)
                 ,")")
 
 ret <- c(
@@ -421,11 +420,11 @@ ret <- c(
   ciRad, # ci RAD
   format(x$avgDiffFom, scientific = TF, digits = dig),
   ciDif, # ci DIFF
-  format(as.numeric(x$Tstat)^2, scientific = TF, digits = dig),  
-  format(as.numeric(x$df), scientific = TF, digits = dig),  
-  format(as.numeric(x$pval), scientific = TF, digits = dig))  
+  format(as.numeric(x$Tstat)^2, scientific = TF, digits = 2),  
+  format(as.numeric(x$df), scientific = TF, digits = 2),  
+  format(as.numeric(x$pval), scientific = TF, digits = 2))  
 
-return(stresc(ret))
+return(seqinr::stresc(ret))
 }
 ```
 
@@ -436,19 +435,19 @@ do_one_ST_RRRC_2T <- function(x,fom,method){
 
 dig <- 3
 ciCad <- paste0("(", 
-                format(x$ciAvgRdrEachTrt$CILower[1], scientific = TF, digits = dig),
+                format(x$ciAvgRdrEachTrt$CILower[1], scientific = TF, digits = 2),
                 ",",
-                format(x$ciAvgRdrEachTrt$CIUpper[1], scientific = TF, digits = dig),
+                format(x$ciAvgRdrEachTrt$CIUpper[1], scientific = TF, digits = 2),
                 ")")
 ciRad <- paste0("(", 
-                format(x$ciAvgRdrEachTrt$CILower[2], scientific = TF, digits = dig),
+                format(x$ciAvgRdrEachTrt$CILower[2], scientific = TF, digits = 2),
                 ",",
-                format(x$ciAvgRdrEachTrt$CIUpper[2], scientific = TF, digits = dig),
+                format(x$ciAvgRdrEachTrt$CIUpper[2], scientific = TF, digits = 2),
                 ")")
 ciDif <- paste0("(", 
-                format(x$ciDiffFom$CILower, scientific = TF, digits = dig), 
+                format(x$ciDiffFom$CILower, scientific = TF, digits = 2), 
                 ",",
-                format(x$ciDiffFom$CIUpper, scientific = TF, digits = dig),
+                format(x$ciDiffFom$CIUpper, scientific = TF, digits = 2),
                 ")")
 
 ret <- c(
@@ -460,11 +459,11 @@ ret <- c(
   ciRad, # ci RAD
   format(x$avgDiffFom, scientific = TF, digits = dig),
   ciDif, # ci DIFF
-  format(x$FStat, scientific = TF, digits = dig),  
-  format(x$df, scientific = TF, digits = dig),  
+  format(x$FStat, scientific = TF, digits = 2),  
+  format(x$df, scientific = TF, digits = 2),  
   format(x$pval, scientific = TF, digits = 2))  
 
-return(stresc(ret))
+return(seqinr::stresc(ret))
 }
 ```
 
@@ -474,14 +473,14 @@ return(stresc(ret))
 do_one_ST_RRRC_1T <- function(x,fom,method){
 
 dig <- 3
-ciRad <- paste0("(", format(x$CIAvgRad[1], scientific = TF, digits = dig),
+ciRad <- paste0("(", format(x$CIAvgRad[1], scientific = TF, digits = 2),
                 ",",
-                format(x$CIAvgRad[2], scientific = TF, digits = dig),
+                format(x$CIAvgRad[2], scientific = TF, digits = 2),
                 ")")
 
-ciDif <- paste0("(", format(x$CIAvgDiffFom[1], scientific = TF, digits = dig),
+ciDif <- paste0("(", format(x$CIAvgDiffFom[1], scientific = TF, digits = 2),
                 ",",
-                format(x$CIAvgDiffFom[2], scientific = TF, digits = dig),
+                format(x$CIAvgDiffFom[2], scientific = TF, digits = 2),
                 ")")
 
 ret <- c(
@@ -493,11 +492,11 @@ ret <- c(
   ciRad, # ci RAD
   format(x$avgDiffFom, scientific = TF, digits = dig),
   ciDif, # ci DIFF
-  format(as.numeric(x$Tstat)^2, scientific = TF, digits = dig),  
-  format(x$df, scientific = TF, digits = dig),  
+  format(as.numeric(x$Tstat)^2, scientific = TF, digits = 2),  
+  format(x$df, scientific = TF, digits = 2),  
   format(x$pval, scientific = TF, digits = 2))  
 
-return(stresc(ret))
+return(seqinr::stresc(ret))
 }
 ```
 
@@ -548,7 +547,7 @@ df <- collapse_rows_df(collapse_rows_df(collapse_rows_df(collapse_rows_df(df,C1)
 colnames(df) <-c("FOM", "Analysis", "$\\theta_0$", "$CI_{\\theta_0}$", "$\\theta_{\\bullet}$", "$CI_{\\theta_{\\bullet}}$", "$\\psi_{\\bullet}$", "$CI_{\\psi_{\\bullet}}$",  "F", "ddf", "p")
 
 # escape = FALSE is critical in getting Math right
-kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(3), valign = "middle") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
@@ -583,7 +582,7 @@ ret <- c(
   format(x$varR, scientific = TF, digits = dig),
   rep(as.character(NA),5))
 
-return(stresc(ret))
+return(seqinr::stresc(ret))
 }
 ```
 
@@ -604,7 +603,7 @@ ret <- c(
   format(x$cov3, scientific = TF, digits = dig),
   format(x$varError, scientific = TF, digits = dig))  
 
-return(stresc(ret))
+return(seqinr::stresc(ret))
 }
 ```
 
@@ -625,7 +624,7 @@ ret <- c(
   "NA",
   format(x$varError, scientific = TF, digits = dig))  
 
-return(stresc(ret))
+return(seqinr::stresc(ret))
 }
 ```
 

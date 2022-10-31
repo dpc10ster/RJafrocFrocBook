@@ -1,6 +1,7 @@
 --- 
 title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
+geometry: margin=2cm
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: 
