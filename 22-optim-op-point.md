@@ -4,8 +4,6 @@
 output:
   rmarkdown::pdf_document:
     fig_caption: yes        
-    includes:  
-      in_header: R/learn/my_header.tex
 ---
 
 

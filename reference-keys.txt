@@ -165,8 +165,6 @@ eq:standalone-cad-2t-rrrc-varcom-ordering
 eq:standalone-or-model-single-treatment
 eq:standalone-cad-1t-eps-sampling
 eq:standalone-cad-1t-var-cov2-sampling
-eq:standalone-cad-1t-sigma-jackknife
-eq:standalone-cad-1t-rrrc-var-cov2
 eq:standalone-cad-1t-thetaj
 eq:standalone-cad-diff-reader-def
 eq:standalone-cad-1t-psi
@@ -394,8 +392,10 @@ rsm-3-fits-representative-plots-van-dyke
 rsm-3-fits-representative-plots-franken
 standalone-cad-radiologists
 standalone-cad-radiologists-how-much-finished
-standalone-cad-radiologists-overview
+this-does-not-work
+this-works
 standalone-cad-radiologists-introduction
+standalone-cad-radiologists-overview
 standalone-cad-radiologists-methods
 standalone-cad-radiologists-two-previous-studies
 standalone-cad-radiologists-study1
@@ -404,6 +404,8 @@ standalone-cad-radiologists-comments
 the-1t-rrfc-analysis-model
 standalone-cad-radiologists-2TRRRC-anlaysis
 standalone-cad-radiologists-1TRRRC-anlaysis
+single-treatment-analysis-for-radiologists
+adaptation-of-single-treatment-analysis-to-accommodate-cad
 standalone-cad-radiologists-computational-details
 standalone-cad-radiologists-results
 standalone-cad-radiologists-discussion

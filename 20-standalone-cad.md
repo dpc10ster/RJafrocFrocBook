@@ -3,45 +3,297 @@
 # Standalone CAD vs. Radiologists {#standalone-cad-radiologists}
 
 
----
-output:
-  rmarkdown::pdf_document:
-    fig_caption: yes        
-    includes:  
-      in_header: R/learn/my_header.tex
----
-
-
 
 
 
 ## TBA How much finished {#standalone-cad-radiologists-how-much-finished}
-10%
+50%
 
+Table 2 does not center properly in pdf
+
+Table 2 is too wide
+
+collapse_rows not working even in this example:
+
+### This does not work
+
+
+```r
+df <- data.frame(C1 = c(rep("a", 10), rep("b", 5)),
+                 C2 = c(rep("c", 7), rep("d", 3), rep("c", 2), rep("d", 3)),
+                 C3 = 1:15,
+                 C4 = sample(c(0,1), 15, replace = TRUE))
+```
+
+
+
+
+```r
+kbl(df, align = "c") %>%
+  kable_paper(full_width = F) %>%
+  column_spec(1, bold = T) %>%
+  collapse_rows(columns = 1:2, valign = "top")
+```
+
+<table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> C1 </th>
+   <th style="text-align:center;"> C2 </th>
+   <th style="text-align:center;"> C3 </th>
+   <th style="text-align:center;"> C4 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> d </td>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> d </td>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> d </td>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> b </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> b </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> b </td>
+   <td style="text-align:center;"> d </td>
+   <td style="text-align:center;"> 13 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> b </td>
+   <td style="text-align:center;"> d </td>
+   <td style="text-align:center;"> 14 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> b </td>
+   <td style="text-align:center;"> d </td>
+   <td style="text-align:center;"> 15 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+</tbody>
+</table>
+
+
+### This works!
+
+
+Define this function:
+
+
+```r
+collapse_rows_df <- function(df, variable){
+  group_var <- enquo(variable)
+  df %>%
+    group_by(!! group_var) %>%
+    mutate(groupRow = 1:n()) %>%
+    ungroup() %>%
+    mutate(!!quo_name(group_var) := ifelse(groupRow == 1, as.character(!! group_var), "")) %>%
+    select(-c(groupRow))
+}
+```
+
+
+Now apply it:
+
+
+```r
+kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
+  kable_paper(full_width = F) %>%
+  column_spec(1, bold = T) %>%
+  collapse_rows(columns = 1:2, valign = "top")
+```
+
+<table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> C1 </th>
+   <th style="text-align:center;"> C2 </th>
+   <th style="text-align:center;"> C3 </th>
+   <th style="text-align:center;"> C4 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> a </td>
+   <td style="text-align:center;"> c </td>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;"> d </td>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;"> b </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 13 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 14 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 15 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+</tbody>
+</table>
+
+
+## Introduction {#standalone-cad-radiologists-introduction}
+
+In the US the majority of screening mammograms are analyzed by computer aided detection (CAD) algorithms [@rao2010widely]. Almost all major imaging device manufacturers provide CAD as part of their imaging workstation display software. In the United States CAD is approved for use as a second reader, i.e., the radiologist first interprets the images (typically 4 views, 2 views of each breast) without CAD and then CAD information (i.e., cued suspicious regions, possibly shown with associated probabilities of malignancies) is shown and the radiologist has the opportunity to revise the initial interpretation. In response to the FDA-approved second reader usage, the evolution of CAD algorithms has been guided mainly by comparing observer performance of radiologists with and without CAD.
+
+Clinical CAD systems sometimes only report the locations of suspicious regions, i.e., it may not provide ratings. Analysis of this type of date is deferred to a following TBA chapter. However, a malignancy index (a continuous variable) for every CAD-found suspicious region is available to the algorithm designer [@edwards2002maximum]. Standalone performance, i.e., performance of designer-level CAD by itself, regarded as an algorithmic reader, vs. radiologists, is rarely measured. In breast cancer screening I am aware of only one study [@hupse2013standalone] where standalone performance was measured. ^[Standalone performance has been measured in CAD for computed tomography colonography, chest radiography and three dimensional ultrasound [@hein2010computeraided; @summers2008performance; @taylor2006computerassisted; @deBoo2011computeraided; @tan2012computeraided]].
+
+One possible reason for not measuring standalone performance of CAD is the lack of an accepted assessment method for such measurements. The purpose of this work is to remove that impediment. It describes a method for comparing standalone performance of designer-level CAD to radiologists interpreting the same cases and compares the method to those described in two recent publications [@hupse2013standalone; @kooi2016comparison].
 
 ## Overview {#standalone-cad-radiologists-overview}
 
-Computer aided detection (CAD) research for screening mammography has focused on measuring performance of radiologists with and without CAD: a group of radiologists interpret a set of images with and without CAD assist. Standalone performance of CAD algorithms is rarely measured. The stated reason for this is that in the clinic CAD is never used alone, rather it is always used with radiologists. 
+This chapter extends the method used in a recent study of standalone CAD performance [@hupse2013standalone], termed one-treatment random-reader fixed case or **1T-RRFC** analysis, since CAD is treated as an additional reader within a single treatment and since it only accounts for reader variability but does not account for case-variability. 
 
-Another reason for the lack of focus on standalone CAD performance is the lack of a clear method for measuring standalone CAD performance. This chapter extends the method used in a recent study of standalone CAD performance [@hupse2013standalone], termed one-treatment random-reader fixed case or **1T-RRFC** analysis, since CAD is treated as an additional reader within a single treatment and since it only accounts for reader variability but does not account for case-variability. 
-
-The extension described in this chapter includes the effect of case-sampling variability and is hence termed one-treatment random-reader random-case or **1T-RRRC** analysis. The method is based on an existing method allowing comparison of the average performance of readers in a single treatment to a specified value. The key modification is to regard the difference in performance between radiologists over CAD as a figure of merit to which the existing work is directly applicable. The 1T-RRRC method is compared to 1T-RRFC. 
+The extension includes the effect of case-sampling variability and is hence termed one-treatment random-reader random-case or **1T-RRRC** analysis. The method is based on an existing method allowing comparison of the average performance of readers in a single treatment to a specified value. The key modification is to regard the difference in performance between radiologists over CAD as a figure of merit to which the existing work is directly applicable. The 1T-RRRC method is compared to 1T-RRFC. 
 
 The 1T-RRRC method is also compared to an unorthodox usage of conventional multiple-treatment multiple-reader method, termed **2T-RRRC** analysis, which involves replicating the CAD ratings as many times as there are radiologists, in effect simulating a second treatment, i.e., CAD is regarded as the second treatment (with identical readers within this treatment) to which existing methods (DBM or OR, as described in [RJafrocRocBook](https://dpc10ster.github.io/RJafrocRocBook/dbm-analysis-significance-testing.html)) is applied. 
 `
 
-## Introduction {#standalone-cad-radiologists-introduction}
-
-In the US the majority of screening mammograms are analyzed by computer aided detection (CAD) algorithms [@rao2010widely]. Almost all major imaging device manufacturers provide CAD as part of their imaging workstation display software. In the United States CAD is approved for use as a second reader, i.e., the radiologist first interprets the images (typically 4 views, 2 views of each breast) without CAD and then CAD information (i.e., cued suspicious regions, possibly shown with associated probabilities of malignancies) is shown and the radiologist has the opportunity to revise the initial interpretation. In response to the second reader usage, the evolution of CAD algorithms has been guided mainly by comparing observer performance of radiologists with and without CAD.
-
-Clinical CAD systems sometimes only report the locations of suspicious regions, i.e., it may not provide ratings. However, a (continuous variable) malignancy index for every CAD-found suspicious region is available to the algorithm designer [@edwards2002maximum]. Standalone performance, i.e., performance of designer-level CAD by itself, regarded as an algorithmic reader, vs. radiologists, is rarely measured. In breast cancer screening I am aware of only one study [@hupse2013standalone] where standalone performance was measured. [Standalone performance has been measured in CAD for computed tomography colonography, chest radiography and three dimensional ultrasound [@hein2010computeraided; @summers2008performance; @taylor2006computerassisted; @deBoo2011computeraided; @tan2012computeraided]].
-
-One possible reason for not measuring standalone performance of CAD is the lack of an accepted assessment method for such measurements. The purpose of this work is to remove that impediment.
-It describes a method for comparing standalone performance of designer-level CAD to radiologists interpreting the same cases and compares the method to those described in two recent publications [@hupse2013standalone; @kooi2016comparison].
-
 ## Methods {#standalone-cad-radiologists-methods}
 
-Summarized are two recent studies of CAD vs. radiologists in mammography. This is followed by comments on the methodologies used in the two studies. The second study used multi-treatment multi-reader receiver operating characteristic (ROC) software in an unorthodox or unconventional way. A statistical model and analysis method is described that avoids unorthodox, and perhaps unjustified, use of ROC software and has fewer model parameters.
+
+
+Summarized are two recent studies of CAD vs. radiologists in mammography. This is followed by comments on the methods used in the two studies. The second study used multi-treatment multi-reader receiver operating characteristic (ROC) software in an unorthodox way. A statistical model and analysis method is described that avoids the unorthodox usage of ROC software and has fewer model parameters.
 
 ### Studies assessing performance of CAD vs. radiologists {#standalone-cad-radiologists-two-previous-studies}
 
@@ -49,12 +301,14 @@ The first study [@hupse2013standalone] measured performance in finding and local
 
 #### Study - 1 {#standalone-cad-radiologists-study1}
 
-The first study [@hupse2013standalone] compared standalone performance of a CAD device to that of 9 radiologists interpreting the same cases (120 non-diseased and 80 with a single malignant mass per case). It used the LROC (localization ROC) paradigm [@starr1975visual; @metz1976observer; @swensson1996unified], in which the observer gives an overall rating for presence of disease (an integer 0 to 100 scale was used) and indicates the location of the most suspicious region. On a non-diseased case the rating is classified as a false positive (FP) but on a diseased case it is classified as a *correct localization* (CL) if the location is sufficiently close to the lesion, and otherwise it is classified as an *incorrect localization*. For a given reporting threshold, the number of correct localizations divided by the number of diseased cases estimates the probability of correct localization (PCL) at that threshold. On non-diseased cases the number of false positives (FPs) divided by the number of non-diseased cases estimates the probability of a false positive, or false positive fraction (FPF), at that threshold. The plot of PCL (ordinate) vs. FPF defines the LROC curve. Study - 1 used as figures of merit (FOMs) the interpolated PCL at two values of FPF, specifically FPF = 0.05 and FPF = 0.2, denoted $\text{PCL}_{0.05}$ and $\text{PCL}_{0.2}$, respectively. The t-test between the radiologist $\text{PCL}_{\text{FPF}}$ values and that of CAD was used to compute the two-sided p-value for rejecting the NH of equal performance. Study - 1 reported p-value = 0.17 for $\text{PCL}_{0.05}$ and p-value $\leq$ 0.001, with CAD being inferior, for $\text{PCL}_{0.2}$.
+The first study [@hupse2013standalone] compared standalone performance of a CAD device to that of 9 radiologists interpreting the same cases (120 non-diseased and 80 with a single malignant mass per case). It used the LROC (localization ROC) paradigm [@starr1975visual; @metz1976observer; @swensson1996unified], in which the observer gives an overall rating for presence of disease (an integer 0 to 100 scale was used) and indicates the location of the most suspicious region. On a non-diseased case the rating is classified as a false positive (FP) but on a diseased case it is classified as a *correct localization* (CL) if the location is sufficiently close to the lesion and otherwise it is classified as an *incorrect localization*. For a given reporting threshold, the number of correct localizations divided by the number of diseased cases estimates the probability of correct localization (PCL) at that threshold. On non-diseased cases the number of false positives (FPs) divided by the number of non-diseased cases estimates the probability of a false positive, or false positive fraction (FPF), at that threshold. The plot of PCL (ordinate) vs. FPF defines the empirical LROC curve. Study - 1 used as figures of merit (FOMs) the interpolated PCL at two values of FPF, specifically FPF = 0.05 and FPF = 0.2, denoted $\text{PCL}_{0.05}$ and $\text{PCL}_{0.2}$, respectively. A t-test between the radiologist $\text{PCL}_{\text{FPF}}$ values and that of CAD was used to compute the two-sided p-value for rejecting the NH of equal performance. Study - 1 reported p-value = 0.17 for $\text{PCL}_{0.05}$ and p-value $\leq$ 0.001, with CAD being inferior, for $\text{PCL}_{0.2}$.
 
 
 #### Study - 2 {#standalone-cad-radiologists-study2}
 
-The second study [@kooi2016comparison] used 199 diseased and 199 non-diseased ROIs extracted by an independent CAD algorithm. These were interpreted using the ROC paradigm (i.e., rating only, no localization required) by a different CAD algorithmic observer from that used to determine the ROIs, and by four expert radiologists. The figure of merit was the empirical area (AUC) under the respective ROC curves (one per radiologist and one for CAD). The p-value for the difference in AUCs between the average radiologist and CAD was determined using an unorthodox application of the Dorfman-Berbaum-Metz [@dorfman1992receiver] multiple-treatment multiple-reader multiple-case (DBM-MRMC) software with recent modifications [@hillis2008recent]. The unorthodox application was that in the input data file *radiologists and CAD were entered as two treatments*. In conventional (or orthodox) DBM-MRMC each reader provides two ratings per case and the data file would consist of paired ratings of a set of cases interpreted by 4 readers. To accommodate the paired data structure assumed by the software, the authors of Study - 2 *replicated the CAD ratings four times in the input data file*, as explained in the caption to Table \@ref(tab:standalone-cad-table-conventional). By this artifice they converted a single-treatment 5-reader (4 radiologists plus CAD) data file to a two-treatment 4-reader data file, in which the four readers in treatment 1 were the radiologists, and the four "readers" in treatment 2 were CAD replicated ratings. Note that for each case the four readers in the second treatment had identical ratings. In Table 1 the replicated CAD observers are labeled C1, C2, C3 and C4.
+The second study [@kooi2016comparison] used 199 diseased and 199 non-diseased ROIs extracted by an independent CAD algorithm. These were analyzed by a different CAD algorithmic observer from that used to determine the ROIs and by four expert radiologists. In either case the ROC paradigm was used (i.e., a rating was obtained for each ROI) The figure of merit was the empirical area (AUC) under the respective ROC curves (one for each radiologist and one for CAD). The p-value for the difference in AUCs between the average radiologist's AUC and CAD AUC was determined using an unorthodox application of the Dorfman-Berbaum-Metz [@dorfman1992receiver] multiple-treatment multiple-reader multiple-case (DBM-MRMC) software. 
+
+The application was unorthodox in the sense that in the input data file **radiologists and CAD were entered as two treatments**. In conventional (or orthodox) DBM-MRMC each reader provides two ratings per case and the data file would consist of paired ratings of a set of cases interpreted by 4 readers. To accommodate the paired data structure assumed by the software, the authors of Study - 2 **replicated the CAD ratings four times in the input data file**, as explained in the caption to Table \@ref(tab:standalone-cad-table-conventional). By this artifice they converted a single-treatment 5-reader (4 radiologists plus CAD) data file to a two-treatment 4-reader data file in which the four readers in treatment 1 were the radiologists, and the four "readers" in treatment 2 were CAD replicated ratings. Note that for each case the four readers in the second treatment had identical ratings. In Table 1 the replicated CAD readers are labeled C1, C2, C3 and C4.
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>(\#tab:standalone-cad-table-conventional)The differences between the data structures in conventional DBM-MRMC analysis and the unorthodox application of the software used in Study - 2. There are four radiologists, labeled R1, R2, R3 and R4 interpreting 398 cases labeled 1, 2, …, 398, in two treatments, labeled 1 and 2. Sample ratings are shown only for the first and last radiologist and the first and last case. In the first four columns, labeled "Standard DBM-MRMC", each radiologist interprets each case twice. In the next four columns, labeled "Unorthodox DBM-MRMC", the radiologists interpret each case once. CAD ratings are replicated four times to effectively create the second "treatment". The quotations emphasize that there is, in fact, only one treatment. The replicated CAD observers are labeled C1, C2, C3 and C4.</caption>
@@ -253,7 +507,7 @@ For the purpose of this work, which focuses on the respective analysis methods, 
 
 [^standalone-cad-1]: Prof. Karssemeijer (private communication, 10/27/2017) had consulted with a few ROC experts to determine if the procedure used in Study -- 2 was valid, and while the experts thought it was probably valid they were not sure.
 
-In what follows, the analysis in Study -- 1 is referred to as random-reader fixed-case (1T-RRFC) while that in Study -- 2 is referred to as dual-treatment random-reader random-case (2T-RRRC).
+In what follows, the analysis in Study -- 1 is referred to as **single-treatment random-reader fixed-case (1T-RRFC)** while that in Study -- 2 is referred to as **dual-treatment random-reader random-case (2T-RRRC)**.
 
 ### The 1T-RRFC analysis model
 The sampling model for the FOM is:
@@ -282,16 +536,14 @@ R_j \sim  N\left ( 0,\sigma_R^2 \right )
 
 Because of the assumed normal distribution of $R_j$, in order to compare the readers to a fixed value, that of CAD denoted $\theta_0$, one uses the (unpaired) t-test, as done in Study -- 1. As evident from the model, no allowance is made for case-sampling variability, which is the reason for calling it the 1T-RRFC method.
 
-Performance of CAD on a fixed dataset does exhibit within-reader variability. The same algorithm applied repeatedly to a fixed dataset does not always produce the same mark-rating data. However, this source of CAD FOM variability is much smaller than inter-reader FOM variability of radiologists interpreting the same dataset. In fact the within-reader variability of radiologists is smaller than their inter-reader variability, and within-reader variability of CAD is even smaller still. For this reason one is justified in regarded $\theta_0$ as a fixed quantity for a given dataset. Varying the dataset will result in different values for $\theta_0$, i.e., its case sampling variability needs to be accounted for, as done in the following analyses. 
+Performance of CAD on a fixed dataset does exhibit within-CAD variability, i.e., CAD applied repeatedly to a fixed dataset does not always produce the same mark-rating data. However, this source of within-CAD variability is much smaller than *inter-reader* variability of radiologists interpreting the same dataset. The *within-reader* variability of radiologists is smaller than *inter-reader* variability and *within-CAD* variability is even smaller. For this reason one is justified in regarded $\theta_0$ as a fixed quantity for a given dataset. Varying the dataset will result in different values for $\theta_0$ reflecting case sampling variability which needs to be accounted for as done in the following analyses. 
 
 
 ### The 2T-RRRC analysis model {#standalone-cad-radiologists-2TRRRC-anlaysis}
 
-This could be termed the conventional or the orthodox method. There are two treatments and the study design is fully crossed: each reader interprets each case in each treatment, i.e., the data structure is as in the left half of Table 1. 
+This could be termed the conventional or the orthodox method. There are two treatments and the study design is fully crossed: each reader interprets each case in each treatment, i.e., the data structure is as in the left half of Table \@ref(tab:standalone-cad-table-conventional). 
 
-The following approach, termed 2T-RRRC, uses the Obuchowski and Rockette (OR) figure of merit sampling model [@obuchowski1995hypothesis] instead of the pseudovalue-based model used in the original DBM paper [@dorfman1992receiver]. For the empirical FOM, Hillis has shown the two to be equivalent [@hillis2005comparison]. 
-
-The OR model is:
+The following approach, termed 2T-RRRC, uses the Obuchowski and Rockette (OR) figure of merit sampling model [@obuchowski1995hypothesis]. The OR model is:
 
 
 ```{=tex}
@@ -302,7 +554,7 @@ The OR model is:
 ```
 
 
-Assuming two treatments, $i$ ($i = 1, 2$) is the treatment index, $j$ ($j = 1, ..., J$) is the reader index, and $k$ ($k = 1, ..., K$) is the case index, and $\theta_{ij\{c\}}$ is a figure of merit for reader $j$ in treatment $i$ and case-sample $\{c\}$. A case-sample is a set or ensemble of cases, diseased and non-diseased, and different integer values of $c$ correspond to different case-samples. 
+Assuming two treatments, $i$ ($i = 1, 2$) is the treatment index, $j$ ($j = 1, ..., J$) is the reader index, and $k$ ($k = 1, ..., K$) is the case index, and $\theta_{ij\{c\}}$ is the figure of merit in treatment $i$ for reader $j$ and case-sample $\{c\}$. A case-sample is a set or ensemble of cases, diseased and non-diseased, and different integer values of $c$ correspond to different case-samples. 
 
 The first two terms on the right hand side of Eqn. \@ref(eq:standalone-cad-model-2t-rrrc) are fixed effects (average performance and treatment effect, respectively). The next two terms are random effect variables that, by assumption, are sampled as follows:
 
@@ -342,7 +594,7 @@ Here $N_{I \times J}$ is the $I \times J$ variate normal distribution and $\vec{
 \end{equation}
 ```
 
-Software {U of Iowa and `RJafroc`} yields estimates of all terms appearing on the right hand side of Eqn. \@ref(eq:standalone-cad-2t-rrrc-cov). Excluding fixed effects, the model represented by Eqn. \@ref(eq:standalone-cad-model-2t-rrrc) contains six parameters:
+Software {U of Iowa and `RJafroc`} yields estimates of all terms appearing on the right hand side of Eqn. \@ref(eq:standalone-cad-2t-rrrc-cov). Excluding fixed effects the model represented by Eqn. \@ref(eq:standalone-cad-model-2t-rrrc) contains six parameters:
 
 ```{=tex}
 \begin{equation}
@@ -364,7 +616,7 @@ In practice, since one is usually limited to one case-sample, i.e., $c = 1$, res
 
 ### The 1T-RRRC analysis model {#standalone-cad-radiologists-1TRRRC-anlaysis}
 
-This is the contribution of this work. The key difference from the approach in Study - 2 is to regard standalone CAD as a different reader, not as a different treatment. Therefore, needed is a single treatment method for analyzing readers and CAD, where the latter is regarded as an additional reader. Accordingly the proposed method is termed single-treatment RRRC (1T-RRRC) analysis. 
+The difference from the approach in Study - 2, and the main contribution of this work, is to regard standalone CAD as a different reader, not as a different treatment. This section describes a single treatment method for analyzing readers and CAD, where CAD is regarded as an additional reader and artificially replicated CAD data becomes unnecessary. Accordingly the proposed method is termed **single-treatment random-reader random-case (1T-RRRC)** analysis. 
 
 The starting point is the [@obuchowski1995hypothesis] model for a single treatment, which for the radiologists (i.e., *excluding* CAD) interpreting in a single-treatment reduces to the following model:
 
@@ -398,32 +650,17 @@ The $J \times J$ covariance matrix $\Sigma$ is defined by two parameters, $\text
 \end{equation}
 ```
 
-The terms $\text{Var}$ and $\text{Cov}_2$ are estimated using resampling methods. Using the jackknife, and denoting the FOM with case $k$ removed by $\psi_{j(k)}$ (the index in parenthesis denotes deleted case $k$, and since one is dealing with a single case-sample, the case-sample index $c$ is now superfluous). The covariance matrix is estimated using (the dot symbol represents an average over the replaced index):
+In practice the terms $\text{Var}$ and $\text{Cov}_2$ are estimated using the jackknife method.
 
-```{=tex}
-\begin{equation}
-\Sigma_{jj'}|_\text{jack} = \frac{K-1}{K} \sum_{k=1}^{K} \left ( \psi_{j(k)}  - \psi_{j(\bullet)} \right ) \left ( \psi_{j'(k)}  - \psi_{j'(\bullet)} \right )
-(\#eq:standalone-cad-1t-sigma-jackknife)
-\end{equation}
-```
+#### Single treatment analysis for radiologists
 
-The final estimates of $\text{Var}$ and $\text{Cov}_2$ are averaged (indicated in the following equation by the angular brackets) over all pairings of radiologists satisfying the relevant equalities/inequalities shown just below the closing angular bracket:
+Hillis [@hillis2005comparison; @hillis2007comparison] has described how to use the single treatment model \@ref(eq:standalone-or-model-single-treatment) to compare a groups of radiologists' average performance to a fixed value, in effect the $\text{NH}: \mu = \mu_0$, where $\mu_0$ is a pre-specified constant. 
 
-```{=tex}
-\begin{equation}
-\left.
-\begin{aligned}  
-\text{Var} = \left \langle \Sigma_{jj'}|_{\text{jack}} \right \rangle_{j=j'}\\
-\text{Cov}_2 = \left \langle \Sigma_{jj'}|_{\text{jack}} \right \rangle_{j \neq j'}
-\end{aligned}
-\right \}
-(\#eq:standalone-cad-1t-rrrc-var-cov2)
-\end{equation}
-```
+One might be tempted to set $\mu_0$ equal to the performance of CAD but that would not be accounting for the fact that the performance of CAD is itself a random variable whose case-sampling variability needs to be accounted for.
 
-Hillis' formulae [@hillis2005comparison; @hillis2007comparison] permit one to test the NH: $\mu = \mu_0$, where $\mu_0$ is a pre-specified constant. One could set $\mu_0$ equal to the performance of CAD, but that would not be accounting for the fact that the performance of CAD is itself a random variable, whose case-sampling variability needs to be accounted for.
+#### Adaptation of single treatment analysis to accommodate CAD
 
-Instead, the following model was used for the figure of merit of the radiologists and CAD ($j = 0$ is used to denote the CAD algorithmic reader):
+Instead, the following model is used for the figure of merit of the radiologists **and** CAD (note that $j = 0$ is used to denote the CAD algorithmic reader):
 
 ```{=tex}
 \begin{equation}
@@ -433,7 +670,7 @@ j=1,2,...J
 \end{equation}
 ```
 
-$\theta_{0\{c\}}$ is the CAD figure of merit for case-sample $\{c\}$ and $\Delta \theta$ is the average figure of merit increment of the radiologists over CAD. To reduce this model to one to which existing formulae are directly applicable, one subtracts the CAD figure of merit from each radiologist's figure of merit (for the same case-sample), and defines this as the difference figure of merit $\psi_{j\{c\}}$ , i.e.,
+$\theta_{0\{c\}}$ is the CAD figure of merit for case-sample $\{c\}$ and $\Delta \theta$ is the average figure of merit increment of the radiologists over CAD. To reduce this model to one to which Hillis' formulae are directly applicable, one subtracts the CAD figure of merit from each radiologist's figure of merit for the same case-sample, and defines this as the difference figure of merit $\psi_{j\{c\}}$ , i.e.,
 
 ```{=tex}
 \begin{equation}
@@ -446,13 +683,12 @@ Then Eqn. \@ref(eq:standalone-cad-1t-thetaj) reduces to:
 
 ```{=tex}
 \begin{equation}
-\psi_{j\{c\}} = \Delta \theta + R_j + \epsilon_{j\{c\}}\\
-j=1,2,...J
+\psi_{j\{c\}} = \Delta \theta + R_j + \epsilon_{j\{c\}}
 (\#eq:standalone-cad-1t-psi)
 \end{equation}
 ```
 
-Eqn. \@ref(eq:standalone-cad-1t-psi) is identical in form to Eqn. \@ref(eq:standalone-or-model-single-treatment) with the difference that the figure of merit on the left hand side of Eqn. \@ref(eq:standalone-cad-1t-psi) is a *difference FOM*, that between the radiologist's and CAD. Eqn. \@ref(eq:standalone-cad-1t-psi) describes a model for $J$ radiologists interpreting a common case set, each of whose performances is measured relative to that of CAD. Under the NH the expected difference is zero: $\text{NH:} \Delta \theta = 0$. The method [@hillis2005comparison; @hillis2007comparison] for single-treatment multiple-reader analysis is now directly applicable to the model described by Eqn. \@ref(eq:standalone-cad-1t-psi).
+Eqn. \@ref(eq:standalone-cad-1t-psi) is identical in form to Eqn. \@ref(eq:standalone-or-model-single-treatment) excepting that the figure of merit on the left hand side of Eqn. \@ref(eq:standalone-cad-1t-psi) is a *difference FOM*, that between the radiologist's and CAD, i.e., describing a model for $J$ radiologists interpreting a common case set, each of whose performances is measured *relative* to that of CAD. Under the NH the expected difference is zero: $\text{NH:} \Delta \theta = 0$. The method [@hillis2005comparison; @hillis2007comparison] for single-treatment multiple-reader analysis is now directly applicable to the model described by Eqn. \@ref(eq:standalone-cad-1t-psi).
 
 Apart from fixed effects, the model in Eqn. \@ref(eq:standalone-cad-1t-psi) contains three parameters:
 
@@ -468,15 +704,13 @@ Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model, which conta
 
 ## Software implementation {#standalone-cad-radiologists-computational-details}
 
-The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in `RJafroc`, an R-package [@R-RJafroc]. 
+The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in `RJafroc`. 
 
-The following code shows usage of the software to generate the results corrsponding to the three analyses. Note that `datasetCadLroc` is the LROC dataset and `dataset09` is the corresponding ROC dataset. 
+The following code shows usage of the software to generate the results. Note that `datasetCadLroc` is the LROC dataset and `dataset09` is the corresponding ROC dataset. 
 
 
 
 ```r
-
-
 RRFC_1T_PCL_0_05 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRFC")
 RRRC_2T_PCL_0_05 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
@@ -510,13 +744,13 @@ FOM = "Wilcoxon", method = "1T-RRRC")
 The results are organized as follows:
 
 
-* `RRFC_1T_PCL_0_05` contains the results of 1T-RRFC analysis for figure of merit = $PCL_{0.05}$. 
-* `RRRC_2T_PCL_0_05` contains the results of 2T-RRFC analysis for figure of merit = $PCL_{0.05}$.
-* `RRRC_1T_PCL_0_05` contains the results of 1T-RRFC analysis for figure of merit = $PCL_{0.05}$.
+* `RRFC_1T_PCL_0_05` contains the results of 1T-RRFC analysis for figure of merit = $\text{PCL}_{0.05}$. 
+* `RRRC_2T_PCL_0_05` contains the results of 2T-RRRC analysis for figure of merit = $\text{PCL}_{0.05}$.
+* `RRRC_1T_PCL_0_05` contains the results of 1T-RRRC analysis for figure of merit = $\text{PCL}_{0.05}$.
 
-* `RRFC_1T_PCL_0_2` contains the results of 1T-RRFC analysis for figure of merit = $PCL_{0.2}$.
-* `RRRC_2T_PCL_0_2` contains the results of 2T-RRRC analysis for figure of merit = $PCL_{0.2}$.
-* `RRRC_1T_PCL_0_2` contains the results of 1T-RRRC analysis for figure of merit = $PCL_{0.2}$.
+* `RRFC_1T_PCL_0_2` contains the results of 1T-RRFC analysis for figure of merit = $\text{PCL}_{0.2}$.
+* `RRRC_2T_PCL_0_2` contains the results of 2T-RRRC analysis for figure of merit = $\text{PCL}_{0.2}$.
+* `RRRC_1T_PCL_0_2` contains the results of 1T-RRRC analysis for figure of merit = $\text{PCL}_{0.2}$.
 
 * `RRFC_1T_AUC` contains the results of 1T-RRFC  analysis for the Wilcoxon figure of merit.
 * `RRRC_2T_AUC` contains the results of 2T-RRRC  analysis for the Wilcoxon figure of merit.
@@ -543,13 +777,13 @@ The structures of these objects are illustrated with examples in the Appendix.
 
 ## Results {#standalone-cad-radiologists-results}
 
-The three methods, in historical order 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof. Karssemeijer for making this dataset available).
+The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof. Karssemeijer for making this dataset available).
 
 Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing results corresponding to the three analyses.
 
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:standalone-cad-table2)Significance testing results of the analyses for an LROC dataset. Three sets of results, namely RRRC, 2T-RRRC and 1T-RRRC, are shown for each figure of merit (FOM). Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence intervals than the corresponding row labeled 1T-RRFC. [$\theta_0$ = FOM CAD; $\theta_{\bullet}$ = average FOM of radiologists; $\psi_{\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\psi_{\bullet} = 0$.]</caption>
+<table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">(\#tab:standalone-cad-table2)Significance testing results of the analyses for an LROC dataset. Three sets of results, namely RRRC, 2T-RRRC and 1T-RRRC, are shown for each figure of merit (FOM). Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence intervals than the corresponding row labeled 1T-RRFC. [$\theta_0$ = FOM CAD; $\theta_{\bullet}$ = average FOM of radiologists; $\psi_{\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\psi_{\bullet} = 0$.]</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -569,158 +803,158 @@ Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing
   <tr>
    <td style="text-align:left;"> PCL\_0\_05 </td>
    <td style="text-align:left;"> 1T-RRFC </td>
-   <td style="text-align:left;"> 4.5e-01 </td>
+   <td style="text-align:left;"> 0.45 </td>
    <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 4.93e-01 </td>
-   <td style="text-align:left;"> (4.18e-01,5.68e-01) </td>
-   <td style="text-align:left;"> 4.33e-02 </td>
-   <td style="text-align:left;"> (-3.16e-02,1.18e-01) </td>
-   <td style="text-align:left;"> 1.77e+00 </td>
-   <td style="text-align:left;"> 8e+00 </td>
-   <td style="text-align:left;"> 2.2e-01 </td>
+   <td style="text-align:left;"> 0.493 </td>
+   <td style="text-align:left;"> (0.418,0.568) </td>
+   <td style="text-align:left;"> 0.0433 </td>
+   <td style="text-align:left;"> (-0.0316,0.118) </td>
+   <td style="text-align:left;"> 1.77 </td>
+   <td style="text-align:left;"> 8 </td>
+   <td style="text-align:left;"> 0.22 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_0\_05 </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 4.5e-01 </td>
-   <td style="text-align:left;"> (2.58e-01,6.42e-01) </td>
-   <td style="text-align:left;"> 4.93e-01 </td>
-   <td style="text-align:left;"> (3.76e-01,6.11e-01) </td>
-   <td style="text-align:left;"> 4.33e-02 </td>
-   <td style="text-align:left;"> (-1.57e-01,2.44e-01) </td>
-   <td style="text-align:left;"> 1.79e-01 </td>
-   <td style="text-align:left;"> 7.84e+02 </td>
-   <td style="text-align:left;"> 6.7e-01 </td>
+   <td style="text-align:left;"> 0.45 </td>
+   <td style="text-align:left;"> (0.258,0.642) </td>
+   <td style="text-align:left;"> 0.493 </td>
+   <td style="text-align:left;"> (0.376,0.611) </td>
+   <td style="text-align:left;"> 0.0433 </td>
+   <td style="text-align:left;"> (-0.157,0.244) </td>
+   <td style="text-align:left;"> 0.179 </td>
+   <td style="text-align:left;"> 784 </td>
+   <td style="text-align:left;"> 0.67 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_0\_05 </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 4.5e-01 </td>
+   <td style="text-align:left;"> 0.45 </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 4.93e-01 </td>
-   <td style="text-align:left;"> (2.93e-01,6.94e-01) </td>
-   <td style="text-align:left;"> 4.33e-02 </td>
-   <td style="text-align:left;"> (-1.57e-01,2.44e-01) </td>
-   <td style="text-align:left;"> 1.79e-01 </td>
-   <td style="text-align:left;"> 7.84e+02 </td>
-   <td style="text-align:left;"> 6.7e-01 </td>
+   <td style="text-align:left;"> 0.493 </td>
+   <td style="text-align:left;"> (0.293,0.694) </td>
+   <td style="text-align:left;"> 0.0433 </td>
+   <td style="text-align:left;"> (-0.157,0.244) </td>
+   <td style="text-align:left;"> 0.179 </td>
+   <td style="text-align:left;"> 784 </td>
+   <td style="text-align:left;"> 0.67 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_0\_2 </td>
    <td style="text-align:left;"> 1T-RRFC </td>
-   <td style="text-align:left;"> 5.92e-01 </td>
+   <td style="text-align:left;"> 0.592 </td>
    <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 7.1e-01 </td>
-   <td style="text-align:left;"> (6.69e-01,7.51e-01) </td>
-   <td style="text-align:left;"> 1.19e-01 </td>
-   <td style="text-align:left;"> (7.78e-02,1.59e-01) </td>
-   <td style="text-align:left;"> 4.5e+01 </td>
-   <td style="text-align:left;"> 8e+00 </td>
-   <td style="text-align:left;"> 1.51e-04 </td>
+   <td style="text-align:left;"> 0.71 </td>
+   <td style="text-align:left;"> (0.669,0.751) </td>
+   <td style="text-align:left;"> 0.119 </td>
+   <td style="text-align:left;"> (0.0778,0.159) </td>
+   <td style="text-align:left;"> 45 </td>
+   <td style="text-align:left;"> 8 </td>
+   <td style="text-align:left;"> 0.000151 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_0\_2 </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 5.92e-01 </td>
-   <td style="text-align:left;"> (4.78e-01,7.05e-01) </td>
-   <td style="text-align:left;"> 7.1e-01 </td>
-   <td style="text-align:left;"> (6.33e-01,7.87e-01) </td>
-   <td style="text-align:left;"> 1.19e-01 </td>
-   <td style="text-align:left;"> (4.45e-03,2.33e-01) </td>
-   <td style="text-align:left;"> 4.16e+00 </td>
-   <td style="text-align:left;"> 9.37e+02 </td>
-   <td style="text-align:left;"> 4.2e-02 </td>
+   <td style="text-align:left;"> 0.592 </td>
+   <td style="text-align:left;"> (0.478,0.705) </td>
+   <td style="text-align:left;"> 0.71 </td>
+   <td style="text-align:left;"> (0.633,0.787) </td>
+   <td style="text-align:left;"> 0.119 </td>
+   <td style="text-align:left;"> (0.00445,0.233) </td>
+   <td style="text-align:left;"> 4.16 </td>
+   <td style="text-align:left;"> 937 </td>
+   <td style="text-align:left;"> 0.042 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_0\_2 </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 5.92e-01 </td>
+   <td style="text-align:left;"> 0.592 </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 7.1e-01 </td>
-   <td style="text-align:left;"> (5.96e-01,8.24e-01) </td>
-   <td style="text-align:left;"> 1.19e-01 </td>
-   <td style="text-align:left;"> (4.45e-03,2.33e-01) </td>
-   <td style="text-align:left;"> 4.16e+00 </td>
-   <td style="text-align:left;"> 9.37e+02 </td>
-   <td style="text-align:left;"> 4.2e-02 </td>
+   <td style="text-align:left;"> 0.71 </td>
+   <td style="text-align:left;"> (0.596,0.824) </td>
+   <td style="text-align:left;"> 0.119 </td>
+   <td style="text-align:left;"> (0.00445,0.233) </td>
+   <td style="text-align:left;"> 4.16 </td>
+   <td style="text-align:left;"> 937 </td>
+   <td style="text-align:left;"> 0.042 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_1 </td>
    <td style="text-align:left;"> 1T-RRFC </td>
-   <td style="text-align:left;"> 6.75e-01 </td>
+   <td style="text-align:left;"> 0.675 </td>
    <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 7.83e-01 </td>
-   <td style="text-align:left;"> (7.4e-01,8.27e-01) </td>
-   <td style="text-align:left;"> 1.08e-01 </td>
-   <td style="text-align:left;"> (6.48e-02,1.52e-01) </td>
-   <td style="text-align:left;"> 3.3e+01 </td>
-   <td style="text-align:left;"> 8e+00 </td>
-   <td style="text-align:left;"> 4.33e-04 </td>
+   <td style="text-align:left;"> 0.783 </td>
+   <td style="text-align:left;"> (0.74,0.827) </td>
+   <td style="text-align:left;"> 0.108 </td>
+   <td style="text-align:left;"> (0.0648,0.152) </td>
+   <td style="text-align:left;"> 33 </td>
+   <td style="text-align:left;"> 8 </td>
+   <td style="text-align:left;"> 0.000433 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_1 </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 6.75e-01 </td>
-   <td style="text-align:left;"> (5.71e-01,7.79e-01) </td>
-   <td style="text-align:left;"> 7.83e-01 </td>
-   <td style="text-align:left;"> (7.12e-01,8.54e-01) </td>
-   <td style="text-align:left;"> 1.08e-01 </td>
-   <td style="text-align:left;"> (4.5e-03,2.12e-01) </td>
-   <td style="text-align:left;"> 4.2e+00 </td>
-   <td style="text-align:left;"> 4.93e+02 </td>
-   <td style="text-align:left;"> 4.1e-02 </td>
+   <td style="text-align:left;"> 0.675 </td>
+   <td style="text-align:left;"> (0.571,0.779) </td>
+   <td style="text-align:left;"> 0.783 </td>
+   <td style="text-align:left;"> (0.712,0.854) </td>
+   <td style="text-align:left;"> 0.108 </td>
+   <td style="text-align:left;"> (0.0045,0.212) </td>
+   <td style="text-align:left;"> 4.2 </td>
+   <td style="text-align:left;"> 493 </td>
+   <td style="text-align:left;"> 0.041 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_1 </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 6.75e-01 </td>
+   <td style="text-align:left;"> 0.675 </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 7.83e-01 </td>
-   <td style="text-align:left;"> (6.8e-01,8.87e-01) </td>
-   <td style="text-align:left;"> 1.08e-01 </td>
-   <td style="text-align:left;"> (4.5e-03,2.12e-01) </td>
-   <td style="text-align:left;"> 4.2e+00 </td>
-   <td style="text-align:left;"> 4.93e+02 </td>
-   <td style="text-align:left;"> 4.1e-02 </td>
+   <td style="text-align:left;"> 0.783 </td>
+   <td style="text-align:left;"> (0.68,0.887) </td>
+   <td style="text-align:left;"> 0.108 </td>
+   <td style="text-align:left;"> (0.0045,0.212) </td>
+   <td style="text-align:left;"> 4.2 </td>
+   <td style="text-align:left;"> 493 </td>
+   <td style="text-align:left;"> 0.041 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Wilcoxon </td>
    <td style="text-align:left;"> 1T-RRFC </td>
-   <td style="text-align:left;"> 8.17e-01 </td>
+   <td style="text-align:left;"> 0.817 </td>
    <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 8.49e-01 </td>
-   <td style="text-align:left;"> (8.26e-01,8.71e-01) </td>
-   <td style="text-align:left;"> 3.17e-02 </td>
-   <td style="text-align:left;"> (8.96e-03,5.45e-02) </td>
-   <td style="text-align:left;"> 1.03e+01 </td>
-   <td style="text-align:left;"> 8e+00 </td>
-   <td style="text-align:left;"> 1.24e-02 </td>
+   <td style="text-align:left;"> 0.849 </td>
+   <td style="text-align:left;"> (0.826,0.871) </td>
+   <td style="text-align:left;"> 0.0317 </td>
+   <td style="text-align:left;"> (0.00896,0.0545) </td>
+   <td style="text-align:left;"> 10.3 </td>
+   <td style="text-align:left;"> 8 </td>
+   <td style="text-align:left;"> 0.0124 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Wilcoxon </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 8.17e-01 </td>
-   <td style="text-align:left;"> (7.52e-01,8.82e-01) </td>
-   <td style="text-align:left;"> 8.49e-01 </td>
-   <td style="text-align:left;"> (8.07e-01,8.9e-01) </td>
-   <td style="text-align:left;"> 3.17e-02 </td>
-   <td style="text-align:left;"> (-3.1e-02,9.45e-02) </td>
-   <td style="text-align:left;"> 9.86e-01 </td>
-   <td style="text-align:left;"> 8.78e+02 </td>
-   <td style="text-align:left;"> 3.2e-01 </td>
+   <td style="text-align:left;"> 0.817 </td>
+   <td style="text-align:left;"> (0.752,0.882) </td>
+   <td style="text-align:left;"> 0.849 </td>
+   <td style="text-align:left;"> (0.807,0.89) </td>
+   <td style="text-align:left;"> 0.0317 </td>
+   <td style="text-align:left;"> (-0.031,0.0945) </td>
+   <td style="text-align:left;"> 0.986 </td>
+   <td style="text-align:left;"> 878 </td>
+   <td style="text-align:left;"> 0.32 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Wilcoxon </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 8.17e-01 </td>
+   <td style="text-align:left;"> 0.817 </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 8.49e-01 </td>
-   <td style="text-align:left;"> (7.86e-01,9.11e-01) </td>
-   <td style="text-align:left;"> 3.17e-02 </td>
-   <td style="text-align:left;"> (-3.1e-02,9.45e-02) </td>
-   <td style="text-align:left;"> 9.86e-01 </td>
-   <td style="text-align:left;"> 8.78e+02 </td>
-   <td style="text-align:left;"> 3.2e-01 </td>
+   <td style="text-align:left;"> 0.849 </td>
+   <td style="text-align:left;"> (0.786,0.911) </td>
+   <td style="text-align:left;"> 0.0317 </td>
+   <td style="text-align:left;"> (-0.031,0.0945) </td>
+   <td style="text-align:left;"> 0.986 </td>
+   <td style="text-align:left;"> 878 </td>
+   <td style="text-align:left;"> 0.32 </td>
   </tr>
 </tbody>
 </table>
@@ -779,7 +1013,7 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   <tr>
    <td style="text-align:left;"> PCL\_0\_05 </td>
    <td style="text-align:left;"> 1T-RRFC </td>
-   <td style="text-align:left;"> 9.5e-03 </td>
+   <td style="text-align:left;"> 0.0095 </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
@@ -789,27 +1023,27 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   <tr>
    <td style="text-align:left;"> PCL\_0\_05 </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 1.84e-18 </td>
-   <td style="text-align:left;"> -5.71e-03 </td>
-   <td style="text-align:left;"> 1.31e-03 </td>
-   <td style="text-align:left;"> 6.01e-03 </td>
-   <td style="text-align:left;"> 1.31e-03 </td>
-   <td style="text-align:left;"> 1.65e-02 </td>
+   <td style="text-align:left;"> 0.00000000000000000184 </td>
+   <td style="text-align:left;"> -0.00571 </td>
+   <td style="text-align:left;"> 0.00131 </td>
+   <td style="text-align:left;"> 0.00601 </td>
+   <td style="text-align:left;"> 0.00131 </td>
+   <td style="text-align:left;"> 0.0165 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_0\_05 </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 9.5e-03 </td>
+   <td style="text-align:left;"> 0.0095 </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 9.4e-03 </td>
+   <td style="text-align:left;"> 0.0094 </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 3.03e-02 </td>
+   <td style="text-align:left;"> 0.0303 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_0\_2 </td>
    <td style="text-align:left;"> 1T-RRFC </td>
-   <td style="text-align:left;"> 2.81e-03 </td>
+   <td style="text-align:left;"> 0.00281 </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
@@ -819,27 +1053,27 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   <tr>
    <td style="text-align:left;"> PCL\_0\_2 </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> -7.59e-19 </td>
-   <td style="text-align:left;"> 2.65e-04 </td>
-   <td style="text-align:left;"> 7.61e-04 </td>
-   <td style="text-align:left;"> 2.29e-03 </td>
-   <td style="text-align:left;"> 7.61e-04 </td>
-   <td style="text-align:left;"> 3.43e-03 </td>
+   <td style="text-align:left;"> -0.000000000000000000759 </td>
+   <td style="text-align:left;"> 0.000265 </td>
+   <td style="text-align:left;"> 0.000761 </td>
+   <td style="text-align:left;"> 0.00229 </td>
+   <td style="text-align:left;"> 0.000761 </td>
+   <td style="text-align:left;"> 0.00343 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_0\_2 </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 2.81e-03 </td>
+   <td style="text-align:left;"> 0.00281 </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 3.07e-03 </td>
+   <td style="text-align:left;"> 0.00307 </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 5.34e-03 </td>
+   <td style="text-align:left;"> 0.00534 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_1 </td>
    <td style="text-align:left;"> 1T-RRFC </td>
-   <td style="text-align:left;"> 3.2e-03 </td>
+   <td style="text-align:left;"> 0.0032 </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
@@ -849,27 +1083,27 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   <tr>
    <td style="text-align:left;"> PCL\_1 </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 1.63e-18 </td>
-   <td style="text-align:left;"> 1e-03 </td>
-   <td style="text-align:left;"> 6.43e-04 </td>
-   <td style="text-align:left;"> 1.86e-03 </td>
-   <td style="text-align:left;"> 6.43e-04 </td>
-   <td style="text-align:left;"> 2.46e-03 </td>
+   <td style="text-align:left;"> 0.00000000000000000163 </td>
+   <td style="text-align:left;"> 0.001 </td>
+   <td style="text-align:left;"> 0.000643 </td>
+   <td style="text-align:left;"> 0.00186 </td>
+   <td style="text-align:left;"> 0.000643 </td>
+   <td style="text-align:left;"> 0.00246 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> PCL\_1 </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 3.2e-03 </td>
+   <td style="text-align:left;"> 0.0032 </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 2.44e-03 </td>
+   <td style="text-align:left;"> 0.00244 </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 3.64e-03 </td>
+   <td style="text-align:left;"> 0.00364 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Wilcoxon </td>
    <td style="text-align:left;"> 1T-RRFC </td>
-   <td style="text-align:left;"> 8.78e-04 </td>
+   <td style="text-align:left;"> 0.000878 </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
@@ -879,22 +1113,22 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   <tr>
    <td style="text-align:left;"> Wilcoxon </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 2.98e-19 </td>
-   <td style="text-align:left;"> 2.01e-04 </td>
-   <td style="text-align:left;"> 2.62e-04 </td>
-   <td style="text-align:left;"> 7.24e-04 </td>
-   <td style="text-align:left;"> 2.62e-04 </td>
-   <td style="text-align:left;"> 9.62e-04 </td>
+   <td style="text-align:left;"> 0.000000000000000000298 </td>
+   <td style="text-align:left;"> 0.000201 </td>
+   <td style="text-align:left;"> 0.000262 </td>
+   <td style="text-align:left;"> 0.000724 </td>
+   <td style="text-align:left;"> 0.000262 </td>
+   <td style="text-align:left;"> 0.000962 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Wilcoxon </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 8.78e-04 </td>
+   <td style="text-align:left;"> 0.000878 </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 9.24e-04 </td>
+   <td style="text-align:left;"> 0.000924 </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 1.4e-03 </td>
+   <td style="text-align:left;"> 0.0014 </td>
   </tr>
 </tbody>
 </table>

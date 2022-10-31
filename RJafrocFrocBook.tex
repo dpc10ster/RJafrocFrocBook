@@ -134,7 +134,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-10-28}
+\date{2022-10-31}
 
 \begin{document}
 \maketitle
@@ -4811,34 +4811,168 @@ The following plots are arranged in pairs, with the left plot corresponding to t
 \hypertarget{standalone-cad-radiologists-how-much-finished}{%
 \section{TBA How much finished}\label{standalone-cad-radiologists-how-much-finished}}
 
-10\%
+50\%
 
-\hypertarget{standalone-cad-radiologists-overview}{%
-\section{Overview}\label{standalone-cad-radiologists-overview}}
+Table 2 does not center properly in pdf
 
-Computer aided detection (CAD) research for screening mammography has focused on measuring performance of radiologists with and without CAD: a group of radiologists interpret a set of images with and without CAD assist. Standalone performance of CAD algorithms is rarely measured. The stated reason for this is that in the clinic CAD is never used alone, rather it is always used with radiologists.
+Table 2 is too wide
 
-Another reason for the lack of focus on standalone CAD performance is the lack of a clear method for measuring standalone CAD performance. This chapter extends the method used in a recent study of standalone CAD performance \citep{hupse2013standalone}, termed one-treatment random-reader fixed case or \textbf{1T-RRFC} analysis, since CAD is treated as an additional reader within a single treatment and since it only accounts for reader variability but does not account for case-variability.
+collapse\_rows not working even in this example:
 
-The extension described in this chapter includes the effect of case-sampling variability and is hence termed one-treatment random-reader random-case or \textbf{1T-RRRC} analysis. The method is based on an existing method allowing comparison of the average performance of readers in a single treatment to a specified value. The key modification is to regard the difference in performance between radiologists over CAD as a figure of merit to which the existing work is directly applicable. The 1T-RRRC method is compared to 1T-RRFC.
+\hypertarget{this-does-not-work}{%
+\subsection{This does not work}\label{this-does-not-work}}
 
-The 1T-RRRC method is also compared to an unorthodox usage of conventional multiple-treatment multiple-reader method, termed \textbf{2T-RRRC} analysis, which involves replicating the CAD ratings as many times as there are radiologists, in effect simulating a second treatment, i.e., CAD is regarded as the second treatment (with identical readers within this treatment) to which existing methods (DBM or OR, as described in \href{https://dpc10ster.github.io/RJafrocRocBook/dbm-analysis-significance-testing.html}{RJafrocRocBook}) is applied.
-`
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{C1 =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\DecValTok{10}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"b"}\NormalTok{, }\DecValTok{5}\NormalTok{)),}
+                 \DataTypeTok{C2 =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"c"}\NormalTok{, }\DecValTok{7}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"d"}\NormalTok{, }\DecValTok{3}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"c"}\NormalTok{, }\DecValTok{2}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"d"}\NormalTok{, }\DecValTok{3}\NormalTok{)),}
+                 \DataTypeTok{C3 =} \DecValTok{1}\OperatorTok{:}\DecValTok{15}\NormalTok{,}
+                 \DataTypeTok{C4 =} \KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DecValTok{15}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{kbl}\NormalTok{(df, }\DataTypeTok{align =} \StringTok{"c"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{kable_paper}\NormalTok{(}\DataTypeTok{full_width =}\NormalTok{ F) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{collapse_rows}\NormalTok{(}\DataTypeTok{columns =} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\DataTypeTok{valign =} \StringTok{"top"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{>{}c|c|c|c}
+\hline
+C1 & C2 & C3 & C4\\
+\hline
+ &  & 1 & 0\\
+\cline{3-4}
+ &  & 2 & 1\\
+\cline{3-4}
+ &  & 3 & 0\\
+\cline{3-4}
+ &  & 4 & 1\\
+\cline{3-4}
+ &  & 5 & 0\\
+\cline{3-4}
+ &  & 6 & 1\\
+\cline{3-4}
+ & \multirow[t]{-7}{*}{\centering\arraybackslash c} & 7 & 1\\
+\cline{2-4}
+ &  & 8 & 1\\
+\cline{3-4}
+ &  & 9 & 0\\
+\cline{3-4}
+\multirow[t]{-10}{*}{\centering\arraybackslash \textbf{a}} & \multirow[t]{-3}{*}{\centering\arraybackslash d} & 10 & 1\\
+\cline{1-4}
+ &  & 11 & 1\\
+\cline{3-4}
+ & \multirow[t]{-2}{*}{\centering\arraybackslash c} & 12 & 0\\
+\cline{2-4}
+ &  & 13 & 1\\
+\cline{3-4}
+ &  & 14 & 0\\
+\cline{3-4}
+\multirow[t]{-5}{*}{\centering\arraybackslash \textbf{b}} & \multirow[t]{-3}{*}{\centering\arraybackslash d} & 15 & 1\\
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{this-works}{%
+\subsection{This works!}\label{this-works}}
+
+Define this function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{collapse_rows_df <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, variable)\{}
+\NormalTok{  group_var <-}\StringTok{ }\KeywordTok{enquo}\NormalTok{(variable)}
+\NormalTok{  df }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{group_by}\NormalTok{(}\OperatorTok{!!}\StringTok{ }\NormalTok{group_var) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{groupRow =} \DecValTok{1}\OperatorTok{:}\KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\OperatorTok{!!}\KeywordTok{quo_name}\NormalTok{(group_var) }\OperatorTok{:}\ErrorTok{=}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(groupRow }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\KeywordTok{as.character}\NormalTok{(}\OperatorTok{!!}\StringTok{ }\NormalTok{group_var), }\StringTok{""}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\KeywordTok{c}\NormalTok{(groupRow))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Now apply it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{kbl}\NormalTok{(}\KeywordTok{collapse_rows_df}\NormalTok{(}\KeywordTok{collapse_rows_df}\NormalTok{(df,C1), C2), }\DataTypeTok{align =} \StringTok{"c"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{kable_paper}\NormalTok{(}\DataTypeTok{full_width =}\NormalTok{ F) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{collapse_rows}\NormalTok{(}\DataTypeTok{columns =} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\DataTypeTok{valign =} \StringTok{"top"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{>{}c|c|c|c}
+\hline
+C1 & C2 & C3 & C4\\
+\hline
+\textbf{a} & c & 1 & 0\\
+\cline{1-4}
+ &  & 2 & 1\\
+\cline{3-4}
+ &  & 3 & 0\\
+\cline{3-4}
+ &  & 4 & 1\\
+\cline{3-4}
+ &  & 5 & 0\\
+\cline{3-4}
+ &  & 6 & 1\\
+\cline{3-4}
+ & \multirow[t]{-6}{*}{\centering\arraybackslash } & 7 & 1\\
+\cline{2-4}
+ & d & 8 & 1\\
+\cline{2-4}
+ &  & 9 & 0\\
+\cline{3-4}
+\multirow[t]{-9}{*}{\centering\arraybackslash \textbf{}} &  & 10 & 1\\
+\cline{1-1}
+\cline{3-4}
+\textbf{b} &  & 11 & 1\\
+\cline{1-1}
+\cline{3-4}
+ &  & 12 & 0\\
+\cline{3-4}
+ &  & 13 & 1\\
+\cline{3-4}
+ &  & 14 & 0\\
+\cline{3-4}
+\multirow[t]{-4}{*}{\centering\arraybackslash \textbf{}} & \multirow[t]{-7}{*}{\centering\arraybackslash } & 15 & 1\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{standalone-cad-radiologists-introduction}{%
 \section{Introduction}\label{standalone-cad-radiologists-introduction}}
 
-In the US the majority of screening mammograms are analyzed by computer aided detection (CAD) algorithms \citep{rao2010widely}. Almost all major imaging device manufacturers provide CAD as part of their imaging workstation display software. In the United States CAD is approved for use as a second reader, i.e., the radiologist first interprets the images (typically 4 views, 2 views of each breast) without CAD and then CAD information (i.e., cued suspicious regions, possibly shown with associated probabilities of malignancies) is shown and the radiologist has the opportunity to revise the initial interpretation. In response to the second reader usage, the evolution of CAD algorithms has been guided mainly by comparing observer performance of radiologists with and without CAD.
+In the US the majority of screening mammograms are analyzed by computer aided detection (CAD) algorithms \citep{rao2010widely}. Almost all major imaging device manufacturers provide CAD as part of their imaging workstation display software. In the United States CAD is approved for use as a second reader, i.e., the radiologist first interprets the images (typically 4 views, 2 views of each breast) without CAD and then CAD information (i.e., cued suspicious regions, possibly shown with associated probabilities of malignancies) is shown and the radiologist has the opportunity to revise the initial interpretation. In response to the FDA-approved second reader usage, the evolution of CAD algorithms has been guided mainly by comparing observer performance of radiologists with and without CAD.
 
-Clinical CAD systems sometimes only report the locations of suspicious regions, i.e., it may not provide ratings. However, a (continuous variable) malignancy index for every CAD-found suspicious region is available to the algorithm designer \citep{edwards2002maximum}. Standalone performance, i.e., performance of designer-level CAD by itself, regarded as an algorithmic reader, vs.~radiologists, is rarely measured. In breast cancer screening I am aware of only one study \citep{hupse2013standalone} where standalone performance was measured. {[}Standalone performance has been measured in CAD for computed tomography colonography, chest radiography and three dimensional ultrasound \citep{hein2010computeraided, summers2008performance, taylor2006computerassisted, deBoo2011computeraided, tan2012computeraided}{]}.
+Clinical CAD systems sometimes only report the locations of suspicious regions, i.e., it may not provide ratings. Analysis of this type of date is deferred to a following TBA chapter. However, a malignancy index (a continuous variable) for every CAD-found suspicious region is available to the algorithm designer \citep{edwards2002maximum}. Standalone performance, i.e., performance of designer-level CAD by itself, regarded as an algorithmic reader, vs.~radiologists, is rarely measured. In breast cancer screening I am aware of only one study \citep{hupse2013standalone} where standalone performance was measured. \footnote{Standalone performance has been measured in CAD for computed tomography colonography, chest radiography and three dimensional ultrasound \citep{hein2010computeraided, summers2008performance, taylor2006computerassisted, deBoo2011computeraided, tan2012computeraided}}.
 
-One possible reason for not measuring standalone performance of CAD is the lack of an accepted assessment method for such measurements. The purpose of this work is to remove that impediment.
-It describes a method for comparing standalone performance of designer-level CAD to radiologists interpreting the same cases and compares the method to those described in two recent publications \citep{hupse2013standalone, kooi2016comparison}.
+One possible reason for not measuring standalone performance of CAD is the lack of an accepted assessment method for such measurements. The purpose of this work is to remove that impediment. It describes a method for comparing standalone performance of designer-level CAD to radiologists interpreting the same cases and compares the method to those described in two recent publications \citep{hupse2013standalone, kooi2016comparison}.
+
+\hypertarget{standalone-cad-radiologists-overview}{%
+\section{Overview}\label{standalone-cad-radiologists-overview}}
+
+This chapter extends the method used in a recent study of standalone CAD performance \citep{hupse2013standalone}, termed one-treatment random-reader fixed case or \textbf{1T-RRFC} analysis, since CAD is treated as an additional reader within a single treatment and since it only accounts for reader variability but does not account for case-variability.
+
+The extension includes the effect of case-sampling variability and is hence termed one-treatment random-reader random-case or \textbf{1T-RRRC} analysis. The method is based on an existing method allowing comparison of the average performance of readers in a single treatment to a specified value. The key modification is to regard the difference in performance between radiologists over CAD as a figure of merit to which the existing work is directly applicable. The 1T-RRRC method is compared to 1T-RRFC.
+
+The 1T-RRRC method is also compared to an unorthodox usage of conventional multiple-treatment multiple-reader method, termed \textbf{2T-RRRC} analysis, which involves replicating the CAD ratings as many times as there are radiologists, in effect simulating a second treatment, i.e., CAD is regarded as the second treatment (with identical readers within this treatment) to which existing methods (DBM or OR, as described in \href{https://dpc10ster.github.io/RJafrocRocBook/dbm-analysis-significance-testing.html}{RJafrocRocBook}) is applied.
+`
 
 \hypertarget{standalone-cad-radiologists-methods}{%
 \section{Methods}\label{standalone-cad-radiologists-methods}}
 
-Summarized are two recent studies of CAD vs.~radiologists in mammography. This is followed by comments on the methodologies used in the two studies. The second study used multi-treatment multi-reader receiver operating characteristic (ROC) software in an unorthodox or unconventional way. A statistical model and analysis method is described that avoids unorthodox, and perhaps unjustified, use of ROC software and has fewer model parameters.
+Summarized are two recent studies of CAD vs.~radiologists in mammography. This is followed by comments on the methods used in the two studies. The second study used multi-treatment multi-reader receiver operating characteristic (ROC) software in an unorthodox way. A statistical model and analysis method is described that avoids the unorthodox usage of ROC software and has fewer model parameters.
 
 \hypertarget{standalone-cad-radiologists-two-previous-studies}{%
 \subsection{Studies assessing performance of CAD vs.~radiologists}\label{standalone-cad-radiologists-two-previous-studies}}
@@ -4848,12 +4982,14 @@ The first study \citep{hupse2013standalone} measured performance in finding and 
 \hypertarget{standalone-cad-radiologists-study1}{%
 \subsubsection{Study - 1}\label{standalone-cad-radiologists-study1}}
 
-The first study \citep{hupse2013standalone} compared standalone performance of a CAD device to that of 9 radiologists interpreting the same cases (120 non-diseased and 80 with a single malignant mass per case). It used the LROC (localization ROC) paradigm \citep{starr1975visual, metz1976observer, swensson1996unified}, in which the observer gives an overall rating for presence of disease (an integer 0 to 100 scale was used) and indicates the location of the most suspicious region. On a non-diseased case the rating is classified as a false positive (FP) but on a diseased case it is classified as a \emph{correct localization} (CL) if the location is sufficiently close to the lesion, and otherwise it is classified as an \emph{incorrect localization}. For a given reporting threshold, the number of correct localizations divided by the number of diseased cases estimates the probability of correct localization (PCL) at that threshold. On non-diseased cases the number of false positives (FPs) divided by the number of non-diseased cases estimates the probability of a false positive, or false positive fraction (FPF), at that threshold. The plot of PCL (ordinate) vs.~FPF defines the LROC curve. Study - 1 used as figures of merit (FOMs) the interpolated PCL at two values of FPF, specifically FPF = 0.05 and FPF = 0.2, denoted \(\text{PCL}_{0.05}\) and \(\text{PCL}_{0.2}\), respectively. The t-test between the radiologist \(\text{PCL}_{\text{FPF}}\) values and that of CAD was used to compute the two-sided p-value for rejecting the NH of equal performance. Study - 1 reported p-value = 0.17 for \(\text{PCL}_{0.05}\) and p-value \(\leq\) 0.001, with CAD being inferior, for \(\text{PCL}_{0.2}\).
+The first study \citep{hupse2013standalone} compared standalone performance of a CAD device to that of 9 radiologists interpreting the same cases (120 non-diseased and 80 with a single malignant mass per case). It used the LROC (localization ROC) paradigm \citep{starr1975visual, metz1976observer, swensson1996unified}, in which the observer gives an overall rating for presence of disease (an integer 0 to 100 scale was used) and indicates the location of the most suspicious region. On a non-diseased case the rating is classified as a false positive (FP) but on a diseased case it is classified as a \emph{correct localization} (CL) if the location is sufficiently close to the lesion and otherwise it is classified as an \emph{incorrect localization}. For a given reporting threshold, the number of correct localizations divided by the number of diseased cases estimates the probability of correct localization (PCL) at that threshold. On non-diseased cases the number of false positives (FPs) divided by the number of non-diseased cases estimates the probability of a false positive, or false positive fraction (FPF), at that threshold. The plot of PCL (ordinate) vs.~FPF defines the empirical LROC curve. Study - 1 used as figures of merit (FOMs) the interpolated PCL at two values of FPF, specifically FPF = 0.05 and FPF = 0.2, denoted \(\text{PCL}_{0.05}\) and \(\text{PCL}_{0.2}\), respectively. A t-test between the radiologist \(\text{PCL}_{\text{FPF}}\) values and that of CAD was used to compute the two-sided p-value for rejecting the NH of equal performance. Study - 1 reported p-value = 0.17 for \(\text{PCL}_{0.05}\) and p-value \(\leq\) 0.001, with CAD being inferior, for \(\text{PCL}_{0.2}\).
 
 \hypertarget{standalone-cad-radiologists-study2}{%
 \subsubsection{Study - 2}\label{standalone-cad-radiologists-study2}}
 
-The second study \citep{kooi2016comparison} used 199 diseased and 199 non-diseased ROIs extracted by an independent CAD algorithm. These were interpreted using the ROC paradigm (i.e., rating only, no localization required) by a different CAD algorithmic observer from that used to determine the ROIs, and by four expert radiologists. The figure of merit was the empirical area (AUC) under the respective ROC curves (one per radiologist and one for CAD). The p-value for the difference in AUCs between the average radiologist and CAD was determined using an unorthodox application of the Dorfman-Berbaum-Metz \citep{dorfman1992receiver} multiple-treatment multiple-reader multiple-case (DBM-MRMC) software with recent modifications \citep{hillis2008recent}. The unorthodox application was that in the input data file \emph{radiologists and CAD were entered as two treatments}. In conventional (or orthodox) DBM-MRMC each reader provides two ratings per case and the data file would consist of paired ratings of a set of cases interpreted by 4 readers. To accommodate the paired data structure assumed by the software, the authors of Study - 2 \emph{replicated the CAD ratings four times in the input data file}, as explained in the caption to Table \ref{tab:standalone-cad-table-conventional}. By this artifice they converted a single-treatment 5-reader (4 radiologists plus CAD) data file to a two-treatment 4-reader data file, in which the four readers in treatment 1 were the radiologists, and the four ``readers'' in treatment 2 were CAD replicated ratings. Note that for each case the four readers in the second treatment had identical ratings. In Table 1 the replicated CAD observers are labeled C1, C2, C3 and C4.
+The second study \citep{kooi2016comparison} used 199 diseased and 199 non-diseased ROIs extracted by an independent CAD algorithm. These were analyzed by a different CAD algorithmic observer from that used to determine the ROIs and by four expert radiologists. In either case the ROC paradigm was used (i.e., a rating was obtained for each ROI) The figure of merit was the empirical area (AUC) under the respective ROC curves (one for each radiologist and one for CAD). The p-value for the difference in AUCs between the average radiologist's AUC and CAD AUC was determined using an unorthodox application of the Dorfman-Berbaum-Metz \citep{dorfman1992receiver} multiple-treatment multiple-reader multiple-case (DBM-MRMC) software.
+
+The application was unorthodox in the sense that in the input data file \textbf{radiologists and CAD were entered as two treatments}. In conventional (or orthodox) DBM-MRMC each reader provides two ratings per case and the data file would consist of paired ratings of a set of cases interpreted by 4 readers. To accommodate the paired data structure assumed by the software, the authors of Study - 2 \textbf{replicated the CAD ratings four times in the input data file}, as explained in the caption to Table \ref{tab:standalone-cad-table-conventional}. By this artifice they converted a single-treatment 5-reader (4 radiologists plus CAD) data file to a two-treatment 4-reader data file in which the four readers in treatment 1 were the radiologists, and the four ``readers'' in treatment 2 were CAD replicated ratings. Note that for each case the four readers in the second treatment had identical ratings. In Table 1 the replicated CAD readers are labeled C1, C2, C3 and C4.
 
 \begin{table}
 
@@ -4893,7 +5029,7 @@ Study -- 2 reported a not significant difference between CAD and the radiologist
 
 For the purpose of this work, which focuses on the respective analysis methods, the difference in observer performance paradigms between the two studies, namely a search paradigm in Study - 1 vs.~an ROI classification paradigm in Study -- 2, is inconsequential. The paired t-test used in Study - 1 treats the case-sample as fixed. In other words, the analysis is not accounting for case-sampling variability but it is accounting for reader variability. While not explicitly stated, the reason for the unorthodox analysis in Study -- 2 was the desire to include case-sampling variability. \footnote{Prof.~Karssemeijer (private communication, 10/27/2017) had consulted with a few ROC experts to determine if the procedure used in Study -- 2 was valid, and while the experts thought it was probably valid they were not sure.}
 
-In what follows, the analysis in Study -- 1 is referred to as random-reader fixed-case (1T-RRFC) while that in Study -- 2 is referred to as dual-treatment random-reader random-case (2T-RRRC).
+In what follows, the analysis in Study -- 1 is referred to as \textbf{single-treatment random-reader fixed-case (1T-RRFC)} while that in Study -- 2 is referred to as \textbf{dual-treatment random-reader random-case (2T-RRRC)}.
 
 \hypertarget{the-1t-rrfc-analysis-model}{%
 \subsection{The 1T-RRFC analysis model}\label{the-1t-rrfc-analysis-model}}
@@ -4919,23 +5055,21 @@ R_j \sim  N\left ( 0,\sigma_R^2 \right )
 
 Because of the assumed normal distribution of \(R_j\), in order to compare the readers to a fixed value, that of CAD denoted \(\theta_0\), one uses the (unpaired) t-test, as done in Study -- 1. As evident from the model, no allowance is made for case-sampling variability, which is the reason for calling it the 1T-RRFC method.
 
-Performance of CAD on a fixed dataset does exhibit within-reader variability. The same algorithm applied repeatedly to a fixed dataset does not always produce the same mark-rating data. However, this source of CAD FOM variability is much smaller than inter-reader FOM variability of radiologists interpreting the same dataset. In fact the within-reader variability of radiologists is smaller than their inter-reader variability, and within-reader variability of CAD is even smaller still. For this reason one is justified in regarded \(\theta_0\) as a fixed quantity for a given dataset. Varying the dataset will result in different values for \(\theta_0\), i.e., its case sampling variability needs to be accounted for, as done in the following analyses.
+Performance of CAD on a fixed dataset does exhibit within-CAD variability, i.e., CAD applied repeatedly to a fixed dataset does not always produce the same mark-rating data. However, this source of within-CAD variability is much smaller than \emph{inter-reader} variability of radiologists interpreting the same dataset. The \emph{within-reader} variability of radiologists is smaller than \emph{inter-reader} variability and \emph{within-CAD} variability is even smaller. For this reason one is justified in regarded \(\theta_0\) as a fixed quantity for a given dataset. Varying the dataset will result in different values for \(\theta_0\) reflecting case sampling variability which needs to be accounted for as done in the following analyses.
 
 \hypertarget{standalone-cad-radiologists-2TRRRC-anlaysis}{%
 \subsection{The 2T-RRRC analysis model}\label{standalone-cad-radiologists-2TRRRC-anlaysis}}
 
-This could be termed the conventional or the orthodox method. There are two treatments and the study design is fully crossed: each reader interprets each case in each treatment, i.e., the data structure is as in the left half of Table 1.
+This could be termed the conventional or the orthodox method. There are two treatments and the study design is fully crossed: each reader interprets each case in each treatment, i.e., the data structure is as in the left half of Table \ref{tab:standalone-cad-table-conventional}.
 
-The following approach, termed 2T-RRRC, uses the Obuchowski and Rockette (OR) figure of merit sampling model \citep{obuchowski1995hypothesis} instead of the pseudovalue-based model used in the original DBM paper \citep{dorfman1992receiver}. For the empirical FOM, Hillis has shown the two to be equivalent \citep{hillis2005comparison}.
-
-The OR model is:
+The following approach, termed 2T-RRRC, uses the Obuchowski and Rockette (OR) figure of merit sampling model \citep{obuchowski1995hypothesis}. The OR model is:
 
 \begin{equation}
 \theta_{ij\{c\}}=\mu+\tau_i+\left ( \tau \text{R} \right )_{ij}+\epsilon_{ij\{c\}}
 \label{eq:standalone-cad-model-2t-rrrc}
 \end{equation}
 
-Assuming two treatments, \(i\) (\(i = 1, 2\)) is the treatment index, \(j\) (\(j = 1, ..., J\)) is the reader index, and \(k\) (\(k = 1, ..., K\)) is the case index, and \(\theta_{ij\{c\}}\) is a figure of merit for reader \(j\) in treatment \(i\) and case-sample \(\{c\}\). A case-sample is a set or ensemble of cases, diseased and non-diseased, and different integer values of \(c\) correspond to different case-samples.
+Assuming two treatments, \(i\) (\(i = 1, 2\)) is the treatment index, \(j\) (\(j = 1, ..., J\)) is the reader index, and \(k\) (\(k = 1, ..., K\)) is the case index, and \(\theta_{ij\{c\}}\) is the figure of merit in treatment \(i\) for reader \(j\) and case-sample \(\{c\}\). A case-sample is a set or ensemble of cases, diseased and non-diseased, and different integer values of \(c\) correspond to different case-samples.
 
 The first two terms on the right hand side of Eqn. \eqref{eq:standalone-cad-model-2t-rrrc} are fixed effects (average performance and treatment effect, respectively). The next two terms are random effect variables that, by assumption, are sampled as follows:
 
@@ -4969,7 +5103,7 @@ Here \(N_{I \times J}\) is the \(I \times J\) variate normal distribution and \(
 \label{eq:standalone-cad-2t-rrrc-cov}
 \end{equation}
 
-Software \{U of Iowa and \texttt{RJafroc}\} yields estimates of all terms appearing on the right hand side of Eqn. \eqref{eq:standalone-cad-2t-rrrc-cov}. Excluding fixed effects, the model represented by Eqn. \eqref{eq:standalone-cad-model-2t-rrrc} contains six parameters:
+Software \{U of Iowa and \texttt{RJafroc}\} yields estimates of all terms appearing on the right hand side of Eqn. \eqref{eq:standalone-cad-2t-rrrc-cov}. Excluding fixed effects the model represented by Eqn. \eqref{eq:standalone-cad-model-2t-rrrc} contains six parameters:
 
 \begin{equation}
 \sigma_R^2, \sigma_{\tau R}^2, \text{Var}, \text{Cov}_1, \text{Cov}_2, \text{Cov}_3
@@ -4988,7 +5122,7 @@ In practice, since one is usually limited to one case-sample, i.e., \(c = 1\), r
 \hypertarget{standalone-cad-radiologists-1TRRRC-anlaysis}{%
 \subsection{The 1T-RRRC analysis model}\label{standalone-cad-radiologists-1TRRRC-anlaysis}}
 
-This is the contribution of this work. The key difference from the approach in Study - 2 is to regard standalone CAD as a different reader, not as a different treatment. Therefore, needed is a single treatment method for analyzing readers and CAD, where the latter is regarded as an additional reader. Accordingly the proposed method is termed single-treatment RRRC (1T-RRRC) analysis.
+The difference from the approach in Study - 2, and the main contribution of this work, is to regard standalone CAD as a different reader, not as a different treatment. This section describes a single treatment method for analyzing readers and CAD, where CAD is regarded as an additional reader and artificially replicated CAD data becomes unnecessary. Accordingly the proposed method is termed \textbf{single-treatment random-reader random-case (1T-RRRC)} analysis.
 
 The starting point is the \citep{obuchowski1995hypothesis} model for a single treatment, which for the radiologists (i.e., \emph{excluding} CAD) interpreting in a single-treatment reduces to the following model:
 
@@ -5016,28 +5150,19 @@ The \(J \times J\) covariance matrix \(\Sigma\) is defined by two parameters, \(
 \label{eq:standalone-cad-1t-var-cov2-sampling}
 \end{equation}
 
-The terms \(\text{Var}\) and \(\text{Cov}_2\) are estimated using resampling methods. Using the jackknife, and denoting the FOM with case \(k\) removed by \(\psi_{j(k)}\) (the index in parenthesis denotes deleted case \(k\), and since one is dealing with a single case-sample, the case-sample index \(c\) is now superfluous). The covariance matrix is estimated using (the dot symbol represents an average over the replaced index):
+In practice the terms \(\text{Var}\) and \(\text{Cov}_2\) are estimated using the jackknife method.
 
-\begin{equation}
-\Sigma_{jj'}|_\text{jack} = \frac{K-1}{K} \sum_{k=1}^{K} \left ( \psi_{j(k)}  - \psi_{j(\bullet)} \right ) \left ( \psi_{j'(k)}  - \psi_{j'(\bullet)} \right )
-\label{eq:standalone-cad-1t-sigma-jackknife}
-\end{equation}
+\hypertarget{single-treatment-analysis-for-radiologists}{%
+\subsubsection{Single treatment analysis for radiologists}\label{single-treatment-analysis-for-radiologists}}
 
-The final estimates of \(\text{Var}\) and \(\text{Cov}_2\) are averaged (indicated in the following equation by the angular brackets) over all pairings of radiologists satisfying the relevant equalities/inequalities shown just below the closing angular bracket:
+Hillis \citep{hillis2005comparison, hillis2007comparison} has described how to use the single treatment model \eqref{eq:standalone-or-model-single-treatment} to compare a groups of radiologists' average performance to a fixed value, in effect the \(\text{NH}: \mu = \mu_0\), where \(\mu_0\) is a pre-specified constant.
 
-\begin{equation}
-\left.
-\begin{aligned}  
-\text{Var} = \left \langle \Sigma_{jj'}|_{\text{jack}} \right \rangle_{j=j'}\\
-\text{Cov}_2 = \left \langle \Sigma_{jj'}|_{\text{jack}} \right \rangle_{j \neq j'}
-\end{aligned}
-\right \}
-\label{eq:standalone-cad-1t-rrrc-var-cov2}
-\end{equation}
+One might be tempted to set \(\mu_0\) equal to the performance of CAD but that would not be accounting for the fact that the performance of CAD is itself a random variable whose case-sampling variability needs to be accounted for.
 
-Hillis' formulae \citep{hillis2005comparison, hillis2007comparison} permit one to test the NH: \(\mu = \mu_0\), where \(\mu_0\) is a pre-specified constant. One could set \(\mu_0\) equal to the performance of CAD, but that would not be accounting for the fact that the performance of CAD is itself a random variable, whose case-sampling variability needs to be accounted for.
+\hypertarget{adaptation-of-single-treatment-analysis-to-accommodate-cad}{%
+\subsubsection{Adaptation of single treatment analysis to accommodate CAD}\label{adaptation-of-single-treatment-analysis-to-accommodate-cad}}
 
-Instead, the following model was used for the figure of merit of the radiologists and CAD (\(j = 0\) is used to denote the CAD algorithmic reader):
+Instead, the following model is used for the figure of merit of the radiologists \textbf{and} CAD (note that \(j = 0\) is used to denote the CAD algorithmic reader):
 
 \begin{equation}
 \theta_{j\{c\}} = \theta_{0\{c\}} + \Delta \theta + R_j + \epsilon_{j\{c\}}\\
@@ -5045,7 +5170,7 @@ j=1,2,...J
 \label{eq:standalone-cad-1t-thetaj}
 \end{equation}
 
-\(\theta_{0\{c\}}\) is the CAD figure of merit for case-sample \(\{c\}\) and \(\Delta \theta\) is the average figure of merit increment of the radiologists over CAD. To reduce this model to one to which existing formulae are directly applicable, one subtracts the CAD figure of merit from each radiologist's figure of merit (for the same case-sample), and defines this as the difference figure of merit \(\psi_{j\{c\}}\) , i.e.,
+\(\theta_{0\{c\}}\) is the CAD figure of merit for case-sample \(\{c\}\) and \(\Delta \theta\) is the average figure of merit increment of the radiologists over CAD. To reduce this model to one to which Hillis' formulae are directly applicable, one subtracts the CAD figure of merit from each radiologist's figure of merit for the same case-sample, and defines this as the difference figure of merit \(\psi_{j\{c\}}\) , i.e.,
 
 \begin{equation}
 \psi_{j\{c\}} = \theta_{j\{c\}} - \theta_{0\{c\}}
@@ -5055,12 +5180,11 @@ j=1,2,...J
 Then Eqn. \eqref{eq:standalone-cad-1t-thetaj} reduces to:
 
 \begin{equation}
-\psi_{j\{c\}} = \Delta \theta + R_j + \epsilon_{j\{c\}}\\
-j=1,2,...J
+\psi_{j\{c\}} = \Delta \theta + R_j + \epsilon_{j\{c\}}
 \label{eq:standalone-cad-1t-psi}
 \end{equation}
 
-Eqn. \eqref{eq:standalone-cad-1t-psi} is identical in form to Eqn. \eqref{eq:standalone-or-model-single-treatment} with the difference that the figure of merit on the left hand side of Eqn. \eqref{eq:standalone-cad-1t-psi} is a \emph{difference FOM}, that between the radiologist's and CAD. Eqn. \eqref{eq:standalone-cad-1t-psi} describes a model for \(J\) radiologists interpreting a common case set, each of whose performances is measured relative to that of CAD. Under the NH the expected difference is zero: \(\text{NH:} \Delta \theta = 0\). The method \citep{hillis2005comparison, hillis2007comparison} for single-treatment multiple-reader analysis is now directly applicable to the model described by Eqn. \eqref{eq:standalone-cad-1t-psi}.
+Eqn. \eqref{eq:standalone-cad-1t-psi} is identical in form to Eqn. \eqref{eq:standalone-or-model-single-treatment} excepting that the figure of merit on the left hand side of Eqn. \eqref{eq:standalone-cad-1t-psi} is a \emph{difference FOM}, that between the radiologist's and CAD, i.e., describing a model for \(J\) radiologists interpreting a common case set, each of whose performances is measured \emph{relative} to that of CAD. Under the NH the expected difference is zero: \(\text{NH:} \Delta \theta = 0\). The method \citep{hillis2005comparison, hillis2007comparison} for single-treatment multiple-reader analysis is now directly applicable to the model described by Eqn. \eqref{eq:standalone-cad-1t-psi}.
 
 Apart from fixed effects, the model in Eqn. \eqref{eq:standalone-cad-1t-psi} contains three parameters:
 
@@ -5075,14 +5199,12 @@ Setting \(\text{Var} = 0, \text{Cov}_2 = 0\) yields the 1T-RRFC model, which con
 \hypertarget{standalone-cad-radiologists-computational-details}{%
 \section{Software implementation}\label{standalone-cad-radiologists-computational-details}}
 
-The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in \texttt{RJafroc}, an R-package \citep{R-RJafroc}.
+The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in \texttt{RJafroc}.
 
-The following code shows usage of the software to generate the results corrsponding to the three analyses. Note that \texttt{datasetCadLroc} is the LROC dataset and \texttt{dataset09} is the corresponding ROC dataset.
+The following code shows usage of the software to generate the results. Note that \texttt{datasetCadLroc} is the LROC dataset and \texttt{dataset09} is the corresponding ROC dataset.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-
-
 \NormalTok{RRFC_1T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{05}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{method =} \StringTok{"1T-RRFC"}\NormalTok{)}
 \NormalTok{RRRC_2T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{05}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
@@ -5117,17 +5239,17 @@ The results are organized as follows:
 
 \begin{itemize}
 \item
-  \texttt{RRFC\_1T\_PCL\_0\_05} contains the results of 1T-RRFC analysis for figure of merit = \(PCL_{0.05}\).
+  \texttt{RRFC\_1T\_PCL\_0\_05} contains the results of 1T-RRFC analysis for figure of merit = \(\text{PCL}_{0.05}\).
 \item
-  \texttt{RRRC\_2T\_PCL\_0\_05} contains the results of 2T-RRFC analysis for figure of merit = \(PCL_{0.05}\).
+  \texttt{RRRC\_2T\_PCL\_0\_05} contains the results of 2T-RRRC analysis for figure of merit = \(\text{PCL}_{0.05}\).
 \item
-  \texttt{RRRC\_1T\_PCL\_0\_05} contains the results of 1T-RRFC analysis for figure of merit = \(PCL_{0.05}\).
+  \texttt{RRRC\_1T\_PCL\_0\_05} contains the results of 1T-RRRC analysis for figure of merit = \(\text{PCL}_{0.05}\).
 \item
-  \texttt{RRFC\_1T\_PCL\_0\_2} contains the results of 1T-RRFC analysis for figure of merit = \(PCL_{0.2}\).
+  \texttt{RRFC\_1T\_PCL\_0\_2} contains the results of 1T-RRFC analysis for figure of merit = \(\text{PCL}_{0.2}\).
 \item
-  \texttt{RRRC\_2T\_PCL\_0\_2} contains the results of 2T-RRRC analysis for figure of merit = \(PCL_{0.2}\).
+  \texttt{RRRC\_2T\_PCL\_0\_2} contains the results of 2T-RRRC analysis for figure of merit = \(\text{PCL}_{0.2}\).
 \item
-  \texttt{RRRC\_1T\_PCL\_0\_2} contains the results of 1T-RRRC analysis for figure of merit = \(PCL_{0.2}\).
+  \texttt{RRRC\_1T\_PCL\_0\_2} contains the results of 1T-RRRC analysis for figure of merit = \(\text{PCL}_{0.2}\).
 \item
   \texttt{RRFC\_1T\_AUC} contains the results of 1T-RRFC analysis for the Wilcoxon figure of merit.
 \item
@@ -5141,35 +5263,52 @@ The structures of these objects are illustrated with examples in the Appendix.
 \hypertarget{standalone-cad-radiologists-results}{%
 \section{Results}\label{standalone-cad-radiologists-results}}
 
-The three methods, in historical order 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof.~Karssemeijer for making this dataset available).
+The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof.~Karssemeijer for making this dataset available).
 
 Shown next, Table \ref{tab:standalone-cad-table2}, are the significance testing results corresponding to the three analyses.
 
-\begin{table}[H]
+\begin{table}
 
 \caption{\label{tab:standalone-cad-table2}Significance testing results of the analyses for an LROC dataset. Three sets of results, namely RRRC, 2T-RRRC and 1T-RRRC, are shown for each figure of merit (FOM). Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence intervals than the corresponding row labeled 1T-RRFC. [$\theta_0$ = FOM CAD; $\theta_{\bullet}$ = average FOM of radiologists; $\psi_{\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\psi_{\bullet} = 0$.]}
 \centering
-\resizebox{\linewidth}{!}{
+\fontsize{10}{12}\selectfont
 \begin{tabular}[t]{lllllllllll}
 \toprule
 FOM & Analysis & $\theta_0$ & $CI_{\theta_0}$ & $\theta_{\bullet}$ & $CI_{\theta_{\bullet}}$ & $\psi_{\bullet}$ & $CI_{\psi_{\bullet}}$ & F & ddf & p\\
 \midrule
-PCL\_0\_05 & 1T-RRFC & 4.5e-01 & 0 & 4.93e-01 & (4.18e-01,5.68e-01) & 4.33e-02 & (-3.16e-02,1.18e-01) & 1.77e+00 & 8e+00 & 2.2e-01\\
-PCL\_0\_05 & 2T-RRRC & 4.5e-01 & (2.58e-01,6.42e-01) & 4.93e-01 & (3.76e-01,6.11e-01) & 4.33e-02 & (-1.57e-01,2.44e-01) & 1.79e-01 & 7.84e+02 & 6.7e-01\\
-PCL\_0\_05 & 1T-RRRC & 4.5e-01 & NA & 4.93e-01 & (2.93e-01,6.94e-01) & 4.33e-02 & (-1.57e-01,2.44e-01) & 1.79e-01 & 7.84e+02 & 6.7e-01\\
-PCL\_0\_2 & 1T-RRFC & 5.92e-01 & 0 & 7.1e-01 & (6.69e-01,7.51e-01) & 1.19e-01 & (7.78e-02,1.59e-01) & 4.5e+01 & 8e+00 & 1.51e-04\\
-PCL\_0\_2 & 2T-RRRC & 5.92e-01 & (4.78e-01,7.05e-01) & 7.1e-01 & (6.33e-01,7.87e-01) & 1.19e-01 & (4.45e-03,2.33e-01) & 4.16e+00 & 9.37e+02 & 4.2e-02\\
-\addlinespace
-PCL\_0\_2 & 1T-RRRC & 5.92e-01 & NA & 7.1e-01 & (5.96e-01,8.24e-01) & 1.19e-01 & (4.45e-03,2.33e-01) & 4.16e+00 & 9.37e+02 & 4.2e-02\\
-PCL\_1 & 1T-RRFC & 6.75e-01 & 0 & 7.83e-01 & (7.4e-01,8.27e-01) & 1.08e-01 & (6.48e-02,1.52e-01) & 3.3e+01 & 8e+00 & 4.33e-04\\
-PCL\_1 & 2T-RRRC & 6.75e-01 & (5.71e-01,7.79e-01) & 7.83e-01 & (7.12e-01,8.54e-01) & 1.08e-01 & (4.5e-03,2.12e-01) & 4.2e+00 & 4.93e+02 & 4.1e-02\\
-PCL\_1 & 1T-RRRC & 6.75e-01 & NA & 7.83e-01 & (6.8e-01,8.87e-01) & 1.08e-01 & (4.5e-03,2.12e-01) & 4.2e+00 & 4.93e+02 & 4.1e-02\\
-Wilcoxon & 1T-RRFC & 8.17e-01 & 0 & 8.49e-01 & (8.26e-01,8.71e-01) & 3.17e-02 & (8.96e-03,5.45e-02) & 1.03e+01 & 8e+00 & 1.24e-02\\
-\addlinespace
-Wilcoxon & 2T-RRRC & 8.17e-01 & (7.52e-01,8.82e-01) & 8.49e-01 & (8.07e-01,8.9e-01) & 3.17e-02 & (-3.1e-02,9.45e-02) & 9.86e-01 & 8.78e+02 & 3.2e-01\\
-Wilcoxon & 1T-RRRC & 8.17e-01 & NA & 8.49e-01 & (7.86e-01,9.11e-01) & 3.17e-02 & (-3.1e-02,9.45e-02) & 9.86e-01 & 8.78e+02 & 3.2e-01\\
+PCL\_0\_05 & 1T-RRFC &  & 0 & 0.493 & (0.418,0.568) & 0.0433 & (-0.0316,0.118) & 1.77 & 8 & 0.22\\
+\cmidrule{1-2}
+\cmidrule{4-11}
+PCL\_0\_05 & 2T-RRRC &  & (0.258,0.642) & 0.493 & (0.376,0.611) & 0.0433 & (-0.157,0.244) & 0.179 & 784 & 0.67\\
+\cmidrule{1-2}
+\cmidrule{4-11}
+PCL\_0\_05 & 1T-RRRC & \multirow{-3}{*}{\raggedright\arraybackslash 0.45} & NA & 0.493 & (0.293,0.694) & 0.0433 & (-0.157,0.244) & 0.179 & 784 & 0.67\\
+\cmidrule{1-11}
+PCL\_0\_2 & 1T-RRFC &  & 0 & 0.71 & (0.669,0.751) & 0.119 & (0.0778,0.159) & 45 & 8 & 0.000151\\
+\cmidrule{1-2}
+\cmidrule{4-11}
+PCL\_0\_2 & 2T-RRRC &  & (0.478,0.705) & 0.71 & (0.633,0.787) & 0.119 & (0.00445,0.233) & 4.16 & 937 & 0.042\\
+\cmidrule{1-2}
+\cmidrule{4-11}
+PCL\_0\_2 & 1T-RRRC & \multirow{-3}{*}{\raggedright\arraybackslash 0.592} & NA & 0.71 & (0.596,0.824) & 0.119 & (0.00445,0.233) & 4.16 & 937 & 0.042\\
+\cmidrule{1-11}
+PCL\_1 & 1T-RRFC &  & 0 & 0.783 & (0.74,0.827) & 0.108 & (0.0648,0.152) & 33 & 8 & 0.000433\\
+\cmidrule{1-2}
+\cmidrule{4-11}
+PCL\_1 & 2T-RRRC &  & (0.571,0.779) & 0.783 & (0.712,0.854) & 0.108 & (0.0045,0.212) & 4.2 & 493 & 0.041\\
+\cmidrule{1-2}
+\cmidrule{4-11}
+PCL\_1 & 1T-RRRC & \multirow{-3}{*}{\raggedright\arraybackslash 0.675} & NA & 0.783 & (0.68,0.887) & 0.108 & (0.0045,0.212) & 4.2 & 493 & 0.041\\
+\cmidrule{1-11}
+Wilcoxon & 1T-RRFC &  & 0 & 0.849 & (0.826,0.871) & 0.0317 & (0.00896,0.0545) & 10.3 & 8 & 0.0124\\
+\cmidrule{1-2}
+\cmidrule{4-11}
+Wilcoxon & 2T-RRRC &  & (0.752,0.882) & 0.849 & (0.807,0.89) & 0.0317 & (-0.031,0.0945) & 0.986 & 878 & 0.32\\
+\cmidrule{1-2}
+\cmidrule{4-11}
+Wilcoxon & 1T-RRRC & \multirow{-3}{*}{\raggedright\arraybackslash 0.817} & NA & 0.849 & (0.786,0.911) & 0.0317 & (-0.031,0.0945) & 0.986 & 878 & 0.32\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 
 Results are shown for the following FOMs: \(\text{PCL}_{0.05}\), \(\text{PCL}_{0.2}\), \(\text{PCL}_{1}\), and the empirical area (AUC) under the ROC curve estimated by the Wilcoxon statistic. The first two FOMs are identical to those used in Study -- 1. Columns 3 and 4 list the CAD FOM \(\theta_0\) and its 95\% confidence interval \(CI_{\theta_0}\), columns 5 and 6 list the average radiologist FOM \(\theta_{\bullet}\) (the dot symbol represents an average over the radiologist index) and its 95\% confidence interval \(CI_{\theta_{\bullet}}\), columns 7 and 8 list the average difference FOM \(\psi_{\bullet}\), i.e., radiologist minus CAD, and its 95\% confidence interval \(CI_{\psi_{\bullet}}\), and the last three columns list the F-statistic, the denominator degrees of freedom (ddf) and the p-value for rejecting the null hypothesis. The numerator degree of freedom of the F-statistic, not listed, is unity.
@@ -5213,29 +5352,29 @@ Shown next, Table \ref{tab:standalone-cad-table3}, are the model-parameters corr
 \toprule
 FOM & Analysis & $\sigma_R^2$ & $\sigma_{\tau R}^2$ & Cov1 & Cov2 & Cov3 & Var\\
 \midrule
- & 1T-RRFC & 9.5e-03 & NA & NA & NA & NA & NA\\
+ & 1T-RRFC & 0.0095 & NA & NA & NA & NA & NA\\
 \cmidrule{2-8}
- & 2T-RRRC & 1.84e-18 & -5.71e-03 & 1.31e-03 & 6.01e-03 & 1.31e-03 & 1.65e-02\\
+ & 2T-RRRC & 0.00000000000000000184 & -0.00571 & 0.00131 & 0.00601 & 0.00131 & 0.0165\\
 \cmidrule{2-8}
-\multirow{-3}{*}{\raggedright\arraybackslash PCL\_0\_05} & 1T-RRRC & 9.5e-03 & NA & NA & 9.4e-03 & NA & 3.03e-02\\
+\multirow{-3}{*}{\raggedright\arraybackslash PCL\_0\_05} & 1T-RRRC & 0.0095 & NA & NA & 0.0094 & NA & 0.0303\\
 \cmidrule{1-8}
- & 1T-RRFC & 2.81e-03 & NA & NA & NA & NA & NA\\
+ & 1T-RRFC & 0.00281 & NA & NA & NA & NA & NA\\
 \cmidrule{2-8}
- & 2T-RRRC & -7.59e-19 & 2.65e-04 & 7.61e-04 & 2.29e-03 & 7.61e-04 & 3.43e-03\\
+ & 2T-RRRC & -0.000000000000000000759 & 0.000265 & 0.000761 & 0.00229 & 0.000761 & 0.00343\\
 \cmidrule{2-8}
-\multirow{-3}{*}{\raggedright\arraybackslash PCL\_0\_2} & 1T-RRRC & 2.81e-03 & NA & NA & 3.07e-03 & NA & 5.34e-03\\
+\multirow{-3}{*}{\raggedright\arraybackslash PCL\_0\_2} & 1T-RRRC & 0.00281 & NA & NA & 0.00307 & NA & 0.00534\\
 \cmidrule{1-8}
- & 1T-RRFC & 3.2e-03 & NA & NA & NA & NA & NA\\
+ & 1T-RRFC & 0.0032 & NA & NA & NA & NA & NA\\
 \cmidrule{2-8}
- & 2T-RRRC & 1.63e-18 & 1e-03 & 6.43e-04 & 1.86e-03 & 6.43e-04 & 2.46e-03\\
+ & 2T-RRRC & 0.00000000000000000163 & 0.001 & 0.000643 & 0.00186 & 0.000643 & 0.00246\\
 \cmidrule{2-8}
-\multirow{-3}{*}{\raggedright\arraybackslash PCL\_1} & 1T-RRRC & 3.2e-03 & NA & NA & 2.44e-03 & NA & 3.64e-03\\
+\multirow{-3}{*}{\raggedright\arraybackslash PCL\_1} & 1T-RRRC & 0.0032 & NA & NA & 0.00244 & NA & 0.00364\\
 \cmidrule{1-8}
- & 1T-RRFC & 8.78e-04 & NA & NA & NA & NA & NA\\
+ & 1T-RRFC & 0.000878 & NA & NA & NA & NA & NA\\
 \cmidrule{2-8}
- & 2T-RRRC & 2.98e-19 & 2.01e-04 & 2.62e-04 & 7.24e-04 & 2.62e-04 & 9.62e-04\\
+ & 2T-RRRC & 0.000000000000000000298 & 0.000201 & 0.000262 & 0.000724 & 0.000262 & 0.000962\\
 \cmidrule{2-8}
-\multirow{-3}{*}{\raggedright\arraybackslash Wilcoxon} & 1T-RRRC & 8.78e-04 & NA & NA & 9.24e-04 & NA & 1.4e-03\\
+\multirow{-3}{*}{\raggedright\arraybackslash Wilcoxon} & 1T-RRRC & 0.000878 & NA & NA & 0.000924 & NA & 0.0014\\
 \bottomrule
 \end{tabular}}
 \end{table}
