@@ -551,11 +551,9 @@ kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling
 ```
 
 
-Results are shown for the following FOMs: $\text{PCL}_{0.05}$, $\text{PCL}_{0.2}$, $\text{PCL}_{1}$, and the empirical area (AUC) under the ROC curve estimated by the Wilcoxon statistic. The first two FOMs are identical to those used in Study -- 1. Columns 3 and 4 list the CAD FOM $\theta_0$ and its 95% confidence interval $CI_{\theta_0}$, columns 5 and 6 list the average radiologist FOM $\theta_{\bullet}$ (the dot symbol represents an average over the radiologist index) and its 95% confidence interval $CI_{\theta_{\bullet}}$, columns 7 and 8 list the average difference FOM $\psi_{\bullet}$, i.e., radiologist minus CAD, and its 95% confidence interval $CI_{\psi_{\bullet}}$, and the last three columns list the F-statistic, the denominator degrees of freedom (ddf) and the p-value for rejecting the null hypothesis. The numerator degree of freedom of the F-statistic, not listed, is unity.
+Results are shown for the following FOMs: $\text{PCL}_{0.05}$, $\text{PCL}_{0.2}$, $\text{PCL}_{1}$ and the empirical area (AUC) under the ROC curve estimated by the Wilcoxon statistic. The first two FOMs are identical to those used in Study -- 1. Columns 3 and 4 list the CAD FOM $\theta_0$ and its 95% confidence interval $CI_{\theta_0}$, columns 5 and 6 list the average radiologist FOM $\theta_{\bullet}$ (the dot symbol represents an average over the radiologist index) and its 95% confidence interval $CI_{\theta_{\bullet}}$, columns 7 and 8 list the average difference FOM $\psi_{\bullet}$, i.e., radiologist minus CAD, and its 95% confidence interval $CI_{\psi_{\bullet}}$, and the last three columns list the F-statistic, the denominator degrees of freedom (ddf) and the p-value for rejecting the null hypothesis. The numerator degree of freedom of the F-statistic, not listed, is unity.
 
-In Table \@ref(tab:standalone-cad-table2) identical values in adjacent cells in vertical columns have been replaced by the common values. The last three columns show that 2T-RRRC and 1T-RRRC analyses yield *identical F-statistics, ddf and p-values*. So the intuition of the authors of Study -- 2, that the unorthodox method of using DBM -- MRMC software to account for both reader and case-sampling variability, turns out to be correct. If interest is solely in these statistics one is justified in using the unorthodox method.
-
-Commented on next are other aspects of the results evident in Table \@ref(tab:standalone-cad-table2).
+The last three columns show that 2T-RRRC and 1T-RRRC analyses yield *identical F-statistics, ddf and p-values*. So the intuition of the authors of Study -- 2, that the unorthodox method of using DBM -- MRMC software to account for both reader and case-sampling variability, turns out to be correct. If interest is solely in these statistics one is justified in using the unorthodox method. Other results evident in Table \@ref(tab:standalone-cad-table2):
 
 1. Where a direct comparison is possible, namely 1T-RRFC analysis using and as FOMs, the p-values in Table \@ref(tab:standalone-cad-table2) are similar to those reported in Study -- 1.
 2. All FOMs (i.e., $\theta_0$, $\theta_{\bullet}$ and $\psi_{\bullet}$) in Table \@ref(tab:standalone-cad-table2) are independent of the method of analysis. However, the corresponding confidence intervals (i.e., $CI_{\theta_0}$, $CI_{\theta_{\bullet}}$ and $CI_{\psi_{\bullet}}$) depend on the analyses.
@@ -596,7 +594,7 @@ dig <- 3
 ret <- c(
   fom, 
   method,
-  format(x$varR, scientific = TF, digits = dig),
+  format(x$varR, scientific = TRUE, digits = 2),
   format(x$varTR, scientific = TF, digits = dig),
   format(x$cov1, scientific = TF, digits = dig),
   format(x$cov2, scientific = TF, digits = dig),
@@ -657,11 +655,16 @@ cells = array(dim = c(12,8))
 for (j in 1:12) cells[j,]  <- allCells[2,j,1:8]
 
 df <- as.data.frame(cells, stringsAsFactors = FALSE)
+
 colnames(df) <- c("FOM", "Analysis", "$\\sigma_R^2$", "$\\sigma_{\\tau R}^2$", "Cov1", "Cov2", "Cov3", "Var")
-kbl(df, caption = "Parameter estimates for the analyses; NA = not applicable.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+
+df <- collapse_rows_df(df,FOM)
+
+# escape = FALSE is critical in getting Math right
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
-The following characteristics are evident from Table \@ref(tab:standalone-cad-table3).
+The following are evident from Table \@ref(tab:standalone-cad-table3):
 
 1. For 2T-RRRC analyses $\sigma_R^2 = 0$. Actually, the analysis yielded very small values, of the order of $10^{-18}$ to $10^{-19}$, which, being smaller than double precision accuracy, were replaced by zeroes in Table \@ref(tab:standalone-cad-table2). $\sigma_R^2 = 0$ is clearly an incorrect result as the radiologists do not have identical performance. In contrast, 1T-RRRC analyses yielded more realistic values, identical to those obtained by 1T-RRFC analyses, and consistent with expectation -- see comment following Eqn. (15).
 2. Because 2T analysis found zero reader variability, it follows from the definitions of the covariances [@obuchowski1995hypothesis], that $Cov_1 = Cov_3 = 0$, as evident in the table.
