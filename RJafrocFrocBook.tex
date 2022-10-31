@@ -4846,33 +4846,33 @@ collapse\_rows not working even in this example:
 \hline
 C1 & C2 & C3 & C4\\
 \hline
- &  & 1 & 0\\
+ &  & 1 & 1\\
 \cline{3-4}
- &  & 2 & 1\\
+ &  & 2 & 0\\
 \cline{3-4}
  &  & 3 & 0\\
 \cline{3-4}
- &  & 4 & 1\\
+ &  & 4 & 0\\
 \cline{3-4}
- &  & 5 & 0\\
+ &  & 5 & 1\\
 \cline{3-4}
  &  & 6 & 1\\
 \cline{3-4}
  & \multirow[t]{-7}{*}{\centering\arraybackslash c} & 7 & 1\\
 \cline{2-4}
- &  & 8 & 1\\
+ &  & 8 & 0\\
 \cline{3-4}
- &  & 9 & 0\\
+ &  & 9 & 1\\
 \cline{3-4}
 \multirow[t]{-10}{*}{\centering\arraybackslash \textbf{a}} & \multirow[t]{-3}{*}{\centering\arraybackslash d} & 10 & 1\\
 \cline{1-4}
  &  & 11 & 1\\
 \cline{3-4}
- & \multirow[t]{-2}{*}{\centering\arraybackslash c} & 12 & 0\\
+ & \multirow[t]{-2}{*}{\centering\arraybackslash c} & 12 & 1\\
 \cline{2-4}
- &  & 13 & 1\\
+ &  & 13 & 0\\
 \cline{3-4}
- &  & 14 & 0\\
+ &  & 14 & 1\\
 \cline{3-4}
 \multirow[t]{-5}{*}{\centering\arraybackslash \textbf{b}} & \multirow[t]{-3}{*}{\centering\arraybackslash d} & 15 & 1\\
 \hline
@@ -4915,23 +4915,23 @@ Now apply it:
 \hline
 C1 & C2 & C3 & C4\\
 \hline
-\textbf{a} & c & 1 & 0\\
+\textbf{a} & c & 1 & 1\\
 \cline{1-4}
- &  & 2 & 1\\
+ &  & 2 & 0\\
 \cline{3-4}
  &  & 3 & 0\\
 \cline{3-4}
- &  & 4 & 1\\
+ &  & 4 & 0\\
 \cline{3-4}
- &  & 5 & 0\\
+ &  & 5 & 1\\
 \cline{3-4}
  &  & 6 & 1\\
 \cline{3-4}
  & \multirow[t]{-6}{*}{\centering\arraybackslash } & 7 & 1\\
 \cline{2-4}
- & d & 8 & 1\\
+ & d & 8 & 0\\
 \cline{2-4}
- &  & 9 & 0\\
+ &  & 9 & 1\\
 \cline{3-4}
 \multirow[t]{-9}{*}{\centering\arraybackslash \textbf{}} &  & 10 & 1\\
 \cline{1-1}
@@ -4939,11 +4939,11 @@ C1 & C2 & C3 & C4\\
 \textbf{b} &  & 11 & 1\\
 \cline{1-1}
 \cline{3-4}
- &  & 12 & 0\\
+ &  & 12 & 1\\
 \cline{3-4}
- &  & 13 & 1\\
+ &  & 13 & 0\\
 \cline{3-4}
- &  & 14 & 0\\
+ &  & 14 & 1\\
 \cline{3-4}
 \multirow[t]{-4}{*}{\centering\arraybackslash \textbf{}} & \multirow[t]{-7}{*}{\centering\arraybackslash } & 15 & 1\\
 \hline
@@ -5197,7 +5197,7 @@ Setting \(\text{Var} = 0, \text{Cov}_2 = 0\) yields the 1T-RRFC model, which con
 {[}One expects identical estimates of \(\sigma_R^2\) using 1T-RRFC, 2T-RRRC or 1T-RRRC analyses.{]}
 
 \hypertarget{standalone-cad-radiologists-computational-details}{%
-\section{Software implementation}\label{standalone-cad-radiologists-computational-details}}
+\section{Implementation}\label{standalone-cad-radiologists-computational-details}}
 
 The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in \texttt{RJafroc}.
 
@@ -5263,50 +5263,44 @@ The structures of these objects are illustrated with examples in the Appendix.
 \hypertarget{standalone-cad-radiologists-results}{%
 \section{Results}\label{standalone-cad-radiologists-results}}
 
-The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof.~Karssemeijer for making this dataset available).
-
-Shown next, Table \ref{tab:standalone-cad-table2}, are the significance testing results corresponding to the three analyses.
+The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof.~Karssemeijer for making this dataset available), Table \ref{tab:standalone-cad-table2}.
 
 \begin{table}
 
-\caption{\label{tab:standalone-cad-table2}Significance testing results of the analyses for an LROC dataset. Three sets of results, namely RRRC, 2T-RRRC and 1T-RRRC, are shown for each figure of merit (FOM). Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence intervals than the corresponding row labeled 1T-RRFC. [$\theta_0$ = FOM CAD; $\theta_{\bullet}$ = average FOM of radiologists; $\psi_{\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\psi_{\bullet} = 0$.]}
+\caption{\label{tab:standalone-cad-table2}Significance testing results for an LROC dataset. For each figure of merit (FOM) shown are results of RRRC, 2T-RRRC and 1T-RRRC analyses. Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence interval than the corresponding row labeled RRFC. [$\theta_0$ = FOM CAD; $\theta_{\bullet}$ = average FOM of radiologists; $\psi_{\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\psi_{\bullet} = 0$.]}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{lllllllllll}
 \toprule
 FOM & Analysis & $\theta_0$ & $CI_{\theta_0}$ & $\theta_{\bullet}$ & $CI_{\theta_{\bullet}}$ & $\psi_{\bullet}$ & $CI_{\psi_{\bullet}}$ & F & ddf & p\\
 \midrule
-PCL\_0\_05 & 1T-RRFC &  & 0 & 0.493 & (0.418,0.568) & 0.0433 & (-0.0316,0.118) & 1.77 & 8 & 0.22\\
-\cmidrule{1-2}
-\cmidrule{4-11}
-PCL\_0\_05 & 2T-RRRC &  & (0.258,0.642) & 0.493 & (0.376,0.611) & 0.0433 & (-0.157,0.244) & 0.179 & 784 & 0.67\\
-\cmidrule{1-2}
-\cmidrule{4-11}
-PCL\_0\_05 & 1T-RRRC & \multirow{-3}{*}{\raggedright\arraybackslash 0.45} & NA & 0.493 & (0.293,0.694) & 0.0433 & (-0.157,0.244) & 0.179 & 784 & 0.67\\
+PCL\_0\_05 & 1T-RRFC & 0.45 & 0 & 0.493 & (0.418,0.568) & 0.0433 & (-0.0316,0.118) & 1.77 & 8 & 0.22\\
 \cmidrule{1-11}
-PCL\_0\_2 & 1T-RRFC &  & 0 & 0.71 & (0.669,0.751) & 0.119 & (0.0778,0.159) & 45 & 8 & 0.000151\\
+ & 2T-RRRC &  & (0.258,0.642) &  & (0.376,0.611) &  & (-0.157,0.244) & 0.179 & 784 & 0.67\\
 \cmidrule{1-2}
 \cmidrule{4-11}
-PCL\_0\_2 & 2T-RRRC &  & (0.478,0.705) & 0.71 & (0.633,0.787) & 0.119 & (0.00445,0.233) & 4.16 & 937 & 0.042\\
-\cmidrule{1-2}
-\cmidrule{4-11}
-PCL\_0\_2 & 1T-RRRC & \multirow{-3}{*}{\raggedright\arraybackslash 0.592} & NA & 0.71 & (0.596,0.824) & 0.119 & (0.00445,0.233) & 4.16 & 937 & 0.042\\
+ & 1T-RRRC & \multirow{-2}{*}{\raggedright\arraybackslash } & NA &  & (0.293,0.694) &  & (-0.157,0.244) & 0.179 & 784 & 0.67\\
 \cmidrule{1-11}
-PCL\_1 & 1T-RRFC &  & 0 & 0.783 & (0.74,0.827) & 0.108 & (0.0648,0.152) & 33 & 8 & 0.000433\\
-\cmidrule{1-2}
-\cmidrule{4-11}
-PCL\_1 & 2T-RRRC &  & (0.571,0.779) & 0.783 & (0.712,0.854) & 0.108 & (0.0045,0.212) & 4.2 & 493 & 0.041\\
-\cmidrule{1-2}
-\cmidrule{4-11}
-PCL\_1 & 1T-RRRC & \multirow{-3}{*}{\raggedright\arraybackslash 0.675} & NA & 0.783 & (0.68,0.887) & 0.108 & (0.0045,0.212) & 4.2 & 493 & 0.041\\
+PCL\_0\_2 & 1T-RRFC & 0.592 & 0 & 0.71 & (0.669,0.751) & 0.119 & (0.0778,0.159) & 45 & 8 & 0.000151\\
 \cmidrule{1-11}
-Wilcoxon & 1T-RRFC &  & 0 & 0.849 & (0.826,0.871) & 0.0317 & (0.00896,0.0545) & 10.3 & 8 & 0.0124\\
+ & 2T-RRRC &  & (0.478,0.705) &  & (0.633,0.787) &  & (0.00445,0.233) & 4.16 & 937 & 0.042\\
 \cmidrule{1-2}
 \cmidrule{4-11}
-Wilcoxon & 2T-RRRC &  & (0.752,0.882) & 0.849 & (0.807,0.89) & 0.0317 & (-0.031,0.0945) & 0.986 & 878 & 0.32\\
+ & 1T-RRRC & \multirow{-2}{*}{\raggedright\arraybackslash } & NA &  & (0.596,0.824) &  & (0.00445,0.233) & 4.16 & 937 & 0.042\\
+\cmidrule{1-11}
+PCL\_1 & 1T-RRFC & 0.675 & 0 & 0.783 & (0.74,0.827) & 0.108 & (0.0648,0.152) & 33 & 8 & 0.000433\\
+\cmidrule{1-11}
+ & 2T-RRRC &  & (0.571,0.779) &  & (0.712,0.854) &  & (0.0045,0.212) & 4.2 & 493 & 0.041\\
 \cmidrule{1-2}
 \cmidrule{4-11}
-Wilcoxon & 1T-RRRC & \multirow{-3}{*}{\raggedright\arraybackslash 0.817} & NA & 0.849 & (0.786,0.911) & 0.0317 & (-0.031,0.0945) & 0.986 & 878 & 0.32\\
+ & 1T-RRRC & \multirow{-2}{*}{\raggedright\arraybackslash } & NA &  & (0.68,0.887) &  & (0.0045,0.212) & 4.2 & 493 & 0.041\\
+\cmidrule{1-11}
+Wilcoxon & 1T-RRFC & 0.817 & 0 & 0.849 & (0.826,0.871) & 0.0317 & (0.00896,0.0545) & 10.3 & 8 & 0.0124\\
+\cmidrule{1-11}
+ & 2T-RRRC &  & (0.752,0.882) &  & (0.807,0.89) &  & (-0.031,0.0945) & 0.986 & 878 & 0.32\\
+\cmidrule{1-2}
+\cmidrule{4-11}
+ & 1T-RRRC & \multirow{-2}{*}{\raggedright\arraybackslash } & NA &  & (0.786,0.911) &  & (-0.031,0.0945) & 0.986 & 878 & 0.32\\
 \bottomrule
 \end{tabular}
 \end{table}

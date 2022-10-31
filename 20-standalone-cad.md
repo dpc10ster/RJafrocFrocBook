@@ -49,7 +49,7 @@ kbl(df, align = "c") %>%
    <td style="text-align:center;font-weight: bold;"> a </td>
    <td style="text-align:center;"> c </td>
    <td style="text-align:center;"> 1 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> a </td>
@@ -67,7 +67,7 @@ kbl(df, align = "c") %>%
    <td style="text-align:center;font-weight: bold;"> a </td>
    <td style="text-align:center;"> c </td>
    <td style="text-align:center;"> 4 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> a </td>
@@ -79,7 +79,7 @@ kbl(df, align = "c") %>%
    <td style="text-align:center;font-weight: bold;"> a </td>
    <td style="text-align:center;"> c </td>
    <td style="text-align:center;"> 6 </td>
-   <td style="text-align:center;"> 0 </td>
+   <td style="text-align:center;"> 1 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> a </td>
@@ -91,7 +91,7 @@ kbl(df, align = "c") %>%
    <td style="text-align:center;font-weight: bold;"> a </td>
    <td style="text-align:center;"> d </td>
    <td style="text-align:center;"> 8 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> a </td>
@@ -103,13 +103,13 @@ kbl(df, align = "c") %>%
    <td style="text-align:center;font-weight: bold;"> a </td>
    <td style="text-align:center;"> d </td>
    <td style="text-align:center;"> 10 </td>
-   <td style="text-align:center;"> 0 </td>
+   <td style="text-align:center;"> 1 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> b </td>
    <td style="text-align:center;"> c </td>
    <td style="text-align:center;"> 11 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> b </td>
@@ -182,7 +182,7 @@ kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
    <td style="text-align:center;font-weight: bold;"> a </td>
    <td style="text-align:center;"> c </td>
    <td style="text-align:center;"> 1 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;">  </td>
@@ -200,7 +200,7 @@ kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
    <td style="text-align:center;font-weight: bold;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 4 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;">  </td>
@@ -212,7 +212,7 @@ kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
    <td style="text-align:center;font-weight: bold;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 6 </td>
-   <td style="text-align:center;"> 0 </td>
+   <td style="text-align:center;"> 1 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;">  </td>
@@ -224,7 +224,7 @@ kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
    <td style="text-align:center;font-weight: bold;">  </td>
    <td style="text-align:center;"> d </td>
    <td style="text-align:center;"> 8 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;">  </td>
@@ -236,13 +236,13 @@ kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
    <td style="text-align:center;font-weight: bold;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 10 </td>
-   <td style="text-align:center;"> 0 </td>
+   <td style="text-align:center;"> 1 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> b </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 11 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;">  </td>
@@ -702,7 +702,7 @@ Apart from fixed effects, the model in Eqn. \@ref(eq:standalone-cad-1t-psi) cont
 Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model, which contains only one random parameter, namely $\sigma_R^2$. 
 [One expects identical estimates of $\sigma_R^2$ using 1T-RRFC, 2T-RRRC or 1T-RRRC analyses.]
 
-## Software implementation {#standalone-cad-radiologists-computational-details}
+## Implementation {#standalone-cad-radiologists-computational-details}
 
 The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in `RJafroc`. 
 
@@ -777,13 +777,11 @@ The structures of these objects are illustrated with examples in the Appendix.
 
 ## Results {#standalone-cad-radiologists-results}
 
-The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof. Karssemeijer for making this dataset available).
-
-Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing results corresponding to the three analyses.
+The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset similar to that used in Study -- 1 (I thank Prof. Karssemeijer for making this dataset available), Table \@ref(tab:standalone-cad-table2).
 
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:standalone-cad-table2)Significance testing results of the analyses for an LROC dataset. Three sets of results, namely RRRC, 2T-RRRC and 1T-RRRC, are shown for each figure of merit (FOM). Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence intervals than the corresponding row labeled 1T-RRFC. [$\theta_0$ = FOM CAD; $\theta_{\bullet}$ = average FOM of radiologists; $\psi_{\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\psi_{\bullet} = 0$.]</caption>
+<caption style="font-size: initial !important;">(\#tab:standalone-cad-table2)Significance testing results for an LROC dataset. For each figure of merit (FOM) shown are results of RRRC, 2T-RRRC and 1T-RRRC analyses. Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence interval than the corresponding row labeled RRFC. [$\theta_0$ = FOM CAD; $\theta_{\bullet}$ = average FOM of radiologists; $\psi_{\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\psi_{\bullet} = 0$.]</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -814,26 +812,26 @@ Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing
    <td style="text-align:left;"> 0.22 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_0\_05 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 0.45 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.258,0.642) </td>
-   <td style="text-align:left;"> 0.493 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.376,0.611) </td>
-   <td style="text-align:left;"> 0.0433 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (-0.157,0.244) </td>
    <td style="text-align:left;"> 0.179 </td>
    <td style="text-align:left;"> 784 </td>
    <td style="text-align:left;"> 0.67 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_0\_05 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 0.45 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 0.493 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.293,0.694) </td>
-   <td style="text-align:left;"> 0.0433 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (-0.157,0.244) </td>
    <td style="text-align:left;"> 0.179 </td>
    <td style="text-align:left;"> 784 </td>
@@ -853,26 +851,26 @@ Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing
    <td style="text-align:left;"> 0.000151 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_0\_2 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 0.592 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.478,0.705) </td>
-   <td style="text-align:left;"> 0.71 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.633,0.787) </td>
-   <td style="text-align:left;"> 0.119 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.00445,0.233) </td>
    <td style="text-align:left;"> 4.16 </td>
    <td style="text-align:left;"> 937 </td>
    <td style="text-align:left;"> 0.042 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_0\_2 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 0.592 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 0.71 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.596,0.824) </td>
-   <td style="text-align:left;"> 0.119 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.00445,0.233) </td>
    <td style="text-align:left;"> 4.16 </td>
    <td style="text-align:left;"> 937 </td>
@@ -892,26 +890,26 @@ Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing
    <td style="text-align:left;"> 0.000433 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_1 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 0.675 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.571,0.779) </td>
-   <td style="text-align:left;"> 0.783 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.712,0.854) </td>
-   <td style="text-align:left;"> 0.108 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.0045,0.212) </td>
    <td style="text-align:left;"> 4.2 </td>
    <td style="text-align:left;"> 493 </td>
    <td style="text-align:left;"> 0.041 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_1 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 0.675 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 0.783 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.68,0.887) </td>
-   <td style="text-align:left;"> 0.108 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.0045,0.212) </td>
    <td style="text-align:left;"> 4.2 </td>
    <td style="text-align:left;"> 493 </td>
@@ -931,26 +929,26 @@ Shown next, Table \@ref(tab:standalone-cad-table2), are the significance testing
    <td style="text-align:left;"> 0.0124 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Wilcoxon </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 0.817 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.752,0.882) </td>
-   <td style="text-align:left;"> 0.849 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.807,0.89) </td>
-   <td style="text-align:left;"> 0.0317 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (-0.031,0.0945) </td>
    <td style="text-align:left;"> 0.986 </td>
    <td style="text-align:left;"> 878 </td>
    <td style="text-align:left;"> 0.32 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Wilcoxon </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 1T-RRRC </td>
-   <td style="text-align:left;"> 0.817 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> 0.849 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (0.786,0.911) </td>
-   <td style="text-align:left;"> 0.0317 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> (-0.031,0.0945) </td>
    <td style="text-align:left;"> 0.986 </td>
    <td style="text-align:left;"> 878 </td>
