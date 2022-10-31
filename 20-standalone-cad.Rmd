@@ -335,8 +335,7 @@ Apart from fixed effects, the model in Eqn. \@ref(eq:standalone-cad-1t-psi) cont
 \end{equation}
 ```
 
-Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model, which contains only one random parameter, namely $\sigma_R^2$. 
-[One expects identical estimates of $\sigma_R^2$ using 1T-RRFC, 2T-RRRC or 1T-RRRC analyses.]
+Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model which contains only one random parameter, namely $\sigma_R^2$. One expects an identical estimate of this parameter using 1T-RRRC analyses.
 
 ## Implementation {#standalone-cad-radiologists-computational-details}
 
@@ -666,12 +665,11 @@ kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling
 
 The following are evident from Table \@ref(tab:standalone-cad-table3):
 
-1. For 2T-RRRC analyses $\sigma_R^2 = 0$. Actually, the analysis yielded very small values, of the order of $10^{-18}$ to $10^{-19}$, which, being smaller than double precision accuracy, were replaced by zeroes in Table \@ref(tab:standalone-cad-table2). $\sigma_R^2 = 0$ is clearly an incorrect result as the radiologists do not have identical performance. In contrast, 1T-RRRC analyses yielded more realistic values, identical to those obtained by 1T-RRFC analyses, and consistent with expectation -- see comment following Eqn. (15).
-2. Because 2T analysis found zero reader variability, it follows from the definitions of the covariances [@obuchowski1995hypothesis], that $Cov_1 = Cov_3 = 0$, as evident in the table.
-3. When they can be compared (i.e., $\sigma_R^2$, $\text{Cov}_2$ and $\text{Var}$), all variance and covariance estimates were smaller for the 2T method than for the 1T method.
-4. For the 2T method the expected inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering), are not obeyed (specifically, $Cov_1 \geq Cov_2 \geq Cov_3$ is not obeyed).
+1. In fact for 2T-RRRC analyses $\sigma_R^2 = 0$ (the listed values are smaller than machine accuracy) **clearly an incorrect result as the radiologists do not have identical performance**. In contrast, 1T-RRRC analyses yields values *identical to those obtained by 1T-RRFC analyses* which is consistent with expectation -- see comment following Eqn. \@ref(eq:standalone-cad-1t-parms).
+2. When they can be compared (i.e., $\sigma_R^2$, $\text{Cov}_2$ and $\text{Var}$), all variance and covariance estimates were smaller for the 2T method than for the 1T method.
+3. For the 2T method the expected inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering), are not obeyed (specifically, $Cov_1 \geq Cov_2 \geq Cov_3$ is not obeyed).
 
-For an analysis method to be considered statistically valid it needs to be tested with simulations to determine if it has the proper null hypothesis behavior. The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of reference [@chakraborty2017observer]. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
+The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of reference [@chakraborty2017observer]. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
 
 ## Discussion {#standalone-cad-radiologists-discussion}
 
