@@ -55,7 +55,7 @@ kbl(df, align = "c") %>%
    <td style="text-align:center;font-weight: bold;"> a </td>
    <td style="text-align:center;"> c </td>
    <td style="text-align:center;"> 2 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> a </td>
@@ -97,31 +97,31 @@ kbl(df, align = "c") %>%
    <td style="text-align:center;font-weight: bold;"> a </td>
    <td style="text-align:center;"> d </td>
    <td style="text-align:center;"> 9 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> a </td>
    <td style="text-align:center;"> d </td>
    <td style="text-align:center;"> 10 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> b </td>
    <td style="text-align:center;"> c </td>
    <td style="text-align:center;"> 11 </td>
-   <td style="text-align:center;"> 0 </td>
+   <td style="text-align:center;"> 1 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> b </td>
    <td style="text-align:center;"> c </td>
    <td style="text-align:center;"> 12 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> b </td>
    <td style="text-align:center;"> d </td>
    <td style="text-align:center;"> 13 </td>
-   <td style="text-align:center;"> 0 </td>
+   <td style="text-align:center;"> 1 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> b </td>
@@ -133,7 +133,7 @@ kbl(df, align = "c") %>%
    <td style="text-align:center;font-weight: bold;"> b </td>
    <td style="text-align:center;"> d </td>
    <td style="text-align:center;"> 15 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
 </tbody>
 </table>
@@ -188,7 +188,7 @@ kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
    <td style="text-align:center;font-weight: bold;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 2 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;">  </td>
@@ -230,31 +230,31 @@ kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
    <td style="text-align:center;font-weight: bold;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 9 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 10 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;"> b </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 11 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 12 </td>
    <td style="text-align:center;"> 1 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;">  </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 13 </td>
+   <td style="text-align:center;"> 12 </td>
    <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;font-weight: bold;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 13 </td>
+   <td style="text-align:center;"> 1 </td>
   </tr>
   <tr>
    <td style="text-align:center;font-weight: bold;">  </td>
@@ -266,7 +266,7 @@ kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
    <td style="text-align:center;font-weight: bold;">  </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 15 </td>
-   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
   </tr>
 </tbody>
 </table>
@@ -804,10 +804,10 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;"> 0.45 </td>
    <td style="text-align:left;"> 0 </td>
    <td style="text-align:left;"> 0.493 </td>
-   <td style="text-align:left;"> (0.418,0.568) </td>
+   <td style="text-align:left;"> (0.42,0.57) </td>
    <td style="text-align:left;"> 0.0433 </td>
-   <td style="text-align:left;"> (-0.0316,0.118) </td>
-   <td style="text-align:left;"> 1.77 </td>
+   <td style="text-align:left;"> (-0.032,0.12) </td>
+   <td style="text-align:left;"> 1.8 </td>
    <td style="text-align:left;"> 8 </td>
    <td style="text-align:left;"> 0.22 </td>
   </tr>
@@ -815,12 +815,12 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.258,0.642) </td>
+   <td style="text-align:left;"> (0.26,0.64) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.376,0.611) </td>
+   <td style="text-align:left;"> (0.38,0.61) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (-0.157,0.244) </td>
-   <td style="text-align:left;"> 0.179 </td>
+   <td style="text-align:left;"> (-0.16,0.24) </td>
+   <td style="text-align:left;"> 0.18 </td>
    <td style="text-align:left;"> 784 </td>
    <td style="text-align:left;"> 0.67 </td>
   </tr>
@@ -830,10 +830,10 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.293,0.694) </td>
+   <td style="text-align:left;"> (0.29,0.69) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (-0.157,0.244) </td>
-   <td style="text-align:left;"> 0.179 </td>
+   <td style="text-align:left;"> (-0.16,0.24) </td>
+   <td style="text-align:left;"> 0.18 </td>
    <td style="text-align:left;"> 784 </td>
    <td style="text-align:left;"> 0.67 </td>
   </tr>
@@ -843,23 +843,23 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;"> 0.592 </td>
    <td style="text-align:left;"> 0 </td>
    <td style="text-align:left;"> 0.71 </td>
-   <td style="text-align:left;"> (0.669,0.751) </td>
+   <td style="text-align:left;"> (0.67,0.75) </td>
    <td style="text-align:left;"> 0.119 </td>
-   <td style="text-align:left;"> (0.0778,0.159) </td>
+   <td style="text-align:left;"> (0.078,0.16) </td>
    <td style="text-align:left;"> 45 </td>
    <td style="text-align:left;"> 8 </td>
-   <td style="text-align:left;"> 0.000151 </td>
+   <td style="text-align:left;"> 0.00015 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.478,0.705) </td>
+   <td style="text-align:left;"> (0.48,0.71) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.633,0.787) </td>
+   <td style="text-align:left;"> (0.63,0.79) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.00445,0.233) </td>
-   <td style="text-align:left;"> 4.16 </td>
+   <td style="text-align:left;"> (0.0044,0.23) </td>
+   <td style="text-align:left;"> 4.2 </td>
    <td style="text-align:left;"> 937 </td>
    <td style="text-align:left;"> 0.042 </td>
   </tr>
@@ -869,10 +869,10 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.596,0.824) </td>
+   <td style="text-align:left;"> (0.6,0.82) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.00445,0.233) </td>
-   <td style="text-align:left;"> 4.16 </td>
+   <td style="text-align:left;"> (0.0044,0.23) </td>
+   <td style="text-align:left;"> 4.2 </td>
    <td style="text-align:left;"> 937 </td>
    <td style="text-align:left;"> 0.042 </td>
   </tr>
@@ -882,22 +882,22 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;"> 0.675 </td>
    <td style="text-align:left;"> 0 </td>
    <td style="text-align:left;"> 0.783 </td>
-   <td style="text-align:left;"> (0.74,0.827) </td>
+   <td style="text-align:left;"> (0.74,0.83) </td>
    <td style="text-align:left;"> 0.108 </td>
-   <td style="text-align:left;"> (0.0648,0.152) </td>
+   <td style="text-align:left;"> (0.065,0.15) </td>
    <td style="text-align:left;"> 33 </td>
    <td style="text-align:left;"> 8 </td>
-   <td style="text-align:left;"> 0.000433 </td>
+   <td style="text-align:left;"> 0.00043 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.571,0.779) </td>
+   <td style="text-align:left;"> (0.57,0.78) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.712,0.854) </td>
+   <td style="text-align:left;"> (0.71,0.85) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.0045,0.212) </td>
+   <td style="text-align:left;"> (0.0045,0.21) </td>
    <td style="text-align:left;"> 4.2 </td>
    <td style="text-align:left;"> 493 </td>
    <td style="text-align:left;"> 0.041 </td>
@@ -908,9 +908,9 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.68,0.887) </td>
+   <td style="text-align:left;"> (0.68,0.89) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.0045,0.212) </td>
+   <td style="text-align:left;"> (0.0045,0.21) </td>
    <td style="text-align:left;"> 4.2 </td>
    <td style="text-align:left;"> 493 </td>
    <td style="text-align:left;"> 0.041 </td>
@@ -921,23 +921,23 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;"> 0.817 </td>
    <td style="text-align:left;"> 0 </td>
    <td style="text-align:left;"> 0.849 </td>
-   <td style="text-align:left;"> (0.826,0.871) </td>
+   <td style="text-align:left;"> (0.83,0.87) </td>
    <td style="text-align:left;"> 0.0317 </td>
-   <td style="text-align:left;"> (0.00896,0.0545) </td>
-   <td style="text-align:left;"> 10.3 </td>
+   <td style="text-align:left;"> (0.009,0.055) </td>
+   <td style="text-align:left;"> 10 </td>
    <td style="text-align:left;"> 8 </td>
-   <td style="text-align:left;"> 0.0124 </td>
+   <td style="text-align:left;"> 0.012 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.752,0.882) </td>
+   <td style="text-align:left;"> (0.75,0.88) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.807,0.89) </td>
+   <td style="text-align:left;"> (0.81,0.89) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (-0.031,0.0945) </td>
-   <td style="text-align:left;"> 0.986 </td>
+   <td style="text-align:left;"> (-0.031,0.094) </td>
+   <td style="text-align:left;"> 0.99 </td>
    <td style="text-align:left;"> 878 </td>
    <td style="text-align:left;"> 0.32 </td>
   </tr>
@@ -947,10 +947,10 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.786,0.911) </td>
+   <td style="text-align:left;"> (0.79,0.91) </td>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (-0.031,0.0945) </td>
-   <td style="text-align:left;"> 0.986 </td>
+   <td style="text-align:left;"> (-0.031,0.094) </td>
+   <td style="text-align:left;"> 0.99 </td>
    <td style="text-align:left;"> 878 </td>
    <td style="text-align:left;"> 0.32 </td>
   </tr>
