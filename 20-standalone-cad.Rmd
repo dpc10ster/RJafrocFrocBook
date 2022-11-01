@@ -659,9 +659,9 @@ kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling
 From Table \@ref(tab:standalone-cad-table3) some inconsistencies are evident for 2T-RRRC analysis:
 
 1. In fact, for 2T-RRRC analyses $\sigma_R^2 = 0$ since the listed values are smaller than machine accuracy, **clearly an incorrect result as the radiologists do not have identical performance**. In contrast, 1T-RRRC analyses yields values *identical to those obtained by 1T-RRFC analyses*, as expected -- see comment following Eqn. \@ref(eq:standalone-cad-1t-parms).
-2. For the 2T_RRRC method the expected ordering of the inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering) is not observed: one expects $\text{Cov}_1 \geq \text{Cov}_2 \geq \text{Cov}_3$ but instead one observes $\text{Cov}_1 = \text{Cov}_3$ and $\text{Cov}_2 \gt \text{Cov}_1$. 
+2. For the 2T_RRRC method the expected ordering of the inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering) is not observed: one expects $\text{Cov}_1 \geq \text{Cov}_2 \geq \text{Cov}_3$ but instead one observes $\text{Cov}_1 = \text{Cov}_3$ and $\text{Cov}_2 > \text{Cov}_1$. 
 
-The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of reference [@chakraborty2017observer]. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
+The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of my print book [@chakraborty2017observer]. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
 
 ## Discussion {#standalone-cad-radiologists-discussion}
 

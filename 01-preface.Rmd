@@ -46,6 +46,6 @@ Dr. Peter Phillips
 
 Online Latex Editor [at](https://latexeditor.lagrida.com/) 
 
-Dataset contributors: Nico especially @ref(standalone-cad-radiologists)
+Dataset contributors: Nico especially \@ref(standalone-cad-radiologists)
 
 
