@@ -550,11 +550,10 @@ The last three columns show that 2T-RRRC and 1T-RRRC analyses yield *identical F
 
 1. Where a direct comparison is possible, namely 1T-RRFC analysis using $\text{PCL}_{0.05}$ and $\text{PCL}_{0.2}$ as FOMs, the p-values in Table \@ref(tab:standalone-cad-table2) are very close to those reported in Study -- 1.
 2. All FOMs (i.e., $\theta_0$, $\theta_{\bullet}$ and $\psi_{\bullet}$) in Table \@ref(tab:standalone-cad-table2) are independent of the method of analysis. However, the corresponding confidence intervals (i.e., $CI_{\theta_0}$, $CI_{\theta_{\bullet}}$ and $CI_{\psi_{\bullet}}$) depend on the analyses.
-3. Since 1T-RRFC analysis ignores case sampling variability, the CAD figure of merit is a constant and hence no confidence interval is listed for either 1T analysis. Since the 2T-RRRC analysis assumes CAD is a different treatment, the analysis lists a confidence interval that is appropriatedly centered on the corresponding CAD value, but is otherwise meaningless.
-4. The LROC FOMs increase as the value of FPF (the subscript) increases.
-This should be obvious, as PCL increases as FPF increases, a general feature of any partial curve based figure of merit.
-5. The area (AUC) under the ROC is larger than the largest PCL value, i.e., $AUC \geq \text{PCL}_1$. This too should be obvious from the general features of the LROC [@swensson1996unified].
-6. The p-value for either RRRC analyses (2T or 1T) is larger than the corresponding 1T-RRFC value. Accounting for case-sampling variability increases the p-value, leading to less possibility of finding a significant difference.
+3. Since the CAD figure of merit is a constant no confidence interval is listed for it for either 1T-RRFC or 1T-RRRC analysis. Since 2T-RRRC analysis assumes CAD is a different treatment the analysis lists a confidence interval that is (appropriately) centered on the corresponding CAD value but is otherwise meaningless.
+4. The LROC FOMs increase as the value of FPF (the subscript) increases, a general feature of any partial curve based figure of merit.
+5. The area (AUC) under the ROC is larger than the largest PCL value, i.e., $AUC \geq \text{PCL}_1$. This too is obvious from the general features of the LROC [@swensson1996unified].
+6. The p-value for either RRRC analyses (2T or 1T) is larger than the corresponding 1T-RRFC value. Accounting for case-sampling variability increases the p-value leading to less possibility of finding a significant difference.
 7. Partial curve-based FOMs, such as $\text{PCL}_{FPF}$, lead, depending on the choice of $FPF$, to different conclusions. The p-values generally decrease as FPF increases. 
 8. Ignoring localization information (i.e., using the AUC FOM) led to a not-significant difference between CAD and the radiologists ($p$ = 0.3210), while the corresponding FOM yielded a significant difference ($p$ = 0.0409). Accounting for localization leads to a less "noisy" measurement. This has been demonstrated for the LROC paradigm [@swensson1996unified] and I have demonstrated this for the FROC paradigm [@chakraborty2008validation].
 9. For 1T-RRRC analysis, is listed as NA, for not applicable, since is not a model parameter, see Eqn. \@ref(eq:standalone-cad-1t-psi).
@@ -659,8 +658,8 @@ kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling
 
 From Table \@ref(tab:standalone-cad-table3) some inconsistencies are evident for 2T-RRRC analysis:
 
-1. In fact, for 2T-RRRC analyses $\sigma_R^2 = 0$ (the listed values are smaller than machine accuracy) **clearly an incorrect result as the radiologists do not have identical performance**. In contrast, 1T-RRRC analyses yields values *identical to those obtained by 1T-RRFC analyses*, which is as expected -- see comment following Eqn. \@ref(eq:standalone-cad-1t-parms).
-2. For the 2T_RRRC method the expected ordering of the inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering) is not observed: one expects $\text{Cov_1} \geq \text{Cov_2} \geq \text{Cov_3}$ but instead one observes $\text{Cov_1} = \text{Cov_3}$ and $\text{Cov_2} > \text{Cov_1}$. 
+1. In fact, for 2T-RRRC analyses $\sigma_R^2 = 0$ since the listed values are smaller than machine accuracy, **clearly an incorrect result as the radiologists do not have identical performance**. In contrast, 1T-RRRC analyses yields values *identical to those obtained by 1T-RRFC analyses*, as expected -- see comment following Eqn. \@ref(eq:standalone-cad-1t-parms).
+2. For the 2T_RRRC method the expected ordering of the inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering) is not observed: one expects $\text{Cov}_1 \geq \text{Cov}_2 \geq \text{Cov}_3$ but instead one observes $\text{Cov}_1 = \text{Cov}_3$ and $\text{Cov}_2 \gt \text{Cov}_1$. 
 
 The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of reference [@chakraborty2017observer]. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
 
