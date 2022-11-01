@@ -19,31 +19,31 @@
 ## TBA How much finished {#standalone-cad-radiologists-how-much-finished}
 60%
 
-### This does not work
+<!-- ### This does not work -->
 
-```{r}
-df <- data.frame(C1 = c(rep("a", 10), rep("b", 5)),
-                 C2 = c(rep("c", 7), rep("d", 3), rep("c", 2), rep("d", 3)),
-                 C3 = 1:15,
-                 C4 = sample(c(0,1), 15, replace = TRUE))
-```
-
-
-
-```{r}
-kbl(df, align = "c") %>%
-  kable_paper(full_width = F) %>%
-  column_spec(1, bold = T) %>%
-  collapse_rows(columns = 1:2, valign = "top")
-```
+<!-- ```{r} -->
+<!-- df <- data.frame(C1 = c(rep("a", 10), rep("b", 5)), -->
+<!--                  C2 = c(rep("c", 7), rep("d", 3), rep("c", 2), rep("d", 3)), -->
+<!--                  C3 = 1:15, -->
+<!--                  C4 = sample(c(0,1), 15, replace = TRUE)) -->
+<!-- ``` -->
 
 
-### This works!
+
+<!-- ```{r} -->
+<!-- kbl(df, align = "c") %>% -->
+<!--   kable_paper(full_width = F) %>% -->
+<!--   column_spec(1, bold = T) %>% -->
+<!--   collapse_rows(columns = 1:2, valign = "top") -->
+<!-- ``` -->
 
 
-Define this function:
+<!-- ### This works! -->
 
-```{r}
+
+<!-- Define this function: -->
+
+```{r echo=FALSE}
 collapse_rows_df <- function(df, variable){
   group_var <- enquo(variable)
   df %>%
@@ -56,14 +56,14 @@ collapse_rows_df <- function(df, variable){
 ```
 
 
-Now apply it:
+<!-- Now apply it: -->
 
-```{r}
-kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
-  kable_paper(full_width = F) %>%
-  column_spec(1, bold = T) %>%
-  collapse_rows(columns = 1:2, valign = "top")
-```  
+<!-- ```{r} -->
+<!-- kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>% -->
+<!--   kable_paper(full_width = F) %>% -->
+<!--   column_spec(1, bold = T) %>% -->
+<!--   collapse_rows(columns = 1:2, valign = "top") -->
+<!-- ```   -->
 
 
 ## Introduction {#standalone-cad-radiologists-introduction}
