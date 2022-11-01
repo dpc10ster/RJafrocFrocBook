@@ -6,8 +6,8 @@
 
 
 
-## TBA How much finished {#standalone-cad-radiologists-how-much-finished}
-60%
+## How much finished {#standalone-cad-radiologists-how-much-finished}
+99%
 
 <!-- ### This does not work -->
 
@@ -50,7 +50,7 @@
 
 In the US the majority of screening mammograms are analyzed by computer aided detection (CAD) algorithms [@rao2010widely]. Almost all major imaging device manufacturers provide CAD as part of their imaging workstation display software. In the United States CAD is approved for use as a second reader, i.e., the radiologist first interprets the images (typically 4 views, 2 views of each breast) without CAD and then CAD information (i.e., cued suspicious regions, possibly shown with associated probabilities of malignancies) is shown and the radiologist has the opportunity to revise the initial interpretation. In response to the FDA-approved second reader usage, the evolution of CAD algorithms has been guided mainly by comparing observer performance of radiologists with and without CAD.
 
-Clinical CAD systems sometimes only report the locations of suspicious regions, i.e., it may not provide ratings. Analysis of this type of date is deferred to a following TBA chapter. However, a malignancy index (a continuous variable) for every CAD-found suspicious region is available to the algorithm designer [@edwards2002maximum]. Standalone performance, i.e., performance of designer-level CAD by itself, regarded as an algorithmic reader, vs. radiologists, is rarely measured. In breast cancer screening I am aware of only one study [@hupse2013standalone] where standalone performance was measured. ^[Standalone performance has been measured in CAD for computed tomography colonography, chest radiography and three dimensional ultrasound [@hein2010computeraided; @summers2008performance; @taylor2006computerassisted; @deBoo2011computeraided; @tan2012computeraided]].
+Clinical CAD systems sometimes only report the locations of suspicious regions, i.e., it may not provide ratings. Analysis of this type of date is deferred to a following TBA chapter. However, a malignancy index (a continuous variable) for every CAD-found suspicious region is available to the algorithm designer [@edwards2002maximum]. Standalone performance, i.e., performance of designer-level CAD by itself, regarded as an algorithmic reader, vs. radiologists, is rarely measured. In breast cancer screening I am aware of only one study [@hupse2013standalone] where standalone performance was measured. [Standalone performance has been measured in CAD for computed tomography colonography, chest radiography and three dimensional ultrasound [@hein2010computeraided; @summers2008performance; @taylor2006computerassisted; @deBoo2011computeraided; @tan2012computeraided]].
 
 One possible reason for not measuring standalone performance of CAD is the lack of an accepted assessment method for such measurements. The purpose of this work is to remove that impediment. It describes a method for comparing standalone performance of designer-level CAD to radiologists interpreting the same cases and compares the method to those described in two recent publications [@hupse2013standalone; @kooi2016comparison].
 
@@ -277,9 +277,7 @@ Study -- 2 reported a not significant difference between CAD and the radiologist
 
 #### Comments {#standalone-cad-radiologists-comments}
 
-For the purpose of this work, which focuses on the respective analysis methods, the difference in observer performance paradigms between the two studies, namely a search paradigm in Study - 1 vs. an ROI classification paradigm in Study -- 2, is inconsequential. The paired t-test used in Study - 1 treats the case-sample as fixed. In other words, the analysis is not accounting for case-sampling variability but it is accounting for reader variability. While not explicitly stated, the reason for the unorthodox analysis in Study -- 2 was the desire to include case-sampling variability. [^standalone-cad-1]
-
-[^standalone-cad-1]: Prof. Karssemeijer (private communication, 10/27/2017) had consulted with a few ROC experts to determine if the procedure used in Study -- 2 was valid, and while the experts thought it was probably valid they were not sure.
+For the purpose of this work, which focuses on the respective analysis methods, the difference in observer performance paradigms between the two studies, namely a search paradigm in Study - 1 vs. an ROI classification paradigm in Study -- 2, is inconsequential. The paired t-test used in Study - 1 treats the case-sample as fixed. In other words, the analysis is not accounting for case-sampling variability but it is accounting for reader variability. While not explicitly stated, the reason for the unorthodox analysis in Study -- 2 was the desire to include case-sampling variability. Prof. Karssemeijer (private communication, 10/27/2017) had consulted with a few ROC experts to determine if the procedure used in Study -- 2 was valid, and while the experts thought it was probably valid they were not sure.
 
 In what follows, the analysis in Study -- 1 is referred to as **single-treatment random-reader fixed-case (1T-RRFC)** while that in Study -- 2 is referred to as **dual-treatment random-reader random-case (2T-RRRC)**.
 
@@ -917,7 +915,7 @@ Described is an extension of the analysis used in Study -- 1 that accounts for c
 
 The proposed method, 1T-RRRC analyses, yields identical "overall" results (specifically the F-statistic, degrees of freedom and p-value) to those yielded by the unorthodox application of commonly available software, termed 2T-RRRC analyses, where the CAD reader is regarded as a second treatment (specifically the CAD ratings are replicated to match the number of radiologists). If interest is in just these values one is justified in using the 2T-RRRC method. However, 2T-RRRC model parameter estimates were unrealistic: for example, it yields zero between-reader variance. The result $\sigma_R^2 = 0$ is clearly an artifact. One can only speculate as to what happens when software is used in a manner that it was not designed for: perhaps finding that all readers in the second treatment have identical FOMs led the software to yield $\sigma_R^2 = 0$. Additionally, the covariance estimates are incorrect. Since sample-size estimation requires some of the covariance values the 2T-RRRC method should never be used to perform sample-size estimation for a prospective study.
 
-The 1T-RRRC method described here is clearly applicable to any scalar figure of merit. The paradigm used to collect the observer performance data - ROC, FROC, LROC or ROI - is irrelevant. 
+The 1T-RRRC method described here is applicable to any scalar figure of merit. The paradigm used to collect the observer performance data - ROC, FROC, LROC or ROI - is irrelevant. 
 
 Assessing CAD utility by  measuring performance with and without CAD may have inadvertently set a low bar for CAD to be considered useful. As examples, CAD is not penalized for missing cancers as long as the radiologist finds them and CAD is not penalized for excessive false positives (FPs) as long as the radiologist ignores them. Moreover, since both such measurements include the variability of radiologists, there is additional noise introduces that presumably makes it harder to determine if the CAD system is optimal. 
 
@@ -933,6 +931,16 @@ The structures of the` R` objects generated by the software are illustrated with
 The first example shows the structure of `RRFC_1T_PCL_0_2`.
 
 
+```r
+x <- RRFC_1T_PCL_0_2
+fom_individual_rad <- as.data.frame(t(x$fomRAD))
+colnames(fom_individual_rad) <- paste0("rdr", seq(1:9))
+
+stats <- data.frame(fomCAD = x$fomCAD, avgRadFom = x$avgRadFom, avgDiffFom = x$avgDiffFom, varR = x$varR, Tstat = x$Tstat, df = x$df, pval = x$pval)
+
+ConfidenceIntervals <- data.frame(CIAvgRadFom = x$CIAvgRadFom, CIAvgDiffFom = x$CIAvgDiffFom)
+rownames(ConfidenceIntervals) <- c("Lower", "Upper")
+```
 
 
 
@@ -978,6 +986,20 @@ The last data frame summarizes the 95 percent confidence intervals.
 The next example shows the structure of `RRRC_2T_PCL_0_2`.
 
 
+```r
+x <- RRRC_2T_PCL_0_2
+
+fom_individual_rad <- as.data.frame(t(x$fomRAD))
+colnames(fom_individual_rad) <- paste0("rdr", seq(1:9))
+
+stats1 <- data.frame(fomCAD = x$fomCAD, avgRadFom = x$avgRadFom, avgDiffFom = x$avgDiffFom)
+
+stats2 <- data.frame(varR = x$varR, varTR = x$varTR, 
+                 cov1 = x$cov1, cov2 = x$cov2 , 
+                 cov3 = x$cov3 , Var = x$varError, 
+                 FStat = x$FStat, df = x$df, pval = x$pval)
+
+```
 
 
 
@@ -1128,7 +1150,8 @@ Notice that the `RRRC_1T_PCL_0_2` p value, i.e., 0.04172626,  is identical to th
 
 ## Appendix 2 {#standalone-cad-radiologists-appendix2}
 
-TBA
+Two text files `R/standalone-cad/jaf_truth.txt` and `R/standalone-cad/jaf_truth.txt` were provided by Prof. Nico Karssemeijer. These are read into a dataset object by the following code.
+
 
 ```r
 source(here("R/standalone-cad/DfReadLrocDataFile.R"))
