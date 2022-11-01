@@ -17,13 +17,7 @@
 
 
 ## TBA How much finished {#standalone-cad-radiologists-how-much-finished}
-50%
-
-Table 2 does not center properly in pdf
-
-Table 2 is too wide
-
-collapse_rows not working even in this example:
+60%
 
 ### This does not work
 
@@ -394,8 +388,8 @@ The results are organized as follows:
 The structures of these objects are illustrated with examples in the Appendix. 
 
 
-```{r do_one_ST_RRFC_1T, echo=FALSE}
-do_one_ST_RRFC_1T <- function(x,fom,method){
+```{r do_one_ST_1T_RRFC, echo=FALSE}
+do_one_ST_1T_RRFC <- function(x,fom,method){
 
 dig <- 3
 ciRad <- paste0("(", 
@@ -414,7 +408,7 @@ ret <- c(
   fom, 
   method,
   format(x$fomCAD, scientific = TF, digits = dig),
-  "0", # ci CAD
+  "NA", # ci CAD
   format(x$avgRadFom, scientific = TF, digits = dig),
   ciRad, # ci RAD
   format(x$avgDiffFom, scientific = TF, digits = dig),
@@ -429,8 +423,8 @@ return(seqinr::stresc(ret))
 
 
 
-```{r do_one_ST_RRRC_2T, echo=FALSE}
-do_one_ST_RRRC_2T <- function(x,fom,method){
+```{r do_one_ST_2T_RRRC, echo=FALSE}
+do_one_ST_2T_RRRC <- function(x,fom,method){
 
 dig <- 3
 ciCad <- paste0("(", 
@@ -468,8 +462,8 @@ return(seqinr::stresc(ret))
 
 
 
-```{r do_one_ST_RRRC_1T, echo=FALSE}
-do_one_ST_RRRC_1T <- function(x,fom,method){
+```{r do_one_ST_1T_RRRC, echo=FALSE}
+do_one_ST_1T_RRRC <- function(x,fom,method){
 
 dig <- 3
 ciRad <- paste0("(", format(x$CIAvgRad[1], scientific = TF, digits = 2),
@@ -505,21 +499,21 @@ return(seqinr::stresc(ret))
 allCells <- array("", dim = c(2,12,11))
 TF <- FALSE
 
-allCells[1,1,] <- do_one_ST_RRFC_1T (RRFC_1T_PCL_0_05,"PCL_0_05","1T-RRFC")  
-allCells[1,2,] <- do_one_ST_RRRC_2T (RRRC_2T_PCL_0_05,"PCL_0_05","2T-RRRC")  
-allCells[1,3,] <- do_one_ST_RRRC_1T (RRRC_1T_PCL_0_05,"PCL_0_05","1T-RRRC")  
+allCells[1,1,] <- do_one_ST_1T_RRFC (RRFC_1T_PCL_0_05,"PCL_0_05","1T-RRFC")  
+allCells[1,2,] <- do_one_ST_2T_RRRC (RRRC_2T_PCL_0_05,"PCL_0_05","2T-RRRC")  
+allCells[1,3,] <- do_one_ST_1T_RRRC (RRRC_1T_PCL_0_05,"PCL_0_05","1T-RRRC")  
 
-allCells[1,4,] <- do_one_ST_RRFC_1T (RRFC_1T_PCL_0_2,"PCL_0_2","1T-RRFC")  
-allCells[1,5,] <- do_one_ST_RRRC_2T (RRRC_2T_PCL_0_2,"PCL_0_2","2T-RRRC")  
-allCells[1,6,] <- do_one_ST_RRRC_1T (RRRC_1T_PCL_0_2,"PCL_0_2","1T-RRRC")  
+allCells[1,4,] <- do_one_ST_1T_RRFC (RRFC_1T_PCL_0_2,"PCL_0_2","1T-RRFC")  
+allCells[1,5,] <- do_one_ST_2T_RRRC (RRRC_2T_PCL_0_2,"PCL_0_2","2T-RRRC")  
+allCells[1,6,] <- do_one_ST_1T_RRRC (RRRC_1T_PCL_0_2,"PCL_0_2","1T-RRRC")  
 
-allCells[1,7,] <- do_one_ST_RRFC_1T (RRFC_1T_PCL_1,"PCL_1","1T-RRFC")  
-allCells[1,8,] <- do_one_ST_RRRC_2T (RRRC_2T_PCL_1,"PCL_1","2T-RRRC")  
-allCells[1,9,] <- do_one_ST_RRRC_1T (RRRC_1T_PCL_1,"PCL_1","1T-RRRC")  
+allCells[1,7,] <- do_one_ST_1T_RRFC (RRFC_1T_PCL_1,"PCL_1","1T-RRFC")  
+allCells[1,8,] <- do_one_ST_2T_RRRC (RRRC_2T_PCL_1,"PCL_1","2T-RRRC")  
+allCells[1,9,] <- do_one_ST_1T_RRRC (RRRC_1T_PCL_1,"PCL_1","1T-RRRC")  
 
-allCells[1,10,] <- do_one_ST_RRFC_1T (RRFC_1T_AUC,"Wilcoxon","1T-RRFC")  
-allCells[1,11,] <- do_one_ST_RRRC_2T (RRRC_2T_AUC,"Wilcoxon","2T-RRRC")  
-allCells[1,12,] <- do_one_ST_RRRC_1T (RRRC_1T_AUC,"Wilcoxon","1T-RRRC")  
+allCells[1,10,] <- do_one_ST_1T_RRFC (RRFC_1T_AUC,"Wilcoxon","1T-RRFC")  
+allCells[1,11,] <- do_one_ST_2T_RRRC (RRRC_2T_AUC,"Wilcoxon","2T-RRRC")  
+allCells[1,12,] <- do_one_ST_1T_RRRC (RRRC_1T_AUC,"Wilcoxon","1T-RRRC")  
 
 ```
 
@@ -554,22 +548,22 @@ Results are shown for the following FOMs: $\text{PCL}_{0.05}$, $\text{PCL}_{0.2}
 
 The last three columns show that 2T-RRRC and 1T-RRRC analyses yield *identical F-statistics, ddf and p-values*. So the intuition of the authors of Study -- 2, that the unorthodox method of using DBM -- MRMC software to account for both reader and case-sampling variability, turns out to be correct. If interest is solely in these statistics one is justified in using the unorthodox method. Other results evident in Table \@ref(tab:standalone-cad-table2):
 
-1. Where a direct comparison is possible, namely 1T-RRFC analysis using and as FOMs, the p-values in Table \@ref(tab:standalone-cad-table2) are similar to those reported in Study -- 1.
+1. Where a direct comparison is possible, namely 1T-RRFC analysis using $\text{PCL}_{0.05}$ and $\text{PCL}_{0.2}$ as FOMs, the p-values in Table \@ref(tab:standalone-cad-table2) are very close to those reported in Study -- 1.
 2. All FOMs (i.e., $\theta_0$, $\theta_{\bullet}$ and $\psi_{\bullet}$) in Table \@ref(tab:standalone-cad-table2) are independent of the method of analysis. However, the corresponding confidence intervals (i.e., $CI_{\theta_0}$, $CI_{\theta_{\bullet}}$ and $CI_{\psi_{\bullet}}$) depend on the analyses.
-3. Since 1T-RRFC analysis ignores case sampling variability, the CAD figure of merit is a constant, with zero-width confidence interval. For compactness the CI is listed as 0, rather than two identical values in parentheses. The confidence interval listed for 2T-RRRC analyses is centered on the corresponding CAD value, as are all confidence intervals in Table \@ref(tab:standalone-cad-table2).
+3. Since 1T-RRFC analysis ignores case sampling variability, the CAD figure of merit is a constant and hence no confidence interval is listed for either 1T analysis. Since the 2T-RRRC analysis assumes CAD is a different treatment, the analysis lists a confidence interval that is appropriatedly centered on the corresponding CAD value, but is otherwise meaningless.
 4. The LROC FOMs increase as the value of FPF (the subscript) increases.
 This should be obvious, as PCL increases as FPF increases, a general feature of any partial curve based figure of merit.
 5. The area (AUC) under the ROC is larger than the largest PCL value, i.e., $AUC \geq \text{PCL}_1$. This too should be obvious from the general features of the LROC [@swensson1996unified].
 6. The p-value for either RRRC analyses (2T or 1T) is larger than the corresponding 1T-RRFC value. Accounting for case-sampling variability increases the p-value, leading to less possibility of finding a significant difference.
-7. Partial curve-based FOMs, such as $\text{PCL}_{FPF}$, lead, depending on the choice of $FPF$, to different conclusions. The p-values generally decrease as FPF increases. Measuring performance on the steep part of the LROC curve (i.e., small FPF) needs to account for greater reader variability and risks lower statistical power.
+7. Partial curve-based FOMs, such as $\text{PCL}_{FPF}$, lead, depending on the choice of $FPF$, to different conclusions. The p-values generally decrease as FPF increases. 
 8. Ignoring localization information (i.e., using the AUC FOM) led to a not-significant difference between CAD and the radiologists ($p$ = 0.3210), while the corresponding FOM yielded a significant difference ($p$ = 0.0409). Accounting for localization leads to a less "noisy" measurement. This has been demonstrated for the LROC paradigm [@swensson1996unified] and I have demonstrated this for the FROC paradigm [@chakraborty2008validation].
 9. For 1T-RRRC analysis, is listed as NA, for not applicable, since is not a model parameter, see Eqn. \@ref(eq:standalone-cad-1t-psi).
 
 Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters corresponding to the three analyses.
 
 
-```{r do_one_parms_RRFC_1T, echo=FALSE}
-do_one_parms_RRFC_1T <- function(x,fom,method){
+```{r do_one_parms_1T_RRFC, echo=FALSE}
+do_one_parms_1T_RRFC <- function(x,fom,method){
 
 dig <- 3
 
@@ -585,8 +579,8 @@ return(seqinr::stresc(ret))
 
 
 
-```{r do_one_parms_RRRC_2T, echo=FALSE}
-do_one_parms_RRRC_2T <- function(x,fom,method){
+```{r do_one_parms_2T_RRRC, echo=FALSE}
+do_one_parms_2T_RRRC <- function(x,fom,method){
 RRRC_2T_PCL_0_05$ciAvgRdrEachTrt$CILower
 dig <- 3
 
@@ -606,8 +600,8 @@ return(seqinr::stresc(ret))
 
 
 
-```{r do_one_parms_RRRC_1T, echo=FALSE}
-do_one_parms_RRRC_1T <- function(x,fom,method){
+```{r do_one_parms_1T_RRRC, echo=FALSE}
+do_one_parms_1T_RRRC <- function(x,fom,method){
 
 dig <- 3
 
@@ -629,21 +623,21 @@ return(seqinr::stresc(ret))
 
 ```{r allCellsParameters, echo=FALSE}
 
-allCells[2,1,1:8] <- do_one_parms_RRFC_1T (RRFC_1T_PCL_0_05,"PCL_0_05","1T-RRFC")  
-allCells[2,2,1:8] <- do_one_parms_RRRC_2T (RRRC_2T_PCL_0_05,"PCL_0_05","2T-RRRC")  
-allCells[2,3,1:8] <- do_one_parms_RRRC_1T (RRRC_1T_PCL_0_05,"PCL_0_05","1T-RRRC")  
+allCells[2,1,1:8] <- do_one_parms_1T_RRFC (RRFC_1T_PCL_0_05,"PCL_0_05","1T-RRFC")  
+allCells[2,2,1:8] <- do_one_parms_2T_RRRC (RRRC_2T_PCL_0_05,"PCL_0_05","2T-RRRC")  
+allCells[2,3,1:8] <- do_one_parms_1T_RRRC (RRRC_1T_PCL_0_05,"PCL_0_05","1T-RRRC")  
 
-allCells[2,4,1:8] <- do_one_parms_RRFC_1T (RRFC_1T_PCL_0_2,"PCL_0_2","1T-RRFC")  
-allCells[2,5,1:8] <- do_one_parms_RRRC_2T (RRRC_2T_PCL_0_2,"PCL_0_2","2T-RRRC")  
-allCells[2,6,1:8] <- do_one_parms_RRRC_1T (RRRC_1T_PCL_0_2,"PCL_0_2","1T-RRRC")  
+allCells[2,4,1:8] <- do_one_parms_1T_RRFC (RRFC_1T_PCL_0_2,"PCL_0_2","1T-RRFC")  
+allCells[2,5,1:8] <- do_one_parms_2T_RRRC (RRRC_2T_PCL_0_2,"PCL_0_2","2T-RRRC")  
+allCells[2,6,1:8] <- do_one_parms_1T_RRRC (RRRC_1T_PCL_0_2,"PCL_0_2","1T-RRRC")  
 
-allCells[2,7,1:8] <- do_one_parms_RRFC_1T (RRFC_1T_PCL_1,"PCL_1","1T-RRFC")  
-allCells[2,8,1:8] <- do_one_parms_RRRC_2T (RRRC_2T_PCL_1,"PCL_1","2T-RRRC")  
-allCells[2,9,1:8] <- do_one_parms_RRRC_1T (RRRC_1T_PCL_1,"PCL_1","1T-RRRC")  
+allCells[2,7,1:8] <- do_one_parms_1T_RRFC (RRFC_1T_PCL_1,"PCL_1","1T-RRFC")  
+allCells[2,8,1:8] <- do_one_parms_2T_RRRC (RRRC_2T_PCL_1,"PCL_1","2T-RRRC")  
+allCells[2,9,1:8] <- do_one_parms_1T_RRRC (RRRC_1T_PCL_1,"PCL_1","1T-RRRC")  
 
-allCells[2,10,1:8] <- do_one_parms_RRFC_1T (RRFC_1T_AUC,"Wilcoxon","1T-RRFC")  
-allCells[2,11,1:8] <- do_one_parms_RRRC_2T (RRRC_2T_AUC,"Wilcoxon","2T-RRRC")  
-allCells[2,12,1:8] <- do_one_parms_RRRC_1T (RRRC_1T_AUC,"Wilcoxon","1T-RRRC")  
+allCells[2,10,1:8] <- do_one_parms_1T_RRFC (RRFC_1T_AUC,"Wilcoxon","1T-RRFC")  
+allCells[2,11,1:8] <- do_one_parms_2T_RRRC (RRRC_2T_AUC,"Wilcoxon","2T-RRRC")  
+allCells[2,12,1:8] <- do_one_parms_1T_RRRC (RRRC_1T_AUC,"Wilcoxon","1T-RRRC")  
 
 ```
 
@@ -663,11 +657,10 @@ df <- collapse_rows_df(df,FOM)
 kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
-The following are evident from Table \@ref(tab:standalone-cad-table3):
+From Table \@ref(tab:standalone-cad-table3) some inconsistencies are evident for 2T-RRRC analysis:
 
-1. In fact for 2T-RRRC analyses $\sigma_R^2 = 0$ (the listed values are smaller than machine accuracy) **clearly an incorrect result as the radiologists do not have identical performance**. In contrast, 1T-RRRC analyses yields values *identical to those obtained by 1T-RRFC analyses* which is consistent with expectation -- see comment following Eqn. \@ref(eq:standalone-cad-1t-parms).
-2. When they can be compared (i.e., $\sigma_R^2$, $\text{Cov}_2$ and $\text{Var}$), all variance and covariance estimates were smaller for the 2T method than for the 1T method.
-3. For the 2T method the expected inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering), are not obeyed (specifically, $Cov_1 \geq Cov_2 \geq Cov_3$ is not obeyed).
+1. In fact, for 2T-RRRC analyses $\sigma_R^2 = 0$ (the listed values are smaller than machine accuracy) **clearly an incorrect result as the radiologists do not have identical performance**. In contrast, 1T-RRRC analyses yields values *identical to those obtained by 1T-RRFC analyses*, which is as expected -- see comment following Eqn. \@ref(eq:standalone-cad-1t-parms).
+2. For the 2T_RRRC method the expected ordering of the inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering) is not observed: one expects $\text{Cov_1} \geq \text{Cov_2} \geq \text{Cov_3}$ but instead one observes $\text{Cov_1} = \text{Cov_3}$ and $\text{Cov_2} > \text{Cov_1}$. 
 
 The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of reference [@chakraborty2017observer]. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
 
