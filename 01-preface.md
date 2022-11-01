@@ -2,7 +2,7 @@
 title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
 geometry: margin=2cm
-date: "2022-10-31"
+date: "2022-11-01"
 site: bookdown::bookdown_site
 output: 
    bookdown::pdf_document: default
@@ -42,6 +42,6 @@ Dr. Peter Phillips
 
 Online Latex Editor [at](https://latexeditor.lagrida.com/) 
 
-Dataset contributors
+Dataset contributors: Nico especially \@ref(standalone-cad-radiologists)
 
 

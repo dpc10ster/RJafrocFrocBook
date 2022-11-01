@@ -7,269 +7,43 @@
 
 
 ## TBA How much finished {#standalone-cad-radiologists-how-much-finished}
-50%
+60%
 
-Table 2 does not center properly in pdf
+<!-- ### This does not work -->
 
-Table 2 is too wide
-
-collapse_rows not working even in this example:
-
-### This does not work
-
-
-```r
-df <- data.frame(C1 = c(rep("a", 10), rep("b", 5)),
-                 C2 = c(rep("c", 7), rep("d", 3), rep("c", 2), rep("d", 3)),
-                 C3 = 1:15,
-                 C4 = sample(c(0,1), 15, replace = TRUE))
-```
+<!-- ```{r} -->
+<!-- df <- data.frame(C1 = c(rep("a", 10), rep("b", 5)), -->
+<!--                  C2 = c(rep("c", 7), rep("d", 3), rep("c", 2), rep("d", 3)), -->
+<!--                  C3 = 1:15, -->
+<!--                  C4 = sample(c(0,1), 15, replace = TRUE)) -->
+<!-- ``` -->
 
 
 
-
-```r
-kbl(df, align = "c") %>%
-  kable_paper(full_width = F) %>%
-  column_spec(1, bold = T) %>%
-  collapse_rows(columns = 1:2, valign = "top")
-```
-
-<table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
- <thead>
-  <tr>
-   <th style="text-align:center;"> C1 </th>
-   <th style="text-align:center;"> C2 </th>
-   <th style="text-align:center;"> C3 </th>
-   <th style="text-align:center;"> C4 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 1 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 2 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 3 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 4 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 5 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 6 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 7 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> d </td>
-   <td style="text-align:center;"> 8 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> d </td>
-   <td style="text-align:center;"> 9 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> d </td>
-   <td style="text-align:center;"> 10 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> b </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 11 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> b </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 12 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> b </td>
-   <td style="text-align:center;"> d </td>
-   <td style="text-align:center;"> 13 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> b </td>
-   <td style="text-align:center;"> d </td>
-   <td style="text-align:center;"> 14 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> b </td>
-   <td style="text-align:center;"> d </td>
-   <td style="text-align:center;"> 15 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-</tbody>
-</table>
+<!-- ```{r} -->
+<!-- kbl(df, align = "c") %>% -->
+<!--   kable_paper(full_width = F) %>% -->
+<!--   column_spec(1, bold = T) %>% -->
+<!--   collapse_rows(columns = 1:2, valign = "top") -->
+<!-- ``` -->
 
 
-### This works!
+<!-- ### This works! -->
 
 
-Define this function:
+<!-- Define this function: -->
 
 
-```r
-collapse_rows_df <- function(df, variable){
-  group_var <- enquo(variable)
-  df %>%
-    group_by(!! group_var) %>%
-    mutate(groupRow = 1:n()) %>%
-    ungroup() %>%
-    mutate(!!quo_name(group_var) := ifelse(groupRow == 1, as.character(!! group_var), "")) %>%
-    select(-c(groupRow))
-}
-```
 
 
-Now apply it:
+<!-- Now apply it: -->
 
-
-```r
-kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>%
-  kable_paper(full_width = F) %>%
-  column_spec(1, bold = T) %>%
-  collapse_rows(columns = 1:2, valign = "top")
-```
-
-<table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
- <thead>
-  <tr>
-   <th style="text-align:center;"> C1 </th>
-   <th style="text-align:center;"> C2 </th>
-   <th style="text-align:center;"> C3 </th>
-   <th style="text-align:center;"> C4 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> a </td>
-   <td style="text-align:center;"> c </td>
-   <td style="text-align:center;"> 1 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 2 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 3 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 4 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 5 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 6 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 7 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;"> d </td>
-   <td style="text-align:center;"> 8 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 9 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 10 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;"> b </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 11 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 12 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 13 </td>
-   <td style="text-align:center;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 14 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;font-weight: bold;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 15 </td>
-   <td style="text-align:center;"> 0 </td>
-  </tr>
-</tbody>
-</table>
+<!-- ```{r} -->
+<!-- kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>% -->
+<!--   kable_paper(full_width = F) %>% -->
+<!--   column_spec(1, bold = T) %>% -->
+<!--   collapse_rows(columns = 1:2, valign = "top") -->
+<!-- ```   -->
 
 
 ## Introduction {#standalone-cad-radiologists-introduction}
@@ -699,8 +473,7 @@ Apart from fixed effects, the model in Eqn. \@ref(eq:standalone-cad-1t-psi) cont
 \end{equation}
 ```
 
-Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model, which contains only one random parameter, namely $\sigma_R^2$. 
-[One expects identical estimates of $\sigma_R^2$ using 1T-RRFC, 2T-RRRC or 1T-RRRC analyses.]
+Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model which contains only one random parameter, namely $\sigma_R^2$. One expects an identical estimate of this parameter using 1T-RRRC analyses.
 
 ## Implementation {#standalone-cad-radiologists-computational-details}
 
@@ -802,7 +575,7 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;"> PCL\_0\_05 </td>
    <td style="text-align:left;"> 1T-RRFC </td>
    <td style="text-align:left;"> 0.45 </td>
-   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> 0.493 </td>
    <td style="text-align:left;"> (0.42,0.57) </td>
    <td style="text-align:left;"> 0.0433 </td>
@@ -841,7 +614,7 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;"> PCL\_0\_2 </td>
    <td style="text-align:left;"> 1T-RRFC </td>
    <td style="text-align:left;"> 0.592 </td>
-   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> 0.71 </td>
    <td style="text-align:left;"> (0.67,0.75) </td>
    <td style="text-align:left;"> 0.119 </td>
@@ -880,7 +653,7 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;"> PCL\_1 </td>
    <td style="text-align:left;"> 1T-RRFC </td>
    <td style="text-align:left;"> 0.675 </td>
-   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> 0.783 </td>
    <td style="text-align:left;"> (0.74,0.83) </td>
    <td style="text-align:left;"> 0.108 </td>
@@ -919,7 +692,7 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
    <td style="text-align:left;"> Wilcoxon </td>
    <td style="text-align:left;"> 1T-RRFC </td>
    <td style="text-align:left;"> 0.817 </td>
-   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
    <td style="text-align:left;"> 0.849 </td>
    <td style="text-align:left;"> (0.83,0.87) </td>
    <td style="text-align:left;"> 0.0317 </td>
@@ -958,20 +731,17 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
 </table>
 
 
-Results are shown for the following FOMs: $\text{PCL}_{0.05}$, $\text{PCL}_{0.2}$, $\text{PCL}_{1}$, and the empirical area (AUC) under the ROC curve estimated by the Wilcoxon statistic. The first two FOMs are identical to those used in Study -- 1. Columns 3 and 4 list the CAD FOM $\theta_0$ and its 95% confidence interval $CI_{\theta_0}$, columns 5 and 6 list the average radiologist FOM $\theta_{\bullet}$ (the dot symbol represents an average over the radiologist index) and its 95% confidence interval $CI_{\theta_{\bullet}}$, columns 7 and 8 list the average difference FOM $\psi_{\bullet}$, i.e., radiologist minus CAD, and its 95% confidence interval $CI_{\psi_{\bullet}}$, and the last three columns list the F-statistic, the denominator degrees of freedom (ddf) and the p-value for rejecting the null hypothesis. The numerator degree of freedom of the F-statistic, not listed, is unity.
+Results are shown for the following FOMs: $\text{PCL}_{0.05}$, $\text{PCL}_{0.2}$, $\text{PCL}_{1}$ and the empirical area (AUC) under the ROC curve estimated by the Wilcoxon statistic. The first two FOMs are identical to those used in Study -- 1. Columns 3 and 4 list the CAD FOM $\theta_0$ and its 95% confidence interval $CI_{\theta_0}$, columns 5 and 6 list the average radiologist FOM $\theta_{\bullet}$ (the dot symbol represents an average over the radiologist index) and its 95% confidence interval $CI_{\theta_{\bullet}}$, columns 7 and 8 list the average difference FOM $\psi_{\bullet}$, i.e., radiologist minus CAD, and its 95% confidence interval $CI_{\psi_{\bullet}}$, and the last three columns list the F-statistic, the denominator degrees of freedom (ddf) and the p-value for rejecting the null hypothesis. The numerator degree of freedom of the F-statistic, not listed, is unity.
 
-In Table \@ref(tab:standalone-cad-table2) identical values in adjacent cells in vertical columns have been replaced by the common values. The last three columns show that 2T-RRRC and 1T-RRRC analyses yield *identical F-statistics, ddf and p-values*. So the intuition of the authors of Study -- 2, that the unorthodox method of using DBM -- MRMC software to account for both reader and case-sampling variability, turns out to be correct. If interest is solely in these statistics one is justified in using the unorthodox method.
+The last three columns show that 2T-RRRC and 1T-RRRC analyses yield *identical F-statistics, ddf and p-values*. So the intuition of the authors of Study -- 2, that the unorthodox method of using DBM -- MRMC software to account for both reader and case-sampling variability, turns out to be correct. If interest is solely in these statistics one is justified in using the unorthodox method. Other results evident in Table \@ref(tab:standalone-cad-table2):
 
-Commented on next are other aspects of the results evident in Table \@ref(tab:standalone-cad-table2).
-
-1. Where a direct comparison is possible, namely 1T-RRFC analysis using and as FOMs, the p-values in Table \@ref(tab:standalone-cad-table2) are similar to those reported in Study -- 1.
+1. Where a direct comparison is possible, namely 1T-RRFC analysis using $\text{PCL}_{0.05}$ and $\text{PCL}_{0.2}$ as FOMs, the p-values in Table \@ref(tab:standalone-cad-table2) are very close to those reported in Study -- 1.
 2. All FOMs (i.e., $\theta_0$, $\theta_{\bullet}$ and $\psi_{\bullet}$) in Table \@ref(tab:standalone-cad-table2) are independent of the method of analysis. However, the corresponding confidence intervals (i.e., $CI_{\theta_0}$, $CI_{\theta_{\bullet}}$ and $CI_{\psi_{\bullet}}$) depend on the analyses.
-3. Since 1T-RRFC analysis ignores case sampling variability, the CAD figure of merit is a constant, with zero-width confidence interval. For compactness the CI is listed as 0, rather than two identical values in parentheses. The confidence interval listed for 2T-RRRC analyses is centered on the corresponding CAD value, as are all confidence intervals in Table \@ref(tab:standalone-cad-table2).
-4. The LROC FOMs increase as the value of FPF (the subscript) increases.
-This should be obvious, as PCL increases as FPF increases, a general feature of any partial curve based figure of merit.
-5. The area (AUC) under the ROC is larger than the largest PCL value, i.e., $AUC \geq \text{PCL}_1$. This too should be obvious from the general features of the LROC [@swensson1996unified].
-6. The p-value for either RRRC analyses (2T or 1T) is larger than the corresponding 1T-RRFC value. Accounting for case-sampling variability increases the p-value, leading to less possibility of finding a significant difference.
-7. Partial curve-based FOMs, such as $\text{PCL}_{FPF}$, lead, depending on the choice of $FPF$, to different conclusions. The p-values generally decrease as FPF increases. Measuring performance on the steep part of the LROC curve (i.e., small FPF) needs to account for greater reader variability and risks lower statistical power.
+3. Since the CAD figure of merit is a constant no confidence interval is listed for it for either 1T-RRFC or 1T-RRRC analysis. Since 2T-RRRC analysis assumes CAD is a different treatment the analysis lists a confidence interval that is (appropriately) centered on the corresponding CAD value but is otherwise meaningless.
+4. The LROC FOMs increase as the value of FPF (the subscript) increases, a general feature of any partial curve based figure of merit.
+5. The area (AUC) under the ROC is larger than the largest PCL value, i.e., $AUC \geq \text{PCL}_1$. This too is obvious from the general features of the LROC [@swensson1996unified].
+6. The p-value for either RRRC analyses (2T or 1T) is larger than the corresponding 1T-RRFC value. Accounting for case-sampling variability increases the p-value leading to less possibility of finding a significant difference.
+7. Partial curve-based FOMs, such as $\text{PCL}_{FPF}$, lead, depending on the choice of $FPF$, to different conclusions. The p-values generally decrease as FPF increases. 
 8. Ignoring localization information (i.e., using the AUC FOM) led to a not-significant difference between CAD and the radiologists ($p$ = 0.3210), while the corresponding FOM yielded a significant difference ($p$ = 0.0409). Accounting for localization leads to a less "noisy" measurement. This has been demonstrated for the LROC paradigm [@swensson1996unified] and I have demonstrated this for the FROC paradigm [@chakraborty2008validation].
 9. For 1T-RRRC analysis, is listed as NA, for not applicable, since is not a model parameter, see Eqn. \@ref(eq:standalone-cad-1t-psi).
 
@@ -993,8 +763,8 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
 
 
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:standalone-cad-table3)Parameter estimates for the analyses; NA = not applicable.</caption>
+<table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">(\#tab:standalone-cad-table3)Significance testing results for an LROC dataset. For each figure of merit (FOM) shown are results of RRRC, 2T-RRRC and 1T-RRRC analyses. Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence interval than the corresponding row labeled RRFC. [$\theta_0$ = FOM CAD; $\theta_{\bullet}$ = average FOM of radiologists; $\psi_{\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\psi_{\bullet} = 0$.]</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -1019,9 +789,9 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
    <td style="text-align:left;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_0\_05 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 0.00000000000000000184 </td>
+   <td style="text-align:left;"> 1.8e-18 </td>
    <td style="text-align:left;"> -0.00571 </td>
    <td style="text-align:left;"> 0.00131 </td>
    <td style="text-align:left;"> 0.00601 </td>
@@ -1029,7 +799,7 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
    <td style="text-align:left;"> 0.0165 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_0\_05 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 1T-RRRC </td>
    <td style="text-align:left;"> 0.0095 </td>
    <td style="text-align:left;"> NA </td>
@@ -1049,9 +819,9 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
    <td style="text-align:left;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_0\_2 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> -0.000000000000000000759 </td>
+   <td style="text-align:left;"> -7.6e-19 </td>
    <td style="text-align:left;"> 0.000265 </td>
    <td style="text-align:left;"> 0.000761 </td>
    <td style="text-align:left;"> 0.00229 </td>
@@ -1059,7 +829,7 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
    <td style="text-align:left;"> 0.00343 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_0\_2 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 1T-RRRC </td>
    <td style="text-align:left;"> 0.00281 </td>
    <td style="text-align:left;"> NA </td>
@@ -1079,9 +849,9 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
    <td style="text-align:left;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_1 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 0.00000000000000000163 </td>
+   <td style="text-align:left;"> 1.6e-18 </td>
    <td style="text-align:left;"> 0.001 </td>
    <td style="text-align:left;"> 0.000643 </td>
    <td style="text-align:left;"> 0.00186 </td>
@@ -1089,7 +859,7 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
    <td style="text-align:left;"> 0.00246 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> PCL\_1 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 1T-RRRC </td>
    <td style="text-align:left;"> 0.0032 </td>
    <td style="text-align:left;"> NA </td>
@@ -1109,9 +879,9 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
    <td style="text-align:left;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Wilcoxon </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 0.000000000000000000298 </td>
+   <td style="text-align:left;"> 3e-19 </td>
    <td style="text-align:left;"> 0.000201 </td>
    <td style="text-align:left;"> 0.000262 </td>
    <td style="text-align:left;"> 0.000724 </td>
@@ -1119,7 +889,7 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
    <td style="text-align:left;"> 0.000962 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Wilcoxon </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 1T-RRRC </td>
    <td style="text-align:left;"> 0.000878 </td>
    <td style="text-align:left;"> NA </td>
@@ -1131,14 +901,12 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
 </tbody>
 </table>
 
-The following characteristics are evident from Table \@ref(tab:standalone-cad-table3).
+From Table \@ref(tab:standalone-cad-table3) some inconsistencies are evident for 2T-RRRC analysis:
 
-1. For 2T-RRRC analyses $\sigma_R^2 = 0$. Actually, the analysis yielded very small values, of the order of $10^{-18}$ to $10^{-19}$, which, being smaller than double precision accuracy, were replaced by zeroes in Table \@ref(tab:standalone-cad-table2). $\sigma_R^2 = 0$ is clearly an incorrect result as the radiologists do not have identical performance. In contrast, 1T-RRRC analyses yielded more realistic values, identical to those obtained by 1T-RRFC analyses, and consistent with expectation -- see comment following Eqn. (15).
-2. Because 2T analysis found zero reader variability, it follows from the definitions of the covariances [@obuchowski1995hypothesis], that $Cov_1 = Cov_3 = 0$, as evident in the table.
-3. When they can be compared (i.e., $\sigma_R^2$, $\text{Cov}_2$ and $\text{Var}$), all variance and covariance estimates were smaller for the 2T method than for the 1T method.
-4. For the 2T method the expected inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering), are not obeyed (specifically, $Cov_1 \geq Cov_2 \geq Cov_3$ is not obeyed).
+1. In fact, for 2T-RRRC analyses $\sigma_R^2 = 0$ since the listed values are smaller than machine accuracy, **clearly an incorrect result as the radiologists do not have identical performance**. In contrast, 1T-RRRC analyses yields values *identical to those obtained by 1T-RRFC analyses*, as expected -- see comment following Eqn. \@ref(eq:standalone-cad-1t-parms).
+2. For the 2T_RRRC method the expected ordering of the inequalities, Eqn. \@ref(eq:standalone-cad-2t-rrrc-varcom-ordering) is not observed: one expects $\text{Cov}_1 \geq \text{Cov}_2 \geq \text{Cov}_3$ but instead one observes $\text{Cov}_1 = \text{Cov}_3$ and $\text{Cov}_2 > \text{Cov}_1$. 
 
-For an analysis method to be considered statistically valid it needs to be tested with simulations to determine if it has the proper null hypothesis behavior. The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of reference [@chakraborty2017observer]. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
+The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of my print book [@chakraborty2017observer]. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
 
 ## Discussion {#standalone-cad-radiologists-discussion}
 

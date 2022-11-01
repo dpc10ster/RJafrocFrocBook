@@ -135,7 +135,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-10-31}
+\date{2022-11-01}
 
 \begin{document}
 \maketitle
@@ -186,7 +186,7 @@ Dr.~Peter Phillips
 
 Online Latex Editor \href{https://latexeditor.lagrida.com/}{at}
 
-Dataset contributors
+Dataset contributors: Nico especially \ref{standalone-cad-radiologists}
 
 \hypertarget{part-froc-paradigm}{%
 \part*{FROC paradigm}\label{part-froc-paradigm}}
@@ -236,7 +236,12 @@ There are three location-specific paradigms:
 The 4 panels in Fig. \ref{fig:froc-paradigm-4} show a schematic mammogram interpreted according to the 4 current observer performance paradigms. The arrows point to two lesions and the three light crosses indicate suspicious regions. A marked suspicious region is indicated by a dark cross. Evidently the radiologist found one of the lesions (the light-shaded cross near the left most arrow in the top-left panel), missed the other lesion and mistook two normal structures for lesions (the two light-shaded crosses that are relatively far from any of the lesions). In this example there are three suspicious regions one of which is close to a real lesion.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/4Paradigms} \caption{Upper Left: ROC, Upper Right: FROC, Lower Left: LROC, Lower Right: ROI}\label{fig:froc-paradigm-4}
+
+{\centering \includegraphics[width=300pt]{images/4Paradigms} 
+
+}
+
+\caption{Observer performance paradigms in use: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI}\label{fig:froc-paradigm-4}
 \end{figure}
 
 \begin{quote}
@@ -4812,144 +4817,7 @@ The following plots are arranged in pairs, with the left plot corresponding to t
 \hypertarget{standalone-cad-radiologists-how-much-finished}{%
 \section{TBA How much finished}\label{standalone-cad-radiologists-how-much-finished}}
 
-50\%
-
-Table 2 does not center properly in pdf
-
-Table 2 is too wide
-
-collapse\_rows not working even in this example:
-
-\hypertarget{this-does-not-work}{%
-\subsection{This does not work}\label{this-does-not-work}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{C1 =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\DecValTok{10}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"b"}\NormalTok{, }\DecValTok{5}\NormalTok{)),}
-                 \DataTypeTok{C2 =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"c"}\NormalTok{, }\DecValTok{7}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"d"}\NormalTok{, }\DecValTok{3}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"c"}\NormalTok{, }\DecValTok{2}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"d"}\NormalTok{, }\DecValTok{3}\NormalTok{)),}
-                 \DataTypeTok{C3 =} \DecValTok{1}\OperatorTok{:}\DecValTok{15}\NormalTok{,}
-                 \DataTypeTok{C4 =} \KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DecValTok{15}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{kbl}\NormalTok{(df, }\DataTypeTok{align =} \StringTok{"c"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{kable_paper}\NormalTok{(}\DataTypeTok{full_width =}\NormalTok{ F) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{collapse_rows}\NormalTok{(}\DataTypeTok{columns =} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\DataTypeTok{valign =} \StringTok{"top"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{table}
-\centering
-\begin{tabular}[t]{>{}c|c|c|c}
-\hline
-C1 & C2 & C3 & C4\\
-\hline
- &  & 1 & 1\\
-\cline{3-4}
- &  & 2 & 1\\
-\cline{3-4}
- &  & 3 & 1\\
-\cline{3-4}
- &  & 4 & 1\\
-\cline{3-4}
- &  & 5 & 1\\
-\cline{3-4}
- &  & 6 & 0\\
-\cline{3-4}
- & \multirow[t]{-7}{*}{\centering\arraybackslash c} & 7 & 0\\
-\cline{2-4}
- &  & 8 & 1\\
-\cline{3-4}
- &  & 9 & 1\\
-\cline{3-4}
-\multirow[t]{-10}{*}{\centering\arraybackslash \textbf{a}} & \multirow[t]{-3}{*}{\centering\arraybackslash d} & 10 & 0\\
-\cline{1-4}
- &  & 11 & 1\\
-\cline{3-4}
- & \multirow[t]{-2}{*}{\centering\arraybackslash c} & 12 & 1\\
-\cline{2-4}
- &  & 13 & 0\\
-\cline{3-4}
- &  & 14 & 0\\
-\cline{3-4}
-\multirow[t]{-5}{*}{\centering\arraybackslash \textbf{b}} & \multirow[t]{-3}{*}{\centering\arraybackslash d} & 15 & 1\\
-\hline
-\end{tabular}
-\end{table}
-
-\hypertarget{this-works}{%
-\subsection{This works!}\label{this-works}}
-
-Define this function:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{collapse_rows_df <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, variable)\{}
-\NormalTok{  group_var <-}\StringTok{ }\KeywordTok{enquo}\NormalTok{(variable)}
-\NormalTok{  df }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{group_by}\NormalTok{(}\OperatorTok{!!}\StringTok{ }\NormalTok{group_var) }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{groupRow =} \DecValTok{1}\OperatorTok{:}\KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\OperatorTok{!!}\KeywordTok{quo_name}\NormalTok{(group_var) }\OperatorTok{:}\ErrorTok{=}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(groupRow }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\KeywordTok{as.character}\NormalTok{(}\OperatorTok{!!}\StringTok{ }\NormalTok{group_var), }\StringTok{""}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\KeywordTok{c}\NormalTok{(groupRow))}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-Now apply it:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{kbl}\NormalTok{(}\KeywordTok{collapse_rows_df}\NormalTok{(}\KeywordTok{collapse_rows_df}\NormalTok{(df,C1), C2), }\DataTypeTok{align =} \StringTok{"c"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{kable_paper}\NormalTok{(}\DataTypeTok{full_width =}\NormalTok{ F) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{collapse_rows}\NormalTok{(}\DataTypeTok{columns =} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\DataTypeTok{valign =} \StringTok{"top"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{table}
-\centering
-\begin{tabular}[t]{>{}c|c|c|c}
-\hline
-C1 & C2 & C3 & C4\\
-\hline
-\textbf{a} & c & 1 & 1\\
-\cline{1-4}
- &  & 2 & 1\\
-\cline{3-4}
- &  & 3 & 1\\
-\cline{3-4}
- &  & 4 & 1\\
-\cline{3-4}
- &  & 5 & 1\\
-\cline{3-4}
- &  & 6 & 0\\
-\cline{3-4}
- & \multirow[t]{-6}{*}{\centering\arraybackslash } & 7 & 0\\
-\cline{2-4}
- & d & 8 & 1\\
-\cline{2-4}
- &  & 9 & 1\\
-\cline{3-4}
-\multirow[t]{-9}{*}{\centering\arraybackslash \textbf{}} &  & 10 & 0\\
-\cline{1-1}
-\cline{3-4}
-\textbf{b} &  & 11 & 1\\
-\cline{1-1}
-\cline{3-4}
- &  & 12 & 1\\
-\cline{3-4}
- &  & 13 & 0\\
-\cline{3-4}
- &  & 14 & 0\\
-\cline{3-4}
-\multirow[t]{-4}{*}{\centering\arraybackslash \textbf{}} & \multirow[t]{-7}{*}{\centering\arraybackslash } & 15 & 1\\
-\hline
-\end{tabular}
-\end{table}
+60\%
 
 \hypertarget{standalone-cad-radiologists-introduction}{%
 \section{Introduction}\label{standalone-cad-radiologists-introduction}}
@@ -5194,8 +5062,7 @@ Apart from fixed effects, the model in Eqn. \eqref{eq:standalone-cad-1t-psi} con
 \label{eq:standalone-cad-1t-parms}
 \end{equation}
 
-Setting \(\text{Var} = 0, \text{Cov}_2 = 0\) yields the 1T-RRFC model, which contains only one random parameter, namely \(\sigma_R^2\).
-{[}One expects identical estimates of \(\sigma_R^2\) using 1T-RRFC, 2T-RRRC or 1T-RRRC analyses.{]}
+Setting \(\text{Var} = 0, \text{Cov}_2 = 0\) yields the 1T-RRFC model which contains only one random parameter, namely \(\sigma_R^2\). One expects an identical estimate of this parameter using 1T-RRRC analyses.
 
 \hypertarget{standalone-cad-radiologists-computational-details}{%
 \section{Implementation}\label{standalone-cad-radiologists-computational-details}}
@@ -5275,17 +5142,17 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
 \toprule
 FOM & Analysis & $\theta_0$ & $CI_{\theta_0}$ & $\theta_{\bullet}$ & $CI_{\theta_{\bullet}}$ & $\psi_{\bullet}$ & $CI_{\psi_{\bullet}}$ & F & ddf & p\\
 \midrule
-PCL\_0\_05 & 1T-RRFC & 0.45 & 0 & 0.493 & (0.42,0.57) & 0.0433 & (-0.032,0.12) & 1.8 & 8 & 0.22\\
+PCL\_0\_05 & 1T-RRFC & 0.45 & NA & 0.493 & (0.42,0.57) & 0.0433 & (-0.032,0.12) & 1.8 & 8 & 0.22\\
  & 2T-RRRC &  & (0.26,0.64) &  & (0.38,0.61) &  & (-0.16,0.24) & 0.18 & 784 & 0.67\\
  & 1T-RRRC &  & NA &  & (0.29,0.69) &  & (-0.16,0.24) & 0.18 & 784 & 0.67\\
-PCL\_0\_2 & 1T-RRFC & 0.592 & 0 & 0.71 & (0.67,0.75) & 0.119 & (0.078,0.16) & 45 & 8 & 0.00015\\
+PCL\_0\_2 & 1T-RRFC & 0.592 & NA & 0.71 & (0.67,0.75) & 0.119 & (0.078,0.16) & 45 & 8 & 0.00015\\
  & 2T-RRRC &  & (0.48,0.71) &  & (0.63,0.79) &  & (0.0044,0.23) & 4.2 & 937 & 0.042\\
 \addlinespace
  & 1T-RRRC &  & NA &  & (0.6,0.82) &  & (0.0044,0.23) & 4.2 & 937 & 0.042\\
-PCL\_1 & 1T-RRFC & 0.675 & 0 & 0.783 & (0.74,0.83) & 0.108 & (0.065,0.15) & 33 & 8 & 0.00043\\
+PCL\_1 & 1T-RRFC & 0.675 & NA & 0.783 & (0.74,0.83) & 0.108 & (0.065,0.15) & 33 & 8 & 0.00043\\
  & 2T-RRRC &  & (0.57,0.78) &  & (0.71,0.85) &  & (0.0045,0.21) & 4.2 & 493 & 0.041\\
  & 1T-RRRC &  & NA &  & (0.68,0.89) &  & (0.0045,0.21) & 4.2 & 493 & 0.041\\
-Wilcoxon & 1T-RRFC & 0.817 & 0 & 0.849 & (0.83,0.87) & 0.0317 & (0.009,0.055) & 10 & 8 & 0.012\\
+Wilcoxon & 1T-RRFC & 0.817 & NA & 0.849 & (0.83,0.87) & 0.0317 & (0.009,0.055) & 10 & 8 & 0.012\\
 \addlinespace
  & 2T-RRRC &  & (0.75,0.88) &  & (0.81,0.89) &  & (-0.031,0.094) & 0.99 & 878 & 0.32\\
  & 1T-RRRC &  & NA &  & (0.79,0.91) &  & (-0.031,0.094) & 0.99 & 878 & 0.32\\
@@ -5293,30 +5160,27 @@ Wilcoxon & 1T-RRFC & 0.817 & 0 & 0.849 & (0.83,0.87) & 0.0317 & (0.009,0.055) & 
 \end{tabular}
 \end{table}
 
-Results are shown for the following FOMs: \(\text{PCL}_{0.05}\), \(\text{PCL}_{0.2}\), \(\text{PCL}_{1}\), and the empirical area (AUC) under the ROC curve estimated by the Wilcoxon statistic. The first two FOMs are identical to those used in Study -- 1. Columns 3 and 4 list the CAD FOM \(\theta_0\) and its 95\% confidence interval \(CI_{\theta_0}\), columns 5 and 6 list the average radiologist FOM \(\theta_{\bullet}\) (the dot symbol represents an average over the radiologist index) and its 95\% confidence interval \(CI_{\theta_{\bullet}}\), columns 7 and 8 list the average difference FOM \(\psi_{\bullet}\), i.e., radiologist minus CAD, and its 95\% confidence interval \(CI_{\psi_{\bullet}}\), and the last three columns list the F-statistic, the denominator degrees of freedom (ddf) and the p-value for rejecting the null hypothesis. The numerator degree of freedom of the F-statistic, not listed, is unity.
+Results are shown for the following FOMs: \(\text{PCL}_{0.05}\), \(\text{PCL}_{0.2}\), \(\text{PCL}_{1}\) and the empirical area (AUC) under the ROC curve estimated by the Wilcoxon statistic. The first two FOMs are identical to those used in Study -- 1. Columns 3 and 4 list the CAD FOM \(\theta_0\) and its 95\% confidence interval \(CI_{\theta_0}\), columns 5 and 6 list the average radiologist FOM \(\theta_{\bullet}\) (the dot symbol represents an average over the radiologist index) and its 95\% confidence interval \(CI_{\theta_{\bullet}}\), columns 7 and 8 list the average difference FOM \(\psi_{\bullet}\), i.e., radiologist minus CAD, and its 95\% confidence interval \(CI_{\psi_{\bullet}}\), and the last three columns list the F-statistic, the denominator degrees of freedom (ddf) and the p-value for rejecting the null hypothesis. The numerator degree of freedom of the F-statistic, not listed, is unity.
 
-In Table \ref{tab:standalone-cad-table2} identical values in adjacent cells in vertical columns have been replaced by the common values. The last three columns show that 2T-RRRC and 1T-RRRC analyses yield \emph{identical F-statistics, ddf and p-values}. So the intuition of the authors of Study -- 2, that the unorthodox method of using DBM -- MRMC software to account for both reader and case-sampling variability, turns out to be correct. If interest is solely in these statistics one is justified in using the unorthodox method.
-
-Commented on next are other aspects of the results evident in Table \ref{tab:standalone-cad-table2}.
+The last three columns show that 2T-RRRC and 1T-RRRC analyses yield \emph{identical F-statistics, ddf and p-values}. So the intuition of the authors of Study -- 2, that the unorthodox method of using DBM -- MRMC software to account for both reader and case-sampling variability, turns out to be correct. If interest is solely in these statistics one is justified in using the unorthodox method. Other results evident in Table \ref{tab:standalone-cad-table2}:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Where a direct comparison is possible, namely 1T-RRFC analysis using and as FOMs, the p-values in Table \ref{tab:standalone-cad-table2} are similar to those reported in Study -- 1.
+  Where a direct comparison is possible, namely 1T-RRFC analysis using \(\text{PCL}_{0.05}\) and \(\text{PCL}_{0.2}\) as FOMs, the p-values in Table \ref{tab:standalone-cad-table2} are very close to those reported in Study -- 1.
 \item
   All FOMs (i.e., \(\theta_0\), \(\theta_{\bullet}\) and \(\psi_{\bullet}\)) in Table \ref{tab:standalone-cad-table2} are independent of the method of analysis. However, the corresponding confidence intervals (i.e., \(CI_{\theta_0}\), \(CI_{\theta_{\bullet}}\) and \(CI_{\psi_{\bullet}}\)) depend on the analyses.
 \item
-  Since 1T-RRFC analysis ignores case sampling variability, the CAD figure of merit is a constant, with zero-width confidence interval. For compactness the CI is listed as 0, rather than two identical values in parentheses. The confidence interval listed for 2T-RRRC analyses is centered on the corresponding CAD value, as are all confidence intervals in Table \ref{tab:standalone-cad-table2}.
+  Since the CAD figure of merit is a constant no confidence interval is listed for it for either 1T-RRFC or 1T-RRRC analysis. Since 2T-RRRC analysis assumes CAD is a different treatment the analysis lists a confidence interval that is (appropriately) centered on the corresponding CAD value but is otherwise meaningless.
 \item
-  The LROC FOMs increase as the value of FPF (the subscript) increases.
-  This should be obvious, as PCL increases as FPF increases, a general feature of any partial curve based figure of merit.
+  The LROC FOMs increase as the value of FPF (the subscript) increases, a general feature of any partial curve based figure of merit.
 \item
-  The area (AUC) under the ROC is larger than the largest PCL value, i.e., \(AUC \geq \text{PCL}_1\). This too should be obvious from the general features of the LROC \citep{swensson1996unified}.
+  The area (AUC) under the ROC is larger than the largest PCL value, i.e., \(AUC \geq \text{PCL}_1\). This too is obvious from the general features of the LROC \citep{swensson1996unified}.
 \item
-  The p-value for either RRRC analyses (2T or 1T) is larger than the corresponding 1T-RRFC value. Accounting for case-sampling variability increases the p-value, leading to less possibility of finding a significant difference.
+  The p-value for either RRRC analyses (2T or 1T) is larger than the corresponding 1T-RRFC value. Accounting for case-sampling variability increases the p-value leading to less possibility of finding a significant difference.
 \item
-  Partial curve-based FOMs, such as \(\text{PCL}_{FPF}\), lead, depending on the choice of \(FPF\), to different conclusions. The p-values generally decrease as FPF increases. Measuring performance on the steep part of the LROC curve (i.e., small FPF) needs to account for greater reader variability and risks lower statistical power.
+  Partial curve-based FOMs, such as \(\text{PCL}_{FPF}\), lead, depending on the choice of \(FPF\), to different conclusions. The p-values generally decrease as FPF increases.
 \item
   Ignoring localization information (i.e., using the AUC FOM) led to a not-significant difference between CAD and the radiologists (\(p\) = 0.3210), while the corresponding FOM yielded a significant difference (\(p\) = 0.0409). Accounting for localization leads to a less ``noisy'' measurement. This has been demonstrated for the LROC paradigm \citep{swensson1996unified} and I have demonstrated this for the FROC paradigm \citep{chakraborty2008validation}.
 \item
@@ -5325,58 +5189,45 @@ Commented on next are other aspects of the results evident in Table \ref{tab:sta
 
 Shown next, Table \ref{tab:standalone-cad-table3}, are the model-parameters corresponding to the three analyses.
 
-\begin{table}[H]
+\begin{table}
 
-\caption{\label{tab:standalone-cad-table3}Parameter estimates for the analyses; NA = not applicable.}
+\caption{\label{tab:standalone-cad-table3}Significance testing results for an LROC dataset. For each figure of merit (FOM) shown are results of RRRC, 2T-RRRC and 1T-RRRC analyses. Because it is accounting for an additional source of variability, each of the rows labeled RRRC yields a larger p-value and wider confidence interval than the corresponding row labeled RRFC. [$\theta_0$ = FOM CAD; $\theta_{\bullet}$ = average FOM of radiologists; $\psi_{\bullet}$ = average FOM of radiologists minus CAD; CI= 95 percent confidence interval of quantity indicated by the subscript, F = F-statistic; ddf = denominator degrees of freedom; p = p-value for rejecting the null hypothesis: $\psi_{\bullet} = 0$.]}
 \centering
-\resizebox{\linewidth}{!}{
+\fontsize{10}{12}\selectfont
 \begin{tabular}[t]{llllllll}
 \toprule
 FOM & Analysis & $\sigma_R^2$ & $\sigma_{\tau R}^2$ & Cov1 & Cov2 & Cov3 & Var\\
 \midrule
- & 1T-RRFC & 0.0095 & NA & NA & NA & NA & NA\\
-\cmidrule{2-8}
- & 2T-RRRC & 0.00000000000000000184 & -0.00571 & 0.00131 & 0.00601 & 0.00131 & 0.0165\\
-\cmidrule{2-8}
-\multirow{-3}{*}{\raggedright\arraybackslash PCL\_0\_05} & 1T-RRRC & 0.0095 & NA & NA & 0.0094 & NA & 0.0303\\
-\cmidrule{1-8}
- & 1T-RRFC & 0.00281 & NA & NA & NA & NA & NA\\
-\cmidrule{2-8}
- & 2T-RRRC & -0.000000000000000000759 & 0.000265 & 0.000761 & 0.00229 & 0.000761 & 0.00343\\
-\cmidrule{2-8}
-\multirow{-3}{*}{\raggedright\arraybackslash PCL\_0\_2} & 1T-RRRC & 0.00281 & NA & NA & 0.00307 & NA & 0.00534\\
-\cmidrule{1-8}
- & 1T-RRFC & 0.0032 & NA & NA & NA & NA & NA\\
-\cmidrule{2-8}
- & 2T-RRRC & 0.00000000000000000163 & 0.001 & 0.000643 & 0.00186 & 0.000643 & 0.00246\\
-\cmidrule{2-8}
-\multirow{-3}{*}{\raggedright\arraybackslash PCL\_1} & 1T-RRRC & 0.0032 & NA & NA & 0.00244 & NA & 0.00364\\
-\cmidrule{1-8}
- & 1T-RRFC & 0.000878 & NA & NA & NA & NA & NA\\
-\cmidrule{2-8}
- & 2T-RRRC & 0.000000000000000000298 & 0.000201 & 0.000262 & 0.000724 & 0.000262 & 0.000962\\
-\cmidrule{2-8}
-\multirow{-3}{*}{\raggedright\arraybackslash Wilcoxon} & 1T-RRRC & 0.000878 & NA & NA & 0.000924 & NA & 0.0014\\
+PCL\_0\_05 & 1T-RRFC & 0.0095 & NA & NA & NA & NA & NA\\
+ & 2T-RRRC & 1.8e-18 & -0.00571 & 0.00131 & 0.00601 & 0.00131 & 0.0165\\
+ & 1T-RRRC & 0.0095 & NA & NA & 0.0094 & NA & 0.0303\\
+PCL\_0\_2 & 1T-RRFC & 0.00281 & NA & NA & NA & NA & NA\\
+ & 2T-RRRC & -7.6e-19 & 0.000265 & 0.000761 & 0.00229 & 0.000761 & 0.00343\\
+\addlinespace
+ & 1T-RRRC & 0.00281 & NA & NA & 0.00307 & NA & 0.00534\\
+PCL\_1 & 1T-RRFC & 0.0032 & NA & NA & NA & NA & NA\\
+ & 2T-RRRC & 1.6e-18 & 0.001 & 0.000643 & 0.00186 & 0.000643 & 0.00246\\
+ & 1T-RRRC & 0.0032 & NA & NA & 0.00244 & NA & 0.00364\\
+Wilcoxon & 1T-RRFC & 0.000878 & NA & NA & NA & NA & NA\\
+\addlinespace
+ & 2T-RRRC & 3e-19 & 0.000201 & 0.000262 & 0.000724 & 0.000262 & 0.000962\\
+ & 1T-RRRC & 0.000878 & NA & NA & 0.000924 & NA & 0.0014\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 
-The following characteristics are evident from Table \ref{tab:standalone-cad-table3}.
+From Table \ref{tab:standalone-cad-table3} some inconsistencies are evident for 2T-RRRC analysis:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  For 2T-RRRC analyses \(\sigma_R^2 = 0\). Actually, the analysis yielded very small values, of the order of \(10^{-18}\) to \(10^{-19}\), which, being smaller than double precision accuracy, were replaced by zeroes in Table \ref{tab:standalone-cad-table2}. \(\sigma_R^2 = 0\) is clearly an incorrect result as the radiologists do not have identical performance. In contrast, 1T-RRRC analyses yielded more realistic values, identical to those obtained by 1T-RRFC analyses, and consistent with expectation -- see comment following Eqn. (15).
+  In fact, for 2T-RRRC analyses \(\sigma_R^2 = 0\) since the listed values are smaller than machine accuracy, \textbf{clearly an incorrect result as the radiologists do not have identical performance}. In contrast, 1T-RRRC analyses yields values \emph{identical to those obtained by 1T-RRFC analyses}, as expected -- see comment following Eqn. \eqref{eq:standalone-cad-1t-parms}.
 \item
-  Because 2T analysis found zero reader variability, it follows from the definitions of the covariances \citep{obuchowski1995hypothesis}, that \(Cov_1 = Cov_3 = 0\), as evident in the table.
-\item
-  When they can be compared (i.e., \(\sigma_R^2\), \(\text{Cov}_2\) and \(\text{Var}\)), all variance and covariance estimates were smaller for the 2T method than for the 1T method.
-\item
-  For the 2T method the expected inequalities, Eqn. \eqref{eq:standalone-cad-2t-rrrc-varcom-ordering}, are not obeyed (specifically, \(Cov_1 \geq Cov_2 \geq Cov_3\) is not obeyed).
+  For the 2T\_RRRC method the expected ordering of the inequalities, Eqn. \eqref{eq:standalone-cad-2t-rrrc-varcom-ordering} is not observed: one expects \(\text{Cov}_1 \geq \text{Cov}_2 \geq \text{Cov}_3\) but instead one observes \(\text{Cov}_1 = \text{Cov}_3\) and \(\text{Cov}_2 > \text{Cov}_1\).
 \end{enumerate}
 
-For an analysis method to be considered statistically valid it needs to be tested with simulations to determine if it has the proper null hypothesis behavior. The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of reference \citep{chakraborty2017observer}. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
+The design of a ratings simulator to statistically match a given dataset is addressed in Chapter 23 of my print book \citep{chakraborty2017observer}. Using this simulator, the 1T-RRRC method had the expected null hypothesis behavior (Table 23.5, ibid).
 
 \hypertarget{standalone-cad-radiologists-discussion}{%
 \section{Discussion}\label{standalone-cad-radiologists-discussion}}

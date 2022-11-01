@@ -392,8 +392,6 @@ rsm-3-fits-representative-plots-van-dyke
 rsm-3-fits-representative-plots-franken
 standalone-cad-radiologists
 standalone-cad-radiologists-how-much-finished
-this-does-not-work
-this-works
 standalone-cad-radiologists-introduction
 standalone-cad-radiologists-overview
 standalone-cad-radiologists-methods

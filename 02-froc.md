@@ -45,9 +45,9 @@ There are three location-specific paradigms:
 The 4 panels in Fig. \@ref(fig:froc-paradigm-4) show a schematic mammogram interpreted according to the 4 current observer performance paradigms. The arrows point to two lesions and the three light crosses indicate suspicious regions. A marked suspicious region is indicated by a dark cross. Evidently the radiologist found one of the lesions (the light-shaded cross near the left most arrow in the top-left panel), missed the other lesion and mistook two normal structures for lesions (the two light-shaded crosses that are relatively far from any of the lesions). In this example there are three suspicious regions one of which is close to a real lesion.
 
 
-<div class="figure">
-<img src="images/4Paradigms.png" alt="Upper Left: ROC, Upper Right: FROC, Lower Left: LROC, Lower Right: ROI" width="100%" />
-<p class="caption">(\#fig:froc-paradigm-4)Upper Left: ROC, Upper Right: FROC, Lower Left: LROC, Lower Right: ROI</p>
+<div class="figure" style="text-align: center">
+<img src="images/4Paradigms.png" alt="Observer performance paradigms in use: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI" width="300pt" />
+<p class="caption">(\#fig:froc-paradigm-4)Observer performance paradigms in use: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI</p>
 </div>
 
 >In this book *lesion* always refers to a true or real lesion. The term *suspicious region* or *perceived lesion* is reserved for any region that, as far as the observer is concerned, has "lesion-like" characteristics. *A lesion is a real entity while a suspicious region is a perceived entity.*
