@@ -1,4 +1,4 @@
-# Optimal operating point appendices {#optim-op-point-appendices}
+# CAD optimal operating point II {#optim-op-point-appendices}
 
 ---
 output:
