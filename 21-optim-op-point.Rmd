@@ -29,18 +29,9 @@ source(here("R/optim-op-point/optim-op-point-helpers.R"))
 ```
 
 
-```{r echo=FALSE}
-collapse_rows_df <- function(df, variable){
-  group_var <- enquo(variable)
-  df %>%
-    group_by(!! group_var) %>%
-    mutate(groupRow = 1:n()) %>%
-    ungroup() %>%
-    mutate(!!quo_name(group_var) := ifelse(groupRow == 1, as.character(!! group_var), "")) %>%
-    select(-c(groupRow))
-}
+```{r, include=FALSE}
+source("R/collapse_rows_df.R", local = knitr::knit_global())
 ```
-
 
 
 ## TBA How much finished {#optim-op-point-how-much-finished}

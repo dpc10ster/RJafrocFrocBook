@@ -25,6 +25,12 @@ library(here)
 
 
 
+```{r, include=FALSE}
+source("R/collapse_rows_df.R", local = knitr::knit_global())
+```
+
+
+
 ```{r, echo=FALSE}
 source(here("R/optim-op-point/optim-op-point-helpers.R"))
 ```
@@ -38,7 +44,7 @@ For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7
 
 
 
-```{r}
+```{r, echo = FALSE}
 muArr <- c(2)
 lambdaPArr <- c(1)
 nuPArr <- c(0.6, 0.7, 0.8, 0.9)
@@ -73,36 +79,31 @@ x12 <- doOneTable(nuPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1
 
 
 ```{r optim-op-point-table-vary-nu, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for $\\mu = 2$, $\\lambda = 1$ and 4 values of $\\nu$.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for $\\mu = 2$, $\\lambda = 1$ and 4 values of $\\nu$."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
 
 Table \@ref(tab:optim-op-point-table-vary-nu) summarizes the results.
 
-1. For wAFROC-AUC FOM as $\nu$ increases the optimal threshold *decreases* and both $\text{wAFROC} \left ( 1, \mu, \lambda, \nu \right )$ and $\text{ROC} \left ( 1, \mu, \lambda, \nu \right )$ *increase*. CAD performance increases, regardless of how it is measured. Performance increases with increasing numbers of LLs per case and this effect is reinforced by performance going up with decreasing optimal reporting threshold. [Since both $\text{LLF} \left ( f, \mu, \lambda, \nu \right )$ and $\text{NLF} \left ( f, \mu, \lambda, \nu \right )$ increase with increasing $\nu$, neither FROC-curve based measure has an unambiguous interpretation.  
+1. For wAFROC based optimization as $\nu$ increases the optimal threshold decreases and both $\text{wAFROC}$ and $\text{ROC}$ increase. CAD performance increases regardless of how it is measured. Performance increases with increasing numbers of LLs per case and this effect is reinforced by performance increasing with decreasing optimal reporting threshold. Since both $\text{LLF}$ and $\text{NLF}$ increase with increasing $\nu$ neither FROC-curve based measure has an unambiguous interpretation.  
 
-1. The wAFROC based based optimal thresholds are smaller than the corresponding Youden-index based optimal thresholds, i.e., $\zeta_{1} \left ( 1, \mu, \lambda, \nu \right ) < \zeta_{1} \left ( 2, \mu, \lambda, \nu \right )$. A smaller threshold corresponds to a less strict reporting criterion.
+1. The wAFROC based based optimal thresholds are smaller than the corresponding Youden-index based optimal thresholds, i.e., $\zeta_{1} < \zeta_{1} \left ( 2, \mu, \lambda, \nu \right )$. A smaller threshold corresponds to a less strict reporting criterion.
 
-1. For fixed $\mu, \lambda, \nu$ the operating point on the FROC for $f = 2$ is below that corresponding to $f = 1$:
-    + $\text{NLF} \left (2, \mu, \lambda, \nu \right ) < \text{NLF} \left (1, \mu, \lambda, \nu \right )$ and 
-    + $\text{LLF} \left (2, \mu, \lambda, \nu \right ) < \text{LLF} \left (1, \mu, \lambda, \nu \right )$. 
-    + The difference increases with increasing $\nu$. 
-    + These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-nu-froc).
+1. The operating point on the FROC for $f = 2$ is below-left to that corresponding to $f = 1$ and the difference increases with increasing $\nu$. These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-nu-froc).
 
-1. For fixed $\mu, \lambda, \nu$ the Youden-index based optimization yields lesser performance than the corresponding wAFROC-AUC based optimization:
-
-    + $\text{wAFROC} \left (2, \mu, \lambda, \nu \right ) < \text{wAFROC} \left (1, \mu, \lambda, \nu \right )$ and 
-    + $\text{ROC} \left (2, \mu, \lambda, \nu \right ) < \text{ROC} \left (1, \mu, \lambda, \nu \right )$. 
-    + The difference decreases with decreasing $\nu$. 
-    + These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-nu-wafroc).
+1. The Youden-index based optimization yields decreased performance compared to wAFROC-AUC based optimization and the difference decreases with decreasing $\nu$. These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-nu-wafroc).
 
 
 ### FROC
 
-The third effect is illustrated by the FROC plots with superimposed operating points for varying $\nu$ shown in Fig. \@ref(fig:optim-op-point-vary-nu-froc). The black dots are consistently above the red dots and the separation of the dots is greatest for $\nu = 0.9$ and smallest for $\nu = 0.6$. The difference in optimal thresholds found by the two optimization methods is greatest for poor performance.  
+The second effect is illustrated by the FROC plots shown in Fig. \@ref(fig:optim-op-point-vary-nu-froc). The red dots are consistently above the black dots and the separation of the dots is greatest for $\nu = 0.9$ and smallest for $\nu = 0.6$. The separation is greatest for poor performance.  
 
-The FROC plots also illustrate the decrease in $\text{LLF} \left ( f, \mu, \lambda, \nu \right )$ with increasing $\nu$ (the black dots move to larger ordinates, as do the red dots). However, the accompanying change in $\text{NLF} \left ( f, \mu, \lambda, \nu \right )$ rules out an FROC curve based unambiguous determination of the direction of the change in overall performance. 
+The FROC plots also illustrate the decrease in $\text{LLF}$ with increasing $\nu$ (the red dots move to larger ordinates, as do the black dots). However, the accompanying change in $\text{NLF}$ rules out an FROC curve based unambiguous determination of the direction of the change in overall performance. 
 
 
 
@@ -114,7 +115,7 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-vary-nu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-nu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -204,18 +205,22 @@ x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:
 
 
 ```{r optim-op-point-table-vary-mu, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$, $\\nu = 0.9$.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$, $\\nu = 0.9$."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
 
 Table \@ref(tab:optim-op-point-table-vary-mu) summarizes the results.
 
-1. For either FOM as $\mu$ increases the optimal threshold *increases* and both $\text{wAFROC} \left ( f, \mu, \lambda, \nu \right )$ and $\text{ROC} \left ( f, \mu, \lambda, \nu \right )$ *increase*. CAD performance increases, regardless of how it is measured. Performance increases with increasing separation of the sampling distributions of NLs and LLs and the negative effect of increasing optimal reporting thresholds is not enough to overcome this. [Since $\text{LLF} \left ( f, \mu, \lambda, \nu \right )$ is relatively constant while $\text{NLF} \left ( f, \mu, \lambda, \nu \right )$ decreases sharply with increasing $\mu$, this is one example where an FROC-curve based measure does have an unambiguous interpretation, namely performance is higher for the larger values of $\mu$.  
+1. For either FOM as $\mu$ increases the optimal threshold *increases* and both $\text{wAFROC}$ and $\text{ROC}$ *increase*. CAD performance increases, regardless of how it is measured. Performance increases with increasing separation of the sampling distributions of NLs and LLs and the negative effect of increasing optimal reporting thresholds is not enough to overcome this. [Since $\text{LLF}$ is relatively constant while $\text{NLF}$ decreases sharply with increasing $\mu$, this is one example where an FROC-curve based measure does have an unambiguous interpretation, namely performance is higher for the larger values of $\mu$.  
 
 1. The wAFROC based based optimal thresholds are smaller than the corresponding Youden-index based optimal thresholds. A smaller threshold corresponds to a less strict reporting criterion and greater wAFROC-AUC and ROC-AUC performance.
 
-1. For fixed $\mu, \lambda, \nu$ the operating point on the FROC for $f = 2$ is below that corresponding to $f = 1$. The difference decreases with increasing $\mu$. These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-mu-froc). The black dots are consistently above the red dots and the separation of the dots is greatest for $\mu = 1$ and smallest for $\mu = 4$.  
+1. For fixed $\mu, \lambda, \nu$ the operating point on the FROC for $f = 2$ is below that corresponding to $f = 1$. The difference decreases with increasing $\mu$. These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-mu-froc). The red dots are consistently above the black dots and the separation of the dots is greatest for $\mu = 1$ and smallest for $\mu = 4$.  
 
 
 1. For fixed $\mu, \lambda, \nu$ the Youden-index based optimization yields lesser performance than the corresponding wAFROC-AUC based optimization. The difference decreases with increasing $\mu$. These effects are illustrated in Fig. \@ref(fig:optim-op-point-vary-mu-wafroc).
@@ -231,7 +236,7 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-vary-mu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\mu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-mu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\mu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -318,7 +323,11 @@ x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:
 
 
 ```{r optim-op-point-high-performance-vary-mu-table-vary-all, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
@@ -334,7 +343,7 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-low-performance-vary-mu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-low-performance-vary-mu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 # DpcBugFix 8/28/22
 # in next line the generating code has been altered to suppress title on each plot; TBA; TODOLAST 
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
@@ -416,7 +425,11 @@ x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:
 
 
 ```{r optim-op-point-low-performance-vary-mu-table-vary-all, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
@@ -431,7 +444,7 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-low-performance-vary-mu-vary-all, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-low-performance-vary-mu-vary-all, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -512,7 +525,11 @@ x12 <- doOneTable(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptAr
 
 
 ```{r optim-op-point-high-performance-vary-lambda-table-vary-all, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
@@ -527,7 +544,7 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-high-performance-vary-lambda-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-high-performance-vary-lambda-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 #grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
@@ -606,7 +623,11 @@ x12 <- doOneTable(lambdaPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptAr
 
 
 ```{r optim-op-point-low-performance-vary-lambda-table-vary-all, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
@@ -622,7 +643,7 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-low-performance-vary-lambda-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-low-performance-vary-lambda-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -703,7 +724,11 @@ x12 <- doOneTable(nuPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1
 
 
 ```{r optim-op-point-high-performance-vary-nu-table-vary-all, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
@@ -719,7 +744,7 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-high-performance-vary-nu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-high-performance-vary-nu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -798,7 +823,11 @@ x12 <- doOneTable(nuPArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1
 
 
 ```{r optim-op-point-low-performance-vary-nu-table-vary-all, echo=FALSE}
-kbl(x12, caption = "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $\\nu = 0.9$. Row labeling as in previous tables.", booktabs = TRUE, escape = FALSE) %>% collapse_rows(columns = c(1), valign = "middle") %>% kable_styling(latex_options = c("basic", "scale_down", "HOLD_position"), row_label_position = "c") 
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for 4 values of $\\mu$, $\\lambda = 1$ and $\\nu = 0.9$. Row labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
@@ -814,7 +843,7 @@ plotArr = plotFroc(muArr, lambdaPArr, nuPArr)
 
 
 
-```{r optim-op-point-low-performance-vary-nu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The black dot corresponds to wAFROC AUC optimization and the red dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-low-performance-vary-nu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
