@@ -15,7 +15,6 @@ output:
 
 
 
-
 ## TBA How much finished {#optim-op-point-how-much-finished}
 95%
 
