@@ -163,7 +163,7 @@ plotFroc <- function(muArr, lambdaArr, nuArr) {
             NLF = nlfOptArr[y,i1,i2,i3], 
             LLF = llfOptArr[y,i1,i2,i3])
           plotArr[[i]] <- plotArr[[i]] + 
-            geom_point(data = optPt, color = y) 
+            geom_point(data = optPt, color = 3-y) 
         }
         i <- i + 1
       }
