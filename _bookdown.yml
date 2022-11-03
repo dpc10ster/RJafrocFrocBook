@@ -9,7 +9,7 @@ rmd_files: [
   "03-empirical.Rmd",
   "05-visual-search.Rmd",
   "06-rsm.Rmd",
-  "07-rsm-predictions.Rmd",
+  "07-rsm-predictions1.Rmd",
   "08-rsm-predictions2.Rmd",
   "10-rsm-search-classification.Rmd",
   "11-rsm-fitting.Rmd",
