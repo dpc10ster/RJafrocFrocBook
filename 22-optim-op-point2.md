@@ -25,9 +25,13 @@ For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7
 
 
 
-
-
-
+```r
+muArr <- c(2)
+lambdaArr <- c(1)
+nuArr <- c(0.6, 0.7, 0.8, 0.9)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
 
 
 
@@ -151,8 +155,8 @@ For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-nu-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
-<p class="caption">(\#fig:optim-op-point-vary-nu-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-nu-wafroc-1.png" alt="Varying $\nu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
+<p class="caption">(\#fig:optim-op-point-vary-nu-wafroc)Varying $\nu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
 </div>
 
 
@@ -170,8 +174,8 @@ For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-nu-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
-<p class="caption">(\#fig:optim-op-point-vary-nu-roc)ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-nu-roc-1.png" alt="Varying $\nu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
+<p class="caption">(\#fig:optim-op-point-vary-nu-roc)Varying $\nu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
 </div>
 
 
@@ -189,12 +193,7 @@ For $\lambda = 1$ and $\nu = 0.9$ optimizations were performed for $\mu = 1, 2, 
 muArr <- c(1, 2, 3, 4)
 lambdaArr <- 1
 nuArr <- 0.9
-lesDistr <- c(0.5, 0.5)
-relWeights <- c(0.5, 0.5)
 ```
-
-
-
 
 
 
@@ -318,8 +317,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-mu-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-vary-mu-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-mu-wafroc-1.png" alt="Varying $\mu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-vary-mu-wafroc)Varying $\mu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
 </div>
 
 
@@ -335,8 +334,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-mu-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-vary-mu-roc)ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-mu-roc-1.png" alt="Varying $\mu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-vary-mu-roc)Varying $\mu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
 </div>
 
 
@@ -344,7 +343,7 @@ relWeights <- c(0.5, 0.5)
 
 ## Limiting cases {#optim-op-point-limiting-situations}
 
-### High performance vary $\mu$ {#optim-op-point-high-performance-vary-mu}
+### High performance varying $\mu$ {#optim-op-point-high-performance-vary-mu}
 
 
 
@@ -352,10 +351,7 @@ relWeights <- c(0.5, 0.5)
 muArr <- c(2, 3, 4, 5)
 nuArr <- c(0.9)
 lambdaArr <- c(1)
-lesDistr <- c(0.5, 0.5)
-relWeights <- c(0.5, 0.5)
 ```
-
 
 
 
@@ -372,7 +368,7 @@ relWeights <- c(0.5, 0.5)
 
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:optim-op-point-high-performance-vary-mu-table-vary-all)Summary of optimization results for $\lambda = 1$ and $\nu = 0.9$ and varying $\mu$.</caption>
+<caption style="font-size: initial !important;">(\#tab:optim-op-point-high-performance-vary-mu-table)High performance summary of optimization results for $\lambda = 1$ and $\nu = 0.9$ and varying $\mu$.</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -463,8 +459,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-froc-1.png" alt="Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-froc)Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$.</p>
 </div>
 
 
@@ -479,8 +475,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-mu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-mu-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-mu-wafroc-1.png" alt="High performance varying $\mu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-mu-wafroc)High performance varying $\mu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$.</p>
 </div>
 
 
@@ -496,12 +492,12 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-mu-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-mu-vary-all-roc)ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-mu-roc-1.png" alt="High performance varying $\mu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-mu-roc)High performance varying $\mu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$.</p>
 </div>
 
 
-### Low performance vary $\mu$ {#optim-op-point-low-performance-vary-mu}
+### Low performance varying $\mu$ {#optim-op-point-low-performance-vary-mu}
 
 
 
@@ -509,11 +505,7 @@ relWeights <- c(0.5, 0.5)
 muArr <- c(1, 2, 3, 4)
 nuArr <- c(0.1)
 lambdaArr <- c(10)
-lesDistr <- c(0.5, 0.5)
-relWeights <- c(0.5, 0.5)
 ```
-
-
 
 
 
@@ -530,7 +522,7 @@ relWeights <- c(0.5, 0.5)
 
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:optim-op-point-low-performance-vary-mu-table-vary-all)Summary of optimization results for $\lambda = 10$ and $nu = 0.1$ and varying $\mu$. Column labeling as in previous tables.</caption>
+<caption style="font-size: initial !important;">(\#tab:optim-op-point-low-performance-vary-mu-table)Low performance summary of optimization results for $\lambda = 10$ and $nu = 0.1$ and varying $\mu$. Column labeling as in previous tables.</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -620,8 +612,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-vary-all-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-vary-all)FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-1.png" alt="Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu)Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
 </div>
 
 
@@ -636,8 +628,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-wafroc-1.png" alt="Low performance varying $\mu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-wafroc)Low performance varying $\mu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
 </div>
 
 
@@ -652,14 +644,14 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-vary-all-roc)ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-roc-1.png" alt="Low performance varying $\mu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-roc)Low performance varying $\mu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
 </div>
 
 
 
 
-### High performance vary $\lambda$ {#optim-op-point-high-performance-vary-lambda}
+### High performance varying $\lambda$ {#optim-op-point-high-performance-vary-lambda}
 
 
 
@@ -667,8 +659,6 @@ relWeights <- c(0.5, 0.5)
 muArr <- c(4)
 nuArr <- c(0.9)
 lambdaArr <- c(1,2,5,10)
-lesDistr <- c(0.5, 0.5)
-relWeights <- c(0.5, 0.5)
 ```
 
 
@@ -687,7 +677,7 @@ relWeights <- c(0.5, 0.5)
 
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:optim-op-point-high-performance-vary-lambda-table-vary-all)Summary of optimization results for $\mu = 4$, $nu = 0.9$ and varying lambda. Column labeling as in previous tables.</caption>
+<caption style="font-size: initial !important;">(\#tab:optim-op-point-high-performance-vary-lambda-table)Summary of optimization results for $\mu = 4$, $nu = 0.9$ and varying $\lambda$. Column labeling as in previous tables.</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -777,8 +767,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-lambda-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-lambda-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-lambda-froc-1.png" alt="High performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-lambda-froc)High performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
 </div>
 
 
@@ -794,8 +784,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-lambda-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-lambda-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-lambda-wafroc-1.png" alt="High performance varying $\lambda$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-lambda-wafroc)High performance varying $\lambda$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
 </div>
 
 
@@ -810,12 +800,12 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-lambda-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-lambda-vary-all-roc)ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-lambda-roc-1.png" alt="High performance varying $\lambda$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-lambda-roc)High performance varying $\lambda$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
 </div>
 
 
-### Low performance vary $\lambda$ {#optim-op-point-low-performance-vary-lambda}
+### Low performance varying $\lambda$ {#optim-op-point-low-performance-vary-lambda}
 
 
 
@@ -823,8 +813,6 @@ relWeights <- c(0.5, 0.5)
 muArr <- c(1)
 nuArr <- c(0.2)
 lambdaArr <- c(1, 2, 5, 10)
-lesDistr <- c(0.5, 0.5)
-relWeights <- c(0.5, 0.5)
 ```
 
 
@@ -843,7 +831,7 @@ relWeights <- c(0.5, 0.5)
 
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:optim-op-point-low-performance-vary-lambda-table-vary-all)Summary of optimization results for $\mu = 1$, $\nu = 0.2$ and varying $\lambda$. Column labeling as in previous tables.</caption>
+<caption style="font-size: initial !important;">(\#tab:optim-op-point-low-performance-vary-lambda-table)Summary of optimization results for $\mu = 1$, $\nu = 0.2$ and varying $\lambda$. Column labeling as in previous tables.</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -934,8 +922,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-lambda-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-lambda-froc-1.png" alt="Low performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-froc)Low performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
 </div>
 
 
@@ -953,8 +941,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-lambda-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-lambda-wafroc-1.png" alt="Low performance varying $\lambda$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-wafroc)Low performance varying $\lambda$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
 </div>
 
 
@@ -969,13 +957,13 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-lambda-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-vary-all-roc)ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-lambda-roc-1.png" alt="Low performance varying $\lambda$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-roc)Low performance varying $\lambda$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
 </div>
 
 
 
-### High performance vary $\nu$ {#optim-op-point-high-performance-vary-nu}
+### High performance varying $\nu$ {#optim-op-point-high-performance-vary-nu}
 
 
 
@@ -983,8 +971,6 @@ relWeights <- c(0.5, 0.5)
 muArr <- c(4)
 lambdaArr <- c(1)
 nuArr <- c(0.6, 0.7, 0.8, 0.9)
-lesDistr <- c(0.5, 0.5)
-relWeights <- c(0.5, 0.5)
 ```
 
 
@@ -1003,7 +989,7 @@ relWeights <- c(0.5, 0.5)
 
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:optim-op-point-high-performance-vary-nu-table-vary-all)Summary of optimization results for $\mu = 4$, $\lambda = 1$ and varying $\nu$. Column labeling as in previous tables.</caption>
+<caption style="font-size: initial !important;">(\#tab:optim-op-point-high-performance-vary-nu-table)Summary of optimization results for $\mu = 4$, $\lambda = 1$ and varying $\nu$. Column labeling as in previous tables.</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -1094,8 +1080,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-nu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-nu-froc-1.png" alt="High performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-froc)High performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
 </div>
 
 
@@ -1112,8 +1098,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-nu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-nu-wafroc-1.png" alt="High performance varying $\nu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-wafroc)High performance varying $\nu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
 </div>
 
 
@@ -1128,12 +1114,12 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-nu-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-vary-all-roc)ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-nu-roc-1.png" alt="High performance varying $\nu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-roc)High performance varying $\nu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
 </div>
 
 
-### Low performance vary $\nu$ {#optim-op-point-low-performance-vary-nu}
+### Low performance varying $\nu$ {#optim-op-point-low-performance-vary-nu}
 
 
 
@@ -1141,10 +1127,7 @@ relWeights <- c(0.5, 0.5)
 muArr <- c(1)
 lambdaArr <- c(10)
 nuArr <- c(0.1, 0.2, 0.3, 0.4)
-lesDistr <- c(0.5, 0.5)
-relWeights <- c(0.5, 0.5)
 ```
-
 
 
 
@@ -1161,7 +1144,7 @@ relWeights <- c(0.5, 0.5)
 
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:optim-op-point-low-performance-vary-nu-table-vary-all)Summary of optimization results for $\mu = 1$, $\lambda = 10$ and varying $\nu$. Column labeling as in previous tables.</caption>
+<caption style="font-size: initial !important;">(\#tab:optim-op-point-low-performance-vary-nu-table)Summary of optimization results for $\mu = 1$, $\lambda = 10$ and varying $\nu$. Column labeling as in previous tables.</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> FOM </th>
@@ -1252,8 +1235,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-nu-vary-all-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-vary-all-froc)FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-nu-froc-1.png" alt="Low performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-froc)Low performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$.</p>
 </div>
 
 
@@ -1271,8 +1254,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-nu-vary-all-wafroc-1.png" alt="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-vary-all-wafroc)wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-nu-wafroc-1.png" alt="Low performance varying $\nu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-wafroc)Low performance varying $\nu$ wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$.</p>
 </div>
 
 
@@ -1287,8 +1270,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-nu-vary-all-roc-1.png" alt="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-vary-all-roc)ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-nu-roc-1.png" alt="Low performance varying $\nu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-roc)Low performance varying $\nu$ ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$.</p>
 </div>
 
 
