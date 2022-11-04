@@ -1,6 +1,6 @@
 # (PART\*) CAD applications {-}
 
-# Standalone CAD vs. Radiologists {#standalone-cad-radiologists}
+# Standalone CAD {#standalone-cad-radiologists}
 
 
 ```{r setup, include = FALSE}

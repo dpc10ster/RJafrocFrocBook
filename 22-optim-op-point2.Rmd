@@ -1,0 +1,855 @@
+# CAD optimal operating point II {#cad-optim-op-point-2}
+
+---
+output:
+  rmarkdown::pdf_document:
+    fig_caption: yes        
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval.after = "fig.cap"
+)
+
+library(RJafroc)
+library(ggplot2)
+library(kableExtra)
+library(gridExtra)
+library(abind)
+library(dplyr)
+library(mvtnorm)
+library(here)
+```
+
+
+
+```{r, include=FALSE}
+source("R/collapse_rows_df.R", local = knitr::knit_global())
+```
+
+
+
+```{r, echo=FALSE}
+source(here("R/optim-op-point/optim-op-point-helpers.R"))
+```
+
+
+
+## Varying $\nu$ optimizations{#optim-op-point-vary-nu}
+
+For $\mu = 2$ and $\lambda = 1$ optimizations were performed for $\nu = 0.6, 0.7, 0.8, 0.9$. 
+
+
+
+
+```{r, echo = FALSE}
+muArr <- c(2)
+lambdaArr <- c(1)
+nuArr <- c(0.6, 0.7, 0.8, 0.9)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
+
+
+
+
+
+```{r, echo = FALSE}
+ret <- doOneSet(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+zetaOptArr <- ret$zetaOptArr
+nlfOptArr <- ret$nlfOptArr
+llfOptArr <- ret$llfOptArr
+fpfOptArr <- ret$fpfOptArr
+tpfOptArr <- ret$tpfOptArr
+wAfrocArr <- ret$wAfrocArr
+rocArr <- ret$rocArr
+```
+
+
+### Summary table
+
+
+```{r optim-op-point-table-vary-nu-contents, echo=FALSE}
+x12 <- doOneTable(nuArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1,1:4, labelIndx = 3)
+```
+
+
+
+
+```{r optim-op-point-table-vary-nu, echo=FALSE}
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for $\\mu = 2$, $\\lambda = 1$ and varying $\\nu$."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+```
+
+
+
+
+### FROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotFroc(muArr, lambdaArr, nuArr)
+```
+
+
+
+
+```{r optim-op-point-vary-nu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+### wAFROC
+
+
+ 
+```{r echo=FALSE}
+plotArr = plotwAfroc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+```{r optim-op-point-vary-nu-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+### ROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotRoc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+
+
+
+```{r optim-op-point-vary-nu-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+
+
+## Varying $\mu$ optimizations{#optim-op-point-vary-mu}
+
+For $\lambda = 1$ and $\nu = 0.9$ optimizations were performed for $\mu = 1, 2, 3, 4$. 
+
+
+
+```{r}
+muArr <- c(1, 2, 3, 4)
+lambdaArr <- 1
+nuArr <- 0.9
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
+
+
+
+
+
+```{r, echo = FALSE}
+ret <- doOneSet(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+zetaOptArr <- ret$zetaOptArr
+nlfOptArr <- ret$nlfOptArr
+llfOptArr <- ret$llfOptArr
+fpfOptArr <- ret$fpfOptArr
+tpfOptArr <- ret$tpfOptArr
+wAfrocArr <- ret$wAfrocArr
+rocArr <- ret$rocArr
+```
+
+
+
+
+### Summary table
+
+
+
+```{r optim-op-point-table-vary-mu-contents, echo=FALSE}
+x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:4,1,1, labelIndx = 1)
+```
+
+
+
+
+
+```{r optim-op-point-table-vary-mu, echo=FALSE}
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for $\\lambda = 1$, $\\nu = 0.9$ and varying $\\mu$."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+```
+
+
+
+### FROC
+
+
+```{r echo=FALSE}
+plotArr = plotFroc(muArr, lambdaArr, nuArr)
+```
+
+
+
+
+```{r optim-op-point-vary-mu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\mu$. The red dot corresponds to wAFROC optimization and the black dot to Youden-index optimization. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+### wAFROC
+
+
+```{r echo=FALSE}
+plotArr = plotwAfroc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+```{r optim-op-point-vary-mu-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+
+### ROC
+
+
+```{r echo=FALSE}
+plotArr = plotRoc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+
+```{r optim-op-point-vary-mu-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+
+## Limiting cases {#optim-op-point-limiting-situations}
+
+### High performance vary $\mu$ {#optim-op-point-high-performance-vary-mu}
+
+
+```{r}
+muArr <- c(2, 3, 4, 5)
+nuArr <- c(0.9)
+lambdaArr <- c(1)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
+
+
+
+
+```{r, echo = FALSE}
+ret <- doOneSet(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+zetaOptArr <- ret$zetaOptArr
+nlfOptArr <- ret$nlfOptArr
+llfOptArr <- ret$llfOptArr
+fpfOptArr <- ret$fpfOptArr
+tpfOptArr <- ret$tpfOptArr
+wAfrocArr <- ret$wAfrocArr
+rocArr <- ret$rocArr
+```
+
+
+
+#### Summary table
+
+
+
+```{r optim-op-point-high-performance-vary-mu-table-vary-all-contents, echo=FALSE}
+x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:4,1,1, labelIndx = 1)
+```
+
+
+
+```{r optim-op-point-high-performance-vary-mu-table-vary-all, echo=FALSE}
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for $\\lambda = 1$ and $\\nu = 0.9$ and varying $\\mu$."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+```
+
+
+
+#### FROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotFroc(muArr, lambdaArr, nuArr)
+```
+
+
+
+
+```{r optim-op-point-low-performance-vary-mu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\mu$ are: top-left $\\mu = 2$, top-right $\\mu = 3$, bottom-left $\\mu = 4$ and bottom-right $\\mu = 5$.", fig.show='hold', echo=FALSE}
+# DpcBugFix 8/28/22
+# in next line the generating code has been altered to suppress title on each plot; TBA; TODOLAST 
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+
+#### wAFROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotwAfroc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+```{r optim-op-point-high-performance-vary-mu-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\mu$ are: top-left $\\mu = 2$, top-right $\\mu = 3$, bottom-left $\\mu = 4$ and bottom-right $\\mu = 5$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
+```
+
+
+
+
+#### ROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotRoc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+```{r optim-op-point-high-performance-vary-mu-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\mu$ are: top-left $\\mu = 2$, top-right $\\mu = 3$, bottom-left $\\mu = 4$ and bottom-right $\\mu = 5$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+### Low performance vary $\mu$ {#optim-op-point-low-performance-vary-mu}
+
+
+```{r}
+muArr <- c(1, 2, 3, 4)
+nuArr <- c(0.1)
+lambdaArr <- c(10)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
+
+
+
+
+
+```{r, echo = FALSE}
+ret <- doOneSet(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+zetaOptArr <- ret$zetaOptArr
+nlfOptArr <- ret$nlfOptArr
+llfOptArr <- ret$llfOptArr
+fpfOptArr <- ret$fpfOptArr
+tpfOptArr <- ret$tpfOptArr
+wAfrocArr <- ret$wAfrocArr
+rocArr <- ret$rocArr
+```
+
+
+
+
+#### Summary table
+
+
+```{r optim-op-point-low-performance-vary-mu-table-vary-all-contents, echo=FALSE}
+x12 <- doOneTable(muArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1:4,1,1, labelIndx = 1)
+```
+
+
+
+```{r optim-op-point-low-performance-vary-mu-table-vary-all, echo=FALSE}
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for $\\lambda = 10$ and $nu = 0.1$ and varying $\\mu$. Column labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+```
+
+
+#### FROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotFroc(muArr, lambdaArr, nuArr)
+```
+
+
+
+
+```{r optim-op-point-low-performance-vary-mu-vary-all, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+
+#### wAFROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotwAfroc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+```{r optim-op-point-low-performance-vary-mu-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
+```
+
+
+
+#### ROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotRoc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+```{r optim-op-point-low-performance-vary-mu-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
+```
+
+
+
+
+### High performance vary $\lambda$ {#optim-op-point-high-performance-vary-lambda}
+
+
+```{r}
+muArr <- c(4)
+nuArr <- c(0.9)
+lambdaArr <- c(1,2,5,10)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
+
+
+
+
+```{r, echo = FALSE}
+ret <- doOneSet(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+zetaOptArr <- ret$zetaOptArr
+nlfOptArr <- ret$nlfOptArr
+llfOptArr <- ret$llfOptArr
+fpfOptArr <- ret$fpfOptArr
+tpfOptArr <- ret$tpfOptArr
+wAfrocArr <- ret$wAfrocArr
+rocArr <- ret$rocArr
+```
+
+
+
+
+#### Summary table
+
+
+```{r optim-op-point-high-performance-vary-lambda-table-vary-all-contents, echo=FALSE}
+x12 <- doOneTable(lambdaArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1:4,1, labelIndx = 2)
+```
+
+
+
+```{r optim-op-point-high-performance-vary-lambda-table-vary-all, echo=FALSE}
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for $\\mu = 4$, $nu = 0.9$ and varying lambda. Column labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+```
+
+
+#### FROC
+
+
+
+
+```{r echo=FALSE}
+plotArr = plotFroc(muArr, lambdaArr, nuArr)
+```
+
+
+
+```{r optim-op-point-high-performance-vary-lambda-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+#grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
+```
+
+
+
+#### wAFROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotwAfroc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+
+```{r optim-op-point-high-performance-vary-lambda-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+#### ROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotRoc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+```{r optim-op-point-high-performance-vary-lambda-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+### Low performance vary $\lambda$ {#optim-op-point-low-performance-vary-lambda}
+
+
+```{r}
+muArr <- c(1)
+nuArr <- c(0.2)
+lambdaArr <- c(1, 2, 5, 10)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
+
+
+
+
+```{r, echo = FALSE}
+ret <- doOneSet(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+zetaOptArr <- ret$zetaOptArr
+nlfOptArr <- ret$nlfOptArr
+llfOptArr <- ret$llfOptArr
+fpfOptArr <- ret$fpfOptArr
+tpfOptArr <- ret$tpfOptArr
+wAfrocArr <- ret$wAfrocArr
+rocArr <- ret$rocArr
+```
+
+
+
+#### Summary table
+
+
+
+```{r optim-op-point-low-performance-vary-lambda-table-vary-all-contents, echo=FALSE}
+x12 <- doOneTable(lambdaArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1:4,1, labelIndx = 2)
+```
+
+
+
+```{r optim-op-point-low-performance-vary-lambda-table-vary-all, echo=FALSE}
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for $\\mu = 1$, $\\nu = 0.2$ and varying $\\lambda$. Column labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+```
+
+
+
+#### FROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotFroc(muArr, lambdaArr, nuArr)
+```
+
+
+
+
+```{r optim-op-point-low-performance-vary-lambda-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+#### wAFROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotwAfroc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+
+
+
+```{r optim-op-point-low-performance-vary-lambda-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+#### ROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotRoc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+```{r optim-op-point-low-performance-vary-lambda-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+### High performance vary $\nu$ {#optim-op-point-high-performance-vary-nu}
+
+
+```{r}
+muArr <- c(4)
+lambdaArr <- c(1)
+nuArr <- c(0.6, 0.7, 0.8, 0.9)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
+
+
+
+
+```{r, echo = FALSE}
+ret <- doOneSet(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+zetaOptArr <- ret$zetaOptArr
+nlfOptArr <- ret$nlfOptArr
+llfOptArr <- ret$llfOptArr
+fpfOptArr <- ret$fpfOptArr
+tpfOptArr <- ret$tpfOptArr
+wAfrocArr <- ret$wAfrocArr
+rocArr <- ret$rocArr
+```
+
+
+
+#### Summary table
+
+
+
+```{r optim-op-point-high-performance-vary-nu-table-vary-all-contents, echo=FALSE}
+x12 <- doOneTable(nuArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1,1:4, labelIndx = 3)
+```
+
+
+
+```{r optim-op-point-high-performance-vary-nu-table-vary-all, echo=FALSE}
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for $\\mu = 4$, $\\lambda = 1$ and varying $\\nu$. Column labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+```
+
+
+
+#### FROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotFroc(muArr, lambdaArr, nuArr)
+```
+
+
+
+
+```{r optim-op-point-high-performance-vary-nu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+#### wAFROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotwAfroc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+
+
+```{r optim-op-point-high-performance-vary-nu-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+#### ROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotRoc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+```{r optim-op-point-high-performance-vary-nu-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+### Low performance vary $\nu$ {#optim-op-point-low-performance-vary-nu}
+
+
+```{r}
+muArr <- c(1)
+lambdaArr <- c(10)
+nuArr <- c(0.1, 0.2, 0.3, 0.4)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
+
+
+
+
+```{r, echo = FALSE}
+ret <- doOneSet(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+zetaOptArr <- ret$zetaOptArr
+nlfOptArr <- ret$nlfOptArr
+llfOptArr <- ret$llfOptArr
+fpfOptArr <- ret$fpfOptArr
+tpfOptArr <- ret$tpfOptArr
+wAfrocArr <- ret$wAfrocArr
+rocArr <- ret$rocArr
+```
+
+
+
+#### Summary table
+
+
+
+```{r optim-op-point-low-performance-vary-nu-table-vary-all-contents, echo=FALSE}
+x12 <- doOneTable(nuArr, zetaOptArr, wAfrocArr, rocArr, nlfOptArr, llfOptArr, 1,1,1:4, labelIndx = 3)
+```
+
+
+
+```{r optim-op-point-low-performance-vary-nu-table-vary-all, echo=FALSE}
+df <- collapse_rows_df(x12,FOM)
+
+captionStr <- "Summary of optimization results for $\\mu = 1$, $\\lambda = 10$ and varying $\\nu$. Column labeling as in previous tables."
+  
+kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+```
+
+
+
+#### FROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotFroc(muArr, lambdaArr, nuArr)
+```
+
+
+
+
+```{r optim-op-point-low-performance-vary-nu-vary-all-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\nu$ are: top-left $\\nu = 0.1$, top-right $\\nu = 0.2$, bottom-left $\\nu = 0.3$ and bottom-right $\\nu = 0.4$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+#### wAFROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotwAfroc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+
+
+
+```{r optim-op-point-low-performance-vary-nu-vary-all-wafroc, fig.cap="wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\nu$ are: top-left $\\nu = 0.1$, top-right $\\nu = 0.2$, bottom-left $\\nu = 0.3$ and bottom-right $\\nu = 0.4$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
+#### ROC
+
+
+
+```{r echo=FALSE}
+plotArr = plotRoc(muArr, lambdaArr, nuArr, lesDistr, relWeights)
+```
+
+
+
+
+```{r optim-op-point-low-performance-vary-nu-vary-all-roc, fig.cap="ROC plots for the two optimization methods. The color coding is as in previous figures. The values of $\\nu$ are: top-left $\\nu = 0.1$, top-right $\\nu = 0.2$, bottom-left $\\nu = 0.3$ and bottom-right $\\nu = 0.4$.", fig.show='hold', echo=FALSE}
+grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
+```
+
+
+
