@@ -135,7 +135,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-11-03}
+\date{2022-11-04}
 
 \begin{document}
 \maketitle
@@ -3024,7 +3024,7 @@ No effect on FPF but TPF increases as more lesions per case means more LLs per c
 
 \begin{figure}
 \centering
-\includegraphics{07-rsm-predictions_files/figure-latex/rsm-predictions-fig-auc-mu-plots-1.pdf}
+\includegraphics{07-rsm-predictions1_files/figure-latex/rsm-predictions-fig-auc-mu-plots-1.pdf}
 \caption{\label{fig:rsm-predictions-fig-auc-mu-plots}ROC curves for indicated values of the \(\mu\) parameter. Notice the transition, as \(\mu\) increases, from near chance level performance to almost perfect performancea as the end-point moves from near (1,1) to near (0,1).}
 \end{figure}
 
@@ -3056,7 +3056,7 @@ The following are evident from these figures:
 
 \begin{figure}
 \centering
-\includegraphics{07-rsm-predictions_files/figure-latex/rsm-predictions-fig-pdf-mu-plots-1.pdf}
+\includegraphics{07-rsm-predictions1_files/figure-latex/rsm-predictions-fig-pdf-mu-plots-1.pdf}
 \caption{\label{fig:rsm-predictions-fig-pdf-mu-plots}RSM pdf curves for indicated values of the \(\mu\) parameter. The solid curve corresponds to diseased cases and the dotted curve corresponds to non-diseased cases.}
 \end{figure}
 
@@ -3153,7 +3153,7 @@ Clearly the red curve has higher AUC. The specific values are 0.9591597 for the 
 
 \begin{figure}
 \centering
-\includegraphics{07-rsm-predictions_files/figure-latex/rsm-predictions-roc-zeta1-1.pdf}
+\includegraphics{07-rsm-predictions1_files/figure-latex/rsm-predictions-roc-zeta1-1.pdf}
 \caption{\label{fig:rsm-predictions-roc-zeta1}ROC curves for two values of \(\zeta\): both curves correspond to \(\mu = 2\), \(\nu = 1\) and \(\lambda = 1\). The red curve corresponds to \(\zeta = -10\) and the blue curve to \(\zeta = 1\).}
 \end{figure}
 
@@ -3291,7 +3291,7 @@ The end-point coordinates are (0.1812692, 0.9410514) and the slope is 0.072. Nex
 
 \begin{figure}
 \centering
-\includegraphics{07-rsm-predictions_files/figure-latex/rsm-predictions-roc-plot-1.pdf}
+\includegraphics{07-rsm-predictions1_files/figure-latex/rsm-predictions-roc-plot-1.pdf}
 \caption{\label{fig:rsm-predictions-roc-plot}ROC curve for selected RSM parameters. The slope of the dashed line is 0.4935272.}
 \end{figure}
 
@@ -3349,7 +3349,7 @@ The next code section displays 3 plots.
 
 \begin{figure}
 \centering
-\includegraphics{07-rsm-predictions_files/figure-latex/rsm-predictions-plots1-1.pdf}
+\includegraphics{07-rsm-predictions1_files/figure-latex/rsm-predictions-plots1-1.pdf}
 \caption{\label{fig:rsm-predictions-plots1}Horizontal dashed red line: the value of \texttt{mStLine}, the slope of the straight line connecting the ROC end-point to (1,1). Dashed blue line: slope using double precision arithmetic. Solid black line: slope using multiple precision arithmetic - this curve approaches the limiting value \texttt{mStLine}.}
 \end{figure}
 
@@ -4812,7 +4812,7 @@ The following plots are arranged in pairs, with the left plot corresponding to t
 \addcontentsline{toc}{part}{CAD applications}
 
 \hypertarget{standalone-cad-radiologists}{%
-\chapter{Standalone CAD vs.~Radiologists}\label{standalone-cad-radiologists}}
+\chapter{Standalone CAD}\label{standalone-cad-radiologists}}
 
 \hypertarget{standalone-cad-radiologists-how-much-finished}{%
 \section{How much finished}\label{standalone-cad-radiologists-how-much-finished}}
@@ -5590,13 +5590,13 @@ Background on the radiological search model (RSM) is provided in Chapter \ref{rs
   The \(\nu\) parameter, \(0 \le \nu \le 1\), determines the probability of latent LLs, i.e., the probability that any present lesion will be perceived. Higher values of \(\nu\) lead to more latent LL marks and increased performance.
 \end{itemize}
 
-Additionally, the threshold \(\zeta_1\) determines if a latent mark is actually marked: if the rating of a latent mark exceeds \(\zeta_1\) the latent mark is actually marked. Higher values of \(\zeta_1\) correspond to more stringent reporting criteria and fewer actual marks. As will be shown next \textbf{net performance as measured by wAFROC-AUC or the Youden-index peaks at an optimal value of \(\zeta_1\)}. The purpose of this chapter is to investigate this effect, i.e., given the 3 RSM parameters and the figure of merit to be optimized (i.e., wAFROC-AUC or the Youden-index), to determine the optimal value of \(\zeta_1\).
+Additionally, there is a threshold parameter \(\zeta_1\) with the property that only if the rating of a latent mark exceeds \(\zeta_1\) the latent mark is actually marked. Therefore higher values of \(\zeta_1\) correspond to more stringent reporting criteria and fewer actual marks. As will be shown next \textbf{net performance as measured by wAFROC-AUC or the Youden-index peaks at an optimal value of \(\zeta_1\)}. The purpose of this chapter is to investigate this effect, i.e., given the 3 RSM parameters and the figure of merit to be optimized (i.e., wAFROC-AUC or the Youden-index), to determine the optimal value of \(\zeta_1\).
 
-In the following sections each of the three RSM parameters is varied in turn and the corresponding optimal \(\zeta_1\) determined by maximizing either wAFROC-AUC or the Youden-index. The value maximizing wAFROC-AUC is denoted \(\zeta_{1} \left ( 1, \mu, \lambda, \nu \right )\) and that maximizing the Youden-index is denoted \(\zeta_{1} \left ( 2, \mu, \lambda, \nu \right )\).
+In the following sections the RSM \(\lambda\) parameter is varied (for fixed \(\mu\) and \(\nu\)) and the corresponding optimal \(\zeta_1\) determined by maximizing either wAFROC-AUC or the Youden-index. The value maximizing wAFROC-AUC is denoted \(\zeta_{1} \left ( 1, \mu, \lambda, \nu \right )\) and that maximizing the Youden-index is denoted \(\zeta_{1} \left ( 2, \mu, \lambda, \nu \right )\). These results are termed varying \(\lambda\) optimizations.
 
-The wAFROC figure of merit is implemented in the \texttt{RJafroc} function \texttt{UtilAnalyticalAucsRSM}.
+To keep this chapter to a reasonable length the results for varying \(\mu\) or \(\nu\) are only summarized in this chapter. The detailed results presented in Chapter \ref{cad-optim-op-point-2} (this chapter also has results for the limiting cases of high and low ROC performance).
 
-The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function \texttt{RSM\_yROC} and specificity is the complement of \texttt{RSM\_xROC}.
+The wAFROC figure of merit is implemented in the \texttt{RJafroc} function \texttt{UtilAnalyticalAucsRSM}. The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function \texttt{RSM\_yROC} and specificity is the complement of \texttt{RSM\_xROC}.
 
 \hypertarget{optim-op-point-vary-lambda}{%
 \section{\texorpdfstring{Varying \(\lambda\) optimizations}{Varying \textbackslash lambda optimizations}}\label{optim-op-point-vary-lambda}}
@@ -5686,7 +5686,7 @@ The second effect is illustrated by the FROC plots with superimposed operating p
 
 \begin{figure}
 \centering
-\includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-vary-lambda-froc-1.pdf}
+\includegraphics{21-optim-op-point1_files/figure-latex/optim-op-point-vary-lambda-froc-1.pdf}
 \caption{\label{fig:optim-op-point-vary-lambda-froc}FROC plots with superimposed operating points for varying \(\lambda\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.}
 \end{figure}
 
@@ -5699,7 +5699,7 @@ The transition from continuous to dashed is determined by the value of \(\zeta_1
 
 \begin{figure}
 \centering
-\includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-vary-lambda-wafroc-1.pdf}
+\includegraphics{21-optim-op-point1_files/figure-latex/optim-op-point-vary-lambda-wafroc-1.pdf}
 \caption{\label{fig:optim-op-point-vary-lambda-wafroc}wAFROC plots for the two optimization methods: the ``green solid-red dashed-red'' curve corresponds to wAFROC-AUC optimization and the ``solid-green dashed-green'' curve corresponds to Youden-index optimization. The wAFROC optimizations yield greater performance than do Youden-index optimizations and the difference decreases with increasing \(\lambda\).}
 \end{figure}
 
@@ -5710,7 +5710,7 @@ The decrease in \(\text{ROC}\) with increasing \(\lambda\) is illustrated in Fig
 
 \begin{figure}
 \centering
-\includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-vary-lambda-roc-1.pdf}
+\includegraphics{21-optim-op-point1_files/figure-latex/optim-op-point-vary-lambda-roc-1.pdf}
 \caption{\label{fig:optim-op-point-vary-lambda-roc}ROC plots for the two optimization methods: the ``green solid-red dashed-red'' curve corresponds to wAFROC-AUC optimization and the ``solid-green dashed-green'' curve corresponds to Youden-index optimization. The wAFROC optimizations yield greater performance than Youden-index optimizations and the difference decreases with increasing \(\lambda\).}
 \end{figure}
 
@@ -5723,25 +5723,25 @@ For a proper ROC curve the slope decreases monotonically as the operating point 
 
 \begin{figure}
 \centering
-\includegraphics{21-optim-op-point_files/figure-latex/binormal-model-threshold-dependence-2-1.pdf}
+\includegraphics{21-optim-op-point1_files/figure-latex/binormal-model-threshold-dependence-2-1.pdf}
 \caption{\label{fig:binormal-model-threshold-dependence-2}In the region above the dot the proper curve is above the dotted line, meaning performance of an observer who adopts a finite \(\zeta_1\) is less than performance of an observer who adopts \(\zeta_1 = -\infty\).}
 \end{figure}
 
 \hypertarget{optim-op-point-vary-nu-mu}{%
 \section{\texorpdfstring{Varying \(\nu\) and \(\mu\) optimizations}{Varying \textbackslash nu and \textbackslash mu optimizations}}\label{optim-op-point-vary-nu-mu}}
 
-Details of varying \(\nu\), including tables and figures, are in Appendix \ref{optim-op-point-vary-nu}. The results are similar to those just described for varying \(\lambda\) but, since unlike \(\lambda\) increasing \(\nu\) results in increasing performance, the directions of the effects are reversed. As \(\nu\) increases wAFROC-AUC and ROC-AUC performances increase and the reporting threshold \(\zeta_1\) decreases. The Youden-index based optimal threshold is almost independent of \(\nu\) which results in relatively constant NLF while LLF increases with increasing \(\nu\). As before wAFROC optimization yields lower reporting threshold and higher performance than Youden-index optimization.
+Details of varying \(\nu\) (with \(\mu\) and \(\lambda\) held constant) are in Chapter \ref{cad-optim-op-point-2} Section \ref{optim-op-point-vary-nu}. The results, summarized in Table \ref{tab:optim-op-point-table-vary-nu}, are similar to those just described for varying \(\lambda\) but, since unlike as was the case with increasing \(\lambda\), increasing \(\nu\) results in increasing performance, the directions of the effects are reversed. For either optimization method as \(\nu\) increases both wAFROC-AUC and ROC-AUC increase. The optimal reporting threshold \(\zeta_1\) decreases sharply (laxer reporting threshold) for wAFROC optimization, i.e., the FROC operating point moves up the curve. In contrast the Youden-index based optimal threshold is almost independent of \(\nu\) which results in relatively constant NLF while LLF increases with increasing \(\nu\), see Fig. \ref{fig:optim-op-point-vary-nu-froc}). As before, wAFROC optimization yields lower reporting threshold and higher performance than Youden-index optimization (particularly for larger \(\nu\)). See Fig. \ref{fig:optim-op-point-vary-nu-wafroc} for the wAFROC performance comparison between the two optimization methods and Fig. \ref{fig:optim-op-point-vary-nu-roc} for the ROC performance comparison. The difference between the two optimization methods increases with increasing \(\nu\) (for comparison the difference between the two optimization methods decreases with increasing \(\lambda\)).
 
-Details of varying \(\mu\) are in Appendix \ref{optim-op-point-vary-mu}. Increasing \(\mu\) results in increasing performance and is accompanied by increasing \(\zeta_1\): LLF is relatively constant while NLF decreases for both optimization methods. Again wAFROC optimization yields lower reporting threshold and higher performance than Youden-index optimization.
+Details of varying \(\mu\) (with \(\lambda\) and \(\nu\) held constant) are in Chapter \ref{cad-optim-op-point-2} Section \ref{optim-op-point-vary-mu}. The results are summarized in Table \ref{tab:optim-op-point-table-vary-mu}. Increasing \(\mu\) is accompanied by increasing \(\zeta_1\) (stricter reporting threshold) and increasing wAFROC-AUC and ROC-AUC. Performance measured either way is higher for wAFROC optimizations but the difference tends to shrink at the larger values of \(\mu\). LLF is relatively constant for wAFROC optimizations while it increases slowly with \(\mu\) for Youden-index optimizations. NLF decreases with increasing \(\mu\) for both optimization methods, i.e, the FROC operating point shifts down-left, see Fig. \ref{fig:optim-op-point-vary-mu-froc}). Again, wAFROC optimization yields a lower reporting threshold and higher performance than Youden-index optimization, see Fig. \ref{fig:optim-op-point-vary-mu-wafroc} for the wAFROC performance comparison and Fig. \ref{fig:optim-op-point-vary-mu-roc} for the ROC performance comparison. The difference between the two optimization methods decreases with increasing \(\mu\).
 
 \hypertarget{optim-op-point-vary-nu-limiting-situations}{%
 \section{Very high or very low performance}\label{optim-op-point-vary-nu-limiting-situations}}
 
-Limiting situations covering very high and very low performances are described in Appendix \ref{optim-op-point-limiting-situations}.
+Limiting situations covering high and low performances are described in \ref{optim-op-point-limiting-situations}.
 
-For very high performance, defined as \(\text{ROC-AUC} > 0.9\), both methods place the optimal operating point on the sharp bend near the upper-left corner of all operating characteristics. The wAFROC based method chooses a lower threshold than the Youden-index method resulting in a higher operating point on the FROC and higher wAFROC-AUC and ROC-AUC performance. The difference between the two methods decreases as \(\text{ROC-AUC} \rightarrow 1\).
+For high performance, defined as \(\text{ROC-AUC} > 0.9\), both methods place the optimal operating point on the sharp bend near the upper-left corner of the operating characteristics. The wAFROC based method chooses a lower threshold than the Youden-index method resulting in a higher operating point on the FROC and higher wAFROC-AUC and ROC-AUC. The difference between the two methods decreases as \(\text{ROC-AUC} \rightarrow 1\).
 
-For very low performance, defined as \(0.5 < \text{ROC-AUC} < 0.6\), the Youden-index method chooses a lower threshold compared to wAFROC optimization, resulting in a higher operating point on the FROC, greater ROC-AUC but sharply lower wAFROC-AUC. The difference between the two methods increases as \(\text{ROC-AUC} \rightarrow 0.5\). In this limit the wAFROC method severely limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.
+For low performance, defined as \(0.5 < \text{ROC-AUC} < 0.6\), the Youden-index method selected a lower threshold compared to wAFROC optimization, resulting in a higher operating point on the FROC, greater ROC-AUC but sharply lower wAFROC-AUC. The difference between the two methods increases as \(\text{ROC-AUC} \rightarrow 0.5\). In this limit the wAFROC method severely limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.
 
 \hypertarget{optim-op-point-how-to-use-method}{%
 \section{Using the method}\label{optim-op-point-how-to-use-method}}
@@ -5796,7 +5796,7 @@ Fig. \ref{fig:optim-op-point-application-froc} shows FROC curves with superimpos
 
 \begin{figure}
 \centering
-\includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-application-froc-1.pdf}
+\includegraphics{21-optim-op-point1_files/figure-latex/optim-op-point-application-froc-1.pdf}
 \caption{\label{fig:optim-op-point-application-froc}FROC plots with superposed optimal operating points. The red dot is using wAFROC optimization and black dot is using Youden-index optimization.}
 \end{figure}
 
@@ -5807,7 +5807,7 @@ Fig. \ref{fig:optim-op-point-application-wafroc} shows wAFROC curves using the t
 
 \begin{figure}
 \centering
-\includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-application-wafroc-1.pdf}
+\includegraphics{21-optim-op-point1_files/figure-latex/optim-op-point-application-wafroc-1.pdf}
 \caption{\label{fig:optim-op-point-application-wafroc}The color coding is as in previous figures. The two wAFROC-AUCs are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization).}
 \end{figure}
 
@@ -5818,7 +5818,7 @@ Fig. \ref{fig:optim-op-point-application-roc} shows ROC curves using the two met
 
 \begin{figure}
 \centering
-\includegraphics{21-optim-op-point_files/figure-latex/optim-op-point-application-roc-1.pdf}
+\includegraphics{21-optim-op-point1_files/figure-latex/optim-op-point-application-roc-1.pdf}
 \caption{\label{fig:optim-op-point-application-roc}The color coding is as in previous figures. The two ROC-AUCs are 0.815 (wAFROC optimization) and 0.798 (Youden-index optimization).}
 \end{figure}
 
@@ -5837,11 +5837,11 @@ The FROC plots also illustrate the decrease in \(\text{LLF}\) with increasing \(
 
 TBA For very low performance, defined as \(0.5 < \text{ROC-AUC} < 0.6\), the Youden-index method chooses a lower threshold compared to wAFROC optimization, resulting in a higher operating point on the FROC, greater ROC-AUC but sharply lower wAFROC-AUC. The difference between the two methods increases as \(\text{ROC-AUC} \rightarrow 0.5\). In this limit the wAFROC method severely limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.
 
-\hypertarget{optim-op-point-appendices}{%
-\chapter{CAD optimal operating point II}\label{optim-op-point-appendices}}
+\hypertarget{cad-optim-op-point-2}{%
+\chapter{CAD optimal operating point II}\label{cad-optim-op-point-2}}
 
 \hypertarget{optim-op-point-vary-nu}{%
-\section{\texorpdfstring{Appendix I: Varying \(\nu\) optimizations}{Appendix I: Varying \textbackslash nu optimizations}}\label{optim-op-point-vary-nu}}
+\section{\texorpdfstring{Varying \(\nu\) optimizations}{Varying \textbackslash nu optimizations}}\label{optim-op-point-vary-nu}}
 
 For \(\mu = 2\) and \(\lambda = 1\) optimizations were performed for \(\nu = 0.6, 0.7, 0.8, 0.9\).
 
@@ -5850,7 +5850,7 @@ For \(\mu = 2\) and \(\lambda = 1\) optimizations were performed for \(\nu = 0.6
 
 \begin{table}
 
-\caption{\label{tab:optim-op-point-table-vary-nu}Summary of optimization results for $\mu = 2$, $\lambda = 1$ and 4 values of $\nu$.}
+\caption{\label{tab:optim-op-point-table-vary-nu}Summary of optimization results for $\mu = 2$, $\lambda = 1$ and varying $\nu$.}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{llllll}
@@ -5870,31 +5870,13 @@ Youden & 0.6 & 1.022 & 0.700 & 0.797 & (0.153, 0.502)\\
 \end{tabular}
 \end{table}
 
-Table \ref{tab:optim-op-point-table-vary-nu} summarizes the results.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  For wAFROC based optimization as \(\nu\) increases the optimal threshold decreases and both \(\text{wAFROC}\) and \(\text{ROC}\) increase. CAD performance increases regardless of how it is measured. Performance increases with increasing numbers of LLs per case and this effect is reinforced by performance increasing with decreasing optimal reporting threshold. Since both \(\text{LLF}\) and \(\text{NLF}\) increase with increasing \(\nu\) neither FROC-curve based measure has an unambiguous interpretation.
-\item
-  The wAFROC based based optimal thresholds are smaller than the corresponding Youden-index based optimal thresholds, i.e., \(\zeta_{1} < \zeta_{1} \left ( 2, \mu, \lambda, \nu \right )\). A smaller threshold corresponds to a less strict reporting criterion.
-\item
-  The operating point on the FROC for \(f = 2\) is below-left to that corresponding to \(f = 1\) and the difference increases with increasing \(\nu\). These effects are illustrated in Fig. \ref{fig:optim-op-point-vary-nu-froc}.
-\item
-  The Youden-index based optimization yields decreased performance compared to wAFROC-AUC based optimization and the difference decreases with decreasing \(\nu\). These effects are illustrated in Fig. \ref{fig:optim-op-point-vary-nu-wafroc}.
-\end{enumerate}
-
 \hypertarget{froc-3}{%
 \subsection{FROC}\label{froc-3}}
 
-The second effect is illustrated by the FROC plots shown in Fig. \ref{fig:optim-op-point-vary-nu-froc}. The red dots are consistently above the black dots and the separation of the dots is greatest for \(\nu = 0.9\) and smallest for \(\nu = 0.6\). The separation is greatest for poor performance.
-
-The FROC plots also illustrate the decrease in \(\text{LLF}\) with increasing \(\nu\) (the red dots move to larger ordinates, as do the black dots). However, the accompanying change in \(\text{NLF}\) rules out an FROC curve based unambiguous determination of the direction of the change in overall performance.
-
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-vary-nu-froc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-nu-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-vary-nu-froc-1.pdf}
+\caption{\label{fig:optim-op-point-vary-nu-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of \(\nu\) are: top-left \(\nu = 0.6\), top-right \(\nu = 0.7\), bottom-left \(\nu = 0.8\) and bottom-right \(\nu = 0.9\).}
 \end{figure}
 
 \hypertarget{wafroc-3}{%
@@ -5902,8 +5884,8 @@ The FROC plots also illustrate the decrease in \(\text{LLF}\) with increasing \(
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-vary-nu-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-nu-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-vary-nu-wafroc-1.pdf}
+\caption{\label{fig:optim-op-point-vary-nu-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\nu\) are: top-left \(\nu = 0.6\), top-right \(\nu = 0.7\), bottom-left \(\nu = 0.8\) and bottom-right \(\nu = 0.9\).}
 \end{figure}
 
 \hypertarget{roc-3}{%
@@ -5911,20 +5893,20 @@ The FROC plots also illustrate the decrease in \(\text{LLF}\) with increasing \(
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-vary-nu-roc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-nu-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-vary-nu-roc-1.pdf}
+\caption{\label{fig:optim-op-point-vary-nu-roc}ROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\nu\) are: top-left \(\nu = 0.6\), top-right \(\nu = 0.7\), bottom-left \(\nu = 0.8\) and bottom-right \(\nu = 0.9\).}
 \end{figure}
 
 \hypertarget{optim-op-point-vary-mu}{%
-\section{\texorpdfstring{Appendix II: Varying \(\mu\) optimizations}{Appendix II: Varying \textbackslash mu optimizations}}\label{optim-op-point-vary-mu}}
+\section{\texorpdfstring{Varying \(\mu\) optimizations}{Varying \textbackslash mu optimizations}}\label{optim-op-point-vary-mu}}
 
 For \(\lambda = 1\) and \(\nu = 0.9\) optimizations were performed for \(\mu = 1, 2, 3, 4\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
-\NormalTok{lambdaPArr <-}\StringTok{ }\DecValTok{1}
-\NormalTok{nuPArr <-}\StringTok{ }\FloatTok{0.9}
+\NormalTok{lambdaArr <-}\StringTok{ }\DecValTok{1}
+\NormalTok{nuArr <-}\StringTok{ }\FloatTok{0.9}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -5935,7 +5917,7 @@ For \(\lambda = 1\) and \(\nu = 0.9\) optimizations were performed for \(\mu = 1
 
 \begin{table}
 
-\caption{\label{tab:optim-op-point-table-vary-mu}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$, $\nu = 0.9$.}
+\caption{\label{tab:optim-op-point-table-vary-mu}Summary of optimization results for $\lambda = 1$, $\nu = 0.9$ and varying $\mu$.}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{llllll}
@@ -5955,27 +5937,13 @@ Youden & 1 & 0.462 & 0.704 & 0.815 & (0.322, 0.634)\\
 \end{tabular}
 \end{table}
 
-Table \ref{tab:optim-op-point-table-vary-mu} summarizes the results.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  For either FOM as \(\mu\) increases the optimal threshold \emph{increases} and both \(\text{wAFROC}\) and \(\text{ROC}\) \emph{increase}. CAD performance increases, regardless of how it is measured. Performance increases with increasing separation of the sampling distributions of NLs and LLs and the negative effect of increasing optimal reporting thresholds is not enough to overcome this. {[}Since \(\text{LLF}\) is relatively constant while \(\text{NLF}\) decreases sharply with increasing \(\mu\), this is one example where an FROC-curve based measure does have an unambiguous interpretation, namely performance is higher for the larger values of \(\mu\).
-\item
-  The wAFROC based based optimal thresholds are smaller than the corresponding Youden-index based optimal thresholds. A smaller threshold corresponds to a less strict reporting criterion and greater wAFROC-AUC and ROC-AUC performance.
-\item
-  For fixed \(\mu, \lambda, \nu\) the operating point on the FROC for \(f = 2\) is below that corresponding to \(f = 1\). The difference decreases with increasing \(\mu\). These effects are illustrated in Fig. \ref{fig:optim-op-point-vary-mu-froc}. The red dots are consistently above the black dots and the separation of the dots is greatest for \(\mu = 1\) and smallest for \(\mu = 4\).
-\item
-  For fixed \(\mu, \lambda, \nu\) the Youden-index based optimization yields lesser performance than the corresponding wAFROC-AUC based optimization. The difference decreases with increasing \(\mu\). These effects are illustrated in Fig. \ref{fig:optim-op-point-vary-mu-wafroc}.
-\end{enumerate}
-
 \hypertarget{froc-4}{%
 \subsection{FROC}\label{froc-4}}
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-vary-mu-froc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-mu-froc}FROC plots with superimposed operating points for varying \(\mu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-vary-mu-froc-1.pdf}
+\caption{\label{fig:optim-op-point-vary-mu-froc}FROC plots with superimposed operating points for varying \(\mu\). The red dot corresponds to wAFROC optimization and the black dot to Youden-index optimization. The values of \(\mu\) are: top-left \(\mu = 1\), top-right \(\mu = 2\), bottom-left \(\mu = 3\) and bottom-right \(\mu = 4\).}
 \end{figure}
 
 \hypertarget{wafroc-4}{%
@@ -5983,34 +5951,30 @@ Table \ref{tab:optim-op-point-table-vary-mu} summarizes the results.
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-vary-mu-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-mu-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-vary-mu-wafroc-1.pdf}
+\caption{\label{fig:optim-op-point-vary-mu-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\mu\) are: top-left \(\mu = 1\), top-right \(\mu = 2\), bottom-left \(\mu = 3\) and bottom-right \(\mu = 4\).}
 \end{figure}
-
-TBA The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-mu}, namely \(\zeta_1\) = -1.663 for the green-red-red-dashed curve and \(\zeta_1\) = 0.462 for the green curve. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
 
 \hypertarget{roc-4}{%
 \subsection{ROC}\label{roc-4}}
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-vary-mu-roc-1.pdf}
-\caption{\label{fig:optim-op-point-vary-mu-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-vary-mu-roc-1.pdf}
+\caption{\label{fig:optim-op-point-vary-mu-roc}ROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\mu\) are: top-left \(\mu = 1\), top-right \(\mu = 2\), bottom-left \(\mu = 3\) and bottom-right \(\mu = 4\).}
 \end{figure}
 
-The continuous section of each curve ends at the optimal threshold listed in Table \ref{tab:optim-op-point-table-vary-mu}. The lower performance represented by the green curve, based on Youden-index maximization, is due to the adoption of an overly strict threshold.
-
 \hypertarget{optim-op-point-limiting-situations}{%
-\section{Appendix III: Limiting situations}\label{optim-op-point-limiting-situations}}
+\section{Limiting cases}\label{optim-op-point-limiting-situations}}
 
 \hypertarget{optim-op-point-high-performance-vary-mu}{%
-\subsection{High performance vary mu}\label{optim-op-point-high-performance-vary-mu}}
+\subsection{\texorpdfstring{High performance vary \(\mu\)}{High performance vary \textbackslash mu}}\label{optim-op-point-high-performance-vary-mu}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{)}
-\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.9}\NormalTok{)}
-\NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{nuArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.9}\NormalTok{)}
+\NormalTok{lambdaArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -6021,7 +5985,7 @@ The continuous section of each curve ends at the optimal threshold listed in Tab
 
 \begin{table}
 
-\caption{\label{tab:optim-op-point-high-performance-vary-mu-table-vary-all}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.}
+\caption{\label{tab:optim-op-point-high-performance-vary-mu-table-vary-all}Summary of optimization results for $\lambda = 1$ and $\nu = 0.9$ and varying $\mu$.}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{llllll}
@@ -6046,8 +6010,8 @@ Youden & 2 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-mu-vary-all-froc-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-mu-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-mu-vary-all-froc-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-mu-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of \(\mu\) are: top-left \(\mu = 2\), top-right \(\mu = 3\), bottom-left \(\mu = 4\) and bottom-right \(\mu = 5\).}
 \end{figure}
 
 \hypertarget{wafroc-5}{%
@@ -6055,8 +6019,8 @@ Youden & 2 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-high-performance-vary-mu-vary-all-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-high-performance-vary-mu-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-high-performance-vary-mu-vary-all-wafroc-1.pdf}
+\caption{\label{fig:optim-op-point-high-performance-vary-mu-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\mu\) are: top-left \(\mu = 2\), top-right \(\mu = 3\), bottom-left \(\mu = 4\) and bottom-right \(\mu = 5\).}
 \end{figure}
 
 \hypertarget{roc-5}{%
@@ -6064,18 +6028,18 @@ Youden & 2 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-high-performance-vary-mu-vary-all-roc-1.pdf}
-\caption{\label{fig:optim-op-point-high-performance-vary-mu-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-high-performance-vary-mu-vary-all-roc-1.pdf}
+\caption{\label{fig:optim-op-point-high-performance-vary-mu-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\mu\) are: top-left \(\mu = 2\), top-right \(\mu = 3\), bottom-left \(\mu = 4\) and bottom-right \(\mu = 5\).}
 \end{figure}
 
 \hypertarget{optim-op-point-low-performance-vary-mu}{%
-\subsection{Low performance vary mu}\label{optim-op-point-low-performance-vary-mu}}
+\subsection{\texorpdfstring{Low performance vary \(\mu\)}{Low performance vary \textbackslash mu}}\label{optim-op-point-low-performance-vary-mu}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
-\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{)}
-\NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{nuArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{)}
+\NormalTok{lambdaArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -6086,7 +6050,7 @@ Youden & 2 & 1.095 & 0.831 & 0.899 & (0.137, 0.735)\\
 
 \begin{table}
 
-\caption{\label{tab:optim-op-point-low-performance-vary-mu-table-vary-all}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.}
+\caption{\label{tab:optim-op-point-low-performance-vary-mu-table-vary-all}Summary of optimization results for $\lambda = 10$ and $nu = 0.1$ and varying $\mu$. Column labeling as in previous tables.}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{llllll}
@@ -6111,8 +6075,8 @@ Youden & 1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-mu-vary-all-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-mu-vary-all}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-mu-vary-all-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-mu-vary-all}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of \(\mu\) are: top-left \(\mu = 1\), top-right \(\mu = 2\), bottom-left \(\mu = 3\) and bottom-right \(\mu = 4\).}
 \end{figure}
 
 \hypertarget{wafroc-6}{%
@@ -6120,8 +6084,8 @@ Youden & 1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-mu-vary-all-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-mu-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-mu-vary-all-wafroc-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-mu-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\mu\) are: top-left \(\mu = 1\), top-right \(\mu = 2\), bottom-left \(\mu = 3\) and bottom-right \(\mu = 4\).}
 \end{figure}
 
 \hypertarget{roc-6}{%
@@ -6129,18 +6093,18 @@ Youden & 1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-mu-vary-all-roc-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-mu-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-mu-vary-all-roc-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-mu-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\mu\) are: top-left \(\mu = 1\), top-right \(\mu = 2\), bottom-left \(\mu = 3\) and bottom-right \(\mu = 4\).}
 \end{figure}
 
 \hypertarget{optim-op-point-high-performance-vary-lambda}{%
-\subsection{High performance vary lambda}\label{optim-op-point-high-performance-vary-lambda}}
+\subsection{\texorpdfstring{High performance vary \(\lambda\)}{High performance vary \textbackslash lambda}}\label{optim-op-point-high-performance-vary-lambda}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{)}
-\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.9}\NormalTok{)}
-\NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{10}\NormalTok{)}
+\NormalTok{nuArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.9}\NormalTok{)}
+\NormalTok{lambdaArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{10}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -6151,7 +6115,7 @@ Youden & 1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 
 \begin{table}
 
-\caption{\label{tab:optim-op-point-high-performance-vary-lambda-table-vary-all}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.}
+\caption{\label{tab:optim-op-point-high-performance-vary-lambda-table-vary-all}Summary of optimization results for $\mu = 4$, $nu = 0.9$ and varying lambda. Column labeling as in previous tables.}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{llllll}
@@ -6176,8 +6140,8 @@ Youden & 1 & 2.124 & 0.935 & 0.964 & (0.017, 0.873)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-high-performance-vary-lambda-vary-all-froc-1.pdf}
-\caption{\label{fig:optim-op-point-high-performance-vary-lambda-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-high-performance-vary-lambda-vary-all-froc-1.pdf}
+\caption{\label{fig:optim-op-point-high-performance-vary-lambda-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of \(\lambda\) are: top-left \(\lambda = 1\), top-right \(\lambda = 2\), bottom-left \(\lambda = 5\) and bottom-right \(\lambda = 10\).}
 \end{figure}
 
 \hypertarget{wafroc-7}{%
@@ -6185,8 +6149,8 @@ Youden & 1 & 2.124 & 0.935 & 0.964 & (0.017, 0.873)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-high-performance-vary-lambda-vary-all-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-high-performance-vary-lambda-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-high-performance-vary-lambda-vary-all-wafroc-1.pdf}
+\caption{\label{fig:optim-op-point-high-performance-vary-lambda-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\lambda\) are: top-left \(\lambda = 1\), top-right \(\lambda = 2\), bottom-left \(\lambda = 5\) and bottom-right \(\lambda = 10\).}
 \end{figure}
 
 \hypertarget{roc-7}{%
@@ -6194,18 +6158,18 @@ Youden & 1 & 2.124 & 0.935 & 0.964 & (0.017, 0.873)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-high-performance-vary-lambda-vary-all-roc-1.pdf}
-\caption{\label{fig:optim-op-point-high-performance-vary-lambda-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-high-performance-vary-lambda-vary-all-roc-1.pdf}
+\caption{\label{fig:optim-op-point-high-performance-vary-lambda-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\lambda\) are: top-left \(\lambda = 1\), top-right \(\lambda = 2\), bottom-left \(\lambda = 5\) and bottom-right \(\lambda = 10\).}
 \end{figure}
 
 \hypertarget{optim-op-point-low-performance-vary-lambda}{%
-\subsection{Low performance vary lambda}\label{optim-op-point-low-performance-vary-lambda}}
+\subsection{\texorpdfstring{Low performance vary \(\lambda\)}{Low performance vary \textbackslash lambda}}\label{optim-op-point-low-performance-vary-lambda}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{)}
-\NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{nuArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{)}
+\NormalTok{lambdaArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -6216,7 +6180,7 @@ Youden & 1 & 2.124 & 0.935 & 0.964 & (0.017, 0.873)\\
 
 \begin{table}
 
-\caption{\label{tab:optim-op-point-low-performance-vary-lambda-table-vary-all}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.}
+\caption{\label{tab:optim-op-point-low-performance-vary-lambda-table-vary-all}Summary of optimization results for $\mu = 1$, $\nu = 0.2$ and varying $\lambda$. Column labeling as in previous tables.}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{llllll}
@@ -6241,8 +6205,8 @@ Youden & 1 & 0.284 & 0.423 & 0.587 & (0.388, 0.153)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-lambda-vary-all-froc-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-lambda-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-lambda-vary-all-froc-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-lambda-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of \(\lambda\) are: top-left \(\lambda = 1\), top-right \(\lambda = 2\), bottom-left \(\lambda = 5\) and bottom-right \(\lambda = 10\).}
 \end{figure}
 
 \hypertarget{wafroc-8}{%
@@ -6250,8 +6214,8 @@ Youden & 1 & 0.284 & 0.423 & 0.587 & (0.388, 0.153)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-lambda-vary-all-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-lambda-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-lambda-vary-all-wafroc-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-lambda-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\lambda\) are: top-left \(\lambda = 1\), top-right \(\lambda = 2\), bottom-left \(\lambda = 5\) and bottom-right \(\lambda = 10\).}
 \end{figure}
 
 \hypertarget{roc-8}{%
@@ -6259,18 +6223,18 @@ Youden & 1 & 0.284 & 0.423 & 0.587 & (0.388, 0.153)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-lambda-vary-all-roc-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-lambda-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-lambda-vary-all-roc-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-lambda-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\lambda\) are: top-left \(\lambda = 1\), top-right \(\lambda = 2\), bottom-left \(\lambda = 5\) and bottom-right \(\lambda = 10\).}
 \end{figure}
 
 \hypertarget{optim-op-point-high-performance-vary-nu}{%
-\subsection{High performance vary nu}\label{optim-op-point-high-performance-vary-nu}}
+\subsection{\texorpdfstring{High performance vary \(\nu\)}{High performance vary \textbackslash nu}}\label{optim-op-point-high-performance-vary-nu}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{)}
-\NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\FloatTok{0.9}\NormalTok{)}
+\NormalTok{lambdaArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{nuArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\FloatTok{0.9}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -6281,7 +6245,7 @@ Youden & 1 & 0.284 & 0.423 & 0.587 & (0.388, 0.153)\\
 
 \begin{table}
 
-\caption{\label{tab:optim-op-point-high-performance-vary-nu-table-vary-all}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $nu = 0.9$. Row labeling as in previous tables.}
+\caption{\label{tab:optim-op-point-high-performance-vary-nu-table-vary-all}Summary of optimization results for $\mu = 4$, $\lambda = 1$ and varying $\nu$. Column labeling as in previous tables.}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{llllll}
@@ -6306,8 +6270,8 @@ Youden & 0.6 & 2.063 & 0.788 & 0.852 & (0.020, 0.584)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-high-performance-vary-nu-vary-all-froc-1.pdf}
-\caption{\label{fig:optim-op-point-high-performance-vary-nu-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-high-performance-vary-nu-vary-all-froc-1.pdf}
+\caption{\label{fig:optim-op-point-high-performance-vary-nu-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of \(\nu\) are: top-left \(\nu = 0.6\), top-right \(\nu = 0.7\), bottom-left \(\nu = 0.8\) and bottom-right \(\nu = 0.9\).}
 \end{figure}
 
 \hypertarget{wafroc-9}{%
@@ -6315,8 +6279,8 @@ Youden & 0.6 & 2.063 & 0.788 & 0.852 & (0.020, 0.584)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-high-performance-vary-nu-vary-all-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-high-performance-vary-nu-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-high-performance-vary-nu-vary-all-wafroc-1.pdf}
+\caption{\label{fig:optim-op-point-high-performance-vary-nu-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\nu\) are: top-left \(\nu = 0.6\), top-right \(\nu = 0.7\), bottom-left \(\nu = 0.8\) and bottom-right \(\nu = 0.9\).}
 \end{figure}
 
 \hypertarget{roc-9}{%
@@ -6324,18 +6288,18 @@ Youden & 0.6 & 2.063 & 0.788 & 0.852 & (0.020, 0.584)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-high-performance-vary-nu-vary-all-roc-1.pdf}
-\caption{\label{fig:optim-op-point-high-performance-vary-nu-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-high-performance-vary-nu-vary-all-roc-1.pdf}
+\caption{\label{fig:optim-op-point-high-performance-vary-nu-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\nu\) are: top-left \(\nu = 0.6\), top-right \(\nu = 0.7\), bottom-left \(\nu = 0.8\) and bottom-right \(\nu = 0.9\).}
 \end{figure}
 
 \hypertarget{optim-op-point-low-performance-vary-nu}{%
-\subsection{Low performance vary nu}\label{optim-op-point-low-performance-vary-nu}}
+\subsection{\texorpdfstring{Low performance vary \(\nu\)}{Low performance vary \textbackslash nu}}\label{optim-op-point-low-performance-vary-nu}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{lambdaPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\NormalTok{nuPArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.4}\NormalTok{)}
+\NormalTok{lambdaArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{nuArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.4}\NormalTok{)}
 \NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
@@ -6346,7 +6310,7 @@ Youden & 0.6 & 2.063 & 0.788 & 0.852 & (0.020, 0.584)\\
 
 \begin{table}
 
-\caption{\label{tab:optim-op-point-low-performance-vary-nu-table-vary-all}Summary of optimization results for 4 values of $\mu$, $\lambda = 1$ and $\nu = 0.9$. Row labeling as in previous tables.}
+\caption{\label{tab:optim-op-point-low-performance-vary-nu-table-vary-all}Summary of optimization results for $\mu = 1$, $\lambda = 10$ and varying $\nu$. Column labeling as in previous tables.}
 \centering
 \fontsize{10}{12}\selectfont
 \begin{tabular}[t]{llllll}
@@ -6371,8 +6335,8 @@ Youden & 0.1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-nu-vary-all-froc-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-nu-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-nu-vary-all-froc-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-nu-vary-all-froc}FROC plots with superimposed operating points for varying \(\nu\). The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of \(\nu\) are: top-left \(\nu = 0.1\), top-right \(\nu = 0.2\), bottom-left \(\nu = 0.3\) and bottom-right \(\nu = 0.4\).}
 \end{figure}
 
 \hypertarget{wafroc-10}{%
@@ -6380,8 +6344,8 @@ Youden & 0.1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-nu-vary-all-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-nu-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-nu-vary-all-wafroc-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-nu-vary-all-wafroc}wAFROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\nu\) are: top-left \(\nu = 0.1\), top-right \(\nu = 0.2\), bottom-left \(\nu = 0.3\) and bottom-right \(\nu = 0.4\).}
 \end{figure}
 
 \hypertarget{roc-10}{%
@@ -6389,8 +6353,8 @@ Youden & 0.1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 
 \begin{figure}
 \centering
-\includegraphics{22-optim-op-point_files/figure-latex/optim-op-point-low-performance-vary-nu-vary-all-roc-1.pdf}
-\caption{\label{fig:optim-op-point-low-performance-vary-nu-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures.}
+\includegraphics{22-optim-op-point2_files/figure-latex/optim-op-point-low-performance-vary-nu-vary-all-roc-1.pdf}
+\caption{\label{fig:optim-op-point-low-performance-vary-nu-vary-all-roc}ROC plots for the two optimization methods. The color coding is as in previous figures. The values of \(\nu\) are: top-left \(\nu = 0.1\), top-right \(\nu = 0.2\), bottom-left \(\nu = 0.3\) and bottom-right \(\nu = 0.4\).}
 \end{figure}
 
 \hypertarget{part-datasets}{%
