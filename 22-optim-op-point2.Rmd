@@ -90,7 +90,7 @@ plotArr = plotFroc(muArr, lambdaArr, nuArr)
 
 
 
-```{r optim-op-point-vary-nu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-nu-froc, fig.cap = "Varying $\\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$. Each red dot is above the corresponding black dot and their separation increases as $\\nu$ increases, i.e., as CAD performance increases.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -187,7 +187,7 @@ plotArr = plotFroc(muArr, lambdaArr, nuArr)
 
 
 
-```{r optim-op-point-vary-mu-froc, fig.cap = "FROC plots with superimposed operating points for varying $\\mu$. The red dot corresponds to wAFROC optimization and the black dot to Youden-index optimization. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-vary-mu-froc, fig.cap = "Varying $\\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -278,7 +278,7 @@ plotArr = plotFroc(muArr, lambdaArr, nuArr)
 
 
 
-```{r optim-op-point-low-performance-vary-mu-froc, fig.cap = "Low performance varying $\\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\mu$ are: top-left $\\mu = 2$, top-right $\\mu = 3$, bottom-left $\\mu = 4$ and bottom-right $\\mu = 5$.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-high-performance-vary-mu-froc, fig.cap = "High performance varying $\\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\\mu$ are: top-left $\\mu = 2$, top-right $\\mu = 3$, bottom-left $\\mu = 4$ and bottom-right $\\mu = 5$.", fig.show='hold', echo=FALSE}
 # DpcBugFix 8/28/22
 # in next line the generating code has been altered to suppress title on each plot; TBA; TODOLAST 
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
@@ -368,7 +368,7 @@ plotArr = plotFroc(muArr, lambdaArr, nuArr)
 
 
 
-```{r optim-op-point-low-performance-vary-mu, fig.cap = "Low performance varying $\\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-low-performance-vary-mu, fig.cap = "Low performance varying $\\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\\mu$ are: top-left $\\mu = 1$, top-right $\\mu = 2$, bottom-left $\\mu = 3$ and bottom-right $\\mu = 4$.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -459,7 +459,7 @@ plotArr = plotFroc(muArr, lambdaArr, nuArr)
 
 
 
-```{r optim-op-point-high-performance-vary-lambda-froc, fig.cap = "High performance varying $\\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-high-performance-vary-lambda-froc, fig.cap = "High performance varying $\\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 #grid.arrange(plotArr[[5]], plotArr[[6]], plotArr[[7]], plotArr[[8]], nrow = 2, ncol = 2)
 ```
@@ -549,7 +549,7 @@ plotArr = plotFroc(muArr, lambdaArr, nuArr)
 
 
 
-```{r optim-op-point-low-performance-vary-lambda-froc, fig.cap = "Low performance varying $\\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-low-performance-vary-lambda-froc, fig.cap = "Low performance varying $\\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\\lambda$ are: top-left $\\lambda = 1$, top-right $\\lambda = 2$, bottom-left $\\lambda = 5$ and bottom-right $\\lambda = 10$.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -641,7 +641,7 @@ plotArr = plotFroc(muArr, lambdaArr, nuArr)
 
 
 
-```{r optim-op-point-high-performance-vary-nu-froc, fig.cap = "High performance varying $\\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-high-performance-vary-nu-froc, fig.cap = "High performance varying $\\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\\nu$ are: top-left $\\nu = 0.6$, top-right $\\nu = 0.7$, bottom-left $\\nu = 0.8$ and bottom-right $\\nu = 0.9$.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
@@ -730,7 +730,7 @@ plotArr = plotFroc(muArr, lambdaArr, nuArr)
 
 
 
-```{r optim-op-point-low-performance-vary-nu-froc, fig.cap = "Low performance varying $\\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\\nu$ are: top-left $\\nu = 0.1$, top-right $\\nu = 0.2$, bottom-left $\\nu = 0.3$ and bottom-right $\\nu = 0.4$.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-low-performance-vary-nu-froc, fig.cap = "Low performance varying $\\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\\nu$ are: top-left $\\nu = 0.1$, top-right $\\nu = 0.2$, bottom-left $\\nu = 0.3$ and bottom-right $\\nu = 0.4$.", fig.show='hold', echo=FALSE}
 grid.arrange(plotArr[[1]], plotArr[[2]], plotArr[[3]], plotArr[[4]], nrow = 2, ncol = 2)
 ```
 
