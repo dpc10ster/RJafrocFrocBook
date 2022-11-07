@@ -289,29 +289,29 @@ Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model which contai
 
 The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in `RJafroc`. 
 
-The following code shows usage of the software to generate the results. Note that `datasetCadLroc` is the LROC dataset and `dataset09` is the corresponding ROC dataset. 
+The following code shows usage of the software to generate the results. Note that `RJafroc::datasetCadLroc` is the LROC dataset and `dataset09` is the corresponding ROC dataset. 
 
 
 ```{r standalone-cad-rjafroc-implementation, cache=TRUE, echo=TRUE}
-RRFC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRFC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRFC")
-RRRC_2T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_2T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "2T-RRRC")
-RRRC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRRC")
 
-RRFC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRFC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRFC")
-RRRC_2T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_2T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "2T-RRRC")
-RRRC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRRC")
 
-RRFC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRFC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRFC")
-RRRC_2T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_2T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "2T-RRRC")
-RRRC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRRC")
 
 RRFC_1T_AUC <- RJafroc::StSignificanceTestingCadVsRad (dataset09, 

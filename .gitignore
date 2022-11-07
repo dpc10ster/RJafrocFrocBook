@@ -7,6 +7,5 @@ _book
 _RJafroc_files
 rsconnect
 docs/
-.rds
-RJafrocFrocBook.rds
+*.rds
 packages.bib
