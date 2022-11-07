@@ -179,8 +179,8 @@ gpfPlotRsmPropCbm <- function(f, mu, lambda, nu, lesDistr, c1, da,
   FPF <- FPF[ciIndx]
   TPF <- TPF[ciIndx]
   fitPlot <- ggplot(data = plotCurve) + 
-    geom_line(mapping = aes(x = FPF, y = TPF, color = Model), size = 2) + 
-    geom_line(data = dashedRsm, aes(x = FPF, y = TPF, color = Model), linetype = 3, size = 2) + 
+    geom_line(mapping = aes(x = FPF, y = TPF, color = Model), linewidth = 2) + 
+    geom_line(data = dashedRsm, aes(x = FPF, y = TPF, color = Model), linetype = 3, linewidth = 2) + 
     scale_color_manual(values = c("red", "darkblue", "black")) # color corresponds to order of plots in plotCurve
 
   fitPlot <- fitPlot + 

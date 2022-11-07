@@ -87,8 +87,8 @@ if (fpfMax < 0.99){
   cText <- data.frame(FPF = 0.5, TPF = 0.45)
   dsText <- data.frame(FPF = (fpfMax + fpfCross)/2 + 0.05, TPF = (tpfMax + tpfCross)/2)
   compPlot <- ggplot() + geom_line(mapping = aes(x = FPF, y = TPF), data = plotRsm, size = 1) + 
-    geom_line(mapping = aes(x = FPF, y = TPF), data = plotBm, size = 1) + 
-    geom_line(data = dashedRsm, aes(x = FPF, y = TPF), linetype = 3, size = 1) +
+    geom_line(mapping = aes(x = FPF, y = TPF), data = plotBm, linewidth = 1) + 
+    geom_line(data = dashedRsm, aes(x = FPF, y = TPF), linetype = 3, linewidth = 1) +
     geom_point(data = endPointRSM, mapping = aes(x = FPF, y = TPF), shape = 15, size = 3) +
     geom_point(data = endPointBM, mapping = aes(x = FPF, y = TPF), shape = 16, size = 3) +
     geom_line(data = ds, mapping = aes(x = FPF, y = TPF), linetype = 2) + 

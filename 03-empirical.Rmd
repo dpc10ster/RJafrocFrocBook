@@ -1259,7 +1259,7 @@ knitr::include_graphics("images/03-empiricalPlots/proofFigure.png")
 <!-- shade2 <- data.frame(FPF = c(1, 1, 0.75, 0.75), wLLF = c(1, 0, 0, 0.8)) -->
 
 <!-- p <- ggplot(wAFROC_Points, aes(x = FPF, y = wLLF) ) + geom_polygon(data = shade1, fill = 'grey') + geom_polygon(data = shade2, fill = 'grey') +  -->
-<!--   geom_line(size = 1) + geom_point(size = 4) +  -->
+<!--   geom_line(linewidth = 1) + geom_point(size = 4) +  -->
 <!--   geom_line(data = zeta1, aes(x = x, y = y), linetype = 2) + geom_line(data = zeta2, aes(x = x, y = y), linetype = 2) + -->
 <!--   geom_segment(aes(x = 0.75, y = 0, xend = 0.75, yend = 0.8), linetype = 2) +   -->
 <!--   geom_segment(aes(x = 1, y = 0.8, xend = 0.75, yend = 0.8), linetype = 2) +   -->

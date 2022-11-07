@@ -14,7 +14,7 @@ wAFROC <- function (
   relWeights) {
   # return negative of aucwAFROC 
   # (as optimize finds minimum of function)
-  return(-UtilAnalyticalAucsRSM(mu, lambda = lambda, nu = nu, zeta1, lesDistr, relWeights)$aucwAFROC)
+  return(-UtilAnalyticalAucsRSM(mu, lambda, nu, zeta1, lesDistr, relWeights)$aucwAFROC)
 }
 
 
@@ -37,6 +37,7 @@ doOneSet <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
   tpfOptArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
   nlfOptArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
   llfOptArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
+  wllfOptArr <- array(dim = c(2,length(muArr), length(lambdaArr), length(nuArr)))
   for (i1 in 1:length(muArr)) {
     for (i2 in 1:length(lambdaArr)) {
       for (i3 in 1:length(nuArr)) {
@@ -48,71 +49,85 @@ doOneSet <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
             x <- optimize(wAFROC, 
                           interval = c(-5,5), 
                           mu, 
-                          lambda = lambda, 
-                          nu = nu, 
+                          lambda, 
+                          nu, 
                           lesDistr, 
                           relWeights)
             zetaOptArr[y,i1,i2,i3] <- x$minimum
             wAfrocArr[y,i1,i2,i3] <- -x$objective # safe to use objective here
             rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
               mu, 
-              lambda = lambda, 
-              nu = nu, 
+              lambda, 
+              nu, 
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucROC
             fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
               z = x$minimum, 
-              lambda = lambda)
+              lambda)
             tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
               z = x$minimum, 
               mu, 
-              lambda = lambda,
-              nu = nu,
-              lesDistr = lesDistr)
-            nlfOptArr[y,i1,i2,i3] <- RSM_xFROC(
+              lambda,
+              nu,
+              lesDistr)
+            nlfOptArr[y,i1,i2,i3] <- RSM_NLF(
               z = x$minimum, 
-              lambda = lambda)
-            llfOptArr[y,i1,i2,i3] <- RSM_yFROC(
+              lambda)
+            llfOptArr[y,i1,i2,i3] <- RSM_LLF(
               z = x$minimum, 
               mu, 
-              nu = nu)
+              nu)
+            wllfOptArr[y,i1,i2,i3] <- RSM_wLLF(
+              z = x$minimum, 
+              mu, 
+              nu,
+              lesDistr,
+              relWeights = relWeights)
           } else if (y == 2) {
             x <- optimize(Youden, 
                           interval = c(-5,5), 
                           mu, 
-                          lambda = lambda, 
-                          nu = nu, 
+                          lambda, 
+                          nu, 
                           lesDistr)
             zetaOptArr[y,i1,i2,i3] <- x$minimum
             wAfrocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
               mu, 
-              lambda = lambda, 
-              nu = nu, 
+              lambda, 
+              nu, 
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucwAFROC
             rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
               mu, 
-              lambda = lambda, 
-              nu = nu, 
+              lambda, 
+              nu, 
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucROC
             fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
               z = x$minimum, 
-              lambda = lambda)
+              lambda)
             tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
               z = x$minimum, 
               mu, 
-              lambda = lambda,
-              nu = nu,
-              lesDistr = lesDistr)
-            nlfOptArr[y,i1,i2,i3] <- RSM_xFROC(
+              lambda,
+              nu,
+              lesDistr)
+            nlfOptArr[y,i1,i2,i3] <- RSM_NLF(
               z = x$minimum, 
-              lambda = lambda)
-            llfOptArr[y,i1,i2,i3] <- RSM_yFROC(
-              z = x$minimum, mu, nu)
+              lambda)
+            llfOptArr[y,i1,i2,i3] <- RSM_LLF(
+              z = x$minimum, 
+              mu, 
+              nu)
+            wllfOptArr[y,i1,i2,i3] <- RSM_wLLF(
+              z = x$minimum, 
+              mu, 
+              nu,
+              lesDistr,
+              relWeights = relWeights)
           } else stop("incorrect y")
         }
       }
@@ -122,6 +137,7 @@ doOneSet <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
     zetaOptArr = zetaOptArr,
     nlfOptArr = nlfOptArr,
     llfOptArr = llfOptArr,
+    wllfOptArr = wllfOptArr,
     fpfOptArr = fpfOptArr,
     tpfOptArr = tpfOptArr,
     wAfrocArr = wAfrocArr, 
@@ -141,8 +157,8 @@ plotFroc <- function(muArr, lambdaArr, nuArr) {
         lambda <- lambdaArr[i2]
         nu <- nuArr[i3]
         z <- seq(-5,mu+5,0.1)
-        xFROC <- RSM_xFROC(z, lambda)
-        yFROC <- RSM_yFROC(z, mu, nu)
+        xFROC <- RSM_NLF(z, lambda)
+        yFROC <- RSM_LLF(z, mu, nu)
         df_froc <- data.frame(
           NLF = xFROC, 
           LLF = yFROC)
@@ -153,11 +169,6 @@ plotFroc <- function(muArr, lambdaArr, nuArr) {
           scale_x_continuous(limits = c(0,lambda)) + 
           scale_y_continuous(limits = c(0,1))
           #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
-          # DpcBugFix 8/28/22
-          # fix the following error in GitHub Actions 
-          # Quitting from lines 340-341 (22-optim-op-point.Rmd) 
-          # Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  : 
-          #    polygon edge not found
         for (y in 1:2) {
           optPt <- data.frame(
             NLF = nlfOptArr[y,i1,i2,i3], 
@@ -194,11 +205,14 @@ plotwAfroc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
           legendPosition = "null"
         )$wAFROCPlot
         #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
-        # DpcBugFix 9/24/22
-        # fix the following error in GitHub Actions 
-        # Quitting from lines 378-379 (22-optim-op-point.Rmd) 
-        # Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  : 
         #     polygon edge not found
+        for (y in 1:2) {
+          optPt <- data.frame(
+            FPF = fpfOptArr[y,i1,i2,i3], 
+            wLLF = wllfOptArr[y,i1,i2,i3])
+          plotArr[[i]] <- plotArr[[i]] + 
+            ggplot2::geom_point(data = optPt, aes(x = FPF, y = wLLF), color = 3-y) 
+        }
         i <- i + 1
       }
     }
@@ -227,13 +241,16 @@ plotRoc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
           OpChType = "ROC",
           legendPosition = "null"
         )$ROCPlot
-          #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
-          # DpcBugFix 9/24/22
-          # fix the following error in GitHub Actions 
-          # Quitting from lines 378-379 (22-optim-op-point.Rmd) 
-          # Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  : 
-          #     polygon edge not found
-          i <- i + 1
+        for (y in 1:2) {
+          optPt <- data.frame(
+            FPF = fpfOptArr[y,i1,i2,i3], 
+            TPF = tpfOptArr[y,i1,i2,i3])
+          plotArr[[i]] <- plotArr[[i]] + 
+            geom_point(data = optPt, aes(x = FPF, y = TPF), color = 3-y) 
+        }
+        #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
+        #     polygon edge not found
+        i <- i + 1
       }
     }
   }

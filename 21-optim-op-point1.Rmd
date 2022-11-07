@@ -337,8 +337,8 @@ kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling
 ```{r, echo=FALSE}
 froc <- ggplot2::ggplot()
 z <- seq(-5,zetaOptArr1[1]+5,0.1)
-xFROC <- RSM_xFROC(z, lambda)
-yFROC <- RSM_yFROC(z, mu, nu) 
+xFROC <- RSM_NLF(z, lambda)
+yFROC <- RSM_LLF(z, mu, nu) 
 df_froc <- data.frame(NLF = xFROC, LLF = yFROC)
 froc <- froc + geom_line(data = df_froc, aes(x = NLF, y = LLF)) +
   scale_y_continuous(limits = c(0,1)) + scale_x_continuous(limits = c(0,lambda))

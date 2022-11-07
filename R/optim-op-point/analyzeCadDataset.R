@@ -24,10 +24,10 @@ for (y in 1:2) {
       zeta1 = x$minimum, 
       lesDistrCad, 
       relWeightsCad)$aucROC
-    nlfOptArr[y] <- RSM_xFROC(
+    nlfOptArr[y] <- RSM_NLF(
       z = x$minimum, 
       lambda = lambda)
-    llfOptArr[y] <- RSM_yFROC(
+    llfOptArr[y] <- RSM_LLF(
       z = x$minimum, 
       mu, 
       nu)
@@ -53,10 +53,10 @@ for (y in 1:2) {
       zeta1 = x$minimum, 
       lesDistrCad, 
       relWeightsCad)$aucROC
-    nlfOptArr[y] <- RSM_xFROC(
+    nlfOptArr[y] <- RSM_NLF(
       z = x$minimum, 
       lambda = lambda)
-    llfOptArr[y] <- RSM_yFROC(
+    llfOptArr[y] <- RSM_LLF(
       z = x$minimum, mu, nu)
   } else stop("incorrect y")
 }
