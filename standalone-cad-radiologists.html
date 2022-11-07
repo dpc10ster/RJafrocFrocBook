@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-11-04" />
+<meta name="date" content="2022-11-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -380,15 +380,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.4.5" data-path="optim-op-point.html"><a href="optim-op-point.html#why-not-maximize-roc-auc"><i class="fa fa-check"></i><b>11.4.5</b> Why not maximize ROC-AUC?</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-mu"><i class="fa fa-check"></i><b>11.5</b> Varying <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> optimizations</a></li>
-<li class="chapter" data-level="11.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations"><i class="fa fa-check"></i><b>11.6</b> Very high or very low performance</a></li>
-<li class="chapter" data-level="11.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>11.7</b> Using the method</a></li>
-<li class="chapter" data-level="11.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>11.8</b> A CAD application</a><ul>
-<li class="chapter" data-level="11.8.1" data-path="optim-op-point.html"><a href="optim-op-point.html#summary-table-1"><i class="fa fa-check"></i><b>11.8.1</b> Summary table</a></li>
-<li class="chapter" data-level="11.8.2" data-path="optim-op-point.html"><a href="optim-op-point.html#froc-2"><i class="fa fa-check"></i><b>11.8.2</b> FROC</a></li>
-<li class="chapter" data-level="11.8.3" data-path="optim-op-point.html"><a href="optim-op-point.html#wafroc-2"><i class="fa fa-check"></i><b>11.8.3</b> wAFROC</a></li>
-<li class="chapter" data-level="11.8.4" data-path="optim-op-point.html"><a href="optim-op-point.html#roc-2"><i class="fa fa-check"></i><b>11.8.4</b> ROC</a></li>
+<li class="chapter" data-level="11.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations"><i class="fa fa-check"></i><b>11.6</b> Limiting situations</a></li>
+<li class="chapter" data-level="11.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-summary-comments"><i class="fa fa-check"></i><b>11.7</b> Summary comments</a></li>
+<li class="chapter" data-level="11.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>11.8</b> Using the method</a></li>
+<li class="chapter" data-level="11.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>11.9</b> A CAD application</a><ul>
+<li class="chapter" data-level="11.9.1" data-path="optim-op-point.html"><a href="optim-op-point.html#summary-table-1"><i class="fa fa-check"></i><b>11.9.1</b> Summary table</a></li>
+<li class="chapter" data-level="11.9.2" data-path="optim-op-point.html"><a href="optim-op-point.html#froc-2"><i class="fa fa-check"></i><b>11.9.2</b> FROC</a></li>
+<li class="chapter" data-level="11.9.3" data-path="optim-op-point.html"><a href="optim-op-point.html#wafroc-2"><i class="fa fa-check"></i><b>11.9.3</b> wAFROC</a></li>
+<li class="chapter" data-level="11.9.4" data-path="optim-op-point.html"><a href="optim-op-point.html#roc-2"><i class="fa fa-check"></i><b>11.9.4</b> ROC</a></li>
 </ul></li>
-<li class="chapter" data-level="11.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>11.9</b> TBA Discussion</a></li>
+<li class="chapter" data-level="11.10" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>11.10</b> TBA Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="cad-optim-op-point-2.html"><a href="cad-optim-op-point-2.html"><i class="fa fa-check"></i><b>12</b> CAD optimal operating point II</a><ul>
 <li class="chapter" data-level="12.1" data-path="cad-optim-op-point-2.html"><a href="cad-optim-op-point-2.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>12.1</b> Varying <span class="math inline">\(\nu\)</span> optimizations</a><ul>
@@ -1091,33 +1092,33 @@ j=1,2,...J
 <h2><span class="header-section-number">10.5</span> Implementation<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in <code>RJafroc</code>.</p>
 <p>The following code shows usage of the software to generate the results. Note that <code>datasetCadLroc</code> is the LROC dataset and <code>dataset09</code> is the corresponding ROC dataset.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="standalone-cad-radiologists.html#cb118-1"></a>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
-<span id="cb118-2"><a href="standalone-cad-radiologists.html#cb118-2"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.05</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
-<span id="cb118-3"><a href="standalone-cad-radiologists.html#cb118-3"></a>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
-<span id="cb118-4"><a href="standalone-cad-radiologists.html#cb118-4"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.05</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
-<span id="cb118-5"><a href="standalone-cad-radiologists.html#cb118-5"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
-<span id="cb118-6"><a href="standalone-cad-radiologists.html#cb118-6"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.05</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span>
-<span id="cb118-7"><a href="standalone-cad-radiologists.html#cb118-7"></a></span>
-<span id="cb118-8"><a href="standalone-cad-radiologists.html#cb118-8"></a>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
-<span id="cb118-9"><a href="standalone-cad-radiologists.html#cb118-9"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.2</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
-<span id="cb118-10"><a href="standalone-cad-radiologists.html#cb118-10"></a>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
-<span id="cb118-11"><a href="standalone-cad-radiologists.html#cb118-11"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.2</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
-<span id="cb118-12"><a href="standalone-cad-radiologists.html#cb118-12"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
-<span id="cb118-13"><a href="standalone-cad-radiologists.html#cb118-13"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.2</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span>
-<span id="cb118-14"><a href="standalone-cad-radiologists.html#cb118-14"></a></span>
-<span id="cb118-15"><a href="standalone-cad-radiologists.html#cb118-15"></a>RRFC_1T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
-<span id="cb118-16"><a href="standalone-cad-radiologists.html#cb118-16"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
-<span id="cb118-17"><a href="standalone-cad-radiologists.html#cb118-17"></a>RRRC_2T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
-<span id="cb118-18"><a href="standalone-cad-radiologists.html#cb118-18"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
-<span id="cb118-19"><a href="standalone-cad-radiologists.html#cb118-19"></a>RRRC_1T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
-<span id="cb118-20"><a href="standalone-cad-radiologists.html#cb118-20"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span>
-<span id="cb118-21"><a href="standalone-cad-radiologists.html#cb118-21"></a></span>
-<span id="cb118-22"><a href="standalone-cad-radiologists.html#cb118-22"></a>RRFC_1T_AUC &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (dataset09, </span>
-<span id="cb118-23"><a href="standalone-cad-radiologists.html#cb118-23"></a><span class="dt">FOM =</span> <span class="st">&quot;Wilcoxon&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
-<span id="cb118-24"><a href="standalone-cad-radiologists.html#cb118-24"></a>RRRC_2T_AUC &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (dataset09, </span>
-<span id="cb118-25"><a href="standalone-cad-radiologists.html#cb118-25"></a><span class="dt">FOM =</span> <span class="st">&quot;Wilcoxon&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
-<span id="cb118-26"><a href="standalone-cad-radiologists.html#cb118-26"></a>RRRC_1T_AUC &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (dataset09, </span>
-<span id="cb118-27"><a href="standalone-cad-radiologists.html#cb118-27"></a><span class="dt">FOM =</span> <span class="st">&quot;Wilcoxon&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="standalone-cad-radiologists.html#cb119-1"></a>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-2"><a href="standalone-cad-radiologists.html#cb119-2"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.05</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
+<span id="cb119-3"><a href="standalone-cad-radiologists.html#cb119-3"></a>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-4"><a href="standalone-cad-radiologists.html#cb119-4"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.05</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
+<span id="cb119-5"><a href="standalone-cad-radiologists.html#cb119-5"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-6"><a href="standalone-cad-radiologists.html#cb119-6"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.05</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span>
+<span id="cb119-7"><a href="standalone-cad-radiologists.html#cb119-7"></a></span>
+<span id="cb119-8"><a href="standalone-cad-radiologists.html#cb119-8"></a>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-9"><a href="standalone-cad-radiologists.html#cb119-9"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.2</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
+<span id="cb119-10"><a href="standalone-cad-radiologists.html#cb119-10"></a>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-11"><a href="standalone-cad-radiologists.html#cb119-11"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.2</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
+<span id="cb119-12"><a href="standalone-cad-radiologists.html#cb119-12"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-13"><a href="standalone-cad-radiologists.html#cb119-13"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.2</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span>
+<span id="cb119-14"><a href="standalone-cad-radiologists.html#cb119-14"></a></span>
+<span id="cb119-15"><a href="standalone-cad-radiologists.html#cb119-15"></a>RRFC_1T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-16"><a href="standalone-cad-radiologists.html#cb119-16"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
+<span id="cb119-17"><a href="standalone-cad-radiologists.html#cb119-17"></a>RRRC_2T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-18"><a href="standalone-cad-radiologists.html#cb119-18"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
+<span id="cb119-19"><a href="standalone-cad-radiologists.html#cb119-19"></a>RRRC_1T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-20"><a href="standalone-cad-radiologists.html#cb119-20"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span>
+<span id="cb119-21"><a href="standalone-cad-radiologists.html#cb119-21"></a></span>
+<span id="cb119-22"><a href="standalone-cad-radiologists.html#cb119-22"></a>RRFC_1T_AUC &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (dataset09, </span>
+<span id="cb119-23"><a href="standalone-cad-radiologists.html#cb119-23"></a><span class="dt">FOM =</span> <span class="st">&quot;Wilcoxon&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
+<span id="cb119-24"><a href="standalone-cad-radiologists.html#cb119-24"></a>RRRC_2T_AUC &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (dataset09, </span>
+<span id="cb119-25"><a href="standalone-cad-radiologists.html#cb119-25"></a><span class="dt">FOM =</span> <span class="st">&quot;Wilcoxon&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
+<span id="cb119-26"><a href="standalone-cad-radiologists.html#cb119-26"></a>RRRC_1T_AUC &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (dataset09, </span>
+<span id="cb119-27"><a href="standalone-cad-radiologists.html#cb119-27"></a><span class="dt">FOM =</span> <span class="st">&quot;Wilcoxon&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span></code></pre></div>
 <p>The results are organized as follows:</p>
 <ul>
 <li><p><code>RRFC_1T_PCL_0_05</code> contains the results of 1T-RRFC analysis for figure of merit = <span class="math inline">\(\text{PCL}_{0.05}\)</span>.</p></li>
@@ -1942,24 +1943,24 @@ NA
 <div id="example-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">10.8.1</span> Example 1<a href="standalone-cad-radiologists.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first example shows the structure of <code>RRFC_1T_PCL_0_2</code>.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="standalone-cad-radiologists.html#cb119-1"></a>x &lt;-<span class="st"> </span>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span></span>
-<span id="cb119-2"><a href="standalone-cad-radiologists.html#cb119-2"></a>fom_individual_rad &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">t</span>(x<span class="op">$</span>fomRAD))</span>
-<span id="cb119-3"><a href="standalone-cad-radiologists.html#cb119-3"></a><span class="kw">colnames</span>(fom_individual_rad) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;rdr&quot;</span>, <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>))</span>
-<span id="cb119-4"><a href="standalone-cad-radiologists.html#cb119-4"></a></span>
-<span id="cb119-5"><a href="standalone-cad-radiologists.html#cb119-5"></a>stats &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">fomCAD =</span> x<span class="op">$</span>fomCAD, <span class="dt">avgRadFom =</span> x<span class="op">$</span>avgRadFom, <span class="dt">avgDiffFom =</span> x<span class="op">$</span>avgDiffFom, <span class="dt">varR =</span> x<span class="op">$</span>varR, <span class="dt">Tstat =</span> x<span class="op">$</span>Tstat, <span class="dt">df =</span> x<span class="op">$</span>df, <span class="dt">pval =</span> x<span class="op">$</span>pval)</span>
-<span id="cb119-6"><a href="standalone-cad-radiologists.html#cb119-6"></a></span>
-<span id="cb119-7"><a href="standalone-cad-radiologists.html#cb119-7"></a>ConfidenceIntervals &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">CIAvgRadFom =</span> x<span class="op">$</span>CIAvgRadFom, <span class="dt">CIAvgDiffFom =</span> x<span class="op">$</span>CIAvgDiffFom)</span>
-<span id="cb119-8"><a href="standalone-cad-radiologists.html#cb119-8"></a><span class="kw">rownames</span>(ConfidenceIntervals) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Lower&quot;</span>, <span class="st">&quot;Upper&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="standalone-cad-radiologists.html#cb120-1"></a><span class="kw">print</span>(fom_individual_rad)</span>
-<span id="cb120-2"><a href="standalone-cad-radiologists.html#cb120-2"></a><span class="co">#&gt;         rdr1 rdr2    rdr3  rdr4       rdr5       rdr6   rdr7  rdr8  rdr9</span></span>
-<span id="cb120-3"><a href="standalone-cad-radiologists.html#cb120-3"></a><span class="co">#&gt; 1 0.69453125 0.65 0.80625 0.725 0.65982143 0.76845238 0.7375 0.675 0.675</span></span>
-<span id="cb120-4"><a href="standalone-cad-radiologists.html#cb120-4"></a><span class="kw">print</span>(stats)</span>
-<span id="cb120-5"><a href="standalone-cad-radiologists.html#cb120-5"></a><span class="co">#&gt;       fomCAD  avgRadFom avgDiffFom        varR     Tstat df          pval</span></span>
-<span id="cb120-6"><a href="standalone-cad-radiologists.html#cb120-6"></a><span class="co">#&gt; 1 0.59166667 0.71017278 0.11850612 0.002808612 6.7083568  8 0.00015139664</span></span>
-<span id="cb120-7"><a href="standalone-cad-radiologists.html#cb120-7"></a><span class="kw">print</span>(ConfidenceIntervals)</span>
-<span id="cb120-8"><a href="standalone-cad-radiologists.html#cb120-8"></a><span class="co">#&gt;       CIAvgRadFom CIAvgDiffFom</span></span>
-<span id="cb120-9"><a href="standalone-cad-radiologists.html#cb120-9"></a><span class="co">#&gt; Lower  0.66943619  0.077769525</span></span>
-<span id="cb120-10"><a href="standalone-cad-radiologists.html#cb120-10"></a><span class="co">#&gt; Upper  0.75090938  0.159242710</span></span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="standalone-cad-radiologists.html#cb120-1"></a>x &lt;-<span class="st"> </span>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span></span>
+<span id="cb120-2"><a href="standalone-cad-radiologists.html#cb120-2"></a>fom_individual_rad &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">t</span>(x<span class="op">$</span>fomRAD))</span>
+<span id="cb120-3"><a href="standalone-cad-radiologists.html#cb120-3"></a><span class="kw">colnames</span>(fom_individual_rad) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;rdr&quot;</span>, <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>))</span>
+<span id="cb120-4"><a href="standalone-cad-radiologists.html#cb120-4"></a></span>
+<span id="cb120-5"><a href="standalone-cad-radiologists.html#cb120-5"></a>stats &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">fomCAD =</span> x<span class="op">$</span>fomCAD, <span class="dt">avgRadFom =</span> x<span class="op">$</span>avgRadFom, <span class="dt">avgDiffFom =</span> x<span class="op">$</span>avgDiffFom, <span class="dt">varR =</span> x<span class="op">$</span>varR, <span class="dt">Tstat =</span> x<span class="op">$</span>Tstat, <span class="dt">df =</span> x<span class="op">$</span>df, <span class="dt">pval =</span> x<span class="op">$</span>pval)</span>
+<span id="cb120-6"><a href="standalone-cad-radiologists.html#cb120-6"></a></span>
+<span id="cb120-7"><a href="standalone-cad-radiologists.html#cb120-7"></a>ConfidenceIntervals &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">CIAvgRadFom =</span> x<span class="op">$</span>CIAvgRadFom, <span class="dt">CIAvgDiffFom =</span> x<span class="op">$</span>CIAvgDiffFom)</span>
+<span id="cb120-8"><a href="standalone-cad-radiologists.html#cb120-8"></a><span class="kw">rownames</span>(ConfidenceIntervals) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Lower&quot;</span>, <span class="st">&quot;Upper&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="standalone-cad-radiologists.html#cb121-1"></a><span class="kw">print</span>(fom_individual_rad)</span>
+<span id="cb121-2"><a href="standalone-cad-radiologists.html#cb121-2"></a><span class="co">#&gt;         rdr1 rdr2    rdr3  rdr4       rdr5       rdr6   rdr7  rdr8  rdr9</span></span>
+<span id="cb121-3"><a href="standalone-cad-radiologists.html#cb121-3"></a><span class="co">#&gt; 1 0.69453125 0.65 0.80625 0.725 0.65982143 0.76845238 0.7375 0.675 0.675</span></span>
+<span id="cb121-4"><a href="standalone-cad-radiologists.html#cb121-4"></a><span class="kw">print</span>(stats)</span>
+<span id="cb121-5"><a href="standalone-cad-radiologists.html#cb121-5"></a><span class="co">#&gt;       fomCAD  avgRadFom avgDiffFom        varR     Tstat df          pval</span></span>
+<span id="cb121-6"><a href="standalone-cad-radiologists.html#cb121-6"></a><span class="co">#&gt; 1 0.59166667 0.71017278 0.11850612 0.002808612 6.7083568  8 0.00015139664</span></span>
+<span id="cb121-7"><a href="standalone-cad-radiologists.html#cb121-7"></a><span class="kw">print</span>(ConfidenceIntervals)</span>
+<span id="cb121-8"><a href="standalone-cad-radiologists.html#cb121-8"></a><span class="co">#&gt;       CIAvgRadFom CIAvgDiffFom</span></span>
+<span id="cb121-9"><a href="standalone-cad-radiologists.html#cb121-9"></a><span class="co">#&gt; Lower  0.66943619  0.077769525</span></span>
+<span id="cb121-10"><a href="standalone-cad-radiologists.html#cb121-10"></a><span class="co">#&gt; Upper  0.75090938  0.159242710</span></span></code></pre></div>
 <p>The results are displayed as three data frames.</p>
 <p>The first data frame :</p>
 <ul>
@@ -1986,29 +1987,29 @@ NA
 <div id="example-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">10.8.2</span> Example 2<a href="standalone-cad-radiologists.html#example-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The next example shows the structure of <code>RRRC_2T_PCL_0_2</code>.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="standalone-cad-radiologists.html#cb121-1"></a>x &lt;-<span class="st"> </span>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">2</span></span>
-<span id="cb121-2"><a href="standalone-cad-radiologists.html#cb121-2"></a></span>
-<span id="cb121-3"><a href="standalone-cad-radiologists.html#cb121-3"></a>fom_individual_rad &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">t</span>(x<span class="op">$</span>fomRAD))</span>
-<span id="cb121-4"><a href="standalone-cad-radiologists.html#cb121-4"></a><span class="kw">colnames</span>(fom_individual_rad) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;rdr&quot;</span>, <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>))</span>
-<span id="cb121-5"><a href="standalone-cad-radiologists.html#cb121-5"></a></span>
-<span id="cb121-6"><a href="standalone-cad-radiologists.html#cb121-6"></a>stats1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">fomCAD =</span> x<span class="op">$</span>fomCAD, <span class="dt">avgRadFom =</span> x<span class="op">$</span>avgRadFom, <span class="dt">avgDiffFom =</span> x<span class="op">$</span>avgDiffFom)</span>
-<span id="cb121-7"><a href="standalone-cad-radiologists.html#cb121-7"></a></span>
-<span id="cb121-8"><a href="standalone-cad-radiologists.html#cb121-8"></a>stats2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">varR =</span> x<span class="op">$</span>varR, <span class="dt">varTR =</span> x<span class="op">$</span>varTR, </span>
-<span id="cb121-9"><a href="standalone-cad-radiologists.html#cb121-9"></a>                 <span class="dt">cov1 =</span> x<span class="op">$</span>cov1, <span class="dt">cov2 =</span> x<span class="op">$</span>cov2 , </span>
-<span id="cb121-10"><a href="standalone-cad-radiologists.html#cb121-10"></a>                 <span class="dt">cov3 =</span> x<span class="op">$</span>cov3 , <span class="dt">Var =</span> x<span class="op">$</span>varError, </span>
-<span id="cb121-11"><a href="standalone-cad-radiologists.html#cb121-11"></a>                 <span class="dt">FStat =</span> x<span class="op">$</span>FStat, <span class="dt">df =</span> x<span class="op">$</span>df, <span class="dt">pval =</span> x<span class="op">$</span>pval)</span></code></pre></div>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="standalone-cad-radiologists.html#cb122-1"></a></span>
-<span id="cb122-2"><a href="standalone-cad-radiologists.html#cb122-2"></a><span class="kw">print</span>(fom_individual_rad)</span>
-<span id="cb122-3"><a href="standalone-cad-radiologists.html#cb122-3"></a><span class="co">#&gt;         rdr1 rdr2    rdr3  rdr4       rdr5       rdr6   rdr7  rdr8  rdr9</span></span>
-<span id="cb122-4"><a href="standalone-cad-radiologists.html#cb122-4"></a><span class="co">#&gt; 1 0.69453125 0.65 0.80625 0.725 0.65982143 0.76845238 0.7375 0.675 0.675</span></span>
-<span id="cb122-5"><a href="standalone-cad-radiologists.html#cb122-5"></a><span class="kw">print</span>(stats1)</span>
-<span id="cb122-6"><a href="standalone-cad-radiologists.html#cb122-6"></a><span class="co">#&gt;       fomCAD  avgRadFom avgDiffFom</span></span>
-<span id="cb122-7"><a href="standalone-cad-radiologists.html#cb122-7"></a><span class="co">#&gt; 1 0.59166667 0.71017278 0.11850612</span></span>
-<span id="cb122-8"><a href="standalone-cad-radiologists.html#cb122-8"></a><span class="kw">print</span>(stats2)</span>
-<span id="cb122-9"><a href="standalone-cad-radiologists.html#cb122-9"></a><span class="co">#&gt;             varR         varTR          cov1         cov2          cov3</span></span>
-<span id="cb122-10"><a href="standalone-cad-radiologists.html#cb122-10"></a><span class="co">#&gt; 1 -7.5894152e-19 0.00026488983 0.00076136841 0.0022942211 0.00076136841</span></span>
-<span id="cb122-11"><a href="standalone-cad-radiologists.html#cb122-11"></a><span class="co">#&gt;            Var     FStat        df        pval</span></span>
-<span id="cb122-12"><a href="standalone-cad-radiologists.html#cb122-12"></a><span class="co">#&gt; 1 0.0034336373 4.1576797 937.24371 0.041726262</span></span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="standalone-cad-radiologists.html#cb122-1"></a>x &lt;-<span class="st"> </span>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">2</span></span>
+<span id="cb122-2"><a href="standalone-cad-radiologists.html#cb122-2"></a></span>
+<span id="cb122-3"><a href="standalone-cad-radiologists.html#cb122-3"></a>fom_individual_rad &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">t</span>(x<span class="op">$</span>fomRAD))</span>
+<span id="cb122-4"><a href="standalone-cad-radiologists.html#cb122-4"></a><span class="kw">colnames</span>(fom_individual_rad) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;rdr&quot;</span>, <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>))</span>
+<span id="cb122-5"><a href="standalone-cad-radiologists.html#cb122-5"></a></span>
+<span id="cb122-6"><a href="standalone-cad-radiologists.html#cb122-6"></a>stats1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">fomCAD =</span> x<span class="op">$</span>fomCAD, <span class="dt">avgRadFom =</span> x<span class="op">$</span>avgRadFom, <span class="dt">avgDiffFom =</span> x<span class="op">$</span>avgDiffFom)</span>
+<span id="cb122-7"><a href="standalone-cad-radiologists.html#cb122-7"></a></span>
+<span id="cb122-8"><a href="standalone-cad-radiologists.html#cb122-8"></a>stats2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">varR =</span> x<span class="op">$</span>varR, <span class="dt">varTR =</span> x<span class="op">$</span>varTR, </span>
+<span id="cb122-9"><a href="standalone-cad-radiologists.html#cb122-9"></a>                 <span class="dt">cov1 =</span> x<span class="op">$</span>cov1, <span class="dt">cov2 =</span> x<span class="op">$</span>cov2 , </span>
+<span id="cb122-10"><a href="standalone-cad-radiologists.html#cb122-10"></a>                 <span class="dt">cov3 =</span> x<span class="op">$</span>cov3 , <span class="dt">Var =</span> x<span class="op">$</span>varError, </span>
+<span id="cb122-11"><a href="standalone-cad-radiologists.html#cb122-11"></a>                 <span class="dt">FStat =</span> x<span class="op">$</span>FStat, <span class="dt">df =</span> x<span class="op">$</span>df, <span class="dt">pval =</span> x<span class="op">$</span>pval)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="standalone-cad-radiologists.html#cb123-1"></a></span>
+<span id="cb123-2"><a href="standalone-cad-radiologists.html#cb123-2"></a><span class="kw">print</span>(fom_individual_rad)</span>
+<span id="cb123-3"><a href="standalone-cad-radiologists.html#cb123-3"></a><span class="co">#&gt;         rdr1 rdr2    rdr3  rdr4       rdr5       rdr6   rdr7  rdr8  rdr9</span></span>
+<span id="cb123-4"><a href="standalone-cad-radiologists.html#cb123-4"></a><span class="co">#&gt; 1 0.69453125 0.65 0.80625 0.725 0.65982143 0.76845238 0.7375 0.675 0.675</span></span>
+<span id="cb123-5"><a href="standalone-cad-radiologists.html#cb123-5"></a><span class="kw">print</span>(stats1)</span>
+<span id="cb123-6"><a href="standalone-cad-radiologists.html#cb123-6"></a><span class="co">#&gt;       fomCAD  avgRadFom avgDiffFom</span></span>
+<span id="cb123-7"><a href="standalone-cad-radiologists.html#cb123-7"></a><span class="co">#&gt; 1 0.59166667 0.71017278 0.11850612</span></span>
+<span id="cb123-8"><a href="standalone-cad-radiologists.html#cb123-8"></a><span class="kw">print</span>(stats2)</span>
+<span id="cb123-9"><a href="standalone-cad-radiologists.html#cb123-9"></a><span class="co">#&gt;             varR         varTR          cov1         cov2          cov3</span></span>
+<span id="cb123-10"><a href="standalone-cad-radiologists.html#cb123-10"></a><span class="co">#&gt; 1 -7.5894152e-19 0.00026488983 0.00076136841 0.0022942211 0.00076136841</span></span>
+<span id="cb123-11"><a href="standalone-cad-radiologists.html#cb123-11"></a><span class="co">#&gt;            Var     FStat        df        pval</span></span>
+<span id="cb123-12"><a href="standalone-cad-radiologists.html#cb123-12"></a><span class="co">#&gt; 1 0.0034336373 4.1576797 937.24371 0.041726262</span></span></code></pre></div>
 <p>In addition to the quantities defined previously, the output contains the covariance matrix for the Obuchowski-Rockette model, summarized in Eqn. <a href="standalone-cad-radiologists.html#eq:standalone-cad-model-2t-rrrc">(10.3)</a> – Eqn. <a href="standalone-cad-radiologists.html#eq:standalone-cad-2t-rrrc-cov">(10.6)</a>.</p>
 <ul>
 <li><code>varTR</code> is <span class="math inline">\(\sigma_{\tau R}^2\)</span>.</li>
@@ -2024,11 +2025,11 @@ NA
 </ul>
 <p>Notice that including the variability of cases results in a higher p-value for 2T-RRRC as compared to 1T-RRFC.</p>
 <p>Shown next are the confidence interval statistics <code>x$ciAvgRdrEachTrt</code> for the two treatments (“trt1” = CAD, “trt2” = RAD):</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="standalone-cad-radiologists.html#cb123-1"></a></span>
-<span id="cb123-2"><a href="standalone-cad-radiologists.html#cb123-2"></a><span class="kw">print</span>(x<span class="op">$</span>ciAvgRdrEachTrt)</span>
-<span id="cb123-3"><a href="standalone-cad-radiologists.html#cb123-3"></a><span class="co">#&gt;        Estimate      StdErr        DF    CILower    CIUpper         Cov2</span></span>
-<span id="cb123-4"><a href="standalone-cad-radiologists.html#cb123-4"></a><span class="co">#&gt; trt1 0.59166667 0.058028349       Inf 0.47793319 0.70540014 0.0033672893</span></span>
-<span id="cb123-5"><a href="standalone-cad-radiologists.html#cb123-5"></a><span class="co">#&gt; trt2 0.71017278 0.039156365 193.10832 0.63294372 0.78740185 0.0012211529</span></span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="standalone-cad-radiologists.html#cb124-1"></a></span>
+<span id="cb124-2"><a href="standalone-cad-radiologists.html#cb124-2"></a><span class="kw">print</span>(x<span class="op">$</span>ciAvgRdrEachTrt)</span>
+<span id="cb124-3"><a href="standalone-cad-radiologists.html#cb124-3"></a><span class="co">#&gt;        Estimate      StdErr        DF    CILower    CIUpper         Cov2</span></span>
+<span id="cb124-4"><a href="standalone-cad-radiologists.html#cb124-4"></a><span class="co">#&gt; trt1 0.59166667 0.058028349       Inf 0.47793319 0.70540014 0.0033672893</span></span>
+<span id="cb124-5"><a href="standalone-cad-radiologists.html#cb124-5"></a><span class="co">#&gt; trt2 0.71017278 0.039156365 193.10832 0.63294372 0.78740185 0.0012211529</span></span></code></pre></div>
 <ul>
 <li><code>Estimate</code> contains the difference FOM estimate.</li>
 <li><code>StdErr</code> contains the standard estimate of the difference FOM estimate.</li>
@@ -2039,12 +2040,12 @@ NA
 <li><code>CIUpper</code> is the upper confidence interval for the difference FOM.</li>
 </ul>
 <p>Shown next are the confidence interval statistics <code>x$ciDiffFom</code> between the two treatments (“trt1-trt2” = CAD - RAD):</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="standalone-cad-radiologists.html#cb124-1"></a></span>
-<span id="cb124-2"><a href="standalone-cad-radiologists.html#cb124-2"></a><span class="kw">print</span>(x<span class="op">$</span>ciDiffFom)</span>
-<span id="cb124-3"><a href="standalone-cad-radiologists.html#cb124-3"></a><span class="co">#&gt;             Estimate      StdErr        DF         t       PrGTt     CILower</span></span>
-<span id="cb124-4"><a href="standalone-cad-radiologists.html#cb124-4"></a><span class="co">#&gt; trt2-trt1 0.11850612 0.058118615 937.24371 2.0390389 0.041726262 0.004448434</span></span>
-<span id="cb124-5"><a href="standalone-cad-radiologists.html#cb124-5"></a><span class="co">#&gt;             CIUpper</span></span>
-<span id="cb124-6"><a href="standalone-cad-radiologists.html#cb124-6"></a><span class="co">#&gt; trt2-trt1 0.2325638</span></span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="standalone-cad-radiologists.html#cb125-1"></a></span>
+<span id="cb125-2"><a href="standalone-cad-radiologists.html#cb125-2"></a><span class="kw">print</span>(x<span class="op">$</span>ciDiffFom)</span>
+<span id="cb125-3"><a href="standalone-cad-radiologists.html#cb125-3"></a><span class="co">#&gt;             Estimate      StdErr        DF         t       PrGTt     CILower</span></span>
+<span id="cb125-4"><a href="standalone-cad-radiologists.html#cb125-4"></a><span class="co">#&gt; trt2-trt1 0.11850612 0.058118615 937.24371 2.0390389 0.041726262 0.004448434</span></span>
+<span id="cb125-5"><a href="standalone-cad-radiologists.html#cb125-5"></a><span class="co">#&gt;             CIUpper</span></span>
+<span id="cb125-6"><a href="standalone-cad-radiologists.html#cb125-6"></a><span class="co">#&gt; trt2-trt1 0.2325638</span></span></code></pre></div>
 <p>The difference figure of merit statistics are contained in a dataframe <code>x$ciDiffFom</code> with elements:</p>
 <ul>
 <li><code>Estimate</code> contains the difference FOM estimate.</li>
@@ -2065,46 +2066,46 @@ NA
 <div id="example-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">10.8.3</span> Example 3<a href="standalone-cad-radiologists.html#example-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The last example shows the structure of <code>RRRC_1T_PCL_0_2</code>.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="standalone-cad-radiologists.html#cb125-1"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span></span>
-<span id="cb125-2"><a href="standalone-cad-radiologists.html#cb125-2"></a><span class="co">#&gt; $fomCAD</span></span>
-<span id="cb125-3"><a href="standalone-cad-radiologists.html#cb125-3"></a><span class="co">#&gt; [1] 0.59166667</span></span>
-<span id="cb125-4"><a href="standalone-cad-radiologists.html#cb125-4"></a><span class="co">#&gt; </span></span>
-<span id="cb125-5"><a href="standalone-cad-radiologists.html#cb125-5"></a><span class="co">#&gt; $fomRAD</span></span>
-<span id="cb125-6"><a href="standalone-cad-radiologists.html#cb125-6"></a><span class="co">#&gt; [1] 0.69453125 0.65000000 0.80625000 0.72500000 0.65982143 0.76845238 0.73750000</span></span>
-<span id="cb125-7"><a href="standalone-cad-radiologists.html#cb125-7"></a><span class="co">#&gt; [8] 0.67500000 0.67500000</span></span>
-<span id="cb125-8"><a href="standalone-cad-radiologists.html#cb125-8"></a><span class="co">#&gt; </span></span>
-<span id="cb125-9"><a href="standalone-cad-radiologists.html#cb125-9"></a><span class="co">#&gt; $avgRadFom</span></span>
-<span id="cb125-10"><a href="standalone-cad-radiologists.html#cb125-10"></a><span class="co">#&gt; [1] 0.71017278</span></span>
-<span id="cb125-11"><a href="standalone-cad-radiologists.html#cb125-11"></a><span class="co">#&gt; </span></span>
-<span id="cb125-12"><a href="standalone-cad-radiologists.html#cb125-12"></a><span class="co">#&gt; $CIAvgRad</span></span>
-<span id="cb125-13"><a href="standalone-cad-radiologists.html#cb125-13"></a><span class="co">#&gt; [1] 0.59611510 0.82423047</span></span>
-<span id="cb125-14"><a href="standalone-cad-radiologists.html#cb125-14"></a><span class="co">#&gt; </span></span>
-<span id="cb125-15"><a href="standalone-cad-radiologists.html#cb125-15"></a><span class="co">#&gt; $avgDiffFom</span></span>
-<span id="cb125-16"><a href="standalone-cad-radiologists.html#cb125-16"></a><span class="co">#&gt; [1] 0.11850612</span></span>
-<span id="cb125-17"><a href="standalone-cad-radiologists.html#cb125-17"></a><span class="co">#&gt; </span></span>
-<span id="cb125-18"><a href="standalone-cad-radiologists.html#cb125-18"></a><span class="co">#&gt; $CIAvgDiffFom</span></span>
-<span id="cb125-19"><a href="standalone-cad-radiologists.html#cb125-19"></a><span class="co">#&gt; [1] 0.004448434 0.232563801</span></span>
-<span id="cb125-20"><a href="standalone-cad-radiologists.html#cb125-20"></a><span class="co">#&gt; </span></span>
-<span id="cb125-21"><a href="standalone-cad-radiologists.html#cb125-21"></a><span class="co">#&gt; $varR</span></span>
-<span id="cb125-22"><a href="standalone-cad-radiologists.html#cb125-22"></a><span class="co">#&gt; [1] 0.002808612</span></span>
-<span id="cb125-23"><a href="standalone-cad-radiologists.html#cb125-23"></a><span class="co">#&gt; </span></span>
-<span id="cb125-24"><a href="standalone-cad-radiologists.html#cb125-24"></a><span class="co">#&gt; $varError</span></span>
-<span id="cb125-25"><a href="standalone-cad-radiologists.html#cb125-25"></a><span class="co">#&gt; [1] 0.0053445377</span></span>
-<span id="cb125-26"><a href="standalone-cad-radiologists.html#cb125-26"></a><span class="co">#&gt; </span></span>
-<span id="cb125-27"><a href="standalone-cad-radiologists.html#cb125-27"></a><span class="co">#&gt; $cov2</span></span>
-<span id="cb125-28"><a href="standalone-cad-radiologists.html#cb125-28"></a><span class="co">#&gt; [1] 0.0030657054</span></span>
-<span id="cb125-29"><a href="standalone-cad-radiologists.html#cb125-29"></a><span class="co">#&gt; </span></span>
-<span id="cb125-30"><a href="standalone-cad-radiologists.html#cb125-30"></a><span class="co">#&gt; $Tstat</span></span>
-<span id="cb125-31"><a href="standalone-cad-radiologists.html#cb125-31"></a><span class="co">#&gt;      rdr2 </span></span>
-<span id="cb125-32"><a href="standalone-cad-radiologists.html#cb125-32"></a><span class="co">#&gt; 2.0390389 </span></span>
-<span id="cb125-33"><a href="standalone-cad-radiologists.html#cb125-33"></a><span class="co">#&gt; </span></span>
-<span id="cb125-34"><a href="standalone-cad-radiologists.html#cb125-34"></a><span class="co">#&gt; $df</span></span>
-<span id="cb125-35"><a href="standalone-cad-radiologists.html#cb125-35"></a><span class="co">#&gt;      rdr2 </span></span>
-<span id="cb125-36"><a href="standalone-cad-radiologists.html#cb125-36"></a><span class="co">#&gt; 937.24371 </span></span>
-<span id="cb125-37"><a href="standalone-cad-radiologists.html#cb125-37"></a><span class="co">#&gt; </span></span>
-<span id="cb125-38"><a href="standalone-cad-radiologists.html#cb125-38"></a><span class="co">#&gt; $pval</span></span>
-<span id="cb125-39"><a href="standalone-cad-radiologists.html#cb125-39"></a><span class="co">#&gt;        rdr2 </span></span>
-<span id="cb125-40"><a href="standalone-cad-radiologists.html#cb125-40"></a><span class="co">#&gt; 0.041726262</span></span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="standalone-cad-radiologists.html#cb126-1"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span></span>
+<span id="cb126-2"><a href="standalone-cad-radiologists.html#cb126-2"></a><span class="co">#&gt; $fomCAD</span></span>
+<span id="cb126-3"><a href="standalone-cad-radiologists.html#cb126-3"></a><span class="co">#&gt; [1] 0.59166667</span></span>
+<span id="cb126-4"><a href="standalone-cad-radiologists.html#cb126-4"></a><span class="co">#&gt; </span></span>
+<span id="cb126-5"><a href="standalone-cad-radiologists.html#cb126-5"></a><span class="co">#&gt; $fomRAD</span></span>
+<span id="cb126-6"><a href="standalone-cad-radiologists.html#cb126-6"></a><span class="co">#&gt; [1] 0.69453125 0.65000000 0.80625000 0.72500000 0.65982143 0.76845238 0.73750000</span></span>
+<span id="cb126-7"><a href="standalone-cad-radiologists.html#cb126-7"></a><span class="co">#&gt; [8] 0.67500000 0.67500000</span></span>
+<span id="cb126-8"><a href="standalone-cad-radiologists.html#cb126-8"></a><span class="co">#&gt; </span></span>
+<span id="cb126-9"><a href="standalone-cad-radiologists.html#cb126-9"></a><span class="co">#&gt; $avgRadFom</span></span>
+<span id="cb126-10"><a href="standalone-cad-radiologists.html#cb126-10"></a><span class="co">#&gt; [1] 0.71017278</span></span>
+<span id="cb126-11"><a href="standalone-cad-radiologists.html#cb126-11"></a><span class="co">#&gt; </span></span>
+<span id="cb126-12"><a href="standalone-cad-radiologists.html#cb126-12"></a><span class="co">#&gt; $CIAvgRad</span></span>
+<span id="cb126-13"><a href="standalone-cad-radiologists.html#cb126-13"></a><span class="co">#&gt; [1] 0.59611510 0.82423047</span></span>
+<span id="cb126-14"><a href="standalone-cad-radiologists.html#cb126-14"></a><span class="co">#&gt; </span></span>
+<span id="cb126-15"><a href="standalone-cad-radiologists.html#cb126-15"></a><span class="co">#&gt; $avgDiffFom</span></span>
+<span id="cb126-16"><a href="standalone-cad-radiologists.html#cb126-16"></a><span class="co">#&gt; [1] 0.11850612</span></span>
+<span id="cb126-17"><a href="standalone-cad-radiologists.html#cb126-17"></a><span class="co">#&gt; </span></span>
+<span id="cb126-18"><a href="standalone-cad-radiologists.html#cb126-18"></a><span class="co">#&gt; $CIAvgDiffFom</span></span>
+<span id="cb126-19"><a href="standalone-cad-radiologists.html#cb126-19"></a><span class="co">#&gt; [1] 0.004448434 0.232563801</span></span>
+<span id="cb126-20"><a href="standalone-cad-radiologists.html#cb126-20"></a><span class="co">#&gt; </span></span>
+<span id="cb126-21"><a href="standalone-cad-radiologists.html#cb126-21"></a><span class="co">#&gt; $varR</span></span>
+<span id="cb126-22"><a href="standalone-cad-radiologists.html#cb126-22"></a><span class="co">#&gt; [1] 0.002808612</span></span>
+<span id="cb126-23"><a href="standalone-cad-radiologists.html#cb126-23"></a><span class="co">#&gt; </span></span>
+<span id="cb126-24"><a href="standalone-cad-radiologists.html#cb126-24"></a><span class="co">#&gt; $varError</span></span>
+<span id="cb126-25"><a href="standalone-cad-radiologists.html#cb126-25"></a><span class="co">#&gt; [1] 0.0053445377</span></span>
+<span id="cb126-26"><a href="standalone-cad-radiologists.html#cb126-26"></a><span class="co">#&gt; </span></span>
+<span id="cb126-27"><a href="standalone-cad-radiologists.html#cb126-27"></a><span class="co">#&gt; $cov2</span></span>
+<span id="cb126-28"><a href="standalone-cad-radiologists.html#cb126-28"></a><span class="co">#&gt; [1] 0.0030657054</span></span>
+<span id="cb126-29"><a href="standalone-cad-radiologists.html#cb126-29"></a><span class="co">#&gt; </span></span>
+<span id="cb126-30"><a href="standalone-cad-radiologists.html#cb126-30"></a><span class="co">#&gt; $Tstat</span></span>
+<span id="cb126-31"><a href="standalone-cad-radiologists.html#cb126-31"></a><span class="co">#&gt;      rdr2 </span></span>
+<span id="cb126-32"><a href="standalone-cad-radiologists.html#cb126-32"></a><span class="co">#&gt; 2.0390389 </span></span>
+<span id="cb126-33"><a href="standalone-cad-radiologists.html#cb126-33"></a><span class="co">#&gt; </span></span>
+<span id="cb126-34"><a href="standalone-cad-radiologists.html#cb126-34"></a><span class="co">#&gt; $df</span></span>
+<span id="cb126-35"><a href="standalone-cad-radiologists.html#cb126-35"></a><span class="co">#&gt;      rdr2 </span></span>
+<span id="cb126-36"><a href="standalone-cad-radiologists.html#cb126-36"></a><span class="co">#&gt; 937.24371 </span></span>
+<span id="cb126-37"><a href="standalone-cad-radiologists.html#cb126-37"></a><span class="co">#&gt; </span></span>
+<span id="cb126-38"><a href="standalone-cad-radiologists.html#cb126-38"></a><span class="co">#&gt; $pval</span></span>
+<span id="cb126-39"><a href="standalone-cad-radiologists.html#cb126-39"></a><span class="co">#&gt;        rdr2 </span></span>
+<span id="cb126-40"><a href="standalone-cad-radiologists.html#cb126-40"></a><span class="co">#&gt; 0.041726262</span></span></code></pre></div>
 <p>The differences from <code>RRFC_1T_PCL_0_2</code> are listed next:</p>
 <ul>
 <li><code>varR</code> is <span class="math inline">\(\sigma_R^2\)</span> of the single treatment model for comparing CAD to RAD, Eqn. <a href="standalone-cad-radiologists.html#eq:standalone-cad-1t-parms">(10.15)</a>.</li>
@@ -2117,8 +2118,8 @@ NA
 <div id="standalone-cad-radiologists-appendix2" class="section level2 hasAnchor">
 <h2><span class="header-section-number">10.9</span> Appendix 2<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Two text files <code>R/standalone-cad/jaf_truth.txt</code> and <code>R/standalone-cad/jaf_truth.txt</code> were provided by Prof. Nico Karssemeijer. These are read into a dataset object by the following code.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="standalone-cad-radiologists.html#cb126-1"></a><span class="kw">source</span>(<span class="kw">here</span>(<span class="st">&quot;R/standalone-cad/DfReadLrocDataFile.R&quot;</span>))</span>
-<span id="cb126-2"><a href="standalone-cad-radiologists.html#cb126-2"></a>lrocDataset &lt;-<span class="st"> </span><span class="kw">DfReadLrocDataFile</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="standalone-cad-radiologists.html#cb127-1"></a><span class="kw">source</span>(<span class="kw">here</span>(<span class="st">&quot;R/standalone-cad/DfReadLrocDataFile.R&quot;</span>))</span>
+<span id="cb127-2"><a href="standalone-cad-radiologists.html#cb127-2"></a>lrocDataset &lt;-<span class="st"> </span><span class="kw">DfReadLrocDataFile</span>()</span></code></pre></div>
 
 </div>
 </div>

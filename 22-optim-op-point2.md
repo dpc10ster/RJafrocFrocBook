@@ -53,8 +53,8 @@ relWeights <- c(0.5, 0.5)
    <th style="text-align:left;"> FOM </th>
    <th style="text-align:left;"> $\nu$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
-   <th style="text-align:left;"> $\text{wAFROC}$ </th>
-   <th style="text-align:left;"> $\text{ROC}$ </th>
+   <th style="text-align:left;"> $\text{wAFROC}_\text{AUC}$ </th>
+   <th style="text-align:left;"> $\text{ROC}_\text{AUC}$ </th>
    <th style="text-align:left;"> $\left( \text{NLF}, \text{LLF}\right)$ </th>
   </tr>
  </thead>
@@ -139,8 +139,8 @@ relWeights <- c(0.5, 0.5)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-nu-froc-1.png" alt="FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
-<p class="caption">(\#fig:optim-op-point-vary-nu-froc)FROC plots with superimposed operating points for varying $\nu$. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-nu-froc-1.png" alt="Varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$. Each red dot is above the corresponding black dot and their separation increases as $\nu$ increases, i.e., as CAD performance increases." width="672" />
+<p class="caption">(\#fig:optim-op-point-vary-nu-froc)Varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$. Each red dot is above the corresponding black dot and their separation increases as $\nu$ increases, i.e., as CAD performance increases.</p>
 </div>
 
 
@@ -218,8 +218,8 @@ nuArr <- 0.9
    <th style="text-align:left;"> FOM </th>
    <th style="text-align:left;"> $\mu$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
-   <th style="text-align:left;"> $\text{wAFROC}$ </th>
-   <th style="text-align:left;"> $\text{ROC}$ </th>
+   <th style="text-align:left;"> $\text{wAFROC}_\text{AUC}$ </th>
+   <th style="text-align:left;"> $\text{ROC}_\text{AUC}$ </th>
    <th style="text-align:left;"> $\left( \text{NLF}, \text{LLF}\right)$ </th>
   </tr>
  </thead>
@@ -302,8 +302,8 @@ nuArr <- 0.9
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-mu-froc-1.png" alt="FROC plots with superimposed operating points for varying $\mu$. The red dot corresponds to wAFROC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-vary-mu-froc)FROC plots with superimposed operating points for varying $\mu$. The red dot corresponds to wAFROC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-vary-mu-froc-1.png" alt="Varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-vary-mu-froc)Varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
 </div>
 
 
@@ -374,8 +374,8 @@ lambdaArr <- c(1)
    <th style="text-align:left;"> FOM </th>
    <th style="text-align:left;"> $\mu$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
-   <th style="text-align:left;"> $\text{wAFROC}$ </th>
-   <th style="text-align:left;"> $\text{ROC}$ </th>
+   <th style="text-align:left;"> $\text{wAFROC}_\text{AUC}$ </th>
+   <th style="text-align:left;"> $\text{ROC}_\text{AUC}$ </th>
    <th style="text-align:left;"> $\left( \text{NLF}, \text{LLF}\right)$ </th>
   </tr>
  </thead>
@@ -459,8 +459,8 @@ lambdaArr <- c(1)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-froc-1.png" alt="Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu-froc)Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-mu-froc-1.png" alt="High performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-mu-froc)High performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$.</p>
 </div>
 
 
@@ -528,8 +528,8 @@ lambdaArr <- c(10)
    <th style="text-align:left;"> FOM </th>
    <th style="text-align:left;"> $\mu$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
-   <th style="text-align:left;"> $\text{wAFROC}$ </th>
-   <th style="text-align:left;"> $\text{ROC}$ </th>
+   <th style="text-align:left;"> $\text{wAFROC}_\text{AUC}$ </th>
+   <th style="text-align:left;"> $\text{ROC}_\text{AUC}$ </th>
    <th style="text-align:left;"> $\left( \text{NLF}, \text{LLF}\right)$ </th>
   </tr>
  </thead>
@@ -612,8 +612,8 @@ lambdaArr <- c(10)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-1.png" alt="Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu)Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-mu-1.png" alt="Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-mu)Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$.</p>
 </div>
 
 
@@ -683,8 +683,8 @@ lambdaArr <- c(1,2,5,10)
    <th style="text-align:left;"> FOM </th>
    <th style="text-align:left;"> $\lambda$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
-   <th style="text-align:left;"> $\text{wAFROC}$ </th>
-   <th style="text-align:left;"> $\text{ROC}$ </th>
+   <th style="text-align:left;"> $\text{wAFROC}_\text{AUC}$ </th>
+   <th style="text-align:left;"> $\text{ROC}_\text{AUC}$ </th>
    <th style="text-align:left;"> $\left( \text{NLF}, \text{LLF}\right)$ </th>
   </tr>
  </thead>
@@ -767,8 +767,8 @@ lambdaArr <- c(1,2,5,10)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-lambda-froc-1.png" alt="High performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-lambda-froc)High performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-lambda-froc-1.png" alt="High performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-lambda-froc)High performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
 </div>
 
 
@@ -837,8 +837,8 @@ lambdaArr <- c(1, 2, 5, 10)
    <th style="text-align:left;"> FOM </th>
    <th style="text-align:left;"> $\lambda$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
-   <th style="text-align:left;"> $\text{wAFROC}$ </th>
-   <th style="text-align:left;"> $\text{ROC}$ </th>
+   <th style="text-align:left;"> $\text{wAFROC}_\text{AUC}$ </th>
+   <th style="text-align:left;"> $\text{ROC}_\text{AUC}$ </th>
    <th style="text-align:left;"> $\left( \text{NLF}, \text{LLF}\right)$ </th>
   </tr>
  </thead>
@@ -922,8 +922,8 @@ lambdaArr <- c(1, 2, 5, 10)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-lambda-froc-1.png" alt="Low performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-froc)Low performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-lambda-froc-1.png" alt="Low performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-lambda-froc)Low performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$.</p>
 </div>
 
 
@@ -995,8 +995,8 @@ nuArr <- c(0.6, 0.7, 0.8, 0.9)
    <th style="text-align:left;"> FOM </th>
    <th style="text-align:left;"> $\nu$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
-   <th style="text-align:left;"> $\text{wAFROC}$ </th>
-   <th style="text-align:left;"> $\text{ROC}$ </th>
+   <th style="text-align:left;"> $\text{wAFROC}_\text{AUC}$ </th>
+   <th style="text-align:left;"> $\text{ROC}_\text{AUC}$ </th>
    <th style="text-align:left;"> $\left( \text{NLF}, \text{LLF}\right)$ </th>
   </tr>
  </thead>
@@ -1080,8 +1080,8 @@ nuArr <- c(0.6, 0.7, 0.8, 0.9)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-nu-froc-1.png" alt="High performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
-<p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-froc)High performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-high-performance-vary-nu-froc-1.png" alt="High performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
+<p class="caption">(\#fig:optim-op-point-high-performance-vary-nu-froc)High performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$.</p>
 </div>
 
 
@@ -1150,8 +1150,8 @@ nuArr <- c(0.1, 0.2, 0.3, 0.4)
    <th style="text-align:left;"> FOM </th>
    <th style="text-align:left;"> $\nu$ </th>
    <th style="text-align:left;"> $\zeta_1$ </th>
-   <th style="text-align:left;"> $\text{wAFROC}$ </th>
-   <th style="text-align:left;"> $\text{ROC}$ </th>
+   <th style="text-align:left;"> $\text{wAFROC}_\text{AUC}$ </th>
+   <th style="text-align:left;"> $\text{ROC}_\text{AUC}$ </th>
    <th style="text-align:left;"> $\left( \text{NLF}, \text{LLF}\right)$ </th>
   </tr>
  </thead>
@@ -1235,8 +1235,8 @@ nuArr <- c(0.1, 0.2, 0.3, 0.4)
 
 
 <div class="figure">
-<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-nu-froc-1.png" alt="Low performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
-<p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-froc)Low performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$.</p>
+<img src="22-optim-op-point2_files/figure-html/optim-op-point-low-performance-vary-nu-froc-1.png" alt="Low performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
+<p class="caption">(\#fig:optim-op-point-low-performance-vary-nu-froc)Low performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to wAFROC-AUC optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$.</p>
 </div>
 
 

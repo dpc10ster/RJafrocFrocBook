@@ -189,7 +189,7 @@ fig:optim-op-point-vary-mu-froc
 fig:optim-op-point-vary-mu-wafroc
 fig:optim-op-point-vary-mu-roc
 tab:optim-op-point-high-performance-vary-mu-table
-fig:optim-op-point-low-performance-vary-mu-froc
+fig:optim-op-point-high-performance-vary-mu-froc
 fig:optim-op-point-high-performance-vary-mu-wafroc
 fig:optim-op-point-high-performance-vary-mu-roc
 tab:optim-op-point-low-performance-vary-mu-table
@@ -424,6 +424,7 @@ roc-1
 why-not-maximize-roc-auc
 optim-op-point-vary-nu-mu
 optim-op-point-vary-nu-limiting-situations
+optim-op-point-summary-comments
 optim-op-point-how-to-use-method
 optim-op-point-application
 summary-table-1

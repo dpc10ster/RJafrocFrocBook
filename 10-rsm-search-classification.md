@@ -52,6 +52,12 @@ lesDistr <- c(1) # one lesion per dis. case
 
 
 
+
+```
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+```
+
 <div class="figure">
 <img src="10-rsm-search-classification_files/figure-html/rsm-search-classification-performance-from-roc-curve-1.png" alt="Relation of lesion-localization performance to the end-point of the ROC curve. Plot (a) is using the binormal model while plot (b) is using a RSM predicted curve. The chance diagonal is labeled c. The filled square is the end-point of the RSM predicted curve while the filled dot is the end-point of the binormal predicted curve. The distance of the filled square from the chance diagonal, labeled $d_S$, is a measure of lesion-localization performance." width="672" />
 <p class="caption">(\#fig:rsm-search-classification-performance-from-roc-curve)Relation of lesion-localization performance to the end-point of the ROC curve. Plot (a) is using the binormal model while plot (b) is using a RSM predicted curve. The chance diagonal is labeled c. The filled square is the end-point of the RSM predicted curve while the filled dot is the end-point of the binormal predicted curve. The distance of the filled square from the chance diagonal, labeled $d_S$, is a measure of lesion-localization performance.</p>
