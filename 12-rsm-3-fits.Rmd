@@ -10,7 +10,6 @@ library(ggplot2)
 library(gridExtra)
 library(grid)
 library(binom)
-library(here)
 library(foreach)
 library(doRNG)
 library(doParallel)
@@ -67,7 +66,7 @@ In the following we focus, for now, on just two ROC datasets (these have been wi
 
 
 ```{r rsm-3-fits-code, echo=FALSE}
-source(here("R/compare-3-fits/Compare3ProperRocFits.R"))
+source(here::here("R/compare-3-fits/Compare3ProperRocFits.R"))
 ```
 
 
@@ -379,9 +378,9 @@ The code for calculating the average slopes is in `R/compare-3-fits/slopesConvVs
 
 
 ```{r rsm-3-fits-confidence-intervals, echo=FALSE}
-source(here("R/compare-3-fits/loadDataFile.R"))
-source(here("R/compare-3-fits/slopesConvVsRsm.R"))
-source(here("R/compare-3-fits/slopesAucsConvVsRsmCI.R"))
+source(here::here("R/compare-3-fits/loadDataFile.R"))
+source(here::here("R/compare-3-fits/slopesConvVsRsm.R"))
+source(here::here("R/compare-3-fits/slopesAucsConvVsRsmCI.R"))
 ```
 
 

@@ -17,17 +17,17 @@ for (y in 1:2) {
                   relWeightsCad)
     zetaOptArr1[y] <- x$minimum
     wafrocArr[y] <- -x$objective  # safe to use objective here
-    rocAucArr[y] <- UtilAnalyticalAucsRSM(
+    rocAucArr[y] <- RJafroc::UtilAnalyticalAucsRSM(
       mu, 
       lambda = lambda, 
       nu = nu, 
       zeta1 = x$minimum, 
       lesDistrCad, 
       relWeightsCad)$aucROC
-    nlfOptArr[y] <- RSM_NLF(
+    nlfOptArr[y] <- RJafroc::RSM_NLF(
       z = x$minimum, 
       lambda = lambda)
-    llfOptArr[y] <- RSM_LLF(
+    llfOptArr[y] <- RJafroc::RSM_LLF(
       z = x$minimum, 
       mu, 
       nu)
@@ -39,24 +39,24 @@ for (y in 1:2) {
                   nu = nu, 
                   lesDistrCad)
     zetaOptArr1[y] <- x$minimum
-    wafrocArr[y] <- UtilAnalyticalAucsRSM(
+    wafrocArr[y] <- RJafroc::UtilAnalyticalAucsRSM(
       mu, 
       lambda = lambda, 
       nu = nu, 
       zeta1 = x$minimum, 
       lesDistrCad, 
       relWeightsCad)$aucwAFROC
-    rocAucArr[y] <- UtilAnalyticalAucsRSM(
+    rocAucArr[y] <- RJafroc::UtilAnalyticalAucsRSM(
       mu, 
       lambda = lambda, 
       nu = nu, 
       zeta1 = x$minimum, 
       lesDistrCad, 
       relWeightsCad)$aucROC
-    nlfOptArr[y] <- RSM_NLF(
+    nlfOptArr[y] <- RJafroc::RSM_NLF(
       z = x$minimum, 
       lambda = lambda)
-    llfOptArr[y] <- RSM_LLF(
+    llfOptArr[y] <- RJafroc::RSM_LLF(
       z = x$minimum, mu, nu)
   } else stop("incorrect y")
 }

@@ -13,14 +13,9 @@ knitr::opts_chunk$set(
   eval.after = "fig.cap"
 )
 
-library(RJafroc)
-library(ggplot2)
 library(kableExtra)
 library(gridExtra)
-library(abind)
 library(dplyr)
-library(mvtnorm)
-library(here)
 ```
 
 
@@ -32,7 +27,7 @@ source("R/collapse_rows_df.R", local = knitr::knit_global())
 
 
 ```{r, echo=FALSE}
-source(here("R/optim-op-point/optim-op-point-helpers.R"))
+source(here::here("R/optim-op-point/optim-op-point-helpers.R"))
 ```
 
 

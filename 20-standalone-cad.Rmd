@@ -8,54 +8,18 @@
   collapse = TRUE,
   comment = "#>"
   )
-  library(RJafroc)
-  library(ggplot2)
-  library(kableExtra)
+
   library(dplyr)
-  library(here)
 ```
 
 
 ## How much finished {#standalone-cad-radiologists-how-much-finished}
 99%
 
-<!-- ### This does not work -->
-
-<!-- ```{r} -->
-<!-- df <- data.frame(C1 = c(rep("a", 10), rep("b", 5)), -->
-<!--                  C2 = c(rep("c", 7), rep("d", 3), rep("c", 2), rep("d", 3)), -->
-<!--                  C3 = 1:15, -->
-<!--                  C4 = sample(c(0,1), 15, replace = TRUE)) -->
-<!-- ``` -->
-
-
-
-<!-- ```{r} -->
-<!-- kbl(df, align = "c") %>% -->
-<!--   kable_paper(full_width = F) %>% -->
-<!--   column_spec(1, bold = T) %>% -->
-<!--   collapse_rows(columns = 1:2, valign = "top") -->
-<!-- ``` -->
-
-
-<!-- ### This works! -->
-
-
-<!-- Define this function: -->
 
 ```{r, include=FALSE}
 source("R/collapse_rows_df.R", local = knitr::knit_global())
 ```
-
-
-<!-- Now apply it: -->
-
-<!-- ```{r} -->
-<!-- kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>% -->
-<!--   kable_paper(full_width = F) %>% -->
-<!--   column_spec(1, bold = T) %>% -->
-<!--   collapse_rows(columns = 1:2, valign = "top") -->
-<!-- ```   -->
 
 
 ## Introduction {#standalone-cad-radiologists-introduction}
@@ -118,7 +82,7 @@ cells[15,]  <- c("R4", "2", "398", "20", "", "C4", "2", "398", "5")
 
 df <- as.data.frame(cells)
 colnames(df) <- c("Reader", "Treatment", "Case", "Rating", "", "Reader", "Treatment", "Case", "Rating")
-kbl(df, caption = "The differences between the data structures in conventional DBM-MRMC analysis and the unorthodox application of the software used in Study - 2. There are four radiologists, labeled R1, R2, R3 and R4 interpreting 398 cases labeled 1, 2, …, 398, in two treatments, labeled 1 and 2. Sample ratings are shown only for the first and last radiologist and the first and last case. In the first four columns, labeled \"Standard DBM-MRMC\", each radiologist interprets each case twice. In the next four columns, labeled \"Unorthodox DBM-MRMC\", the radiologists interpret each case once. CAD ratings are replicated four times to effectively create the second \"treatment\". The quotations emphasize that there is, in fact, only one treatment. The replicated CAD observers are labeled C1, C2, C3 and C4.", booktabs = TRUE) %>% kable_styling() %>% add_header_above(c("Standard DBM-MRMC" = 4, "", "Unorthodox DBM-MRMC" = 4)) 
+kableExtra::kbl(df, caption = "The differences between the data structures in conventional DBM-MRMC analysis and the unorthodox application of the software used in Study - 2. There are four radiologists, labeled R1, R2, R3 and R4 interpreting 398 cases labeled 1, 2, …, 398, in two treatments, labeled 1 and 2. Sample ratings are shown only for the first and last radiologist and the first and last case. In the first four columns, labeled \"Standard DBM-MRMC\", each radiologist interprets each case twice. In the next four columns, labeled \"Unorthodox DBM-MRMC\", the radiologists interpret each case once. CAD ratings are replicated four times to effectively create the second \"treatment\". The quotations emphasize that there is, in fact, only one treatment. The replicated CAD observers are labeled C1, C2, C3 and C4.", booktabs = TRUE) %>% kableExtra::kable_styling() %>% kableExtra::add_header_above(c("Standard DBM-MRMC" = 4, "", "Unorthodox DBM-MRMC" = 4)) 
 ```
 
 Study -- 2 reported a not significant difference between CAD and the radiologists (p = 0.253).
@@ -329,32 +293,32 @@ The following code shows usage of the software to generate the results. Note tha
 
 
 ```{r standalone-cad-rjafroc-implementation, cache=TRUE, echo=TRUE}
-RRFC_1T_PCL_0_05 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRFC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRFC")
-RRRC_2T_PCL_0_05 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_2T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "2T-RRRC")
-RRRC_1T_PCL_0_05 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRRC")
 
-RRFC_1T_PCL_0_2 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRFC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRFC")
-RRRC_2T_PCL_0_2 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_2T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "2T-RRRC")
-RRRC_1T_PCL_0_2 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRRC")
 
-RRFC_1T_PCL_1 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRFC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRFC")
-RRRC_2T_PCL_1 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_2T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "2T-RRRC")
-RRRC_1T_PCL_1 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRRC")
 
-RRFC_1T_AUC <- StSignificanceTestingCadVsRad (dataset09, 
+RRFC_1T_AUC <- RJafroc::StSignificanceTestingCadVsRad (dataset09, 
 FOM = "Wilcoxon", method = "1T-RRFC")
-RRRC_2T_AUC <- StSignificanceTestingCadVsRad (dataset09, 
+RRRC_2T_AUC <- RJafroc::StSignificanceTestingCadVsRad (dataset09, 
 FOM = "Wilcoxon", method = "2T-RRRC")
-RRRC_1T_AUC <- StSignificanceTestingCadVsRad (dataset09, 
+RRRC_1T_AUC <- RJafroc::StSignificanceTestingCadVsRad (dataset09, 
 FOM = "Wilcoxon", method = "1T-RRRC")
 
 ```
@@ -531,7 +495,7 @@ df <- collapse_rows_df(collapse_rows_df(collapse_rows_df(collapse_rows_df(df,C1)
 colnames(df) <-c("FOM", "Analysis", "$\\theta_0$", "$CI_{\\theta_0}$", "$\\theta_{\\bullet}$", "$CI_{\\theta_{\\bullet}}$", "$\\psi_{\\bullet}$", "$CI_{\\psi_{\\bullet}}$",  "F", "ddf", "p")
 
 # escape = FALSE is critical in getting Math right
-kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+kableExtra::kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 
@@ -646,7 +610,7 @@ colnames(df) <- c("FOM", "Analysis", "$\\sigma_R^2$", "$\\sigma_{\\tau R}^2$", "
 df <- collapse_rows_df(df,FOM)
 
 # escape = FALSE is critical in getting Math right
-kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
+kableExtra::kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 10) 
 ```
 
 From Table \@ref(tab:standalone-cad-table3) some inconsistencies are evident for 2T-RRRC analysis:
@@ -836,7 +800,7 @@ Notice that the `RRRC_1T_PCL_0_2` p value, i.e., `r RRRC_1T_PCL_0_2$pval`,  is i
 Two text files `R/standalone-cad/jaf_truth.txt` and `R/standalone-cad/jaf_truth.txt` were provided by Prof. Nico Karssemeijer. These are read into a dataset object by the following code.
 
 ```{r readLrocFiles}
-source(here("R/standalone-cad/DfReadLrocDataFile.R"))
+source(here::here("R/standalone-cad/DfReadLrocDataFile.R"))
 lrocDataset <- DfReadLrocDataFile()
 ```
 

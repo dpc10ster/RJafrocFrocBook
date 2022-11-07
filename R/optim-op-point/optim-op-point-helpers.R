@@ -14,15 +14,15 @@ wAFROC <- function (
   relWeights) {
   # return negative of aucwAFROC 
   # (as optimize finds minimum of function)
-  return(-UtilAnalyticalAucsRSM(mu, lambda, nu, zeta1, lesDistr, relWeights)$aucwAFROC)
+  return(-RJafroc::UtilAnalyticalAucsRSM(mu, lambda, nu, zeta1, lesDistr, relWeights)$aucwAFROC)
 }
 
 
 Youden <- function (zeta1, mu, lambda, nu, lesDistr) {
   # add sensitivity and specificity 
   # and subtract 1, i.e., Youden's index
-  x <- RSM_yROC(zeta1, mu, lambda, nu, lesDistr) + 
-    (1 - RSM_xROC(zeta1, lambda)) - 1
+  x <- RJafroc::RSM_yROC(zeta1, mu, lambda, nu, lesDistr) + 
+    (1 - RJafroc::RSM_xROC(zeta1, lambda)) - 1
   # return negative of Youden-index 
   # (as optimize finds minimum of function)
   return(-x)
@@ -55,30 +55,30 @@ doOneSet <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
                           relWeights)
             zetaOptArr[y,i1,i2,i3] <- x$minimum
             wAfrocArr[y,i1,i2,i3] <- -x$objective # safe to use objective here
-            rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
+            rocArr[y,i1,i2,i3] <- RJafroc::UtilAnalyticalAucsRSM(
               mu, 
               lambda, 
               nu, 
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucROC
-            fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
+            fpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_xROC(
               z = x$minimum, 
               lambda)
-            tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
+            tpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_yROC(
               z = x$minimum, 
               mu, 
               lambda,
               nu,
               lesDistr)
-            nlfOptArr[y,i1,i2,i3] <- RSM_NLF(
+            nlfOptArr[y,i1,i2,i3] <- RJafroc::RSM_NLF(
               z = x$minimum, 
               lambda)
-            llfOptArr[y,i1,i2,i3] <- RSM_LLF(
+            llfOptArr[y,i1,i2,i3] <- RJafroc::RSM_LLF(
               z = x$minimum, 
               mu, 
               nu)
-            wllfOptArr[y,i1,i2,i3] <- RSM_wLLF(
+            wllfOptArr[y,i1,i2,i3] <- RJafroc::RSM_wLLF(
               z = x$minimum, 
               mu, 
               nu,
@@ -92,37 +92,37 @@ doOneSet <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
                           nu, 
                           lesDistr)
             zetaOptArr[y,i1,i2,i3] <- x$minimum
-            wAfrocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
+            wAfrocArr[y,i1,i2,i3] <- RJafroc::UtilAnalyticalAucsRSM(
               mu, 
               lambda, 
               nu, 
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucwAFROC
-            rocArr[y,i1,i2,i3] <- UtilAnalyticalAucsRSM(
+            rocArr[y,i1,i2,i3] <- RJafroc::UtilAnalyticalAucsRSM(
               mu, 
               lambda, 
               nu, 
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucROC
-            fpfOptArr[y,i1,i2,i3] <- RSM_xROC(
+            fpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_xROC(
               z = x$minimum, 
               lambda)
-            tpfOptArr[y,i1,i2,i3] <- RSM_yROC(
+            tpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_yROC(
               z = x$minimum, 
               mu, 
               lambda,
               nu,
               lesDistr)
-            nlfOptArr[y,i1,i2,i3] <- RSM_NLF(
+            nlfOptArr[y,i1,i2,i3] <- RJafroc::RSM_NLF(
               z = x$minimum, 
               lambda)
-            llfOptArr[y,i1,i2,i3] <- RSM_LLF(
+            llfOptArr[y,i1,i2,i3] <- RJafroc::RSM_LLF(
               z = x$minimum, 
               mu, 
               nu)
-            wllfOptArr[y,i1,i2,i3] <- RSM_wLLF(
+            wllfOptArr[y,i1,i2,i3] <- RJafroc::RSM_wLLF(
               z = x$minimum, 
               mu, 
               nu,
@@ -157,24 +157,24 @@ plotFroc <- function(muArr, lambdaArr, nuArr) {
         lambda <- lambdaArr[i2]
         nu <- nuArr[i3]
         z <- seq(-5,mu+5,0.1)
-        xFROC <- RSM_NLF(z, lambda)
-        yFROC <- RSM_LLF(z, mu, nu)
+        xFROC <- RJafroc::RSM_NLF(z, lambda)
+        yFROC <- RJafroc::RSM_LLF(z, mu, nu)
         df_froc <- data.frame(
           NLF = xFROC, 
           LLF = yFROC)
         plotArr[[i]] <- ggplot2::ggplot(
           df_froc, 
-          aes(x = NLF, y = LLF)) + 
-          geom_line() +
-          scale_x_continuous(limits = c(0,lambda)) + 
-          scale_y_continuous(limits = c(0,1))
+          ggplot2::aes(x = NLF, y = LLF)) + 
+          ggplot2::geom_line() +
+          ggplot2::scale_x_continuous(limits = c(0,lambda)) + 
+          ggplot2::scale_y_continuous(limits = c(0,1))
           #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
         for (y in 1:2) {
           optPt <- data.frame(
             NLF = nlfOptArr[y,i1,i2,i3], 
             LLF = llfOptArr[y,i1,i2,i3])
           plotArr[[i]] <- plotArr[[i]] + 
-            geom_point(data = optPt, color = 3-y) 
+            ggplot2::geom_point(data = optPt, color = 3-y) 
         }
         i <- i + 1
       }
@@ -194,7 +194,7 @@ plotwAfroc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
         mu <- muArr[i1]
         lambda <- lambdaArr[i2]
         nu <- nuArr[i3]
-        plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+        plotArr[[i]] <- RJafroc::PlotRsmOperatingCharacteristics(
           c(mu,mu),
           c(lambda,lambda),
           c(nu,nu),
@@ -211,7 +211,7 @@ plotwAfroc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
             FPF = fpfOptArr[y,i1,i2,i3], 
             wLLF = wllfOptArr[y,i1,i2,i3])
           plotArr[[i]] <- plotArr[[i]] + 
-            ggplot2::geom_point(data = optPt, aes(x = FPF, y = wLLF), color = 3-y) 
+            ggplot2::geom_point(data = optPt, ggplot2::aes(x = FPF, y = wLLF), color = 3-y) 
         }
         i <- i + 1
       }
@@ -231,7 +231,7 @@ plotRoc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
         mu <- muArr[i1]
         lambda <- lambdaArr[i2]
         nu <- nuArr[i3]
-        plotArr[[i]] <- PlotRsmOperatingCharacteristics(
+        plotArr[[i]] <- RJafroc::PlotRsmOperatingCharacteristics(
           c(mu,mu),
           c(lambda,lambda),
           c(nu,nu),
@@ -246,7 +246,7 @@ plotRoc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
             FPF = fpfOptArr[y,i1,i2,i3], 
             TPF = tpfOptArr[y,i1,i2,i3])
           plotArr[[i]] <- plotArr[[i]] + 
-            geom_point(data = optPt, aes(x = FPF, y = TPF), color = 3-y) 
+            ggplot2::geom_point(data = optPt, ggplot2::aes(x = FPF, y = TPF), color = 3-y) 
         }
         #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
         #     polygon edge not found

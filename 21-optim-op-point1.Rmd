@@ -13,19 +13,15 @@ knitr::opts_chunk$set(
   eval.after = "fig.cap"
 )
 
-library(RJafroc)
-library(ggplot2)
 library(kableExtra)
 library(gridExtra)
 library(abind)
 library(dplyr)
-library(mvtnorm)
-library(here)
 ```
 
 
 ```{r, echo=FALSE}
-source(here("R/optim-op-point/optim-op-point-helpers.R"))
+source(here::here("R/optim-op-point/optim-op-point-helpers.R"))
 ```
 
 
@@ -35,10 +31,9 @@ source("R/collapse_rows_df.R", local = knitr::knit_global())
 
 
 ## TBA How much finished {#optim-op-point-how-much-finished}
-95%
+96%
 
 Discussion needs more work
-end all plots with red and black dots
 
 
 ## Introduction {#optim-op-point-intro}
@@ -234,11 +229,11 @@ TPF <- pnorm(a - b*zeta1Arr)
 continuous <- data.frame(FPF = pnorm(-zeta1ArrAll), TPF = pnorm(a - b*zeta1ArrAll))
 dashed <- data.frame(FPF = c(FPF[1], 1), TPF = c(TPF[1], 1))
 endPoint <- data.frame(x = FPF[1], y = TPF[1])
-p1 <- ggplot2::ggplot(continuous, aes(x = FPF, y = TPF)) + 
-  geom_line() + 
-  geom_line(data = dashed, aes(x = FPF, y = TPF), linetype = 3) + 
-  geom_point(data = endPoint, aes(x = x, y = y), size = 4) + 
-  scale_x_continuous(limits = c(0,1)) + scale_y_continuous(limits = c(0,1))
+p1 <- ggplot2::ggplot(continuous, ggplot2::aes(x = FPF, y = TPF)) + 
+  ggplot2::geom_line() + 
+  ggplot2::geom_line(data = dashed, ggplot2::aes(x = FPF, y = TPF), linetype = 3) + 
+  ggplot2::geom_point(data = endPoint, ggplot2::aes(x = x, y = y), size = 4) + 
+  ggplot2::scale_x_continuous(limits = c(0,1)) + ggplot2::scale_y_continuous(limits = c(0,1))
 ```
 
 
@@ -284,13 +279,13 @@ Assume that one has designed an algorithmic observer that has been optimized wit
 I do not have any CAD FROC datasets. The standalone CAD LROC dataset described in [@hupse2013standalone] was used to create a simulated FROC (i.e., ROC-AUC equivalent) dataset which is embedded in `RJafroc` as object `datasetCadSimuFroc`. In the following code the first reader for this dataset, corresponding to CAD, is extracted using `DfExtractDataset` (the other reader data, corresponding to radiologists, are ignored). The function `DfFroc2Roc` converts `dsCad` to an ROC dataset. The function `DfBinDataset` bins the data to about 7 bins. Each diseased case contains one lesion: `lesDistr = c(1)`. `FitRsmRoc` fits the binned ROC dataset to the radiological search model (RSM). Object `fit` contains the RSM parameters required to perform the optimizations described in previous sections.  
 
 ```{r}
-ds <- datasetCadSimuFroc
-dsCad <- DfExtractDataset(ds, rdrs = 1)
-dsCadRoc <- DfFroc2Roc(dsCad)
-dsCadRocBinned <- DfBinDataset(dsCadRoc, opChType = "ROC")
+ds <- RJafroc::datasetCadSimuFroc
+dsCad <- RJafroc::DfExtractDataset(ds, rdrs = 1)
+dsCadRoc <- RJafroc::DfFroc2Roc(dsCad)
+dsCadRocBinned <- RJafroc::DfBinDataset(dsCadRoc, opChType = "ROC")
 lesDistrCad <- c(1) # LROC dataset has one lesion per diseased case
 relWeightsCad <- c(1)
-fit <- FitRsmRoc(dsCadRocBinned, lesDistrCad)
+fit <- RJafroc::FitRsmRoc(dsCadRocBinned, lesDistrCad)
 cat(sprintf("fitted values: mu = %5.3f,", fit$mu), 
     sprintf("lambda = %5.3f,", fit$lambda), 
     sprintf("nu = %5.3f.", fit$nu)) 
@@ -337,18 +332,18 @@ kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling
 ```{r, echo=FALSE}
 froc <- ggplot2::ggplot()
 z <- seq(-5,zetaOptArr1[1]+5,0.1)
-xFROC <- RSM_NLF(z, lambda)
-yFROC <- RSM_LLF(z, mu, nu) 
+xFROC <- RJafroc::RSM_NLF(z, lambda)
+yFROC <- RJafroc::RSM_LLF(z, mu, nu) 
 df_froc <- data.frame(NLF = xFROC, LLF = yFROC)
-froc <- froc + geom_line(data = df_froc, aes(x = NLF, y = LLF)) +
-  scale_y_continuous(limits = c(0,1)) + scale_x_continuous(limits = c(0,lambda))
+froc <- froc + ggplot2::geom_line(data = df_froc, ggplot2::aes(x = NLF, y = LLF)) +
+  ggplot2::scale_y_continuous(limits = c(0,1)) + ggplot2::scale_x_continuous(limits = c(0,lambda))
 for (y in 1:2) {
   optPt <- data.frame(
     NLF = nlfOptArr[y], 
     LLF = llfOptArr[y]) 
   froc <- froc + 
-    geom_point(data = optPt, 
-               aes(x = NLF, y = LLF),  
+    ggplot2::geom_point(data = optPt, 
+               ggplot2::aes(x = NLF, y = LLF),  
                color = 3-y)
 }
 ```
@@ -366,7 +361,7 @@ grid.arrange(froc)
 
 
 ```{r, echo=FALSE}
-wafroc <- PlotRsmOperatingCharacteristics(
+wafroc <- RJafroc::PlotRsmOperatingCharacteristics(
   c(mu,mu),
   c(lambda,lambda),
   c(nu,nu),
@@ -395,7 +390,7 @@ grid.arrange(wafroc)
 
 
 ```{r, echo=FALSE}
-roc <- PlotRsmOperatingCharacteristics(
+roc <- RJafroc::PlotRsmOperatingCharacteristics(
   c(mu,mu),
   c(lambda,lambda),
   c(nu,nu),
