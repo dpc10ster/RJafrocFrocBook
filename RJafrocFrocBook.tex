@@ -135,7 +135,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-11-07}
+\date{2022-11-08}
 
 \begin{document}
 \maketitle
@@ -5074,36 +5074,36 @@ Setting \(\text{Var} = 0, \text{Cov}_2 = 0\) yields the 1T-RRFC model which cont
 
 The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in \texttt{RJafroc}.
 
-The following code shows usage of the software to generate the results. Note that \texttt{datasetCadLroc} is the LROC dataset and \texttt{dataset09} is the corresponding ROC dataset.
+The following code shows usage of the software to generate the results. Note that \texttt{RJafroc::datasetCadLroc} is the LROC dataset and \texttt{RJafroc::dataset09} is the corresponding ROC dataset.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{RRFC_1T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{05}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
+\NormalTok{RRFC_1T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{05}\NormalTok{ <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{method =} \StringTok{"1T-RRFC"}\NormalTok{)}
-\NormalTok{RRRC_2T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{05}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
+\NormalTok{RRRC_2T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{05}\NormalTok{ <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{method =} \StringTok{"2T-RRRC"}\NormalTok{)}
-\NormalTok{RRRC_1T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{05}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
+\NormalTok{RRRC_1T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{05}\NormalTok{ <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{method =} \StringTok{"1T-RRRC"}\NormalTok{)}
 
-\NormalTok{RRFC_1T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
+\NormalTok{RRFC_1T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{method =} \StringTok{"1T-RRFC"}\NormalTok{)}
-\NormalTok{RRRC_2T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
+\NormalTok{RRRC_2T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{method =} \StringTok{"2T-RRRC"}\NormalTok{)}
-\NormalTok{RRRC_1T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
+\NormalTok{RRRC_1T_PCL_}\DecValTok{0}\NormalTok{_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{method =} \StringTok{"1T-RRRC"}\NormalTok{)}
 
-\NormalTok{RRFC_1T_PCL_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
+\NormalTok{RRFC_1T_PCL_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \DecValTok{1}\NormalTok{, }\DataTypeTok{method =} \StringTok{"1T-RRFC"}\NormalTok{)}
-\NormalTok{RRRC_2T_PCL_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
+\NormalTok{RRRC_2T_PCL_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \DecValTok{1}\NormalTok{, }\DataTypeTok{method =} \StringTok{"2T-RRRC"}\NormalTok{)}
-\NormalTok{RRRC_1T_PCL_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (datasetCadLroc, }
+\NormalTok{RRRC_1T_PCL_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{datasetCadLroc, }
 \DataTypeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\DataTypeTok{FPFValue =} \DecValTok{1}\NormalTok{, }\DataTypeTok{method =} \StringTok{"1T-RRRC"}\NormalTok{)}
 
-\NormalTok{RRFC_1T_AUC <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (dataset09, }
+\NormalTok{RRFC_1T_AUC <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{dataset09, }
 \DataTypeTok{FOM =} \StringTok{"Wilcoxon"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"1T-RRFC"}\NormalTok{)}
-\NormalTok{RRRC_2T_AUC <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (dataset09, }
+\NormalTok{RRRC_2T_AUC <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{dataset09, }
 \DataTypeTok{FOM =} \StringTok{"Wilcoxon"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"2T-RRRC"}\NormalTok{)}
-\NormalTok{RRRC_1T_AUC <-}\StringTok{ }\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (dataset09, }
+\NormalTok{RRRC_1T_AUC <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\OperatorTok{::}\NormalTok{dataset09, }
 \DataTypeTok{FOM =} \StringTok{"Wilcoxon"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"1T-RRRC"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -5541,7 +5541,7 @@ Two text files \texttt{R/standalone-cad/jaf\_truth.txt} and \texttt{R/standalone
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{source}\NormalTok{(}\KeywordTok{here}\NormalTok{(}\StringTok{"R/standalone-cad/DfReadLrocDataFile.R"}\NormalTok{))}
+\KeywordTok{source}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"R/standalone-cad/DfReadLrocDataFile.R"}\NormalTok{))}
 \NormalTok{lrocDataset <-}\StringTok{ }\KeywordTok{DfReadLrocDataFile}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -5552,10 +5552,9 @@ Two text files \texttt{R/standalone-cad/jaf\_truth.txt} and \texttt{R/standalone
 \hypertarget{optim-op-point-how-much-finished}{%
 \section{TBA How much finished}\label{optim-op-point-how-much-finished}}
 
-95\%
+96\%
 
 Discussion needs more work
-end all plots with red and black dots
 
 \hypertarget{optim-op-point-intro}{%
 \section{Introduction}\label{optim-op-point-intro}}
@@ -5755,13 +5754,13 @@ I do not have any CAD FROC datasets. The standalone CAD LROC dataset described i
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ds <-}\StringTok{ }\NormalTok{datasetCadSimuFroc}
-\NormalTok{dsCad <-}\StringTok{ }\KeywordTok{DfExtractDataset}\NormalTok{(ds, }\DataTypeTok{rdrs =} \DecValTok{1}\NormalTok{)}
-\NormalTok{dsCadRoc <-}\StringTok{ }\KeywordTok{DfFroc2Roc}\NormalTok{(dsCad)}
-\NormalTok{dsCadRocBinned <-}\StringTok{ }\KeywordTok{DfBinDataset}\NormalTok{(dsCadRoc, }\DataTypeTok{opChType =} \StringTok{"ROC"}\NormalTok{)}
+\NormalTok{ds <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\NormalTok{datasetCadSimuFroc}
+\NormalTok{dsCad <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{DfExtractDataset}\NormalTok{(ds, }\DataTypeTok{rdrs =} \DecValTok{1}\NormalTok{)}
+\NormalTok{dsCadRoc <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{DfFroc2Roc}\NormalTok{(dsCad)}
+\NormalTok{dsCadRocBinned <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{DfBinDataset}\NormalTok{(dsCadRoc, }\DataTypeTok{opChType =} \StringTok{"ROC"}\NormalTok{)}
 \NormalTok{lesDistrCad <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{) }\CommentTok{# LROC dataset has one lesion per diseased case}
 \NormalTok{relWeightsCad <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{fit <-}\StringTok{ }\KeywordTok{FitRsmRoc}\NormalTok{(dsCadRocBinned, lesDistrCad)}
+\NormalTok{fit <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{FitRsmRoc}\NormalTok{(dsCadRocBinned, lesDistrCad)}
 \KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"fitted values: mu = %5.3f,"}\NormalTok{, fit}\OperatorTok{$}\NormalTok{mu), }
     \KeywordTok{sprintf}\NormalTok{(}\StringTok{"lambda = %5.3f,"}\NormalTok{, fit}\OperatorTok{$}\NormalTok{lambda), }
     \KeywordTok{sprintf}\NormalTok{(}\StringTok{"nu = %5.3f."}\NormalTok{, fit}\OperatorTok{$}\NormalTok{nu)) }

@@ -9,41 +9,8 @@
 ## How much finished {#standalone-cad-radiologists-how-much-finished}
 99%
 
-<!-- ### This does not work -->
-
-<!-- ```{r} -->
-<!-- df <- data.frame(C1 = c(rep("a", 10), rep("b", 5)), -->
-<!--                  C2 = c(rep("c", 7), rep("d", 3), rep("c", 2), rep("d", 3)), -->
-<!--                  C3 = 1:15, -->
-<!--                  C4 = sample(c(0,1), 15, replace = TRUE)) -->
-<!-- ``` -->
 
 
-
-<!-- ```{r} -->
-<!-- kbl(df, align = "c") %>% -->
-<!--   kable_paper(full_width = F) %>% -->
-<!--   column_spec(1, bold = T) %>% -->
-<!--   collapse_rows(columns = 1:2, valign = "top") -->
-<!-- ``` -->
-
-
-<!-- ### This works! -->
-
-
-<!-- Define this function: -->
-
-
-
-
-<!-- Now apply it: -->
-
-<!-- ```{r} -->
-<!-- kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>% -->
-<!--   kable_paper(full_width = F) %>% -->
-<!--   column_spec(1, bold = T) %>% -->
-<!--   collapse_rows(columns = 1:2, valign = "top") -->
-<!-- ```   -->
 
 
 ## Introduction {#standalone-cad-radiologists-introduction}
@@ -477,37 +444,37 @@ Setting $\text{Var} = 0, \text{Cov}_2 = 0$ yields the 1T-RRFC model which contai
 
 The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in `RJafroc`. 
 
-The following code shows usage of the software to generate the results. Note that `datasetCadLroc` is the LROC dataset and `dataset09` is the corresponding ROC dataset. 
+The following code shows usage of the software to generate the results. Note that `RJafroc::datasetCadLroc` is the LROC dataset and `RJafroc::dataset09` is the corresponding ROC dataset. 
 
 
 
 ```r
-RRFC_1T_PCL_0_05 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRFC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRFC")
-RRRC_2T_PCL_0_05 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_2T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "2T-RRRC")
-RRRC_1T_PCL_0_05 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRRC")
 
-RRFC_1T_PCL_0_2 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRFC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRFC")
-RRRC_2T_PCL_0_2 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_2T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "2T-RRRC")
-RRRC_1T_PCL_0_2 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRRC")
 
-RRFC_1T_PCL_1 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRFC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRFC")
-RRRC_2T_PCL_1 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_2T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "2T-RRRC")
-RRRC_1T_PCL_1 <- StSignificanceTestingCadVsRad (datasetCadLroc, 
+RRRC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRRC")
 
-RRFC_1T_AUC <- StSignificanceTestingCadVsRad (dataset09, 
+RRFC_1T_AUC <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::dataset09, 
 FOM = "Wilcoxon", method = "1T-RRFC")
-RRRC_2T_AUC <- StSignificanceTestingCadVsRad (dataset09, 
+RRRC_2T_AUC <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::dataset09, 
 FOM = "Wilcoxon", method = "2T-RRRC")
-RRRC_1T_AUC <- StSignificanceTestingCadVsRad (dataset09, 
+RRRC_1T_AUC <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::dataset09, 
 FOM = "Wilcoxon", method = "1T-RRRC")
 ```
 
@@ -1154,7 +1121,7 @@ Two text files `R/standalone-cad/jaf_truth.txt` and `R/standalone-cad/jaf_truth.
 
 
 ```r
-source(here("R/standalone-cad/DfReadLrocDataFile.R"))
+source(here::here("R/standalone-cad/DfReadLrocDataFile.R"))
 lrocDataset <- DfReadLrocDataFile()
 ```
 

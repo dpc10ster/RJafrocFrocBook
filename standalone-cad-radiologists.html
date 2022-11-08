@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-11-07" />
+<meta name="date" content="2022-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -443,28 +443,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="standalone-cad-radiologists-how-much-finished" class="section level2 hasAnchor">
 <h2><span class="header-section-number">10.1</span> How much finished<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>99%</p>
-<!-- ### This does not work -->
-<!-- ```{r} -->
-<!-- df <- data.frame(C1 = c(rep("a", 10), rep("b", 5)), -->
-<!--                  C2 = c(rep("c", 7), rep("d", 3), rep("c", 2), rep("d", 3)), -->
-<!--                  C3 = 1:15, -->
-<!--                  C4 = sample(c(0,1), 15, replace = TRUE)) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- kbl(df, align = "c") %>% -->
-<!--   kable_paper(full_width = F) %>% -->
-<!--   column_spec(1, bold = T) %>% -->
-<!--   collapse_rows(columns = 1:2, valign = "top") -->
-<!-- ``` -->
-<!-- ### This works! -->
-<!-- Define this function: -->
-<!-- Now apply it: -->
-<!-- ```{r} -->
-<!-- kbl(collapse_rows_df(collapse_rows_df(df,C1), C2), align = "c") %>% -->
-<!--   kable_paper(full_width = F) %>% -->
-<!--   column_spec(1, bold = T) %>% -->
-<!--   collapse_rows(columns = 1:2, valign = "top") -->
-<!-- ```   -->
 </div>
 <div id="standalone-cad-radiologists-introduction" class="section level2 hasAnchor">
 <h2><span class="header-section-number">10.2</span> Introduction<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1091,33 +1069,33 @@ j=1,2,...J
 <div id="standalone-cad-radiologists-computational-details" class="section level2 hasAnchor">
 <h2><span class="header-section-number">10.5</span> Implementation<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The three analyses, namely random-reader fixed-case (1T-RRFC), dual-treatment random-reader random-case (2T-RRRC) and single-treatment random-reader random-case (1T-RRRC), are implemented in <code>RJafroc</code>.</p>
-<p>The following code shows usage of the software to generate the results. Note that <code>datasetCadLroc</code> is the LROC dataset and <code>dataset09</code> is the corresponding ROC dataset.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="standalone-cad-radiologists.html#cb119-1"></a>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<p>The following code shows usage of the software to generate the results. Note that <code>RJafroc::datasetCadLroc</code> is the LROC dataset and <code>RJafroc::dataset09</code> is the corresponding ROC dataset.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="standalone-cad-radiologists.html#cb119-1"></a>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>datasetCadLroc, </span>
 <span id="cb119-2"><a href="standalone-cad-radiologists.html#cb119-2"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.05</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
-<span id="cb119-3"><a href="standalone-cad-radiologists.html#cb119-3"></a>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-3"><a href="standalone-cad-radiologists.html#cb119-3"></a>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>datasetCadLroc, </span>
 <span id="cb119-4"><a href="standalone-cad-radiologists.html#cb119-4"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.05</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
-<span id="cb119-5"><a href="standalone-cad-radiologists.html#cb119-5"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-5"><a href="standalone-cad-radiologists.html#cb119-5"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">05</span> &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>datasetCadLroc, </span>
 <span id="cb119-6"><a href="standalone-cad-radiologists.html#cb119-6"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.05</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span>
 <span id="cb119-7"><a href="standalone-cad-radiologists.html#cb119-7"></a></span>
-<span id="cb119-8"><a href="standalone-cad-radiologists.html#cb119-8"></a>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-8"><a href="standalone-cad-radiologists.html#cb119-8"></a>RRFC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>datasetCadLroc, </span>
 <span id="cb119-9"><a href="standalone-cad-radiologists.html#cb119-9"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.2</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
-<span id="cb119-10"><a href="standalone-cad-radiologists.html#cb119-10"></a>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-10"><a href="standalone-cad-radiologists.html#cb119-10"></a>RRRC_2T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>datasetCadLroc, </span>
 <span id="cb119-11"><a href="standalone-cad-radiologists.html#cb119-11"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.2</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
-<span id="cb119-12"><a href="standalone-cad-radiologists.html#cb119-12"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-12"><a href="standalone-cad-radiologists.html#cb119-12"></a>RRRC_1T_PCL_<span class="dv">0</span>_<span class="dv">2</span> &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>datasetCadLroc, </span>
 <span id="cb119-13"><a href="standalone-cad-radiologists.html#cb119-13"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="fl">0.2</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span>
 <span id="cb119-14"><a href="standalone-cad-radiologists.html#cb119-14"></a></span>
-<span id="cb119-15"><a href="standalone-cad-radiologists.html#cb119-15"></a>RRFC_1T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-15"><a href="standalone-cad-radiologists.html#cb119-15"></a>RRFC_1T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>datasetCadLroc, </span>
 <span id="cb119-16"><a href="standalone-cad-radiologists.html#cb119-16"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
-<span id="cb119-17"><a href="standalone-cad-radiologists.html#cb119-17"></a>RRRC_2T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-17"><a href="standalone-cad-radiologists.html#cb119-17"></a>RRRC_2T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>datasetCadLroc, </span>
 <span id="cb119-18"><a href="standalone-cad-radiologists.html#cb119-18"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
-<span id="cb119-19"><a href="standalone-cad-radiologists.html#cb119-19"></a>RRRC_1T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (datasetCadLroc, </span>
+<span id="cb119-19"><a href="standalone-cad-radiologists.html#cb119-19"></a>RRRC_1T_PCL_<span class="dv">1</span> &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>datasetCadLroc, </span>
 <span id="cb119-20"><a href="standalone-cad-radiologists.html#cb119-20"></a><span class="dt">FOM =</span> <span class="st">&quot;PCL&quot;</span>, <span class="dt">FPFValue =</span> <span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span>
 <span id="cb119-21"><a href="standalone-cad-radiologists.html#cb119-21"></a></span>
-<span id="cb119-22"><a href="standalone-cad-radiologists.html#cb119-22"></a>RRFC_1T_AUC &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (dataset09, </span>
+<span id="cb119-22"><a href="standalone-cad-radiologists.html#cb119-22"></a>RRFC_1T_AUC &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>dataset09, </span>
 <span id="cb119-23"><a href="standalone-cad-radiologists.html#cb119-23"></a><span class="dt">FOM =</span> <span class="st">&quot;Wilcoxon&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRFC&quot;</span>)</span>
-<span id="cb119-24"><a href="standalone-cad-radiologists.html#cb119-24"></a>RRRC_2T_AUC &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (dataset09, </span>
+<span id="cb119-24"><a href="standalone-cad-radiologists.html#cb119-24"></a>RRRC_2T_AUC &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>dataset09, </span>
 <span id="cb119-25"><a href="standalone-cad-radiologists.html#cb119-25"></a><span class="dt">FOM =</span> <span class="st">&quot;Wilcoxon&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;2T-RRRC&quot;</span>)</span>
-<span id="cb119-26"><a href="standalone-cad-radiologists.html#cb119-26"></a>RRRC_1T_AUC &lt;-<span class="st"> </span><span class="kw">StSignificanceTestingCadVsRad</span> (dataset09, </span>
+<span id="cb119-26"><a href="standalone-cad-radiologists.html#cb119-26"></a>RRRC_1T_AUC &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">StSignificanceTestingCadVsRad</span> (RJafroc<span class="op">::</span>dataset09, </span>
 <span id="cb119-27"><a href="standalone-cad-radiologists.html#cb119-27"></a><span class="dt">FOM =</span> <span class="st">&quot;Wilcoxon&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;1T-RRRC&quot;</span>)</span></code></pre></div>
 <p>The results are organized as follows:</p>
 <ul>
@@ -2118,7 +2096,7 @@ NA
 <div id="standalone-cad-radiologists-appendix2" class="section level2 hasAnchor">
 <h2><span class="header-section-number">10.9</span> Appendix 2<a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Two text files <code>R/standalone-cad/jaf_truth.txt</code> and <code>R/standalone-cad/jaf_truth.txt</code> were provided by Prof. Nico Karssemeijer. These are read into a dataset object by the following code.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="standalone-cad-radiologists.html#cb127-1"></a><span class="kw">source</span>(<span class="kw">here</span>(<span class="st">&quot;R/standalone-cad/DfReadLrocDataFile.R&quot;</span>))</span>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="standalone-cad-radiologists.html#cb127-1"></a><span class="kw">source</span>(here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;R/standalone-cad/DfReadLrocDataFile.R&quot;</span>))</span>
 <span id="cb127-2"><a href="standalone-cad-radiologists.html#cb127-2"></a>lrocDataset &lt;-<span class="st"> </span><span class="kw">DfReadLrocDataFile</span>()</span></code></pre></div>
 
 </div>

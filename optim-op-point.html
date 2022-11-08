@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-11-07" />
+<meta name="date" content="2022-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -442,9 +442,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 11</span> CAD optimal operating point I<a href="optim-op-point.html#optim-op-point" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="optim-op-point-how-much-finished" class="section level2 hasAnchor">
 <h2><span class="header-section-number">11.1</span> TBA How much finished<a href="optim-op-point.html#optim-op-point-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>95%</p>
-<p>Discussion needs more work
-end all plots with red and black dots</p>
+<p>96%</p>
+<p>Discussion needs more work</p>
 </div>
 <div id="optim-op-point-intro" class="section level2 hasAnchor">
 <h2><span class="header-section-number">11.2</span> Introduction<a href="optim-op-point.html#optim-op-point-intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -746,13 +745,13 @@ FIGURE 11.4: In the region above the dot the proper curve is above the dotted li
 <div id="optim-op-point-application" class="section level2 hasAnchor">
 <h2><span class="header-section-number">11.9</span> A CAD application<a href="optim-op-point.html#optim-op-point-application" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>I do not have any CAD FROC datasets. The standalone CAD LROC dataset described in <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>)</span> was used to create a simulated FROC (i.e., ROC-AUC equivalent) dataset which is embedded in <code>RJafroc</code> as object <code>datasetCadSimuFroc</code>. In the following code the first reader for this dataset, corresponding to CAD, is extracted using <code>DfExtractDataset</code> (the other reader data, corresponding to radiologists, are ignored). The function <code>DfFroc2Roc</code> converts <code>dsCad</code> to an ROC dataset. The function <code>DfBinDataset</code> bins the data to about 7 bins. Each diseased case contains one lesion: <code>lesDistr = c(1)</code>. <code>FitRsmRoc</code> fits the binned ROC dataset to the radiological search model (RSM). Object <code>fit</code> contains the RSM parameters required to perform the optimizations described in previous sections.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="optim-op-point.html#cb129-1"></a>ds &lt;-<span class="st"> </span>datasetCadSimuFroc</span>
-<span id="cb129-2"><a href="optim-op-point.html#cb129-2"></a>dsCad &lt;-<span class="st"> </span><span class="kw">DfExtractDataset</span>(ds, <span class="dt">rdrs =</span> <span class="dv">1</span>)</span>
-<span id="cb129-3"><a href="optim-op-point.html#cb129-3"></a>dsCadRoc &lt;-<span class="st"> </span><span class="kw">DfFroc2Roc</span>(dsCad)</span>
-<span id="cb129-4"><a href="optim-op-point.html#cb129-4"></a>dsCadRocBinned &lt;-<span class="st"> </span><span class="kw">DfBinDataset</span>(dsCadRoc, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="optim-op-point.html#cb129-1"></a>ds &lt;-<span class="st"> </span>RJafroc<span class="op">::</span>datasetCadSimuFroc</span>
+<span id="cb129-2"><a href="optim-op-point.html#cb129-2"></a>dsCad &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">DfExtractDataset</span>(ds, <span class="dt">rdrs =</span> <span class="dv">1</span>)</span>
+<span id="cb129-3"><a href="optim-op-point.html#cb129-3"></a>dsCadRoc &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">DfFroc2Roc</span>(dsCad)</span>
+<span id="cb129-4"><a href="optim-op-point.html#cb129-4"></a>dsCadRocBinned &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">DfBinDataset</span>(dsCadRoc, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
 <span id="cb129-5"><a href="optim-op-point.html#cb129-5"></a>lesDistrCad &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>) <span class="co"># LROC dataset has one lesion per diseased case</span></span>
 <span id="cb129-6"><a href="optim-op-point.html#cb129-6"></a>relWeightsCad &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb129-7"><a href="optim-op-point.html#cb129-7"></a>fit &lt;-<span class="st"> </span><span class="kw">FitRsmRoc</span>(dsCadRocBinned, lesDistrCad)</span>
+<span id="cb129-7"><a href="optim-op-point.html#cb129-7"></a>fit &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">FitRsmRoc</span>(dsCadRocBinned, lesDistrCad)</span>
 <span id="cb129-8"><a href="optim-op-point.html#cb129-8"></a><span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&quot;fitted values: mu = %5.3f,&quot;</span>, fit<span class="op">$</span>mu), </span>
 <span id="cb129-9"><a href="optim-op-point.html#cb129-9"></a>    <span class="kw">sprintf</span>(<span class="st">&quot;lambda = %5.3f,&quot;</span>, fit<span class="op">$</span>lambda), </span>
 <span id="cb129-10"><a href="optim-op-point.html#cb129-10"></a>    <span class="kw">sprintf</span>(<span class="st">&quot;nu = %5.3f.&quot;</span>, fit<span class="op">$</span>nu)) </span>

@@ -16,10 +16,9 @@ output:
 
 
 ## TBA How much finished {#optim-op-point-how-much-finished}
-95%
+96%
 
 Discussion needs more work
-end all plots with red and black dots
 
 
 ## Introduction {#optim-op-point-intro}
@@ -315,13 +314,13 @@ I do not have any CAD FROC datasets. The standalone CAD LROC dataset described i
 
 
 ```r
-ds <- datasetCadSimuFroc
-dsCad <- DfExtractDataset(ds, rdrs = 1)
-dsCadRoc <- DfFroc2Roc(dsCad)
-dsCadRocBinned <- DfBinDataset(dsCadRoc, opChType = "ROC")
+ds <- RJafroc::datasetCadSimuFroc
+dsCad <- RJafroc::DfExtractDataset(ds, rdrs = 1)
+dsCadRoc <- RJafroc::DfFroc2Roc(dsCad)
+dsCadRocBinned <- RJafroc::DfBinDataset(dsCadRoc, opChType = "ROC")
 lesDistrCad <- c(1) # LROC dataset has one lesion per diseased case
 relWeightsCad <- c(1)
-fit <- FitRsmRoc(dsCadRocBinned, lesDistrCad)
+fit <- RJafroc::FitRsmRoc(dsCadRocBinned, lesDistrCad)
 cat(sprintf("fitted values: mu = %5.3f,", fit$mu), 
     sprintf("lambda = %5.3f,", fit$lambda), 
     sprintf("nu = %5.3f.", fit$nu)) 
