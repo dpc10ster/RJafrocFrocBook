@@ -4,7 +4,7 @@ repo: https://github.com/dpc10ster/RJafrocFrocBook
 output_dir: docs
 delete_merged_file: TRUE
 rmd_files: [
-  "01-preface.Rmd", 
+  "index.Rmd",
   "02-froc.Rmd",
   "03-empirical.Rmd",
   "05-visual-search.Rmd",
@@ -15,8 +15,7 @@ rmd_files: [
   "11-rsm-fitting.Rmd",
   "12-rsm-3-fits.Rmd",
   "20-standalone-cad.Rmd",
-  "21-optim-op-point1.Rmd",
-  "22-optim-op-point2.Rmd",
+  "21-optim-op-point.Rmd",
   "90-datasets.Rmd",
   "99-references.Rmd",
 ]

@@ -1,6 +1,7 @@
 --- 
 title: "The RJafroc Froc Book"
 author: "Dev P. Chakraborty, PhD"
+geometry: margin=2cm
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: 
@@ -17,24 +18,43 @@ description: "Artificial intelligence and observer performance book based on RJa
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'RJafroc'
-), 'packages.bib')
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib')
 ```
 
 
-# Preface {-}
+# (PART\*) Preamble {-}
+
+# Preface
+
+TBA
+## Please ignore following sections 
+
+* They are intended for my convenience and will be deleted in final version
+
+
+## TBA Rationale and Organization
 
 * Intended as an online update to my print book [@chakraborty2017observer].
 * All references in this book to `RJafroc` refer to the R package with that name (case sensitive) [@R-RJafroc]. 
-* Since its publication in 2017 `RJafroc`, on which the `R` code examples in the book depend, has evolved considerably, causing many of the examples to "break". 
-* This gives me the opportunity to improve on the book and include additional material.
+* Since its publication in 2017 `RJafroc`, on which the `R` code examples in the print book depend, has evolved considerably causing many of the examples to "break" if one uses the most current version of `RJafroc`. The code will still run if one uses [`RJafroc` 0.0.1](https://cran.r-project.org/src/contrib/Archive/RJafroc/) but this is inconvenient and misses out on many of the software improvements made since the print book appeared.
+* This gives me the opportunity to update the print book.
 * The online book has been divided into 3 books.
-    + The [QuickStart](https://dpc10ster.github.io/RJafrocQuickStart/) book.
-    + The [Roc](https://dpc10ster.github.io/RJafrocRocBook/) book.
-    + The current [Froc](https://dpc10ster.github.io/RJafrocFrocBook/) book, which focuses on the FROC paradigm.
+    + The [RJafrocQuickStartBook](https://dpc10ster.github.io/RJafrocQuickStart/) book.
+    + The [RJafrocRocBook](https://dpc10ster.github.io/RJafrocRocBook/) book.
+    + **This book:** [RJafrocFrocBook](https://dpc10ster.github.io/RJafrocFrocBook/).
 
 
-## Nearly finished chapters {-}
+## TBA Acknowledgements
+
+Dr. Xuetong Zhai
+
+Dr. Peter Phillips
+
+Online Latex Editor [at](https://latexeditor.lagrida.com/) 
+
+Dataset contributors: Nico especially \@ref(standalone-cad-radiologists)
+
+## TBA Nearly finished chapters 
 
 * Chapter 1 The FROC paradigm and search
 * Chapter 2 Empirical plots from FROC data
@@ -50,19 +70,14 @@ knitr::write_bib(c(
 
 
 
-## The pdf file of the book {-}
+## The pdf file of the book 
 
 Go [here](https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFrocBook.pdf) and then click on `Download` to get the `RJafrocFrocBook.pdf` file. The pdf version may not be as aesthetically pleasing as the HTML version, in particular the layout of figures and tables is sometimes disjointed from the citing text. 
 
 
 
 
-## Please ignore following sections {-}
-
-* They are intended for my convenience and will be deleted in final version
-
-
-## Please ignore: TBA How much finished HMF{-}
+## Please ignore: TBA How much finished HMF
 
 * HMF approximately 30%
 * This book is currently (as of August 2022) in preparation. 
@@ -71,7 +86,7 @@ Go [here](https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFroc
 
 
 
-## Please ignore: A note on the online distribution mechanism of the book {-}
+## Please ignore: A note on the online distribution mechanism of the book 
 * In the hard-copy version of my book [@chakraborty2017observer] the online distribution mechanism was `BitBucket`. 
 * `BitBucket` allows code sharing within a _closed_ group of a few users (e.g., myself and a grad student). 
 * Since the purpose of open-source code is to encourage collaborations, this was, in hindsight, an unfortunate choice. Moreover, as my experience with R-packages grew, it became apparent that the vast majority of R-packages are shared on `GitHub`, not `BitBucket`. 
@@ -80,16 +95,16 @@ Go [here](https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFroc
 * Go to [this link](https://github.com) and click on `Sign Up`.
 
 
-## Please ignore: Structure of the book {-}
+## Please ignore: Structure of the book 
 
 
-## Please ignore Contributing to this book {-}
+## Please ignore Contributing to this book 
 
 I appreciate constructive feedback on this document. To do this raise an `Issue` on the `GitHub` [interface](https://github.com/dpc10ster/RJafrocFrocBook). Click on the `Issues` tab under `dpc10ster/RJafrocFrocBook`, then click on `New issue`. When done this way, contributions from users automatically become part of the `GitHub` documentation/history of the book.
 
 
 
-## Please ignore: Is this book relevant to you and what are the alternatives? {-}
+## Please ignore: Is this book relevant to you and what are the alternatives? 
 
 * Diagnostic imaging system evaluation
 * Detection
@@ -102,12 +117,8 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 
 
 
-## Please ignore: Chapters needing heavy edits {-}
-
-
-
-
-## Please ignore: Shelved vs. removed vs. parked folders needing heavy edits {-}
+## Please ignore: Chapters needing heavy edits 
+## Please ignore: Shelved vs. removed vs. parked folders needing heavy edits 
 
 * replace functions with \text{}; eg. erf and exp in all of document
 * Also for TPF, FPF etc.
@@ -116,7 +127,7 @@ I appreciate constructive feedback on this document. To do this raise an `Issue`
 * parked has dependence of ROC/FROC performance on threshold
 
 
-## Please ignore: Coding aids (for me) {-}
+## Please ignore: Coding aids (for me) 
 
 * weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-empirical1.Rmd which should be 13a-empirical1.Rmd
 
