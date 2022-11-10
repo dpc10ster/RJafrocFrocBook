@@ -148,11 +148,16 @@
 \part*{Preamble}\label{part-preamble}}
 \addcontentsline{toc}{part}{Preamble}
 
-\hypertarget{preface}{%
-\chapter{Preface}\label{preface}}
+\hypertarget{please-ignore-preface}{%
+\chapter{Please ignore preface}\label{please-ignore-preface}}
 
 TBA
-\#\# Please ignore following sections
+
+\hypertarget{please-ignore-issues}{%
+\section{Please ignore issues}\label{please-ignore-issues}}
+
+\hypertarget{please-ignore-following-sections}{%
+\section{Please ignore following sections}\label{please-ignore-following-sections}}
 
 \begin{itemize}
 \tightlist
@@ -6033,17 +6038,28 @@ Fig. \ref{fig:optim-op-point-application-roc} shows ROC curves using the two met
 \hypertarget{optim-op-point-discussion}{%
 \section{TBA Discussion}\label{optim-op-point-discussion}}
 
-In Table \ref{tab:optim-op-point-table-vary-lambda} the \(\lambda\) parameter controls the average number of perceived NLs per case. For \(\lambda = 1\) there is, on average, one perceived NL for every non-diseased case and the optimal \(\text{wAFROC}_\text{AUC}\) based threshold is TBA \(\zeta_{1;1,\mu, \lambda = 1, \nu}\) = 5.000. For \(\lambda = 10\) there are ten perceived NLs for every non-diseased case and the optimal \(\text{wAFROC}_\text{AUC}\) based threshold is \(\zeta_{1;1,\mu, \lambda = 10, \nu}\) = 5.000. The increase in \(\zeta_1\) should make sense to CAD algorithm designers: with increasing numbers of NLs per case it is necessary to increase the reporting threshold (i.e., adopt a stricter criteria) if only because otherwise the reader would be subjected to 10 times the number of NLs/case for the same number of LLs/case.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\NormalTok{lambdaArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{nuArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.9}\NormalTok{)}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\KeywordTok{source}\NormalTok{(}\StringTok{"R/optim-op-point/doOneTable.R"}\NormalTok{, }\DataTypeTok{local =}\NormalTok{ knitr}\OperatorTok{::}\KeywordTok{knit_global}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
 
-The \(\text{ROC}_\text{AUC}\)s are reported as a check of the less familiar \(\text{wAFROC}_\text{AUC}\) figure of merit. The ordering of the two optimization methods is independent of whether it is measured via the \(\text{wAFROC}_\text{AUC}\) or the \(\text{ROC}_\text{AUC}\): either way the \(\text{wAFROC}_\text{AUC}\) optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations.
+In Table \ref{tab:optim-op-point-table-vary-lambda} the \(\lambda\) parameter controls the average number of perceived NLs per case. For \(\lambda = 1\) there is, on average, one perceived NL for every case and the optimal \(\text{wAFROC}_\text{AUC}\) based threshold is \(\zeta_1\) = -0.007. For \(\lambda = 10\) there are ten perceived NLs for every case and the optimal \(\text{wAFROC}_\text{AUC}\) based threshold is \(\zeta_1\) = 1.856. The reason for the increase in \(\zeta_1\) should be obvious: with increasing numbers of latent NLs (perceived false marks) per case it is necessary to adopt a stricter criteria because otherwise the reader would be shown 10 times the number of false marks per case.
 
-In this example the difference in \(\text{wAFROC}_\text{AUC}\), \(\text{ROC}_\text{AUC}\) and the operating points between the two methods decreases as performance \emph{increases}, which is the opposite of that found when \(\lambda\) or \(\nu\) were varied. With constant \(\lambda\) and \(\nu\) the \emph{numbers} of NLs and LLs are unchanging; all that happens is the \emph{values} of the z-samples from LLs increase as \(\mu\) increases, which allows the optimal threshold to increase (this can be understood as a pure ``ROC-type'' effect: as the normal distributions are more widely separated, the optimal threshold will increase, approaching, in the limit, half the separation, since in that limit TPF = 1 and FPF = 0).
+The \(\text{ROC}_\text{AUC}\)s are reported as a check of the less familiar \(\text{wAFROC}_\text{AUC}\) figure of merit. With some notable exceptions the behavior of the two optimization methods is independent of whether it is measured via the \(\text{wAFROC}_\text{AUC}\) or the \(\text{ROC}_\text{AUC}\): either way the \(\text{wAFROC}_\text{AUC}\) optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations. The exceptions occur when CAD performance is very low in which situation the .
+
+In this example the difference in \(\text{wAFROC}_\text{AUC}\), \(\text{ROC}_\text{AUC}\) and the operating points between the two methods decreases as performance \emph{increases}, which is the opposite of that found when \(\lambda\) or \(\nu\) were varied. With constant \(\lambda\) and \(\nu\) the \emph{numbers} of latent NLs and LLs are unchanging; all that happens is the \emph{values} of the z-samples from LLs increase as \(\mu\) increases, which allows the optimal threshold to increase (this can be understood as a ``ROC-paradigm'' effect: as the normal distributions are more widely separated, the optimal threshold will increase, approaching, in the limit, half the separation, since in that limit TPF = 1 and FPF = 0).
 
 This is due to two reinforcing effects: performance goes down with increasing numbers of NLs per case and performance goes down with increasing optimal reporting threshold (see \ref{rsm-predictions-roc-curve-aucs-zeta1} for explanation of the \(\zeta_1\) dependence of AUC performance). It is difficult to unambiguously infer performance based on the FROC operating points: as \(\lambda\) increases LLF decreases but for \(\text{wAFROC}_\text{AUC}\) optimizations NLF peaks while for Youden-index optimizations it increases.
 
-The FROC plots also illustrate the decrease in \(\text{LLF}\) with increasing \(\lambda\): the black dots move to smaller ordinates, as do the red dots, which would seem to imply decreasing performance. However, the accompanying change in \(\text{NLF}\) rules out an unambiguous determination of the direction of the change in overall performance based on the FROC.
+The FROC plots also illustrate the decrease in \(\text{LLF}\) with increasing \(\lambda\): the black dots move to smaller ordinates, as do the red dots, which would seem to imply decreasing performance. However, the accompanying change in \(\text{NLF}\) rules out an unambiguous determination of the direction of the change in overall performance based on the FROC curve.
 
-TBA For very low performance, defined as \(0.5 < \text{ROC}_\text{AUC} < 0.6\), the Youden-index method chooses a lower threshold compared to \(\text{wAFROC}_\text{AUC}\) optimization, resulting in a higher operating point on the FROC, greater \(\text{ROC}_\text{AUC}\) but sharply lower \(\text{wAFROC}_\text{AUC}\). The difference between the two methods increases as \(\text{ROC}_\text{AUC} \rightarrow 0.5\). In this limit the \(\text{wAFROC}_\text{AUC}\) method severely limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.
+For very low performance, defined as \(0.5 < \text{ROC}_\text{AUC} < 0.6\), the Youden-index method chooses a lower threshold compared to \(\text{wAFROC}_\text{AUC}\) optimization, resulting in a higher operating point on the FROC, greater \(\text{ROC}_\text{AUC}\) but sharply lower \(\text{wAFROC}_\text{AUC}\). The difference between the two methods increases as \(\text{ROC}_\text{AUC} \rightarrow 0.5\). In this limit the \(\text{wAFROC}_\text{AUC}\) method severely limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.
 
 \hypertarget{cad-optim-op-appendices}{%
 \section{Appendices}\label{cad-optim-op-appendices}}

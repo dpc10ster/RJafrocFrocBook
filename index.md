@@ -4,8 +4,7 @@ author: "Dev P. Chakraborty, PhD"
 geometry: margin=2cm
 date: "2022-11-10"
 site: bookdown::bookdown_site
-output: 
-   bookdown::pdf_document: default
+output: pdf_document
 documentclass: book
 bibliography: [packages.bib, myRefs.bib]
 biblio-style: apalike
@@ -20,9 +19,15 @@ description: "Artificial intelligence and observer performance book based on RJa
 
 # (PART\*) Preamble {-}
 
-# Preface
+# Please ignore preface
 
 TBA
+
+## Please ignore issues
+
+<!-- Setting margins for pdf output currently does not work on GitHub actions  -->
+
+
 ## Please ignore following sections 
 
 * They are intended for my convenience and will be deleted in final version

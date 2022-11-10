@@ -213,7 +213,9 @@ fig:optim-op-point-low-performance-vary-nu-froc
 fig:optim-op-point-low-performance-vary-nu-wafroc
 fig:optim-op-point-low-performance-vary-nu-roc
 fig:datasets-datasets
-preface
+please-ignore-preface
+please-ignore-issues
+please-ignore-following-sections
 tba-rationale-and-organization
 tba-acknowledgements
 tba-nearly-finished-chapters
