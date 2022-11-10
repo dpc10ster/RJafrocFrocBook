@@ -433,10 +433,27 @@ grid.arrange(roc)
 
 ## TBA Discussion {#optim-op-point-discussion}
 
-In Table \@ref(tab:optim-op-point-table-vary-lambda) the $\lambda$ parameter controls the average number of perceived NLs per case. For $\lambda = 1$ there is, on average, one perceived NL for every case and the optimal $\text{wAFROC}_\text{AUC}$ based threshold is $\zeta_1}$ = `r simplePrint(zetaOptArr[1,1,1,1])`. For $\lambda = 10$ there are ten perceived NLs for every case and the optimal $\text{wAFROC}_\text{AUC}$ based threshold is $\zeta_1$ = `r simplePrint(zetaOptArr[1,1,1,1])`. The reason for the increase in $\zeta_1$ should be clear: with increasing numbers of NLs per case it is necessary to adopt a stricter criteria if only because otherwise the reader would be shown 10 times the number of NLs per case. 
 
 
-The $\text{ROC}_\text{AUC}$s are reported as a check of the less familiar $\text{wAFROC}_\text{AUC}$ figure of merit. With some notable exceptions the ordering of the two optimization methods is independent of whether it is measured via the $\text{wAFROC}_\text{AUC}$ or the $\text{ROC}_\text{AUC}$: either way the $\text{wAFROC}_\text{AUC}$ optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations. The exceptions occur when CAD performance is very low in which situation the .    
+```{r vary-lambda-parameters_duplicate, echo=TRUE}
+muArr <- c(2)
+lambdaArr <- c(1, 2, 5, 10)
+nuArr <- c(0.9)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+source("R/optim-op-point/doOneTable.R", local = knitr::knit_global())
+```
+
+
+
+```{r, include=FALSE}
+#source("R/optim-op-point/doOneTable.R", local = knitr::knit_global())
+```
+
+In Table \@ref(tab:optim-op-point-table-vary-lambda) the $\lambda$ parameter controls the average number of perceived NLs per case. For $\lambda = 1$ there is, on average, one perceived NL for every case and the optimal $\text{wAFROC}_\text{AUC}$ based threshold is $\zeta_1$ = `r simplePrint(zetaOptArr[1,1,1,1])`. For $\lambda = 10$ there are ten perceived NLs for every case and the optimal $\text{wAFROC}_\text{AUC}$ based threshold is $\zeta_1$ = `r simplePrint(zetaOptArr[1,1,4,1])`. The reason for the increase in $\zeta_1$ should be obvious: with increasing numbers of latent NLs (perceived false marks) per case it is necessary to adopt a stricter criteria because otherwise the reader would be shown 10 times the number of false marks per case. 
+
+
+The $\text{ROC}_\text{AUC}$s are reported as a check of the less familiar $\text{wAFROC}_\text{AUC}$ figure of merit. With some notable exceptions the behavior of the two optimization methods is independent of whether it is measured via the $\text{wAFROC}_\text{AUC}$ or the $\text{ROC}_\text{AUC}$: either way the $\text{wAFROC}_\text{AUC}$ optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations. The exceptions occur when CAD performance is very low in which situation the .    
 
 In this example the difference in $\text{wAFROC}_\text{AUC}$, $\text{ROC}_\text{AUC}$ and the operating points between the two methods decreases as performance *increases*, which is the opposite of that found when $\lambda$ or $\nu$ were varied. With constant $\lambda$ and $\nu$ the *numbers* of latent NLs and LLs are unchanging; all that happens is the *values* of the z-samples from LLs increase as $\mu$ increases, which allows the optimal threshold to increase (this can be understood as a "ROC-paradigm" effect: as the normal distributions are more widely separated, the optimal threshold will increase, approaching, in the limit, half the separation, since in that limit TPF = 1 and FPF = 0).
 
