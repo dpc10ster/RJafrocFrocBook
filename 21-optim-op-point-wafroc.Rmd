@@ -10,7 +10,8 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval.after = "fig.cap"
+  eval.after = "fig.cap",
+  cache = FALSE
 )
 
 library(kableExtra)
@@ -33,6 +34,7 @@ source("R/collapse_rows_df.R", local = knitr::knit_global())
 ## TBA How much finished {#optim-op-point-how-much-finished}
 98%
 
+Handling diseased-only datasets
 Discussion needs more work
 
 
@@ -75,7 +77,7 @@ In the following sections the RSM $\lambda$ parameter is varied (for fixed $\mu$
 For organizational reasons only the summary results for varying $\mu$ or $\nu$ are shown in the body of this chapter. Detailed results are in Appendix \@ref(cad-optim-op-appendices) which also has results for limiting cases of high and low ROC performance.
 
 
-The $\text{wAFROC}_\text{AUC}$ figure of merit is implemented in the `RJafroc` function `UtilAnalyticalAucsRSM`. The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function `RSM_yROC` and specificity is the complement of `RSM_xROC`. 
+The $\text{wAFROC}_\text{AUC}$ figure of merit is implemented in the `RJafroc` function `UtilAnalyticalAucsRSM`. The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function `RSM_TPF` and specificity is the complement of `RSM_FPF`. 
 
 
 ## Varying $\lambda$ optimizations{#optim-op-point-vary-lambda}
@@ -288,9 +290,10 @@ Assume that one has designed an algorithmic observer that has been optimized wit
 
 
 
-## A CAD application {#optim-op-point-application}
+### A CAD application {#optim-op-point-application}
 
-I do not have any CAD FROC datasets. The standalone CAD LROC dataset described in [@hupse2013standalone] was used to create a simulated FROC (i.e., $\text{ROC}_\text{AUC}$ equivalent) dataset which is embedded in `RJafroc` as object `datasetCadSimuFroc`. In the following code the first reader for this dataset, corresponding to CAD, is extracted using `DfExtractDataset` (the other reader data, corresponding to radiologists, are ignored). The function `DfFroc2Roc` converts `dsCad` to an ROC dataset. The function `DfBinDataset` bins the data to about 7 bins. Each diseased case contains one lesion: `lesDistr = c(1)`. `FitRsmRoc` fits the binned ROC dataset to the radiological search model (RSM). Object `fit` contains the RSM parameters required to perform the optimizations described in previous sections.  
+Not having access to any CAD FROC datasets the standalone CAD LROC dataset described in [@hupse2013standalone] was used to create a simulated FROC (i.e., $\text{ROC}_\text{AUC}$ equivalent) dataset which is embedded in `RJafroc` as object `datasetCadSimuFroc`. In the following code the first reader for this dataset, corresponding to CAD, is extracted using `DfExtractDataset` (the other reader data, corresponding to radiologists, are ignored). The function `DfFroc2Roc` converts `dsCad` to an ROC dataset. The function `DfBinDataset` bins the data to about 7 bins. Each diseased case contains one lesion: `lesDistr = c(1)`. `FitRsmRoc` fits the binned ROC dataset to the radiological search model (RSM). Object `fit` contains the RSM parameters required to perform the optimizations described in previous sections.  
+
 
 ```{r}
 ds <- RJafroc::datasetCadSimuFroc
@@ -311,7 +314,7 @@ source("R/optim-op-point/analyzeCadDataset.R", local = knitr::knit_global())
 ```
 
 
-### Summary table
+#### Summary table
 
 Table \@ref(tab:optim-op-point-table4) summarizes the results. As compared to Youden-index optimization the $\text{wAFROC}_\text{AUC}$ based optimization results in a lower reporting threshold $\zeta_1$, larger figures of merit -- see Fig. \@ref(fig:optim-op-point-application-wafroc) for $\text{wAFROC}_\text{AUC}$ and Fig. \@ref(fig:optim-op-point-application-roc) for $\text{ROC}_\text{AUC}$ -- and a higher operating point on the FROC, see Fig. \@ref(fig:optim-op-point-application-froc). These results match the trends shown in Table \@ref(tab:optim-op-point-table-vary-lambda).  
 
@@ -340,7 +343,7 @@ kbl(df, caption = captionStr, booktabs = TRUE, escape = FALSE) %>% kable_styling
 
 
 
-### FROC
+#### FROC
 
 
 ```{r, echo=FALSE}
@@ -371,7 +374,7 @@ grid.arrange(froc)
 ```
 
 
-### wAFROC
+#### wAFROC
 
 
 ```{r, echo=FALSE}
@@ -400,7 +403,7 @@ grid.arrange(wafroc)
 
 
 
-### ROC
+#### ROC
 
 
 ```{r, echo=FALSE}
@@ -429,6 +432,11 @@ captionStr <- paste0("The color coding is as in previous figures. The two $\\tex
 ```{r optim-op-point-application-roc, fig.cap=captionStr, fig.show='hold', echo=FALSE}
 grid.arrange(roc)
 ```
+
+
+### TBA Handling diseased-only datasets {#optim-op-point-application1}
+
+ROC-like plot of TPF vs. FPF1 is possible. Can create a ROC-like dataset with equal number of "non-diseased" and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot proceed. Need `RJafroc` function to handle this special case: `FitRsmRoc1`? 
 
 
 ## TBA Discussion {#optim-op-point-discussion}

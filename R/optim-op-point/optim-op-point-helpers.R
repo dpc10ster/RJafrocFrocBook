@@ -21,8 +21,8 @@ wAFROC <- function (
 Youden <- function (zeta1, mu, lambda, nu, lesDistr) {
   # add sensitivity and specificity 
   # and subtract 1, i.e., Youden's index
-  x <- RJafroc::RSM_yROC(zeta1, mu, lambda, nu, lesDistr) + 
-    (1 - RJafroc::RSM_xROC(zeta1, lambda)) - 1
+  x <- RJafroc::RSM_TPF(zeta1, mu, lambda, nu, lesDistr) + 
+    (1 - RJafroc::RSM_FPF(zeta1, lambda)) - 1
   # return negative of Youden-index 
   # (as optimize finds minimum of function)
   return(-x)
@@ -62,10 +62,10 @@ doOneSet <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucROC
-            fpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_xROC(
+            fpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_FPF(
               z = x$minimum, 
               lambda)
-            tpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_yROC(
+            tpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_TPF(
               z = x$minimum, 
               mu, 
               lambda,
@@ -106,10 +106,10 @@ doOneSet <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
               zeta1 = x$minimum, 
               lesDistr, 
               relWeights)$aucROC
-            fpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_xROC(
+            fpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_FPF(
               z = x$minimum, 
               lambda)
-            tpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_yROC(
+            tpfOptArr[y,i1,i2,i3] <- RJafroc::RSM_TPF(
               z = x$minimum, 
               mu, 
               lambda,

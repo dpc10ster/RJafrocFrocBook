@@ -253,8 +253,8 @@ gpfRsmOperatingCharacteristic <- function(mu, lambda, nu, lesDistr){
   
   plotZeta <- seq(-4, mu+4, by = 0.1)
   
-  FPF_R <- sapply(plotZeta, RSM_xROC, lambda = lambda)
-  TPF_R <- sapply(plotZeta, RSM_yROC, mu = mu, lambda = lambda, 
+  FPF_R <- sapply(plotZeta, RSM_FPF, lambda = lambda)
+  TPF_R <- sapply(plotZeta, RSM_TPF, mu = mu, lambda = lambda, 
                   nu = nu, lesDistr = lesDistr)
   
   return(list(FPF = FPF_R,

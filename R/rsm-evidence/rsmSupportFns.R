@@ -4,7 +4,7 @@ intROC <- function(FPF, mu, lambdaP, nuP, lesDistr){
   tmp <- 1 / lambdaP * log(1 - FPF) + 1
   tmp[tmp < 0] <- pnorm(-20)
   zeta <- qnorm(tmp)
-  TPF <- RSM_yROC(zeta, mu, lambdaP, nuP, lesDistr) 
+  TPF <- RSM_TPF(zeta, mu, lambdaP, nuP, lesDistr) 
   return (TPF)
 }
 

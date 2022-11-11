@@ -41,8 +41,8 @@ AucsRsmRocDiff <- function(mu, lambda, nu, lesDistr, RocAuc){
     
     lambdaP[i] <- lambda[i] / mu[i]
     if (abs(nu[i] * mu[i]) <= 1e-6 ) nuP[i] <- 1e-6 else nuP[i] <- (1-exp(-nu[i] * mu[i]))
-    maxFPF <- RSM_xROC(-20, lambdaP[i])
-    maxTPF <- RSM_yROC(-20, mu[i], lambdaP[i], nuP[i], 1) # DPC TBA
+    maxFPF <- RSM_FPF(-20, lambdaP[i])
+    maxTPF <- RSM_TPF(-20, mu[i], lambdaP[i], nuP[i], 1) # DPC TBA
     AUC <- integrate(intROC, 0, maxFPF, mu = mu[i], lambdaP = lambdaP[i], nuP = nuP[i], lesDistr = lesDistr)$value
     aucROC[i] <- AUC + (1 + maxTPF) * (1 - maxFPF) / 2
   }

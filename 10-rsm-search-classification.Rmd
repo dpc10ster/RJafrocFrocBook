@@ -67,8 +67,8 @@ fpfBm <- 1 - pnorm(plotZeta)
 tpfBm <- 1 - pnorm(plotZeta, mean = a/b, sd = 1/b)
 plotBm <- data.frame(FPF = fpfBm, TPF = tpfBm)
 
-fpfRsm <- sapply(plotZeta, RSM_xROC, lambda = lambda)
-tpfRsm <- sapply(plotZeta, RSM_yROC, mu = mu, lambda = lambda, 
+fpfRsm <- sapply(plotZeta, RSM_FPF, lambda = lambda)
+tpfRsm <- sapply(plotZeta, RSM_TPF, mu = mu, lambda = lambda, 
                 nu = nu, lesDistr = lesDistr)
 plotRsm <- data.frame(FPF = fpfRsm, TPF = tpfRsm)
 dashedRsm <- data.frame(FPF = c(fpfRsm[1], 1), TPF = c(tpfRsm[1], 1))
