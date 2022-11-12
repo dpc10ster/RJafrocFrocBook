@@ -415,7 +415,7 @@ Experimenting with different parameter combinations reveals the following behavi
 ### Comparing TPF formula to `RJafroc` functions
 
 
-A hand calculation is shown and compared to the value yielded by the function `RSM_yROC`. The RSM parameters and the value of $\zeta$ are:
+A hand calculation is shown and compared to the value yielded by the function `RSM_TPF`. The RSM parameters and the value of $\zeta$ are:
 
 
 
@@ -431,7 +431,7 @@ lesDistr <- c(0.5,0.5)
 The `lesDistr` vector corresponds to $f_L$ and specifies $L_{max} = 2$ and 50 percent of diseased cases have one lesion per case and the rest have two lesions per case.
 
 
-Direct implementation of Eqn. \@ref(eq:rsm-predictions-tpf2) followed by usage of the function `RSM_yROC` follows:
+Direct implementation of Eqn. \@ref(eq:rsm-predictions-tpf2) followed by usage of the function `RSM_TPF` follows:
 
 
 
@@ -447,7 +447,7 @@ lesDistr[2]*(1-nu*pnorm(mu-zeta))^2))
 ```
 
 ```r
-cat(RSM_yROC(zeta,mu,lambda,nu, lesDistr = lesDistr))
+cat(RSM_TPF(zeta,mu,lambda,nu, lesDistr = lesDistr))
 ```
 
 ```
