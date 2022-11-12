@@ -369,7 +369,7 @@ for (y in 1:2) {
 Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimposed optimal operating points. With NLF = 0.278, a four-view mammogram would show about 1.2 false CAD marks per patient and lesion-level sensitivity would be about 68 percent.
 
 
-```{r optim-op-point-application-froc, fig.cap="FROC plots with superposed optimal operating points. The red dot is using $\\text{wAFROC}_\\text{AUC}$ optimization and black dot is using Youden-index optimization.", fig.show='hold', echo=FALSE}
+```{r optim-op-point-application-froc, fig.cap="FROC plots with superposed optimal operating points. The red dot is using $\\text{wAFROC}_\\text{AUC}$ optimization and black dot is using Youden-index optimization.", out.width="300pt", fig.align='center', fig.show='hold', echo=FALSE}
 grid.arrange(froc)
 ```
 
@@ -397,7 +397,7 @@ Fig. \@ref(fig:optim-op-point-application-wafroc) shows wAFROC curves using the 
 captionStr <- paste0("The color coding is as in previous figures. The two $\\text{wAFROC}_\\text{AUC}$s are ", simplePrint(wafrocArr[1]), " (wAFROC optimization) and ", simplePrint(wafrocArr[2]), " (Youden-index optimization).")
 ```
 
-```{r optim-op-point-application-wafroc, fig.cap=captionStr, fig.show='hold', echo=FALSE}
+```{r optim-op-point-application-wafroc, fig.cap=captionStr, out.width="300pt", fig.align='center', fig.show='hold', echo=FALSE}
 grid.arrange(wafroc)
 ```
 
@@ -429,7 +429,7 @@ captionStr <- paste0("The color coding is as in previous figures. The two $\\tex
 
 
 
-```{r optim-op-point-application-roc, fig.cap=captionStr, fig.show='hold', echo=FALSE}
+```{r optim-op-point-application-roc, fig.cap=captionStr, out.width="300pt", fig.align='center', fig.show='hold', echo=FALSE}
 grid.arrange(roc)
 ```
 
