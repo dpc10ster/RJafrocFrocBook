@@ -436,7 +436,7 @@ grid.arrange(roc)
 
 ### TBA Handling diseased-only datasets {#optim-op-point-application1}
 
-ROC-like plot of TPF vs. FPF1 is possible. Can create a ROC-like dataset with equal number of "non-diseased" and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot proceed. Need `RJafroc` function to handle this special case: `FitRsmRoc1`? 
+ROC-like plot of TPF vs. FPF1 is possible. Can create a ROC-like dataset with equal number of "non-diseased" and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need `RJafroc` function to handle this special case: `FitRsmRoc1`? No! Just need function to create a "ROC" dataset from one that only has diseased cases. e.g., DfCreateDatasetFromDiseasedCasesOnly? Too long.
 
 
 ## TBA Discussion {#optim-op-point-discussion}
