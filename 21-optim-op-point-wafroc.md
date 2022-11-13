@@ -396,8 +396,8 @@ Table \@ref(tab:optim-op-point-table4) summarizes the results. As compared to Yo
 Fig. \@ref(fig:optim-op-point-application-froc) shows FROC curves with superimposed optimal operating points. With NLF = 0.278, a four-view mammogram would show about 1.2 false CAD marks per patient and lesion-level sensitivity would be about 68 percent.
 
 
-<div class="figure">
-<img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-application-froc-1.png" alt="FROC plots with superposed optimal operating points. The red dot is using $\text{wAFROC}_\text{AUC}$ optimization and black dot is using Youden-index optimization." width="672" />
+<div class="figure" style="text-align: center">
+<img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-application-froc-1.png" alt="FROC plots with superposed optimal operating points. The red dot is using $\text{wAFROC}_\text{AUC}$ optimization and black dot is using Youden-index optimization." width="300pt" />
 <p class="caption">(\#fig:optim-op-point-application-froc)FROC plots with superposed optimal operating points. The red dot is using $\text{wAFROC}_\text{AUC}$ optimization and black dot is using Youden-index optimization.</p>
 </div>
 
@@ -412,8 +412,8 @@ Fig. \@ref(fig:optim-op-point-application-wafroc) shows wAFROC curves using the 
 
 
 
-<div class="figure">
-<img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-application-wafroc-1.png" alt="The color coding is as in previous figures. The two $\text{wAFROC}_\text{AUC}$s are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization)." width="672" />
+<div class="figure" style="text-align: center">
+<img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-application-wafroc-1.png" alt="The color coding is as in previous figures. The two $\text{wAFROC}_\text{AUC}$s are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization)." width="300pt" />
 <p class="caption">(\#fig:optim-op-point-application-wafroc)The color coding is as in previous figures. The two $\text{wAFROC}_\text{AUC}$s are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization).</p>
 </div>
 
@@ -432,15 +432,11 @@ Fig. \@ref(fig:optim-op-point-application-roc) shows ROC curves using the two me
 
 
 
-<div class="figure">
-<img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-application-roc-1.png" alt="The color coding is as in previous figures. The two $\text{ROC}_\text{AUC}$s are 0.815 (wAFROC optimization) and 0.798 (Youden-index optimization)." width="672" />
+<div class="figure" style="text-align: center">
+<img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-application-roc-1.png" alt="The color coding is as in previous figures. The two $\text{ROC}_\text{AUC}$s are 0.815 (wAFROC optimization) and 0.798 (Youden-index optimization)." width="300pt" />
 <p class="caption">(\#fig:optim-op-point-application-roc)The color coding is as in previous figures. The two $\text{ROC}_\text{AUC}$s are 0.815 (wAFROC optimization) and 0.798 (Youden-index optimization).</p>
 </div>
 
-
-### TBA Handling diseased-only datasets {#optim-op-point-application1}
-
-ROC-like plot of TPF vs. FPF1 is possible. Can create a ROC-like dataset with equal number of "non-diseased" and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot proceed. Need `RJafroc` function to handle this special case: `FitRsmRoc1`? 
 
 
 ## TBA Discussion {#optim-op-point-discussion}
@@ -803,7 +799,6 @@ nuArr <- 0.9
 
 
 ### Limiting cases {#optim-op-point-limiting-situations}
-
 #### High performance varying $\mu$ {#optim-op-point-high-performance-vary-mu}
 
 

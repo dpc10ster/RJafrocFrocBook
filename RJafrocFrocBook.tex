@@ -135,7 +135,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-11-12}
+\date{2022-11-13}
 
 \begin{document}
 \maketitle
@@ -6009,9 +6009,12 @@ Youden &  & 1.982 & 0.770 & 0.798 & (0.161, 0.627)\\
 Fig. \ref{fig:optim-op-point-application-froc} shows FROC curves with superimposed optimal operating points. With NLF = 0.278, a four-view mammogram would show about 1.2 false CAD marks per patient and lesion-level sensitivity would be about 68 percent.
 
 \begin{figure}
-\centering
-\includegraphics{21-optim-op-point-wafroc_files/figure-latex/optim-op-point-application-froc-1.pdf}
-\caption{\label{fig:optim-op-point-application-froc}FROC plots with superposed optimal operating points. The red dot is using \(\text{wAFROC}_\text{AUC}\) optimization and black dot is using Youden-index optimization.}
+
+{\centering \includegraphics[width=300pt]{21-optim-op-point-wafroc_files/figure-latex/optim-op-point-application-froc-1} 
+
+}
+
+\caption{FROC plots with superposed optimal operating points. The red dot is using $\text{wAFROC}_\text{AUC}$ optimization and black dot is using Youden-index optimization.}\label{fig:optim-op-point-application-froc}
 \end{figure}
 
 \hypertarget{wafroc-2}{%
@@ -6020,9 +6023,12 @@ Fig. \ref{fig:optim-op-point-application-froc} shows FROC curves with superimpos
 Fig. \ref{fig:optim-op-point-application-wafroc} shows wAFROC curves using the two methods. The red curve is using \(\text{wAFROC}_\text{AUC}\) optimization and the green curve is using Youden-index optimization. The difference in AUCs is small - following the trend described in Appendix \ref{optim-op-point-vary-nu-mu} for the larger values of \(\lambda\).
 
 \begin{figure}
-\centering
-\includegraphics{21-optim-op-point-wafroc_files/figure-latex/optim-op-point-application-wafroc-1.pdf}
-\caption{\label{fig:optim-op-point-application-wafroc}The color coding is as in previous figures. The two \(\text{wAFROC}_\text{AUC}\)s are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization).}
+
+{\centering \includegraphics[width=300pt]{21-optim-op-point-wafroc_files/figure-latex/optim-op-point-application-wafroc-1} 
+
+}
+
+\caption{The color coding is as in previous figures. The two $\text{wAFROC}_\text{AUC}$s are 0.774 (wAFROC optimization) and 0.770 (Youden-index optimization).}\label{fig:optim-op-point-application-wafroc}
 \end{figure}
 
 \hypertarget{roc-2}{%
@@ -6031,15 +6037,13 @@ Fig. \ref{fig:optim-op-point-application-wafroc} shows wAFROC curves using the t
 Fig. \ref{fig:optim-op-point-application-roc} shows ROC curves using the two methods. The red curve is using \(\text{wAFROC}_\text{AUC}\) optimization and the green curve is using Youden-index optimization.
 
 \begin{figure}
-\centering
-\includegraphics{21-optim-op-point-wafroc_files/figure-latex/optim-op-point-application-roc-1.pdf}
-\caption{\label{fig:optim-op-point-application-roc}The color coding is as in previous figures. The two \(\text{ROC}_\text{AUC}\)s are 0.815 (wAFROC optimization) and 0.798 (Youden-index optimization).}
+
+{\centering \includegraphics[width=300pt]{21-optim-op-point-wafroc_files/figure-latex/optim-op-point-application-roc-1} 
+
+}
+
+\caption{The color coding is as in previous figures. The two $\text{ROC}_\text{AUC}$s are 0.815 (wAFROC optimization) and 0.798 (Youden-index optimization).}\label{fig:optim-op-point-application-roc}
 \end{figure}
-
-\hypertarget{optim-op-point-application1}{%
-\subsection{TBA Handling diseased-only datasets}\label{optim-op-point-application1}}
-
-ROC-like plot of TPF vs.~FPF1 is possible. Can create a ROC-like dataset with equal number of ``non-diseased'' and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot proceed. Need \texttt{RJafroc} function to handle this special case: \texttt{FitRsmRoc1}?
 
 \hypertarget{optim-op-point-discussion}{%
 \section{TBA Discussion}\label{optim-op-point-discussion}}
@@ -6582,6 +6586,34 @@ Youden-index & 0.1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 \includegraphics{21-optim-op-point-wafroc_files/figure-latex/optim-op-point-low-performance-vary-nu-roc-1.pdf}
 \caption{\label{fig:optim-op-point-low-performance-vary-nu-roc}Low performance varying \(\nu\) ROC plots for the two optimization methods with superimposed operating points. The color coding is as in previous figures. The values of \(\nu\) are: top-left \(\nu = 0.1\), top-right \(\nu = 0.2\), bottom-left \(\nu = 0.3\) and bottom-right \(\nu = 0.4\).}
 \end{figure}
+
+\hypertarget{analyze-diseased-only-dataset}{%
+\chapter{How to analyze a dataset with zero non-diseased cases}\label{analyze-diseased-only-dataset}}
+
+\hypertarget{analyze-diseased-only-dataset-how-much-finished}{%
+\section{TBA How much finished}\label{analyze-diseased-only-dataset-how-much-finished}}
+
+0\%
+
+\hypertarget{analyze-diseased-only-dataset-methods}{%
+\section{The problem}\label{analyze-diseased-only-dataset-methods}}
+
+How to analyze \(K_1 = 0\) datasets.
+
+\hypertarget{diseased-only-dataset}{%
+\section{TBA Handling diseased-only datasets}\label{diseased-only-dataset}}
+
+ROC-like plot of TPF vs.~FPF1 is possible. Can create a ROC-like dataset with equal number of ``non-diseased'' and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need \texttt{RJafroc} function to handle this special case: \texttt{FitRsmRoc1}? No! Just need function to create a ``ROC'' dataset from one that only has diseased cases. e.g., FixK1eq0dataset?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\NormalTok{lambdaArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{nuArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.9}\NormalTok{)}
+\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{part-datasets}{%
 \part*{DATASETS}\label{part-datasets}}

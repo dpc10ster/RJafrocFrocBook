@@ -447,7 +447,6 @@ summary-table-1
 froc-2
 wafroc-2
 roc-2
-optim-op-point-application1
 optim-op-point-discussion
 cad-optim-op-appendices
 optim-op-point-vary-nu
@@ -491,5 +490,9 @@ summary-table-9
 froc-10
 wafroc-10
 roc-10
+analyze-diseased-only-dataset
+analyze-diseased-only-dataset-how-much-finished
+analyze-diseased-only-dataset-methods
+diseased-only-dataset
 datasets
 datasets-datasets
