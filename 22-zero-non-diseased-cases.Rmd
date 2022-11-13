@@ -1,0 +1,49 @@
+# How to analyze a dataset with zero non-diseased cases  {#analyze-diseased-only-dataset}
+
+---
+output:
+  rmarkdown::pdf_document:
+    fig_caption: yes        
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval.after = "fig.cap"
+)
+
+library(kableExtra)
+library(gridExtra)
+library(abind)
+library(dplyr)
+```
+
+
+
+
+## TBA How much finished {#analyze-diseased-only-dataset-how-much-finished}
+0%
+
+
+## The problem {#analyze-diseased-only-dataset-methods}
+
+How to analyze $K_1 = 0$ datasets.
+
+
+## TBA Handling diseased-only datasets {#diseased-only-dataset}
+
+ROC-like plot of TPF vs. FPF1 is possible. Can create a ROC-like dataset with equal number of "non-diseased" and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need `RJafroc` function to handle this special case: `FitRsmRoc1`? No! Just need function to create a "ROC" dataset from one that only has diseased cases. e.g., FixK1eq0dataset?
+
+
+
+```{r vary-lambda-parameters, echo=TRUE}
+muArr <- c(2)
+lambdaArr <- c(1, 2, 5, 10)
+nuArr <- c(0.9)
+lesDistr <- c(0.5, 0.5)
+relWeights <- c(0.5, 0.5)
+```
+
+
+

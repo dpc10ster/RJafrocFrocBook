@@ -16,6 +16,7 @@ rmd_files: [
   "12-rsm-3-fits.Rmd",
   "20-standalone-cad.Rmd",
   "21-optim-op-point-wafroc.Rmd",
+  "22-zero-non-diseased-cases.Rmd",
   "90-datasets.Rmd",
   "99-references.Rmd",
 ]
