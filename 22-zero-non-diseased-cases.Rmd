@@ -31,18 +31,29 @@ library(dplyr)
 How to analyze $K_1 = 0$ datasets.
 
 
-## TBA Handling diseased-only datasets {#diseased-only-dataset}
+## Handling diseased-only datasets {#diseased-only-dataset}
 
 ROC-like plot of TPF vs. FPF1 is possible. Can create a ROC-like dataset with equal number of "non-diseased" and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need `RJafroc` function to handle this special case: `FitRsmRoc1`? No! Just need function to create a "ROC" dataset from one that only has diseased cases. e.g., FixK1eq0dataset?
 
 
+Save TONY dataset to `dsTony`. Create copy `dsNoNormals`. Replace all marks with case indices greater than $K_2$ with `NA`. This creates a dataset with no marks on non-diseased cases.
 
-```{r vary-lambda-parameters, echo=TRUE}
-muArr <- c(2)
-lambdaArr <- c(1, 2, 5, 10)
-nuArr <- c(0.9)
-lesDistr <- c(0.5, 0.5)
-relWeights <- c(0.5, 0.5)
+```{r analyze-diseased-only-code, echo=TRUE}
+dsTony <- RJafroc::dataset01 # TONY dataset
+K2 <- length(dsTony$lesions$perCase)
+K1 <- length(dsTony$ratings$NL[1,1,,1]) - K2
+dsNoNormals <- dsTony
+dsNoNormals$ratings$NL[,,1:K1,] <- NA # remove any marks from non-diseased cases
+UtilFigureOfMerit(dsTony,FOM = "wAFROC")
+UtilFigureOfMerit(dsNoNormals,FOM = "wAFROC")
+UtilFigureOfMerit(dsTony,FOM = "wAFROC1")
+UtilFigureOfMerit(dsNoNormals,FOM = "wAFROC1")
+ds1 <- array(NA, dim = c(2,5,K2,3))
+for (i in 1:2) {
+  for (j in 1:5) {
+    
+  } 
+}
 ```
 
 
