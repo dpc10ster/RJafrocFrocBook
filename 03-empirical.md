@@ -1117,7 +1117,7 @@ The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, th
 
 ## The AFROC1 plot {#empirical-AFROC1}
 
-Historically the AFROC originally used a different definition of FPF, resulting in what is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-"FP" z-sample on a *diseased case* as the maximum of all NL z-samples on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:empirical-FP)]:
+Historically the AFROC originally used a different definition of FPF resulting in what is (retrospectively) termed the AFROC1 plot. Since NLs can occur on diseased cases it is possible to define an inferred-"FP" z-sample on a *diseased case* as the maximum of all NL z-samples on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology since in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:empirical-FP)]:
 
 
 \begin{equation}
@@ -1141,7 +1141,7 @@ $FP_{k_t t}^1$ is the maximum over all latent NL marks, labeled by the location 
 \left.
 \begin{aligned}
 FPF_r^1 
-&\equiv FPF_r^1\left ( \zeta_r \right ) \\
+&\equiv FPF^1\left ( \zeta_r \right ) \\
 &= \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
 \end{aligned}
 \right \}

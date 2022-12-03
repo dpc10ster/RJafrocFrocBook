@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 How to analyze a dataset with zero non-diseased cases | The RJafroc Froc Book</title>
+  <title>Chapter 13 How to analyze a dataset with only diseased cases | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 How to analyze a dataset with zero non-diseased cases | The RJafroc Froc Book" />
+  <meta property="og:title" content="Chapter 13 How to analyze a dataset with only diseased cases | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Artificial intelligence and observer performance book based on RJafroc." />
   <meta name="github-repo" content="dpc10ster/RJafrocFrocBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 How to analyze a dataset with zero non-diseased cases | The RJafroc Froc Book" />
+  <meta name="twitter:title" content="Chapter 13 How to analyze a dataset with only diseased cases | The RJafroc Froc Book" />
   
   <meta name="twitter:description" content="Artificial intelligence and observer performance book based on RJafroc." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-11-13" />
+<meta name="date" content="2022-12-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -409,10 +409,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>12.10.3</b> Limiting cases</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> How to analyze a dataset with zero non-diseased cases</a><ul>
+<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> How to analyze a dataset with only diseased cases</a><ul>
 <li class="chapter" data-level="13.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished"><i class="fa fa-check"></i><b>13.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="13.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>13.2</b> The problem</a></li>
-<li class="chapter" data-level="13.3" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#diseased-only-dataset"><i class="fa fa-check"></i><b>13.3</b> TBA Handling diseased-only datasets</a></li>
+<li class="chapter" data-level="13.3" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#diseased-only-dataset"><i class="fa fa-check"></i><b>13.3</b> Handling diseased-only datasets</a></li>
 </ul></li>
 <li class="part"><span><b>DATASETS</b></span></li>
 <li class="chapter" data-level="14" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>14</b> Datasets</a><ul>
@@ -440,7 +440,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="analyze-diseased-only-dataset" class="section level1 hasAnchor">
-<h1><span class="header-section-number">Chapter 13</span> How to analyze a dataset with zero non-diseased cases<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 13</span> How to analyze a dataset with only diseased cases<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="analyze-diseased-only-dataset-how-much-finished" class="section level2 hasAnchor">
 <h2><span class="header-section-number">13.1</span> TBA How much finished<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>0%</p>
@@ -450,13 +450,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>How to analyze <span class="math inline">\(K_1 = 0\)</span> datasets.</p>
 </div>
 <div id="diseased-only-dataset" class="section level2 hasAnchor">
-<h2><span class="header-section-number">13.3</span> TBA Handling diseased-only datasets<a href="analyze-diseased-only-dataset.html#diseased-only-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>ROC-like plot of TPF vs. FPF1 is possible. Can create a ROC-like dataset with equal number of “non-diseased” and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need <code>RJafroc</code> function to handle this special case: <code>FitRsmRoc1</code>? No! Just need function to create a “ROC” dataset from one that only has diseased cases. e.g., FixK1eq0dataset?</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="analyze-diseased-only-dataset.html#cb140-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>)</span>
-<span id="cb140-2"><a href="analyze-diseased-only-dataset.html#cb140-2"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
-<span id="cb140-3"><a href="analyze-diseased-only-dataset.html#cb140-3"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
-<span id="cb140-4"><a href="analyze-diseased-only-dataset.html#cb140-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb140-5"><a href="analyze-diseased-only-dataset.html#cb140-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<h2><span class="header-section-number">13.3</span> Handling diseased-only datasets<a href="analyze-diseased-only-dataset.html#diseased-only-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>ROC-like plot of TPF vs. FPF1 is possible, see Section <a href="empirical.html#empirical-definition-empirical-auc-afroc1">3.12.1</a>. Can create a ROC-like dataset with equal number of “non-diseased” and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need <code>RJafroc</code> function to handle this special case: <code>FitRsmRoc1</code>? No! Just need function to create a “ROC” dataset from one that only has diseased cases. e.g., FixK1eq0dataset?</p>
+<p>Save TONY dataset to <code>dsTony</code>. Create copy <code>dsNoNormals</code>. Replace all marks with case indices greater than <span class="math inline">\(K_2\)</span> with <code>NA</code>. This creates a dataset with no marks on non-diseased cases.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="analyze-diseased-only-dataset.html#cb140-1"></a>dsTony &lt;-<span class="st"> </span>RJafroc<span class="op">::</span>dataset01 <span class="co"># TONY dataset</span></span>
+<span id="cb140-2"><a href="analyze-diseased-only-dataset.html#cb140-2"></a>K2 &lt;-<span class="st"> </span><span class="kw">length</span>(dsTony<span class="op">$</span>lesions<span class="op">$</span>perCase)</span>
+<span id="cb140-3"><a href="analyze-diseased-only-dataset.html#cb140-3"></a>K1 &lt;-<span class="st"> </span><span class="kw">length</span>(dsTony<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,<span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span>K2</span>
+<span id="cb140-4"><a href="analyze-diseased-only-dataset.html#cb140-4"></a>I &lt;-<span class="st"> </span><span class="kw">length</span>(dsTony<span class="op">$</span>ratings<span class="op">$</span>NL[,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span>K2</span>
+<span id="cb140-5"><a href="analyze-diseased-only-dataset.html#cb140-5"></a>J &lt;-<span class="st"> </span><span class="kw">length</span>(dsTony<span class="op">$</span>ratings<span class="op">$</span>NL[<span class="dv">1</span>,,<span class="dv">1</span>,<span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span>K2</span>
+<span id="cb140-6"><a href="analyze-diseased-only-dataset.html#cb140-6"></a>dsNoNormals &lt;-<span class="st"> </span>dsTony</span>
+<span id="cb140-7"><a href="analyze-diseased-only-dataset.html#cb140-7"></a>dsNoNormals<span class="op">$</span>ratings<span class="op">$</span>NL &lt;-<span class="st"> </span>dsNoNormals<span class="op">$</span>ratings<span class="op">$</span>NL[,,<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span>K1),]</span>
+<span id="cb140-8"><a href="analyze-diseased-only-dataset.html#cb140-8"></a>RJafroc<span class="op">::</span><span class="kw">UtilFigureOfMerit</span>(dsTony,<span class="dt">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
+<span id="cb140-9"><a href="analyze-diseased-only-dataset.html#cb140-9"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
+<span id="cb140-10"><a href="analyze-diseased-only-dataset.html#cb140-10"></a><span class="co">#&gt; trtBT 0.7602704 0.8406191 0.8171524 0.8153090 0.8278324</span></span>
+<span id="cb140-11"><a href="analyze-diseased-only-dataset.html#cb140-11"></a><span class="co">#&gt; trtDM 0.6425854 0.7049977 0.7518434 0.7724426 0.6836962</span></span>
+<span id="cb140-12"><a href="analyze-diseased-only-dataset.html#cb140-12"></a><span class="co">#RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = &quot;wAFROC&quot;)</span></span>
+<span id="cb140-13"><a href="analyze-diseased-only-dataset.html#cb140-13"></a>RJafroc<span class="op">::</span><span class="kw">UtilFigureOfMerit</span>(dsTony,<span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb140-14"><a href="analyze-diseased-only-dataset.html#cb140-14"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
+<span id="cb140-15"><a href="analyze-diseased-only-dataset.html#cb140-15"></a><span class="co">#&gt; trtBT 0.8079866 0.8696629 0.8747798 0.8517613 0.8563468</span></span>
+<span id="cb140-16"><a href="analyze-diseased-only-dataset.html#cb140-16"></a><span class="co">#&gt; trtDM 0.7277103 0.7781506 0.8225630 0.7968418 0.7496963</span></span>
+<span id="cb140-17"><a href="analyze-diseased-only-dataset.html#cb140-17"></a>RJafroc<span class="op">::</span><span class="kw">UtilFigureOfMerit</span>(dsNoNormals,<span class="dt">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb140-18"><a href="analyze-diseased-only-dataset.html#cb140-18"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
+<span id="cb140-19"><a href="analyze-diseased-only-dataset.html#cb140-19"></a><span class="co">#&gt; trtBT 0.8594559 0.9009910 0.9369398 0.8910807 0.8871039</span></span>
+<span id="cb140-20"><a href="analyze-diseased-only-dataset.html#cb140-20"></a><span class="co">#&gt; trtDM 0.8195304 0.8570572 0.8988448 0.8231600 0.8208875</span></span></code></pre></div>
 
 </div>
 </div>

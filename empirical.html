@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2022-11-13" />
+<meta name="date" content="2022-12-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -409,10 +409,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>12.10.3</b> Limiting cases</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> How to analyze a dataset with zero non-diseased cases</a><ul>
+<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> How to analyze a dataset with only diseased cases</a><ul>
 <li class="chapter" data-level="13.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished"><i class="fa fa-check"></i><b>13.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="13.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>13.2</b> The problem</a></li>
-<li class="chapter" data-level="13.3" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#diseased-only-dataset"><i class="fa fa-check"></i><b>13.3</b> TBA Handling diseased-only datasets</a></li>
+<li class="chapter" data-level="13.3" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#diseased-only-dataset"><i class="fa fa-check"></i><b>13.3</b> Handling diseased-only datasets</a></li>
 </ul></li>
 <li class="part"><span><b>DATASETS</b></span></li>
 <li class="chapter" data-level="14" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>14</b> Datasets</a><ul>
@@ -1275,7 +1275,7 @@ FIGURE 3.1: Left: AFROC plot; Right: corresponding wAFROC plot.
 </div>
 <div id="empirical-AFROC1" class="section level2 hasAnchor">
 <h2><span class="header-section-number">3.12</span> The AFROC1 plot<a href="empirical.html#empirical-AFROC1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Historically the AFROC originally used a different definition of FPF, resulting in what is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-“FP” z-sample on a <em>diseased case</em> as the maximum of all NL z-samples on the case, or <span class="math inline">\(-\infty\)</span> if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a <em>non-diseased case</em>. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case <span class="math inline">\(k_t t\)</span> is [the “1” superscript below is necessary to distinguish it from Eqn. <a href="empirical.html#eq:empirical-FP">(3.13)</a>]:</p>
+<p>Historically the AFROC originally used a different definition of FPF resulting in what is (retrospectively) termed the AFROC1 plot. Since NLs can occur on diseased cases it is possible to define an inferred-“FP” z-sample on a <em>diseased case</em> as the maximum of all NL z-samples on the case, or <span class="math inline">\(-\infty\)</span> if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology since in an ROC study, a FP can only occur on a <em>non-diseased case</em>. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case <span class="math inline">\(k_t t\)</span> is [the “1” superscript below is necessary to distinguish it from Eqn. <a href="empirical.html#eq:empirical-FP">(3.13)</a>]:</p>
 <p><span class="math display" id="eq:empirical-FP1">\[\begin{equation}
 \left.
 \begin{aligned}
@@ -1292,7 +1292,7 @@ FP_{k_t t}^1=&amp;-\infty &amp; \text{if} &amp; l_1 = \varnothing
 \left.
 \begin{aligned}
 FPF_r^1 
-&amp;\equiv FPF_r^1\left ( \zeta_r \right ) \\
+&amp;\equiv FPF^1\left ( \zeta_r \right ) \\
 &amp;= \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
 \end{aligned}
 \right \}

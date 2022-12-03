@@ -135,7 +135,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-11-13}
+\date{2022-12-03}
 
 \begin{document}
 \maketitle
@@ -1630,7 +1630,7 @@ The following is the plot of \(A_{\text{wAFROC}}\) vs.~\(A_{\text{ROC}}\). Again
 \hypertarget{empirical-AFROC1}{%
 \section{The AFROC1 plot}\label{empirical-AFROC1}}
 
-Historically the AFROC originally used a different definition of FPF, resulting in what is retrospectively termed the AFROC1 plot. Since NLs can occur on diseased cases, it is possible to define an inferred-``FP'' z-sample on a \emph{diseased case} as the maximum of all NL z-samples on the case, or \(-\infty\) if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology: in an ROC study, a FP can only occur on a \emph{non-diseased case}. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case \(k_t t\) is {[}the ``1'' superscript below is necessary to distinguish it from Eqn. \eqref{eq:empirical-FP}{]}:
+Historically the AFROC originally used a different definition of FPF resulting in what is (retrospectively) termed the AFROC1 plot. Since NLs can occur on diseased cases it is possible to define an inferred-``FP'' z-sample on a \emph{diseased case} as the maximum of all NL z-samples on the case, or \(-\infty\) if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology since in an ROC study, a FP can only occur on a \emph{non-diseased case}. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case \(k_t t\) is {[}the ``1'' superscript below is necessary to distinguish it from Eqn. \eqref{eq:empirical-FP}{]}:
 
 \begin{equation}
 \left.
@@ -1650,7 +1650,7 @@ FP_{k_t t}^1=&-\infty & \text{if} & l_1 = \varnothing
 \left.
 \begin{aligned}
 FPF_r^1 
-&\equiv FPF_r^1\left ( \zeta_r \right ) \\
+&\equiv FPF^1\left ( \zeta_r \right ) \\
 &= \frac{1}{K_1+K_2}\sum_{t=1}^{2}\sum_{k_t=1}^{K_t} \mathbb{I}\left ( FP_{k_t t}^1 \geq \zeta_r \right )
 \end{aligned}
 \right \}
@@ -6588,7 +6588,7 @@ Youden-index & 0.1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 \end{figure}
 
 \hypertarget{analyze-diseased-only-dataset}{%
-\chapter{How to analyze a dataset with zero non-diseased cases}\label{analyze-diseased-only-dataset}}
+\chapter{How to analyze a dataset with only diseased cases}\label{analyze-diseased-only-dataset}}
 
 \hypertarget{analyze-diseased-only-dataset-how-much-finished}{%
 \section{TBA How much finished}\label{analyze-diseased-only-dataset-how-much-finished}}
@@ -6601,17 +6601,34 @@ Youden-index & 0.1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 How to analyze \(K_1 = 0\) datasets.
 
 \hypertarget{diseased-only-dataset}{%
-\section{TBA Handling diseased-only datasets}\label{diseased-only-dataset}}
+\section{Handling diseased-only datasets}\label{diseased-only-dataset}}
 
-ROC-like plot of TPF vs.~FPF1 is possible. Can create a ROC-like dataset with equal number of ``non-diseased'' and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need \texttt{RJafroc} function to handle this special case: \texttt{FitRsmRoc1}? No! Just need function to create a ``ROC'' dataset from one that only has diseased cases. e.g., FixK1eq0dataset?
+ROC-like plot of TPF vs.~FPF1 is possible, see Section \ref{empirical-definition-empirical-auc-afroc1}. Can create a ROC-like dataset with equal number of ``non-diseased'' and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need \texttt{RJafroc} function to handle this special case: \texttt{FitRsmRoc1}? No! Just need function to create a ``ROC'' dataset from one that only has diseased cases. e.g., FixK1eq0dataset?
+
+Save TONY dataset to \texttt{dsTony}. Create copy \texttt{dsNoNormals}. Replace all marks with case indices greater than \(K_2\) with \texttt{NA}. This creates a dataset with no marks on non-diseased cases.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{muArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{)}
-\NormalTok{lambdaArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
-\NormalTok{nuArr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.9}\NormalTok{)}
-\NormalTok{lesDistr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
-\NormalTok{relWeights <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{dsTony <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\NormalTok{dataset01 }\CommentTok{# TONY dataset}
+\NormalTok{K2 <-}\StringTok{ }\KeywordTok{length}\NormalTok{(dsTony}\OperatorTok{$}\NormalTok{lesions}\OperatorTok{$}\NormalTok{perCase)}
+\NormalTok{K1 <-}\StringTok{ }\KeywordTok{length}\NormalTok{(dsTony}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,,}\DecValTok{1}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\NormalTok{K2}
+\NormalTok{I <-}\StringTok{ }\KeywordTok{length}\NormalTok{(dsTony}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL[,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\NormalTok{K2}
+\NormalTok{J <-}\StringTok{ }\KeywordTok{length}\NormalTok{(dsTony}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL[}\DecValTok{1}\NormalTok{,,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\NormalTok{K2}
+\NormalTok{dsNoNormals <-}\StringTok{ }\NormalTok{dsTony}
+\NormalTok{dsNoNormals}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL <-}\StringTok{ }\NormalTok{dsNoNormals}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL[,,}\OperatorTok{-}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{K1),]}
+\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{UtilFigureOfMerit}\NormalTok{(dsTony,}\DataTypeTok{FOM =} \StringTok{"wAFROC"}\NormalTok{)}
+\CommentTok{#>            rdr1      rdr2      rdr3      rdr4      rdr5}
+\CommentTok{#> trtBT 0.7602704 0.8406191 0.8171524 0.8153090 0.8278324}
+\CommentTok{#> trtDM 0.6425854 0.7049977 0.7518434 0.7724426 0.6836962}
+\CommentTok{#RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = "wAFROC")}
+\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{UtilFigureOfMerit}\NormalTok{(dsTony,}\DataTypeTok{FOM =} \StringTok{"wAFROC1"}\NormalTok{)}
+\CommentTok{#>            rdr1      rdr2      rdr3      rdr4      rdr5}
+\CommentTok{#> trtBT 0.8079866 0.8696629 0.8747798 0.8517613 0.8563468}
+\CommentTok{#> trtDM 0.7277103 0.7781506 0.8225630 0.7968418 0.7496963}
+\NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{UtilFigureOfMerit}\NormalTok{(dsNoNormals,}\DataTypeTok{FOM =} \StringTok{"wAFROC1"}\NormalTok{)}
+\CommentTok{#>            rdr1      rdr2      rdr3      rdr4      rdr5}
+\CommentTok{#> trtBT 0.8594559 0.9009910 0.9369398 0.8910807 0.8871039}
+\CommentTok{#> trtDM 0.8195304 0.8570572 0.8988448 0.8231600 0.8208875}
 \end{Highlighting}
 \end{Shaded}
 
