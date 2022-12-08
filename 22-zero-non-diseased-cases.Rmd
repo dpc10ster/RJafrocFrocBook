@@ -1,4 +1,4 @@
-# How to analyze a dataset with only diseased cases  {#analyze-diseased-only-dataset}
+# Analyzing a dataset with only diseased cases {#analyze-diseased-only-dataset}
 
 ---
 output:
@@ -30,13 +30,12 @@ library(dplyr)
 
 How to analyze $K_1 = 0$ datasets.
 
-
-## Handling diseased-only datasets {#diseased-only-dataset}
-
 ROC-like plot of TPF vs. FPF1 is possible, see Section \@ref(empirical-definition-empirical-auc-afroc1). Can create a ROC-like dataset with equal number of "non-diseased" and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need `RJafroc` function to handle this special case: `FitRsmRoc1`? No! Just need function to create a "ROC" dataset from one that only has diseased cases. e.g., `DfNoNormalsDataset`?
 
 
-Save TONY dataset to `dsTony`. Create copy `dsNoNormals`. Remove all normal cases from it. This creates a dataset with no marks on non-diseased cases.
+### Step 1: Create a test (diseased cases only) dataset {#analyze-diseased-only-dataset-step-1}
+
+Save TONY dataset to `dsTony`. Create copy `dsNoNormals`. Remove all normal cases from it. 
 
 ```{r analyze-diseased-only-code, echo=TRUE}
 dsTony <- RJafroc::dataset01 # TONY dataset
@@ -51,4 +50,16 @@ RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = "wAFROC1")
 ```
 
 
+`dsNoNormals` is the desired test dataset.
+
+### Step 2: create a test diseased cases only dataset {#analyze-diseased-only-dataset-step-2}
+
+
+```{r analyze-diseased-only-code, echo=TRUE}
+I <- length(dsTony$ratings$NL[,1,1,1])
+J <- length(dsTony$ratings$NL[1,,1,1])
+maxNL <- length(dsTony$ratings$NL[1,1,1,])
+#rm(dsTony)
+temp <- array(NA,dim=c(I,J,2*K2,maxNL))
+```
 
