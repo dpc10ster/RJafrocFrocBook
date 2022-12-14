@@ -11,119 +11,158 @@ library(ggplot2)
 ```
 
 
-## Datasets {#datasets-datasets}
+## Datasets embedded in `RJafroc` {#datasets-datasetsdd}
 
-The datasets are embedded in `RJafroc`. They can be viewed in the help file of the package, a partial screen-shot of which is shown next. 
-
-
-```{r datasets-datasets, echo=FALSE,fig.cap="Partial screen shot of `RJafroc` help file showing the datasets included with the current distribution (v2.0.1).",fig.show='hold',fig.align='center'}
-knitr::include_graphics("images/compare-3-fits/datasets.png")
-``` 
+They are identified in the code by dataset`dd` (where `dd` is an integer in the range `01` to `14`). As an example, `dataset01` can be viewed [here](https://dpc10ster.github.io/RJafroc/reference/dataset01.html). 
 
 
-The datasets are identified in the code by dataset`dd` (where `dd` is an integer in the range `01` to `14`) as follows:
+### Dataset01 {#datasets-dataset01}
 
-* `dataset01` "TONY" FROC dataset [@chakraborty2011estimating]
+`dataset01` "TONY" FROC dataset [@chakraborty2011estimating]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset01$ratings)
 ```
 
 
-* `dataset02` "VAN-DYKE" Van Dyke ROC dataset [@RN1993]
+### Dataset02 {#datasets-dataset02}
+
+`dataset02` "VAN-DYKE" (Van Dyke) ROC dataset [@RN1993]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset02$ratings)
 ```
 
 
-* `dataset03` "FRANKEN" Franken ROC dataset [@RN1995]
+### Dataset03 {#datasets-dataset03}
+
+`dataset03` "FRANKEN" (Franken) ROC dataset [@RN1995]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset03$ratings)
 ```
 
 
-* `dataset04` "FEDERICA" Federica Zanca FROC dataset [@zanca2009evaluation]
+### Dataset04 {#datasets-dataset04}
+
+`dataset04` "FEDERICA" (Federica Zanca) FROC dataset [@zanca2009evaluation]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset04$ratings)
 ```
 
 
-* `dataset05` "THOMPSON" John Thompson FROC dataset [@RN2368]
+### Dataset05 {#datasets-dataset05}
+
+
+`dataset05` "THOMPSON" (John Thompson) FROC dataset [@RN2368]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset05$ratings)
 ```
 
 
+### Dataset06 {#datasets-dataset06}
 
-* `dataset06` "MAGNUS" Magnus Bath FROC dataset [@RN1929]
+* `dataset06` "MAGNUS" (Magnus Bath) FROC dataset [@RN1929]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset06$ratings)
 ```
 
 
-* `dataset07` "LUCY-WARREN" Lucy Warren FROC dataset [@RN2507]
+### Dataset07 {#datasets-dataset07}
+
+`dataset07` "LUCY-WARREN" (Lucy Warren) FROC dataset [@RN2507]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset07$ratings)
 ```
 
 
-* `dataset08` "PENEDO" Monica Penedo FROC dataset [@RN1520]
+### Dataset08 {#datasets-dataset08}
+
+`dataset08` "PENEDO" (Monica Penedo) FROC dataset [@RN1520]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset08$ratings)
 ```
 
 
-* `dataset09` "NICO-CAD-ROC" Nico Karssemeijer ROC dataset [@hupse2013standalone]
+### Dataset09 {#datasets-dataset09}
+
+`dataset09` "NICO-CAD-ROC" (Nico Karssemeijer) ROC dataset [@hupse2013standalone]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset09$ratings)
 ```
 
 
-* `dataset10` "RUSCHIN" Mark Ruschin ROC dataset [@RN1646]
+### Dataset10 {#datasets-dataset10}
+
+`dataset10` "RUSCHIN" (Mark Ruschin) ROC dataset [@RN1646]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset10$ratings)
 ```
 
 
-* `dataset11` "DOBBINS-1" Dobbins I FROC dataset [@Dobbins2016MultiInstitutional]
+### Dataset11 {#datasets-dataset11}
+
+`dataset11` "DOBBINS-1" (James Dobbins) FROC dataset [@Dobbins2016MultiInstitutional]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset11$ratings)
 ```
 
 
-* `dataset12`  "DOBBINS-2" Dobbins II ROC dataset [@Dobbins2016MultiInstitutional]
+### Dataset12 {#datasets-dataset12}
+
+`dataset12`  "DOBBINS-2" (James Dobbins) ROC dataset [@Dobbins2016MultiInstitutional]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset12$ratings)
 ```
 
 
+### Dataset13 {#datasets-dataset13}
 
-* `dataset13` "DOBBINS-3" Dobbins III FROC dataset [@Dobbins2016MultiInstitutional]
+`dataset13` "DOBBINS-3" (James Dobbins) FROC dataset [@Dobbins2016MultiInstitutional]
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset13$ratings)
 ```
 
 
-* `dataset14` "FEDERICA-REAL-ROC" Federica Zanca *real* ROC dataset [@RN2318]
+### Dataset14 {#datasets-dataset14}
+
+
+`dataset14` "FEDERICA-REAL-ROC" (Federica Zanca) *real* ROC dataset [@RN2318]
+
 
 ```{r, echo=FALSE}
 str(RJafroc::dataset14$ratings)
 ```
 
 
+## Other datasets
+
+### DatasetCadLroc {#datasets-datasetCadLroc}
+
+`datasetCadLroc` "NICO-CAD-LROC" (Nico Karssemeijer) standalone CAD LROC dataset
 
 
+```{r, echo=FALSE}
+str(RJafroc::datasetCadLroc$ratings)
+```
 
+
+### datasetCadSimuFroc {#datasets-datasetCadSimuFroc}
+
+`datasetCadSimuFroc` "SIM-CAD-FROC" (Nico Karssemeijer) simulated standalone CAD FROC dataset
+
+
+```{r, echo=FALSE}
+str(RJafroc::datasetCadSimuFroc$ratings)
+```
 
