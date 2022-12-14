@@ -135,7 +135,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2022-12-03}
+\date{2022-12-14}
 
 \begin{document}
 \maketitle
@@ -1630,7 +1630,11 @@ The following is the plot of \(A_{\text{wAFROC}}\) vs.~\(A_{\text{ROC}}\). Again
 \hypertarget{empirical-AFROC1}{%
 \section{The AFROC1 plot}\label{empirical-AFROC1}}
 
-Historically the AFROC originally used a different definition of FPF resulting in what is (retrospectively) termed the AFROC1 plot. Since NLs can occur on diseased cases it is possible to define an inferred-``FP'' z-sample on a \emph{diseased case} as the maximum of all NL z-samples on the case, or \(-\infty\) if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology since in an ROC study, a FP can only occur on a \emph{non-diseased case}. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case \(k_t t\) is {[}the ``1'' superscript below is necessary to distinguish it from Eqn. \eqref{eq:empirical-FP}{]}:
+\begin{quote}
+Historically the AFROC originally used a different definition of FPF resulting in what is now termed the AFROC1 plot.
+\end{quote}
+
+Since NLs can occur on diseased cases it is possible to define an inferred ``FP'' z-sample on a \emph{diseased case} as the maximum of all NL z-samples on the case, or \(-\infty\) if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology since in an ROC study, a FP can only occur on a \emph{non-diseased case}. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case \(k_t t\), where \(t = 1,2\), is:
 
 \begin{equation}
 \left.
@@ -1643,6 +1647,8 @@ FP_{k_t t}^1=&-\infty & \text{if} & l_1 = \varnothing
 \right \}
 \label{eq:empirical-FP1}
 \end{equation}
+
+The ``1'' superscript below is necessary to distinguish the above definition from that in Eqn. \eqref{eq:empirical-FP}.
 
 \(FP_{k_t t}^1\) is the maximum over all latent NL marks, labeled by the location index \(l_1\), occurring in case \(k_t t\), or \(-\infty\) if \(l_1 = \varnothing\). The corresponding false positive fraction \(FPF_r^1\) is defined by:
 
@@ -1657,19 +1663,19 @@ FPF_r^1
 \label{eq:empirical-fpf1}
 \end{equation}
 
-Note the subtle differences between Eqn. \eqref{eq:empirical-fpf} and Eqn. \eqref{eq:empirical-fpf1}. The latter counts ``FPs'' on non-diseased and diseased cases while Eqn. \eqref{eq:empirical-fpf} counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to generate both a TP and a FP may be questionable, however, this plot is useful in applications where all or almost all cases are diseased.
+Note the differences between Eqn. \eqref{eq:empirical-fpf} and Eqn. \eqref{eq:empirical-fpf1}. The latter counts ``FPs'' on non-diseased \emph{and} diseased cases while Eqn. \eqref{eq:empirical-fpf} counts FPs on \emph{only} non-diseased cases. The denominators in the two equations are different and, unlike the first equation, the second equation is valid even when \(K_1 = 0\). This definition, resulting in the AUCs described next, is useful in applications where all (or almost all) cases are diseased (i.e., all cases have ``targets''). Most machine language applications may fall into this category: for example, a face-recognition algorithm may be used to search for target faces (e.g., known criminals) to be localized in crowd images; there mau be no (or very few) crowd images without any target faces. For these applications the following two empirical characteristics (AFROC1 and wAFROC1) are relevant.
 
 \hypertarget{empirical-definition-empirical-auc-afroc1}{%
 \subsection{Empirical AFROC1 plot and AUC}\label{empirical-definition-empirical-auc-afroc1}}
 
 \begin{quote}
-The empirical AFROC1 plot connects adjacent operating points \(\left ( FPF_r^1, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 plot and the AFROC plot is the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted \(A_{\text{AFROC1}}\).
+The empirical AFROC1 plot connects adjacent operating points \(\left ( FPF_r^1, \text{LLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 plot and the AFROC plot is the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted \(A_{\text{AFROC1}}\) or AFROC1-AUC.
 \end{quote}
 
 \hypertarget{empirical-afroc1-plot-illustration}{%
 \subsection{Illustration with a dataset}\label{empirical-afroc1-plot-illustration}}
 
-The following code uses \texttt{dataset04} to illustrate an empirical ROC plot for treatment 1 and reader 1.
+The following code uses \texttt{dataset04} to illustrate an empirical AFROC1 plot for treatment 1 and reader 1. Note that the only difference from an empirical AFROC plot is in the abscissa.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1682,7 +1688,7 @@ The following code uses \texttt{dataset04} to illustrate an empirical ROC plot f
 
 \includegraphics{03-empirical_files/figure-latex/unnamed-chunk-31-1.pdf}
 
-Shown next is calculation of the figure of merit for this dataset.
+Shown next is calculation of AFROC1-AUC for this dataset.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1705,13 +1711,15 @@ Similar to the logic for introducing the wAFROC plot as a way of giving equal im
 \subsection{Empirical wAFROC1 plot and AUC}\label{empirical-definition-empirical-auc-wafroc1}}
 
 \begin{quote}
-The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points \(\left ( FPF_r^1, \text{wLLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted \(A_{\text{wAFROC1}}\).
+The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points \(\left ( FPF_r^1, \text{wLLF}_r \right )\), including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted \(A_{\text{wAFROC1}}\) or wAFROC1-AUC.
 \end{quote}
+
+The wAFROC1-AUC may be preferable as it gives equal importance to each case (or crowd image) regardless of the number of targets contained in it.
 
 \hypertarget{empirical-wafroc1-plot-illustration}{%
 \subsection{Illustration with a dataset}\label{empirical-wafroc1-plot-illustration}}
 
-The following code uses \texttt{dataset04} to illustrate an empirical wAFROC1 plot for treatment 1 and reader 1.
+The following code uses \texttt{dataset04} to illustrate an empirical wAFROC1 plot for treatment 1 and reader 1. Note that the only difference from an empirical wAFROC plot is in the abscissa.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1724,7 +1732,7 @@ The following code uses \texttt{dataset04} to illustrate an empirical wAFROC1 pl
 
 \includegraphics{03-empirical_files/figure-latex/unnamed-chunk-34-1.pdf}
 
-Shown next is calculation of the figure of merit for this dataset.
+Shown next is calculation of wAFROC1-AUC for this dataset.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1745,7 +1753,7 @@ Here is a summary of the plots defined from FROC data along with my recommendati
 
 \begin{table}
 
-\caption{\label{tab:empirical-summary}Summary of plots from FROC data. All empirical plots except FROC include a straight line extension from the uppermost observed point to (1,1).}
+\caption{\label{tab:empirical-summary}Summary of plots from FROC data. OC = Operating Characteristic. All empirical plots except FROC include a straight line extension from the uppermost observed point to (1,1). Each figure of merit is defined by appending "-AUC" to the name of the corresponding OC}
 \centering
 \begin{tabular}[t]{l|l|l|l}
 \hline
@@ -6588,7 +6596,7 @@ Youden-index & 0.1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 \end{figure}
 
 \hypertarget{analyze-diseased-only-dataset}{%
-\chapter{How to analyze a dataset with only diseased cases}\label{analyze-diseased-only-dataset}}
+\chapter{Analyzing a dataset with only diseased cases}\label{analyze-diseased-only-dataset}}
 
 \hypertarget{analyze-diseased-only-dataset-how-much-finished}{%
 \section{TBA How much finished}\label{analyze-diseased-only-dataset-how-much-finished}}
@@ -6600,27 +6608,29 @@ Youden-index & 0.1 & 1.563 & 0.292 & 0.514 & (0.590, 0.029)\\
 
 How to analyze \(K_1 = 0\) datasets.
 
-\hypertarget{diseased-only-dataset}{%
-\section{Handling diseased-only datasets}\label{diseased-only-dataset}}
+ROC-like plot of TPF vs.~FPF1 is possible, see Section \ref{empirical-definition-empirical-auc-afroc1}. Can create a ROC-like dataset with equal number of ``non-diseased'' and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need \texttt{RJafroc} function to handle this special case: \texttt{FitRsmRoc1}? No! Just need function to create a ``ROC'' dataset from one that only has diseased cases. e.g., \texttt{DfNoNormalsDataset}?
 
-ROC-like plot of TPF vs.~FPF1 is possible, see Section \ref{empirical-definition-empirical-auc-afroc1}. Can create a ROC-like dataset with equal number of ``non-diseased'' and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need \texttt{RJafroc} function to handle this special case: \texttt{FitRsmRoc1}? No! Just need function to create a ``ROC'' dataset from one that only has diseased cases. e.g., FixK1eq0dataset?
+\hypertarget{analyze-diseased-only-dataset-step-1}{%
+\subsection{Step 1: Create a test (diseased cases only) dataset}\label{analyze-diseased-only-dataset-step-1}}
 
-Save TONY dataset to \texttt{dsTony}. Create copy \texttt{dsNoNormals}. Replace all marks with case indices greater than \(K_2\) with \texttt{NA}. This creates a dataset with no marks on non-diseased cases.
+Save TONY dataset to \texttt{dsTony}. Create copy \texttt{dsNoNormals}. Remove all normal cases from it.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dsTony <-}\StringTok{ }\NormalTok{RJafroc}\OperatorTok{::}\NormalTok{dataset01 }\CommentTok{# TONY dataset}
 \NormalTok{K2 <-}\StringTok{ }\KeywordTok{length}\NormalTok{(dsTony}\OperatorTok{$}\NormalTok{lesions}\OperatorTok{$}\NormalTok{perCase)}
 \NormalTok{K1 <-}\StringTok{ }\KeywordTok{length}\NormalTok{(dsTony}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,,}\DecValTok{1}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\NormalTok{K2}
-\NormalTok{I <-}\StringTok{ }\KeywordTok{length}\NormalTok{(dsTony}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL[,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\NormalTok{K2}
-\NormalTok{J <-}\StringTok{ }\KeywordTok{length}\NormalTok{(dsTony}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL[}\DecValTok{1}\NormalTok{,,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\NormalTok{K2}
 \NormalTok{dsNoNormals <-}\StringTok{ }\NormalTok{dsTony}
-\NormalTok{dsNoNormals}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL <-}\StringTok{ }\NormalTok{dsNoNormals}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL[,,}\OperatorTok{-}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{K1),]}
+\CommentTok{# Remove all normal cases}
+\NormalTok{dsNoNormals}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL <-}\StringTok{ }\NormalTok{dsNoNormals}\OperatorTok{$}\NormalTok{ratings}\OperatorTok{$}\NormalTok{NL[,,}\OperatorTok{-}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{K1),] }
+\CommentTok{# And fix truthTableStr}
+\NormalTok{dsNoNormals}\OperatorTok{$}\NormalTok{descriptions}\OperatorTok{$}\NormalTok{truthTableStr <-}\StringTok{ }
+\StringTok{  }\NormalTok{dsNoNormals}\OperatorTok{$}\NormalTok{descriptions}\OperatorTok{$}\NormalTok{truthTableStr[,,}\OperatorTok{-}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{K1),]}
 \NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{UtilFigureOfMerit}\NormalTok{(dsTony,}\DataTypeTok{FOM =} \StringTok{"wAFROC"}\NormalTok{)}
 \CommentTok{#>            rdr1      rdr2      rdr3      rdr4      rdr5}
 \CommentTok{#> trtBT 0.7602704 0.8406191 0.8171524 0.8153090 0.8278324}
 \CommentTok{#> trtDM 0.6425854 0.7049977 0.7518434 0.7724426 0.6836962}
-\CommentTok{#RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = "wAFROC")}
+\CommentTok{#RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = "wAFROC") #this will generate an error}
 \NormalTok{RJafroc}\OperatorTok{::}\KeywordTok{UtilFigureOfMerit}\NormalTok{(dsTony,}\DataTypeTok{FOM =} \StringTok{"wAFROC1"}\NormalTok{)}
 \CommentTok{#>            rdr1      rdr2      rdr3      rdr4      rdr5}
 \CommentTok{#> trtBT 0.8079866 0.8696629 0.8747798 0.8517613 0.8563468}
@@ -6629,8 +6639,51 @@ Save TONY dataset to \texttt{dsTony}. Create copy \texttt{dsNoNormals}. Replace 
 \CommentTok{#>            rdr1      rdr2      rdr3      rdr4      rdr5}
 \CommentTok{#> trtBT 0.8594559 0.9009910 0.9369398 0.8910807 0.8871039}
 \CommentTok{#> trtDM 0.8195304 0.8570572 0.8988448 0.8231600 0.8208875}
+\NormalTok{st <-}\StringTok{ }\KeywordTok{StSignificanceTesting}\NormalTok{(dsTony,}\DataTypeTok{FOM =} \StringTok{"wAFROC"}\NormalTok{)}
+\NormalTok{st1 <-}\StringTok{ }\KeywordTok{StSignificanceTesting}\NormalTok{(dsNoNormals,}\DataTypeTok{FOM =} \StringTok{"wAFROC1"}\NormalTok{)}
+\NormalTok{st}\OperatorTok{$}\NormalTok{RRRC}
+\CommentTok{#> $FTests}
+\CommentTok{#>                  DF         MS     FStat            p}
+\CommentTok{#> Treatment  1.000000 4.72951648 10.298825 0.0036685784}
+\CommentTok{#> Error     24.702758 0.45922873        NA           NA}
+\CommentTok{#> }
+\CommentTok{#> $ciDiffTrt}
+\CommentTok{#>              Estimate      StdErr        DF         t        PrGTt     CILower}
+\CommentTok{#> trtBT-trtDM 0.1011236 0.031510744 24.702758 3.2091783 0.0036685784 0.036186385}
+\CommentTok{#>                CIUpper}
+\CommentTok{#> trtBT-trtDM 0.16606081}
+\CommentTok{#> }
+\CommentTok{#> $ciAvgRdrEachTrt}
+\CommentTok{#>         Estimate      StdErr        DF    CILower    CIUpper}
+\CommentTok{#> trtBT 0.81223666 0.026984337 59.281486 0.75824649 0.86622683}
+\CommentTok{#> trtDM 0.71111306 0.033910209 17.789298 0.63980982 0.78241630}
+\NormalTok{st1}\OperatorTok{$}\NormalTok{RRRC}
+\CommentTok{#> $FTests}
+\CommentTok{#>                  DF          MS     FStat            p}
+\CommentTok{#> Treatment   1.00000 0.583686978 7.9579613 0.0051936318}
+\CommentTok{#> Error     236.88206 0.073346295        NA           NA}
+\CommentTok{#> }
+\CommentTok{#> $ciDiffTrt}
+\CommentTok{#>                Estimate      StdErr        DF         t        PrGTt}
+\CommentTok{#> trtBT-trtDM 0.051218281 0.018156163 236.88206 2.8209859 0.0051936318}
+\CommentTok{#>                 CILower    CIUpper}
+\CommentTok{#> trtBT-trtDM 0.015450111 0.08698645}
+\CommentTok{#> }
+\CommentTok{#> $ciAvgRdrEachTrt}
+\CommentTok{#>         Estimate      StdErr        DF    CILower    CIUpper}
+\CommentTok{#> trtBT 0.89511425 0.019745498 24.733020 0.85442537 0.93580314}
+\CommentTok{#> trtDM 0.84389597 0.024970629 27.621445 0.79271436 0.89507759}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{itemize}
+\item
+  \texttt{dsNoNormals} is the dataset with no non-diseased cases.
+\item
+  \texttt{st} contains the results of significance testing using the wAFROC-AUC figure of merit for the full dataset.
+\item
+  \texttt{st1} contains the results of significance testing using the wAFROC1-AUC figure of merit for the dataset with no non-diseased cases.
+\end{itemize}
 
 \hypertarget{part-datasets}{%
 \part*{DATASETS}\label{part-datasets}}
@@ -6639,27 +6692,15 @@ Save TONY dataset to \texttt{dsTony}. Create copy \texttt{dsNoNormals}. Replace 
 \hypertarget{datasets}{%
 \chapter{Datasets}\label{datasets}}
 
-\hypertarget{datasets-datasets}{%
-\section{Datasets}\label{datasets-datasets}}
+\hypertarget{datasets-datasetsdd}{%
+\section{\texorpdfstring{Datasets embedded in \texttt{RJafroc}}{Datasets embedded in RJafroc}}\label{datasets-datasetsdd}}
 
-The datasets are embedded in \texttt{RJafroc}. They can be viewed in the help file of the package, a partial screen-shot of which is shown next.
+They are identified in the code by dataset\texttt{dd} (where \texttt{dd} is an integer in the range \texttt{01} to \texttt{14}). As an example, \texttt{dataset01} can be viewed \href{https://dpc10ster.github.io/RJafroc/reference/dataset01.html}{here}.
 
-\begin{figure}
+\hypertarget{datasets-dataset01}{%
+\subsection{Dataset01}\label{datasets-dataset01}}
 
-{\centering \includegraphics{images/compare-3-fits/datasets} 
-
-}
-
-\caption{Partial screen shot of `RJafroc` help file showing the datasets included with the current distribution (v2.0.1).}\label{fig:datasets-datasets}
-\end{figure}
-
-The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd} is an integer in the range \texttt{01} to \texttt{14}) as follows:
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset01} ``TONY'' FROC dataset \citep{chakraborty2011estimating}
-\end{itemize}
+\texttt{dataset01} ``TONY'' FROC dataset \citep{chakraborty2011estimating}
 
 \begin{verbatim}
 ## List of 3
@@ -6668,11 +6709,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset02} ``VAN-DYKE'' Van Dyke ROC dataset \citep{RN1993}
-\end{itemize}
+\hypertarget{datasets-dataset02}{%
+\subsection{Dataset02}\label{datasets-dataset02}}
+
+\texttt{dataset02} ``VAN-DYKE'' (Van Dyke) ROC dataset \citep{RN1993}
 
 \begin{verbatim}
 ## List of 3
@@ -6681,11 +6721,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset03} ``FRANKEN'' Franken ROC dataset \citep{RN1995}
-\end{itemize}
+\hypertarget{datasets-dataset03}{%
+\subsection{Dataset03}\label{datasets-dataset03}}
+
+\texttt{dataset03} ``FRANKEN'' (Franken) ROC dataset \citep{RN1995}
 
 \begin{verbatim}
 ## List of 3
@@ -6694,11 +6733,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset04} ``FEDERICA'' Federica Zanca FROC dataset \citep{zanca2009evaluation}
-\end{itemize}
+\hypertarget{datasets-dataset04}{%
+\subsection{Dataset04}\label{datasets-dataset04}}
+
+\texttt{dataset04} ``FEDERICA'' (Federica Zanca) FROC dataset \citep{zanca2009evaluation}
 
 \begin{verbatim}
 ## List of 3
@@ -6707,11 +6745,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset05} ``THOMPSON'' John Thompson FROC dataset \citep{RN2368}
-\end{itemize}
+\hypertarget{datasets-dataset05}{%
+\subsection{Dataset05}\label{datasets-dataset05}}
+
+\texttt{dataset05} ``THOMPSON'' (John Thompson) FROC dataset \citep{RN2368}
 
 \begin{verbatim}
 ## List of 3
@@ -6720,10 +6757,13 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
+\hypertarget{datasets-dataset06}{%
+\subsection{Dataset06}\label{datasets-dataset06}}
+
 \begin{itemize}
 \tightlist
 \item
-  \texttt{dataset06} ``MAGNUS'' Magnus Bath FROC dataset \citep{RN1929}
+  \texttt{dataset06} ``MAGNUS'' (Magnus Bath) FROC dataset \citep{RN1929}
 \end{itemize}
 
 \begin{verbatim}
@@ -6733,11 +6773,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset07} ``LUCY-WARREN'' Lucy Warren FROC dataset \citep{RN2507}
-\end{itemize}
+\hypertarget{datasets-dataset07}{%
+\subsection{Dataset07}\label{datasets-dataset07}}
+
+\texttt{dataset07} ``LUCY-WARREN'' (Lucy Warren) FROC dataset \citep{RN2507}
 
 \begin{verbatim}
 ## List of 3
@@ -6746,11 +6785,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset08} ``PENEDO'' Monica Penedo FROC dataset \citep{RN1520}
-\end{itemize}
+\hypertarget{datasets-dataset08}{%
+\subsection{Dataset08}\label{datasets-dataset08}}
+
+\texttt{dataset08} ``PENEDO'' (Monica Penedo) FROC dataset \citep{RN1520}
 
 \begin{verbatim}
 ## List of 3
@@ -6759,11 +6797,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset09} ``NICO-CAD-ROC'' Nico Karssemeijer ROC dataset \citep{hupse2013standalone}
-\end{itemize}
+\hypertarget{datasets-dataset09}{%
+\subsection{Dataset09}\label{datasets-dataset09}}
+
+\texttt{dataset09} ``NICO-CAD-ROC'' (Nico Karssemeijer) ROC dataset \citep{hupse2013standalone}
 
 \begin{verbatim}
 ## List of 3
@@ -6772,11 +6809,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset10} ``RUSCHIN'' Mark Ruschin ROC dataset \citep{RN1646}
-\end{itemize}
+\hypertarget{datasets-dataset10}{%
+\subsection{Dataset10}\label{datasets-dataset10}}
+
+\texttt{dataset10} ``RUSCHIN'' (Mark Ruschin) ROC dataset \citep{RN1646}
 
 \begin{verbatim}
 ## List of 3
@@ -6785,11 +6821,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset11} ``DOBBINS-1'' Dobbins I FROC dataset \citep{Dobbins2016MultiInstitutional}
-\end{itemize}
+\hypertarget{datasets-dataset11}{%
+\subsection{Dataset11}\label{datasets-dataset11}}
+
+\texttt{dataset11} ``DOBBINS-1'' (James Dobbins) FROC dataset \citep{Dobbins2016MultiInstitutional}
 
 \begin{verbatim}
 ## List of 3
@@ -6798,11 +6833,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset12} ``DOBBINS-2'' Dobbins II ROC dataset \citep{Dobbins2016MultiInstitutional}
-\end{itemize}
+\hypertarget{datasets-dataset12}{%
+\subsection{Dataset12}\label{datasets-dataset12}}
+
+\texttt{dataset12} ``DOBBINS-2'' (James Dobbins) ROC dataset \citep{Dobbins2016MultiInstitutional}
 
 \begin{verbatim}
 ## List of 3
@@ -6811,11 +6845,10 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset13} ``DOBBINS-3'' Dobbins III FROC dataset \citep{Dobbins2016MultiInstitutional}
-\end{itemize}
+\hypertarget{datasets-dataset13}{%
+\subsection{Dataset13}\label{datasets-dataset13}}
+
+\texttt{dataset13} ``DOBBINS-3'' (James Dobbins) FROC dataset \citep{Dobbins2016MultiInstitutional}
 
 \begin{verbatim}
 ## List of 3
@@ -6824,16 +6857,42 @@ The datasets are identified in the code by dataset\texttt{dd} (where \texttt{dd}
 ##  $ LL_IL: logi NA
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{dataset14} ``FEDERICA-REAL-ROC'' Federica Zanca \emph{real} ROC dataset \citep{RN2318}
-\end{itemize}
+\hypertarget{datasets-dataset14}{%
+\subsection{Dataset14}\label{datasets-dataset14}}
+
+\texttt{dataset14} ``FEDERICA-REAL-ROC'' (Federica Zanca) \emph{real} ROC dataset \citep{RN2318}
 
 \begin{verbatim}
 ## List of 3
 ##  $ NL   : num [1:2, 1:4, 1:200, 1] 2 2 2 2 1 3 2 2 3 1 ...
 ##  $ LL   : num [1:2, 1:4, 1:100, 1] 6 5 6 4 5 5 5 5 5 4 ...
+##  $ LL_IL: logi NA
+\end{verbatim}
+
+\hypertarget{other-datasets}{%
+\section{Other datasets}\label{other-datasets}}
+
+\hypertarget{datasets-datasetCadLroc}{%
+\subsection{DatasetCadLroc}\label{datasets-datasetCadLroc}}
+
+\texttt{datasetCadLroc} ``NICO-CAD-LROC'' (Nico Karssemeijer) standalone CAD LROC dataset
+
+\begin{verbatim}
+## List of 3
+##  $ NL   : num [1, 1:10, 1:200, 1] 28 0 14 0 16 0 31 0 0 0 ...
+##  $ LL   : num [1, 1:10, 1:80, 1] 0 0 0 0 0 0 0 0 67 0 ...
+##  $ LL_IL: num [1, 1:10, 1:80, 1] 29 12 13 10 41 67 61 51 0 0 ...
+\end{verbatim}
+
+\hypertarget{datasets-datasetCadSimuFroc}{%
+\subsection{datasetCadSimuFroc}\label{datasets-datasetCadSimuFroc}}
+
+\texttt{datasetCadSimuFroc} ``SIM-CAD-FROC'' (Nico Karssemeijer) simulated standalone CAD FROC dataset
+
+\begin{verbatim}
+## List of 3
+##  $ NL   : num [1, 1:10, 1:200, 1] 28 -Inf 14 -Inf 16 ...
+##  $ LL   : num [1, 1:10, 1:80, 1] -Inf -Inf -Inf -Inf -Inf ...
 ##  $ LL_IL: logi NA
 \end{verbatim}
 

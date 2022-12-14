@@ -1117,7 +1117,10 @@ The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, th
 
 ## The AFROC1 plot {#empirical-AFROC1}
 
-Historically the AFROC originally used a different definition of FPF resulting in what is (retrospectively) termed the AFROC1 plot. Since NLs can occur on diseased cases it is possible to define an inferred-"FP" z-sample on a *diseased case* as the maximum of all NL z-samples on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology since in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$ is [the "1" superscript below is necessary to distinguish it from Eqn. \@ref(eq:empirical-FP)]:
+>
+Historically the AFROC originally used a different definition of FPF resulting in what is now termed the AFROC1 plot. 
+
+Since NLs can occur on diseased cases it is possible to define an inferred "FP" z-sample on a *diseased case* as the maximum of all NL z-samples on the case, or $-\infty$ if the case has no NLs. The quotes emphasize that this is non-standard usage of ROC terminology since in an ROC study, a FP can only occur on a *non-diseased case*. Since both case-level truth states are allowed, the highest false positive (FP) z-sample for case $k_t t$, where $t = 1,2$, is:
 
 
 \begin{equation}
@@ -1133,6 +1136,7 @@ FP_{k_t t}^1=&-\infty & \text{if} & l_1 = \varnothing
 \end{equation}
 
 
+The "1" superscript below is necessary to distinguish the above definition from that in Eqn. \@ref(eq:empirical-FP).
 
 $FP_{k_t t}^1$ is the maximum over all latent NL marks, labeled by the location index $l_1$, occurring in case $k_t t$, or $-\infty$ if $l_1 = \varnothing$. The corresponding false positive fraction $FPF_r^1$ is defined by:
 
@@ -1148,18 +1152,19 @@ FPF_r^1
 (\#eq:empirical-fpf1)
 \end{equation}
 
-Note the subtle differences between Eqn. \@ref(eq:empirical-fpf) and Eqn. \@ref(eq:empirical-fpf1). The latter counts "FPs" on non-diseased and diseased cases while Eqn. \@ref(eq:empirical-fpf) counts FPs on non-diseased cases only, and for that reason the denominators in the two equations are different. The advisability of allowing a diseased case to generate both a TP and a FP may be questionable, however, this plot is useful in applications where all or almost all cases are diseased.
+Note the differences between Eqn. \@ref(eq:empirical-fpf) and Eqn. \@ref(eq:empirical-fpf1). The latter counts "FPs" on non-diseased *and* diseased cases while Eqn. \@ref(eq:empirical-fpf) counts FPs on *only* non-diseased cases. The denominators in the two equations are different and, unlike the first equation, the second equation is valid even when $K_1 = 0$. This definition, resulting in the AUCs described next, is useful in applications where all (or almost all) cases are diseased (i.e., all cases have "targets"). Most machine language applications may fall into this category: for example, a face-recognition algorithm may be used to search for target faces (e.g., known criminals) to be localized in crowd images; there mau be no (or very few) crowd images without any target faces. For these applications the following two empirical characteristics (AFROC1 and wAFROC1) are relevant.
+
 
 ### Empirical AFROC1 plot and  AUC {#empirical-definition-empirical-auc-afroc1}
 
 >
-The empirical AFROC1 plot connects adjacent operating points $\left ( FPF_r^1, \text{LLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 plot and the AFROC plot is the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted $A_{\text{AFROC1}}$.
+The empirical AFROC1 plot connects adjacent operating points $\left ( FPF_r^1, \text{LLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between AFROC1 plot and the AFROC plot is the x-axis. The area under this plot is the empirical AFROC1 AUC, denoted $A_{\text{AFROC1}}$ or AFROC1-AUC.
 
 
 
 ### Illustration with a dataset {#empirical-afroc1-plot-illustration}
 
-The following code uses `dataset04` to illustrate an empirical ROC plot for treatment 1 and reader 1.
+The following code uses `dataset04` to illustrate an empirical AFROC1 plot for treatment 1 and reader 1. Note that the only difference from an empirical AFROC plot is in the abscissa.
 
 
 
@@ -1174,7 +1179,7 @@ print(ret$Plot)
 
 
 
-Shown next is calculation of the figure of merit for this dataset.
+Shown next is calculation of AFROC1-AUC for this dataset.
 
 
 
@@ -1205,12 +1210,14 @@ Similar to the logic for introducing the wAFROC plot as a way of giving equal im
 ### Empirical wAFROC1 plot and  AUC {#empirical-definition-empirical-auc-wafroc1}
 
 >
-The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points $\left ( FPF_r^1, \text{wLLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted $A_{\text{wAFROC1}}$.
+The empirical weighted-AFROC1 (wAFROC1) plot connects adjacent operating points $\left ( FPF_r^1, \text{wLLF}_r \right )$, including the origin (0,0) and (1,1), with straight lines. The only difference between it and the wAFROC plot is in the x-axis. The area under this plot is the empirical weighted-AFROC AUC, denoted $A_{\text{wAFROC1}}$ or wAFROC1-AUC.
 
+
+The wAFROC1-AUC may be preferable as it gives equal importance to each case (or crowd image) regardless of the number of targets contained in it.
 
 ### Illustration with a dataset {#empirical-wafroc1-plot-illustration}
 
-The following code uses `dataset04` to illustrate an empirical wAFROC1 plot for treatment 1 and reader 1.
+The following code uses `dataset04` to illustrate an empirical wAFROC1 plot for treatment 1 and reader 1. Note that the only difference from an empirical wAFROC plot is in the abscissa.
 
 
 
@@ -1224,7 +1231,7 @@ print(ret$Plot)
 <img src="03-empirical_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 
-Shown next is calculation of the figure of merit for this dataset.
+Shown next is calculation of wAFROC1-AUC for this dataset.
 
 
 
@@ -1250,7 +1257,7 @@ UtilFigureOfMerit(dataset04, FOM = "wAFROC1")
 Here is a summary of the plots defined from FROC data along with my recommendations:
 
 <table>
-<caption>(\#tab:empirical-summary)Summary of plots from FROC data. All empirical plots except FROC include a straight line extension from the uppermost observed point to (1,1).</caption>
+<caption>(\#tab:empirical-summary)Summary of plots from FROC data. OC = Operating Characteristic. All empirical plots except FROC include a straight line extension from the uppermost observed point to (1,1). Each figure of merit is defined by appending "-AUC" to the name of the corresponding OC</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> OC </th>

@@ -7,20 +7,14 @@
 
 
 
-## Datasets {#datasets-datasets}
+## Datasets embedded in `RJafroc` {#datasets-datasetsdd}
 
-The datasets are embedded in `RJafroc`. They can be viewed in the help file of the package, a partial screen-shot of which is shown next. 
-
-
-<div class="figure" style="text-align: center">
-<img src="images/compare-3-fits/datasets.png" alt="Partial screen shot of `RJafroc` help file showing the datasets included with the current distribution (v2.0.1)."  />
-<p class="caption">(\#fig:datasets-datasets)Partial screen shot of `RJafroc` help file showing the datasets included with the current distribution (v2.0.1).</p>
-</div>
+They are identified in the code by dataset`dd` (where `dd` is an integer in the range `01` to `14`). As an example, `dataset01` can be viewed [here](https://dpc10ster.github.io/RJafroc/reference/dataset01.html). 
 
 
-The datasets are identified in the code by dataset`dd` (where `dd` is an integer in the range `01` to `14`) as follows:
+### Dataset01 {#datasets-dataset01}
 
-* `dataset01` "TONY" FROC dataset [@chakraborty2011estimating]
+`dataset01` "TONY" FROC dataset [@chakraborty2011estimating]
 
 
 ```
@@ -31,7 +25,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset02` "VAN-DYKE" Van Dyke ROC dataset [@RN1993]
+### Dataset02 {#datasets-dataset02}
+
+`dataset02` "VAN-DYKE" (Van Dyke) ROC dataset [@RN1993]
 
 
 ```
@@ -42,7 +38,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset03` "FRANKEN" Franken ROC dataset [@RN1995]
+### Dataset03 {#datasets-dataset03}
+
+`dataset03` "FRANKEN" (Franken) ROC dataset [@RN1995]
 
 
 ```
@@ -53,7 +51,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset04` "FEDERICA" Federica Zanca FROC dataset [@zanca2009evaluation]
+### Dataset04 {#datasets-dataset04}
+
+`dataset04` "FEDERICA" (Federica Zanca) FROC dataset [@zanca2009evaluation]
 
 
 ```
@@ -64,7 +64,10 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset05` "THOMPSON" John Thompson FROC dataset [@RN2368]
+### Dataset05 {#datasets-dataset05}
+
+
+`dataset05` "THOMPSON" (John Thompson) FROC dataset [@RN2368]
 
 
 ```
@@ -75,8 +78,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
+### Dataset06 {#datasets-dataset06}
 
-* `dataset06` "MAGNUS" Magnus Bath FROC dataset [@RN1929]
+* `dataset06` "MAGNUS" (Magnus Bath) FROC dataset [@RN1929]
 
 
 ```
@@ -87,7 +91,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset07` "LUCY-WARREN" Lucy Warren FROC dataset [@RN2507]
+### Dataset07 {#datasets-dataset07}
+
+`dataset07` "LUCY-WARREN" (Lucy Warren) FROC dataset [@RN2507]
 
 
 ```
@@ -98,7 +104,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset08` "PENEDO" Monica Penedo FROC dataset [@RN1520]
+### Dataset08 {#datasets-dataset08}
+
+`dataset08` "PENEDO" (Monica Penedo) FROC dataset [@RN1520]
 
 
 ```
@@ -109,7 +117,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset09` "NICO-CAD-ROC" Nico Karssemeijer ROC dataset [@hupse2013standalone]
+### Dataset09 {#datasets-dataset09}
+
+`dataset09` "NICO-CAD-ROC" (Nico Karssemeijer) ROC dataset [@hupse2013standalone]
 
 
 ```
@@ -120,7 +130,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset10` "RUSCHIN" Mark Ruschin ROC dataset [@RN1646]
+### Dataset10 {#datasets-dataset10}
+
+`dataset10` "RUSCHIN" (Mark Ruschin) ROC dataset [@RN1646]
 
 
 ```
@@ -131,7 +143,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset11` "DOBBINS-1" Dobbins I FROC dataset [@Dobbins2016MultiInstitutional]
+### Dataset11 {#datasets-dataset11}
+
+`dataset11` "DOBBINS-1" (James Dobbins) FROC dataset [@Dobbins2016MultiInstitutional]
 
 
 ```
@@ -142,7 +156,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset12`  "DOBBINS-2" Dobbins II ROC dataset [@Dobbins2016MultiInstitutional]
+### Dataset12 {#datasets-dataset12}
+
+`dataset12`  "DOBBINS-2" (James Dobbins) ROC dataset [@Dobbins2016MultiInstitutional]
 
 
 ```
@@ -153,8 +169,9 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
+### Dataset13 {#datasets-dataset13}
 
-* `dataset13` "DOBBINS-3" Dobbins III FROC dataset [@Dobbins2016MultiInstitutional]
+`dataset13` "DOBBINS-3" (James Dobbins) FROC dataset [@Dobbins2016MultiInstitutional]
 
 
 ```
@@ -165,7 +182,11 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
-* `dataset14` "FEDERICA-REAL-ROC" Federica Zanca *real* ROC dataset [@RN2318]
+### Dataset14 {#datasets-dataset14}
+
+
+`dataset14` "FEDERICA-REAL-ROC" (Federica Zanca) *real* ROC dataset [@RN2318]
+
 
 
 ```
@@ -176,7 +197,32 @@ The datasets are identified in the code by dataset`dd` (where `dd` is an integer
 ```
 
 
+## Other datasets
+
+### DatasetCadLroc {#datasets-datasetCadLroc}
+
+`datasetCadLroc` "NICO-CAD-LROC" (Nico Karssemeijer) standalone CAD LROC dataset
 
 
 
+```
+## List of 3
+##  $ NL   : num [1, 1:10, 1:200, 1] 28 0 14 0 16 0 31 0 0 0 ...
+##  $ LL   : num [1, 1:10, 1:80, 1] 0 0 0 0 0 0 0 0 67 0 ...
+##  $ LL_IL: num [1, 1:10, 1:80, 1] 29 12 13 10 41 67 61 51 0 0 ...
+```
+
+
+### datasetCadSimuFroc {#datasets-datasetCadSimuFroc}
+
+`datasetCadSimuFroc` "SIM-CAD-FROC" (Nico Karssemeijer) simulated standalone CAD FROC dataset
+
+
+
+```
+## List of 3
+##  $ NL   : num [1, 1:10, 1:200, 1] 28 -Inf 14 -Inf 16 ...
+##  $ LL   : num [1, 1:10, 1:80, 1] -Inf -Inf -Inf -Inf -Inf ...
+##  $ LL_IL: logi NA
+```
 
