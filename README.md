@@ -1,5 +1,9 @@
-### RJafrocFrocBook
+# RJafrocFrocBook
 
+
+# Summary
+
+See [this link](https://dpc10ster.github.io/ai-froc-research/) for a summary of my AI/FROC research websites. 
 
 # What is this repository for?
 
@@ -11,16 +15,6 @@
 * HMF approximately 70%
 * This book is currently (as of December 2021) in preparation.
 * Parts labeled TBA and TODOLAST need to be updated on final revision.
-
-
-## The pdf file of the book {-}
-
-Go [here](https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFrocBook.pdf) and then click on `Download` to get the `RJafrocFrocBook.pdf` file.
-
-
-## The html version of the book {-}
-
-Go [here](https://dpc10ster.github.io/RJafrocFrocBook/) to view the `html` version of the book.
 
 
 ## Contributing to this book {-}
