@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 CAD optimal operating point | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 CAD optimal operating point | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-02-28" />
+<meta name="date" content="2023-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,7 +49,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -58,18 +57,18 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,13 +88,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -108,7 +107,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -122,6 +121,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -140,7 +161,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="part"><span><b>Preamble</b></span></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Please ignore preface</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Please ignore preface</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#please-ignore-issues"><i class="fa fa-check"></i><b>1.1</b> Please ignore issues</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#please-ignore-following-sections"><i class="fa fa-check"></i><b>1.2</b> Please ignore following sections</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tba-rationale-and-organization"><i class="fa fa-check"></i><b>1.3</b> TBA Rationale and Organization</a></li>
@@ -154,34 +176,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.11" data-path="index.html"><a href="index.html#please-ignore-is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i><b>1.11</b> Please ignore: Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="1.12" data-path="index.html"><a href="index.html#please-ignore-chapters-needing-heavy-edits"><i class="fa fa-check"></i><b>1.12</b> Please ignore: Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="1.13" data-path="index.html"><a href="index.html#please-ignore-shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i><b>1.13</b> Please ignore: Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="1.14" data-path="index.html"><a href="index.html#please-ignore-coding-aids-for-me"><i class="fa fa-check"></i><b>1.14</b> Please ignore: Coding aids (for me)</a><ul>
+<li class="chapter" data-level="1.14" data-path="index.html"><a href="index.html#please-ignore-coding-aids-for-me"><i class="fa fa-check"></i><b>1.14</b> Please ignore: Coding aids (for me)</a>
+<ul>
 <li class="chapter" data-level="1.14.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>1.14.1</b> formatting</a></li>
 <li class="chapter" data-level="1.14.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>1.14.2</b> tables</a></li>
 <li class="chapter" data-level="1.14.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>1.14.3</b> tinytex problems</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
-<li class="chapter" data-level="2" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>2</b> The FROC paradigm and visual search</a><ul>
+<li class="chapter" data-level="2" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>2</b> The FROC paradigm and visual search</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-how-much-finished"><i class="fa fa-check"></i><b>2.1</b> How much finished</a></li>
-<li class="chapter" data-level="2.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>2.2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>2.2</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-outline"><i class="fa fa-check"></i><b>2.2.1</b> Chapter outline</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-location-specific-paradigms"><i class="fa fa-check"></i><b>2.3</b> Location specific paradigms</a></li>
-<li class="chapter" data-level="2.4" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-vis-search"><i class="fa fa-check"></i><b>2.4</b> Visual search</a><ul>
+<li class="chapter" data-level="2.4" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-vis-search"><i class="fa fa-check"></i><b>2.4</b> Visual search</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-scoring-the-data"><i class="fa fa-check"></i><b>2.4.1</b> Proximity criterion and scoring the data</a></li>
 <li class="chapter" data-level="2.4.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#multiple-marks-in-the-same-vicinity"><i class="fa fa-check"></i><b>2.4.2</b> Multiple marks in the same vicinity</a></li>
 <li class="chapter" data-level="2.4.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#historical-context"><i class="fa fa-check"></i><b>2.4.3</b> Historical context</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>2.5</b> The FROC plot</a><ul>
+<li class="chapter" data-level="2.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>2.5</b> The FROC plot</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-plot-illustration"><i class="fa fa-check"></i><b>2.5.1</b> Illustration with a dataset</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>2.6</b> The “solar” analogy</a></li>
 <li class="chapter" data-level="2.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>2.7</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>3</b> Empirical plots from FROC data</a><ul>
+<li class="chapter" data-level="3" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>3</b> Empirical plots from FROC data</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="empirical.html"><a href="empirical.html#empirical-how-much-finished"><i class="fa fa-check"></i><b>3.1</b> How much finished</a></li>
 <li class="chapter" data-level="3.2" data-path="empirical.html"><a href="empirical.html#empirical-intro"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
-<li class="chapter" data-level="3.3" data-path="empirical.html"><a href="empirical.html#empirical-mark-rating-pairs"><i class="fa fa-check"></i><b>3.3</b> FROC data and notation</a><ul>
+<li class="chapter" data-level="3.3" data-path="empirical.html"><a href="empirical.html#empirical-mark-rating-pairs"><i class="fa fa-check"></i><b>3.3</b> FROC data and notation</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="empirical.html"><a href="empirical.html#lls-vs.-nls"><i class="fa fa-check"></i><b>3.3.1</b> LLs vs. NLs</a></li>
 <li class="chapter" data-level="3.3.2" data-path="empirical.html"><a href="empirical.html#latent-vs.-actual-marks"><i class="fa fa-check"></i><b>3.3.2</b> Latent vs. actual marks</a></li>
 <li class="chapter" data-level="3.3.3" data-path="empirical.html"><a href="empirical.html#z-samples-vs.-ratings"><i class="fa fa-check"></i><b>3.3.3</b> z-samples vs. ratings</a></li>
@@ -190,28 +219,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.6" data-path="empirical.html"><a href="empirical.html#comments"><i class="fa fa-check"></i><b>3.3.6</b> Comments</a></li>
 <li class="chapter" data-level="3.3.7" data-path="empirical.html"><a href="empirical.html#empirical-indexing-marks"><i class="fa fa-check"></i><b>3.3.7</b> A conceptual and notatonal issue</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-1"><i class="fa fa-check"></i><b>3.4</b> The FROC plot</a><ul>
+<li class="chapter" data-level="3.4" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-1"><i class="fa fa-check"></i><b>3.4</b> The FROC plot</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="empirical.html"><a href="empirical.html#empirical-end-point"><i class="fa fa-check"></i><b>3.4.1</b> The observed FROC end-point and its semi-constrained property</a></li>
 <li class="chapter" data-level="3.4.2" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-futility-extrapolation"><i class="fa fa-check"></i><b>3.4.2</b> Futility of extrapolation outside the observed end-point</a></li>
 <li class="chapter" data-level="3.4.3" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-illustration"><i class="fa fa-check"></i><b>3.4.3</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="empirical.html"><a href="empirical.html#empirical-ROC"><i class="fa fa-check"></i><b>3.5</b> The inferred-ROC plot</a><ul>
+<li class="chapter" data-level="3.5" data-path="empirical.html"><a href="empirical.html#empirical-ROC"><i class="fa fa-check"></i><b>3.5</b> The inferred-ROC plot</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="empirical.html"><a href="empirical.html#empirical-ROC-fpf"><i class="fa fa-check"></i><b>3.5.1</b> The inferred-ROC z-sample</a></li>
 <li class="chapter" data-level="3.5.2" data-path="empirical.html"><a href="empirical.html#empirical-ROC-tpf"><i class="fa fa-check"></i><b>3.5.2</b> Inferred TPF</a></li>
 <li class="chapter" data-level="3.5.3" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-roc"><i class="fa fa-check"></i><b>3.5.3</b> The empirical ROC plot and AUC</a></li>
 <li class="chapter" data-level="3.5.4" data-path="empirical.html"><a href="empirical.html#empirical-ROC-constrained"><i class="fa fa-check"></i><b>3.5.4</b> The observed end-point of the ROC and its constrained property</a></li>
 <li class="chapter" data-level="3.5.5" data-path="empirical.html"><a href="empirical.html#empirical-roc-plot-illustration"><i class="fa fa-check"></i><b>3.5.5</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="empirical.html"><a href="empirical.html#empirical-AFROC"><i class="fa fa-check"></i><b>3.6</b> The alternative FROC (AFROC) plot</a><ul>
+<li class="chapter" data-level="3.6" data-path="empirical.html"><a href="empirical.html#empirical-AFROC"><i class="fa fa-check"></i><b>3.6</b> The alternative FROC (AFROC) plot</a>
+<ul>
 <li class="chapter" data-level="3.6.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-afroc"><i class="fa fa-check"></i><b>3.6.1</b> Definition: empirical AFROC plot and AUC</a></li>
 <li class="chapter" data-level="3.6.2" data-path="empirical.html"><a href="empirical.html#empirical-AFROC-constrained"><i class="fa fa-check"></i><b>3.6.2</b> The observed end-point of the AFROC and its constrained property</a></li>
 <li class="chapter" data-level="3.6.3" data-path="empirical.html"><a href="empirical.html#empirical-afroc-plot-illustration"><i class="fa fa-check"></i><b>3.6.3</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC"><i class="fa fa-check"></i><b>3.7</b> The weighted-AFROC plot (wAFROC) plot</a><ul>
+<li class="chapter" data-level="3.7" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC"><i class="fa fa-check"></i><b>3.7</b> The weighted-AFROC plot (wAFROC) plot</a>
+<ul>
 <li class="chapter" data-level="3.7.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-wafroc"><i class="fa fa-check"></i><b>3.7.1</b> The empirical wAFROC plot and AUC</a></li>
 <li class="chapter" data-level="3.7.2" data-path="empirical.html"><a href="empirical.html#empirical-wafroc-plot-illustration"><i class="fa fa-check"></i><b>3.7.2</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.8" data-path="empirical.html"><a href="empirical.html#empirical-numerical-understanding"><i class="fa fa-check"></i><b>3.8</b> AFROC vs. wAFROC</a><ul>
+<li class="chapter" data-level="3.8" data-path="empirical.html"><a href="empirical.html#empirical-numerical-understanding"><i class="fa fa-check"></i><b>3.8</b> AFROC vs. wAFROC</a>
+<ul>
 <li class="chapter" data-level="3.8.1" data-path="empirical.html"><a href="empirical.html#nl-and-ll-z-samples"><i class="fa fa-check"></i><b>3.8.1</b> NL and LL z-samples</a></li>
 <li class="chapter" data-level="3.8.2" data-path="empirical.html"><a href="empirical.html#lesion-weights"><i class="fa fa-check"></i><b>3.8.2</b> Lesion weights</a></li>
 <li class="chapter" data-level="3.8.3" data-path="empirical.html"><a href="empirical.html#fpf"><i class="fa fa-check"></i><b>3.8.3</b> FPF</a></li>
@@ -219,29 +253,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.8.5" data-path="empirical.html"><a href="empirical.html#wllf"><i class="fa fa-check"></i><b>3.8.5</b> wLLF</a></li>
 </ul></li>
 <li class="chapter" data-level="3.9" data-path="empirical.html"><a href="empirical.html#empirical-meanings"><i class="fa fa-check"></i><b>3.9</b> Interpretation of AUCs</a></li>
-<li class="chapter" data-level="3.10" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases"><i class="fa fa-check"></i><b>3.10</b> Instructive examples</a><ul>
+<li class="chapter" data-level="3.10" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases"><i class="fa fa-check"></i><b>3.10</b> Instructive examples</a>
+<ul>
 <li class="chapter" data-level="3.10.1" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-FROC"><i class="fa fa-check"></i><b>3.10.1</b> The FROC</a></li>
 <li class="chapter" data-level="3.10.2" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-ROC"><i class="fa fa-check"></i><b>3.10.2</b> The ROC</a></li>
 <li class="chapter" data-level="3.10.3" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-AFROC"><i class="fa fa-check"></i><b>3.10.3</b> The AFROC</a></li>
 <li class="chapter" data-level="3.10.4" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-wAFROC"><i class="fa fa-check"></i><b>3.10.4</b> The wAFROC</a></li>
 </ul></li>
-<li class="chapter" data-level="3.11" data-path="empirical.html"><a href="empirical.html#empirical-froc-auc-poor"><i class="fa fa-check"></i><b>3.11</b> FROC-AUC is a poor measure</a><ul>
+<li class="chapter" data-level="3.11" data-path="empirical.html"><a href="empirical.html#empirical-froc-auc-poor"><i class="fa fa-check"></i><b>3.11</b> FROC-AUC is a poor measure</a>
+<ul>
 <li class="chapter" data-level="3.11.1" data-path="empirical.html"><a href="empirical.html#plot-of-froc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>3.11.1</b> Plot of FROC AUC vs. ROC AUC</a></li>
 <li class="chapter" data-level="3.11.2" data-path="empirical.html"><a href="empirical.html#plot-of-afroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>3.11.2</b> Plot of AFROC AUC vs. ROC AUC</a></li>
 <li class="chapter" data-level="3.11.3" data-path="empirical.html"><a href="empirical.html#plot-of-wafroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>3.11.3</b> Plot of wAFROC AUC vs. ROC AUC</a></li>
 </ul></li>
-<li class="chapter" data-level="3.12" data-path="empirical.html"><a href="empirical.html#empirical-AFROC1"><i class="fa fa-check"></i><b>3.12</b> The AFROC1 plot</a><ul>
+<li class="chapter" data-level="3.12" data-path="empirical.html"><a href="empirical.html#empirical-AFROC1"><i class="fa fa-check"></i><b>3.12</b> The AFROC1 plot</a>
+<ul>
 <li class="chapter" data-level="3.12.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-afroc1"><i class="fa fa-check"></i><b>3.12.1</b> Empirical AFROC1 plot and AUC</a></li>
 <li class="chapter" data-level="3.12.2" data-path="empirical.html"><a href="empirical.html#empirical-afroc1-plot-illustration"><i class="fa fa-check"></i><b>3.12.2</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.13" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC1"><i class="fa fa-check"></i><b>3.13</b> The weighted-AFROC1 (wAFROC1) plot</a><ul>
+<li class="chapter" data-level="3.13" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC1"><i class="fa fa-check"></i><b>3.13</b> The weighted-AFROC1 (wAFROC1) plot</a>
+<ul>
 <li class="chapter" data-level="3.13.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-wafroc1"><i class="fa fa-check"></i><b>3.13.1</b> Empirical wAFROC1 plot and AUC</a></li>
 <li class="chapter" data-level="3.13.2" data-path="empirical.html"><a href="empirical.html#empirical-wafroc1-plot-illustration"><i class="fa fa-check"></i><b>3.13.2</b> Illustration with a dataset</a></li>
 </ul></li>
 <li class="chapter" data-level="3.14" data-path="empirical.html"><a href="empirical.html#empirical-summary"><i class="fa fa-check"></i><b>3.14</b> Summary</a></li>
 <li class="chapter" data-level="3.15" data-path="empirical.html"><a href="empirical.html#empirical-theorem-1"><i class="fa fa-check"></i><b>3.15</b> Appendix 1: Proof of formula for wAFROC-AUC</a></li>
 <li class="chapter" data-level="3.16" data-path="empirical.html"><a href="empirical.html#empirical-theorem-2"><i class="fa fa-check"></i><b>3.16</b> Appendix 2: Interpretation of area under straight line extension of wAFROC</a></li>
-<li class="chapter" data-level="3.17" data-path="empirical.html"><a href="empirical.html#empirical-summary-computational-formulae"><i class="fa fa-check"></i><b>3.17</b> Appendix 3: Summary of computational formulae</a><ul>
+<li class="chapter" data-level="3.17" data-path="empirical.html"><a href="empirical.html#empirical-summary-computational-formulae"><i class="fa fa-check"></i><b>3.17</b> Appendix 3: Summary of computational formulae</a>
+<ul>
 <li class="chapter" data-level="3.17.1" data-path="empirical.html"><a href="empirical.html#froc"><i class="fa fa-check"></i><b>3.17.1</b> FROC</a></li>
 <li class="chapter" data-level="3.17.2" data-path="empirical.html"><a href="empirical.html#roc"><i class="fa fa-check"></i><b>3.17.2</b> ROC</a></li>
 <li class="chapter" data-level="3.17.3" data-path="empirical.html"><a href="empirical.html#afroc"><i class="fa fa-check"></i><b>3.17.3</b> AFROC</a></li>
@@ -251,24 +290,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="part"><span><b>The radiological search model (RSM)</b></span></li>
-<li class="chapter" data-level="4" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>4</b> Visual Search</a><ul>
+<li class="chapter" data-level="4" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>4</b> Visual Search</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-how-much-finished"><i class="fa fa-check"></i><b>4.1</b> How much finished</a></li>
 <li class="chapter" data-level="4.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-intro"><i class="fa fa-check"></i><b>4.2</b> Introduction</a></li>
 <li class="chapter" data-level="4.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-grouping-labeling-rois"><i class="fa fa-check"></i><b>4.3</b> Grouping and labeling ROIs</a></li>
 <li class="chapter" data-level="4.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>4.4</b> Lesion-localization vs. detection</a></li>
 <li class="chapter" data-level="4.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>4.5</b> Lesion-localization vs. lesion-classification</a></li>
-<li class="chapter" data-level="4.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>4.6</b> The Kundel - Nodine search model</a><ul>
+<li class="chapter" data-level="4.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>4.6</b> The Kundel - Nodine search model</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>4.6.1</b> Lesion-localization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Lesion-classification</a></li>
 <li class="chapter" data-level="4.6.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-example"><i class="fa fa-check"></i><b>4.6.3</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>5</b> The radiological search model (RSM)</a><ul>
+<li class="chapter" data-level="5" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>5</b> The radiological search model (RSM)</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="rsm.html"><a href="rsm.html#rsm-how-much-finished"><i class="fa fa-check"></i><b>5.1</b> How much finished</a></li>
 <li class="chapter" data-level="5.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
 <li class="chapter" data-level="5.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>5.3</b> The radiological search model</a></li>
 <li class="chapter" data-level="5.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>5.4</b> RSM assumptions</a></li>
-<li class="chapter" data-level="5.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>5.5</b> Physical meanings of the RSM parameters</a><ul>
+<li class="chapter" data-level="5.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>5.5</b> Physical meanings of the RSM parameters</a>
+<ul>
 <li class="chapter" data-level="5.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>5.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
 <li class="chapter" data-level="5.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-parameter"><i class="fa fa-check"></i><b>5.5.2</b> The <span class="math inline">\(\lambda\)</span> parameter</a></li>
 <li class="chapter" data-level="5.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>5.5.3</b> The <span class="math inline">\(\nu\)</span> parameter</a></li>
@@ -276,16 +319,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="rsm.html"><a href="rsm.html#rsm-intrinsic-parameters"><i class="fa fa-check"></i><b>5.6</b> Intrinsic RSM parameters</a></li>
 <li class="chapter" data-level="5.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>5.7</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="rsm-predictions.html"><a href="rsm-predictions.html"><i class="fa fa-check"></i><b>6</b> ROC predictions of the RSM</a><ul>
+<li class="chapter" data-level="6" data-path="rsm-predictions.html"><a href="rsm-predictions.html"><i class="fa fa-check"></i><b>6</b> ROC predictions of the RSM</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="6.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-intro"><i class="fa fa-check"></i><b>6.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="6.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-inferred-roc"><i class="fa fa-check"></i><b>6.3</b> Inferred ROC z-sample</a></li>
-<li class="chapter" data-level="6.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point"><i class="fa fa-check"></i><b>6.4</b> End-point of the ROC</a><ul>
+<li class="chapter" data-level="6.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point"><i class="fa fa-check"></i><b>6.4</b> End-point of the ROC</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-abscissa"><i class="fa fa-check"></i><b>6.4.1</b> The abscissa of the ROC end-point</a></li>
 <li class="chapter" data-level="6.4.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-ordinate"><i class="fa fa-check"></i><b>6.4.2</b> The ordinate of the ROC end-point</a></li>
 <li class="chapter" data-level="6.4.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point-variable-number-lesions"><i class="fa fa-check"></i><b>6.4.3</b> Variable number of lesions per case</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve"><i class="fa fa-check"></i><b>6.5</b> ROC curve</a><ul>
+<li class="chapter" data-level="6.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve"><i class="fa fa-check"></i><b>6.5</b> ROC curve</a>
+<ul>
 <li class="chapter" data-level="6.5.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-fpf"><i class="fa fa-check"></i><b>6.5.1</b> Derivation of FPF</a></li>
 <li class="chapter" data-level="6.5.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-tpf"><i class="fa fa-check"></i><b>6.5.2</b> Derivation of TPF</a></li>
 <li class="chapter" data-level="6.5.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-tpf-varying-lesions"><i class="fa fa-check"></i><b>6.5.3</b> Variable number of lesions per case</a></li>
@@ -302,21 +348,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix1"><i class="fa fa-check"></i><b>6.9</b> Appendix 1: Proof of continuity of slope at the end-point</a></li>
 <li class="chapter" data-level="6.10" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix2"><i class="fa fa-check"></i><b>6.10</b> Appendix 2: Numerical illustration of continuity</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html"><i class="fa fa-check"></i><b>7</b> Other RSM predictions</a><ul>
+<li class="chapter" data-level="7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html"><i class="fa fa-check"></i><b>7</b> Other RSM predictions</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="7.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-intro"><i class="fa fa-check"></i><b>7.2</b> TBA Introduction</a></li>
-<li class="chapter" data-level="7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-curve"><i class="fa fa-check"></i><b>7.3</b> RSM-predicted FROC curve</a><ul>
+<li class="chapter" data-level="7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-curve"><i class="fa fa-check"></i><b>7.3</b> RSM-predicted FROC curve</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.3.1</b> FROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-afroc-curve"><i class="fa fa-check"></i><b>7.4</b> RSM-predicted AFROC curve</a><ul>
+<li class="chapter" data-level="7.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-afroc-curve"><i class="fa fa-check"></i><b>7.4</b> RSM-predicted AFROC curve</a>
+<ul>
 <li class="chapter" data-level="7.4.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#afroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.4.1</b> AFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 <li class="chapter" data-level="7.4.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-no-marks"><i class="fa fa-check"></i><b>7.4.2</b> Case of the reader who does not make any marks</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-curve"><i class="fa fa-check"></i><b>7.5</b> RSM-predicted wAFROC curve</a><ul>
+<li class="chapter" data-level="7.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-curve"><i class="fa fa-check"></i><b>7.5</b> RSM-predicted wAFROC curve</a>
+<ul>
 <li class="chapter" data-level="7.5.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#wafroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.5.1</b> wAFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-comments"><i class="fa fa-check"></i><b>7.6</b> Comments on end-point-discontinuity property</a></li>
-<li class="chapter" data-level="7.7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-appendix"><i class="fa fa-check"></i><b>7.7</b> Appendix</a><ul>
+<li class="chapter" data-level="7.7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-appendix"><i class="fa fa-check"></i><b>7.7</b> Appendix</a>
+<ul>
 <li class="chapter" data-level="7.7.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-physical-parameters"><i class="fa fa-check"></i><b>7.7.1</b> Slope of the FROC curve</a></li>
 <li class="chapter" data-level="7.7.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda-nu-parameterization"><i class="fa fa-check"></i><b>7.7.2</b> FROC plots <span class="math inline">\(\lambda, \nu\)</span> parameterization</a></li>
 <li class="chapter" data-level="7.7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-afroc-physical-parameters"><i class="fa fa-check"></i><b>7.7.3</b> Slope of the AFROC curve</a></li>
@@ -325,14 +376,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-above-afroc"><i class="fa fa-check"></i><b>7.7.6</b> Are wAFROC curves above AFROC curves?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html"><i class="fa fa-check"></i><b>8</b> Lesion localization and classification performances</a><ul>
+<li class="chapter" data-level="8" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html"><i class="fa fa-check"></i><b>8</b> Lesion localization and classification performances</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> How much finished</a></li>
 <li class="chapter" data-level="8.2" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-intro"><i class="fa fa-check"></i><b>8.2</b> Introduction</a></li>
 <li class="chapter" data-level="8.3" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-quantifying"><i class="fa fa-check"></i><b>8.3</b> Quantifying lesion-localization performance</a></li>
 <li class="chapter" data-level="8.4" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-performance"><i class="fa fa-check"></i><b>8.4</b> Quantifying lesion-classification performance</a></li>
 <li class="chapter" data-level="8.5" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-discussion"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>9</b> RSM fitting</a><ul>
+<li class="chapter" data-level="9" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>9</b> RSM fitting</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> How much finished</a></li>
 <li class="chapter" data-level="9.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-intro"><i class="fa fa-check"></i><b>9.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="9.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-roc-likelihood"><i class="fa fa-check"></i><b>9.3</b> ROC Likelihood function</a></li>
@@ -340,24 +393,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example"><i class="fa fa-check"></i><b>9.5</b> <code>FitRsmROC</code> usage example</a></li>
 <li class="chapter" data-level="9.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>9.6</b> Discussion / Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>10</b> Three proper ROC fits</a><ul>
+<li class="chapter" data-level="10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>10</b> Three proper ROC fits</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="10.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-intro"><i class="fa fa-check"></i><b>10.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="10.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-applications"><i class="fa fa-check"></i><b>10.3</b> Application to datasets</a></li>
 <li class="chapter" data-level="10.4" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-composite-plots"><i class="fa fa-check"></i><b>10.4</b> Composite plots</a></li>
-<li class="chapter" data-level="10.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>10.5</b> RSM parameters</a><ul>
+<li class="chapter" data-level="10.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>10.5</b> RSM parameters</a>
+<ul>
 <li class="chapter" data-level="10.5.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-parameters-van-dyke-dataset-i-1-j-2"><i class="fa fa-check"></i><b>10.5.1</b> RSM parameters Van Dyke dataset i = 1, j= 2</a></li>
 <li class="chapter" data-level="10.5.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-parameters-franken-dataset-i-2-j-3"><i class="fa fa-check"></i><b>10.5.2</b> RSM parameters Franken dataset i = 2, j= 3</a></li>
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-cbm-parameters"><i class="fa fa-check"></i><b>10.6</b> CBM parameters</a></li>
 <li class="chapter" data-level="10.7" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-proproc-parameters"><i class="fa fa-check"></i><b>10.7</b> PROPROC parameters</a></li>
-<li class="chapter" data-level="10.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>10.8</b> Overview of findings</a><ul>
+<li class="chapter" data-level="10.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>10.8</b> Overview of findings</a>
+<ul>
 <li class="chapter" data-level="10.8.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes"><i class="fa fa-check"></i><b>10.8.1</b> Slopes</a></li>
 <li class="chapter" data-level="10.8.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-confidence-intervals"><i class="fa fa-check"></i><b>10.8.2</b> Confidence intervals</a></li>
 <li class="chapter" data-level="10.8.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes-confidence-intervals-summary"><i class="fa fa-check"></i><b>10.8.3</b> Summary of slopes and confidence intervals</a></li>
 </ul></li>
 <li class="chapter" data-level="10.9" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-discussion-summary"><i class="fa fa-check"></i><b>10.9</b> Reason for equal AUCs / Summary</a></li>
-<li class="chapter" data-level="10.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>10.10</b> Appendices</a><ul>
+<li class="chapter" data-level="10.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>10.10</b> Appendices</a>
+<ul>
 <li class="chapter" data-level="10.10.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-one-dataset-proproc"><i class="fa fa-check"></i><b>10.10.1</b> Location of PROPROC files</a></li>
 <li class="chapter" data-level="10.10.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results"><i class="fa fa-check"></i><b>10.10.2</b> Location of pre-analyzed results</a></li>
 <li class="chapter" data-level="10.10.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-representative-plots-van-dyke"><i class="fa fa-check"></i><b>10.10.3</b> Plots for the Van Dyke dataset</a></li>
@@ -365,11 +422,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="part"><span><b>CAD applications</b></span></li>
-<li class="chapter" data-level="11" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>11</b> Standalone CAD</a><ul>
+<li class="chapter" data-level="11" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>11</b> Standalone CAD</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> How much finished</a></li>
 <li class="chapter" data-level="11.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>11.2</b> Introduction</a></li>
 <li class="chapter" data-level="11.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-overview"><i class="fa fa-check"></i><b>11.3</b> Overview</a></li>
-<li class="chapter" data-level="11.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>11.4</b> Methods</a><ul>
+<li class="chapter" data-level="11.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>11.4</b> Methods</a>
+<ul>
 <li class="chapter" data-level="11.4.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>11.4.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
 <li class="chapter" data-level="11.4.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>11.4.2</b> The 1T-RRFC analysis model</a></li>
 <li class="chapter" data-level="11.4.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>11.4.3</b> The 2T-RRRC analysis model</a></li>
@@ -378,18 +437,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>11.5</b> Implementation</a></li>
 <li class="chapter" data-level="11.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>11.6</b> Results</a></li>
 <li class="chapter" data-level="11.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>11.7</b> Discussion</a></li>
-<li class="chapter" data-level="11.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>11.8</b> Appendix 1</a><ul>
+<li class="chapter" data-level="11.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>11.8</b> Appendix 1</a>
+<ul>
 <li class="chapter" data-level="11.8.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1"><i class="fa fa-check"></i><b>11.8.1</b> Example 1</a></li>
 <li class="chapter" data-level="11.8.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2"><i class="fa fa-check"></i><b>11.8.2</b> Example 2</a></li>
 <li class="chapter" data-level="11.8.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>11.8.3</b> Example 3</a></li>
 </ul></li>
 <li class="chapter" data-level="11.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix2"><i class="fa fa-check"></i><b>11.9</b> Appendix 2</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>12</b> CAD optimal operating point</a><ul>
+<li class="chapter" data-level="12" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>12</b> CAD optimal operating point</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>12.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="12.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>12.2</b> Introduction</a></li>
 <li class="chapter" data-level="12.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>12.3</b> Methods</a></li>
-<li class="chapter" data-level="12.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>12.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a><ul>
+<li class="chapter" data-level="12.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>12.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="optim-op-point.html"><a href="optim-op-point.html#summary-table"><i class="fa fa-check"></i><b>12.4.1</b> Summary table</a></li>
 <li class="chapter" data-level="12.4.2" data-path="optim-op-point.html"><a href="optim-op-point.html#froc-1"><i class="fa fa-check"></i><b>12.4.2</b> FROC</a></li>
 <li class="chapter" data-level="12.4.3" data-path="optim-op-point.html"><a href="optim-op-point.html#wafroc-1"><i class="fa fa-check"></i><b>12.4.3</b> wAFROC</a></li>
@@ -399,25 +461,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-mu"><i class="fa fa-check"></i><b>12.5</b> Varying <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> optimizations</a></li>
 <li class="chapter" data-level="12.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations"><i class="fa fa-check"></i><b>12.6</b> Limiting situations</a></li>
 <li class="chapter" data-level="12.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-trends"><i class="fa fa-check"></i><b>12.7</b> Trends</a></li>
-<li class="chapter" data-level="12.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>12.8</b> Applying the method</a><ul>
+<li class="chapter" data-level="12.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>12.8</b> Applying the method</a>
+<ul>
 <li class="chapter" data-level="12.8.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>12.8.1</b> A CAD application</a></li>
 </ul></li>
 <li class="chapter" data-level="12.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>12.9</b> TBA Discussion</a></li>
-<li class="chapter" data-level="12.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a><ul>
+<li class="chapter" data-level="12.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a>
+<ul>
 <li class="chapter" data-level="12.10.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>12.10.1</b> Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
 <li class="chapter" data-level="12.10.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>12.10.2</b> Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
 <li class="chapter" data-level="12.10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>12.10.3</b> Limiting cases</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> Analyzing a dataset with only diseased cases</a><ul>
+<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> Analyzing a dataset with only diseased cases</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished"><i class="fa fa-check"></i><b>13.1</b> TBA How much finished</a></li>
-<li class="chapter" data-level="13.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>13.2</b> The problem</a><ul>
+<li class="chapter" data-level="13.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>13.2</b> The problem</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-step-1"><i class="fa fa-check"></i><b>13.2.1</b> Step 1: Create a test (diseased cases only) dataset</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>DATASETS</b></span></li>
-<li class="chapter" data-level="14" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>14</b> Datasets</a><ul>
-<li class="chapter" data-level="14.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetsdd"><i class="fa fa-check"></i><b>14.1</b> Datasets embedded in <code>RJafroc</code></a><ul>
+<li class="chapter" data-level="14" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>14</b> Datasets</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetsdd"><i class="fa fa-check"></i><b>14.1</b> Datasets embedded in <code>RJafroc</code></a>
+<ul>
 <li class="chapter" data-level="14.1.1" data-path="datasets.html"><a href="datasets.html#datasets-dataset01"><i class="fa fa-check"></i><b>14.1.1</b> Dataset01</a></li>
 <li class="chapter" data-level="14.1.2" data-path="datasets.html"><a href="datasets.html#datasets-dataset02"><i class="fa fa-check"></i><b>14.1.2</b> Dataset02</a></li>
 <li class="chapter" data-level="14.1.3" data-path="datasets.html"><a href="datasets.html#datasets-dataset03"><i class="fa fa-check"></i><b>14.1.3</b> Dataset03</a></li>
@@ -433,7 +501,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1.13" data-path="datasets.html"><a href="datasets.html#datasets-dataset13"><i class="fa fa-check"></i><b>14.1.13</b> Dataset13</a></li>
 <li class="chapter" data-level="14.1.14" data-path="datasets.html"><a href="datasets.html#datasets-dataset14"><i class="fa fa-check"></i><b>14.1.14</b> Dataset14</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="datasets.html"><a href="datasets.html#other-datasets"><i class="fa fa-check"></i><b>14.2</b> Other datasets</a><ul>
+<li class="chapter" data-level="14.2" data-path="datasets.html"><a href="datasets.html#other-datasets"><i class="fa fa-check"></i><b>14.2</b> Other datasets</a>
+<ul>
 <li class="chapter" data-level="14.2.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetCadLroc"><i class="fa fa-check"></i><b>14.2.1</b> DatasetCadLroc</a></li>
 <li class="chapter" data-level="14.2.2" data-path="datasets.html"><a href="datasets.html#datasets-datasetCadSimuFroc"><i class="fa fa-check"></i><b>14.2.2</b> datasetCadSimuFroc</a></li>
 </ul></li>
@@ -459,22 +528,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="optim-op-point" class="section level1 hasAnchor">
+<div id="optim-op-point" class="section level1 hasAnchor" number="12">
 <h1><span class="header-section-number">Chapter 12</span> CAD optimal operating point<a href="optim-op-point.html#optim-op-point" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="optim-op-point-how-much-finished" class="section level2 hasAnchor">
+<div id="optim-op-point-how-much-finished" class="section level2 hasAnchor" number="12.1">
 <h2><span class="header-section-number">12.1</span> TBA How much finished<a href="optim-op-point.html#optim-op-point-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>98%</p>
 <p>Handling diseased-only datasets
 Discussion needs more work</p>
 </div>
-<div id="optim-op-point-intro" class="section level2 hasAnchor">
+<div id="optim-op-point-intro" class="section level2 hasAnchor" number="12.2">
 <h2><span class="header-section-number">12.2</span> Introduction<a href="optim-op-point.html#optim-op-point-intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A familiar problem for the computer aided detection or artificial intelligence (CAD/AI) algorithm designer is how to set the reporting threshold of the algorithm. Assuming designer level mark-rating FROC data is available for the algorithm a decision needs to be made as to the optimal reporting threshold, i.e., the minimum rating of a mark before it is shown to the radiologist (or the next stage of the AI algorithm – in what follows references to CAD apply equally to AI algorithms).</p>
-<p>The problem has been solved in the context of ROC analysis <span class="citation">(Metz <a href="#ref-metz1978rocmethodology" role="doc-biblioref">1978</a>)</span>, namely, the optimal operating point on the ROC corresponds to where its slope equals a specific value determined by disease prevalence and the cost of decisions in the four basic binary paradigm categories: true and false positives and true and false negatives. In practice the costs are difficult to quantify. However, for equal numbers of diseased and non-diseased cases and equal costs it can be shown that the slope of the ROC curve at the optimal operating point is unity. For a proper ROC curve this corresponds to the point that maximizes the Youden-index <span class="citation">(Youden <a href="#ref-youden1950index" role="doc-biblioref">1950</a>)</span>. Typically this index is maximized at the point that is closest to the (0,1) corner of the ROC.</p>
+<p>The problem has been solved in the context of ROC analysis <span class="citation">(<a href="#ref-metz1978rocmethodology" role="doc-biblioref">C. E. Metz 1978</a>)</span>, namely, the optimal operating point on the ROC corresponds to where its slope equals a specific value determined by disease prevalence and the cost of decisions in the four basic binary paradigm categories: true and false positives and true and false negatives. In practice the costs are difficult to quantify. However, for equal numbers of diseased and non-diseased cases and equal costs it can be shown that the slope of the ROC curve at the optimal operating point is unity. For a proper ROC curve this corresponds to the point that maximizes the Youden-index <span class="citation">(<a href="#ref-youden1950index" role="doc-biblioref">Youden 1950</a>)</span>. Typically this index is maximized at the point that is closest to the (0,1) corner of the ROC.</p>
 <p>Lacking a procedure for determining it analytically currently CAD designers (in consultation with radiologists) set imaging site-specific reporting thresholds. For example, if radiologists at an imaging site are comfortable with more false marks as the price of potentially greater lesion-level sensitivity, the reporting threshold for them is adjusted downward.</p>
 <p>This chapter describes an analytic method for finding the optimal reporting threshold based on maximizing AUC (area under curve) of the wAFROC curve. For comparison the Youden-index based method was also used.</p>
 </div>
-<div id="optim-op-point-methods" class="section level2 hasAnchor">
+<div id="optim-op-point-methods" class="section level2 hasAnchor" number="12.3">
 <h2><span class="header-section-number">12.3</span> Methods<a href="optim-op-point.html#optim-op-point-methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Terminology</strong></p>
 <blockquote>
@@ -495,13 +564,13 @@ Discussion needs more work</p>
 <p>For organizational reasons only the summary results for varying <span class="math inline">\(\mu\)</span> or <span class="math inline">\(\nu\)</span> are shown in the body of this chapter. Detailed results are in Appendix <a href="optim-op-point.html#cad-optim-op-appendices">12.10</a> which also has results for limiting cases of high and low ROC performance.</p>
 <p>The <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> figure of merit is implemented in the <code>RJafroc</code> function <code>UtilAnalyticalAucsRSM</code>. The Youden-index is defined as sensitivity plus specificity minus 1. Sensitivity is implemented in function <code>RSM_TPF</code> and specificity is the complement of <code>RSM_FPF</code>.</p>
 </div>
-<div id="optim-op-point-vary-lambda" class="section level2 hasAnchor">
+<div id="optim-op-point-vary-lambda" class="section level2 hasAnchor" number="12.4">
 <h2><span class="header-section-number">12.4</span> Varying <span class="math inline">\(\lambda\)</span> optimizations<a href="optim-op-point.html#optim-op-point-vary-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="optim-op-point.html#cb129-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>)</span>
-<span id="cb129-2"><a href="optim-op-point.html#cb129-2"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
-<span id="cb129-3"><a href="optim-op-point.html#cb129-3"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
-<span id="cb129-4"><a href="optim-op-point.html#cb129-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb129-5"><a href="optim-op-point.html#cb129-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="optim-op-point.html#cb129-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>)</span>
+<span id="cb129-2"><a href="optim-op-point.html#cb129-2" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb129-3"><a href="optim-op-point.html#cb129-3" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.9</span>)</span>
+<span id="cb129-4"><a href="optim-op-point.html#cb129-4" aria-hidden="true" tabindex="-1"></a>lesDistr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb129-5"><a href="optim-op-point.html#cb129-5" aria-hidden="true" tabindex="-1"></a>relWeights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <p>For <span class="math inline">\(\mu = 2\)</span> and <span class="math inline">\(\nu = 0.9\)</span> <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> and Youden-index optimizations were performed for <span class="math inline">\(\lambda = 1, 2, 5, 10\)</span>. Half of the diseased cases contained one lesion and the rest contained two lesions. On cases with two lesions the lesions were assigned equal weights (i.e., equal clinical importance).</p>
 <p>The following quantities were calculated:</p>
 <ul>
@@ -510,7 +579,7 @@ Discussion needs more work</p>
 <li><p><span class="math inline">\(\text{ROC}_\text{AUC}\)</span>; the ROC figure of merit;</p></li>
 <li><p><span class="math inline">\(\text{NLF}\)</span> and <span class="math inline">\(\text{LLF}\)</span>: the coordinates of the operating point on the FROC curve corresponding to <span class="math inline">\(\zeta_1\)</span>.</p></li>
 </ul>
-<div id="summary-table" class="section level3 hasAnchor">
+<div id="summary-table" class="section level3 hasAnchor" number="12.4.1">
 <h3><span class="header-section-number">12.4.1</span> Summary table<a href="optim-op-point.html#summary-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-lambda">12.1</a>: The FOM column lists the quantity being maximized, the <span class="math inline">\(\lambda\)</span> column lists the values of <span class="math inline">\(\lambda\)</span>, the <span class="math inline">\(\zeta_1\)</span> column lists the optimal values that maximize the chosen figure of merit. The <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> column lists the AUCs under the wAFROC curves, the <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> column lists the AUCs under the ROC curves, and the <span class="math inline">\(\left( \text{NLF}, \text{LLF}\right)\)</span> column lists the operating point on the FROC curves.</p>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
@@ -703,7 +772,7 @@ Youden-index
 <li><p>For either FOM as <span class="math inline">\(\lambda\)</span> increases <span class="math inline">\(\zeta_1\)</span> increases (i.e., stricter reporting threshold). <strong>When CAD performance decreases the algorithms adopt stricter reporting criteria.</strong> This should make sense to the CAD algorithm designer: with decreasing performance one has to be more careful about showing CAD generated marks to the radiologist.</p></li>
 </ol>
 </div>
-<div id="froc-1" class="section level3 hasAnchor">
+<div id="froc-1" class="section level3 hasAnchor" number="12.4.2">
 <h3><span class="header-section-number">12.4.2</span> FROC<a href="optim-op-point.html#froc-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-lambda-froc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-vary-lambda-froc-1.png" alt="FROC plots with superimposed operating points for varying $\lambda$. The red dot corresponds to $\text{wAFROC}_\text{AUC}$ optimization and the black dot to Youden-index optimization." width="672" />
@@ -712,7 +781,7 @@ FIGURE 12.1: FROC plots with superimposed operating points for varying <span cla
 </p>
 </div>
 </div>
-<div id="wafroc-1" class="section level3 hasAnchor">
+<div id="wafroc-1" class="section level3 hasAnchor" number="12.4.3">
 <h3><span class="header-section-number">12.4.3</span> wAFROC<a href="optim-op-point.html#wafroc-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Each wAFROC plot consists of a continuous curve followed by a dashed line. The “red” curve, corresponding to <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization, appears as a “solid-green solid-red dashed-red” curve (the curve is in fact a true red curve complicated by superposition of the green curve over part of its traverse). The “solid-green dashed-green” curve corresponds to Youden-index optimization. As before the black dot denotes the Youden-index based operating point and the red dot denotes the <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> based operating point.</p>
 <p>The transition from continuous to dashed is determined by the value of <span class="math inline">\(\zeta_1\)</span>. It occurs at a higher value of <span class="math inline">\(\zeta_1\)</span> (lower transition point) for the Youden-index optimization. In other words the stricter Youden-index based threshold sacrifices some of the area under the wAFROC resulting in lower performance, particularly for the lower values of <span class="math inline">\(\lambda\)</span>. At the highest value of <span class="math inline">\(\lambda\)</span> the values of optimal <span class="math inline">\(\zeta_1\)</span> are similar and both methods make similar predictions.</p>
@@ -723,7 +792,7 @@ FIGURE 12.2: wAFROC plots for the two optimization methods: the “solid-green s
 </p>
 </div>
 </div>
-<div id="roc-1" class="section level3 hasAnchor">
+<div id="roc-1" class="section level3 hasAnchor" number="12.4.4">
 <h3><span class="header-section-number">12.4.4</span> ROC<a href="optim-op-point.html#roc-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The decrease in <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> with increasing <span class="math inline">\(\lambda\)</span> is illustrated in Fig. <a href="optim-op-point.html#fig:optim-op-point-vary-lambda-roc">12.3</a> which shows RSM-predicted ROC plots for the two optimization methods for the 4 values of <span class="math inline">\(\lambda\)</span>. Again, each plot consists of a continuous curve followed by a dashed curve and a similar color-coding convention is used as in Fig. <a href="optim-op-point.html#fig:optim-op-point-vary-lambda-wafroc">12.2</a>. The ROC plots show similar dependencies as the wAFROC plots: the stricter Youden-index based reporting thresholds sacrifice some of the area under the ROC resulting in lower performance, particularly for the lower values of <span class="math inline">\(\lambda\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-lambda-roc"></span>
@@ -733,7 +802,7 @@ FIGURE 12.3: ROC plots for the two optimization methods: the “solid-green soli
 </p>
 </div>
 </div>
-<div id="why-not-maximize-roc-auc" class="section level3 hasAnchor">
+<div id="why-not-maximize-roc-auc" class="section level3 hasAnchor" number="12.4.5">
 <h3><span class="header-section-number">12.4.5</span> Why not maximize ROC-AUC?<a href="optim-op-point.html#why-not-maximize-roc-auc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Since the ROC curves show similarities to the wAFROC curves, why not maximize <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> instead of <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span>? It can be shown that as long as one restricts to proper ROC models this always results in <span class="math inline">\(\zeta_1 = -\infty\)</span>, i.e., all latent marks are to be shown to the radiologist, an obviously incorrect strategy. This result can be understood from the following geometrical argument.</p>
 <p>For a proper ROC curve the slope decreases monotonically as the operating point moves up the curve and at each point the slope is greater than that of the straight curve connecting the point to (1,1). This geometry ensures that AUC under any curve with a finite <span class="math inline">\(\zeta_1\)</span> is smaller than that under the full curve. Therefore maximum AUC can only be attained by choosing <span class="math inline">\(\zeta_1 = -\infty\)</span>, see Fig. <a href="optim-op-point.html#fig:binormal-model-threshold-dependence-2">12.4</a>.</p>
@@ -745,18 +814,18 @@ FIGURE 12.4: In the region above the dot the proper curve is above the dotted li
 </div>
 </div>
 </div>
-<div id="optim-op-point-vary-nu-mu" class="section level2 hasAnchor">
+<div id="optim-op-point-vary-nu-mu" class="section level2 hasAnchor" number="12.5">
 <h2><span class="header-section-number">12.5</span> Varying <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> optimizations<a href="optim-op-point.html#optim-op-point-vary-nu-mu" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Details of varying <span class="math inline">\(\nu\)</span> (with <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\lambda\)</span> held constant) are in Appendix <a href="optim-op-point.html#optim-op-point-vary-nu">12.10.1</a>. The results, summarized in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-nu">12.3</a>, are similar to those just described for varying <span class="math inline">\(\lambda\)</span> but, since unlike as was the case with increasing <span class="math inline">\(\lambda\)</span>, increasing <span class="math inline">\(\nu\)</span> results in increasing performance, the <em>directions of the effects are reversed</em>. For <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization the optimal reporting threshold <span class="math inline">\(\zeta_1\)</span> decreases with increasing <span class="math inline">\(\nu\)</span>. In contrast the Youden-index based optimal threshold is almost independent of <span class="math inline">\(\nu\)</span>. For <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization the FROC operating point moves to higher NLF values while the Youden-index based operating point stays at a near constant NLF value, see Fig. <a href="optim-op-point.html#fig:optim-op-point-vary-nu-froc">12.8</a>). As before, <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimizations yield higher performances than Youden-index optimizations (particularly for larger <span class="math inline">\(\nu\)</span>): see Fig. <a href="optim-op-point.html#fig:optim-op-point-vary-nu-wafroc">12.9</a> for the wAFROC and Fig. <a href="optim-op-point.html#fig:optim-op-point-vary-nu-roc">12.10</a> for the ROC. The difference between the two optimization methods <em>increases</em> with increasing <span class="math inline">\(\nu\)</span> (for comparison the difference between the methods decreases with increasing <span class="math inline">\(\lambda\)</span> – this is what I meant by “reversed effects”).</p>
 <p>Details of varying <span class="math inline">\(\mu\)</span> (with <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> held constant) are in Appendix <a href="optim-op-point.html#optim-op-point-vary-mu">12.10.2</a>. The results are summarized in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-mu">12.4</a>. Increasing <span class="math inline">\(\mu\)</span> is accompanied by increasing <span class="math inline">\(\zeta_1\)</span> (i.e., stricter reporting threshold) and increasing <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> and <span class="math inline">\(\text{ROC}_\text{AUC}\)</span>. Performance measured either way is higher for <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimizations but the difference tends to shrink at the larger values of <span class="math inline">\(\mu\)</span>. LLF is relatively constant for <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimizations while it increases slowly with <span class="math inline">\(\mu\)</span> for Youden-index optimizations. NLF decreases with increasing <span class="math inline">\(\mu\)</span> for both optimization methods, i.e, the FROC operating point shifts leftward, see Fig. <a href="optim-op-point.html#fig:optim-op-point-vary-mu-froc">12.11</a>). Again, <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization yields a lower reporting threshold and higher performance than Youden-index optimization, see Fig. <a href="optim-op-point.html#fig:optim-op-point-vary-mu-wafroc">12.12</a> for the wAFROC and Fig. <a href="optim-op-point.html#fig:optim-op-point-vary-mu-roc">12.13</a> for the ROC. The difference between the two optimization methods decreases with increasing <span class="math inline">\(\mu\)</span>.</p>
 </div>
-<div id="optim-op-point-vary-nu-limiting-situations" class="section level2 hasAnchor">
+<div id="optim-op-point-vary-nu-limiting-situations" class="section level2 hasAnchor" number="12.6">
 <h2><span class="header-section-number">12.6</span> Limiting situations<a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Limiting situations covering high and low performances are described in <a href="optim-op-point.html#optim-op-point-limiting-situations">12.10.3</a>.</p>
 <p>For high performance, defined as <span class="math inline">\(\text{ROC}_\text{AUC} &gt; 0.9\)</span>, both methods place the optimal operating point near the inflection point on the upper-left corner of the wAFROC or ROC. The <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> based method chooses a lower threshold than the Youden-index method resulting in a higher operating point on the FROC and higher <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> and <span class="math inline">\(\text{ROC}_\text{AUC}\)</span>. The difference between the two methods decreases as <span class="math inline">\(\text{ROC}_\text{AUC} \rightarrow 1\)</span>.</p>
 <p>For low performance, defined as <span class="math inline">\(0.5 &lt; \text{ROC}_\text{AUC} &lt; 0.6\)</span>, the Youden-index method selected a lower threshold compared to <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization, resulting in a higher operating point on the FROC, greater <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> but sharply lower <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span>. The difference between the two methods increases as <span class="math inline">\(\text{ROC}_\text{AUC} \rightarrow 0.5\)</span>. In this limit the <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> method severely limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.</p>
 </div>
-<div id="optim-op-point-trends" class="section level2 hasAnchor">
+<div id="optim-op-point-trends" class="section level2 hasAnchor" number="12.7">
 <h2><span class="header-section-number">12.7</span> Trends<a href="optim-op-point.html#optim-op-point-trends" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>No matter how the RSM parameters are varied the trend is that <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimizations result in lower optimal thresholds <span class="math inline">\(\zeta_1\)</span> (i.e.,laxer reporting criteria that result in more displayed marks) than Youden-index optimizations. Accordingly the <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimizations yield FROC operating points at higher NLF values (i.e., red dots to the right of the black dots in FROC plots), greater <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span>s (red curves above the green curves in wAFROC plots) and greater <span class="math inline">\(\text{ROC}_\text{AUC}\)</span>s (red curves above the green curves in ROC plots). These trends are true no matter how the RSM parameters are varied provided CAD performance is not too low.</p>
 <p>If CAD performance is very low there are instructive exceptions where <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimizations yield <em>greater</em> <span class="math inline">\(\zeta_1\)</span> (i.e., stricter reporting criteria that result in <em>fewer</em> displayed marks) than Youden-index optimizations. This finding is true no matter how the RSM parameters are varied.</p>
@@ -764,24 +833,24 @@ FIGURE 12.4: In the region above the dot the proper curve is above the dotted li
 <p>While Youden-index optimizations yield smaller <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> values they do yield larger <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> values as is evident by comparing the ROC plots, Fig. <a href="optim-op-point.html#fig:optim-op-point-low-performance-vary-nu-roc">12.31</a>. For <span class="math inline">\(\nu=0.1\)</span> the <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> corresponding to <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization is 0.5000024 while that corresponding to Youden-index optimization is 0.5143474. Clearly <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization yields a very close to chance-level <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> while Youden-index optimization yields a slightly larger <span class="math inline">\(\text{ROC}_\text{AUC}\)</span>.</p>
 <p>Keep in mind that <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> measures classification accuracy performance between non-diseased and diseased cases: it does not care about lesion localization accuracy. In contrast <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> measures both lesion localization accuracy and lesion classification accuracy. By choosing an optimal operating point close to the origin the low performance CAD does not get credit for missing almost all the lesions on diseased cases but it does get credit for not marking non-diseased cases.</p>
 </div>
-<div id="optim-op-point-how-to-use-method" class="section level2 hasAnchor">
+<div id="optim-op-point-how-to-use-method" class="section level2 hasAnchor" number="12.8">
 <h2><span class="header-section-number">12.8</span> Applying the method<a href="optim-op-point.html#optim-op-point-how-to-use-method" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Assume that one has designed an algorithmic observer that has been optimized with respect to all other parameters except the reporting threshold. At this point the algorithm reports every suspicious region no matter how low the malignancy index. The mark-rating pairs are entered into a <code>RJafroc</code> format Excel input file, as describe <a href="https://dpc10ster.github.io/RJafrocQuickStart/quick-start-froc-data-format.html">here</a>. The next step is to read the data file – <code>DfReadDataFile()</code> – convert it to an ROC dataset – <code>DfFroc2Roc()</code> – and then perform a radiological search model (RSM) fit to the dataset using function <code>FitRsmRoc()</code>. This yields the necessary <span class="math inline">\(\lambda, \mu, \nu\)</span> parameters. These values are used to perform the computations described in this chapter to determine the optimal reporting threshold. The RSM parameter values and the reporting threshold determine the optimal reporting point on the FROC curve. The designer sets the algorithm to only report marks with confidence levels exceeding this threshold. These steps are illustrated in the following example.</p>
-<div id="optim-op-point-application" class="section level3 hasAnchor">
+<div id="optim-op-point-application" class="section level3 hasAnchor" number="12.8.1">
 <h3><span class="header-section-number">12.8.1</span> A CAD application<a href="optim-op-point.html#optim-op-point-application" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Not having access to any CAD FROC datasets the standalone CAD LROC dataset described in <span class="citation">(Hupse et al. <a href="#ref-hupse2013standalone" role="doc-biblioref">2013</a>)</span> was used to create a simulated FROC (i.e., <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> equivalent) dataset which is embedded in <code>RJafroc</code> as object <code>datasetCadSimuFroc</code>. In the following code the first reader for this dataset, corresponding to CAD, is extracted using <code>DfExtractDataset</code> (the other reader data, corresponding to radiologists, are ignored). The function <code>DfFroc2Roc</code> converts <code>dsCad</code> to an ROC dataset. The function <code>DfBinDataset</code> bins the data to about 7 bins. Each diseased case contains one lesion: <code>lesDistr = c(1)</code>. <code>FitRsmRoc</code> fits the binned ROC dataset to the radiological search model (RSM). Object <code>fit</code> contains the RSM parameters required to perform the optimizations described in previous sections.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="optim-op-point.html#cb130-1"></a>ds &lt;-<span class="st"> </span>RJafroc<span class="op">::</span>datasetCadSimuFroc</span>
-<span id="cb130-2"><a href="optim-op-point.html#cb130-2"></a>dsCad &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">DfExtractDataset</span>(ds, <span class="dt">rdrs =</span> <span class="dv">1</span>)</span>
-<span id="cb130-3"><a href="optim-op-point.html#cb130-3"></a>dsCadRoc &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">DfFroc2Roc</span>(dsCad)</span>
-<span id="cb130-4"><a href="optim-op-point.html#cb130-4"></a>dsCadRocBinned &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">DfBinDataset</span>(dsCadRoc, <span class="dt">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
-<span id="cb130-5"><a href="optim-op-point.html#cb130-5"></a>lesDistrCad &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>) <span class="co"># LROC dataset has one lesion per diseased case</span></span>
-<span id="cb130-6"><a href="optim-op-point.html#cb130-6"></a>relWeightsCad &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb130-7"><a href="optim-op-point.html#cb130-7"></a>fit &lt;-<span class="st"> </span>RJafroc<span class="op">::</span><span class="kw">FitRsmRoc</span>(dsCadRocBinned, lesDistrCad)</span>
-<span id="cb130-8"><a href="optim-op-point.html#cb130-8"></a><span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&quot;fitted values: mu = %5.3f,&quot;</span>, fit<span class="op">$</span>mu), </span>
-<span id="cb130-9"><a href="optim-op-point.html#cb130-9"></a>    <span class="kw">sprintf</span>(<span class="st">&quot;lambda = %5.3f,&quot;</span>, fit<span class="op">$</span>lambda), </span>
-<span id="cb130-10"><a href="optim-op-point.html#cb130-10"></a>    <span class="kw">sprintf</span>(<span class="st">&quot;nu = %5.3f.&quot;</span>, fit<span class="op">$</span>nu)) </span>
-<span id="cb130-11"><a href="optim-op-point.html#cb130-11"></a><span class="co">#&gt; fitted values: mu = 2.756, lambda = 6.778, nu = 0.803.</span></span></code></pre></div>
-<div id="summary-table-1" class="section level4 hasAnchor">
+<p>Not having access to any CAD FROC datasets the standalone CAD LROC dataset described in <span class="citation">(<a href="#ref-hupse2013standalone" role="doc-biblioref">Hupse et al. 2013</a>)</span> was used to create a simulated FROC (i.e., <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> equivalent) dataset which is embedded in <code>RJafroc</code> as object <code>datasetCadSimuFroc</code>. In the following code the first reader for this dataset, corresponding to CAD, is extracted using <code>DfExtractDataset</code> (the other reader data, corresponding to radiologists, are ignored). The function <code>DfFroc2Roc</code> converts <code>dsCad</code> to an ROC dataset. The function <code>DfBinDataset</code> bins the data to about 7 bins. Each diseased case contains one lesion: <code>lesDistr = c(1)</code>. <code>FitRsmRoc</code> fits the binned ROC dataset to the radiological search model (RSM). Object <code>fit</code> contains the RSM parameters required to perform the optimizations described in previous sections.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="optim-op-point.html#cb130-1" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> RJafroc<span class="sc">::</span>datasetCadSimuFroc</span>
+<span id="cb130-2"><a href="optim-op-point.html#cb130-2" aria-hidden="true" tabindex="-1"></a>dsCad <span class="ot">&lt;-</span> RJafroc<span class="sc">::</span><span class="fu">DfExtractDataset</span>(ds, <span class="at">rdrs =</span> <span class="dv">1</span>)</span>
+<span id="cb130-3"><a href="optim-op-point.html#cb130-3" aria-hidden="true" tabindex="-1"></a>dsCadRoc <span class="ot">&lt;-</span> RJafroc<span class="sc">::</span><span class="fu">DfFroc2Roc</span>(dsCad)</span>
+<span id="cb130-4"><a href="optim-op-point.html#cb130-4" aria-hidden="true" tabindex="-1"></a>dsCadRocBinned <span class="ot">&lt;-</span> RJafroc<span class="sc">::</span><span class="fu">DfBinDataset</span>(dsCadRoc, <span class="at">opChType =</span> <span class="st">&quot;ROC&quot;</span>)</span>
+<span id="cb130-5"><a href="optim-op-point.html#cb130-5" aria-hidden="true" tabindex="-1"></a>lesDistrCad <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>) <span class="co"># LROC dataset has one lesion per diseased case</span></span>
+<span id="cb130-6"><a href="optim-op-point.html#cb130-6" aria-hidden="true" tabindex="-1"></a>relWeightsCad <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
+<span id="cb130-7"><a href="optim-op-point.html#cb130-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> RJafroc<span class="sc">::</span><span class="fu">FitRsmRoc</span>(dsCadRocBinned, lesDistrCad)</span>
+<span id="cb130-8"><a href="optim-op-point.html#cb130-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;fitted values: mu = %5.3f,&quot;</span>, fit<span class="sc">$</span>mu), </span>
+<span id="cb130-9"><a href="optim-op-point.html#cb130-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">&quot;lambda = %5.3f,&quot;</span>, fit<span class="sc">$</span>lambda), </span>
+<span id="cb130-10"><a href="optim-op-point.html#cb130-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">&quot;nu = %5.3f.&quot;</span>, fit<span class="sc">$</span>nu)) </span>
+<span id="cb130-11"><a href="optim-op-point.html#cb130-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fitted values: mu = 2.756, lambda = 6.778, nu = 0.803.</span></span></code></pre></div>
+<div id="summary-table-1" class="section level4 hasAnchor" number="12.8.1.1">
 <h4><span class="header-section-number">12.8.1.1</span> Summary table<a href="optim-op-point.html#summary-table-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Table <a href="optim-op-point.html#tab:optim-op-point-table4">12.2</a> summarizes the results. As compared to Youden-index optimization the <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> based optimization results in a lower reporting threshold <span class="math inline">\(\zeta_1\)</span>, larger figures of merit – see Fig. <a href="optim-op-point.html#fig:optim-op-point-application-wafroc">12.6</a> for <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> and Fig. <a href="optim-op-point.html#fig:optim-op-point-application-roc">12.7</a> for <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> – and a higher operating point on the FROC, see Fig. <a href="optim-op-point.html#fig:optim-op-point-application-froc">12.5</a>. These results match the trends shown in Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-lambda">12.1</a>.</p>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
@@ -853,7 +922,7 @@ Youden
 </tbody>
 </table>
 </div>
-<div id="froc-2" class="section level4 hasAnchor">
+<div id="froc-2" class="section level4 hasAnchor" number="12.8.1.2">
 <h4><span class="header-section-number">12.8.1.2</span> FROC<a href="optim-op-point.html#froc-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Fig. <a href="optim-op-point.html#fig:optim-op-point-application-froc">12.5</a> shows FROC curves with superimposed optimal operating points. With NLF = 0.278, a four-view mammogram would show about 1.2 false CAD marks per patient and lesion-level sensitivity would be about 68 percent.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:optim-op-point-application-froc"></span>
@@ -863,7 +932,7 @@ FIGURE 12.5: FROC plots with superposed optimal operating points. The red dot is
 </p>
 </div>
 </div>
-<div id="wafroc-2" class="section level4 hasAnchor">
+<div id="wafroc-2" class="section level4 hasAnchor" number="12.8.1.3">
 <h4><span class="header-section-number">12.8.1.3</span> wAFROC<a href="optim-op-point.html#wafroc-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Fig. <a href="optim-op-point.html#fig:optim-op-point-application-wafroc">12.6</a> shows wAFROC curves using the two methods. The red curve is using <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization and the green curve is using Youden-index optimization. The difference in AUCs is small - following the trend described in Appendix <a href="optim-op-point.html#optim-op-point-vary-nu-mu">12.5</a> for the larger values of <span class="math inline">\(\lambda\)</span>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:optim-op-point-application-wafroc"></span>
@@ -873,7 +942,7 @@ FIGURE 12.6: The color coding is as in previous figures. The two <span class="ma
 </p>
 </div>
 </div>
-<div id="roc-2" class="section level4 hasAnchor">
+<div id="roc-2" class="section level4 hasAnchor" number="12.8.1.4">
 <h4><span class="header-section-number">12.8.1.4</span> ROC<a href="optim-op-point.html#roc-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Fig. <a href="optim-op-point.html#fig:optim-op-point-application-roc">12.7</a> shows ROC curves using the two methods. The red curve is using <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization and the green curve is using Youden-index optimization.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:optim-op-point-application-roc"></span>
@@ -885,14 +954,14 @@ FIGURE 12.7: The color coding is as in previous figures. The two <span class="ma
 </div>
 </div>
 </div>
-<div id="optim-op-point-discussion" class="section level2 hasAnchor">
+<div id="optim-op-point-discussion" class="section level2 hasAnchor" number="12.9">
 <h2><span class="header-section-number">12.9</span> TBA Discussion<a href="optim-op-point.html#optim-op-point-discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="optim-op-point.html#cb131-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>)</span>
-<span id="cb131-2"><a href="optim-op-point.html#cb131-2"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
-<span id="cb131-3"><a href="optim-op-point.html#cb131-3"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
-<span id="cb131-4"><a href="optim-op-point.html#cb131-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb131-5"><a href="optim-op-point.html#cb131-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb131-6"><a href="optim-op-point.html#cb131-6"></a><span class="kw">source</span>(<span class="st">&quot;R/optim-op-point/doOneTable.R&quot;</span>, <span class="dt">local =</span> knitr<span class="op">::</span><span class="kw">knit_global</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="optim-op-point.html#cb131-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>)</span>
+<span id="cb131-2"><a href="optim-op-point.html#cb131-2" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb131-3"><a href="optim-op-point.html#cb131-3" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.9</span>)</span>
+<span id="cb131-4"><a href="optim-op-point.html#cb131-4" aria-hidden="true" tabindex="-1"></a>lesDistr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb131-5"><a href="optim-op-point.html#cb131-5" aria-hidden="true" tabindex="-1"></a>relWeights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb131-6"><a href="optim-op-point.html#cb131-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;R/optim-op-point/doOneTable.R&quot;</span>, <span class="at">local =</span> knitr<span class="sc">::</span><span class="fu">knit_global</span>())</span></code></pre></div>
 <p>In Table <a href="optim-op-point.html#tab:optim-op-point-table-vary-lambda">12.1</a> the <span class="math inline">\(\lambda\)</span> parameter controls the average number of perceived NLs per case. For <span class="math inline">\(\lambda = 1\)</span> there is, on average, one perceived NL for every case and the optimal <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> based threshold is <span class="math inline">\(\zeta_1\)</span> = -0.007. For <span class="math inline">\(\lambda = 10\)</span> there are ten perceived NLs for every case and the optimal <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> based threshold is <span class="math inline">\(\zeta_1\)</span> = 1.856. The reason for the increase in <span class="math inline">\(\zeta_1\)</span> should be obvious: with increasing numbers of latent NLs (perceived false marks) per case it is necessary to adopt a stricter criteria because otherwise the reader would be shown 10 times the number of false marks per case.</p>
 <p>The <span class="math inline">\(\text{ROC}_\text{AUC}\)</span>s are reported as a check of the less familiar <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> figure of merit. With some notable exceptions the behavior of the two optimization methods is independent of whether it is measured via the <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> or the <span class="math inline">\(\text{ROC}_\text{AUC}\)</span>: either way the <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimizations yield higher AUC values and higher operating points on the FROC than the corresponding Youden-index optimizations. The exceptions occur when CAD performance is very low in which situation the .</p>
 <p>In this example the difference in <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span>, <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> and the operating points between the two methods decreases as performance <em>increases</em>, which is the opposite of that found when <span class="math inline">\(\lambda\)</span> or <span class="math inline">\(\nu\)</span> were varied. With constant <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> the <em>numbers</em> of latent NLs and LLs are unchanging; all that happens is the <em>values</em> of the z-samples from LLs increase as <span class="math inline">\(\mu\)</span> increases, which allows the optimal threshold to increase (this can be understood as a “ROC-paradigm” effect: as the normal distributions are more widely separated, the optimal threshold will increase, approaching, in the limit, half the separation, since in that limit TPF = 1 and FPF = 0).</p>
@@ -900,17 +969,17 @@ FIGURE 12.7: The color coding is as in previous figures. The two <span class="ma
 <p>The FROC plots also illustrate the decrease in <span class="math inline">\(\text{LLF}\)</span> with increasing <span class="math inline">\(\lambda\)</span>: the black dots move to smaller ordinates, as do the red dots, which would seem to imply decreasing performance. However, the accompanying change in <span class="math inline">\(\text{NLF}\)</span> rules out an unambiguous determination of the direction of the change in overall performance based on the FROC curve.</p>
 <p>For very low performance, defined as <span class="math inline">\(0.5 &lt; \text{ROC}_\text{AUC} &lt; 0.6\)</span>, the Youden-index method chooses a lower threshold compared to <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> optimization, resulting in a higher operating point on the FROC, greater <span class="math inline">\(\text{ROC}_\text{AUC}\)</span> but sharply lower <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span>. The difference between the two methods increases as <span class="math inline">\(\text{ROC}_\text{AUC} \rightarrow 0.5\)</span>. In this limit the <span class="math inline">\(\text{wAFROC}_\text{AUC}\)</span> method severely limits the numbers of marks shown to the radiologist as compared to the Youden-index based method.</p>
 </div>
-<div id="cad-optim-op-appendices" class="section level2 hasAnchor">
+<div id="cad-optim-op-appendices" class="section level2 hasAnchor" number="12.10">
 <h2><span class="header-section-number">12.10</span> Appendices<a href="optim-op-point.html#cad-optim-op-appendices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="optim-op-point-vary-nu" class="section level3 hasAnchor">
+<div id="optim-op-point-vary-nu" class="section level3 hasAnchor" number="12.10.1">
 <h3><span class="header-section-number">12.10.1</span> Varying <span class="math inline">\(\nu\)</span> optimizations<a href="optim-op-point.html#optim-op-point-vary-nu" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For <span class="math inline">\(\mu = 2\)</span> and <span class="math inline">\(\lambda = 1\)</span> optimizations were performed for <span class="math inline">\(\nu = 0.6, 0.7, 0.8, 0.9\)</span>.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="optim-op-point.html#cb132-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>)</span>
-<span id="cb132-2"><a href="optim-op-point.html#cb132-2"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb132-3"><a href="optim-op-point.html#cb132-3"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
-<span id="cb132-4"><a href="optim-op-point.html#cb132-4"></a>lesDistr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb132-5"><a href="optim-op-point.html#cb132-5"></a>relWeights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
-<div id="summary-table-2" class="section level4 hasAnchor">
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="optim-op-point.html#cb132-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>)</span>
+<span id="cb132-2"><a href="optim-op-point.html#cb132-2" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
+<span id="cb132-3"><a href="optim-op-point.html#cb132-3" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span>
+<span id="cb132-4"><a href="optim-op-point.html#cb132-4" aria-hidden="true" tabindex="-1"></a>lesDistr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb132-5"><a href="optim-op-point.html#cb132-5" aria-hidden="true" tabindex="-1"></a>relWeights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div id="summary-table-2" class="section level4 hasAnchor" number="12.10.1.1">
 <h4><span class="header-section-number">12.10.1.1</span> Summary table<a href="optim-op-point.html#summary-table-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -1096,7 +1165,7 @@ Youden-index
 </tbody>
 </table>
 </div>
-<div id="froc-3" class="section level4 hasAnchor">
+<div id="froc-3" class="section level4 hasAnchor" number="12.10.1.2">
 <h4><span class="header-section-number">12.10.1.2</span> FROC<a href="optim-op-point.html#froc-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-nu-froc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-vary-nu-froc-1.png" alt="Varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to $\text{wAFROC}_\text{AUC}$ optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$. Each red dot is above the corresponding black dot and their separation increases as $\nu$ increases, i.e., as CAD performance increases." width="672" />
@@ -1105,7 +1174,7 @@ FIGURE 12.8: Varying <span class="math inline">\(\nu\)</span> FROC plots with su
 </p>
 </div>
 </div>
-<div id="wafroc-3" class="section level4 hasAnchor">
+<div id="wafroc-3" class="section level4 hasAnchor" number="12.10.1.3">
 <h4><span class="header-section-number">12.10.1.3</span> wAFROC<a href="optim-op-point.html#wafroc-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-nu-wafroc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-vary-nu-wafroc-1.png" alt="Varying $\nu$ wAFROC plots for the two optimization methods with superimposed operating points with superimposed operating points. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
@@ -1114,7 +1183,7 @@ FIGURE 12.9: Varying <span class="math inline">\(\nu\)</span> wAFROC plots for t
 </p>
 </div>
 </div>
-<div id="roc-3" class="section level4 hasAnchor">
+<div id="roc-3" class="section level4 hasAnchor" number="12.10.1.4">
 <h4><span class="header-section-number">12.10.1.4</span> ROC<a href="optim-op-point.html#roc-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-nu-roc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-vary-nu-roc-1.png" alt="Varying $\nu$ ROC plots for the two optimization methods with superimposed operating points with superimposed operating points. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
@@ -1124,13 +1193,13 @@ FIGURE 12.10: Varying <span class="math inline">\(\nu\)</span> ROC plots for the
 </div>
 </div>
 </div>
-<div id="optim-op-point-vary-mu" class="section level3 hasAnchor">
+<div id="optim-op-point-vary-mu" class="section level3 hasAnchor" number="12.10.2">
 <h3><span class="header-section-number">12.10.2</span> Varying <span class="math inline">\(\mu\)</span> optimizations<a href="optim-op-point.html#optim-op-point-vary-mu" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\nu = 0.9\)</span> optimizations were performed for <span class="math inline">\(\mu = 1, 2, 3, 4\)</span>.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="optim-op-point.html#cb133-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb133-2"><a href="optim-op-point.html#cb133-2"></a>lambdaArr &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb133-3"><a href="optim-op-point.html#cb133-3"></a>nuArr &lt;-<span class="st"> </span><span class="fl">0.9</span></span></code></pre></div>
-<div id="summary-table-3" class="section level4 hasAnchor">
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="optim-op-point.html#cb133-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb133-2"><a href="optim-op-point.html#cb133-2" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb133-3"><a href="optim-op-point.html#cb133-3" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fl">0.9</span></span></code></pre></div>
+<div id="summary-table-3" class="section level4 hasAnchor" number="12.10.2.1">
 <h4><span class="header-section-number">12.10.2.1</span> Summary table<a href="optim-op-point.html#summary-table-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -1316,7 +1385,7 @@ Youden-index
 </tbody>
 </table>
 </div>
-<div id="froc-4" class="section level4 hasAnchor">
+<div id="froc-4" class="section level4 hasAnchor" number="12.10.2.2">
 <h4><span class="header-section-number">12.10.2.2</span> FROC<a href="optim-op-point.html#froc-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-mu-froc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-vary-mu-froc-1.png" alt="Varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to $\text{wAFROC}_\text{AUC}$ optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
@@ -1325,7 +1394,7 @@ FIGURE 12.11: Varying <span class="math inline">\(\mu\)</span> FROC plots with s
 </p>
 </div>
 </div>
-<div id="wafroc-4" class="section level4 hasAnchor">
+<div id="wafroc-4" class="section level4 hasAnchor" number="12.10.2.3">
 <h4><span class="header-section-number">12.10.2.3</span> wAFROC<a href="optim-op-point.html#wafroc-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-mu-wafroc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-vary-mu-wafroc-1.png" alt="Varying $\mu$ wAFROC plots for the two optimization methods with superimposed operating points with superimposed operating points. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
@@ -1334,7 +1403,7 @@ FIGURE 12.12: Varying <span class="math inline">\(\mu\)</span> wAFROC plots for 
 </p>
 </div>
 </div>
-<div id="roc-4" class="section level4 hasAnchor">
+<div id="roc-4" class="section level4 hasAnchor" number="12.10.2.4">
 <h4><span class="header-section-number">12.10.2.4</span> ROC<a href="optim-op-point.html#roc-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-vary-mu-roc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-vary-mu-roc-1.png" alt="Varying $\mu$ ROC plots for the two optimization methods with superimposed operating points with superimposed operating points. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
@@ -1344,14 +1413,14 @@ FIGURE 12.13: Varying <span class="math inline">\(\mu\)</span> ROC plots for the
 </div>
 </div>
 </div>
-<div id="optim-op-point-limiting-situations" class="section level3 hasAnchor">
+<div id="optim-op-point-limiting-situations" class="section level3 hasAnchor" number="12.10.3">
 <h3><span class="header-section-number">12.10.3</span> Limiting cases<a href="optim-op-point.html#optim-op-point-limiting-situations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="optim-op-point-high-performance-vary-mu" class="section level4 hasAnchor">
+<div id="optim-op-point-high-performance-vary-mu" class="section level4 hasAnchor" number="12.10.3.1">
 <h4><span class="header-section-number">12.10.3.1</span> High performance varying <span class="math inline">\(\mu\)</span><a href="optim-op-point.html#optim-op-point-high-performance-vary-mu" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="optim-op-point.html#cb134-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb134-2"><a href="optim-op-point.html#cb134-2"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
-<span id="cb134-3"><a href="optim-op-point.html#cb134-3"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span></code></pre></div>
-<div id="summary-table-4" class="section level5 hasAnchor">
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="optim-op-point.html#cb134-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb134-2"><a href="optim-op-point.html#cb134-2" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.9</span>)</span>
+<span id="cb134-3"><a href="optim-op-point.html#cb134-3" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div id="summary-table-4" class="section level5 hasAnchor" number="12.10.3.1.1">
 <h5><span class="header-section-number">12.10.3.1.1</span> Summary table<a href="optim-op-point.html#summary-table-4" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -1537,7 +1606,7 @@ Youden-index
 </tbody>
 </table>
 </div>
-<div id="froc-5" class="section level5 hasAnchor">
+<div id="froc-5" class="section level5 hasAnchor" number="12.10.3.1.2">
 <h5><span class="header-section-number">12.10.3.1.2</span> FROC<a href="optim-op-point.html#froc-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-mu-froc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-high-performance-vary-mu-froc-1.png" alt="High performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to $\text{wAFROC}_\text{AUC}$ optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
@@ -1546,7 +1615,7 @@ FIGURE 12.14: High performance varying <span class="math inline">\(\mu\)</span> 
 </p>
 </div>
 </div>
-<div id="wafroc-5" class="section level5 hasAnchor">
+<div id="wafroc-5" class="section level5 hasAnchor" number="12.10.3.1.3">
 <h5><span class="header-section-number">12.10.3.1.3</span> wAFROC<a href="optim-op-point.html#wafroc-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-mu-wafroc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-high-performance-vary-mu-wafroc-1.png" alt="High performance varying $\mu$ wAFROC plots for the two optimization methods with superimposed operating points with superimposed operating points. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
@@ -1555,7 +1624,7 @@ FIGURE 12.15: High performance varying <span class="math inline">\(\mu\)</span> 
 </p>
 </div>
 </div>
-<div id="roc-5" class="section level5 hasAnchor">
+<div id="roc-5" class="section level5 hasAnchor" number="12.10.3.1.4">
 <h5><span class="header-section-number">12.10.3.1.4</span> ROC<a href="optim-op-point.html#roc-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-mu-roc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-high-performance-vary-mu-roc-1.png" alt="High performance varying $\mu$ ROC plots for the two optimization methods with superimposed operating points with superimposed operating points. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 2$, top-right $\mu = 3$, bottom-left $\mu = 4$ and bottom-right $\mu = 5$." width="672" />
@@ -1565,12 +1634,12 @@ FIGURE 12.16: High performance varying <span class="math inline">\(\mu\)</span> 
 </div>
 </div>
 </div>
-<div id="optim-op-point-low-performance-vary-mu" class="section level4 hasAnchor">
+<div id="optim-op-point-low-performance-vary-mu" class="section level4 hasAnchor" number="12.10.3.2">
 <h4><span class="header-section-number">12.10.3.2</span> Low performance varying <span class="math inline">\(\mu\)</span><a href="optim-op-point.html#optim-op-point-low-performance-vary-mu" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="optim-op-point.html#cb135-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb135-2"><a href="optim-op-point.html#cb135-2"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>)</span>
-<span id="cb135-3"><a href="optim-op-point.html#cb135-3"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>)</span></code></pre></div>
-<div id="summary-table-5" class="section level5 hasAnchor">
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="optim-op-point.html#cb135-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb135-2"><a href="optim-op-point.html#cb135-2" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>)</span>
+<span id="cb135-3"><a href="optim-op-point.html#cb135-3" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div id="summary-table-5" class="section level5 hasAnchor" number="12.10.3.2.1">
 <h5><span class="header-section-number">12.10.3.2.1</span> Summary table<a href="optim-op-point.html#summary-table-5" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -1756,7 +1825,7 @@ Youden-index
 </tbody>
 </table>
 </div>
-<div id="froc-6" class="section level5 hasAnchor">
+<div id="froc-6" class="section level5 hasAnchor" number="12.10.3.2.2">
 <h5><span class="header-section-number">12.10.3.2.2</span> FROC<a href="optim-op-point.html#froc-6" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-mu"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-low-performance-vary-mu-1.png" alt="Low performance varying $\mu$ FROC plots with superimposed operating points. The red dot corresponds to $\text{wAFROC}_\text{AUC}$ optimization and the black dot to Youden-index optimization. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
@@ -1765,7 +1834,7 @@ FIGURE 12.17: Low performance varying <span class="math inline">\(\mu\)</span> F
 </p>
 </div>
 </div>
-<div id="wafroc-6" class="section level5 hasAnchor">
+<div id="wafroc-6" class="section level5 hasAnchor" number="12.10.3.2.3">
 <h5><span class="header-section-number">12.10.3.2.3</span> wAFROC<a href="optim-op-point.html#wafroc-6" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-mu-wafroc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-low-performance-vary-mu-wafroc-1.png" alt="Low performance varying $\mu$ wAFROC plots for the two optimization methods with superimposed operating points with superimposed operating points. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
@@ -1774,7 +1843,7 @@ FIGURE 12.18: Low performance varying <span class="math inline">\(\mu\)</span> w
 </p>
 </div>
 </div>
-<div id="roc-6" class="section level5 hasAnchor">
+<div id="roc-6" class="section level5 hasAnchor" number="12.10.3.2.4">
 <h5><span class="header-section-number">12.10.3.2.4</span> ROC<a href="optim-op-point.html#roc-6" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-mu-roc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-low-performance-vary-mu-roc-1.png" alt="Low performance varying $\mu$ ROC plots for the two optimization methods with superimposed operating points with superimposed operating points. The color coding is as in previous figures. The values of $\mu$ are: top-left $\mu = 1$, top-right $\mu = 2$, bottom-left $\mu = 3$ and bottom-right $\mu = 4$." width="672" />
@@ -1784,12 +1853,12 @@ FIGURE 12.19: Low performance varying <span class="math inline">\(\mu\)</span> R
 </div>
 </div>
 </div>
-<div id="optim-op-point-high-performance-vary-lambda" class="section level4 hasAnchor">
+<div id="optim-op-point-high-performance-vary-lambda" class="section level4 hasAnchor" number="12.10.3.3">
 <h4><span class="header-section-number">12.10.3.3</span> High performance varying <span class="math inline">\(\lambda\)</span><a href="optim-op-point.html#optim-op-point-high-performance-vary-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="optim-op-point.html#cb136-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>)</span>
-<span id="cb136-2"><a href="optim-op-point.html#cb136-2"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>)</span>
-<span id="cb136-3"><a href="optim-op-point.html#cb136-3"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">10</span>)</span></code></pre></div>
-<div id="summary-table-6" class="section level5 hasAnchor">
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="optim-op-point.html#cb136-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>)</span>
+<span id="cb136-2"><a href="optim-op-point.html#cb136-2" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.9</span>)</span>
+<span id="cb136-3"><a href="optim-op-point.html#cb136-3" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">10</span>)</span></code></pre></div>
+<div id="summary-table-6" class="section level5 hasAnchor" number="12.10.3.3.1">
 <h5><span class="header-section-number">12.10.3.3.1</span> Summary table<a href="optim-op-point.html#summary-table-6" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -1975,7 +2044,7 @@ Youden-index
 </tbody>
 </table>
 </div>
-<div id="froc-7" class="section level5 hasAnchor">
+<div id="froc-7" class="section level5 hasAnchor" number="12.10.3.3.2">
 <h5><span class="header-section-number">12.10.3.3.2</span> FROC<a href="optim-op-point.html#froc-7" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-lambda-froc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-high-performance-vary-lambda-froc-1.png" alt="High performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to $\text{wAFROC}_\text{AUC}$ optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
@@ -1984,7 +2053,7 @@ FIGURE 12.20: High performance varying <span class="math inline">\(\lambda\)</sp
 </p>
 </div>
 </div>
-<div id="wafroc-7" class="section level5 hasAnchor">
+<div id="wafroc-7" class="section level5 hasAnchor" number="12.10.3.3.3">
 <h5><span class="header-section-number">12.10.3.3.3</span> wAFROC<a href="optim-op-point.html#wafroc-7" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-lambda-wafroc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-high-performance-vary-lambda-wafroc-1.png" alt="High performance varying $\lambda$ wAFROC plots for the two optimization methods with superimposed operating points. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
@@ -1993,7 +2062,7 @@ FIGURE 12.21: High performance varying <span class="math inline">\(\lambda\)</sp
 </p>
 </div>
 </div>
-<div id="roc-7" class="section level5 hasAnchor">
+<div id="roc-7" class="section level5 hasAnchor" number="12.10.3.3.4">
 <h5><span class="header-section-number">12.10.3.3.4</span> ROC<a href="optim-op-point.html#roc-7" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-lambda-roc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-high-performance-vary-lambda-roc-1.png" alt="High performance varying $\lambda$ ROC plots for the two optimization methods with superimposed operating points. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
@@ -2003,12 +2072,12 @@ FIGURE 12.22: High performance varying <span class="math inline">\(\lambda\)</sp
 </div>
 </div>
 </div>
-<div id="optim-op-point-low-performance-vary-lambda" class="section level4 hasAnchor">
+<div id="optim-op-point-low-performance-vary-lambda" class="section level4 hasAnchor" number="12.10.3.4">
 <h4><span class="header-section-number">12.10.3.4</span> Low performance varying <span class="math inline">\(\lambda\)</span><a href="optim-op-point.html#optim-op-point-low-performance-vary-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="optim-op-point.html#cb137-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb137-2"><a href="optim-op-point.html#cb137-2"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.2</span>)</span>
-<span id="cb137-3"><a href="optim-op-point.html#cb137-3"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span></code></pre></div>
-<div id="summary-table-7" class="section level5 hasAnchor">
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="optim-op-point.html#cb137-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
+<span id="cb137-2"><a href="optim-op-point.html#cb137-2" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>)</span>
+<span id="cb137-3"><a href="optim-op-point.html#cb137-3" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span></code></pre></div>
+<div id="summary-table-7" class="section level5 hasAnchor" number="12.10.3.4.1">
 <h5><span class="header-section-number">12.10.3.4.1</span> Summary table<a href="optim-op-point.html#summary-table-7" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -2194,7 +2263,7 @@ Youden-index
 </tbody>
 </table>
 </div>
-<div id="froc-8" class="section level5 hasAnchor">
+<div id="froc-8" class="section level5 hasAnchor" number="12.10.3.4.2">
 <h5><span class="header-section-number">12.10.3.4.2</span> FROC<a href="optim-op-point.html#froc-8" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-lambda-froc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-low-performance-vary-lambda-froc-1.png" alt="Low performance varying $\lambda$ FROC plots with superimposed operating points. The red dot corresponds to $\text{wAFROC}_\text{AUC}$ optimization and the black dot to Youden-index optimization. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
@@ -2203,7 +2272,7 @@ FIGURE 12.23: Low performance varying <span class="math inline">\(\lambda\)</spa
 </p>
 </div>
 </div>
-<div id="wafroc-8" class="section level5 hasAnchor">
+<div id="wafroc-8" class="section level5 hasAnchor" number="12.10.3.4.3">
 <h5><span class="header-section-number">12.10.3.4.3</span> wAFROC<a href="optim-op-point.html#wafroc-8" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-lambda-wafroc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-low-performance-vary-lambda-wafroc-1.png" alt="Low performance varying $\lambda$ wAFROC plots for the two optimization methods with superimposed operating points. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
@@ -2212,7 +2281,7 @@ FIGURE 12.24: Low performance varying <span class="math inline">\(\lambda\)</spa
 </p>
 </div>
 </div>
-<div id="roc-8" class="section level5 hasAnchor">
+<div id="roc-8" class="section level5 hasAnchor" number="12.10.3.4.4">
 <h5><span class="header-section-number">12.10.3.4.4</span> ROC<a href="optim-op-point.html#roc-8" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-lambda-roc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-low-performance-vary-lambda-roc-1.png" alt="Low performance varying $\lambda$ ROC plots for the two optimization methods with superimposed operating points. The color coding is as in previous figures. The values of $\lambda$ are: top-left $\lambda = 1$, top-right $\lambda = 2$, bottom-left $\lambda = 5$ and bottom-right $\lambda = 10$." width="672" />
@@ -2222,12 +2291,12 @@ FIGURE 12.25: Low performance varying <span class="math inline">\(\lambda\)</spa
 </div>
 </div>
 </div>
-<div id="optim-op-point-high-performance-vary-nu" class="section level4 hasAnchor">
+<div id="optim-op-point-high-performance-vary-nu" class="section level4 hasAnchor" number="12.10.3.5">
 <h4><span class="header-section-number">12.10.3.5</span> High performance varying <span class="math inline">\(\nu\)</span><a href="optim-op-point.html#optim-op-point-high-performance-vary-nu" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="optim-op-point.html#cb138-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>)</span>
-<span id="cb138-2"><a href="optim-op-point.html#cb138-2"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb138-3"><a href="optim-op-point.html#cb138-3"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span></code></pre></div>
-<div id="summary-table-8" class="section level5 hasAnchor">
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="optim-op-point.html#cb138-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>)</span>
+<span id="cb138-2"><a href="optim-op-point.html#cb138-2" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
+<span id="cb138-3"><a href="optim-op-point.html#cb138-3" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>)</span></code></pre></div>
+<div id="summary-table-8" class="section level5 hasAnchor" number="12.10.3.5.1">
 <h5><span class="header-section-number">12.10.3.5.1</span> Summary table<a href="optim-op-point.html#summary-table-8" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -2413,7 +2482,7 @@ Youden-index
 </tbody>
 </table>
 </div>
-<div id="froc-9" class="section level5 hasAnchor">
+<div id="froc-9" class="section level5 hasAnchor" number="12.10.3.5.2">
 <h5><span class="header-section-number">12.10.3.5.2</span> FROC<a href="optim-op-point.html#froc-9" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-nu-froc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-high-performance-vary-nu-froc-1.png" alt="High performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to $\text{wAFROC}_\text{AUC}$ optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
@@ -2422,7 +2491,7 @@ FIGURE 12.26: High performance varying <span class="math inline">\(\nu\)</span> 
 </p>
 </div>
 </div>
-<div id="wafroc-9" class="section level5 hasAnchor">
+<div id="wafroc-9" class="section level5 hasAnchor" number="12.10.3.5.3">
 <h5><span class="header-section-number">12.10.3.5.3</span> wAFROC<a href="optim-op-point.html#wafroc-9" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-nu-wafroc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-high-performance-vary-nu-wafroc-1.png" alt="High performance varying $\nu$ wAFROC plots for the two optimization methods with superimposed operating points. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
@@ -2431,7 +2500,7 @@ FIGURE 12.27: High performance varying <span class="math inline">\(\nu\)</span> 
 </p>
 </div>
 </div>
-<div id="roc-9" class="section level5 hasAnchor">
+<div id="roc-9" class="section level5 hasAnchor" number="12.10.3.5.4">
 <h5><span class="header-section-number">12.10.3.5.4</span> ROC<a href="optim-op-point.html#roc-9" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-high-performance-vary-nu-roc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-high-performance-vary-nu-roc-1.png" alt="High performance varying $\nu$ ROC plots for the two optimization methods with superimposed operating points. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.6$, top-right $\nu = 0.7$, bottom-left $\nu = 0.8$ and bottom-right $\nu = 0.9$." width="672" />
@@ -2441,12 +2510,12 @@ FIGURE 12.28: High performance varying <span class="math inline">\(\nu\)</span> 
 </div>
 </div>
 </div>
-<div id="optim-op-point-low-performance-vary-nu" class="section level4 hasAnchor">
+<div id="optim-op-point-low-performance-vary-nu" class="section level4 hasAnchor" number="12.10.3.6">
 <h4><span class="header-section-number">12.10.3.6</span> Low performance varying <span class="math inline">\(\nu\)</span><a href="optim-op-point.html#optim-op-point-low-performance-vary-nu" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="optim-op-point.html#cb139-1"></a>muArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>)</span>
-<span id="cb139-2"><a href="optim-op-point.html#cb139-2"></a>lambdaArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>)</span>
-<span id="cb139-3"><a href="optim-op-point.html#cb139-3"></a>nuArr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>)</span></code></pre></div>
-<div id="summary-table-9" class="section level5 hasAnchor">
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="optim-op-point.html#cb139-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
+<span id="cb139-2"><a href="optim-op-point.html#cb139-2" aria-hidden="true" tabindex="-1"></a>lambdaArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>)</span>
+<span id="cb139-3"><a href="optim-op-point.html#cb139-3" aria-hidden="true" tabindex="-1"></a>nuArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>)</span></code></pre></div>
+<div id="summary-table-9" class="section level5 hasAnchor" number="12.10.3.6.1">
 <h5><span class="header-section-number">12.10.3.6.1</span> Summary table<a href="optim-op-point.html#summary-table-9" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -2632,7 +2701,7 @@ Youden-index
 </tbody>
 </table>
 </div>
-<div id="froc-10" class="section level5 hasAnchor">
+<div id="froc-10" class="section level5 hasAnchor" number="12.10.3.6.2">
 <h5><span class="header-section-number">12.10.3.6.2</span> FROC<a href="optim-op-point.html#froc-10" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-nu-froc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-low-performance-vary-nu-froc-1.png" alt="Low performance varying $\nu$ FROC plots with superimposed operating points. The red dot corresponds to $\text{wAFROC}_\text{AUC}$ optimization and the black dot to Youden-index optimization. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
@@ -2641,7 +2710,7 @@ FIGURE 12.29: Low performance varying <span class="math inline">\(\nu\)</span> F
 </p>
 </div>
 </div>
-<div id="wafroc-10" class="section level5 hasAnchor">
+<div id="wafroc-10" class="section level5 hasAnchor" number="12.10.3.6.3">
 <h5><span class="header-section-number">12.10.3.6.3</span> wAFROC<a href="optim-op-point.html#wafroc-10" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-nu-wafroc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-low-performance-vary-nu-wafroc-1.png" alt="Low performance varying $\nu$ wAFROC plots for the two optimization methods with superimposed operating points. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
@@ -2650,7 +2719,7 @@ FIGURE 12.30: Low performance varying <span class="math inline">\(\nu\)</span> w
 </p>
 </div>
 </div>
-<div id="roc-10" class="section level5 hasAnchor">
+<div id="roc-10" class="section level5 hasAnchor" number="12.10.3.6.4">
 <h5><span class="header-section-number">12.10.3.6.4</span> ROC<a href="optim-op-point.html#roc-10" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="figure"><span style="display:block;" id="fig:optim-op-point-low-performance-vary-nu-roc"></span>
 <img src="21-optim-op-point-wafroc_files/figure-html/optim-op-point-low-performance-vary-nu-roc-1.png" alt="Low performance varying $\nu$ ROC plots for the two optimization methods with superimposed operating points. The color coding is as in previous figures. The values of $\nu$ are: top-left $\nu = 0.1$, top-right $\nu = 0.2$, bottom-left $\nu = 0.3$ and bottom-right $\nu = 0.4$." width="672" />
@@ -2665,15 +2734,15 @@ FIGURE 12.31: Low performance varying <span class="math inline">\(\nu\)</span> R
 </div>
 </div>
 <h3>REFERENCES<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references">
-<div id="ref-hupse2013standalone">
-<p>Hupse, Rianne, Maurice Samulski, Marc Lobbes, Ard Heeten, MechliW Imhof-Tas, David Beijerinck, Ruud Pijnappel, Carla Boetes, and Nico Karssemeijer. 2013. “Standalone Computer-Aided Detection Compared to Radiologists’ Performance for the Detection of Mammographic Masses.” Journal Article. <em>European Radiology</em> 23 (1): 93–100. <a href="https://doi.org/10.1007/s00330-012-2562-7">https://doi.org/10.1007/s00330-012-2562-7</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hupse2013standalone" class="csl-entry">
+Hupse, Rianne, Maurice Samulski, Marc Lobbes, Ard Heeten, MechliW Imhof-Tas, David Beijerinck, Ruud Pijnappel, Carla Boetes, and Nico Karssemeijer. 2013. <span>“Standalone Computer-Aided Detection Compared to Radiologists’ Performance for the Detection of Mammographic Masses.”</span> Journal Article. <em>European Radiology</em> 23 (1): 93–100. <a href="https://doi.org/10.1007/s00330-012-2562-7">https://doi.org/10.1007/s00330-012-2562-7</a>.
 </div>
-<div id="ref-metz1978rocmethodology">
-<p>Metz, C. E. 1978. “Basic Principles of ROC Analysis.” Journal Article. <em>Seminars in Nuclear Medicine</em> 8 (4): 283–98. <a href="https://doi.org/10.1016/s0001-2998(78)80014-2">https://doi.org/10.1016/s0001-2998(78)80014-2</a>.</p>
+<div id="ref-metz1978rocmethodology" class="csl-entry">
+Metz, C. E. 1978. <span>“Basic Principles of <span>ROC</span> Analysis.”</span> Journal Article. <em>Seminars in Nuclear Medicine</em> 8 (4): 283–98. <a href="https://doi.org/10.1016/s0001-2998(78)80014-2">https://doi.org/10.1016/s0001-2998(78)80014-2</a>.
 </div>
-<div id="ref-youden1950index">
-<p>Youden, William J. 1950. “Index for Rating Diagnostic Tests.” <em>Cancer</em> 3 (1): 32–35.</p>
+<div id="ref-youden1950index" class="csl-entry">
+Youden, William J. 1950. <span>“Index for Rating Diagnostic Tests.”</span> <em>Cancer</em> 3 (1): 32–35.
 </div>
 </div>
             </section>

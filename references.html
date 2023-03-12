@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>REFERENCES | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="REFERENCES | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-02-28" />
+<meta name="date" content="2023-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,7 +49,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -58,18 +57,18 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,13 +88,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -108,7 +107,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -122,6 +121,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -140,7 +161,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="part"><span><b>Preamble</b></span></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Please ignore preface</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Please ignore preface</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#please-ignore-issues"><i class="fa fa-check"></i><b>1.1</b> Please ignore issues</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#please-ignore-following-sections"><i class="fa fa-check"></i><b>1.2</b> Please ignore following sections</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tba-rationale-and-organization"><i class="fa fa-check"></i><b>1.3</b> TBA Rationale and Organization</a></li>
@@ -154,34 +176,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.11" data-path="index.html"><a href="index.html#please-ignore-is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i><b>1.11</b> Please ignore: Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="1.12" data-path="index.html"><a href="index.html#please-ignore-chapters-needing-heavy-edits"><i class="fa fa-check"></i><b>1.12</b> Please ignore: Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="1.13" data-path="index.html"><a href="index.html#please-ignore-shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i><b>1.13</b> Please ignore: Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="1.14" data-path="index.html"><a href="index.html#please-ignore-coding-aids-for-me"><i class="fa fa-check"></i><b>1.14</b> Please ignore: Coding aids (for me)</a><ul>
+<li class="chapter" data-level="1.14" data-path="index.html"><a href="index.html#please-ignore-coding-aids-for-me"><i class="fa fa-check"></i><b>1.14</b> Please ignore: Coding aids (for me)</a>
+<ul>
 <li class="chapter" data-level="1.14.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>1.14.1</b> formatting</a></li>
 <li class="chapter" data-level="1.14.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>1.14.2</b> tables</a></li>
 <li class="chapter" data-level="1.14.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>1.14.3</b> tinytex problems</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
-<li class="chapter" data-level="2" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>2</b> The FROC paradigm and visual search</a><ul>
+<li class="chapter" data-level="2" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>2</b> The FROC paradigm and visual search</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-how-much-finished"><i class="fa fa-check"></i><b>2.1</b> How much finished</a></li>
-<li class="chapter" data-level="2.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>2.2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>2.2</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-outline"><i class="fa fa-check"></i><b>2.2.1</b> Chapter outline</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-location-specific-paradigms"><i class="fa fa-check"></i><b>2.3</b> Location specific paradigms</a></li>
-<li class="chapter" data-level="2.4" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-vis-search"><i class="fa fa-check"></i><b>2.4</b> Visual search</a><ul>
+<li class="chapter" data-level="2.4" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-vis-search"><i class="fa fa-check"></i><b>2.4</b> Visual search</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-scoring-the-data"><i class="fa fa-check"></i><b>2.4.1</b> Proximity criterion and scoring the data</a></li>
 <li class="chapter" data-level="2.4.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#multiple-marks-in-the-same-vicinity"><i class="fa fa-check"></i><b>2.4.2</b> Multiple marks in the same vicinity</a></li>
 <li class="chapter" data-level="2.4.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#historical-context"><i class="fa fa-check"></i><b>2.4.3</b> Historical context</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>2.5</b> The FROC plot</a><ul>
+<li class="chapter" data-level="2.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>2.5</b> The FROC plot</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-plot-illustration"><i class="fa fa-check"></i><b>2.5.1</b> Illustration with a dataset</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>2.6</b> The “solar” analogy</a></li>
 <li class="chapter" data-level="2.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>2.7</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>3</b> Empirical plots from FROC data</a><ul>
+<li class="chapter" data-level="3" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>3</b> Empirical plots from FROC data</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="empirical.html"><a href="empirical.html#empirical-how-much-finished"><i class="fa fa-check"></i><b>3.1</b> How much finished</a></li>
 <li class="chapter" data-level="3.2" data-path="empirical.html"><a href="empirical.html#empirical-intro"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
-<li class="chapter" data-level="3.3" data-path="empirical.html"><a href="empirical.html#empirical-mark-rating-pairs"><i class="fa fa-check"></i><b>3.3</b> FROC data and notation</a><ul>
+<li class="chapter" data-level="3.3" data-path="empirical.html"><a href="empirical.html#empirical-mark-rating-pairs"><i class="fa fa-check"></i><b>3.3</b> FROC data and notation</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="empirical.html"><a href="empirical.html#lls-vs.-nls"><i class="fa fa-check"></i><b>3.3.1</b> LLs vs. NLs</a></li>
 <li class="chapter" data-level="3.3.2" data-path="empirical.html"><a href="empirical.html#latent-vs.-actual-marks"><i class="fa fa-check"></i><b>3.3.2</b> Latent vs. actual marks</a></li>
 <li class="chapter" data-level="3.3.3" data-path="empirical.html"><a href="empirical.html#z-samples-vs.-ratings"><i class="fa fa-check"></i><b>3.3.3</b> z-samples vs. ratings</a></li>
@@ -190,28 +219,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.6" data-path="empirical.html"><a href="empirical.html#comments"><i class="fa fa-check"></i><b>3.3.6</b> Comments</a></li>
 <li class="chapter" data-level="3.3.7" data-path="empirical.html"><a href="empirical.html#empirical-indexing-marks"><i class="fa fa-check"></i><b>3.3.7</b> A conceptual and notatonal issue</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-1"><i class="fa fa-check"></i><b>3.4</b> The FROC plot</a><ul>
+<li class="chapter" data-level="3.4" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-1"><i class="fa fa-check"></i><b>3.4</b> The FROC plot</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="empirical.html"><a href="empirical.html#empirical-end-point"><i class="fa fa-check"></i><b>3.4.1</b> The observed FROC end-point and its semi-constrained property</a></li>
 <li class="chapter" data-level="3.4.2" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-futility-extrapolation"><i class="fa fa-check"></i><b>3.4.2</b> Futility of extrapolation outside the observed end-point</a></li>
 <li class="chapter" data-level="3.4.3" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-illustration"><i class="fa fa-check"></i><b>3.4.3</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="empirical.html"><a href="empirical.html#empirical-ROC"><i class="fa fa-check"></i><b>3.5</b> The inferred-ROC plot</a><ul>
+<li class="chapter" data-level="3.5" data-path="empirical.html"><a href="empirical.html#empirical-ROC"><i class="fa fa-check"></i><b>3.5</b> The inferred-ROC plot</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="empirical.html"><a href="empirical.html#empirical-ROC-fpf"><i class="fa fa-check"></i><b>3.5.1</b> The inferred-ROC z-sample</a></li>
 <li class="chapter" data-level="3.5.2" data-path="empirical.html"><a href="empirical.html#empirical-ROC-tpf"><i class="fa fa-check"></i><b>3.5.2</b> Inferred TPF</a></li>
 <li class="chapter" data-level="3.5.3" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-roc"><i class="fa fa-check"></i><b>3.5.3</b> The empirical ROC plot and AUC</a></li>
 <li class="chapter" data-level="3.5.4" data-path="empirical.html"><a href="empirical.html#empirical-ROC-constrained"><i class="fa fa-check"></i><b>3.5.4</b> The observed end-point of the ROC and its constrained property</a></li>
 <li class="chapter" data-level="3.5.5" data-path="empirical.html"><a href="empirical.html#empirical-roc-plot-illustration"><i class="fa fa-check"></i><b>3.5.5</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="empirical.html"><a href="empirical.html#empirical-AFROC"><i class="fa fa-check"></i><b>3.6</b> The alternative FROC (AFROC) plot</a><ul>
+<li class="chapter" data-level="3.6" data-path="empirical.html"><a href="empirical.html#empirical-AFROC"><i class="fa fa-check"></i><b>3.6</b> The alternative FROC (AFROC) plot</a>
+<ul>
 <li class="chapter" data-level="3.6.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-afroc"><i class="fa fa-check"></i><b>3.6.1</b> Definition: empirical AFROC plot and AUC</a></li>
 <li class="chapter" data-level="3.6.2" data-path="empirical.html"><a href="empirical.html#empirical-AFROC-constrained"><i class="fa fa-check"></i><b>3.6.2</b> The observed end-point of the AFROC and its constrained property</a></li>
 <li class="chapter" data-level="3.6.3" data-path="empirical.html"><a href="empirical.html#empirical-afroc-plot-illustration"><i class="fa fa-check"></i><b>3.6.3</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC"><i class="fa fa-check"></i><b>3.7</b> The weighted-AFROC plot (wAFROC) plot</a><ul>
+<li class="chapter" data-level="3.7" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC"><i class="fa fa-check"></i><b>3.7</b> The weighted-AFROC plot (wAFROC) plot</a>
+<ul>
 <li class="chapter" data-level="3.7.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-wafroc"><i class="fa fa-check"></i><b>3.7.1</b> The empirical wAFROC plot and AUC</a></li>
 <li class="chapter" data-level="3.7.2" data-path="empirical.html"><a href="empirical.html#empirical-wafroc-plot-illustration"><i class="fa fa-check"></i><b>3.7.2</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.8" data-path="empirical.html"><a href="empirical.html#empirical-numerical-understanding"><i class="fa fa-check"></i><b>3.8</b> AFROC vs. wAFROC</a><ul>
+<li class="chapter" data-level="3.8" data-path="empirical.html"><a href="empirical.html#empirical-numerical-understanding"><i class="fa fa-check"></i><b>3.8</b> AFROC vs. wAFROC</a>
+<ul>
 <li class="chapter" data-level="3.8.1" data-path="empirical.html"><a href="empirical.html#nl-and-ll-z-samples"><i class="fa fa-check"></i><b>3.8.1</b> NL and LL z-samples</a></li>
 <li class="chapter" data-level="3.8.2" data-path="empirical.html"><a href="empirical.html#lesion-weights"><i class="fa fa-check"></i><b>3.8.2</b> Lesion weights</a></li>
 <li class="chapter" data-level="3.8.3" data-path="empirical.html"><a href="empirical.html#fpf"><i class="fa fa-check"></i><b>3.8.3</b> FPF</a></li>
@@ -219,29 +253,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.8.5" data-path="empirical.html"><a href="empirical.html#wllf"><i class="fa fa-check"></i><b>3.8.5</b> wLLF</a></li>
 </ul></li>
 <li class="chapter" data-level="3.9" data-path="empirical.html"><a href="empirical.html#empirical-meanings"><i class="fa fa-check"></i><b>3.9</b> Interpretation of AUCs</a></li>
-<li class="chapter" data-level="3.10" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases"><i class="fa fa-check"></i><b>3.10</b> Instructive examples</a><ul>
+<li class="chapter" data-level="3.10" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases"><i class="fa fa-check"></i><b>3.10</b> Instructive examples</a>
+<ul>
 <li class="chapter" data-level="3.10.1" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-FROC"><i class="fa fa-check"></i><b>3.10.1</b> The FROC</a></li>
 <li class="chapter" data-level="3.10.2" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-ROC"><i class="fa fa-check"></i><b>3.10.2</b> The ROC</a></li>
 <li class="chapter" data-level="3.10.3" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-AFROC"><i class="fa fa-check"></i><b>3.10.3</b> The AFROC</a></li>
 <li class="chapter" data-level="3.10.4" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-wAFROC"><i class="fa fa-check"></i><b>3.10.4</b> The wAFROC</a></li>
 </ul></li>
-<li class="chapter" data-level="3.11" data-path="empirical.html"><a href="empirical.html#empirical-froc-auc-poor"><i class="fa fa-check"></i><b>3.11</b> FROC-AUC is a poor measure</a><ul>
+<li class="chapter" data-level="3.11" data-path="empirical.html"><a href="empirical.html#empirical-froc-auc-poor"><i class="fa fa-check"></i><b>3.11</b> FROC-AUC is a poor measure</a>
+<ul>
 <li class="chapter" data-level="3.11.1" data-path="empirical.html"><a href="empirical.html#plot-of-froc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>3.11.1</b> Plot of FROC AUC vs. ROC AUC</a></li>
 <li class="chapter" data-level="3.11.2" data-path="empirical.html"><a href="empirical.html#plot-of-afroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>3.11.2</b> Plot of AFROC AUC vs. ROC AUC</a></li>
 <li class="chapter" data-level="3.11.3" data-path="empirical.html"><a href="empirical.html#plot-of-wafroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>3.11.3</b> Plot of wAFROC AUC vs. ROC AUC</a></li>
 </ul></li>
-<li class="chapter" data-level="3.12" data-path="empirical.html"><a href="empirical.html#empirical-AFROC1"><i class="fa fa-check"></i><b>3.12</b> The AFROC1 plot</a><ul>
+<li class="chapter" data-level="3.12" data-path="empirical.html"><a href="empirical.html#empirical-AFROC1"><i class="fa fa-check"></i><b>3.12</b> The AFROC1 plot</a>
+<ul>
 <li class="chapter" data-level="3.12.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-afroc1"><i class="fa fa-check"></i><b>3.12.1</b> Empirical AFROC1 plot and AUC</a></li>
 <li class="chapter" data-level="3.12.2" data-path="empirical.html"><a href="empirical.html#empirical-afroc1-plot-illustration"><i class="fa fa-check"></i><b>3.12.2</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.13" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC1"><i class="fa fa-check"></i><b>3.13</b> The weighted-AFROC1 (wAFROC1) plot</a><ul>
+<li class="chapter" data-level="3.13" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC1"><i class="fa fa-check"></i><b>3.13</b> The weighted-AFROC1 (wAFROC1) plot</a>
+<ul>
 <li class="chapter" data-level="3.13.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-wafroc1"><i class="fa fa-check"></i><b>3.13.1</b> Empirical wAFROC1 plot and AUC</a></li>
 <li class="chapter" data-level="3.13.2" data-path="empirical.html"><a href="empirical.html#empirical-wafroc1-plot-illustration"><i class="fa fa-check"></i><b>3.13.2</b> Illustration with a dataset</a></li>
 </ul></li>
 <li class="chapter" data-level="3.14" data-path="empirical.html"><a href="empirical.html#empirical-summary"><i class="fa fa-check"></i><b>3.14</b> Summary</a></li>
 <li class="chapter" data-level="3.15" data-path="empirical.html"><a href="empirical.html#empirical-theorem-1"><i class="fa fa-check"></i><b>3.15</b> Appendix 1: Proof of formula for wAFROC-AUC</a></li>
 <li class="chapter" data-level="3.16" data-path="empirical.html"><a href="empirical.html#empirical-theorem-2"><i class="fa fa-check"></i><b>3.16</b> Appendix 2: Interpretation of area under straight line extension of wAFROC</a></li>
-<li class="chapter" data-level="3.17" data-path="empirical.html"><a href="empirical.html#empirical-summary-computational-formulae"><i class="fa fa-check"></i><b>3.17</b> Appendix 3: Summary of computational formulae</a><ul>
+<li class="chapter" data-level="3.17" data-path="empirical.html"><a href="empirical.html#empirical-summary-computational-formulae"><i class="fa fa-check"></i><b>3.17</b> Appendix 3: Summary of computational formulae</a>
+<ul>
 <li class="chapter" data-level="3.17.1" data-path="empirical.html"><a href="empirical.html#froc"><i class="fa fa-check"></i><b>3.17.1</b> FROC</a></li>
 <li class="chapter" data-level="3.17.2" data-path="empirical.html"><a href="empirical.html#roc"><i class="fa fa-check"></i><b>3.17.2</b> ROC</a></li>
 <li class="chapter" data-level="3.17.3" data-path="empirical.html"><a href="empirical.html#afroc"><i class="fa fa-check"></i><b>3.17.3</b> AFROC</a></li>
@@ -251,24 +290,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="part"><span><b>The radiological search model (RSM)</b></span></li>
-<li class="chapter" data-level="4" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>4</b> Visual Search</a><ul>
+<li class="chapter" data-level="4" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>4</b> Visual Search</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-how-much-finished"><i class="fa fa-check"></i><b>4.1</b> How much finished</a></li>
 <li class="chapter" data-level="4.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-intro"><i class="fa fa-check"></i><b>4.2</b> Introduction</a></li>
 <li class="chapter" data-level="4.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-grouping-labeling-rois"><i class="fa fa-check"></i><b>4.3</b> Grouping and labeling ROIs</a></li>
 <li class="chapter" data-level="4.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>4.4</b> Lesion-localization vs. detection</a></li>
 <li class="chapter" data-level="4.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>4.5</b> Lesion-localization vs. lesion-classification</a></li>
-<li class="chapter" data-level="4.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>4.6</b> The Kundel - Nodine search model</a><ul>
+<li class="chapter" data-level="4.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>4.6</b> The Kundel - Nodine search model</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>4.6.1</b> Lesion-localization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Lesion-classification</a></li>
 <li class="chapter" data-level="4.6.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-example"><i class="fa fa-check"></i><b>4.6.3</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>5</b> The radiological search model (RSM)</a><ul>
+<li class="chapter" data-level="5" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>5</b> The radiological search model (RSM)</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="rsm.html"><a href="rsm.html#rsm-how-much-finished"><i class="fa fa-check"></i><b>5.1</b> How much finished</a></li>
 <li class="chapter" data-level="5.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
 <li class="chapter" data-level="5.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>5.3</b> The radiological search model</a></li>
 <li class="chapter" data-level="5.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>5.4</b> RSM assumptions</a></li>
-<li class="chapter" data-level="5.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>5.5</b> Physical meanings of the RSM parameters</a><ul>
+<li class="chapter" data-level="5.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>5.5</b> Physical meanings of the RSM parameters</a>
+<ul>
 <li class="chapter" data-level="5.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>5.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
 <li class="chapter" data-level="5.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-parameter"><i class="fa fa-check"></i><b>5.5.2</b> The <span class="math inline">\(\lambda\)</span> parameter</a></li>
 <li class="chapter" data-level="5.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>5.5.3</b> The <span class="math inline">\(\nu\)</span> parameter</a></li>
@@ -276,16 +319,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="rsm.html"><a href="rsm.html#rsm-intrinsic-parameters"><i class="fa fa-check"></i><b>5.6</b> Intrinsic RSM parameters</a></li>
 <li class="chapter" data-level="5.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>5.7</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="rsm-predictions.html"><a href="rsm-predictions.html"><i class="fa fa-check"></i><b>6</b> ROC predictions of the RSM</a><ul>
+<li class="chapter" data-level="6" data-path="rsm-predictions.html"><a href="rsm-predictions.html"><i class="fa fa-check"></i><b>6</b> ROC predictions of the RSM</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="6.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-intro"><i class="fa fa-check"></i><b>6.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="6.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-inferred-roc"><i class="fa fa-check"></i><b>6.3</b> Inferred ROC z-sample</a></li>
-<li class="chapter" data-level="6.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point"><i class="fa fa-check"></i><b>6.4</b> End-point of the ROC</a><ul>
+<li class="chapter" data-level="6.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point"><i class="fa fa-check"></i><b>6.4</b> End-point of the ROC</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-abscissa"><i class="fa fa-check"></i><b>6.4.1</b> The abscissa of the ROC end-point</a></li>
 <li class="chapter" data-level="6.4.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-ordinate"><i class="fa fa-check"></i><b>6.4.2</b> The ordinate of the ROC end-point</a></li>
 <li class="chapter" data-level="6.4.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point-variable-number-lesions"><i class="fa fa-check"></i><b>6.4.3</b> Variable number of lesions per case</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve"><i class="fa fa-check"></i><b>6.5</b> ROC curve</a><ul>
+<li class="chapter" data-level="6.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve"><i class="fa fa-check"></i><b>6.5</b> ROC curve</a>
+<ul>
 <li class="chapter" data-level="6.5.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-fpf"><i class="fa fa-check"></i><b>6.5.1</b> Derivation of FPF</a></li>
 <li class="chapter" data-level="6.5.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-tpf"><i class="fa fa-check"></i><b>6.5.2</b> Derivation of TPF</a></li>
 <li class="chapter" data-level="6.5.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-tpf-varying-lesions"><i class="fa fa-check"></i><b>6.5.3</b> Variable number of lesions per case</a></li>
@@ -302,21 +348,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix1"><i class="fa fa-check"></i><b>6.9</b> Appendix 1: Proof of continuity of slope at the end-point</a></li>
 <li class="chapter" data-level="6.10" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix2"><i class="fa fa-check"></i><b>6.10</b> Appendix 2: Numerical illustration of continuity</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html"><i class="fa fa-check"></i><b>7</b> Other RSM predictions</a><ul>
+<li class="chapter" data-level="7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html"><i class="fa fa-check"></i><b>7</b> Other RSM predictions</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="7.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-intro"><i class="fa fa-check"></i><b>7.2</b> TBA Introduction</a></li>
-<li class="chapter" data-level="7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-curve"><i class="fa fa-check"></i><b>7.3</b> RSM-predicted FROC curve</a><ul>
+<li class="chapter" data-level="7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-curve"><i class="fa fa-check"></i><b>7.3</b> RSM-predicted FROC curve</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.3.1</b> FROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-afroc-curve"><i class="fa fa-check"></i><b>7.4</b> RSM-predicted AFROC curve</a><ul>
+<li class="chapter" data-level="7.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-afroc-curve"><i class="fa fa-check"></i><b>7.4</b> RSM-predicted AFROC curve</a>
+<ul>
 <li class="chapter" data-level="7.4.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#afroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.4.1</b> AFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 <li class="chapter" data-level="7.4.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-no-marks"><i class="fa fa-check"></i><b>7.4.2</b> Case of the reader who does not make any marks</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-curve"><i class="fa fa-check"></i><b>7.5</b> RSM-predicted wAFROC curve</a><ul>
+<li class="chapter" data-level="7.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-curve"><i class="fa fa-check"></i><b>7.5</b> RSM-predicted wAFROC curve</a>
+<ul>
 <li class="chapter" data-level="7.5.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#wafroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.5.1</b> wAFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-comments"><i class="fa fa-check"></i><b>7.6</b> Comments on end-point-discontinuity property</a></li>
-<li class="chapter" data-level="7.7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-appendix"><i class="fa fa-check"></i><b>7.7</b> Appendix</a><ul>
+<li class="chapter" data-level="7.7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-appendix"><i class="fa fa-check"></i><b>7.7</b> Appendix</a>
+<ul>
 <li class="chapter" data-level="7.7.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-physical-parameters"><i class="fa fa-check"></i><b>7.7.1</b> Slope of the FROC curve</a></li>
 <li class="chapter" data-level="7.7.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda-nu-parameterization"><i class="fa fa-check"></i><b>7.7.2</b> FROC plots <span class="math inline">\(\lambda, \nu\)</span> parameterization</a></li>
 <li class="chapter" data-level="7.7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-afroc-physical-parameters"><i class="fa fa-check"></i><b>7.7.3</b> Slope of the AFROC curve</a></li>
@@ -325,14 +376,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-above-afroc"><i class="fa fa-check"></i><b>7.7.6</b> Are wAFROC curves above AFROC curves?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html"><i class="fa fa-check"></i><b>8</b> Lesion localization and classification performances</a><ul>
+<li class="chapter" data-level="8" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html"><i class="fa fa-check"></i><b>8</b> Lesion localization and classification performances</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> How much finished</a></li>
 <li class="chapter" data-level="8.2" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-intro"><i class="fa fa-check"></i><b>8.2</b> Introduction</a></li>
 <li class="chapter" data-level="8.3" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-quantifying"><i class="fa fa-check"></i><b>8.3</b> Quantifying lesion-localization performance</a></li>
 <li class="chapter" data-level="8.4" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-performance"><i class="fa fa-check"></i><b>8.4</b> Quantifying lesion-classification performance</a></li>
 <li class="chapter" data-level="8.5" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-discussion"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>9</b> RSM fitting</a><ul>
+<li class="chapter" data-level="9" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>9</b> RSM fitting</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> How much finished</a></li>
 <li class="chapter" data-level="9.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-intro"><i class="fa fa-check"></i><b>9.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="9.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-roc-likelihood"><i class="fa fa-check"></i><b>9.3</b> ROC Likelihood function</a></li>
@@ -340,24 +393,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example"><i class="fa fa-check"></i><b>9.5</b> <code>FitRsmROC</code> usage example</a></li>
 <li class="chapter" data-level="9.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>9.6</b> Discussion / Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>10</b> Three proper ROC fits</a><ul>
+<li class="chapter" data-level="10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>10</b> Three proper ROC fits</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="10.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-intro"><i class="fa fa-check"></i><b>10.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="10.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-applications"><i class="fa fa-check"></i><b>10.3</b> Application to datasets</a></li>
 <li class="chapter" data-level="10.4" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-composite-plots"><i class="fa fa-check"></i><b>10.4</b> Composite plots</a></li>
-<li class="chapter" data-level="10.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>10.5</b> RSM parameters</a><ul>
+<li class="chapter" data-level="10.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>10.5</b> RSM parameters</a>
+<ul>
 <li class="chapter" data-level="10.5.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-parameters-van-dyke-dataset-i-1-j-2"><i class="fa fa-check"></i><b>10.5.1</b> RSM parameters Van Dyke dataset i = 1, j= 2</a></li>
 <li class="chapter" data-level="10.5.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-parameters-franken-dataset-i-2-j-3"><i class="fa fa-check"></i><b>10.5.2</b> RSM parameters Franken dataset i = 2, j= 3</a></li>
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-cbm-parameters"><i class="fa fa-check"></i><b>10.6</b> CBM parameters</a></li>
 <li class="chapter" data-level="10.7" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-proproc-parameters"><i class="fa fa-check"></i><b>10.7</b> PROPROC parameters</a></li>
-<li class="chapter" data-level="10.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>10.8</b> Overview of findings</a><ul>
+<li class="chapter" data-level="10.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>10.8</b> Overview of findings</a>
+<ul>
 <li class="chapter" data-level="10.8.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes"><i class="fa fa-check"></i><b>10.8.1</b> Slopes</a></li>
 <li class="chapter" data-level="10.8.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-confidence-intervals"><i class="fa fa-check"></i><b>10.8.2</b> Confidence intervals</a></li>
 <li class="chapter" data-level="10.8.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes-confidence-intervals-summary"><i class="fa fa-check"></i><b>10.8.3</b> Summary of slopes and confidence intervals</a></li>
 </ul></li>
 <li class="chapter" data-level="10.9" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-discussion-summary"><i class="fa fa-check"></i><b>10.9</b> Reason for equal AUCs / Summary</a></li>
-<li class="chapter" data-level="10.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>10.10</b> Appendices</a><ul>
+<li class="chapter" data-level="10.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>10.10</b> Appendices</a>
+<ul>
 <li class="chapter" data-level="10.10.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-one-dataset-proproc"><i class="fa fa-check"></i><b>10.10.1</b> Location of PROPROC files</a></li>
 <li class="chapter" data-level="10.10.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results"><i class="fa fa-check"></i><b>10.10.2</b> Location of pre-analyzed results</a></li>
 <li class="chapter" data-level="10.10.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-representative-plots-van-dyke"><i class="fa fa-check"></i><b>10.10.3</b> Plots for the Van Dyke dataset</a></li>
@@ -365,11 +422,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="part"><span><b>CAD applications</b></span></li>
-<li class="chapter" data-level="11" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>11</b> Standalone CAD</a><ul>
+<li class="chapter" data-level="11" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>11</b> Standalone CAD</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> How much finished</a></li>
 <li class="chapter" data-level="11.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>11.2</b> Introduction</a></li>
 <li class="chapter" data-level="11.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-overview"><i class="fa fa-check"></i><b>11.3</b> Overview</a></li>
-<li class="chapter" data-level="11.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>11.4</b> Methods</a><ul>
+<li class="chapter" data-level="11.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>11.4</b> Methods</a>
+<ul>
 <li class="chapter" data-level="11.4.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>11.4.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
 <li class="chapter" data-level="11.4.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>11.4.2</b> The 1T-RRFC analysis model</a></li>
 <li class="chapter" data-level="11.4.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>11.4.3</b> The 2T-RRRC analysis model</a></li>
@@ -378,18 +437,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>11.5</b> Implementation</a></li>
 <li class="chapter" data-level="11.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>11.6</b> Results</a></li>
 <li class="chapter" data-level="11.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>11.7</b> Discussion</a></li>
-<li class="chapter" data-level="11.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>11.8</b> Appendix 1</a><ul>
+<li class="chapter" data-level="11.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>11.8</b> Appendix 1</a>
+<ul>
 <li class="chapter" data-level="11.8.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1"><i class="fa fa-check"></i><b>11.8.1</b> Example 1</a></li>
 <li class="chapter" data-level="11.8.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2"><i class="fa fa-check"></i><b>11.8.2</b> Example 2</a></li>
 <li class="chapter" data-level="11.8.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>11.8.3</b> Example 3</a></li>
 </ul></li>
 <li class="chapter" data-level="11.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix2"><i class="fa fa-check"></i><b>11.9</b> Appendix 2</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>12</b> CAD optimal operating point</a><ul>
+<li class="chapter" data-level="12" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>12</b> CAD optimal operating point</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>12.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="12.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>12.2</b> Introduction</a></li>
 <li class="chapter" data-level="12.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>12.3</b> Methods</a></li>
-<li class="chapter" data-level="12.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>12.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a><ul>
+<li class="chapter" data-level="12.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>12.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="optim-op-point.html"><a href="optim-op-point.html#summary-table"><i class="fa fa-check"></i><b>12.4.1</b> Summary table</a></li>
 <li class="chapter" data-level="12.4.2" data-path="optim-op-point.html"><a href="optim-op-point.html#froc-1"><i class="fa fa-check"></i><b>12.4.2</b> FROC</a></li>
 <li class="chapter" data-level="12.4.3" data-path="optim-op-point.html"><a href="optim-op-point.html#wafroc-1"><i class="fa fa-check"></i><b>12.4.3</b> wAFROC</a></li>
@@ -399,25 +461,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-mu"><i class="fa fa-check"></i><b>12.5</b> Varying <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> optimizations</a></li>
 <li class="chapter" data-level="12.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations"><i class="fa fa-check"></i><b>12.6</b> Limiting situations</a></li>
 <li class="chapter" data-level="12.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-trends"><i class="fa fa-check"></i><b>12.7</b> Trends</a></li>
-<li class="chapter" data-level="12.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>12.8</b> Applying the method</a><ul>
+<li class="chapter" data-level="12.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>12.8</b> Applying the method</a>
+<ul>
 <li class="chapter" data-level="12.8.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>12.8.1</b> A CAD application</a></li>
 </ul></li>
 <li class="chapter" data-level="12.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>12.9</b> TBA Discussion</a></li>
-<li class="chapter" data-level="12.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a><ul>
+<li class="chapter" data-level="12.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a>
+<ul>
 <li class="chapter" data-level="12.10.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>12.10.1</b> Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
 <li class="chapter" data-level="12.10.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>12.10.2</b> Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
 <li class="chapter" data-level="12.10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>12.10.3</b> Limiting cases</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> Analyzing a dataset with only diseased cases</a><ul>
+<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> Analyzing a dataset with only diseased cases</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished"><i class="fa fa-check"></i><b>13.1</b> TBA How much finished</a></li>
-<li class="chapter" data-level="13.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>13.2</b> The problem</a><ul>
+<li class="chapter" data-level="13.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>13.2</b> The problem</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-step-1"><i class="fa fa-check"></i><b>13.2.1</b> Step 1: Create a test (diseased cases only) dataset</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>DATASETS</b></span></li>
-<li class="chapter" data-level="14" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>14</b> Datasets</a><ul>
-<li class="chapter" data-level="14.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetsdd"><i class="fa fa-check"></i><b>14.1</b> Datasets embedded in <code>RJafroc</code></a><ul>
+<li class="chapter" data-level="14" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>14</b> Datasets</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetsdd"><i class="fa fa-check"></i><b>14.1</b> Datasets embedded in <code>RJafroc</code></a>
+<ul>
 <li class="chapter" data-level="14.1.1" data-path="datasets.html"><a href="datasets.html#datasets-dataset01"><i class="fa fa-check"></i><b>14.1.1</b> Dataset01</a></li>
 <li class="chapter" data-level="14.1.2" data-path="datasets.html"><a href="datasets.html#datasets-dataset02"><i class="fa fa-check"></i><b>14.1.2</b> Dataset02</a></li>
 <li class="chapter" data-level="14.1.3" data-path="datasets.html"><a href="datasets.html#datasets-dataset03"><i class="fa fa-check"></i><b>14.1.3</b> Dataset03</a></li>
@@ -433,7 +501,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1.13" data-path="datasets.html"><a href="datasets.html#datasets-dataset13"><i class="fa fa-check"></i><b>14.1.13</b> Dataset13</a></li>
 <li class="chapter" data-level="14.1.14" data-path="datasets.html"><a href="datasets.html#datasets-dataset14"><i class="fa fa-check"></i><b>14.1.14</b> Dataset14</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="datasets.html"><a href="datasets.html#other-datasets"><i class="fa fa-check"></i><b>14.2</b> Other datasets</a><ul>
+<li class="chapter" data-level="14.2" data-path="datasets.html"><a href="datasets.html#other-datasets"><i class="fa fa-check"></i><b>14.2</b> Other datasets</a>
+<ul>
 <li class="chapter" data-level="14.2.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetCadLroc"><i class="fa fa-check"></i><b>14.2.1</b> DatasetCadLroc</a></li>
 <li class="chapter" data-level="14.2.2" data-path="datasets.html"><a href="datasets.html#datasets-datasetCadSimuFroc"><i class="fa fa-check"></i><b>14.2.2</b> datasetCadSimuFroc</a></li>
 </ul></li>
@@ -462,216 +531,216 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="references" class="section level1 unnumbered hasAnchor">
 <h1>REFERENCES<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
-<div id="refs" class="references">
-<div>
-<p>Bamber, Donald. 1975. “The Area Above the Ordinal Dominance Graph and the Area Below the Receiver Operating Characteristic Graph.” <em>Journal of Mathematical Psychology</em> 12 (4): 387–415.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Bamber, Donald. 1975. <span>“The Area Above the Ordinal Dominance Graph and the Area Below the Receiver Operating Characteristic Graph.”</span> <em>Journal of Mathematical Psychology</em> 12 (4): 387–415.
 </div>
-<div>
-<p>Barrett, Harrison H, and Kyle J Myers. 2013. <em>Foundations of Image Science</em>. John Wiley &amp; Sons.</p>
+<div class="csl-entry">
+Barrett, Harrison H, and Kyle J Myers. 2013. <em>Foundations of Image Science</em>. John Wiley &amp; Sons.
 </div>
-<div>
-<p>Black, William C. 2000. “Anatomic Extent of Disease: A Critical Variable in Reports of Diagnostic Accuracy.” Journal Article. <em>Radiology</em> 217 (2): 319–20. <a href="http://radiology.rsnajnls.org">http://radiology.rsnajnls.org</a>.</p>
+<div class="csl-entry">
+Black, William C. 2000. <span>“Anatomic Extent of Disease: A Critical Variable in Reports of Diagnostic Accuracy.”</span> Journal Article. <em>Radiology</em> 217 (2): 319–20. <a href="http://radiology.rsnajnls.org">http://radiology.rsnajnls.org</a>.
 </div>
-<div>
-<p>Black, William C., and Andrew J. Dwyer. 1990. “Local Versus Global Measures of Accuracy: An Important Distinction for Diagnostic Imaging.” Journal Article. <em>Med Decis Making</em> 10 (4): 266–73. <a href="https://doi.org/10.1177/0272989x9001000404">https://doi.org/10.1177/0272989x9001000404</a>.</p>
+<div class="csl-entry">
+Black, William C., and Andrew J. Dwyer. 1990. <span>“Local Versus Global Measures of Accuracy: An Important Distinction for Diagnostic Imaging.”</span> Journal Article. <em>Med Decis Making</em> 10 (4): 266–73. <a href="https://doi.org/10.1177/0272989x9001000404">https://doi.org/10.1177/0272989x9001000404</a>.
 </div>
-<div>
-<p>Bolker, Ben, and R Development Core Team. 2022. <em>Bbmle: Tools for General Maximum Likelihood Estimation</em>. <a href="https://CRAN.R-project.org/package=bbmle">https://CRAN.R-project.org/package=bbmle</a>.</p>
+<div class="csl-entry">
+Bolker, Ben, and R Development Core Team. 2022. <em>Bbmle: Tools for General Maximum Likelihood Estimation</em>. <a href="https://CRAN.R-project.org/package=bbmle">https://CRAN.R-project.org/package=bbmle</a>.
 </div>
-<div>
-<p>Broyden, Charles George. 1970. “The Convergence of a Class of Double-Rank Minimization Algorithms 1. General Considerations.” Journal Article. <em>IMA Journal of Applied Mathematics</em> 6 (1): 76–90.</p>
+<div class="csl-entry">
+Broyden, Charles George. 1970. <span>“The Convergence of a Class of Double-Rank Minimization Algorithms 1. General Considerations.”</span> Journal Article. <em>IMA Journal of Applied Mathematics</em> 6 (1): 76–90.
 </div>
-<div>
-<p>Bunch, Philip C, John F Hamilton, Gary K Sanderson, and Arthur H Simmons. 1977. “A Free Response Approach to the Measurement and Characterization of Radiographic Observer Performance.” In <em>Application of Optical Instrumentation in Medicine Vi</em>, 127:124–35. International Society for Optics; Photonics.</p>
+<div class="csl-entry">
+Bunch, Philip C, John F Hamilton, Gary K Sanderson, and Arthur H Simmons. 1977. <span>“A Free Response Approach to the Measurement and Characterization of Radiographic Observer Performance.”</span> In <em>Application of Optical Instrumentation in Medicine VI</em>, 127:124–35. International Society for Optics; Photonics.
 </div>
-<div>
-<p>Chakraborty, Dev P. 1989. “Maximum Likelihood Analysis of Free-Response Receiver Operating Characteristic (Froc) Data.” <em>Medical Physics</em> 16 (4): 561–68.</p>
+<div class="csl-entry">
+Chakraborty, D. P., E. S. Breatnach, M. V. Yester, B. Soto, G. T. Barnes, and R. G. Fraser. 1986. <span>“Digital and Conventional Chest Imaging: A Modified <span>ROC</span> Study of Observer Performance Using Simulated Nodules.”</span> Journal Article. <em>Radiology</em> 158: 35–39. <a href="https://doi.org/10.1148/radiology.158.1.3940394">https://doi.org/10.1148/radiology.158.1.3940394</a>.
 </div>
-<div>
-<p>———. 1997. “Computer Analysis of Mammography Phantom Images (Campi): An Application to the Measurement of Microcalcification Image Quality of Directly Acquired Digital Images.” <em>Medical Physics</em> 24 (8): 1269–77.</p>
+<div class="csl-entry">
+Chakraborty, Dev P. 1989. <span>“Maximum Likelihood Analysis of Free-Response Receiver Operating Characteristic (FROC) Data.”</span> <em>Medical Physics</em> 16 (4): 561–68.
 </div>
-<div>
-<p>———. 2006. “A Search Model and Figure of Merit for Observer Data Acquired According to the Free-Response Paradigm.” <em>Physics in Medicine &amp; Biology</em> 51 (14): 3449.</p>
+<div class="csl-entry">
+———. 1997. <span>“Computer Analysis of Mammography Phantom Images (CAMPI): An Application to the Measurement of Microcalcification Image Quality of Directly Acquired Digital Images.”</span> <em>Medical Physics</em> 24 (8): 1269–77.
 </div>
-<div>
-<p>———. 2017. <em>Observer Performance Methods for Diagnostic Imaging: Foundations, Modeling, and Applications with R-Based Examples</em>. Boca Raton, FL: CRC Press.</p>
+<div class="csl-entry">
+———. 2006. <span>“A Search Model and Figure of Merit for Observer Data Acquired According to the Free-Response Paradigm.”</span> <em>Physics in Medicine &amp; Biology</em> 51 (14): 3449.
 </div>
-<div>
-<p>Chakraborty, Dev P., and K. S. Berbaum. 2004. “Observer Studies Involving Detection and Localization: Modeling, Analysis and Validation.” Journal Article. <em>Med Phys</em> 31 (8): 2313–30.</p>
+<div class="csl-entry">
+———. 2017. <em>Observer Performance Methods for Diagnostic Imaging: Foundations, Modeling, and Applications with r-Based Examples</em>. Boca Raton, FL: CRC Press.
 </div>
-<div>
-<p>Chakraborty, Dev P., and H. J. Yoon. 2009. “JAFROC Analysis Revisited: Figure-of-Merit Considerations for Human Observer Studies.” Journal Article. <em>Proc. SPIE Medical Imaging: Image Perception, Observer Performance, and Technology Assessment</em> 7263: 72630T.</p>
+<div class="csl-entry">
+Chakraborty, Dev P., and K. S. Berbaum. 2004. <span>“Observer Studies Involving Detection and Localization: Modeling, Analysis and Validation.”</span> Journal Article. <em>Med Phys</em> 31 (8): 2313–30.
 </div>
-<div>
-<p>Chakraborty, Dev P, and Xuetong Zhai. 2016. “On the Meaning of the Weighted Alternative Free-Response Operating Characteristic Figure of Merit.” Journal Article. <em>Medical Physics</em> 43 (5): 2548–57.</p>
+<div class="csl-entry">
+Chakraborty, Dev P., and H. J. Yoon. 2009. <span>“<span>JAFROC</span> Analysis Revisited: Figure-of-Merit Considerations for Human Observer Studies.”</span> Journal Article. <em>Proc. SPIE Medical Imaging: Image Perception, Observer Performance, and Technology Assessment</em> 7263: 72630T.
 </div>
-<div>
-<p>Chakraborty, Dev, and Xuetong Zhai. 2022. <em>RJafroc: Artificial Intelligence Systems and Observer Performance</em>. <a href="https://dpc10ster.github.io/RJafroc/">https://dpc10ster.github.io/RJafroc/</a>.</p>
+<div class="csl-entry">
+Chakraborty, Dev P, and Xuetong Zhai. 2016. <span>“On the Meaning of the Weighted Alternative Free-Response Operating Characteristic Figure of Merit.”</span> Journal Article. <em>Medical Physics</em> 43 (5): 2548–57.
 </div>
-<div>
-<p>Chakraborty, DP. 2006. “ROC Curves Predicted by a Model of Visual Search.” <em>Physics in Medicine &amp; Biology</em> 51 (14): 3463.</p>
+<div class="csl-entry">
+Chakraborty, Dev, and Xuetong Zhai. 2022. <em>RJafroc: Artificial Intelligence Systems and Observer Performance</em>. <a href="https://dpc10ster.github.io/RJafroc/">https://dpc10ster.github.io/RJafroc/</a>.
 </div>
-<div>
-<p>Chakraborty, D. P., E. S. Breatnach, M. V. Yester, B. Soto, G. T. Barnes, and R. G. Fraser. 1986. “Digital and Conventional Chest Imaging: A Modified ROC Study of Observer Performance Using Simulated Nodules.” Journal Article. <em>Radiology</em> 158: 35–39. <a href="https://doi.org/10.1148/radiology.158.1.3940394">https://doi.org/10.1148/radiology.158.1.3940394</a>.</p>
+<div class="csl-entry">
+Chakraborty, DP. 2006. <span>“<span>ROC</span> Curves Predicted by a Model of Visual Search.”</span> <em>Physics in Medicine &amp; Biology</em> 51 (14): 3463.
 </div>
-<div>
-<p>Chakraborty, DP, and Tony Svahn. 2011. “Estimating the Parameters of a Model of Visual Search from Roc Data: An Alternate Method for Fitting Proper Roc Curves.” In <em>Medical Imaging 2011: Image Perception, Observer Performance, and Technology Assessment</em>, 7966:189–97. SPIE.</p>
+<div class="csl-entry">
+Chakraborty, DP, and Tony Svahn. 2011. <span>“Estimating the Parameters of a Model of Visual Search from ROC Data: An Alternate Method for Fitting Proper ROC Curves.”</span> In <em>Medical Imaging 2011: Image Perception, Observer Performance, and Technology Assessment</em>, 7966:189–97. SPIE.
 </div>
-<div>
-<p>Chakraborty, DP, and Hong-Jun Yoon. 2008. “Operating Characteristics Predicted by Models for Diagnostic Tasks Involving Lesion Localization.” <em>Medical Physics</em> 35 (2): 435–45.</p>
+<div class="csl-entry">
+Chakraborty, DP, and Hong-Jun Yoon. 2008. <span>“Operating Characteristics Predicted by Models for Diagnostic Tasks Involving Lesion Localization.”</span> <em>Medical Physics</em> 35 (2): 435–45.
 </div>
-<div>
-<p>De Boo, Diederick W, Martin Uffmann, Michael Weber, Shandra Bipat, Eelco F Boorsma, Maeke J Scheerder, Nicole J Freling, and Cornelia M Schaefer-Prokop. 2011. “Computer-Aided Detection of Small Pulmonary Nodules in Chest Radiographs: An Observer Study.” Journal Article. <em>Academic Radiology</em> 18 (12): 1507–14.</p>
+<div class="csl-entry">
+De Boo, Diederick W, Martin Uffmann, Michael Weber, Shandra Bipat, Eelco F Boorsma, Maeke J Scheerder, Nicole J Freling, and Cornelia M Schaefer-Prokop. 2011. <span>“Computer-Aided Detection of Small Pulmonary Nodules in Chest Radiographs: An Observer Study.”</span> Journal Article. <em>Academic Radiology</em> 18 (12): 1507–14.
 </div>
-<div>
-<p>DeSantis, Carol, Rebecca Siegel, Priti Bandi, and Ahmedin Jemal. 2011. “Breast Cancer Statistics, 2011.” <em>CA: A Cancer Journal for Clinicians</em> 61 (6): 408–18.</p>
+<div class="csl-entry">
+DeSantis, Carol, Rebecca Siegel, Priti Bandi, and Ahmedin Jemal. 2011. <span>“Breast Cancer Statistics, 2011.”</span> <em>CA: A Cancer Journal for Clinicians</em> 61 (6): 408–18.
 </div>
-<div>
-<p>Dobbins III, James T, H Page McAdams, John M Sabol, Dev P Chakraborty, Ella A Kazerooni, Gautham P Reddy, Jenny Vikgren, and Magnus Båth. 2016. “Multi-Institutional Evaluation of Digital Tomosynthesis, Dual-Energy Radiography, and Conventional Chest Radiography for the Detection and Management of Pulmonary Nodules.” Journal Article. <em>Radiology</em> 282 (1): 236–50.</p>
+<div class="csl-entry">
+Dobbins III, James T, H Page McAdams, John M Sabol, Dev P Chakraborty, Ella A Kazerooni, Gautham P Reddy, Jenny Vikgren, and Magnus Båth. 2016. <span>“Multi-Institutional Evaluation of Digital Tomosynthesis, Dual-Energy Radiography, and Conventional Chest Radiography for the Detection and Management of Pulmonary Nodules.”</span> Journal Article. <em>Radiology</em> 282 (1): 236–50.
 </div>
-<div>
-<p>Dorfman, Donald D, Kevin S Berbaum, and Charles E Metz. 1992. “Receiver Operating Characteristic Rating Analysis: Generalization to the Population of Readers and Patients with the Jackknife Method.” <em>Investigative Radiology</em> 27 (9): 723–31.</p>
+<div class="csl-entry">
+Dorfman, Donald D, Kevin S Berbaum, and Charles E Metz. 1992. <span>“Receiver Operating Characteristic Rating Analysis: Generalization to the Population of Readers and Patients with the Jackknife Method.”</span> <em>Investigative Radiology</em> 27 (9): 723–31.
 </div>
-<div>
-<p>Duchowski, Andrew T, and Andrew T Duchowski. 2017. <em>Eye Tracking Methodology: Theory and Practice</em>. Springer.</p>
+<div class="csl-entry">
+Duchowski, Andrew T, and Andrew T Duchowski. 2017. <em>Eye Tracking Methodology: Theory and Practice</em>. Springer.
 </div>
-<div>
-<p>Edwards, Darrin C, Matthew A Kupinski, Charles E Metz, and Robert M Nishikawa. 2002. “Maximum Likelihood Fitting of Froc Curves Under an Initial-Detection-and-Candidate-Analysis Model.” <em>Medical Physics</em> 29 (12): 2861–70.</p>
+<div class="csl-entry">
+Edwards, Darrin C, Matthew A Kupinski, Charles E Metz, and Robert M Nishikawa. 2002. <span>“Maximum Likelihood Fitting of FROC Curves Under an Initial-Detection-and-Candidate-Analysis Model.”</span> <em>Medical Physics</em> 29 (12): 2861–70.
 </div>
-<div>
-<p>Efron, Bradley, and Robert J Tibshirani. 1994. <em>An Introduction to the Bootstrap</em>. CRC press.</p>
+<div class="csl-entry">
+Efron, Bradley, and Robert J Tibshirani. 1994. <em>An Introduction to the Bootstrap</em>. CRC press.
 </div>
-<div>
-<p>Egan, J. P., G. Z. Greenburg, and A. I. Schulman. 1961. “Operating Characteristics, Signal Detectability and the Method of Free Response.” Journal Article. <em>J Acoust Soc. Am.</em> 33: 993–1007.</p>
+<div class="csl-entry">
+Egan, J. P., G. Z. Greenburg, and A. I. Schulman. 1961. <span>“Operating Characteristics, Signal Detectability and the Method of Free Response.”</span> Journal Article. <em>J Acoust Soc. Am.</em> 33: 993–1007.
 </div>
-<div>
-<p>Ernster, Virginia L. 1981. “The Epidemiology of Benign Breast Disease.” Journal Article. <em>Epidemiologic Reviews</em> 3 (1): 184–202.</p>
+<div class="csl-entry">
+Ernster, Virginia L. 1981. <span>“The Epidemiology of Benign Breast Disease.”</span> Journal Article. <em>Epidemiologic Reviews</em> 3 (1): 184–202.
 </div>
-<div>
-<p>Fisher, Ronald Aylmer, and Leonard Henry Caleb Tippett. 1928. “Limiting Forms of the Frequency Distribution of the Largest or Smallest Member of a Sample.” In <em>Mathematical Proceedings of the Cambridge Philosophical Society</em>, 24:180–90. Cambridge University Press.</p>
+<div class="csl-entry">
+Fisher, Ronald Aylmer, and Leonard Henry Caleb Tippett. 1928. <span>“Limiting Forms of the Frequency Distribution of the Largest or Smallest Member of a Sample.”</span> In <em>Mathematical Proceedings of the Cambridge Philosophical Society</em>, 24:180–90. Cambridge University Press.
 </div>
-<div>
-<p>Fletcher, Roger. 1970. “A New Approach to Variable Metric Algorithms.” Journal Article. <em>The Computer Journal</em> 13 (3): 317–22.</p>
+<div class="csl-entry">
+Fletcher, Roger. 1970. <span>“A New Approach to Variable Metric Algorithms.”</span> Journal Article. <em>The Computer Journal</em> 13 (3): 317–22.
 </div>
-<div>
-<p>———. 2013. <em>Practical Methods of Optimization</em>. Book. John Wiley; Sons.</p>
+<div class="csl-entry">
+———. 2013. <em>Practical Methods of Optimization</em>. Book. John Wiley; Sons.
 </div>
-<div>
-<p>Franken, Jr., Edmund A., Kevin S. Berbaum, Susan M. Marley, Wilbur L. Smith, Yutaka Sato, Simon C. S. Kao, and Steven G. Milam. 1992. “Evaluation of a Digital Workstation for Interpreting Neonatal Examinations: A Receiver Operating Characteristic Study.” Journal Article. <em>Investigative Radiology</em> 27 (9): 732–37. <a href="http://journals.lww.com/investigativeradiology/Fulltext/1992/09000/Evaluation_of_a_Digital_Workstation_for.16.aspx">http://journals.lww.com/investigativeradiology/Fulltext/1992/09000/Evaluation_of_a_Digital_Workstation_for.16.aspx</a>.</p>
+<div class="csl-entry">
+Franken, Jr., Edmund A., Kevin S. Berbaum, Susan M. Marley, Wilbur L. Smith, Yutaka Sato, Simon C. S. Kao, and Steven G. Milam. 1992. <span>“Evaluation of a Digital Workstation for Interpreting Neonatal Examinations: A Receiver Operating Characteristic Study.”</span> Journal Article. <em>Investigative Radiology</em> 27 (9): 732–37. <a href="http://journals.lww.com/investigativeradiology/Fulltext/1992/09000/Evaluation_of_a_Digital_Workstation_for.16.aspx">http://journals.lww.com/investigativeradiology/Fulltext/1992/09000/Evaluation_of_a_Digital_Workstation_for.16.aspx</a>.
 </div>
-<div>
-<p>Goldfarb, Donald. 1970. “A Family of Variable-Metric Methods Derived by Variational Means.” Journal Article. <em>Mathematics of Computation</em> 24 (109): 23–26.</p>
+<div class="csl-entry">
+Goldfarb, Donald. 1970. <span>“A Family of Variable-Metric Methods Derived by Variational Means.”</span> Journal Article. <em>Mathematics of Computation</em> 24 (109): 23–26.
 </div>
-<div>
-<p>Hein, Patrick A, Lasse D Krug, Valentina C Romano, Sonja Kandel, Bernd Hamm, and Patrik Rogalla. 2010. “Computer-Aided Detection in Computed Tomography Colonography with Full Fecal Tagging: Comparison of Standalone Performance of 3 Automated Polyp Detection Systems.” Journal Article. <em>Canadian Association of Radiologists Journal</em> 61 (2): 102–8.</p>
+<div class="csl-entry">
+Hein, Patrick A, Lasse D Krug, Valentina C Romano, Sonja Kandel, Bernd Hamm, and Patrik Rogalla. 2010. <span>“Computer-Aided Detection in Computed Tomography Colonography with Full Fecal Tagging: Comparison of Standalone Performance of 3 Automated Polyp Detection Systems.”</span> Journal Article. <em>Canadian Association of Radiologists Journal</em> 61 (2): 102–8.
 </div>
-<div>
-<p>Hillis, Stephen L. 2007. “A Comparison of Denominator Degrees of Freedom Methods for Multiple Observer (ROC) Analysis.” <em>Statistics in Medicine</em> 26 (3): 596–619.</p>
+<div class="csl-entry">
+Hillis, Stephen L. 2007. <span>“A Comparison of Denominator Degrees of Freedom Methods for Multiple Observer (<span>ROC</span>) Analysis.”</span> <em>Statistics in Medicine</em> 26 (3): 596–619.
 </div>
-<div>
-<p>Hillis, Stephen L, Nancy A Obuchowski, Kevin M Schartz, and Kevin S Berbaum. 2005. “A Comparison of the Dorfman–Berbaum–Metz and Obuchowski–Rockette Methods for Receiver Operating Characteristic (ROC) Data.” <em>Statistics in Medicine</em> 24 (10): 1579–1607.</p>
+<div class="csl-entry">
+Hillis, Stephen L, Nancy A Obuchowski, Kevin M Schartz, and Kevin S Berbaum. 2005. <span>“A Comparison of the Dorfman–Berbaum–Metz and Obuchowski–Rockette Methods for Receiver Operating Characteristic (<span>ROC</span>) Data.”</span> <em>Statistics in Medicine</em> 24 (10): 1579–1607.
 </div>
-<div>
-<p>Hupse, Rianne, Maurice Samulski, Marc Lobbes, Ard Heeten, MechliW Imhof-Tas, David Beijerinck, Ruud Pijnappel, Carla Boetes, and Nico Karssemeijer. 2013. “Standalone Computer-Aided Detection Compared to Radiologists’ Performance for the Detection of Mammographic Masses.” Journal Article. <em>European Radiology</em> 23 (1): 93–100. <a href="https://doi.org/10.1007/s00330-012-2562-7">https://doi.org/10.1007/s00330-012-2562-7</a>.</p>
+<div class="csl-entry">
+Hupse, Rianne, Maurice Samulski, Marc Lobbes, Ard Heeten, MechliW Imhof-Tas, David Beijerinck, Ruud Pijnappel, Carla Boetes, and Nico Karssemeijer. 2013. <span>“Standalone Computer-Aided Detection Compared to Radiologists’ Performance for the Detection of Mammographic Masses.”</span> Journal Article. <em>European Radiology</em> 23 (1): 93–100. <a href="https://doi.org/10.1007/s00330-012-2562-7">https://doi.org/10.1007/s00330-012-2562-7</a>.
 </div>
-<div>
-<p>Kooi, Thijs, Albert Gubern-Merida, Jan-Jurre Mordang, Ritse Mann, Ruud Pijnappel, Klaas Schuur, Ard den Heeten, and Nico Karssemeijer. 2016. “A Comparison Between a Deep Convolutional Neural Network and Radiologists for Classifying Regions of Interest in Mammography.” In <em>International Workshop on Breast Imaging</em>, 51–56. Springer.</p>
+<div class="csl-entry">
+Kooi, Thijs, Albert Gubern-Merida, Jan-Jurre Mordang, Ritse Mann, Ruud Pijnappel, Klaas Schuur, Ard den Heeten, and Nico Karssemeijer. 2016. <span>“A Comparison Between a Deep Convolutional Neural Network and Radiologists for Classifying Regions of Interest in Mammography.”</span> In <em>International Workshop on Breast Imaging</em>, 51–56. Springer.
 </div>
-<div>
-<p>Kundel, Harold L, and Calvin F Nodine. 2004. “Modeling Visual Search During Mammogram Viewing.” In <em>Medical Imaging 2004: Image Perception, Observer Performance, and Technology Assessment</em>, 5372:110–15. International Society for Optics; Photonics.</p>
+<div class="csl-entry">
+Kundel, Harold L, and Calvin F Nodine. 2004. <span>“Modeling Visual Search During Mammogram Viewing.”</span> In <em>Medical Imaging 2004: Image Perception, Observer Performance, and Technology Assessment</em>, 5372:110–15. International Society for Optics; Photonics.
 </div>
-<div>
-<p>Kundel, Harold L, Calvin F Nodine, and Dennis Carmody. 1978. “Visual Scanning, Pattern Recognition and Decision-Making in Pulmonary Nodule Detection.” <em>Investigative Radiology</em> 13 (3): 175–81.</p>
+<div class="csl-entry">
+Kundel, Harold L, Calvin F Nodine, and Dennis Carmody. 1978. <span>“Visual Scanning, Pattern Recognition and Decision-Making in Pulmonary Nodule Detection.”</span> <em>Investigative Radiology</em> 13 (3): 175–81.
 </div>
-<div>
-<p>Kundel, Harold L, Calvin F Nodine, Emily F Conant, and Susan P Weinstein. 2007. “Holistic Component of Image Perception in Mammogram Interpretation: Gaze-Tracking Study.” <em>Radiology</em> 242 (2): 396–402.</p>
+<div class="csl-entry">
+Kundel, Harold L, Calvin F Nodine, Emily F Conant, and Susan P Weinstein. 2007. <span>“Holistic Component of Image Perception in Mammogram Interpretation: Gaze-Tracking Study.”</span> <em>Radiology</em> 242 (2): 396–402.
 </div>
-<div>
-<p>Kundel, HL, and CF Nodine. 1983. “A Visual Concept Shapes Image Perception.” <em>Radiology</em> 146 (2): 363–68.</p>
+<div class="csl-entry">
+Kundel, HL, and CF Nodine. 1983. <span>“A Visual Concept Shapes Image Perception.”</span> <em>Radiology</em> 146 (2): 363–68.
 </div>
-<div>
-<p>Larsen, Richard J, and Morris L Marx. 2005. <em>An Introduction to Mathematical Statistics</em>. Prentice Hall.</p>
+<div class="csl-entry">
+Larsen, Richard J, and Morris L Marx. 2005. <em>An Introduction to Mathematical Statistics</em>. Prentice Hall.
 </div>
-<div>
-<p>Macmillan, Neil A, and C Douglas Creelman. 2004. <em>Detection Theory: A User’s Guide</em>. Psychology press.</p>
+<div class="csl-entry">
+Macmillan, Neil A, and C Douglas Creelman. 2004. <em>Detection Theory: A User’s Guide</em>. Psychology press.
 </div>
-<div>
-<p>Metz, C. E. 1978. “Basic Principles of ROC Analysis.” Journal Article. <em>Seminars in Nuclear Medicine</em> 8 (4): 283–98. <a href="https://doi.org/10.1016/s0001-2998(78)80014-2">https://doi.org/10.1016/s0001-2998(78)80014-2</a>.</p>
+<div class="csl-entry">
+Metz, C. E. 1978. <span>“Basic Principles of <span>ROC</span> Analysis.”</span> Journal Article. <em>Seminars in Nuclear Medicine</em> 8 (4): 283–98. <a href="https://doi.org/10.1016/s0001-2998(78)80014-2">https://doi.org/10.1016/s0001-2998(78)80014-2</a>.
 </div>
-<div>
-<p>Metz, Charles E, and Xiaochuan Pan. 1999. “‘Proper’ Binormal Roc Curves: Theory and Maximum-Likelihood Estimation.” <em>Journal of Mathematical Psychology</em> 43 (1): 1–33.</p>
+<div class="csl-entry">
+Metz, Charles E, and Xiaochuan Pan. 1999. <span>“<span>‘Proper’</span> Binormal ROC Curves: Theory and Maximum-Likelihood Estimation.”</span> <em>Journal of Mathematical Psychology</em> 43 (1): 1–33.
 </div>
-<div>
-<p>Metz, Charles E, Stuart J Starr, and Lee B Lusted. 1976. “Observer Performance in Detecting Multiple Radiographic Signals: Prediction and Analysis Using a Generalized Roc Approach.” <em>Radiology</em> 121 (2): 337–47.</p>
+<div class="csl-entry">
+Metz, Charles E, Stuart J Starr, and Lee B Lusted. 1976. <span>“Observer Performance in Detecting Multiple Radiographic Signals: Prediction and Analysis Using a Generalized ROC Approach.”</span> <em>Radiology</em> 121 (2): 337–47.
 </div>
-<div>
-<p>Miller, Harold. 1969. “The FROC Curve: A Representation of the Observer’s Performance for the Method of Free Response.” Journal Article. <em>The Journal of the Acoustical Society of America</em> 46 (6(2)): 1473–6.</p>
+<div class="csl-entry">
+Miller, Harold. 1969. <span>“The <span>FROC</span> Curve: A Representation of the Observer’s Performance for the Method of Free Response.”</span> Journal Article. <em>The Journal of the Acoustical Society of America</em> 46 (6(2)): 1473–76.
 </div>
-<div>
-<p>Nodine, Calvin F, and Harold L Kundel. 1987. “Using Eye Movements to Study Visual Search and to Improve Tumor Detection.” <em>Radiographics</em> 7 (6): 1241–50.</p>
+<div class="csl-entry">
+Nodine, Calvin F, and Harold L Kundel. 1987. <span>“Using Eye Movements to Study Visual Search and to Improve Tumor Detection.”</span> <em>Radiographics</em> 7 (6): 1241–50.
 </div>
-<div>
-<p>Obuchowski, Nancy A., Michael L. Lieber, and Kimerly A. Powell. 2000. “Data Analysis for Detection and Localization of Multiple Abnormalities with Application to Mammography.” Journal Article. <em>Acad. Radiol.</em> 7 (7): 516–25.</p>
+<div class="csl-entry">
+Obuchowski, Nancy A., Michael L. Lieber, and Kimerly A. Powell. 2000. <span>“Data Analysis for Detection and Localization of Multiple Abnormalities with Application to Mammography.”</span> Journal Article. <em>Acad. Radiol.</em> 7 (7): 516–25.
 </div>
-<div>
-<p>Obuchowski, Nancy A., and Howard E. Rockette. 1995. “Hypothesis Testing of Diagnostic Accuracy for Multiple Readers and Multiple Tests an Anova Approach with Dependent Observations.” <em>Communications in Statistics-Simulation and Computation</em> 24 (2): 285–308.</p>
+<div class="csl-entry">
+Obuchowski, Nancy A., and Howard E. Rockette. 1995. <span>“Hypothesis Testing of Diagnostic Accuracy for Multiple Readers and Multiple Tests an Anova Approach with Dependent Observations.”</span> <em>Communications in Statistics-Simulation and Computation</em> 24 (2): 285–308.
 </div>
-<div>
-<p>Penedo, Monica, Miguel Souto, Pablo G. Tahoces, Jose M. Carreira, Justo Villalon, Gerardo Porto, Carmen Seoane, et al. 2005. “Free-Response Receiver Operating Characteristic Evaluation of Lossy Jpeg2000 and Object-Based Set Partitioning in Hierarchical Trees Compression of Digitized Mammograms.” Journal Article. <em>Radiology</em> 237 (2): 450–57.</p>
+<div class="csl-entry">
+Penedo, Monica, Miguel Souto, Pablo G. Tahoces, Jose M. Carreira, Justo Villalon, Gerardo Porto, Carmen Seoane, et al. 2005. <span>“Free-Response Receiver Operating Characteristic Evaluation of Lossy JPEG2000 and Object-Based Set Partitioning in Hierarchical Trees Compression of Digitized Mammograms.”</span> Journal Article. <em>Radiology</em> 237 (2): 450–57.
 </div>
-<div>
-<p>Rao, Vijay M, David C Levin, Laurence Parker, Barbara Cavanaugh, Andrea J Frangos, and Jonathan H Sunshine. 2010. “How Widely Is Computer-Aided Detection Used in Screening and Diagnostic Mammography?” <em>Journal of the American College of Radiology</em> 7 (10): 802–5.</p>
+<div class="csl-entry">
+Rao, Vijay M, David C Levin, Laurence Parker, Barbara Cavanaugh, Andrea J Frangos, and Jonathan H Sunshine. 2010. <span>“How Widely Is Computer-Aided Detection Used in Screening and Diagnostic Mammography?”</span> <em>Journal of the American College of Radiology</em> 7 (10): 802–5.
 </div>
-<div>
-<p>Ruschin, Mark., Pontus. Timberg, Magnus. Bath, Bengt. Hemdal, Tony. Svahn, Rob. Saunders, Ehsan. Samei, et al. 2007. “Dose Dependence of Mass and Microcalcification Detection in Digital Mammography: Free Response Human Observer Studies.” Journal Article. <em>Medical Physics</em> 34: 400–407.</p>
+<div class="csl-entry">
+Ruschin, Mark., Pontus. Timberg, Magnus. Bath, Bengt. Hemdal, Tony. Svahn, Rob. Saunders, Ehsan. Samei, et al. 2007. <span>“Dose Dependence of Mass and Microcalcification Detection in Digital Mammography: Free Response Human Observer Studies.”</span> Journal Article. <em>Medical Physics</em> 34: 400–407.
 </div>
-<div>
-<p>Shanno, David F. 1970. “Conditioning of Quasi-Newton Methods for Function Minimization.” Journal Article. <em>Mathematics of Computation</em> 24 (111): 647–56.</p>
+<div class="csl-entry">
+Shanno, David F. 1970. <span>“Conditioning of Quasi-Newton Methods for Function Minimization.”</span> Journal Article. <em>Mathematics of Computation</em> 24 (111): 647–56.
 </div>
-<div>
-<p>Shanno, David F, and Paul C Kettler. 1970. “Optimal Conditioning of Quasi-Newton Methods.” Journal Article. <em>Mathematics of Computation</em> 24 (111): 657–64.</p>
+<div class="csl-entry">
+Shanno, David F, and Paul C Kettler. 1970. <span>“Optimal Conditioning of Quasi-Newton Methods.”</span> Journal Article. <em>Mathematics of Computation</em> 24 (111): 657–64.
 </div>
-<div>
-<p>Siddiqui, Khan M, Jeffrey P Johnson, Bruce I Reiner, and Eliot L Siegel. 2005. “Discrete Cosine Transform Jpeg Compression Vs. 2D Jpeg2000 Compression: JNDmetrix Visual Discrimination Model Image Quality Analysis.” In <em>Medical Imaging 2005: PACS and Imaging Informatics</em>, 5748:202–7. International Society for Optics; Photonics.</p>
+<div class="csl-entry">
+Siddiqui, Khan M, Jeffrey P Johnson, Bruce I Reiner, and Eliot L Siegel. 2005. <span>“Discrete Cosine Transform JPEG Compression Vs. 2D JPEG2000 Compression: JNDmetrix Visual Discrimination Model Image Quality Analysis.”</span> In <em>Medical Imaging 2005: PACS and Imaging Informatics</em>, 5748:202–7. International Society for Optics; Photonics.
 </div>
-<div>
-<p>Starr, SJ, CE Metz, LB Lusted, PF Sharp, and KB Herath. 1977. “Comments on the Generalization of Receiver Operating Characteristic Analysis to Detection and Localization Tasks.” <em>Physics in Medicine &amp; Biology</em> 22 (2): 376.</p>
+<div class="csl-entry">
+Starr, SJ, CE Metz, LB Lusted, PF Sharp, and KB Herath. 1977. <span>“Comments on the Generalization of Receiver Operating Characteristic Analysis to Detection and Localization Tasks.”</span> <em>Physics in Medicine &amp; Biology</em> 22 (2): 376.
 </div>
-<div>
-<p>Starr, Stuart J, Charles E Metz, Lee B Lusted, and David J Goodenough. 1975. “Visual Detection and Localization of Radiographic Images.” <em>Radiology</em> 116 (3): 533–38.</p>
+<div class="csl-entry">
+Starr, Stuart J, Charles E Metz, Lee B Lusted, and David J Goodenough. 1975. <span>“Visual Detection and Localization of Radiographic Images.”</span> <em>Radiology</em> 116 (3): 533–38.
 </div>
-<div>
-<p>Summers, Ronald M, Laurie R Handwerker, Perry J Pickhardt, Robert L Van Uitert, Keshav K Deshpande, Srinath Yeshwant, Jianhua Yao, and Marek Franaszek. 2008. “Performance of a Previously Validated Ct Colonography Computer-Aided Detection System in a New Patient Population.” Journal Article. <em>American Journal of Roentgenology</em> 191 (1): 168–74.</p>
+<div class="csl-entry">
+Summers, Ronald M, Laurie R Handwerker, Perry J Pickhardt, Robert L Van Uitert, Keshav K Deshpande, Srinath Yeshwant, Jianhua Yao, and Marek Franaszek. 2008. <span>“Performance of a Previously Validated CT Colonography Computer-Aided Detection System in a New Patient Population.”</span> Journal Article. <em>American Journal of Roentgenology</em> 191 (1): 168–74.
 </div>
-<div>
-<p>Swensson, Richard G. 1996. “Unified Measurement of Observer Performance in Detecting and Localizing Target Objects on Images.” <em>Medical Physics</em> 23 (10): 1709–25.</p>
+<div class="csl-entry">
+Swensson, Richard G. 1996. <span>“Unified Measurement of Observer Performance in Detecting and Localizing Target Objects on Images.”</span> <em>Medical Physics</em> 23 (10): 1709–25.
 </div>
-<div>
-<p>Tan, Tao, Bram Platel, Henkjan Huisman, Clara Sánchez, Roel Mus, and Nico Karssemeijer. 2012. “Computer-Aided Lesion Diagnosis in Automated 3-d Breast Ultrasound Using Coronal Spiculation.” Journal Article. <em>Medical Imaging, IEEE Transactions on</em> 31 (5): 1034–42.</p>
+<div class="csl-entry">
+Tan, Tao, Bram Platel, Henkjan Huisman, Clara Sánchez, Roel Mus, and Nico Karssemeijer. 2012. <span>“Computer-Aided Lesion Diagnosis in Automated 3-d Breast Ultrasound Using Coronal Spiculation.”</span> Journal Article. <em>Medical Imaging, IEEE Transactions on</em> 31 (5): 1034–42.
 </div>
-<div>
-<p>Taylor, Stuart A, Steve Halligan, David Burling, Mary E Roddie, Lesley Honeyfield, Justine McQuillan, Hamdam Amin, and Jamshid Dehmeshki. 2006. “Computer-Assisted Reader Software Versus Expert Reviewers for Polyp Detection on Ct Colonography.” Journal Article. <em>American Journal of Roentgenology</em> 186 (3): 696–702.</p>
+<div class="csl-entry">
+Taylor, Stuart A, Steve Halligan, David Burling, Mary E Roddie, Lesley Honeyfield, Justine McQuillan, Hamdam Amin, and Jamshid Dehmeshki. 2006. <span>“Computer-Assisted Reader Software Versus Expert Reviewers for Polyp Detection on CT Colonography.”</span> Journal Article. <em>American Journal of Roentgenology</em> 186 (3): 696–702.
 </div>
-<div>
-<p>Thompson, John D, Peter Hogg, David J Manning, Katy Szczepura, and Dev P Chakraborty. 2014. “A Free-Response Evaluation Determining Value in the Computed Tomography Attenuation Correction Image for Revealing Pulmonary Incidental Findings: A Phantom Study.” Journal Article. <em>Academic Radiology</em> 21 (4): 538–45.</p>
+<div class="csl-entry">
+Thompson, John D, Peter Hogg, David J Manning, Katy Szczepura, and Dev P Chakraborty. 2014. <span>“A Free-Response Evaluation Determining Value in the Computed Tomography Attenuation Correction Image for Revealing Pulmonary Incidental Findings: A Phantom Study.”</span> Journal Article. <em>Academic Radiology</em> 21 (4): 538–45.
 </div>
-<div>
-<p>Van Dyke, C. W., R. D. White, N. A. Obuchowski, M. A. Geisinger, R. J. Lorig, and M. A. Meziane. 1993. “Cine MRI in the Diagnosis of Thoracic Aortic Dissection.” Journal Article. <em>79th RSNA Meetings</em>.</p>
+<div class="csl-entry">
+Van Dyke, C. W., R. D. White, N. A. Obuchowski, M. A. Geisinger, R. J. Lorig, and M. A. Meziane. 1993. <span>“Cine <span>MRI</span> in the Diagnosis of Thoracic Aortic Dissection.”</span> Journal Article. <em>79th RSNA Meetings</em>.
 </div>
-<div>
-<p>Vikgren, Jenny, Sara Zachrisson, Angelica Svalkvist, Ase A. Johnsson, Marianne Boijsen, Agneta Flinck, Susanne Kheddache, and Magnus Bath. 2008. “Comparison of Chest Tomosynthesis and Chest Radiography for Detection of Pulmonary Nodules: Human Observer Study of Clinical Cases.” Journal Article. <em>Radiology</em> 249 (3): 1034–41. <a href="https://doi.org/10.1148/radiol.2492080304">https://doi.org/10.1148/radiol.2492080304</a>.</p>
+<div class="csl-entry">
+Vikgren, Jenny, Sara Zachrisson, Angelica Svalkvist, Ase A. Johnsson, Marianne Boijsen, Agneta Flinck, Susanne Kheddache, and Magnus Bath. 2008. <span>“Comparison of Chest Tomosynthesis and Chest Radiography for Detection of Pulmonary Nodules: Human Observer Study of Clinical Cases.”</span> Journal Article. <em>Radiology</em> 249 (3): 1034–41. <a href="https://doi.org/10.1148/radiol.2492080304">https://doi.org/10.1148/radiol.2492080304</a>.
 </div>
-<div>
-<p>Warren, Lucy M, Rosalind M Given-Wilson, Matthew G Wallis, Julie Cooke, Mark D Halling-Brown, Alistair Mackenzie, Dev P Chakraborty, Hilde Bosmans, David R Dance, and Kenneth C Young. 2014. “The Effect of Image Processing on the Detection of Cancers in Digital Mammography.” Journal Article. <em>American Journal of Roentgenology</em> 203 (2): 387–93.</p>
+<div class="csl-entry">
+Warren, Lucy M, Rosalind M Given-Wilson, Matthew G Wallis, Julie Cooke, Mark D Halling-Brown, Alistair Mackenzie, Dev P Chakraborty, Hilde Bosmans, David R Dance, and Kenneth C Young. 2014. <span>“The Effect of Image Processing on the Detection of Cancers in Digital Mammography.”</span> Journal Article. <em>American Journal of Roentgenology</em> 203 (2): 387–93.
 </div>
-<div>
-<p>Youden, William J. 1950. “Index for Rating Diagnostic Tests.” <em>Cancer</em> 3 (1): 32–35.</p>
+<div class="csl-entry">
+Youden, William J. 1950. <span>“Index for Rating Diagnostic Tests.”</span> <em>Cancer</em> 3 (1): 32–35.
 </div>
-<div>
-<p>Zanca, Federica, Jurgen Jacobs, Chantal Van Ongeval, Filip Claus, Valerie Celis, Catherine Geniets, Veerle Provost, Herman Pauwels, Guy Marchal, and Hilde Bosmans. 2009. “Evaluation of Clinical Image Processing Algorithms Used in Digital Mammography.” <em>Medical Physics</em> 36 (3): 765–75.</p>
+<div class="csl-entry">
+Zanca, Federica, Jurgen Jacobs, Chantal Van Ongeval, Filip Claus, Valerie Celis, Catherine Geniets, Veerle Provost, Herman Pauwels, Guy Marchal, and Hilde Bosmans. 2009. <span>“Evaluation of Clinical Image Processing Algorithms Used in Digital Mammography.”</span> <em>Medical Physics</em> 36 (3): 765–75.
 </div>
-<div>
-<p>Zanca, F., S. L. Hillis, F. Claus, C. Van Ongeval, V. Celis, V. Provoost, H.-J Yoon, and H. Bosmans. 2012. “Correlation of Free-Response and Receiver-Operating-Characteristic Area-Under-the-Curve Estimates: Results from Independently Conducted FROC/ROC Studies in Mammography.” Journal Article. <em>Med Phys</em> 39 (10): 5917–29.</p>
+<div class="csl-entry">
+Zanca, F., S. L. Hillis, F. Claus, C. Van Ongeval, V. Celis, V. Provoost, H.-J Yoon, and H. Bosmans. 2012. <span>“Correlation of Free-Response and Receiver-Operating-Characteristic Area-Under-the-Curve Estimates: Results from Independently Conducted <span>FROC</span>/<span>ROC</span> Studies in Mammography.”</span> Journal Article. <em>Med Phys</em> 39 (10): 5917–29.
 </div>
 </div>
 </div>

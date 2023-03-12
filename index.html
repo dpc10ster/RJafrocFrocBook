@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-02-28" />
+<meta name="date" content="2023-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,7 +49,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -58,18 +57,18 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,13 +88,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -108,7 +107,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -122,6 +121,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -140,7 +161,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="part"><span><b>Preamble</b></span></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Please ignore preface</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Please ignore preface</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#please-ignore-issues"><i class="fa fa-check"></i><b>1.1</b> Please ignore issues</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#please-ignore-following-sections"><i class="fa fa-check"></i><b>1.2</b> Please ignore following sections</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tba-rationale-and-organization"><i class="fa fa-check"></i><b>1.3</b> TBA Rationale and Organization</a></li>
@@ -154,34 +176,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.11" data-path="index.html"><a href="index.html#please-ignore-is-this-book-relevant-to-you-and-what-are-the-alternatives"><i class="fa fa-check"></i><b>1.11</b> Please ignore: Is this book relevant to you and what are the alternatives?</a></li>
 <li class="chapter" data-level="1.12" data-path="index.html"><a href="index.html#please-ignore-chapters-needing-heavy-edits"><i class="fa fa-check"></i><b>1.12</b> Please ignore: Chapters needing heavy edits</a></li>
 <li class="chapter" data-level="1.13" data-path="index.html"><a href="index.html#please-ignore-shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits"><i class="fa fa-check"></i><b>1.13</b> Please ignore: Shelved vs. removed vs. parked folders needing heavy edits</a></li>
-<li class="chapter" data-level="1.14" data-path="index.html"><a href="index.html#please-ignore-coding-aids-for-me"><i class="fa fa-check"></i><b>1.14</b> Please ignore: Coding aids (for me)</a><ul>
+<li class="chapter" data-level="1.14" data-path="index.html"><a href="index.html#please-ignore-coding-aids-for-me"><i class="fa fa-check"></i><b>1.14</b> Please ignore: Coding aids (for me)</a>
+<ul>
 <li class="chapter" data-level="1.14.1" data-path="index.html"><a href="index.html#formatting"><i class="fa fa-check"></i><b>1.14.1</b> formatting</a></li>
 <li class="chapter" data-level="1.14.2" data-path="index.html"><a href="index.html#tables"><i class="fa fa-check"></i><b>1.14.2</b> tables</a></li>
 <li class="chapter" data-level="1.14.3" data-path="index.html"><a href="index.html#tinytex-problems"><i class="fa fa-check"></i><b>1.14.3</b> tinytex problems</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>FROC paradigm</b></span></li>
-<li class="chapter" data-level="2" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>2</b> The FROC paradigm and visual search</a><ul>
+<li class="chapter" data-level="2" data-path="froc-paradigm.html"><a href="froc-paradigm.html"><i class="fa fa-check"></i><b>2</b> The FROC paradigm and visual search</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-how-much-finished"><i class="fa fa-check"></i><b>2.1</b> How much finished</a></li>
-<li class="chapter" data-level="2.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>2.2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-intro"><i class="fa fa-check"></i><b>2.2</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-outline"><i class="fa fa-check"></i><b>2.2.1</b> Chapter outline</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-location-specific-paradigms"><i class="fa fa-check"></i><b>2.3</b> Location specific paradigms</a></li>
-<li class="chapter" data-level="2.4" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-vis-search"><i class="fa fa-check"></i><b>2.4</b> Visual search</a><ul>
+<li class="chapter" data-level="2.4" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-vis-search"><i class="fa fa-check"></i><b>2.4</b> Visual search</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-scoring-the-data"><i class="fa fa-check"></i><b>2.4.1</b> Proximity criterion and scoring the data</a></li>
 <li class="chapter" data-level="2.4.2" data-path="froc-paradigm.html"><a href="froc-paradigm.html#multiple-marks-in-the-same-vicinity"><i class="fa fa-check"></i><b>2.4.2</b> Multiple marks in the same vicinity</a></li>
 <li class="chapter" data-level="2.4.3" data-path="froc-paradigm.html"><a href="froc-paradigm.html#historical-context"><i class="fa fa-check"></i><b>2.4.3</b> Historical context</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>2.5</b> The FROC plot</a><ul>
+<li class="chapter" data-level="2.5" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-froc-plot"><i class="fa fa-check"></i><b>2.5</b> The FROC plot</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-plot-illustration"><i class="fa fa-check"></i><b>2.5.1</b> Illustration with a dataset</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>2.6</b> The “solar” analogy</a></li>
 <li class="chapter" data-level="2.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>2.7</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>3</b> Empirical plots from FROC data</a><ul>
+<li class="chapter" data-level="3" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>3</b> Empirical plots from FROC data</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="empirical.html"><a href="empirical.html#empirical-how-much-finished"><i class="fa fa-check"></i><b>3.1</b> How much finished</a></li>
 <li class="chapter" data-level="3.2" data-path="empirical.html"><a href="empirical.html#empirical-intro"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
-<li class="chapter" data-level="3.3" data-path="empirical.html"><a href="empirical.html#empirical-mark-rating-pairs"><i class="fa fa-check"></i><b>3.3</b> FROC data and notation</a><ul>
+<li class="chapter" data-level="3.3" data-path="empirical.html"><a href="empirical.html#empirical-mark-rating-pairs"><i class="fa fa-check"></i><b>3.3</b> FROC data and notation</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="empirical.html"><a href="empirical.html#lls-vs.-nls"><i class="fa fa-check"></i><b>3.3.1</b> LLs vs. NLs</a></li>
 <li class="chapter" data-level="3.3.2" data-path="empirical.html"><a href="empirical.html#latent-vs.-actual-marks"><i class="fa fa-check"></i><b>3.3.2</b> Latent vs. actual marks</a></li>
 <li class="chapter" data-level="3.3.3" data-path="empirical.html"><a href="empirical.html#z-samples-vs.-ratings"><i class="fa fa-check"></i><b>3.3.3</b> z-samples vs. ratings</a></li>
@@ -190,28 +219,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.6" data-path="empirical.html"><a href="empirical.html#comments"><i class="fa fa-check"></i><b>3.3.6</b> Comments</a></li>
 <li class="chapter" data-level="3.3.7" data-path="empirical.html"><a href="empirical.html#empirical-indexing-marks"><i class="fa fa-check"></i><b>3.3.7</b> A conceptual and notatonal issue</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-1"><i class="fa fa-check"></i><b>3.4</b> The FROC plot</a><ul>
+<li class="chapter" data-level="3.4" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-1"><i class="fa fa-check"></i><b>3.4</b> The FROC plot</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="empirical.html"><a href="empirical.html#empirical-end-point"><i class="fa fa-check"></i><b>3.4.1</b> The observed FROC end-point and its semi-constrained property</a></li>
 <li class="chapter" data-level="3.4.2" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-futility-extrapolation"><i class="fa fa-check"></i><b>3.4.2</b> Futility of extrapolation outside the observed end-point</a></li>
 <li class="chapter" data-level="3.4.3" data-path="empirical.html"><a href="empirical.html#empirical-froc-plot-illustration"><i class="fa fa-check"></i><b>3.4.3</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="empirical.html"><a href="empirical.html#empirical-ROC"><i class="fa fa-check"></i><b>3.5</b> The inferred-ROC plot</a><ul>
+<li class="chapter" data-level="3.5" data-path="empirical.html"><a href="empirical.html#empirical-ROC"><i class="fa fa-check"></i><b>3.5</b> The inferred-ROC plot</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="empirical.html"><a href="empirical.html#empirical-ROC-fpf"><i class="fa fa-check"></i><b>3.5.1</b> The inferred-ROC z-sample</a></li>
 <li class="chapter" data-level="3.5.2" data-path="empirical.html"><a href="empirical.html#empirical-ROC-tpf"><i class="fa fa-check"></i><b>3.5.2</b> Inferred TPF</a></li>
 <li class="chapter" data-level="3.5.3" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-roc"><i class="fa fa-check"></i><b>3.5.3</b> The empirical ROC plot and AUC</a></li>
 <li class="chapter" data-level="3.5.4" data-path="empirical.html"><a href="empirical.html#empirical-ROC-constrained"><i class="fa fa-check"></i><b>3.5.4</b> The observed end-point of the ROC and its constrained property</a></li>
 <li class="chapter" data-level="3.5.5" data-path="empirical.html"><a href="empirical.html#empirical-roc-plot-illustration"><i class="fa fa-check"></i><b>3.5.5</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="empirical.html"><a href="empirical.html#empirical-AFROC"><i class="fa fa-check"></i><b>3.6</b> The alternative FROC (AFROC) plot</a><ul>
+<li class="chapter" data-level="3.6" data-path="empirical.html"><a href="empirical.html#empirical-AFROC"><i class="fa fa-check"></i><b>3.6</b> The alternative FROC (AFROC) plot</a>
+<ul>
 <li class="chapter" data-level="3.6.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-afroc"><i class="fa fa-check"></i><b>3.6.1</b> Definition: empirical AFROC plot and AUC</a></li>
 <li class="chapter" data-level="3.6.2" data-path="empirical.html"><a href="empirical.html#empirical-AFROC-constrained"><i class="fa fa-check"></i><b>3.6.2</b> The observed end-point of the AFROC and its constrained property</a></li>
 <li class="chapter" data-level="3.6.3" data-path="empirical.html"><a href="empirical.html#empirical-afroc-plot-illustration"><i class="fa fa-check"></i><b>3.6.3</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC"><i class="fa fa-check"></i><b>3.7</b> The weighted-AFROC plot (wAFROC) plot</a><ul>
+<li class="chapter" data-level="3.7" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC"><i class="fa fa-check"></i><b>3.7</b> The weighted-AFROC plot (wAFROC) plot</a>
+<ul>
 <li class="chapter" data-level="3.7.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-wafroc"><i class="fa fa-check"></i><b>3.7.1</b> The empirical wAFROC plot and AUC</a></li>
 <li class="chapter" data-level="3.7.2" data-path="empirical.html"><a href="empirical.html#empirical-wafroc-plot-illustration"><i class="fa fa-check"></i><b>3.7.2</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.8" data-path="empirical.html"><a href="empirical.html#empirical-numerical-understanding"><i class="fa fa-check"></i><b>3.8</b> AFROC vs. wAFROC</a><ul>
+<li class="chapter" data-level="3.8" data-path="empirical.html"><a href="empirical.html#empirical-numerical-understanding"><i class="fa fa-check"></i><b>3.8</b> AFROC vs. wAFROC</a>
+<ul>
 <li class="chapter" data-level="3.8.1" data-path="empirical.html"><a href="empirical.html#nl-and-ll-z-samples"><i class="fa fa-check"></i><b>3.8.1</b> NL and LL z-samples</a></li>
 <li class="chapter" data-level="3.8.2" data-path="empirical.html"><a href="empirical.html#lesion-weights"><i class="fa fa-check"></i><b>3.8.2</b> Lesion weights</a></li>
 <li class="chapter" data-level="3.8.3" data-path="empirical.html"><a href="empirical.html#fpf"><i class="fa fa-check"></i><b>3.8.3</b> FPF</a></li>
@@ -219,29 +253,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.8.5" data-path="empirical.html"><a href="empirical.html#wllf"><i class="fa fa-check"></i><b>3.8.5</b> wLLF</a></li>
 </ul></li>
 <li class="chapter" data-level="3.9" data-path="empirical.html"><a href="empirical.html#empirical-meanings"><i class="fa fa-check"></i><b>3.9</b> Interpretation of AUCs</a></li>
-<li class="chapter" data-level="3.10" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases"><i class="fa fa-check"></i><b>3.10</b> Instructive examples</a><ul>
+<li class="chapter" data-level="3.10" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases"><i class="fa fa-check"></i><b>3.10</b> Instructive examples</a>
+<ul>
 <li class="chapter" data-level="3.10.1" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-FROC"><i class="fa fa-check"></i><b>3.10.1</b> The FROC</a></li>
 <li class="chapter" data-level="3.10.2" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-ROC"><i class="fa fa-check"></i><b>3.10.2</b> The ROC</a></li>
 <li class="chapter" data-level="3.10.3" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-AFROC"><i class="fa fa-check"></i><b>3.10.3</b> The AFROC</a></li>
 <li class="chapter" data-level="3.10.4" data-path="empirical.html"><a href="empirical.html#empirical-instructive-cases-wAFROC"><i class="fa fa-check"></i><b>3.10.4</b> The wAFROC</a></li>
 </ul></li>
-<li class="chapter" data-level="3.11" data-path="empirical.html"><a href="empirical.html#empirical-froc-auc-poor"><i class="fa fa-check"></i><b>3.11</b> FROC-AUC is a poor measure</a><ul>
+<li class="chapter" data-level="3.11" data-path="empirical.html"><a href="empirical.html#empirical-froc-auc-poor"><i class="fa fa-check"></i><b>3.11</b> FROC-AUC is a poor measure</a>
+<ul>
 <li class="chapter" data-level="3.11.1" data-path="empirical.html"><a href="empirical.html#plot-of-froc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>3.11.1</b> Plot of FROC AUC vs. ROC AUC</a></li>
 <li class="chapter" data-level="3.11.2" data-path="empirical.html"><a href="empirical.html#plot-of-afroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>3.11.2</b> Plot of AFROC AUC vs. ROC AUC</a></li>
 <li class="chapter" data-level="3.11.3" data-path="empirical.html"><a href="empirical.html#plot-of-wafroc-auc-vs.-roc-auc"><i class="fa fa-check"></i><b>3.11.3</b> Plot of wAFROC AUC vs. ROC AUC</a></li>
 </ul></li>
-<li class="chapter" data-level="3.12" data-path="empirical.html"><a href="empirical.html#empirical-AFROC1"><i class="fa fa-check"></i><b>3.12</b> The AFROC1 plot</a><ul>
+<li class="chapter" data-level="3.12" data-path="empirical.html"><a href="empirical.html#empirical-AFROC1"><i class="fa fa-check"></i><b>3.12</b> The AFROC1 plot</a>
+<ul>
 <li class="chapter" data-level="3.12.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-afroc1"><i class="fa fa-check"></i><b>3.12.1</b> Empirical AFROC1 plot and AUC</a></li>
 <li class="chapter" data-level="3.12.2" data-path="empirical.html"><a href="empirical.html#empirical-afroc1-plot-illustration"><i class="fa fa-check"></i><b>3.12.2</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="3.13" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC1"><i class="fa fa-check"></i><b>3.13</b> The weighted-AFROC1 (wAFROC1) plot</a><ul>
+<li class="chapter" data-level="3.13" data-path="empirical.html"><a href="empirical.html#empirical-wAFROC1"><i class="fa fa-check"></i><b>3.13</b> The weighted-AFROC1 (wAFROC1) plot</a>
+<ul>
 <li class="chapter" data-level="3.13.1" data-path="empirical.html"><a href="empirical.html#empirical-definition-empirical-auc-wafroc1"><i class="fa fa-check"></i><b>3.13.1</b> Empirical wAFROC1 plot and AUC</a></li>
 <li class="chapter" data-level="3.13.2" data-path="empirical.html"><a href="empirical.html#empirical-wafroc1-plot-illustration"><i class="fa fa-check"></i><b>3.13.2</b> Illustration with a dataset</a></li>
 </ul></li>
 <li class="chapter" data-level="3.14" data-path="empirical.html"><a href="empirical.html#empirical-summary"><i class="fa fa-check"></i><b>3.14</b> Summary</a></li>
 <li class="chapter" data-level="3.15" data-path="empirical.html"><a href="empirical.html#empirical-theorem-1"><i class="fa fa-check"></i><b>3.15</b> Appendix 1: Proof of formula for wAFROC-AUC</a></li>
 <li class="chapter" data-level="3.16" data-path="empirical.html"><a href="empirical.html#empirical-theorem-2"><i class="fa fa-check"></i><b>3.16</b> Appendix 2: Interpretation of area under straight line extension of wAFROC</a></li>
-<li class="chapter" data-level="3.17" data-path="empirical.html"><a href="empirical.html#empirical-summary-computational-formulae"><i class="fa fa-check"></i><b>3.17</b> Appendix 3: Summary of computational formulae</a><ul>
+<li class="chapter" data-level="3.17" data-path="empirical.html"><a href="empirical.html#empirical-summary-computational-formulae"><i class="fa fa-check"></i><b>3.17</b> Appendix 3: Summary of computational formulae</a>
+<ul>
 <li class="chapter" data-level="3.17.1" data-path="empirical.html"><a href="empirical.html#froc"><i class="fa fa-check"></i><b>3.17.1</b> FROC</a></li>
 <li class="chapter" data-level="3.17.2" data-path="empirical.html"><a href="empirical.html#roc"><i class="fa fa-check"></i><b>3.17.2</b> ROC</a></li>
 <li class="chapter" data-level="3.17.3" data-path="empirical.html"><a href="empirical.html#afroc"><i class="fa fa-check"></i><b>3.17.3</b> AFROC</a></li>
@@ -251,24 +290,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="part"><span><b>The radiological search model (RSM)</b></span></li>
-<li class="chapter" data-level="4" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>4</b> Visual Search</a><ul>
+<li class="chapter" data-level="4" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>4</b> Visual Search</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-how-much-finished"><i class="fa fa-check"></i><b>4.1</b> How much finished</a></li>
 <li class="chapter" data-level="4.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-intro"><i class="fa fa-check"></i><b>4.2</b> Introduction</a></li>
 <li class="chapter" data-level="4.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-grouping-labeling-rois"><i class="fa fa-check"></i><b>4.3</b> Grouping and labeling ROIs</a></li>
 <li class="chapter" data-level="4.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>4.4</b> Lesion-localization vs. detection</a></li>
 <li class="chapter" data-level="4.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>4.5</b> Lesion-localization vs. lesion-classification</a></li>
-<li class="chapter" data-level="4.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>4.6</b> The Kundel - Nodine search model</a><ul>
+<li class="chapter" data-level="4.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>4.6</b> The Kundel - Nodine search model</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>4.6.1</b> Lesion-localization</a></li>
 <li class="chapter" data-level="4.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Lesion-classification</a></li>
 <li class="chapter" data-level="4.6.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-example"><i class="fa fa-check"></i><b>4.6.3</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>5</b> The radiological search model (RSM)</a><ul>
+<li class="chapter" data-level="5" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>5</b> The radiological search model (RSM)</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="rsm.html"><a href="rsm.html#rsm-how-much-finished"><i class="fa fa-check"></i><b>5.1</b> How much finished</a></li>
 <li class="chapter" data-level="5.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
 <li class="chapter" data-level="5.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>5.3</b> The radiological search model</a></li>
 <li class="chapter" data-level="5.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>5.4</b> RSM assumptions</a></li>
-<li class="chapter" data-level="5.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>5.5</b> Physical meanings of the RSM parameters</a><ul>
+<li class="chapter" data-level="5.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>5.5</b> Physical meanings of the RSM parameters</a>
+<ul>
 <li class="chapter" data-level="5.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>5.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
 <li class="chapter" data-level="5.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-parameter"><i class="fa fa-check"></i><b>5.5.2</b> The <span class="math inline">\(\lambda\)</span> parameter</a></li>
 <li class="chapter" data-level="5.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>5.5.3</b> The <span class="math inline">\(\nu\)</span> parameter</a></li>
@@ -276,16 +319,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="rsm.html"><a href="rsm.html#rsm-intrinsic-parameters"><i class="fa fa-check"></i><b>5.6</b> Intrinsic RSM parameters</a></li>
 <li class="chapter" data-level="5.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>5.7</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="rsm-predictions.html"><a href="rsm-predictions.html"><i class="fa fa-check"></i><b>6</b> ROC predictions of the RSM</a><ul>
+<li class="chapter" data-level="6" data-path="rsm-predictions.html"><a href="rsm-predictions.html"><i class="fa fa-check"></i><b>6</b> ROC predictions of the RSM</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="6.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-intro"><i class="fa fa-check"></i><b>6.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="6.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-inferred-roc"><i class="fa fa-check"></i><b>6.3</b> Inferred ROC z-sample</a></li>
-<li class="chapter" data-level="6.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point"><i class="fa fa-check"></i><b>6.4</b> End-point of the ROC</a><ul>
+<li class="chapter" data-level="6.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point"><i class="fa fa-check"></i><b>6.4</b> End-point of the ROC</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-abscissa"><i class="fa fa-check"></i><b>6.4.1</b> The abscissa of the ROC end-point</a></li>
 <li class="chapter" data-level="6.4.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-ordinate"><i class="fa fa-check"></i><b>6.4.2</b> The ordinate of the ROC end-point</a></li>
 <li class="chapter" data-level="6.4.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point-variable-number-lesions"><i class="fa fa-check"></i><b>6.4.3</b> Variable number of lesions per case</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve"><i class="fa fa-check"></i><b>6.5</b> ROC curve</a><ul>
+<li class="chapter" data-level="6.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve"><i class="fa fa-check"></i><b>6.5</b> ROC curve</a>
+<ul>
 <li class="chapter" data-level="6.5.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-fpf"><i class="fa fa-check"></i><b>6.5.1</b> Derivation of FPF</a></li>
 <li class="chapter" data-level="6.5.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-tpf"><i class="fa fa-check"></i><b>6.5.2</b> Derivation of TPF</a></li>
 <li class="chapter" data-level="6.5.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-tpf-varying-lesions"><i class="fa fa-check"></i><b>6.5.3</b> Variable number of lesions per case</a></li>
@@ -302,21 +348,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix1"><i class="fa fa-check"></i><b>6.9</b> Appendix 1: Proof of continuity of slope at the end-point</a></li>
 <li class="chapter" data-level="6.10" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix2"><i class="fa fa-check"></i><b>6.10</b> Appendix 2: Numerical illustration of continuity</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html"><i class="fa fa-check"></i><b>7</b> Other RSM predictions</a><ul>
+<li class="chapter" data-level="7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html"><i class="fa fa-check"></i><b>7</b> Other RSM predictions</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="7.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-intro"><i class="fa fa-check"></i><b>7.2</b> TBA Introduction</a></li>
-<li class="chapter" data-level="7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-curve"><i class="fa fa-check"></i><b>7.3</b> RSM-predicted FROC curve</a><ul>
+<li class="chapter" data-level="7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-curve"><i class="fa fa-check"></i><b>7.3</b> RSM-predicted FROC curve</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.3.1</b> FROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-afroc-curve"><i class="fa fa-check"></i><b>7.4</b> RSM-predicted AFROC curve</a><ul>
+<li class="chapter" data-level="7.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-afroc-curve"><i class="fa fa-check"></i><b>7.4</b> RSM-predicted AFROC curve</a>
+<ul>
 <li class="chapter" data-level="7.4.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#afroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.4.1</b> AFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 <li class="chapter" data-level="7.4.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-no-marks"><i class="fa fa-check"></i><b>7.4.2</b> Case of the reader who does not make any marks</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-curve"><i class="fa fa-check"></i><b>7.5</b> RSM-predicted wAFROC curve</a><ul>
+<li class="chapter" data-level="7.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-curve"><i class="fa fa-check"></i><b>7.5</b> RSM-predicted wAFROC curve</a>
+<ul>
 <li class="chapter" data-level="7.5.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#wafroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.5.1</b> wAFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-comments"><i class="fa fa-check"></i><b>7.6</b> Comments on end-point-discontinuity property</a></li>
-<li class="chapter" data-level="7.7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-appendix"><i class="fa fa-check"></i><b>7.7</b> Appendix</a><ul>
+<li class="chapter" data-level="7.7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-appendix"><i class="fa fa-check"></i><b>7.7</b> Appendix</a>
+<ul>
 <li class="chapter" data-level="7.7.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-physical-parameters"><i class="fa fa-check"></i><b>7.7.1</b> Slope of the FROC curve</a></li>
 <li class="chapter" data-level="7.7.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda-nu-parameterization"><i class="fa fa-check"></i><b>7.7.2</b> FROC plots <span class="math inline">\(\lambda, \nu\)</span> parameterization</a></li>
 <li class="chapter" data-level="7.7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-afroc-physical-parameters"><i class="fa fa-check"></i><b>7.7.3</b> Slope of the AFROC curve</a></li>
@@ -325,14 +376,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-above-afroc"><i class="fa fa-check"></i><b>7.7.6</b> Are wAFROC curves above AFROC curves?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html"><i class="fa fa-check"></i><b>8</b> Lesion localization and classification performances</a><ul>
+<li class="chapter" data-level="8" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html"><i class="fa fa-check"></i><b>8</b> Lesion localization and classification performances</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> How much finished</a></li>
 <li class="chapter" data-level="8.2" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-intro"><i class="fa fa-check"></i><b>8.2</b> Introduction</a></li>
 <li class="chapter" data-level="8.3" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-quantifying"><i class="fa fa-check"></i><b>8.3</b> Quantifying lesion-localization performance</a></li>
 <li class="chapter" data-level="8.4" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-performance"><i class="fa fa-check"></i><b>8.4</b> Quantifying lesion-classification performance</a></li>
 <li class="chapter" data-level="8.5" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-discussion"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>9</b> RSM fitting</a><ul>
+<li class="chapter" data-level="9" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>9</b> RSM fitting</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> How much finished</a></li>
 <li class="chapter" data-level="9.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-intro"><i class="fa fa-check"></i><b>9.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="9.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-roc-likelihood"><i class="fa fa-check"></i><b>9.3</b> ROC Likelihood function</a></li>
@@ -340,24 +393,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example"><i class="fa fa-check"></i><b>9.5</b> <code>FitRsmROC</code> usage example</a></li>
 <li class="chapter" data-level="9.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>9.6</b> Discussion / Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>10</b> Three proper ROC fits</a><ul>
+<li class="chapter" data-level="10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>10</b> Three proper ROC fits</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="10.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-intro"><i class="fa fa-check"></i><b>10.2</b> TBA Introduction</a></li>
 <li class="chapter" data-level="10.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-applications"><i class="fa fa-check"></i><b>10.3</b> Application to datasets</a></li>
 <li class="chapter" data-level="10.4" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-composite-plots"><i class="fa fa-check"></i><b>10.4</b> Composite plots</a></li>
-<li class="chapter" data-level="10.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>10.5</b> RSM parameters</a><ul>
+<li class="chapter" data-level="10.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>10.5</b> RSM parameters</a>
+<ul>
 <li class="chapter" data-level="10.5.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-parameters-van-dyke-dataset-i-1-j-2"><i class="fa fa-check"></i><b>10.5.1</b> RSM parameters Van Dyke dataset i = 1, j= 2</a></li>
 <li class="chapter" data-level="10.5.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-parameters-franken-dataset-i-2-j-3"><i class="fa fa-check"></i><b>10.5.2</b> RSM parameters Franken dataset i = 2, j= 3</a></li>
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-cbm-parameters"><i class="fa fa-check"></i><b>10.6</b> CBM parameters</a></li>
 <li class="chapter" data-level="10.7" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-proproc-parameters"><i class="fa fa-check"></i><b>10.7</b> PROPROC parameters</a></li>
-<li class="chapter" data-level="10.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>10.8</b> Overview of findings</a><ul>
+<li class="chapter" data-level="10.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>10.8</b> Overview of findings</a>
+<ul>
 <li class="chapter" data-level="10.8.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes"><i class="fa fa-check"></i><b>10.8.1</b> Slopes</a></li>
 <li class="chapter" data-level="10.8.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-confidence-intervals"><i class="fa fa-check"></i><b>10.8.2</b> Confidence intervals</a></li>
 <li class="chapter" data-level="10.8.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes-confidence-intervals-summary"><i class="fa fa-check"></i><b>10.8.3</b> Summary of slopes and confidence intervals</a></li>
 </ul></li>
 <li class="chapter" data-level="10.9" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-discussion-summary"><i class="fa fa-check"></i><b>10.9</b> Reason for equal AUCs / Summary</a></li>
-<li class="chapter" data-level="10.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>10.10</b> Appendices</a><ul>
+<li class="chapter" data-level="10.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>10.10</b> Appendices</a>
+<ul>
 <li class="chapter" data-level="10.10.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-one-dataset-proproc"><i class="fa fa-check"></i><b>10.10.1</b> Location of PROPROC files</a></li>
 <li class="chapter" data-level="10.10.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results"><i class="fa fa-check"></i><b>10.10.2</b> Location of pre-analyzed results</a></li>
 <li class="chapter" data-level="10.10.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-representative-plots-van-dyke"><i class="fa fa-check"></i><b>10.10.3</b> Plots for the Van Dyke dataset</a></li>
@@ -365,11 +422,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="part"><span><b>CAD applications</b></span></li>
-<li class="chapter" data-level="11" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>11</b> Standalone CAD</a><ul>
+<li class="chapter" data-level="11" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>11</b> Standalone CAD</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> How much finished</a></li>
 <li class="chapter" data-level="11.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>11.2</b> Introduction</a></li>
 <li class="chapter" data-level="11.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-overview"><i class="fa fa-check"></i><b>11.3</b> Overview</a></li>
-<li class="chapter" data-level="11.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>11.4</b> Methods</a><ul>
+<li class="chapter" data-level="11.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>11.4</b> Methods</a>
+<ul>
 <li class="chapter" data-level="11.4.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>11.4.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
 <li class="chapter" data-level="11.4.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>11.4.2</b> The 1T-RRFC analysis model</a></li>
 <li class="chapter" data-level="11.4.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>11.4.3</b> The 2T-RRRC analysis model</a></li>
@@ -378,18 +437,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>11.5</b> Implementation</a></li>
 <li class="chapter" data-level="11.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>11.6</b> Results</a></li>
 <li class="chapter" data-level="11.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>11.7</b> Discussion</a></li>
-<li class="chapter" data-level="11.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>11.8</b> Appendix 1</a><ul>
+<li class="chapter" data-level="11.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>11.8</b> Appendix 1</a>
+<ul>
 <li class="chapter" data-level="11.8.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1"><i class="fa fa-check"></i><b>11.8.1</b> Example 1</a></li>
 <li class="chapter" data-level="11.8.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2"><i class="fa fa-check"></i><b>11.8.2</b> Example 2</a></li>
 <li class="chapter" data-level="11.8.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>11.8.3</b> Example 3</a></li>
 </ul></li>
 <li class="chapter" data-level="11.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix2"><i class="fa fa-check"></i><b>11.9</b> Appendix 2</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>12</b> CAD optimal operating point</a><ul>
+<li class="chapter" data-level="12" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>12</b> CAD optimal operating point</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>12.1</b> TBA How much finished</a></li>
 <li class="chapter" data-level="12.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>12.2</b> Introduction</a></li>
 <li class="chapter" data-level="12.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>12.3</b> Methods</a></li>
-<li class="chapter" data-level="12.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>12.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a><ul>
+<li class="chapter" data-level="12.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>12.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="optim-op-point.html"><a href="optim-op-point.html#summary-table"><i class="fa fa-check"></i><b>12.4.1</b> Summary table</a></li>
 <li class="chapter" data-level="12.4.2" data-path="optim-op-point.html"><a href="optim-op-point.html#froc-1"><i class="fa fa-check"></i><b>12.4.2</b> FROC</a></li>
 <li class="chapter" data-level="12.4.3" data-path="optim-op-point.html"><a href="optim-op-point.html#wafroc-1"><i class="fa fa-check"></i><b>12.4.3</b> wAFROC</a></li>
@@ -399,25 +461,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-mu"><i class="fa fa-check"></i><b>12.5</b> Varying <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> optimizations</a></li>
 <li class="chapter" data-level="12.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations"><i class="fa fa-check"></i><b>12.6</b> Limiting situations</a></li>
 <li class="chapter" data-level="12.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-trends"><i class="fa fa-check"></i><b>12.7</b> Trends</a></li>
-<li class="chapter" data-level="12.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>12.8</b> Applying the method</a><ul>
+<li class="chapter" data-level="12.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>12.8</b> Applying the method</a>
+<ul>
 <li class="chapter" data-level="12.8.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>12.8.1</b> A CAD application</a></li>
 </ul></li>
 <li class="chapter" data-level="12.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>12.9</b> TBA Discussion</a></li>
-<li class="chapter" data-level="12.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a><ul>
+<li class="chapter" data-level="12.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a>
+<ul>
 <li class="chapter" data-level="12.10.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>12.10.1</b> Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
 <li class="chapter" data-level="12.10.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>12.10.2</b> Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
 <li class="chapter" data-level="12.10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>12.10.3</b> Limiting cases</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> Analyzing a dataset with only diseased cases</a><ul>
+<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> Analyzing a dataset with only diseased cases</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished"><i class="fa fa-check"></i><b>13.1</b> TBA How much finished</a></li>
-<li class="chapter" data-level="13.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>13.2</b> The problem</a><ul>
+<li class="chapter" data-level="13.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>13.2</b> The problem</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-step-1"><i class="fa fa-check"></i><b>13.2.1</b> Step 1: Create a test (diseased cases only) dataset</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>DATASETS</b></span></li>
-<li class="chapter" data-level="14" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>14</b> Datasets</a><ul>
-<li class="chapter" data-level="14.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetsdd"><i class="fa fa-check"></i><b>14.1</b> Datasets embedded in <code>RJafroc</code></a><ul>
+<li class="chapter" data-level="14" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>14</b> Datasets</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetsdd"><i class="fa fa-check"></i><b>14.1</b> Datasets embedded in <code>RJafroc</code></a>
+<ul>
 <li class="chapter" data-level="14.1.1" data-path="datasets.html"><a href="datasets.html#datasets-dataset01"><i class="fa fa-check"></i><b>14.1.1</b> Dataset01</a></li>
 <li class="chapter" data-level="14.1.2" data-path="datasets.html"><a href="datasets.html#datasets-dataset02"><i class="fa fa-check"></i><b>14.1.2</b> Dataset02</a></li>
 <li class="chapter" data-level="14.1.3" data-path="datasets.html"><a href="datasets.html#datasets-dataset03"><i class="fa fa-check"></i><b>14.1.3</b> Dataset03</a></li>
@@ -433,7 +501,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1.13" data-path="datasets.html"><a href="datasets.html#datasets-dataset13"><i class="fa fa-check"></i><b>14.1.13</b> Dataset13</a></li>
 <li class="chapter" data-level="14.1.14" data-path="datasets.html"><a href="datasets.html#datasets-dataset14"><i class="fa fa-check"></i><b>14.1.14</b> Dataset14</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="datasets.html"><a href="datasets.html#other-datasets"><i class="fa fa-check"></i><b>14.2</b> Other datasets</a><ul>
+<li class="chapter" data-level="14.2" data-path="datasets.html"><a href="datasets.html#other-datasets"><i class="fa fa-check"></i><b>14.2</b> Other datasets</a>
+<ul>
 <li class="chapter" data-level="14.2.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetCadLroc"><i class="fa fa-check"></i><b>14.2.1</b> DatasetCadLroc</a></li>
 <li class="chapter" data-level="14.2.2" data-path="datasets.html"><a href="datasets.html#datasets-datasetCadSimuFroc"><i class="fa fa-check"></i><b>14.2.2</b> datasetCadSimuFroc</a></li>
 </ul></li>
@@ -462,26 +531,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">The RJafroc Froc Book</h1>
 <p class="author"><em>Dev P. Chakraborty, PhD</em></p>
-<p class="date"><em>2023-02-28</em></p>
+<p class="date"><em>2023-03-12</em></p>
 </div>
-<div id="please-ignore-preface" class="section level1 hasAnchor">
+<div id="please-ignore-preface" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Please ignore preface<a href="index.html#please-ignore-preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>TBA</p>
-<div id="please-ignore-issues" class="section level2 hasAnchor">
+<div id="please-ignore-issues" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Please ignore issues<a href="index.html#please-ignore-issues" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- Setting margins for pdf output currently does not work on GitHub actions  -->
 </div>
-<div id="please-ignore-following-sections" class="section level2 hasAnchor">
+<div id="please-ignore-following-sections" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Please ignore following sections<a href="index.html#please-ignore-following-sections" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>They are intended for my convenience and will be deleted in final version</li>
 </ul>
 </div>
-<div id="tba-rationale-and-organization" class="section level2 hasAnchor">
+<div id="tba-rationale-and-organization" class="section level2 hasAnchor" number="1.3">
 <h2><span class="header-section-number">1.3</span> TBA Rationale and Organization<a href="index.html#tba-rationale-and-organization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Intended as an online update to my print book <span class="citation">(Chakraborty <a href="#ref-chakraborty2017observer" role="doc-biblioref">2017</a>)</span>.</li>
-<li>All references in this book to <code>RJafroc</code> refer to the R package with that name (case sensitive) <span class="citation">(Chakraborty and Zhai <a href="#ref-R-RJafroc" role="doc-biblioref">2022</a>)</span>.</li>
+<li>Intended as an online update to my print book <span class="citation">(<a href="#ref-chakraborty2017observer" role="doc-biblioref">Dev P. Chakraborty 2017</a>)</span>.</li>
+<li>All references in this book to <code>RJafroc</code> refer to the R package with that name (case sensitive) <span class="citation">(<a href="#ref-R-RJafroc" role="doc-biblioref">Dev Chakraborty and Zhai 2022</a>)</span>.</li>
 <li>Since its publication in 2017 <code>RJafroc</code>, on which the <code>R</code> code examples in the print book depend, has evolved considerably causing many of the examples to “break” if one uses the most current version of <code>RJafroc</code>. The code will still run if one uses <a href="https://cran.r-project.org/src/contrib/Archive/RJafroc/"><code>RJafroc</code> 0.0.1</a> but this is inconvenient and misses out on many of the software improvements made since the print book appeared.</li>
 <li>This gives me the opportunity to update the print book.</li>
 <li>The online book has been divided into 3 books.
@@ -492,14 +561,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
-<div id="tba-acknowledgements" class="section level2 hasAnchor">
+<div id="tba-acknowledgements" class="section level2 hasAnchor" number="1.4">
 <h2><span class="header-section-number">1.4</span> TBA Acknowledgements<a href="index.html#tba-acknowledgements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Dr. Xuetong Zhai</p>
 <p>Dr. Peter Phillips</p>
 <p>Online Latex Editor <a href="https://latexeditor.lagrida.com/">at</a></p>
 <p>Dataset contributors: Nico especially <a href="standalone-cad-radiologists.html#standalone-cad-radiologists">11</a></p>
 </div>
-<div id="tba-nearly-finished-chapters" class="section level2 hasAnchor">
+<div id="tba-nearly-finished-chapters" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> TBA Nearly finished chapters<a href="index.html#tba-nearly-finished-chapters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Chapter 1 The FROC paradigm and search</li>
@@ -515,11 +584,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Chapter 11 Optimal operating point appendices</li>
 </ul>
 </div>
-<div id="the-pdf-file-of-the-book" class="section level2 hasAnchor">
+<div id="the-pdf-file-of-the-book" class="section level2 hasAnchor" number="1.6">
 <h2><span class="header-section-number">1.6</span> The pdf file of the book<a href="index.html#the-pdf-file-of-the-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Go <a href="https://github.com/dpc10ster/RJafrocFrocBook/blob/gh-pages/RJafrocFrocBook.pdf">here</a> and then click on <code>Download</code> to get the <code>RJafrocFrocBook.pdf</code> file. The pdf version may not be as aesthetically pleasing as the HTML version, in particular the layout of figures and tables is sometimes disjointed from the citing text.</p>
 </div>
-<div id="please-ignore-tba-how-much-finished-hmf" class="section level2 hasAnchor">
+<div id="please-ignore-tba-how-much-finished-hmf" class="section level2 hasAnchor" number="1.7">
 <h2><span class="header-section-number">1.7</span> Please ignore: TBA How much finished HMF<a href="index.html#please-ignore-tba-how-much-finished-hmf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>HMF approximately 30%</li>
@@ -528,10 +597,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Un-comment links like <code>\@ref(froc-paradigm-solar-analogy)</code> etc. Search for <code>\@ref</code></li>
 </ul>
 </div>
-<div id="please-ignore-a-note-on-the-online-distribution-mechanism-of-the-book" class="section level2 hasAnchor">
+<div id="please-ignore-a-note-on-the-online-distribution-mechanism-of-the-book" class="section level2 hasAnchor" number="1.8">
 <h2><span class="header-section-number">1.8</span> Please ignore: A note on the online distribution mechanism of the book<a href="index.html#please-ignore-a-note-on-the-online-distribution-mechanism-of-the-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>In the hard-copy version of my book <span class="citation">(Chakraborty <a href="#ref-chakraborty2017observer" role="doc-biblioref">2017</a>)</span> the online distribution mechanism was <code>BitBucket</code>.</li>
+<li>In the hard-copy version of my book <span class="citation">(<a href="#ref-chakraborty2017observer" role="doc-biblioref">Dev P. Chakraborty 2017</a>)</span> the online distribution mechanism was <code>BitBucket</code>.</li>
 <li><code>BitBucket</code> allows code sharing within a <em>closed</em> group of a few users (e.g., myself and a grad student).</li>
 <li>Since the purpose of open-source code is to encourage collaborations, this was, in hindsight, an unfortunate choice. Moreover, as my experience with R-packages grew, it became apparent that the vast majority of R-packages are shared on <code>GitHub</code>, not <code>BitBucket</code>.</li>
 <li>For these reasons I have switched to <code>GitHub</code>. All previous instructions pertaining to <code>BitBucket</code> are obsolete.</li>
@@ -539,14 +608,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Go to <a href="https://github.com">this link</a> and click on <code>Sign Up</code>.</li>
 </ul>
 </div>
-<div id="please-ignore-structure-of-the-book" class="section level2 hasAnchor">
+<div id="please-ignore-structure-of-the-book" class="section level2 hasAnchor" number="1.9">
 <h2><span class="header-section-number">1.9</span> Please ignore: Structure of the book<a href="index.html#please-ignore-structure-of-the-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="please-ignore-contributing-to-this-book" class="section level2 hasAnchor">
+<div id="please-ignore-contributing-to-this-book" class="section level2 hasAnchor" number="1.10">
 <h2><span class="header-section-number">1.10</span> Please ignore Contributing to this book<a href="index.html#please-ignore-contributing-to-this-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>I appreciate constructive feedback on this document. To do this raise an <code>Issue</code> on the <code>GitHub</code> <a href="https://github.com/dpc10ster/RJafrocFrocBook">interface</a>. Click on the <code>Issues</code> tab under <code>dpc10ster/RJafrocFrocBook</code>, then click on <code>New issue</code>. When done this way, contributions from users automatically become part of the <code>GitHub</code> documentation/history of the book.</p>
 </div>
-<div id="please-ignore-is-this-book-relevant-to-you-and-what-are-the-alternatives" class="section level2 hasAnchor">
+<div id="please-ignore-is-this-book-relevant-to-you-and-what-are-the-alternatives" class="section level2 hasAnchor" number="1.11">
 <h2><span class="header-section-number">1.11</span> Please ignore: Is this book relevant to you and what are the alternatives?<a href="index.html#please-ignore-is-this-book-relevant-to-you-and-what-are-the-alternatives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Diagnostic imaging system evaluation</li>
@@ -558,10 +627,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Alternatives</li>
 </ul>
 </div>
-<div id="please-ignore-chapters-needing-heavy-edits" class="section level2 hasAnchor">
+<div id="please-ignore-chapters-needing-heavy-edits" class="section level2 hasAnchor" number="1.12">
 <h2><span class="header-section-number">1.12</span> Please ignore: Chapters needing heavy edits<a href="index.html#please-ignore-chapters-needing-heavy-edits" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="please-ignore-shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits" class="section level2 hasAnchor">
+<div id="please-ignore-shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits" class="section level2 hasAnchor" number="1.13">
 <h2><span class="header-section-number">1.13</span> Please ignore: Shelved vs. removed vs. parked folders needing heavy edits<a href="index.html#please-ignore-shelved-vs.-removed-vs.-parked-folders-needing-heavy-edits" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>replace functions with ; eg. erf and exp in all of document</li>
@@ -571,19 +640,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>parked has dependence of ROC/FROC performance on threshold</li>
 </ul>
 </div>
-<div id="please-ignore-coding-aids-for-me" class="section level2 hasAnchor">
+<div id="please-ignore-coding-aids-for-me" class="section level2 hasAnchor" number="1.14">
 <h2><span class="header-section-number">1.14</span> Please ignore: Coding aids (for me)<a href="index.html#please-ignore-coding-aids-for-me" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>weird error with knitr not responding to changes in Rmd file: traced to upper case lower case confusion: 13A-empirical1.Rmd which should be 13a-empirical1.Rmd</li>
 </ul>
-<div id="formatting" class="section level3 hasAnchor">
+<div id="formatting" class="section level3 hasAnchor" number="1.14.1">
 <h3><span class="header-section-number">1.14.1</span> formatting<a href="index.html#formatting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>sprintf(“%.4f”, proper formatting of numbers</li>
 <li>OpPtStr(, do:</li>
 </ul>
 </div>
-<div id="tables" class="section level3 hasAnchor">
+<div id="tables" class="section level3 hasAnchor" number="1.14.2">
 <h3><span class="header-section-number">1.14.2</span> tables<a href="index.html#tables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><a href="https://github.com/haozhu233/kableExtra/issues/624" class="uri">https://github.com/haozhu233/kableExtra/issues/624</a></li>
@@ -599,7 +668,7 @@ Please install or upgrade Pandoc to at least version 1.17.2; or if you are using
 Execution halted</li>
 </ul>
 </div>
-<div id="tinytex-problems" class="section level3 hasAnchor">
+<div id="tinytex-problems" class="section level3 hasAnchor" number="1.14.3">
 <h3><span class="header-section-number">1.14.3</span> tinytex problems<a href="index.html#tinytex-problems" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>dont update in response to messages; breaks everything</li>
@@ -608,8 +677,8 @@ Execution halted</li>
 <li>Getting very long builds: looping certain commands</li>
 <li>First uninstall tinytex then reinstall:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="co">#uninstall_tinytex(force = FALSE, dir = tinytex_root())</span></span>
-<span id="cb1-2"><a href="index.html#cb1-2"></a><span class="co">#tinytex::install_tinytex()</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#uninstall_tinytex(force = FALSE, dir = tinytex_root())</span></span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#tinytex::install_tinytex()</span></span></code></pre></div>
 <ul>
 <li>get very long build first time with looping certain commands</li>
 <li>fixed on subsequent pdf builds</li>
@@ -622,12 +691,12 @@ Execution halted</li>
 
 
 <h3>REFERENCES<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references">
-<div id="ref-chakraborty2017observer">
-<p>Chakraborty, Dev P. 2017. <em>Observer Performance Methods for Diagnostic Imaging: Foundations, Modeling, and Applications with R-Based Examples</em>. Boca Raton, FL: CRC Press.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-chakraborty2017observer" class="csl-entry">
+———. 2017. <em>Observer Performance Methods for Diagnostic Imaging: Foundations, Modeling, and Applications with r-Based Examples</em>. Boca Raton, FL: CRC Press.
 </div>
-<div id="ref-R-RJafroc">
-<p>Chakraborty, Dev, and Xuetong Zhai. 2022. <em>RJafroc: Artificial Intelligence Systems and Observer Performance</em>. <a href="https://dpc10ster.github.io/RJafroc/">https://dpc10ster.github.io/RJafroc/</a>.</p>
+<div id="ref-R-RJafroc" class="csl-entry">
+Chakraborty, Dev, and Xuetong Zhai. 2022. <em>RJafroc: Artificial Intelligence Systems and Observer Performance</em>. <a href="https://dpc10ster.github.io/RJafroc/">https://dpc10ster.github.io/RJafroc/</a>.
 </div>
 </div>
             </section>
