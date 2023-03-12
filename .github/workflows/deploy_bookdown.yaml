@@ -15,10 +15,10 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@v1
-      - uses: r-lib/actions/setup-pandoc@v1
-      - uses: r-lib/actions/setup-tinytex@v1
+      - uses: actions/checkout@v3
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-pandoc@v2
+      - uses: r-lib/actions/setup-tinytex@v2
       - name: Install rmarkdown
         run: > 
             Rscript -e 'install.packages(c("foreach","doRNG","doParallel",
@@ -35,7 +35,7 @@ jobs:
           path: docs/
       - name: Render HTML Book
         run: Rscript -e 'bookdown::render_book("index.Rmd")'
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v3
         with:
           name: docs
           path: docs/
@@ -48,14 +48,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
       - name: Download artifact
-        uses: actions/download-artifact@v1.0.0
+        uses: actions/download-artifact@v3
         with:
           # Artifact name
           name: docs # optional
           # Destination path
           path: docs # optional
       - name: Deploy to GitHub Pages
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: gh-pages
           path: book-output
