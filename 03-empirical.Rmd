@@ -107,7 +107,7 @@ r = 1, 2, ..., R_{FROC}\\
 
 *Clear notation is vital to understanding this paradigm.* The notation needs to account for case and location dependencies of ratings and the distinction between case-level and location-level ground truths. *The notation also has to account for cases with no marks.*
 
-FROC notation is summarized in Table \@ref(tab:empirical-notation) in which *marks refer to latent marks*. The first column is the row number, the second column has the symbol(s), and the third column has the meaning(s) of the symbol(s).
+FROC notation is summarized in Table \@ref(tab:empirical-notation) in which "marks" refer to "latent marks". The first column is the row number, the second column has the symbol(s), and the third column has the meaning(s) of the symbol(s).
 
 ```{r empirical-notation, echo=FALSE}
 frocNotation = array(dim = c(17,3))
