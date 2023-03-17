@@ -32,27 +32,39 @@ A schema of how radiologists find perform the search task, termed the Kundel-Nod
 Looking at and understanding an image involves grouping and assigning labels to different regions in the image, where the labels correspond to entities that exist in the real world. As an example, if one looks at Fig. \@ref(fig:visual-search-us-presidents), one would group the image into 8 rectangular regions arranged in two rows and 4 columns and label them (from left to right and top to bottom in raster fashion): Franklin Roosevelt, Harry Truman, Lyndon Johnson, Richard Nixon, Jimmy Carter, Ronald Reagan, George H. W. Bush, and the presidential seal. The accuracy of the labeling depends on expertise of the observer: if one were ignorant about American history one would be unable to correctly label them. 
 
 
-<div class="figure" style="text-align: center">
-<img src="images/15-visual-search/usPresidents.png" alt="Grouping and labeling regions of an image." width="300pt" />
-<p class="caption">(\#fig:visual-search-us-presidents)Grouping and labeling regions of an image.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=300pt]{images/15-visual-search/usPresidents} 
+
+}
+
+\caption{Grouping and labeling regions of an image.}(\#fig:visual-search-us-presidents)
+\end{figure}
 
 
 Image interpretation in radiology is not fundamentally different. It involves grouping and recognizing areas of the image that have correspondences to the radiologist’s knowledge of the underlying anatomy. Most doctors, who need not be radiologists, can look at a chest x-ray and say, "this is the heart", "this is a rib", "this is a clavicle", "this is the aortic arch", etc., Fig. \@ref(fig:visual-search-chest-images1). This is because they know the underlying anatomy, Fig. \@ref(fig:visual-search-chest-images2) and have a basic understanding of x-ray image formation physics that relates the anatomy to the image.
 
 
 
-<div class="figure" style="text-align: center">
-<img src="images/15-visual-search/chest-imageA.png" alt="Grouping and labeling in radiology." width="300pt" />
-<p class="caption">(\#fig:visual-search-chest-images1)Grouping and labeling in radiology.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=300pt]{images/15-visual-search/chest-imageA} 
+
+}
+
+\caption{Grouping and labeling in radiology.}(\#fig:visual-search-chest-images1)
+\end{figure}
 
 
 
-<div class="figure" style="text-align: center">
-<img src="images/15-visual-search/chest-imageB.png" alt="Correct grouping and labeling requires knowledge of the underlying anatomy." width="300pt" />
-<p class="caption">(\#fig:visual-search-chest-images2)Correct grouping and labeling requires knowledge of the underlying anatomy.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=300pt]{images/15-visual-search/chest-imageB} 
+
+}
+
+\caption{Correct grouping and labeling requires knowledge of the underlying anatomy.}(\#fig:visual-search-chest-images2)
+\end{figure}
 
 
 
@@ -113,10 +125,14 @@ The inexperienced observer finds more suspicious regions than does the expert ma
 
 
 
-<div class="figure" style="text-align: center">
-<img src="images/15-visual-search/eye-tracking-4-images.png" alt="Eye-tracking recordings for a two-view digital mammogram. The top row is an inexperienced observer while the bottom row is an expert radiologist. The left column shows MLO views while the right column shows CC views." width="300pt" />
-<p class="caption">(\#fig:visual-search-eye-tracking)Eye-tracking recordings for a two-view digital mammogram. The top row is an inexperienced observer while the bottom row is an expert radiologist. The left column shows MLO views while the right column shows CC views.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=300pt]{images/15-visual-search/eye-tracking-4-images} 
+
+}
+
+\caption{Eye-tracking recordings for a two-view digital mammogram. The top row is an inexperienced observer while the bottom row is an expert radiologist. The left column shows MLO views while the right column shows CC views.}(\#fig:visual-search-eye-tracking)
+\end{figure}
 
 
 

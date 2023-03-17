@@ -45,10 +45,14 @@ There are three location-specific paradigms:
 The 4 panels in Fig. \@ref(fig:froc-paradigm-4) show a schematic mammogram interpreted according to the 4 current observer performance paradigms. The arrows point to two lesions and the three light crosses indicate suspicious regions. A marked suspicious region is indicated by a dark cross. Evidently the radiologist found one of the lesions (the light-shaded cross near the left most arrow in the top-left panel), missed the other lesion and mistook two normal structures for lesions (the two light-shaded crosses that are relatively far from any of the lesions). In this example there are three suspicious regions one of which is close to a real lesion.
 
 
-<div class="figure" style="text-align: center">
-<img src="images/4Paradigms.png" alt="Observer performance paradigms in use: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI" width="300pt" />
-<p class="caption">(\#fig:froc-paradigm-4)Observer performance paradigms in use: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=300pt]{images/4Paradigms} 
+
+}
+
+\caption{Observer performance paradigms in use: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI}(\#fig:froc-paradigm-4)
+\end{figure}
 
 >In this book *lesion* always refers to a true or real lesion. The term *suspicious region* or *perceived lesion* is reserved for any region that, as far as the observer is concerned, has "lesion-like" characteristics. *A lesion is a real entity while a suspicious region is a perceived entity.*
 
@@ -161,7 +165,7 @@ ret <- PlotEmpiricalOperatingCharacteristics(
 print(ret$Plot)
 ```
 
-<img src="02-froc_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+![](02-froc_files/figure-latex/unnamed-chunk-1-1.pdf)<!-- --> 
 
 
 The study in question was a 5 rating FROC study. The lowest non-trivial point (i.e., not counting the trivial origin which is common to all FROC plots) corresponds to the marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic that the operating point cannot move downward or to the left as one cumulates lower confidence level marks (i.e., it can only move upward and to the right; the plot can flatten out or it can end at a finite value of NLF). 

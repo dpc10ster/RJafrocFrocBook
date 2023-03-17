@@ -99,103 +99,50 @@ r = 1, 2, ..., R_{FROC}\\
 
 FROC notation is summarized in Table \@ref(tab:empirical-notation) in which *marks refer to latent marks*. The first column is the row number, the second column has the symbol(s), and the third column has the meaning(s) of the symbol(s).
 
-<table>
-<caption>(\#tab:empirical-notation)FROC notation; all marks refer to latent marks.</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Row </th>
-   <th style="text-align:left;"> Symbol </th>
-   <th style="text-align:left;"> Meaning </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> $t$ </td>
-   <td style="text-align:left;"> Case-level truth: 1 non-diseased, 2 diseased case </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> $K_t$ </td>
-   <td style="text-align:left;"> Number of cases with case-level truth $t$ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> $k_t t$ </td>
-   <td style="text-align:left;"> Case $k_t$ in case-level truth $t$ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 4 </td>
-   <td style="text-align:left;"> $s$ </td>
-   <td style="text-align:left;"> Location-level truth: 1 for NL and 2 for LL </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 5 </td>
-   <td style="text-align:left;"> $l_s s$ </td>
-   <td style="text-align:left;"> Mark $l_s$ in location-level truth $s$ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 6 </td>
-   <td style="text-align:left;"> $N_{k_t t}$ </td>
-   <td style="text-align:left;"> Number of NLs in case $k_t t$ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 7 </td>
-   <td style="text-align:left;"> $L_{k_2 2}$ </td>
-   <td style="text-align:left;"> Number of lesions in case $k_2 2$ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 8 </td>
-   <td style="text-align:left;"> $z_{k_t t l_1 1}$ </td>
-   <td style="text-align:left;"> $z$-sample for case $k_t t$ and NL mark $l_1 1$ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 9 </td>
-   <td style="text-align:left;"> $z_{k_2 2 l_2 2}$ </td>
-   <td style="text-align:left;"> $z$-sample for case $k_2 2$ and LL mark $l_2 2$ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10 </td>
-   <td style="text-align:left;"> $r_{k_t t l_s s}$ </td>
-   <td style="text-align:left;"> rating for case $k_t t$ and LL/NL mark $l_s s$ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 11 </td>
-   <td style="text-align:left;"> $R_{FROC}$ </td>
-   <td style="text-align:left;"> Number of FROC bins </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 12 </td>
-   <td style="text-align:left;"> $\zeta_1$ </td>
-   <td style="text-align:left;"> Lowest non-dummy reporting threshold </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 13 </td>
-   <td style="text-align:left;"> $\zeta_r$ </td>
-   <td style="text-align:left;"> $r$ = 2, 3, ..., non-dummy reporting thresholds </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 14 </td>
-   <td style="text-align:left;"> $\zeta_0, \zeta_{R_{FROC}+1}$ </td>
-   <td style="text-align:left;"> Dummy thresholds, negative and positive infinity </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 15 </td>
-   <td style="text-align:left;"> $W_{k_2 l_2}$ </td>
-   <td style="text-align:left;"> Weight of lesion $l_2 2$ in case $k_2 2$, explained later </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 16 </td>
-   <td style="text-align:left;"> $L_{max}$ </td>
-   <td style="text-align:left;"> Maximum number of lesions per case in dataset </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 17 </td>
-   <td style="text-align:left;"> $L_T$ </td>
-   <td style="text-align:left;"> Total number of lesions in dataset </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}
+
+\caption{(\#tab:empirical-notation)FROC notation; all marks refer to latent marks.}
+\centering
+\begin{tabular}[t]{l|l|l}
+\hline
+Row & Symbol & Meaning\\
+\hline
+1 & $t$ & Case-level truth: 1 non-diseased, 2 diseased case\\
+\hline
+2 & $K_t$ & Number of cases with case-level truth $t$\\
+\hline
+3 & $k_t t$ & Case $k_t$ in case-level truth $t$\\
+\hline
+4 & $s$ & Location-level truth: 1 for NL and 2 for LL\\
+\hline
+5 & $l_s s$ & Mark $l_s$ in location-level truth $s$\\
+\hline
+6 & $N_{k_t t}$ & Number of NLs in case $k_t t$\\
+\hline
+7 & $L_{k_2 2}$ & Number of lesions in case $k_2 2$\\
+\hline
+8 & $z_{k_t t l_1 1}$ & $z$-sample for case $k_t t$ and NL mark $l_1 1$\\
+\hline
+9 & $z_{k_2 2 l_2 2}$ & $z$-sample for case $k_2 2$ and LL mark $l_2 2$\\
+\hline
+10 & $r_{k_t t l_s s}$ & rating for case $k_t t$ and LL/NL mark $l_s s$\\
+\hline
+11 & $R_{FROC}$ & Number of FROC bins\\
+\hline
+12 & $\zeta_1$ & Lowest non-dummy reporting threshold\\
+\hline
+13 & $\zeta_r$ & $r$ = 2, 3, ..., non-dummy reporting thresholds\\
+\hline
+14 & $\zeta_0, \zeta_{R_{FROC}+1}$ & Dummy thresholds, negative and positive infinity\\
+\hline
+15 & $W_{k_2 l_2}$ & Weight of lesion $l_2 2$ in case $k_2 2$, explained later\\
+\hline
+16 & $L_{max}$ & Maximum number of lesions per case in dataset\\
+\hline
+17 & $L_T$ & Total number of lesions in dataset\\
+\hline
+\end{tabular}
+\end{table}
 
 ### Comments
 
@@ -426,7 +373,7 @@ ret <- PlotEmpiricalOperatingCharacteristics(
 print(ret$Plot)
 ```
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+![](03-empirical_files/figure-latex/unnamed-chunk-1-1.pdf)<!-- --> 
 
 Shown next are FROC-AUCs for this dataset calculated using the formula in Eqn. \@ref(eq:empirical-computational-froc). All 20 modality-reader combinations are shown. 
 
@@ -609,7 +556,7 @@ ret <- PlotEmpiricalOperatingCharacteristics(
 print(ret$Plot)
 ```
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](03-empirical_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 
 Shown next is calculation of the figure of merit for this dataset. Note that in function `UtilFigureOfMerit()` the `FOM` argument has to be set to `HrAuc`, for highest rating AUC.].
@@ -676,7 +623,7 @@ ret <- PlotEmpiricalOperatingCharacteristics(
 print(ret$Plot)
 ```
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](03-empirical_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 
 
@@ -746,7 +693,7 @@ ret <- PlotEmpiricalOperatingCharacteristics(
 print(ret$Plot)
 ```
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](03-empirical_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 
 Shown next is calculation of the figure of merit for this dataset.
@@ -979,10 +926,7 @@ The hand-calculations also show why the AFROC gives more importance to diseased 
 
 Shown in Fig. \@ref(fig:plots-afrocPlot-wafrocPlot) are the empirical AFROC and wAFROC plots.
 
-<div class="figure">
-<img src="03-empirical_files/figure-html/plots-afrocPlot-wafrocPlot-1.png" alt="Left: AFROC plot; Right: corresponding wAFROC plot." width="672" />
-<p class="caption">(\#fig:plots-afrocPlot-wafrocPlot)Left: AFROC plot; Right: corresponding wAFROC plot.</p>
-</div>
+![(\#fig:plots-afrocPlot-wafrocPlot)Left: AFROC plot; Right: corresponding wAFROC plot.](03-empirical_files/figure-latex/plots-afrocPlot-wafrocPlot-1.pdf) 
 
 
 The operating points can be used to numerically calculate the AUCs under the empirical AFROC and wAFROC plots, as done in the following code:
@@ -1082,7 +1026,7 @@ The following is the plot of $A_{\text{FROC}}$ vs. $A_{\text{ROC}}$. There are 2
 
 
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+![](03-empirical_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
 
 
 The reason should be fairly obvious. The FROC is unconstrained in the NLF direction and the area under the plot *rewards* an observer who generates more NLs, i.e., as the operating point moves further to the right. (The perfect observer whose FROC plot is the vertical line connecting (0,0) and (0,1) is heavily penalized since $A_{\text{FROC}} = 0$ for this observer.) One can try to try to avoid this problem by limiting the area under the FROC to that between $\text{NLF} = 0$ and $\text{NLF} = x$ where $x$ is an arbitrarily chosen fixed value -- indeed the partial area procedure has been used by CAD algorithm designers. Since the choice of $x$ is arbitrary the procedure is subjective. The method would fail for any observer with $\text{NLF}_{max} < x$ as then the partial area is undefined. This forces the algorithm designer to chose $x$ as the minimum of all $\text{NLF}_{max}$ values over all observers and treatments, which would exclude a lot of data and lead to a statistical power penalty.
@@ -1097,7 +1041,7 @@ The following is the plot of $A_{\text{AFROC}}$ vs. $A_{\text{ROC}}$. This time 
 
 
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+![](03-empirical_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
 
 
 ### Plot of wAFROC AUC vs. ROC AUC
@@ -1110,7 +1054,7 @@ The following is the plot of $A_{\text{wAFROC}}$ vs. $A_{\text{ROC}}$. Again, th
 
 
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+![](03-empirical_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
 
 
 
@@ -1175,7 +1119,7 @@ ret <- PlotEmpiricalOperatingCharacteristics(
 print(ret$Plot)
 ```
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+![](03-empirical_files/figure-latex/unnamed-chunk-31-1.pdf)<!-- --> 
 
 
 
@@ -1228,7 +1172,7 @@ ret <- PlotEmpiricalOperatingCharacteristics(
 print(ret$Plot)
 ```
 
-<img src="03-empirical_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+![](03-empirical_files/figure-latex/unnamed-chunk-34-1.pdf)<!-- --> 
 
 
 Shown next is calculation of wAFROC1-AUC for this dataset.
@@ -1256,55 +1200,28 @@ UtilFigureOfMerit(dataset04, FOM = "wAFROC1")
 
 Here is a summary of the plots defined from FROC data along with my recommendations:
 
-<table>
-<caption>(\#tab:empirical-summary)Summary of plots from FROC data. OC = Operating Characteristic. All empirical plots except FROC include a straight line extension from the uppermost observed point to (1,1). Each figure of merit is defined by appending "-AUC" to the name of the corresponding OC</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> OC </th>
-   <th style="text-align:left;"> Abscissa </th>
-   <th style="text-align:left;"> Ordinate </th>
-   <th style="text-align:left;"> Comments </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> FROC </td>
-   <td style="text-align:left;"> NLF </td>
-   <td style="text-align:left;"> LLF </td>
-   <td style="text-align:left;"> Not recommended </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> ROC </td>
-   <td style="text-align:left;"> FPF </td>
-   <td style="text-align:left;"> TPF </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> AFROC </td>
-   <td style="text-align:left;"> FPF </td>
-   <td style="text-align:left;"> LLF </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC </td>
-   <td style="text-align:left;"> FPF </td>
-   <td style="text-align:left;"> wLLF </td>
-   <td style="text-align:left;"> Recommended when $K_1 \approx K_2$ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> AFROC1 </td>
-   <td style="text-align:left;"> FPF1 </td>
-   <td style="text-align:left;"> LLF </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> wAFROC1 </td>
-   <td style="text-align:left;"> FPF1 </td>
-   <td style="text-align:left;"> wLLF </td>
-   <td style="text-align:left;"> Recommended when $K_1 \ll K_2$ </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}
+
+\caption{(\#tab:empirical-summary)Summary of plots from FROC data. OC = Operating Characteristic. All empirical plots except FROC include a straight line extension from the uppermost observed point to (1,1). Each figure of merit is defined by appending "-AUC" to the name of the corresponding OC}
+\centering
+\begin{tabular}[t]{l|l|l|l}
+\hline
+OC & Abscissa & Ordinate & Comments\\
+\hline
+FROC & NLF & LLF & Not recommended\\
+\hline
+ROC & FPF & TPF & \\
+\hline
+AFROC & FPF & LLF & \\
+\hline
+wAFROC & FPF & wLLF & Recommended when $K_1 \approx K_2$\\
+\hline
+AFROC1 & FPF1 & LLF & \\
+\hline
+wAFROC1 & FPF1 & wLLF & Recommended when $K_1 \ll K_2$\\
+\hline
+\end{tabular}
+\end{table}
 
 
 
@@ -1313,10 +1230,14 @@ Here is a summary of the plots defined from FROC data along with my recommendati
 
 The area $\text{A}_{wAFROC}$ under the empirical wAFROC plot is obtained by summing the areas of individual trapezoids defined by dropping vertical lines from each pair of adjacent operating points to the x-axis. A sample plot is shown Fig. \@ref(fig:empirical-theorems).
 
-<div class="figure" style="text-align: center">
-<img src="images/03-empiricalPlots/proofFigure.png" alt="An example wAFROC plot; from left to right, the two shaded areas correspond to $A_i$ and  $A_0$, respectively, defined below." width="300pt" />
-<p class="caption">(\#fig:empirical-theorems)An example wAFROC plot; from left to right, the two shaded areas correspond to $A_i$ and  $A_0$, respectively, defined below.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=300pt]{images/03-empiricalPlots/proofFigure} 
+
+}
+
+\caption{An example wAFROC plot; from left to right, the two shaded areas correspond to $A_i$ and  $A_0$, respectively, defined below.}(\#fig:empirical-theorems)
+\end{figure}
 
 
 

@@ -12,12 +12,9 @@ rmd_files: [
   "07-rsm-predictions1.Rmd",
   "08-rsm-predictions2.Rmd",
   "10-rsm-search-classification.Rmd",
-  "11-rsm-fitting.Rmd",
-  "12-rsm-3-fits.Rmd",
   "20-standalone-cad.Rmd",
   "21-optim-op-point-wafroc.Rmd",
   "22-zero-non-diseased-cases.Rmd",
-  "90-datasets.Rmd",
   "99-references.Rmd",
 ]
 
