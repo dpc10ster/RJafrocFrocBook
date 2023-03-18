@@ -23,14 +23,14 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-03-12" />
+<meta name="date" content="2023-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="datasets.html"/>
+<link rel="prev" href="analyze-diseased-only-dataset.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -384,127 +384,64 @@ div.csl-indent {
 <li class="chapter" data-level="8.4" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-performance"><i class="fa fa-check"></i><b>8.4</b> Quantifying lesion-classification performance</a></li>
 <li class="chapter" data-level="8.5" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-discussion"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="rsm-fitting.html"><a href="rsm-fitting.html"><i class="fa fa-check"></i><b>9</b> RSM fitting</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> How much finished</a></li>
-<li class="chapter" data-level="9.2" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-intro"><i class="fa fa-check"></i><b>9.2</b> TBA Introduction</a></li>
-<li class="chapter" data-level="9.3" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-roc-likelihood"><i class="fa fa-check"></i><b>9.3</b> ROC Likelihood function</a></li>
-<li class="chapter" data-level="9.4" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-implementation"><i class="fa fa-check"></i><b>9.4</b> Implementation</a></li>
-<li class="chapter" data-level="9.5" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-fitrsmroc-usage-example"><i class="fa fa-check"></i><b>9.5</b> <code>FitRsmROC</code> usage example</a></li>
-<li class="chapter" data-level="9.6" data-path="rsm-fitting.html"><a href="rsm-fitting.html#rsm-fitting-discussion-summary"><i class="fa fa-check"></i><b>9.6</b> Discussion / Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html"><i class="fa fa-check"></i><b>10</b> Three proper ROC fits</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> TBA How much finished</a></li>
-<li class="chapter" data-level="10.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-intro"><i class="fa fa-check"></i><b>10.2</b> TBA Introduction</a></li>
-<li class="chapter" data-level="10.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-applications"><i class="fa fa-check"></i><b>10.3</b> Application to datasets</a></li>
-<li class="chapter" data-level="10.4" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-composite-plots"><i class="fa fa-check"></i><b>10.4</b> Composite plots</a></li>
-<li class="chapter" data-level="10.5" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-rsm-parameters"><i class="fa fa-check"></i><b>10.5</b> RSM parameters</a>
-<ul>
-<li class="chapter" data-level="10.5.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-parameters-van-dyke-dataset-i-1-j-2"><i class="fa fa-check"></i><b>10.5.1</b> RSM parameters Van Dyke dataset i = 1, j= 2</a></li>
-<li class="chapter" data-level="10.5.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-parameters-franken-dataset-i-2-j-3"><i class="fa fa-check"></i><b>10.5.2</b> RSM parameters Franken dataset i = 2, j= 3</a></li>
-</ul></li>
-<li class="chapter" data-level="10.6" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-cbm-parameters"><i class="fa fa-check"></i><b>10.6</b> CBM parameters</a></li>
-<li class="chapter" data-level="10.7" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-proproc-parameters"><i class="fa fa-check"></i><b>10.7</b> PROPROC parameters</a></li>
-<li class="chapter" data-level="10.8" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-overview"><i class="fa fa-check"></i><b>10.8</b> Overview of findings</a>
-<ul>
-<li class="chapter" data-level="10.8.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes"><i class="fa fa-check"></i><b>10.8.1</b> Slopes</a></li>
-<li class="chapter" data-level="10.8.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-confidence-intervals"><i class="fa fa-check"></i><b>10.8.2</b> Confidence intervals</a></li>
-<li class="chapter" data-level="10.8.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-slopes-confidence-intervals-summary"><i class="fa fa-check"></i><b>10.8.3</b> Summary of slopes and confidence intervals</a></li>
-</ul></li>
-<li class="chapter" data-level="10.9" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-discussion-summary"><i class="fa fa-check"></i><b>10.9</b> Reason for equal AUCs / Summary</a></li>
-<li class="chapter" data-level="10.10" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-appendices"><i class="fa fa-check"></i><b>10.10</b> Appendices</a>
-<ul>
-<li class="chapter" data-level="10.10.1" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-one-dataset-proproc"><i class="fa fa-check"></i><b>10.10.1</b> Location of PROPROC files</a></li>
-<li class="chapter" data-level="10.10.2" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-pre-analyzed-results"><i class="fa fa-check"></i><b>10.10.2</b> Location of pre-analyzed results</a></li>
-<li class="chapter" data-level="10.10.3" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-representative-plots-van-dyke"><i class="fa fa-check"></i><b>10.10.3</b> Plots for the Van Dyke dataset</a></li>
-<li class="chapter" data-level="10.10.4" data-path="rsm-3-fits.html"><a href="rsm-3-fits.html#rsm-3-fits-representative-plots-franken"><i class="fa fa-check"></i><b>10.10.4</b> Plots for the Franken dataset</a></li>
-</ul></li>
-</ul></li>
 <li class="part"><span><b>CAD applications</b></span></li>
-<li class="chapter" data-level="11" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>11</b> Standalone CAD</a>
+<li class="chapter" data-level="9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>9</b> Standalone CAD</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> How much finished</a></li>
-<li class="chapter" data-level="11.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>11.2</b> Introduction</a></li>
-<li class="chapter" data-level="11.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-overview"><i class="fa fa-check"></i><b>11.3</b> Overview</a></li>
-<li class="chapter" data-level="11.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>11.4</b> Methods</a>
+<li class="chapter" data-level="9.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> How much finished</a></li>
+<li class="chapter" data-level="9.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>9.2</b> Introduction</a></li>
+<li class="chapter" data-level="9.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-overview"><i class="fa fa-check"></i><b>9.3</b> Overview</a></li>
+<li class="chapter" data-level="9.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>9.4</b> Methods</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>11.4.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
-<li class="chapter" data-level="11.4.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>11.4.2</b> The 1T-RRFC analysis model</a></li>
-<li class="chapter" data-level="11.4.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>11.4.3</b> The 2T-RRRC analysis model</a></li>
-<li class="chapter" data-level="11.4.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-1TRRRC-anlaysis"><i class="fa fa-check"></i><b>11.4.4</b> The 1T-RRRC analysis model</a></li>
+<li class="chapter" data-level="9.4.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>9.4.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
+<li class="chapter" data-level="9.4.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>9.4.2</b> The 1T-RRFC analysis model</a></li>
+<li class="chapter" data-level="9.4.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>9.4.3</b> The 2T-RRRC analysis model</a></li>
+<li class="chapter" data-level="9.4.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-1TRRRC-anlaysis"><i class="fa fa-check"></i><b>9.4.4</b> The 1T-RRRC analysis model</a></li>
 </ul></li>
-<li class="chapter" data-level="11.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>11.5</b> Implementation</a></li>
-<li class="chapter" data-level="11.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>11.6</b> Results</a></li>
-<li class="chapter" data-level="11.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>11.7</b> Discussion</a></li>
-<li class="chapter" data-level="11.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>11.8</b> Appendix 1</a>
+<li class="chapter" data-level="9.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>9.5</b> Implementation</a></li>
+<li class="chapter" data-level="9.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>9.6</b> Results</a></li>
+<li class="chapter" data-level="9.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>9.7</b> Discussion</a></li>
+<li class="chapter" data-level="9.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>9.8</b> Appendix 1</a>
 <ul>
-<li class="chapter" data-level="11.8.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1"><i class="fa fa-check"></i><b>11.8.1</b> Example 1</a></li>
-<li class="chapter" data-level="11.8.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2"><i class="fa fa-check"></i><b>11.8.2</b> Example 2</a></li>
-<li class="chapter" data-level="11.8.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>11.8.3</b> Example 3</a></li>
+<li class="chapter" data-level="9.8.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1"><i class="fa fa-check"></i><b>9.8.1</b> Example 1</a></li>
+<li class="chapter" data-level="9.8.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2"><i class="fa fa-check"></i><b>9.8.2</b> Example 2</a></li>
+<li class="chapter" data-level="9.8.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>9.8.3</b> Example 3</a></li>
 </ul></li>
-<li class="chapter" data-level="11.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix2"><i class="fa fa-check"></i><b>11.9</b> Appendix 2</a></li>
+<li class="chapter" data-level="9.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix2"><i class="fa fa-check"></i><b>9.9</b> Appendix 2</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>12</b> CAD optimal operating point</a>
+<li class="chapter" data-level="10" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>10</b> CAD optimal operating point</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>12.1</b> TBA How much finished</a></li>
-<li class="chapter" data-level="12.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>12.2</b> Introduction</a></li>
-<li class="chapter" data-level="12.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>12.3</b> Methods</a></li>
-<li class="chapter" data-level="12.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>12.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a>
+<li class="chapter" data-level="10.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="10.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>10.2</b> Introduction</a></li>
+<li class="chapter" data-level="10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>10.3</b> Methods</a></li>
+<li class="chapter" data-level="10.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>10.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a>
 <ul>
-<li class="chapter" data-level="12.4.1" data-path="optim-op-point.html"><a href="optim-op-point.html#summary-table"><i class="fa fa-check"></i><b>12.4.1</b> Summary table</a></li>
-<li class="chapter" data-level="12.4.2" data-path="optim-op-point.html"><a href="optim-op-point.html#froc-1"><i class="fa fa-check"></i><b>12.4.2</b> FROC</a></li>
-<li class="chapter" data-level="12.4.3" data-path="optim-op-point.html"><a href="optim-op-point.html#wafroc-1"><i class="fa fa-check"></i><b>12.4.3</b> wAFROC</a></li>
-<li class="chapter" data-level="12.4.4" data-path="optim-op-point.html"><a href="optim-op-point.html#roc-1"><i class="fa fa-check"></i><b>12.4.4</b> ROC</a></li>
-<li class="chapter" data-level="12.4.5" data-path="optim-op-point.html"><a href="optim-op-point.html#why-not-maximize-roc-auc"><i class="fa fa-check"></i><b>12.4.5</b> Why not maximize ROC-AUC?</a></li>
+<li class="chapter" data-level="10.4.1" data-path="optim-op-point.html"><a href="optim-op-point.html#summary-table"><i class="fa fa-check"></i><b>10.4.1</b> Summary table</a></li>
+<li class="chapter" data-level="10.4.2" data-path="optim-op-point.html"><a href="optim-op-point.html#froc-1"><i class="fa fa-check"></i><b>10.4.2</b> FROC</a></li>
+<li class="chapter" data-level="10.4.3" data-path="optim-op-point.html"><a href="optim-op-point.html#wafroc-1"><i class="fa fa-check"></i><b>10.4.3</b> wAFROC</a></li>
+<li class="chapter" data-level="10.4.4" data-path="optim-op-point.html"><a href="optim-op-point.html#roc-1"><i class="fa fa-check"></i><b>10.4.4</b> ROC</a></li>
+<li class="chapter" data-level="10.4.5" data-path="optim-op-point.html"><a href="optim-op-point.html#why-not-maximize-roc-auc"><i class="fa fa-check"></i><b>10.4.5</b> Why not maximize ROC-AUC?</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-mu"><i class="fa fa-check"></i><b>12.5</b> Varying <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> optimizations</a></li>
-<li class="chapter" data-level="12.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations"><i class="fa fa-check"></i><b>12.6</b> Limiting situations</a></li>
-<li class="chapter" data-level="12.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-trends"><i class="fa fa-check"></i><b>12.7</b> Trends</a></li>
-<li class="chapter" data-level="12.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>12.8</b> Applying the method</a>
+<li class="chapter" data-level="10.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-mu"><i class="fa fa-check"></i><b>10.5</b> Varying <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> optimizations</a></li>
+<li class="chapter" data-level="10.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations"><i class="fa fa-check"></i><b>10.6</b> Limiting situations</a></li>
+<li class="chapter" data-level="10.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-trends"><i class="fa fa-check"></i><b>10.7</b> Trends</a></li>
+<li class="chapter" data-level="10.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>10.8</b> Applying the method</a>
 <ul>
-<li class="chapter" data-level="12.8.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>12.8.1</b> A CAD application</a></li>
+<li class="chapter" data-level="10.8.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>10.8.1</b> A CAD application</a></li>
 </ul></li>
-<li class="chapter" data-level="12.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>12.9</b> TBA Discussion</a></li>
-<li class="chapter" data-level="12.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>12.10</b> Appendices</a>
+<li class="chapter" data-level="10.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>10.9</b> TBA Discussion</a></li>
+<li class="chapter" data-level="10.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>10.10</b> Appendices</a>
 <ul>
-<li class="chapter" data-level="12.10.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>12.10.1</b> Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
-<li class="chapter" data-level="12.10.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>12.10.2</b> Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
-<li class="chapter" data-level="12.10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>12.10.3</b> Limiting cases</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>13</b> Analyzing a dataset with only diseased cases</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished"><i class="fa fa-check"></i><b>13.1</b> TBA How much finished</a></li>
-<li class="chapter" data-level="13.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>13.2</b> The problem</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-step-1"><i class="fa fa-check"></i><b>13.2.1</b> Step 1: Create a test (diseased cases only) dataset</a></li>
+<li class="chapter" data-level="10.10.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>10.10.1</b> Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
+<li class="chapter" data-level="10.10.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>10.10.2</b> Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
+<li class="chapter" data-level="10.10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>10.10.3</b> Limiting cases</a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>DATASETS</b></span></li>
-<li class="chapter" data-level="14" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>14</b> Datasets</a>
+<li class="chapter" data-level="11" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>11</b> Analyzing a dataset with only diseased cases</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetsdd"><i class="fa fa-check"></i><b>14.1</b> Datasets embedded in <code>RJafroc</code></a>
+<li class="chapter" data-level="11.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="11.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>11.2</b> The problem</a>
 <ul>
-<li class="chapter" data-level="14.1.1" data-path="datasets.html"><a href="datasets.html#datasets-dataset01"><i class="fa fa-check"></i><b>14.1.1</b> Dataset01</a></li>
-<li class="chapter" data-level="14.1.2" data-path="datasets.html"><a href="datasets.html#datasets-dataset02"><i class="fa fa-check"></i><b>14.1.2</b> Dataset02</a></li>
-<li class="chapter" data-level="14.1.3" data-path="datasets.html"><a href="datasets.html#datasets-dataset03"><i class="fa fa-check"></i><b>14.1.3</b> Dataset03</a></li>
-<li class="chapter" data-level="14.1.4" data-path="datasets.html"><a href="datasets.html#datasets-dataset04"><i class="fa fa-check"></i><b>14.1.4</b> Dataset04</a></li>
-<li class="chapter" data-level="14.1.5" data-path="datasets.html"><a href="datasets.html#datasets-dataset05"><i class="fa fa-check"></i><b>14.1.5</b> Dataset05</a></li>
-<li class="chapter" data-level="14.1.6" data-path="datasets.html"><a href="datasets.html#datasets-dataset06"><i class="fa fa-check"></i><b>14.1.6</b> Dataset06</a></li>
-<li class="chapter" data-level="14.1.7" data-path="datasets.html"><a href="datasets.html#datasets-dataset07"><i class="fa fa-check"></i><b>14.1.7</b> Dataset07</a></li>
-<li class="chapter" data-level="14.1.8" data-path="datasets.html"><a href="datasets.html#datasets-dataset08"><i class="fa fa-check"></i><b>14.1.8</b> Dataset08</a></li>
-<li class="chapter" data-level="14.1.9" data-path="datasets.html"><a href="datasets.html#datasets-dataset09"><i class="fa fa-check"></i><b>14.1.9</b> Dataset09</a></li>
-<li class="chapter" data-level="14.1.10" data-path="datasets.html"><a href="datasets.html#datasets-dataset10"><i class="fa fa-check"></i><b>14.1.10</b> Dataset10</a></li>
-<li class="chapter" data-level="14.1.11" data-path="datasets.html"><a href="datasets.html#datasets-dataset11"><i class="fa fa-check"></i><b>14.1.11</b> Dataset11</a></li>
-<li class="chapter" data-level="14.1.12" data-path="datasets.html"><a href="datasets.html#datasets-dataset12"><i class="fa fa-check"></i><b>14.1.12</b> Dataset12</a></li>
-<li class="chapter" data-level="14.1.13" data-path="datasets.html"><a href="datasets.html#datasets-dataset13"><i class="fa fa-check"></i><b>14.1.13</b> Dataset13</a></li>
-<li class="chapter" data-level="14.1.14" data-path="datasets.html"><a href="datasets.html#datasets-dataset14"><i class="fa fa-check"></i><b>14.1.14</b> Dataset14</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="datasets.html"><a href="datasets.html#other-datasets"><i class="fa fa-check"></i><b>14.2</b> Other datasets</a>
-<ul>
-<li class="chapter" data-level="14.2.1" data-path="datasets.html"><a href="datasets.html#datasets-datasetCadLroc"><i class="fa fa-check"></i><b>14.2.1</b> DatasetCadLroc</a></li>
-<li class="chapter" data-level="14.2.2" data-path="datasets.html"><a href="datasets.html#datasets-datasetCadSimuFroc"><i class="fa fa-check"></i><b>14.2.2</b> datasetCadSimuFroc</a></li>
+<li class="chapter" data-level="11.2.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-step-1"><i class="fa fa-check"></i><b>11.2.1</b> Step 1: Create a test (diseased cases only) dataset</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>REFERENCES</a></li>
@@ -536,19 +473,10 @@ div.csl-indent {
 Bamber, Donald. 1975. <span>“The Area Above the Ordinal Dominance Graph and the Area Below the Receiver Operating Characteristic Graph.”</span> <em>Journal of Mathematical Psychology</em> 12 (4): 387–415.
 </div>
 <div class="csl-entry">
-Barrett, Harrison H, and Kyle J Myers. 2013. <em>Foundations of Image Science</em>. John Wiley &amp; Sons.
-</div>
-<div class="csl-entry">
-Black, William C. 2000. <span>“Anatomic Extent of Disease: A Critical Variable in Reports of Diagnostic Accuracy.”</span> Journal Article. <em>Radiology</em> 217 (2): 319–20. <a href="http://radiology.rsnajnls.org">http://radiology.rsnajnls.org</a>.
+Black, William C. 2000. <span>“Anatomic Extent of Disease: A Critical Variable in Reports of Diagnostic Accuracy.”</span> <em>Radiology</em> 217 (2): 319–20.
 </div>
 <div class="csl-entry">
 Black, William C., and Andrew J. Dwyer. 1990. <span>“Local Versus Global Measures of Accuracy: An Important Distinction for Diagnostic Imaging.”</span> Journal Article. <em>Med Decis Making</em> 10 (4): 266–73. <a href="https://doi.org/10.1177/0272989x9001000404">https://doi.org/10.1177/0272989x9001000404</a>.
-</div>
-<div class="csl-entry">
-Bolker, Ben, and R Development Core Team. 2022. <em>Bbmle: Tools for General Maximum Likelihood Estimation</em>. <a href="https://CRAN.R-project.org/package=bbmle">https://CRAN.R-project.org/package=bbmle</a>.
-</div>
-<div class="csl-entry">
-Broyden, Charles George. 1970. <span>“The Convergence of a Class of Double-Rank Minimization Algorithms 1. General Considerations.”</span> Journal Article. <em>IMA Journal of Applied Mathematics</em> 6 (1): 76–90.
 </div>
 <div class="csl-entry">
 Bunch, Philip C, John F Hamilton, Gary K Sanderson, and Arthur H Simmons. 1977. <span>“A Free Response Approach to the Measurement and Characterization of Radiographic Observer Performance.”</span> In <em>Application of Optical Instrumentation in Medicine VI</em>, 127:124–35. International Society for Optics; Photonics.
@@ -584,12 +512,6 @@ Chakraborty, Dev, and Xuetong Zhai. 2022. <em>RJafroc: Artificial Intelligence S
 Chakraborty, DP. 2006. <span>“<span>ROC</span> Curves Predicted by a Model of Visual Search.”</span> <em>Physics in Medicine &amp; Biology</em> 51 (14): 3463.
 </div>
 <div class="csl-entry">
-Chakraborty, DP, and Tony Svahn. 2011. <span>“Estimating the Parameters of a Model of Visual Search from ROC Data: An Alternate Method for Fitting Proper ROC Curves.”</span> In <em>Medical Imaging 2011: Image Perception, Observer Performance, and Technology Assessment</em>, 7966:189–97. SPIE.
-</div>
-<div class="csl-entry">
-Chakraborty, DP, and Hong-Jun Yoon. 2008. <span>“Operating Characteristics Predicted by Models for Diagnostic Tasks Involving Lesion Localization.”</span> <em>Medical Physics</em> 35 (2): 435–45.
-</div>
-<div class="csl-entry">
 De Boo, Diederick W, Martin Uffmann, Michael Weber, Shandra Bipat, Eelco F Boorsma, Maeke J Scheerder, Nicole J Freling, and Cornelia M Schaefer-Prokop. 2011. <span>“Computer-Aided Detection of Small Pulmonary Nodules in Chest Radiographs: An Observer Study.”</span> Journal Article. <em>Academic Radiology</em> 18 (12): 1507–14.
 </div>
 <div class="csl-entry">
@@ -620,18 +542,6 @@ Ernster, Virginia L. 1981. <span>“The Epidemiology of Benign Breast Disease.�
 Fisher, Ronald Aylmer, and Leonard Henry Caleb Tippett. 1928. <span>“Limiting Forms of the Frequency Distribution of the Largest or Smallest Member of a Sample.”</span> In <em>Mathematical Proceedings of the Cambridge Philosophical Society</em>, 24:180–90. Cambridge University Press.
 </div>
 <div class="csl-entry">
-Fletcher, Roger. 1970. <span>“A New Approach to Variable Metric Algorithms.”</span> Journal Article. <em>The Computer Journal</em> 13 (3): 317–22.
-</div>
-<div class="csl-entry">
-———. 2013. <em>Practical Methods of Optimization</em>. Book. John Wiley; Sons.
-</div>
-<div class="csl-entry">
-Franken, Jr., Edmund A., Kevin S. Berbaum, Susan M. Marley, Wilbur L. Smith, Yutaka Sato, Simon C. S. Kao, and Steven G. Milam. 1992. <span>“Evaluation of a Digital Workstation for Interpreting Neonatal Examinations: A Receiver Operating Characteristic Study.”</span> Journal Article. <em>Investigative Radiology</em> 27 (9): 732–37. <a href="http://journals.lww.com/investigativeradiology/Fulltext/1992/09000/Evaluation_of_a_Digital_Workstation_for.16.aspx">http://journals.lww.com/investigativeradiology/Fulltext/1992/09000/Evaluation_of_a_Digital_Workstation_for.16.aspx</a>.
-</div>
-<div class="csl-entry">
-Goldfarb, Donald. 1970. <span>“A Family of Variable-Metric Methods Derived by Variational Means.”</span> Journal Article. <em>Mathematics of Computation</em> 24 (109): 23–26.
-</div>
-<div class="csl-entry">
 Hein, Patrick A, Lasse D Krug, Valentina C Romano, Sonja Kandel, Bernd Hamm, and Patrik Rogalla. 2010. <span>“Computer-Aided Detection in Computed Tomography Colonography with Full Fecal Tagging: Comparison of Standalone Performance of 3 Automated Polyp Detection Systems.”</span> Journal Article. <em>Canadian Association of Radiologists Journal</em> 61 (2): 102–8.
 </div>
 <div class="csl-entry">
@@ -659,9 +569,6 @@ Kundel, Harold L, Calvin F Nodine, Emily F Conant, and Susan P Weinstein. 2007. 
 Kundel, HL, and CF Nodine. 1983. <span>“A Visual Concept Shapes Image Perception.”</span> <em>Radiology</em> 146 (2): 363–68.
 </div>
 <div class="csl-entry">
-Larsen, Richard J, and Morris L Marx. 2005. <em>An Introduction to Mathematical Statistics</em>. Prentice Hall.
-</div>
-<div class="csl-entry">
 Macmillan, Neil A, and C Douglas Creelman. 2004. <em>Detection Theory: A User’s Guide</em>. Psychology press.
 </div>
 <div class="csl-entry">
@@ -686,19 +593,7 @@ Obuchowski, Nancy A., Michael L. Lieber, and Kimerly A. Powell. 2000. <span>“D
 Obuchowski, Nancy A., and Howard E. Rockette. 1995. <span>“Hypothesis Testing of Diagnostic Accuracy for Multiple Readers and Multiple Tests an Anova Approach with Dependent Observations.”</span> <em>Communications in Statistics-Simulation and Computation</em> 24 (2): 285–308.
 </div>
 <div class="csl-entry">
-Penedo, Monica, Miguel Souto, Pablo G. Tahoces, Jose M. Carreira, Justo Villalon, Gerardo Porto, Carmen Seoane, et al. 2005. <span>“Free-Response Receiver Operating Characteristic Evaluation of Lossy JPEG2000 and Object-Based Set Partitioning in Hierarchical Trees Compression of Digitized Mammograms.”</span> Journal Article. <em>Radiology</em> 237 (2): 450–57.
-</div>
-<div class="csl-entry">
 Rao, Vijay M, David C Levin, Laurence Parker, Barbara Cavanaugh, Andrea J Frangos, and Jonathan H Sunshine. 2010. <span>“How Widely Is Computer-Aided Detection Used in Screening and Diagnostic Mammography?”</span> <em>Journal of the American College of Radiology</em> 7 (10): 802–5.
-</div>
-<div class="csl-entry">
-Ruschin, Mark., Pontus. Timberg, Magnus. Bath, Bengt. Hemdal, Tony. Svahn, Rob. Saunders, Ehsan. Samei, et al. 2007. <span>“Dose Dependence of Mass and Microcalcification Detection in Digital Mammography: Free Response Human Observer Studies.”</span> Journal Article. <em>Medical Physics</em> 34: 400–407.
-</div>
-<div class="csl-entry">
-Shanno, David F. 1970. <span>“Conditioning of Quasi-Newton Methods for Function Minimization.”</span> Journal Article. <em>Mathematics of Computation</em> 24 (111): 647–56.
-</div>
-<div class="csl-entry">
-Shanno, David F, and Paul C Kettler. 1970. <span>“Optimal Conditioning of Quasi-Newton Methods.”</span> Journal Article. <em>Mathematics of Computation</em> 24 (111): 657–64.
 </div>
 <div class="csl-entry">
 Siddiqui, Khan M, Jeffrey P Johnson, Bruce I Reiner, and Eliot L Siegel. 2005. <span>“Discrete Cosine Transform JPEG Compression Vs. 2D JPEG2000 Compression: JNDmetrix Visual Discrimination Model Image Quality Analysis.”</span> In <em>Medical Imaging 2005: PACS and Imaging Informatics</em>, 5748:202–7. International Society for Optics; Photonics.
@@ -722,35 +617,13 @@ Tan, Tao, Bram Platel, Henkjan Huisman, Clara Sánchez, Roel Mus, and Nico Karss
 Taylor, Stuart A, Steve Halligan, David Burling, Mary E Roddie, Lesley Honeyfield, Justine McQuillan, Hamdam Amin, and Jamshid Dehmeshki. 2006. <span>“Computer-Assisted Reader Software Versus Expert Reviewers for Polyp Detection on CT Colonography.”</span> Journal Article. <em>American Journal of Roentgenology</em> 186 (3): 696–702.
 </div>
 <div class="csl-entry">
-Thompson, John D, Peter Hogg, David J Manning, Katy Szczepura, and Dev P Chakraborty. 2014. <span>“A Free-Response Evaluation Determining Value in the Computed Tomography Attenuation Correction Image for Revealing Pulmonary Incidental Findings: A Phantom Study.”</span> Journal Article. <em>Academic Radiology</em> 21 (4): 538–45.
-</div>
-<div class="csl-entry">
-Van Dyke, C. W., R. D. White, N. A. Obuchowski, M. A. Geisinger, R. J. Lorig, and M. A. Meziane. 1993. <span>“Cine <span>MRI</span> in the Diagnosis of Thoracic Aortic Dissection.”</span> Journal Article. <em>79th RSNA Meetings</em>.
-</div>
-<div class="csl-entry">
-Vikgren, Jenny, Sara Zachrisson, Angelica Svalkvist, Ase A. Johnsson, Marianne Boijsen, Agneta Flinck, Susanne Kheddache, and Magnus Bath. 2008. <span>“Comparison of Chest Tomosynthesis and Chest Radiography for Detection of Pulmonary Nodules: Human Observer Study of Clinical Cases.”</span> Journal Article. <em>Radiology</em> 249 (3): 1034–41. <a href="https://doi.org/10.1148/radiol.2492080304">https://doi.org/10.1148/radiol.2492080304</a>.
-</div>
-<div class="csl-entry">
-Warren, Lucy M, Rosalind M Given-Wilson, Matthew G Wallis, Julie Cooke, Mark D Halling-Brown, Alistair Mackenzie, Dev P Chakraborty, Hilde Bosmans, David R Dance, and Kenneth C Young. 2014. <span>“The Effect of Image Processing on the Detection of Cancers in Digital Mammography.”</span> Journal Article. <em>American Journal of Roentgenology</em> 203 (2): 387–93.
-</div>
-<div class="csl-entry">
 Youden, William J. 1950. <span>“Index for Rating Diagnostic Tests.”</span> <em>Cancer</em> 3 (1): 32–35.
 </div>
 <div class="csl-entry">
 Zanca, Federica, Jurgen Jacobs, Chantal Van Ongeval, Filip Claus, Valerie Celis, Catherine Geniets, Veerle Provost, Herman Pauwels, Guy Marchal, and Hilde Bosmans. 2009. <span>“Evaluation of Clinical Image Processing Algorithms Used in Digital Mammography.”</span> <em>Medical Physics</em> 36 (3): 765–75.
 </div>
-<div class="csl-entry">
-Zanca, F., S. L. Hillis, F. Claus, C. Van Ongeval, V. Celis, V. Provoost, H.-J Yoon, and H. Bosmans. 2012. <span>“Correlation of Free-Response and Receiver-Operating-Characteristic Area-Under-the-Curve Estimates: Results from Independently Conducted <span>FROC</span>/<span>ROC</span> Studies in Mammography.”</span> Journal Article. <em>Med Phys</em> 39 (10): 5917–29.
 </div>
 </div>
-</div>
-
-
-
-
-
-
-
 
 
 
@@ -791,7 +664,7 @@ Zanca, F., S. L. Hillis, F. Claus, C. Van Ongeval, V. Celis, V. Provoost, H.-J Y
           </div>
         </div>
       </div>
-<a href="datasets.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analyze-diseased-only-dataset.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
