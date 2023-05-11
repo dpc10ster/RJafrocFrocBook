@@ -139,7 +139,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2023-03-18}
+\date{2023-05-11}
 
 \begin{document}
 \maketitle
@@ -2338,11 +2338,11 @@ l_1 \sim \text{Pois}\left ( \lambda \right )
 \label{eq:rsm-poisson-sampling}
 \end{equation}
 
-The probability mass function (PMF) of the Poissson distribution is defined by:
+The probability mass function (pmf) of the Poissson distribution is defined by:
 
 \begin{equation} 
-\text{PMF}_{Pois}\left ( l_1, \lambda \right ) = exp\left ( -\lambda \right ) \frac{{(\lambda)^{l_1}}}{l_1!}
-\label{eq:rsm-poisson-PMF}
+\text{pmf}_{P}\left ( l_1, \lambda \right ) = exp\left ( -\lambda \right ) \frac{{(\lambda)^{l_1}}}{l_1!}
+\label{eq:rsm-poisson-pmf}
 \end{equation}
 
 \textbf{Assumption 2:} The number of latent LLs, \(l_2\), where \(0 \leq l_2 \leq L\) (since the number of latent LLs cannot exceed the number of lesions) is sampled from the binomial distribution \(\text{B}\) with success probability \(\nu\) and trial size \(L\):
@@ -2352,11 +2352,11 @@ l_2 \sim \text{B}\left ( L, \nu \right )
 \label{eq:rsm-binomial-sampling}
 \end{equation}
 
-The probability mass function (PMF) of the binomial distribution is defined by:
+The probability mass function (pmf) of the binomial distribution is defined by:
 
 \begin{equation} 
-\text{PMF}_{B}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
-\label{eq:rsm-binomial-PMF}
+\text{pmf}_{B}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
+\label{eq:rsm-binomial-pmf}
 \end{equation}
 
 \begin{quote}
@@ -2725,9 +2725,9 @@ This behavior is distinct from conventional ROC models where the entire curve, e
 \hypertarget{rsm-predictions-constrained-end-point-abscissa}{%
 \subsection{The abscissa of the ROC end-point}\label{rsm-predictions-constrained-end-point-abscissa}}
 
-Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of \(h_1\) and with an appropriately low \(\zeta\) it will be marked. The probability of \emph{zero} latent NLs, see Eqn. \eqref{eq:rsm-poisson-PMF}, is:
+Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of \(h_1\) and with an appropriately low \(\zeta\) it will be marked. The probability of \emph{zero} latent NLs, see Eqn. \eqref{eq:rsm-poisson-pmf}, is:
 
-\[\text{PMF}_{Pois} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )\].
+\[\text{pmf}_{P} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )\].
 
 The probability that the case has \emph{at least one} latent NL is the complement of the above probability. At sufficiently low \(\zeta\) each of these cases yields a marked non-disease case. Therefore, the maximum continuously accessible abscissa of the ROC, i.e., \(\text{FPF}_{\text{max}}\), is:
 
@@ -2739,7 +2739,7 @@ The probability that the case has \emph{at least one} latent NL is the complemen
 \hypertarget{rsm-predictions-constrained-end-point-ordinate}{%
 \subsection{The ordinate of the ROC end-point}\label{rsm-predictions-constrained-end-point-ordinate}}
 
-A diseased case has no marks, even for very low \(\zeta\), if it has zero latent NLs, the probability of which is \(\text{exp}(-\lambda)\), and it has zero latent LLs, the probability of which is, see Eqn. \eqref{eq:rsm-binomial-PMF}, \(\text{PMF}_{B} \left ( 0, L, \nu \right )= (1 - \nu)^L\).
+A diseased case has no marks, even for very low \(\zeta\), if it has zero latent NLs, the probability of which is \(\text{exp}(-\lambda)\), and it has zero latent LLs, the probability of which is, see Eqn. \eqref{eq:rsm-binomial-pmf}, \(\text{pmf}_{B} \left ( 0, L, \nu \right )= (1 - \nu)^L\).
 
 Here \(L\) is the number of lesions in each diseased case.
 
@@ -2808,10 +2808,10 @@ Consider the set of non-diseased cases with \(n\) latent NLs each, where \(n > 0
 \label{eq:rsm-predictions-fpf-zeta-n}
 \end{equation}
 
-The conditioning notation in Eqn. \eqref{eq:rsm-predictions-fpf-zeta-n} reflects the fact that this expression applies specifically to non-diseased cases each with \(n\) latent NLs. To obtain \(\text{FPF}_{\text{max}}\) one performs a Poissson PMF-weighted summation of \(\text{FPF}\left (\zeta \mid n \right )\) over \(n\) from 0 to \(\infty\) (the inclusion of the \(n = 0\) term is explained below):
+The conditioning notation in Eqn. \eqref{eq:rsm-predictions-fpf-zeta-n} reflects the fact that this expression applies specifically to non-diseased cases each with \(n\) latent NLs. To obtain \(\text{FPF}_{\text{max}}\) one performs a Poissson pmf-weighted summation of \(\text{FPF}\left (\zeta \mid n \right )\) over \(n\) from 0 to \(\infty\) (the inclusion of the \(n = 0\) term is explained below):
 
 \begin{equation}
-\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{PMF}_{\text{Pois}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
+\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{pmf}_{\text{Pois}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
 \label{eq:rsm-predictions-fpf-zeta-before-maple}
 \end{equation}
 
@@ -2885,8 +2885,8 @@ One averages over the distributions of \(n\) and \(l\) to obtain the desired ROC
 \begin{equation}
 \left.
 \begin{aligned}
-\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =& \sum_{n=0}^{\infty} \text{PMF}_{Pois}(n,\lambda) \\
-&\times \sum_{l=0}^{L} \text{PMF}_{B}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
+\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =& \sum_{n=0}^{\infty} \text{pmf}_{P}(n,\lambda) \\
+&\times \sum_{l=0}^{L} \text{pmf}_{B}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
 \end{aligned}
 \right \}
 \label{eq:rsm-predictions-tpf-double-summation}
@@ -3609,7 +3609,7 @@ We calculate \(\text{LLF}\) as follows:
 \left. 
 \begin{aligned}
 \text{LLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L} \right ) 
-=& \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} \sum_{l_2=0}^{L}  \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )\\
+=& \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} \sum_{l_2=0}^{L}  \, l_2 \,\,  \text{pmf}_{B}\left ( l_2, L, \nu \right )\\
 =&\Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} L \,\nu\\
 =&\nu \,\Phi\left ( \mu - \zeta \right )
 \end{aligned}
@@ -3621,7 +3621,7 @@ The inner summation is over all cases with \(L\) lesions. One calculates the exp
 
 The coordinates of the RSM-predicted operating point on the FROC curve for threshold \(\zeta\) are given by Eqn. \eqref{eq:rsm-other-predictions-nlf} and Eqn. \eqref{eq:rsm-other-predictions-llf}. The FROC curve starts at (0,0) and ends at \(\left ( \lambda, \nu \right )\) -- the end-point. The end-point is not constrained to lie within the unit-square, rather it is \emph{semi-constrained}: while the maximum ordinate, i.e., \(\nu\), cannot exceed unity the maximum abscissa, i.e., \(\lambda\), can.
 
-The clear connection between \(\lambda\) and \(\nu\) and the FROC end-point is the reason they are called the \emph{physical} RSM parameters. For reasons explained in Section \ref{froc-paradigm-solar-analogy} the physical parameters are not the best way of parameterizing predicted RSM curves: they hide an inherent \(\mu\) dependence ignoring which can lead to unreasonable choices of RSM parameters (see Appendix \ref{rsm-other-predictions-froc-physical-parameters}). Intrinsic parameters \(\lambda_i, \nu_i\) were introduced in Section \ref{rsm-intrinsic-parameters} which are independent of \(\mu\). For convenience the transformations between physical and intrinsic parameters are reproduced here:
+The clear connection between \(\lambda\) and \(\nu\) and the FROC end-point is the reason they are called the \emph{physical} RSM parameters. For reasons explained in Section \ref{froc-paradigm-solar-analogy} the physical parameters are not the best way of characterizing predicted RSM curves: they hide an inherent \(\mu\) dependence ignoring which can lead to unreasonable choices of RSM parameters (see Appendix \ref{rsm-other-predictions-froc-physical-parameters}). Intrinsic parameters \(\lambda_i, \nu_i\) were introduced in Section \ref{rsm-intrinsic-parameters} which are independent of \(\mu\). For convenience the transformations between physical and intrinsic parameters are reproduced here:
 
 \begin{equation}
 \left. 
@@ -3638,7 +3638,7 @@ The predicted FROC, AFROC and wAFROC curves that follow use the intrinsic \(\lam
 \hypertarget{froc-plots-lambda_i-nu_i-parameterization}{%
 \subsection{\texorpdfstring{FROC plots \(\lambda_i, \nu_i\) parameterization}{FROC plots \textbackslash lambda\_i, \textbackslash nu\_i parameterization}}\label{froc-plots-lambda_i-nu_i-parameterization}}
 
-The following code generates FROC plots using the intrinsic \(\lambda_i = 2\) and \(\nu_i = 0.5\) parameters for 4 values of \(\mu\) contained in the array \texttt{muArr\ \textless{}-\ c(0.1,1,2,4)} (to avoid a divide by zero error the value \(\mu=0\) is not allowed). A \texttt{list} array \texttt{p\_FROC\_lambdai\_nui} is created to hold the four plots\footnote{Notation: \texttt{p\_} stands for a plot array, \texttt{FROC} stands for type of plot (also allowed are \texttt{AFROC} and \texttt{wAFROC}), \texttt{lambdai} stands for \(\lambda_i\) and \texttt{nui} stands for \(\nu_i\) (also allowed are \texttt{lambda} for \(\lambda\) and \texttt{nu} for \(\nu\) ).}. The intrinsic \(\lambda_i, \nu_i\) parameters are converted to \(\lambda, \nu\) using the function \texttt{UtilIntrinsic2RSM()}which implements Eqn. \eqref{eq:rsm-other-predictions-transform}). The parameters are displayed using the \texttt{cat()} function. The plots are generated using \texttt{PlotRsmOperatingCharacteristics()}. Online help on this function is \href{https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html}{available}. The code-line \texttt{p\_FROC\_lambdai\_nui{[}{[}i{]}{]}\ \textless{}-\ ret1\$FROCPlot} saves the plot to the previously created \texttt{list} array.
+The following code generates FROC plots using the intrinsic \(\lambda_i = 2\) and \(\nu_i = 0.5\) parameters for 4 values of \(\mu\) contained in the array \texttt{muArr\ \textless{}-\ c(0.1,1,2,4)} (to avoid a divide by zero error the value \(\mu=0\) is not allowed). A \texttt{list} array \texttt{p\_FROC\_lambdai\_nui} is created to hold the four plots\footnote{Notation: \texttt{p\_} stands for a plot array, \texttt{FROC} stands for type of plot (also allowed are \texttt{AFROC} and \texttt{wAFROC}), \texttt{lambdai} stands for \(\lambda_i\) and \texttt{nui} stands for \(\nu_i\) (also allowed are \texttt{lambda} for \(\lambda\) and \texttt{nu} for \(\nu\) ).}. The intrinsic \(\lambda_i, \nu_i\) parameters are converted to \(\lambda, \nu\) using the function \texttt{Util2Physical()}which implements Eqn. \eqref{eq:rsm-other-predictions-transform}). The parameters are displayed using the \texttt{cat()} function. The plots are generated using \texttt{PlotRsmOperatingCharacteristics()}. Online help on this function is \href{https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html}{available}. The code-line \texttt{p\_FROC\_lambdai\_nui{[}{[}i{]}{]}\ \textless{}-\ ret1\$FROCPlot} saves the plot to the previously created \texttt{list} array.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3648,7 +3648,7 @@ The following code generates FROC plots using the intrinsic \(\lambda_i = 2\) an
 \NormalTok{p\_FROC\_lambdai\_nui }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\FunctionTok{list}\NormalTok{(), }\AttributeTok{dim =} \FunctionTok{c}\NormalTok{(}\FunctionTok{length}\NormalTok{(muArr)))}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(muArr)) \{}
 \NormalTok{  mu }\OtherTok{\textless{}{-}}\NormalTok{ muArr[i]}
-\NormalTok{  ret }\OtherTok{\textless{}{-}} \FunctionTok{UtilIntrinsic2RSM}\NormalTok{(mu, }\AttributeTok{lambda\_i =}\NormalTok{ lambda\_i, }\AttributeTok{nu\_i =}\NormalTok{ nu\_i)}
+\NormalTok{  ret }\OtherTok{\textless{}{-}} \FunctionTok{Util2Physical}\NormalTok{(mu, }\AttributeTok{lambda\_i =}\NormalTok{ lambda\_i, }\AttributeTok{nu\_i =}\NormalTok{ nu\_i)}
 \NormalTok{  lambda }\OtherTok{\textless{}{-}}\NormalTok{ ret}\SpecialCharTok{$}\NormalTok{lambda}
 \NormalTok{  nu }\OtherTok{\textless{}{-}}\NormalTok{ ret}\SpecialCharTok{$}\NormalTok{nu}
   \FunctionTok{cat}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"lambda = \%6.3f, nu = \%4.3f"}\NormalTok{, lambda, nu), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
@@ -3779,7 +3779,7 @@ Suppose the radiologist does not mark any case. One possibility is that the radi
 The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \eqref{eq:rsm-predictions-fpf} applies. The wAFROC ordinate is calculated using:
 
 \begin{equation} 
-\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l_2=1}^{L} \text{W}_{Ll_2} \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )
+\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l_2=1}^{L} \text{W}_{Ll_2} \, l_2 \,\,  \text{pmf}_{B}\left ( l_2, L, \nu \right )
 \label{eq:rsm-other-predictions-wllf}
 \end{equation}
 
@@ -3788,7 +3788,7 @@ Note that one does not divide by \(L\) outside the inner summation as, for each 
 Eqn. \eqref{eq:rsm-other-predictions-wllf} is implemented in \texttt{UtilAnalyticalAucsRSM}. Help is available \href{https://dpc10ster.github.io/RJafroc/reference/UtilAnalyticalAucsRSM.html}{here}. A skeleton code is shown below:
 
 \begin{verbatim}
-W <-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)
+W <-UtilLesWghtsLD(lesDistr, relWeights)
 wLLF <- 0
 for (L in 1:L_max){
   wLLF_L <- 0
@@ -3824,14 +3824,14 @@ wLLF <- wLLF * pnorm(mu - zeta)
     On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.2, 0.3, 0.1 and 0.4.
   \end{itemize}
 \item
-  The function \texttt{UtilLesionWeightsMatrixLesDistr} calculates the matrix given \texttt{lesDistr} and \texttt{relWeights}. For example:
+  The function \texttt{UtilLesWghtsLD} calculates the matrix given \texttt{lesDistr} and \texttt{relWeights}. For example:
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{lesDistr }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
 \NormalTok{relWeights }\OtherTok{=}  \FunctionTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.4}\NormalTok{)}
-\FunctionTok{UtilLesionWeightsMatrixLesDistr}\NormalTok{(lesDistr, relWeights)[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+\FunctionTok{UtilLesWghtsLD}\NormalTok{(lesDistr, relWeights)[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3848,7 +3848,7 @@ wLLF <- wLLF * pnorm(mu - zeta)
 \item
   It is necessary to label the lesions properly so that the correct weights are used. This is done using the \texttt{lesionID} field in the Excel input file. For example, \texttt{lesionID\ =\ 3} for the one with relative weight 0.1. Since \(\mathbf{W}\) is independent of cases, the lesion characteristics (which determine outcome/importance) of the lesion with \texttt{lesionID\ =\ 1} in cases with one lesion or in cases with 4 lesions are identical. In other words this example assumes that the lesions fall into four classes, with clinical outcomes as specified in \texttt{relWeights}.
 \item
-  \(\text{PMF}_{B}\left ( l_2, L, \nu \right )\) is the probability mass function (PMF) of the binomial distribution with success probability \(\nu\) and trial size \(L\). \(\text{W}_{Ll_2}\) is the weight of lesion \(l_2\) in cases with \(L\) lesions; for example \(\text{W}_{42} = 0.3\).
+  \(\text{pmf}_{B}\left ( l_2, L, \nu \right )\) is the probability mass function (pmf) of the binomial distribution with success probability \(\nu\) and trial size \(L\). \(\text{W}_{Ll_2}\) is the weight of lesion \(l_2\) in cases with \(L\) lesions; for example \(\text{W}_{42} = 0.3\).
 \item
   To generate equal weights set \texttt{relWeights\ =\ 0} as in following code:
 \end{itemize}
@@ -3857,7 +3857,7 @@ wLLF <- wLLF * pnorm(mu - zeta)
 \begin{Highlighting}[]
 \NormalTok{lesDistr }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
 \NormalTok{relWeights0 }\OtherTok{\textless{}{-}} \DecValTok{0}
-\FunctionTok{UtilLesionWeightsMatrixLesDistr}\NormalTok{(lesDistr, }\AttributeTok{relWeights =}\NormalTok{ relWeights0)[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+\FunctionTok{UtilLesWghtsLD}\NormalTok{(lesDistr, }\AttributeTok{relWeights =}\NormalTok{ relWeights0)[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3887,7 +3887,7 @@ wLLF <- wLLF * pnorm(mu - zeta)
 \NormalTok{p\_wAFROC\_lambdai\_nui }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\FunctionTok{list}\NormalTok{(), }\AttributeTok{dim =} \FunctionTok{c}\NormalTok{(}\FunctionTok{length}\NormalTok{(muArr)))}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(muArr)) \{}
 \NormalTok{  mu }\OtherTok{\textless{}{-}}\NormalTok{ muArr[i]}
-\NormalTok{  ret }\OtherTok{\textless{}{-}} \FunctionTok{UtilIntrinsic2RSM}\NormalTok{(mu, }\AttributeTok{lambda\_i =}\NormalTok{ lambda\_i, }\AttributeTok{nu\_i =}\NormalTok{ nu\_i)}
+\NormalTok{  ret }\OtherTok{\textless{}{-}} \FunctionTok{Util2Physical}\NormalTok{(mu, }\AttributeTok{lambda\_i =}\NormalTok{ lambda\_i, }\AttributeTok{nu\_i =}\NormalTok{ nu\_i)}
 \NormalTok{  lambda }\OtherTok{\textless{}{-}}\NormalTok{ ret}\SpecialCharTok{$}\NormalTok{lambda  }
 \NormalTok{  nu }\OtherTok{\textless{}{-}}\NormalTok{ ret}\SpecialCharTok{$}\NormalTok{nu}
 \NormalTok{  ret1 }\OtherTok{\textless{}{-}} \FunctionTok{PlotRsmOperatingCharacteristics}\NormalTok{(}
@@ -4137,7 +4137,7 @@ The following expression follows for the difference between wLLF and LLF:
 \left.
 \begin{aligned}
 \text{wLLF}-\text{LLF}
-= \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L  \sum_{l_2=1}^{L} \left( \text{W}_{Ll_2} -\frac{1}{L} \right) \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )
+= \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L  \sum_{l_2=1}^{L} \left( \text{W}_{Ll_2} -\frac{1}{L} \right) \, l_2 \,\,  \text{pmf}_{B}\left ( l_2, L, \nu \right )
 \end{aligned}
 \right \}
 \label{eq:rsm-other-predictions-wllf-llf}

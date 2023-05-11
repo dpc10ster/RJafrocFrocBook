@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 ROC predictions of the RSM | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 ROC predictions of the RSM | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-05-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -121,6 +121,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -513,8 +517,8 @@ div.csl-indent {
 <p>This behavior is distinct from conventional ROC models where the entire curve, extending from (0, 0) to (1, 1), is continuously accessible. This is because every case yields a finite decision variable, no matter how small. The number of cases with <span class="math inline">\(-\infty\)</span> rating is zero. When <span class="math inline">\(\zeta = -\infty\)</span> the operating point reaches (1,1).</p>
 <div id="rsm-predictions-constrained-end-point-abscissa" class="section level3 hasAnchor" number="6.4.1">
 <h3><span class="header-section-number">6.4.1</span> The abscissa of the ROC end-point<a href="rsm-predictions.html#rsm-predictions-constrained-end-point-abscissa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of <span class="math inline">\(h_1\)</span> and with an appropriately low <span class="math inline">\(\zeta\)</span> it will be marked. The probability of <em>zero</em> latent NLs, see Eqn. <a href="rsm.html#eq:rsm-poisson-PMF">(5.2)</a>, is:</p>
-<p><span class="math display">\[\text{PMF}_{Pois} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )\]</span>.</p>
+<p>Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of <span class="math inline">\(h_1\)</span> and with an appropriately low <span class="math inline">\(\zeta\)</span> it will be marked. The probability of <em>zero</em> latent NLs, see Eqn. <a href="rsm.html#eq:rsm-poisson-pmf">(5.2)</a>, is:</p>
+<p><span class="math display">\[\text{pmf}_{P} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )\]</span>.</p>
 <p>The probability that the case has <em>at least one</em> latent NL is the complement of the above probability. At sufficiently low <span class="math inline">\(\zeta\)</span> each of these cases yields a marked non-disease case. Therefore, the maximum continuously accessible abscissa of the ROC, i.e., <span class="math inline">\(\text{FPF}_{\text{max}}\)</span>, is:</p>
 <p><span class="math display" id="eq:rsm-predictions-fpf-max">\[\begin{equation}
 \text{FPF}_{\text{max}} = 1 - \text{exp} \left ( -\lambda \right )
@@ -523,7 +527,7 @@ div.csl-indent {
 </div>
 <div id="rsm-predictions-constrained-end-point-ordinate" class="section level3 hasAnchor" number="6.4.2">
 <h3><span class="header-section-number">6.4.2</span> The ordinate of the ROC end-point<a href="rsm-predictions.html#rsm-predictions-constrained-end-point-ordinate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A diseased case has no marks, even for very low <span class="math inline">\(\zeta\)</span>, if it has zero latent NLs, the probability of which is <span class="math inline">\(\text{exp}(-\lambda)\)</span>, and it has zero latent LLs, the probability of which is, see Eqn. <a href="rsm.html#eq:rsm-binomial-PMF">(5.4)</a>, <span class="math inline">\(\text{PMF}_{B} \left ( 0, L, \nu \right )= (1 - \nu)^L\)</span>.</p>
+<p>A diseased case has no marks, even for very low <span class="math inline">\(\zeta\)</span>, if it has zero latent NLs, the probability of which is <span class="math inline">\(\text{exp}(-\lambda)\)</span>, and it has zero latent LLs, the probability of which is, see Eqn. <a href="rsm.html#eq:rsm-binomial-pmf">(5.4)</a>, <span class="math inline">\(\text{pmf}_{B} \left ( 0, L, \nu \right )= (1 - \nu)^L\)</span>.</p>
 <p>Here <span class="math inline">\(L\)</span> is the number of lesions in each diseased case.</p>
 <ul>
 <li><p>Assumption 1: occurrences of latent LLs are independent of each other, i.e., the probability that a lesion is found is independent of whether other lesions are found on the same case.</p></li>
@@ -571,9 +575,9 @@ div.csl-indent {
 \right \}
 \tag{6.7}
 \end{equation}\]</span></p>
-<p>The conditioning notation in Eqn. <a href="rsm-predictions.html#eq:rsm-predictions-fpf-zeta-n">(6.7)</a> reflects the fact that this expression applies specifically to non-diseased cases each with <span class="math inline">\(n\)</span> latent NLs. To obtain <span class="math inline">\(\text{FPF}_{\text{max}}\)</span> one performs a Poissson PMF-weighted summation of <span class="math inline">\(\text{FPF}\left (\zeta \mid n \right )\)</span> over <span class="math inline">\(n\)</span> from 0 to <span class="math inline">\(\infty\)</span> (the inclusion of the <span class="math inline">\(n = 0\)</span> term is explained below):</p>
+<p>The conditioning notation in Eqn. <a href="rsm-predictions.html#eq:rsm-predictions-fpf-zeta-n">(6.7)</a> reflects the fact that this expression applies specifically to non-diseased cases each with <span class="math inline">\(n\)</span> latent NLs. To obtain <span class="math inline">\(\text{FPF}_{\text{max}}\)</span> one performs a Poissson pmf-weighted summation of <span class="math inline">\(\text{FPF}\left (\zeta \mid n \right )\)</span> over <span class="math inline">\(n\)</span> from 0 to <span class="math inline">\(\infty\)</span> (the inclusion of the <span class="math inline">\(n = 0\)</span> term is explained below):</p>
 <p><span class="math display" id="eq:rsm-predictions-fpf-zeta-before-maple">\[\begin{equation}
-\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{PMF}_{\text{Pois}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
+\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{pmf}_{\text{Pois}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
 \tag{6.8}
 \end{equation}\]</span></p>
 <p>The infinite summations, see below, are easier performed using symbolic algebra software such as <span class="math inline">\(\text{Maple}^{TM}\)</span>. Inclusion in the summation of <span class="math inline">\(n = 0\)</span>, which evaluates to zero, is done to make it easier for <span class="math inline">\(\text{Maple}^{TM}\)</span> to evaluate the summation in closed form. Otherwise one may need to simplify the <span class="math inline">\(\text{Maple}^{TM}\)</span>-generated result. The <span class="math inline">\(\text{Maple}^{TM}\)</span> code is shown below (Maple 17, Waterloo Maple Inc.).</p>
@@ -626,8 +630,8 @@ P\left ( h_2 \geq \zeta \mid \mu, n, l, L \right ) \\
 <p><span class="math display" id="eq:rsm-predictions-tpf-double-summation">\[\begin{equation}
 \left.
 \begin{aligned}
-\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =&amp; \sum_{n=0}^{\infty} \text{PMF}_{Pois}(n,\lambda) \\
-&amp;\times \sum_{l=0}^{L} \text{PMF}_{B}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
+\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =&amp; \sum_{n=0}^{\infty} \text{pmf}_{P}(n,\lambda) \\
+&amp;\times \sum_{l=0}^{L} \text{pmf}_{B}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
 \end{aligned}
 \right \}
 \tag{6.13}

@@ -69,9 +69,9 @@ This behavior is distinct from conventional ROC models where the entire curve, e
 
 ### The abscissa of the ROC end-point {#rsm-predictions-constrained-end-point-abscissa}
 
-Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of $h_1$ and with an appropriately low $\zeta$ it will be marked. The probability of *zero* latent NLs, see Eqn. \@ref(eq:rsm-poisson-PMF), is:  
+Consider the probability that a non-diseased case has at least one latent NL. Such a case will generate a finite value of $h_1$ and with an appropriately low $\zeta$ it will be marked. The probability of *zero* latent NLs, see Eqn. \@ref(eq:rsm-poisson-pmf), is:  
 
-$$\text{PMF}_{Pois} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )$$.
+$$\text{pmf}_{P} \left (0,\lambda \right ) = \text{exp} \left ( -\lambda \right )$$.
 
 The probability that the case has *at least one* latent NL is the complement of the above probability. At sufficiently low $\zeta$ each of these cases yields a marked non-disease case. Therefore, the maximum continuously accessible abscissa of the ROC, i.e., $\text{FPF}_{\text{max}}$, is: 
 
@@ -84,7 +84,7 @@ The probability that the case has *at least one* latent NL is the complement of 
 
 ### The ordinate of the ROC end-point {#rsm-predictions-constrained-end-point-ordinate}
 
-A diseased case has no marks, even for very low $\zeta$, if it has zero latent NLs, the probability of which is $\text{exp}(-\lambda)$, and it has zero latent LLs, the probability of which is, see Eqn. \@ref(eq:rsm-binomial-PMF), $\text{PMF}_{B} \left ( 0, L, \nu \right )= (1 - \nu)^L$. 
+A diseased case has no marks, even for very low $\zeta$, if it has zero latent NLs, the probability of which is $\text{exp}(-\lambda)$, and it has zero latent LLs, the probability of which is, see Eqn. \@ref(eq:rsm-binomial-pmf), $\text{pmf}_{B} \left ( 0, L, \nu \right )= (1 - \nu)^L$. 
 
 Here $L$ is the number of lesions in each diseased case. 
 
@@ -151,10 +151,10 @@ Consider the set of non-diseased cases with $n$ latent NLs each, where $n > 0$. 
 
 
 
-The conditioning notation in Eqn. \@ref(eq:rsm-predictions-fpf-zeta-n) reflects the fact that this expression applies specifically to non-diseased cases each with $n$ latent NLs. To obtain $\text{FPF}_{\text{max}}$ one performs a Poissson PMF-weighted summation of $\text{FPF}\left (\zeta \mid n \right )$ over $n$ from 0 to $\infty$ (the inclusion of the $n = 0$ term is explained below):    
+The conditioning notation in Eqn. \@ref(eq:rsm-predictions-fpf-zeta-n) reflects the fact that this expression applies specifically to non-diseased cases each with $n$ latent NLs. To obtain $\text{FPF}_{\text{max}}$ one performs a Poissson pmf-weighted summation of $\text{FPF}\left (\zeta \mid n \right )$ over $n$ from 0 to $\infty$ (the inclusion of the $n = 0$ term is explained below):    
 
 \begin{equation}
-\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{PMF}_{\text{Pois}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
+\text{FPF}\left (\zeta, \lambda \right ) = \sum_{n=0}^{\infty} \text{pmf}_{\text{Pois}} \left ( n, \lambda \right )\text{FPF}\left (\zeta \mid n \right )
 (\#eq:rsm-predictions-fpf-zeta-before-maple)
 \end{equation}
 
@@ -238,8 +238,8 @@ One averages over the distributions of $n$ and $l$ to obtain the desired ROC-ord
 \begin{equation}
 \left.
 \begin{aligned}
-\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =& \sum_{n=0}^{\infty} \text{PMF}_{Pois}(n,\lambda) \\
-&\times \sum_{l=0}^{L} \text{PMF}_{B}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
+\text{TPF}\left ( \zeta, \mu, \lambda, \nu \right ) =& \sum_{n=0}^{\infty} \text{pmf}_{P}(n,\lambda) \\
+&\times \sum_{l=0}^{L} \text{pmf}_{B}(l,\nu,L) \text{TPF}_{n,l}\left ( \zeta, \mu, n, l \right )
 \end{aligned}
 \right \}
 (\#eq:rsm-predictions-tpf-double-summation)

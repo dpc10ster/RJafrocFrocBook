@@ -41,11 +41,11 @@ l_1 \sim \text{Pois}\left ( \lambda \right )
 \end{equation}
 
 
-The probability mass function (PMF) of the Poissson distribution is defined by:
+The probability mass function (pmf) of the Poissson distribution is defined by:
 
 \begin{equation} 
-\text{PMF}_{Pois}\left ( l_1, \lambda \right ) = exp\left ( -\lambda \right ) \frac{{(\lambda)^{l_1}}}{l_1!}
-(\#eq:rsm-poisson-PMF)
+\text{pmf}_{P}\left ( l_1, \lambda \right ) = exp\left ( -\lambda \right ) \frac{{(\lambda)^{l_1}}}{l_1!}
+(\#eq:rsm-poisson-pmf)
 \end{equation}
 
 **Assumption 2:** The number of latent LLs, $l_2$, where $0 \leq l_2 \leq L$ (since the number of latent LLs cannot exceed the number of lesions) is sampled from the binomial distribution $\text{B}$ with success probability $\nu$ and trial size $L$: 
@@ -56,11 +56,11 @@ l_2 \sim \text{B}\left ( L, \nu \right )
 (\#eq:rsm-binomial-sampling)
 \end{equation}
 
-The probability mass function (PMF) of the binomial distribution is defined by:
+The probability mass function (pmf) of the binomial distribution is defined by:
 
 \begin{equation} 
-\text{PMF}_{B}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
-(\#eq:rsm-binomial-PMF)
+\text{pmf}_{B}\left ( l_2, L, \nu \right ) = \binom{L}{l_2} \left (\nu  \right )^{l_2} \left (1-\nu  \right )^{L-l_2}
+(\#eq:rsm-binomial-pmf)
 \end{equation}
 
 > Collectively $\lambda$ and $\nu$ are termed the *search* parameters.

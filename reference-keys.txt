@@ -59,9 +59,9 @@ fig:visual-search-chest-images1
 fig:visual-search-chest-images2
 fig:visual-search-eye-tracking
 eq:rsm-poisson-sampling
-eq:rsm-poisson-PMF
+eq:rsm-poisson-pmf
 eq:rsm-binomial-sampling
-eq:rsm-binomial-PMF
+eq:rsm-binomial-pmf
 eq:rsm-sampling-l1
 eq:rsm-sampling-l2
 eq:rsm-pdf-phi-mu

@@ -41,7 +41,7 @@ We calculate $\text{LLF}$ as follows:
 \left. 
 \begin{aligned}
 \text{LLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L} \right ) 
-=& \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} \sum_{l_2=0}^{L}  \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )\\
+=& \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} \sum_{l_2=0}^{L}  \, l_2 \,\,  \text{pmf}_{B}\left ( l_2, L, \nu \right )\\
 =&\Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \frac{1}{L} L \,\nu\\
 =&\nu \,\Phi\left ( \mu - \zeta \right )
 \end{aligned}
@@ -55,7 +55,7 @@ The inner summation is over all cases with $L$ lesions. One calculates the expec
 The coordinates of the RSM-predicted operating point on the FROC curve for threshold $\zeta$ are given by Eqn. \@ref(eq:rsm-other-predictions-nlf) and Eqn. \@ref(eq:rsm-other-predictions-llf). The FROC curve starts at (0,0) and ends at $\left ( \lambda, \nu \right )$ -- the end-point. The end-point is not constrained to lie within the unit-square, rather it is *semi-constrained*: while the maximum ordinate, i.e., $\nu$, cannot exceed unity the maximum abscissa, i.e., $\lambda$, can.
 
 
-The clear connection between $\lambda$ and $\nu$ and the FROC end-point is the reason they are called the *physical* RSM parameters. For reasons explained in Section \@ref(froc-paradigm-solar-analogy) the physical parameters are not the best way of parameterizing predicted RSM curves: they hide an inherent $\mu$ dependence ignoring which can lead to unreasonable choices of RSM parameters (see Appendix \@ref(rsm-other-predictions-froc-physical-parameters)). Intrinsic parameters $\lambda_i, \nu_i$ were introduced in Section \@ref(rsm-intrinsic-parameters) which are independent of $\mu$. For convenience the transformations between physical and intrinsic parameters are reproduced here:
+The clear connection between $\lambda$ and $\nu$ and the FROC end-point is the reason they are called the *physical* RSM parameters. For reasons explained in Section \@ref(froc-paradigm-solar-analogy) the physical parameters are not the best way of characterizing predicted RSM curves: they hide an inherent $\mu$ dependence ignoring which can lead to unreasonable choices of RSM parameters (see Appendix \@ref(rsm-other-predictions-froc-physical-parameters)). Intrinsic parameters $\lambda_i, \nu_i$ were introduced in Section \@ref(rsm-intrinsic-parameters) which are independent of $\mu$. For convenience the transformations between physical and intrinsic parameters are reproduced here:
 
 \begin{equation}
 \left. 
@@ -74,7 +74,7 @@ The predicted FROC, AFROC and wAFROC curves that follow use the intrinsic $\lamb
 ### FROC plots $\lambda_i, \nu_i$ parameterization
 
 
-The following code generates FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.1,1,2,4)` (to avoid a divide by zero error the value $\mu=0$ is not allowed). A `list` array `p_FROC_lambdai_nui` is created to hold the four plots^[Notation: `p_` stands for a plot array, `FROC` stands for type of plot (also allowed are `AFROC` and `wAFROC`), `lambdai` stands for $\lambda_i$ and `nui` stands for $\nu_i$ (also allowed are `lambda` for $\lambda$ and `nu` for $\nu$ ).]. The intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `UtilIntrinsic2RSM()`which implements Eqn. \@ref(eq:rsm-other-predictions-transform)). The parameters are displayed using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`. Online help on this function is [available](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code-line `p_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created `list` array. 
+The following code generates FROC plots using the intrinsic $\lambda_i = 2$ and $\nu_i = 0.5$ parameters for 4 values of $\mu$ contained in the array `muArr <- c(0.1,1,2,4)` (to avoid a divide by zero error the value $\mu=0$ is not allowed). A `list` array `p_FROC_lambdai_nui` is created to hold the four plots^[Notation: `p_` stands for a plot array, `FROC` stands for type of plot (also allowed are `AFROC` and `wAFROC`), `lambdai` stands for $\lambda_i$ and `nui` stands for $\nu_i$ (also allowed are `lambda` for $\lambda$ and `nu` for $\nu$ ).]. The intrinsic $\lambda_i, \nu_i$ parameters are converted to $\lambda, \nu$ using the function `Util2Physical()`which implements Eqn. \@ref(eq:rsm-other-predictions-transform)). The parameters are displayed using the `cat()` function. The plots are generated using `PlotRsmOperatingCharacteristics()`. Online help on this function is [available](https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html). The code-line `p_FROC_lambdai_nui[[i]] <- ret1$FROCPlot` saves the plot to the previously created `list` array. 
 
 
 
@@ -86,7 +86,7 @@ nu_i <- 0.5
 p_FROC_lambdai_nui <- array(list(), dim = c(length(muArr)))
 for (i in 1:length(muArr)) {
   mu <- muArr[i]
-  ret <- UtilIntrinsic2RSM(mu, lambda_i = lambda_i, nu_i = nu_i)
+  ret <- Util2Physical(mu, lambda_i = lambda_i, nu_i = nu_i)
   lambda <- ret$lambda
   nu <- ret$nu
   cat(sprintf("lambda = %6.3f, nu = %4.3f", lambda, nu), "\n")
@@ -218,7 +218,7 @@ The wAFROC abscissa is identical to the ROC abscissa, i.e., Eqn. \@ref(eq:rsm-pr
 
 
 \begin{equation} 
-\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l_2=1}^{L} \text{W}_{Ll_2} \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )
+\text{wLLF} \left ( \mu, \lambda, \nu, \overrightarrow{f_L}, \mathbf{W} \right ) = \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L \sum_{l_2=1}^{L} \text{W}_{Ll_2} \, l_2 \,\,  \text{pmf}_{B}\left ( l_2, L, \nu \right )
 (\#eq:rsm-other-predictions-wllf)
 \end{equation}
 
@@ -230,7 +230,7 @@ Note that one does not divide by $L$ outside the inner summation as, for each va
 Eqn. \@ref(eq:rsm-other-predictions-wllf) is implemented in `UtilAnalyticalAucsRSM`. Help is available [here](https://dpc10ster.github.io/RJafroc/reference/UtilAnalyticalAucsRSM.html). A skeleton code is shown below:
 
 ```
-W <-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)
+W <-UtilLesWghtsLD(lesDistr, relWeights)
 wLLF <- 0
 for (L in 1:L_max){
   wLLF_L <- 0
@@ -252,14 +252,14 @@ wLLF <- wLLF * pnorm(mu - zeta)
     + On cases with two lesions the relative weights are 0.2 and 0.3. Since these do not add up to unity, the actual weights are 0.4 and 0.6. 
     + On cases with three lesions the relative weights are 0.2, 0.3 and 0.1. The actual weights are 1/3, 1/2 and 1/6.
     + On cases with four lesions the relative weights are 0.2, 0.3, 0.1 and 0.5. The actual weights are 0.2, 0.3, 0.1 and 0.4.
-* The function `UtilLesionWeightsMatrixLesDistr` calculates the matrix given `lesDistr` and `relWeights`. For example:
+* The function `UtilLesWghtsLD` calculates the matrix given `lesDistr` and `relWeights`. For example:
 
 
 
 ```r
 lesDistr <- c(0.6, 0.2, 0.1, 0.1)
 relWeights =  c(0.2, 0.3, 0.1, 0.4)
-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)[,-1]
+UtilLesWghtsLD(lesDistr, relWeights)[,-1]
 ```
 
 ```
@@ -272,7 +272,7 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)[,-1]
 
 
 * It is necessary to label the lesions properly so that the correct weights are used. This is done using the `lesionID` field in the Excel input file. For example, `lesionID = 3` for the one with relative weight 0.1. Since $\mathbf{W}$ is independent of cases, the lesion characteristics (which determine outcome/importance) of the lesion with `lesionID = 1` in cases with one lesion or in cases with 4 lesions are identical. In other words this example assumes that the lesions fall into four classes, with clinical outcomes as specified in `relWeights`. 
-* $\text{PMF}_{B}\left ( l_2, L, \nu \right )$ is the probability mass function (PMF) of the binomial distribution with success probability $\nu$ and trial size $L$. $\text{W}_{Ll_2}$ is the weight of lesion $l_2$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.3$. 
+* $\text{pmf}_{B}\left ( l_2, L, \nu \right )$ is the probability mass function (pmf) of the binomial distribution with success probability $\nu$ and trial size $L$. $\text{W}_{Ll_2}$ is the weight of lesion $l_2$ in cases with $L$ lesions; for example $\text{W}_{42} = 0.3$. 
 * To generate equal weights set `relWeights = 0` as in following code:
 
 
@@ -280,7 +280,7 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights)[,-1]
 ```r
 lesDistr <- c(0.6, 0.2, 0.1, 0.1)
 relWeights0 <- 0
-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights = relWeights0)[,-1]
+UtilLesWghtsLD(lesDistr, relWeights = relWeights0)[,-1]
 ```
 
 ```
@@ -305,7 +305,7 @@ UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights = relWeights0)[,-1]
 p_wAFROC_lambdai_nui <- array(list(), dim = c(length(muArr)))
 for (i in 1:length(muArr)) {
   mu <- muArr[i]
-  ret <- UtilIntrinsic2RSM(mu, lambda_i = lambda_i, nu_i = nu_i)
+  ret <- Util2Physical(mu, lambda_i = lambda_i, nu_i = nu_i)
   lambda <- ret$lambda  
   nu <- ret$nu
   ret1 <- PlotRsmOperatingCharacteristics(
@@ -567,7 +567,7 @@ The following expression follows for the difference between wLLF and LLF:
 \left.
 \begin{aligned}
 \text{wLLF}-\text{LLF}
-= \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L  \sum_{l_2=1}^{L} \left( \text{W}_{Ll_2} -\frac{1}{L} \right) \, l_2 \,\,  \text{PMF}_{B}\left ( l_2, L, \nu \right )
+= \Phi\left ( \mu - \zeta \right )\sum_{L=1}^{L_{max}} f_L  \sum_{l_2=1}^{L} \left( \text{W}_{Ll_2} -\frac{1}{L} \right) \, l_2 \,\,  \text{pmf}_{B}\left ( l_2, L, \nu \right )
 \end{aligned}
 \right \}
 (\#eq:rsm-other-predictions-wllf-llf)
@@ -590,7 +590,7 @@ In the general case the two curves are not identical although, for realistic dat
 
 <!-- ```{r echo=FALSE} -->
 <!-- computeDiff <- function(nu, lesDistr, relWeights) { -->
-<!--   W <-UtilLesionWeightsMatrixLesDistr(lesDistr, relWeights) -->
+<!--   W <-UtilLesWghtsLD(lesDistr, relWeights) -->
 <!--   wLLF <- 0 -->
 <!--   for (L in 1:length(lesDistr)){ -->
 <!--     wLLF_L <- 0 -->
