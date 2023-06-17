@@ -240,6 +240,8 @@ The application was unorthodox in the sense that in the input data file **radiol
 </tbody>
 </table>
 
+
+
 Study -- 2 reported a not significant difference between CAD and the radiologists (p = 0.253).
 
 #### Comments {#standalone-cad-radiologists-comments}
@@ -698,6 +700,8 @@ The three methods, 1T-RRFC, 2T-RRRC and 1T-RRRC, were applied to an LROC dataset
 
 
 
+
+
 Results are shown for the following FOMs: $\text{PCL}_{0.05}$, $\text{PCL}_{0.2}$, $\text{PCL}_{1}$ and the empirical area (AUC) under the ROC curve estimated by the Wilcoxon statistic. The first two FOMs are identical to those used in Study -- 1. Columns 3 and 4 list the CAD FOM $\theta_0$ and its 95% confidence interval $CI_{\theta_0}$, columns 5 and 6 list the average radiologist FOM $\theta_{\bullet}$ (the dot symbol represents an average over the non-zero radiologist index j = 1,2,..., 9) and its 95% confidence interval $CI_{\theta_{\bullet}}$, columns 7 and 8 list the average difference FOM $\psi_{\bullet}$, i.e., radiologist average minus CAD, and its 95% confidence interval $CI_{\psi_{\bullet}}$, and the last three columns list the F-statistic, the denominator degrees of freedom (ddf) and the p-value for rejecting the null hypothesis (the numerator degree of freedom of the F-statistic is unity).
 
 >
@@ -759,7 +763,7 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 1.8e-18 </td>
+   <td style="text-align:left;"> -1.1e-19 </td>
    <td style="text-align:left;"> -0.00571 </td>
    <td style="text-align:left;"> 0.00131 </td>
    <td style="text-align:left;"> 0.00601 </td>
@@ -789,7 +793,7 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> -7.6e-19 </td>
+   <td style="text-align:left;"> -4.9e-19 </td>
    <td style="text-align:left;"> 0.000265 </td>
    <td style="text-align:left;"> 0.000761 </td>
    <td style="text-align:left;"> 0.00229 </td>
@@ -819,7 +823,7 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 1.6e-18 </td>
+   <td style="text-align:left;"> 6e-19 </td>
    <td style="text-align:left;"> 0.001 </td>
    <td style="text-align:left;"> 0.000643 </td>
    <td style="text-align:left;"> 0.00186 </td>
@@ -849,7 +853,7 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> 2T-RRRC </td>
-   <td style="text-align:left;"> 3e-19 </td>
+   <td style="text-align:left;"> 7.9e-19 </td>
    <td style="text-align:left;"> 0.000201 </td>
    <td style="text-align:left;"> 0.000262 </td>
    <td style="text-align:left;"> 0.000724 </td>
@@ -868,6 +872,8 @@ Shown next, Table \@ref(tab:standalone-cad-table3), are the model-parameters cor
   </tr>
 </tbody>
 </table>
+
+
 
 From Table \@ref(tab:standalone-cad-table3) some inconsistencies are evident for 2T-RRRC analysis:
 
@@ -980,7 +986,7 @@ print(stats1)
 #> 1 0.59166667 0.71017278 0.11850612
 print(stats2)
 #>             varR         varTR          cov1         cov2          cov3
-#> 1 -7.5894152e-19 0.00026488983 0.00076136841 0.0022942211 0.00076136841
+#> 1 -4.8789098e-19 0.00026488983 0.00076136841 0.0022942211 0.00076136841
 #>            Var     FStat        df        pval
 #> 1 0.0034336373 4.1576797 937.24371 0.041726262
 ```

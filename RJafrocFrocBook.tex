@@ -139,7 +139,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2023-05-11}
+\date{2023-06-17}
 
 \begin{document}
 \maketitle
@@ -415,13 +415,19 @@ I appreciate constructive feedback on this document. To do this raise an \texttt
 \hypertarget{froc-paradigm-intro}{%
 \section{Introduction}\label{froc-paradigm-intro}}
 
-For diagnostic tasks such as detecting diffuse interstitial lung disease\footnote{Diffuse interstitial lung disease refers to disease within both lungs that affects the interstitium or connective tissue that forms the support structure of the lungs' air sacs or alveoli. When one inhales, the alveoli fill with air and pass oxygen to the blood stream. When one exhales, carbon dioxide passes from the blood into the alveoli and is expelled from the body. When interstitial disease is present, the interstitium becomes inflamed and stiff, preventing the alveoli from fully expanding. This limits both the delivery of oxygen to the blood stream and the removal of carbon dioxide from the body. As the disease progresses, the interstitium scars with thickening of the walls of the alveoli, which further hampers lung function. \emph{Diffuse interstitial lung disease is spread through and confined to the lung}.}, or diseases similar to it, \emph{where disease location is either irrelevant or implicit}, the receiver operating characteristic (ROC) paradigm is appropriate in the sense that essential information is not being lost by limiting the radiologist's response to a single rating per case.
+For diagnostic tasks such as detecting diffuse interstitial lung disease\footnote{Diffuse interstitial lung disease refers to disease within both lungs that affects the interstitium or connective tissue that forms the support structure of the lungs' air sacs or alveoli. When one inhales, the alveoli fill with air and pass oxygen to the blood stream. When one exhales, carbon dioxide passes from the blood into the alveoli and is expelled from the body. When interstitial disease is present, the interstitium becomes inflamed and stiff, preventing the alveoli from fully expanding. This limits both the delivery of oxygen to the blood stream and the removal of carbon dioxide from the body. As the disease progresses, the interstitium scars with thickening of the walls of the alveoli, which further hampers lung function. \emph{Diffuse interstitial lung disease is spread through and confined to the lung}.} \emph{where disease location is either irrelevant or implicit}, the receiver operating characteristic (ROC) paradigm is appropriate because essential information is not being lost by limiting the radiologist's response to a single rating per case.
 
-In clinical practice it is not only important to identify if the patient is diseased but also to offer guidance to subsequent care-givers (e.g., the surgeon) regarding other characteristics (such as location, type, size, extent) of the disease. If the radiologist believes the patient is diseased there is generally a location (or locations) associated with the suspected disease. Physicians term this \emph{focal disease}, i.e., disease located at specific region(s) of the image.
+In clinical practice it is not only important to identify if the patient is diseased but also to offer guidance to subsequent care-givers (e.g., the surgeon) regarding other characteristics (such as location, type, size, extent) of the disease. For example, if the radiologist believes the patient is diseased there is generally a location (or locations) associated with the suspected disease.
 
-For focal disease the ROC paradigm constrains the collected information to a single rating that there is disease \emph{somewhere} in the patient's imaged anatomy. The emphasis on ``somewhere'' is because it begs the question: if the radiologist believes the disease is ``somewhere'', why not have them to point to it? In fact they do ``point to it'' in the sense that they record the location(s) of suspect regions in their clinical report but the ROC paradigm cannot use this information. Clinicians have long recognized problems with ignoring location information \citep{BlackDwyer1990, black2000anatomic}.
+For localized disease the ROC paradigm constrains the collected information to a single rating that there is disease \emph{somewhere} in the patient's imaged anatomy. The ``somewhere'' begs the question: if the radiologist believes the disease is ``somewhere'', why not have them to point to it? In fact they do ``point to it'' by recording the location(s) of suspect regions in their clinical report; however, the ROC paradigm cannot use the location information.
 
-From our point of view the most important problem is that neglect of location information leads to loss of statistical power. The reason for this is the additional noise introduced into the AUC measurement due to crediting a radiologist for correctly detecting the diseased condition (a ROC paradigm True Positive or TP event) when the radiologist may have pointed to the wrong location, in which case \emph{the radiologist is credited for a TP when in fact two mistakes were made: the true localized disease was missed and a false location was incorrectly identified as diseased}. Not discriminating between 2 types of TP events, one with correct localizations (associated with an expert radiologist) and the other with incorrect localizations (associated with a radiologist with lesser expertise) leads to reduced ability to distinguish between them (the ROC performance difference will be smaller) as compared to the FROC paradigm described in this book (the FROC performance difference will be larger). This and other problems with using the ROC paradigm in localization tasks are described in \citep{bunch1977free}, a publication that spurred my initial interest in this field \citep{Chakraborty1986DigitalVsConv} ca. 1983.
+From the data analyst's point of view the most troubling issue with ROC analysis is that neglect of location information leads to loss of statistical power as can be seen from the following simple example comparing expert and non-expert radiologists.
+
+\begin{quote}
+Recall that a ROC paradigm true positive event occurs anytime a diseased patient is diagnosed as diseased - the marked location, if any, is irrelevant. Therefore two types of true positive events are possible in ROC studies involving localized disease: those with correct localizations (these tend to be associated with expert radiologists) and those with incorrect localizations (associated with non-expert radiologists). The indistinguishability between the two types of true positive events leads to reduced ability to detect a difference between expert and non-expert radiologists. Loss of statistical power inflates the sample size requirements for the study - a highly undesirable effect.
+\end{quote}
+
+Numerical examples of the loss of statistical power of ROC analysis as compared to a method that only credits correct localizations are to be found \href{https://dpc10ster.github.io/RJafrocQuickStart/froc-sample-size.html}{here}.
 
 \hypertarget{froc-paradigm-outline}{%
 \subsection{Chapter outline}\label{froc-paradigm-outline}}
@@ -4653,18 +4659,18 @@ Shown next, Table \ref{tab:standalone-cad-table3}, are the model-parameters corr
 FOM & Analysis & $\sigma_R^2$ & $\sigma_{\tau R}^2$ & Cov1 & Cov2 & Cov3 & Var\\
 \midrule
 PCL\_0\_05 & 1T-RRFC & 0.0095 & NA & NA & NA & NA & NA\\
- & 2T-RRRC & 1.8e-18 & -0.00571 & 0.00131 & 0.00601 & 0.00131 & 0.0165\\
+ & 2T-RRRC & -1.1e-19 & -0.00571 & 0.00131 & 0.00601 & 0.00131 & 0.0165\\
  & 1T-RRRC & 0.0095 & NA & NA & 0.0094 & NA & 0.0303\\
 PCL\_0\_2 & 1T-RRFC & 0.00281 & NA & NA & NA & NA & NA\\
- & 2T-RRRC & -7.6e-19 & 0.000265 & 0.000761 & 0.00229 & 0.000761 & 0.00343\\
+ & 2T-RRRC & -4.9e-19 & 0.000265 & 0.000761 & 0.00229 & 0.000761 & 0.00343\\
 \addlinespace
  & 1T-RRRC & 0.00281 & NA & NA & 0.00307 & NA & 0.00534\\
 PCL\_1 & 1T-RRFC & 0.0032 & NA & NA & NA & NA & NA\\
- & 2T-RRRC & 1.6e-18 & 0.001 & 0.000643 & 0.00186 & 0.000643 & 0.00246\\
+ & 2T-RRRC & 6e-19 & 0.001 & 0.000643 & 0.00186 & 0.000643 & 0.00246\\
  & 1T-RRRC & 0.0032 & NA & NA & 0.00244 & NA & 0.00364\\
 Wilcoxon & 1T-RRFC & 0.000878 & NA & NA & NA & NA & NA\\
 \addlinespace
- & 2T-RRRC & 3e-19 & 0.000201 & 0.000262 & 0.000724 & 0.000262 & 0.000962\\
+ & 2T-RRRC & 7.9e-19 & 0.000201 & 0.000262 & 0.000724 & 0.000262 & 0.000962\\
  & 1T-RRRC & 0.000878 & NA & NA & 0.000924 & NA & 0.0014\\
 \bottomrule
 \end{tabular}
@@ -4810,7 +4816,7 @@ The next example shows the structure of \texttt{RRRC\_2T\_PCL\_0\_2}.
 \CommentTok{\#\textgreater{} 1 0.59166667 0.71017278 0.11850612}
 \FunctionTok{print}\NormalTok{(stats2)}
 \CommentTok{\#\textgreater{}             varR         varTR          cov1         cov2          cov3}
-\CommentTok{\#\textgreater{} 1 {-}7.5894152e{-}19 0.00026488983 0.00076136841 0.0022942211 0.00076136841}
+\CommentTok{\#\textgreater{} 1 {-}4.8789098e{-}19 0.00026488983 0.00076136841 0.0022942211 0.00076136841}
 \CommentTok{\#\textgreater{}            Var     FStat        df        pval}
 \CommentTok{\#\textgreater{} 1 0.0034336373 4.1576797 937.24371 0.041726262}
 \end{Highlighting}

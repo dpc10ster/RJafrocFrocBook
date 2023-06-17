@@ -191,6 +191,8 @@ Table \@ref(tab:optim-op-point-table-vary-lambda): The FOM column lists the quan
 
 
 
+
+
 Inspection of this table reveals the following:
 
 1. FROC plots, Fig. \@ref(fig:optim-op-point-vary-lambda-froc): The $\text{wAFROC}_\text{AUC}$ based optimal thresholds are smaller (i.e., corresponding to laxer reporting criteria) than the corresponding Youden-index based optimal thresholds. The Youden-index based operating point (black dot) is left of the $\text{wAFROC}_\text{AUC}$ based FROC operating point (red dot). The abscissa difference between the two points decreases with increasing $\lambda$.
@@ -384,6 +386,8 @@ Table \@ref(tab:optim-op-point-table4) summarizes the results. As compared to Yo
   </tr>
 </tbody>
 </table>
+
+
 
 
 
@@ -587,6 +591,8 @@ relWeights <- c(0.5, 0.5)
 
 
 
+
+
 #### FROC
 
 
@@ -751,6 +757,8 @@ nuArr <- 0.9
 
 
 
+
+
 #### FROC
 
 
@@ -906,6 +914,8 @@ lambdaArr <- c(1)
 
 
 
+
+
 ##### FROC
 
 
@@ -1057,6 +1067,8 @@ lambdaArr <- c(10)
   </tr>
 </tbody>
 </table>
+
+
 
 
 ##### FROC
@@ -1214,6 +1226,8 @@ lambdaArr <- c(1,2,5,10)
 </table>
 
 
+
+
 ##### FROC
 
 
@@ -1366,6 +1380,8 @@ lambdaArr <- c(1, 2, 5, 10)
   </tr>
 </tbody>
 </table>
+
+
 
 
 
@@ -1527,6 +1543,8 @@ nuArr <- c(0.6, 0.7, 0.8, 0.9)
 
 
 
+
+
 ##### FROC
 
 
@@ -1679,6 +1697,8 @@ nuArr <- c(0.1, 0.2, 0.3, 0.4)
   </tr>
 </tbody>
 </table>
+
+
 
 
 

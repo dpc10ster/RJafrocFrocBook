@@ -197,6 +197,8 @@ FROC notation is summarized in Table \@ref(tab:empirical-notation) in which "mar
 </tbody>
 </table>
 
+
+
 ### Comments
 
 -   Row 1: The case-truth index $t$ refers to the case (or patient), with $t = 1$ for non-diseased and $t = 2$ for diseased cases. As a useful mnemonic, $t$ is for *truth*.
@@ -1305,6 +1307,8 @@ Here is a summary of the plots defined from FROC data along with my recommendati
   </tr>
 </tbody>
 </table>
+
+
 
 
 
