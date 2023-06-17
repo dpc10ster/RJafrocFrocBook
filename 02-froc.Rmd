@@ -150,9 +150,9 @@ In the medical imaging context, assuming the mark rating pairs have been classif
 
 The rating can be any real number, as long as higher values are associated with higher confidence levels.
 
-If *integer ratings* are used then in a four-rating FROC study at most 4 FROC operating points will result: one corresponding to marks rated 4s; another corresponding to marks rated 4s or 3s; another to the 4s, 3s, or 2s; and finally the 4s, 3s, 2s, or 1s. An R-rating study yields at most R operating points ^[I have seen publications that describe a data collection process where the "1" rating is used to mean, in effect, that the observer sees nothing to report in the image, i.e., to mean "let's move on to the next image". This amounts to wasting a confidence level. The FROC data collection interface should present an explicit "next-image" option and reserve the "1" rating to mean the lowest reportable confidence level.]. 
+If *integer ratings* are used then in a four-rating FROC study at most 4 FROC operating points will result: one corresponding to marks rated 4s; another corresponding to marks rated 4s or 3s; another to the 4s, 3s, or 2s; and finally the 4s, 3s, 2s, or 1s. ^[I have seen publications that describe a data collection process where the "1" rating is used to mean, in effect, that the observer sees nothing to report in the image, i.e., to mean "let's move on to the next image". This amounts to wasting a confidence level. The FROC data collection interface should present an explicit "next-image" option and reserve the "1" rating to mean the lowest reportable confidence level.]. 
 
-If *continuous ratings* are used, the procedure is to start with a very high threshold so that none of the ratings exceed the threshold and then to gradually lower the threshold. Every time the threshold crosses the rating of a mark, or possibly multiple marks, the total count of LLs and NLs exceeding the threshold is divided by the appropriate denominators yielding the ''raw'' FROC plot. For example, when an LL rating just exceeds the threshold, the operating point jumps up by 1/(total number of lesions), and if two LLs simultaneously just exceed the threshold the operating point jumps up by 2/(total number of lesions). If an NL rating just exceeds the threshold, the operating point jumps to the right by 1/(total number of cases). If an LL rating and a NL rating simultaneously just exceed the threshold, the operating point moves diagonally, up by 1/(total number of lesions) and to the right by 1/(total number of cases). The reader should get the general idea by now and recognize that the cumulating procedure is very similar to the manner in which ROC operating points were calculated, the only differences being in the quantities being cumulated and the relevant denominators.
+If *continuous ratings* are used, the procedure is to start with a very high threshold so that none of the ratings exceed the threshold and then to gradually lower the threshold. Every time the threshold crosses the rating of a mark, or possibly multiple marks, the total count of LLs and NLs exceeding the threshold is divided by the appropriate denominators yielding the "raw" FROC plot. For example, when an LL rating just exceeds the threshold, the operating point jumps up by 1/(total number of lesions), and if two LLs simultaneously just exceed the threshold the operating point jumps up by 2/(total number of lesions). If an NL rating just exceeds the threshold, the operating point jumps to the right by 1/(total number of cases). If an LL rating and a NL rating simultaneously just exceed the threshold, the operating point moves diagonally, up by 1/(total number of lesions) and to the right by 1/(total number of cases). The cumulating procedure is very similar to the manner in which ROC operating points were calculated, the only differences being in the quantities being cumulated and the relevant denominators.
 
 Empirical plot:
 
@@ -160,24 +160,24 @@ Empirical plot:
 A plot is termed *empirical* if is based on the observed operating points: one simply connects adjacent operating points (including the origin) with straight lines.
 
 
-Chapter \@ref(empirical) describes the empirical FROC and other possible operating characteristics in more detail. 
+Chapter \@ref(empirical) describes the empirical FROC and other empirical operating characteristics in more detail. 
 
 
 ### Illustration with a dataset {#froc-paradigm-plot-illustration}
 
-The following code uses `dataset04` [@zanca2009evaluation] in `RJafroc` to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so in principle one can generate 20 plots. In this example I have selected treatment 1 and reader 1 to produce the plot. The reader should experiment by running, for example `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 2, rdrs = 1, opChType = "FROC")$Plot`, i.e., with different treatments and readers specified.
+The following code uses `dataset04` [@zanca2009evaluation] in `RJafroc` to illustrate an empirical FROC plot. The dataset has 5-treatments and 4 readers, so one could generate 20 plots. In this example I have selected treatment 1 and reader 1. 
 
 
-```{r, echo=TRUE}
+```{r froc-paradigm-5, echo=TRUE, fig.align='center', fig.cap="Empirical FROC plot for `dataset04`, treatment 1 and reader 1.", fig.show='hold'}
 ret <- PlotEmpiricalOperatingCharacteristics(
   dataset04, trts = 1, rdrs = 1, opChType = "FROC")
 print(ret$Plot)
 ```
 
 
-The study in question was a 5 rating FROC study. The lowest non-trivial point (i.e., not counting the origin which is common to all FROC plots) corresponds to the marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic, namely the operating point cannot move downward or to the left as one cumulates lower confidence level marks. 
+The study in question was a 5 rating FROC study. The lowest non-trivial point (i.e., not counting the origin which is common to all FROC plots) corresponds to marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic, namely the operating point cannot move downward or to the left as one cumulates lower confidence level marks. 
 
-The plot shown above is termed an *empirical plot* as it consists of the empirical (observed) operating points connected by straight line segments.
+The above plot is termed an *empirical plot* as it consists of the empirical (observed) operating points connected by straight line segments. A model based plot would be termed a *predicted plot*.
 
 
 ## The "solar" analogy {#froc-paradigm-solar-analogy}
@@ -211,17 +211,16 @@ False sightings of objects in astronomy do occur. Finding a new astronomical obj
 
 ## Discussion {#froc-paradigm-discussion}
 
-The FROC paradigm is often misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the meaning of search, the paradigm and the FROC curve. These are summarized below (I could cite the offending examples but no useful purpose will be served by my doing so): 
+The FROC paradigm is often misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the meaning of search, the paradigm and the FROC curve. 
 
 -   Loose terminology:
     - Using the term "lesion-specific" to describe location-specific paradigms.
     - Using the term "lesion" when one means a "suspicious region" that may or may not be a true lesion.
-    - Using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localizations, that apply to regions of the image. This is very common.
-    - Using the FROC-1 rating to mean in effect "I see no signs of disease in this image " when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
--   Misconception:
+    - Using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localizations, that apply to regions of the image.     - Using the FROC-1 rating to mean in effect "I see no signs of disease in this image " when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
+-   Misconceptions:
     - A fundamental misunderstanding of search performance is embodied in the statement *"CAD is perfect at search because it looks at everything"*.
     - Showing FROC curves as reaching the unit ordinate as this is the exception rather than the rule.
-    - Believing that FROC curves extend to very large values (potentially infinite) along the abscissa and all the observer has to do to access this region is to lower their reporting threshold.
+    - Believing that FROC curves extend to very large values (potentially infinite) along the abscissa and all the observer has to do to access this region is to lower the reporting threshold.
 
 The FROC plot is historically the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset that have evolved over the years.
 
