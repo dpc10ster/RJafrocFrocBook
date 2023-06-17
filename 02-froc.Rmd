@@ -155,7 +155,7 @@ If *continuous ratings* are used, the procedure is to start with a very high thr
 Empirical plot:
 
 >
-A plot is termed *empirical* if is based on the observed operating points only; one simply connects adjacent operating points (including the origin) with straight lines.
+A plot is termed *empirical* if is based on the observed operating points: one simply connects adjacent operating points (including the origin) with straight lines.
 
 
 Chapter \@ref(empirical) describes the empirical FROC and other possible operating characteristics in more detail. 
@@ -168,13 +168,12 @@ The following code uses `dataset04` [@zanca2009evaluation] in `RJafroc` to illus
 
 ```{r, echo=TRUE}
 ret <- PlotEmpiricalOperatingCharacteristics(
-  dataset04, 
-  trts = 1, rdrs = 1, opChType = "FROC")
+  dataset04, trts = 1, rdrs = 1, opChType = "FROC")
 print(ret$Plot)
 ```
 
 
-The study in question was a 5 rating FROC study. The lowest non-trivial point (i.e., not counting the trivial origin which is common to all FROC plots) corresponds to the marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic that the operating point cannot move downward or to the left as one cumulates lower confidence level marks (i.e., it can only move upward and to the right; the plot can flatten out or it can end at a finite value of NLF). 
+The study in question was a 5 rating FROC study. The lowest non-trivial point (i.e., not counting the origin which is common to all FROC plots) corresponds to the marks rated 5, the next higher one corresponds to marks rated 4 or 5, etc. FROC plots may vary widely in shape but they share the common characteristic, namely the operating point cannot move downward or to the left as one cumulates lower confidence level marks. 
 
 The plot shown above is termed an *empirical plot* as it consists of the empirical (observed) operating points connected by straight line segments.
 
