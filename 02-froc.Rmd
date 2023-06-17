@@ -41,7 +41,7 @@ Numerical examples of the loss of statistical power of ROC analysis as compared 
 
 ### Chapter outline {#froc-paradigm-outline}
 
-Four observer performance paradigms are compared as to the kinds of information collected and ignored. An essential characteristic of the FROC paradigm, namely *visual search*, is introduced. The FROC paradigm and its historical context are described. Key differences between FROC ratings and ROC ratings are noted. The FROC plot is introduced. A "solar" analogy is introduced which yields a good intuitive feel for the FROC paradigm. 
+Four observer performance paradigms are compared as to the kinds of location information collected/ignored. An essential characteristic of the FROC paradigm, namely *visual search*, is introduced. The FROC paradigm and its historical context are described. Key differences between FROC ratings and ROC ratings are noted. The FROC plot is introduced. A "solar" analogy is introduced which yields a good intuitive feel for the FROC paradigm. 
 
 
 ## Location specific paradigms {#froc-paradigm-location-specific-paradigms}
@@ -55,14 +55,15 @@ There are three location-specific paradigms:
 -   the region of interest (ROI) [@obuchowski2010data].
 
 
-The 4 panels in Fig. \@ref(fig:froc-paradigm-4) show a schematic mammogram interpreted according to the 4 current observer performance paradigms. The arrows point to two lesions and the three light crosses indicate suspicious regions. A marked suspicious region is indicated by a dark cross. Evidently the radiologist found one of the lesions (the light-shaded cross near the left most arrow in the top-left panel), missed the other lesion and mistook two normal structures for lesions (the two light-shaded crosses that are relatively far from any of the lesions). In this example there are three suspicious regions one of which is close to a real lesion.
+Together with the ROC paradigm, which ignores localization, this makes up 4 current observer performance paradigms. The 4 panels in Fig. \@ref(fig:froc-paradigm-4) show a schematic mammogram interpreted according to these paradigms. The arrows point to two lesions and the three light crosses indicate suspicious regions. A marked suspicious region is indicated by a dark cross. Evidently the radiologist found one of the lesions (the light-shaded cross near the left most arrow in the top-left panel), missed the other lesion and mistook two normal structures for lesions (the two light-shaded crosses that are relatively far from any of the lesions). In this example there are three suspicious regions one of which is close to a real lesion.
+
+>In this book *lesion* always refers to a true or real lesion. The term *suspicious region* or *perceived lesion* is reserved for any region that, as far as the observer is concerned, has "lesion-like" characteristics. *A lesion is a real entity while a suspicious region is a perceived entity.*
 
 
-```{r froc-paradigm-4, echo=FALSE, out.width="300pt", fig.align='center', fig.cap="Observer performance paradigms in use: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI", fig.show='hold'}
+```{r froc-paradigm-4, echo=FALSE, out.width="300pt", fig.align='center', fig.cap="Observer performance paradigms in current usage: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI", fig.show='hold'}
 knitr::include_graphics("images/4Paradigms.png")
 ```
 
->In this book *lesion* always refers to a true or real lesion. The term *suspicious region* or *perceived lesion* is reserved for any region that, as far as the observer is concerned, has "lesion-like" characteristics. *A lesion is a real entity while a suspicious region is a perceived entity.*
 
 -   In the ROC paradigm, Fig. \@ref(fig:froc-paradigm-4) (top-left panel), the radiologist assigns a single rating indicating the confidence level that there is at least one lesion somewhere in the image. Assuming a 1 -- 5 positive directed integer rating scale if the left-most light-shaded cross is a highly suspicious region then the ROC rating might be 5 (highest confidence for presence of disease). There are no dark-shaded crosses on this panel as no marking occurs in the ROC paradigm.
 
@@ -70,7 +71,7 @@ knitr::include_graphics("images/4Paradigms.png")
 
 -   In the LROC paradigm, Fig. \@ref(fig:froc-paradigm-4) (bottom-left panel), the radiologist rates the confidence that there is at least one lesion somewhere in the image (as in the ROC paradigm) and marks the *most suspicious* region in the image. In this example the rating might be LROC-5, the five rating being the same as in the ROC paradigm, and the mark may be the suspicious region rated FROC-4 in the FROC paradigm panel, and, since it is close to a true lesion, in LROC terminology it would be recorded as a *correct localization*. If the mark were not near a lesion it would be recorded as an *incorrect localization*. Only one mark is allowed in this paradigm, and in fact one mark is *required* on every image, even if the observer does not find any suspicious regions to report.
 
--   In the region of interest (ROI) paradigm the researcher segments the image into a number of regions-of-interest (ROIs) and the radiologist rates each ROI for presence of at least one suspicious region within the ROI. The rating is similar to the ROC rating, except it applies to the ROI, not the whole image. Assuming a 1 -- 5 positive directed integer rating scale in Fig. \@ref(fig:froc-paradigm-4) (bottom-right panel) there are four ROIs. The ROI at \~9 o'clock might be rated ROI-5 as it contains the most suspicious light-shaded cross (the region that was rated FROC-4), the one at \~11 o'clock might be rated ROI-1 as it does not contain any light-shaded crosses, the one at \~3 o'clock might be rated LROC-2 or LROC-3 (the unmarked light-shaded cross would tend to increase the confidence level) and the one at \~7 o'clock might be rated ROI-1[^2].
+-   In the region of interest (ROI) paradigm, Fig. \@ref(fig:froc-paradigm-4) (bottom-right panel) the researcher segments the image into a number of regions-of-interest (ROIs) and the radiologist rates each ROI for presence of at least one suspicious region within the ROI. The rating is similar to the ROC rating, except it applies to the ROI, not the whole image. Assuming a 1 -- 5 positive directed integer rating scale in Fig. \@ref(fig:froc-paradigm-4) (bottom-right panel) there are four ROIs. The ROI at \~9 o'clock might be rated ROI-5 as it contains the most suspicious light-shaded cross (the region that was rated FROC-4), the one at \~11 o'clock might be rated ROI-1 as it does not contain any light-shaded crosses, the one at \~3 o'clock might be rated LROC-2 or LROC-3 (the unmarked light-shaded cross would tend to increase the confidence level) and the one at \~7 o'clock might be rated ROI-1[^2].
 
 [^2]: The ROIs could be clinically driven descriptors of location, such as "apex of lung" or "mediastinum", and the image does not have to have lines showing the ROIs (which would be distracting to the radiologist). The number of ROIs per image can be at the researcher's discretion and there is no requirement that every case have the same number of ROIs.
 
