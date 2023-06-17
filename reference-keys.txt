@@ -1,4 +1,5 @@
 fig:froc-paradigm-4
+fig:froc-paradigm-5
 eq:binning-rule-roc
 eq:binning-rule-froc
 tab:empirical-notation
