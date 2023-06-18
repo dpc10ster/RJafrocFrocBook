@@ -4,9 +4,9 @@
 
 
 
-## How much finished {#rsm-how-much-finished}
+## How much finished 99% {#rsm-how-much-finished}
 
-99%
+
 <!-- Switch to $\mu$, $\lambda$ and $\nu$ and do away with prime parameter? Yes -->
 
 

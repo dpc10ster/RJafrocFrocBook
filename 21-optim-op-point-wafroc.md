@@ -15,9 +15,9 @@ output:
 
 
 
-## TBA How much finished {#optim-op-point-how-much-finished}
+## TBA How much finished 98% {#optim-op-point-how-much-finished}
 
-98%
+
 
 Handling diseased-only datasets
 Discussion needs more work

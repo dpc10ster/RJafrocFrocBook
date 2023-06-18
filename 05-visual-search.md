@@ -6,8 +6,8 @@
 
 
 
-## How much finished {#visual-search-how-much-finished}
-100%
+## How much finished 100% {#visual-search-how-much-finished}
+
 
 
 
@@ -16,7 +16,7 @@
 This chapter draws heavily on work by Nodine and Kundel [@nodine1987using; @kundel2007holistic; @kundel2004modeling; @kundel1983visual; @kundel1978visual]. The author gratefully acknowledges critical insights gained through conversations with Dr. Claudia Mello-Thoms ca. 2003.
 
 
-To understand free-response data, specifically how radiologists interpret images, one must come to grips with visual search. Casual usage of everyday terms like "search", "recognition" and "detection" can lead to confusion.
+To understand free-response data, specifically how radiologists interpret images, one must understand visual search. Casual usage of everyday terms like "search", "recognition" and "detection" can lead to confusion.
 
 >
 Visual search is broadly defined as grouping and labeling parts of an image. In the medical imaging context visual search involves finding lesions and correctly classifying them (as benign or malignant).

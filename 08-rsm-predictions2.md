@@ -4,9 +4,9 @@
 
 
 
-## TBA How much finished {#rsm-other-predictions-how-much-finished}
+## TBA How much finished 95% {#rsm-other-predictions-how-much-finished}
 
-95%
+
 Work on intro
 Need better word than constrained
   finite? discontinuous? end-point-discontinuity?

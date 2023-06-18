@@ -6,8 +6,8 @@
 
 
 
-## How much finished {#standalone-cad-radiologists-how-much-finished}
-99%
+## How much finished 99% {#standalone-cad-radiologists-how-much-finished}
+
 
 
 

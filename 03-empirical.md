@@ -5,8 +5,7 @@
 
 
 
-## How much finished {#empirical-how-much-finished}
-100%
+## How much finished 100% {#empirical-how-much-finished}
 
 
 
@@ -15,7 +14,7 @@
 FROC data consists of mark-rating pairs. A distinction is made between *latent* marks (suspicious regions perceived by the visual system but not necessarily marked) and *actual* marks. A key table (used in later chapters) summarizing FROC notation is introduced which allows unambiguous description of the data. 
 
 
-Empirical plots refer to those generated directly from the data. Empirical operating characteristics (empirical plots) introduced in this chapter are the FROC, the (inferred) ROC, the alternative FROC (AFROC), the weighted AFROC (wAFROC), the AFROC1, wAFROC1. Formulae for x and y coordinates of each plot are given in terms of the underlying mark-rating FROC data. 
+Empirical plots refer to those generated directly from the data. Empirical operating characteristics (empirical plots) introduced in this chapter are the FROC, the inferred ROC, the alternative FROC (AFROC), the weighted AFROC (wAFROC), the AFROC1 and the wAFROC1. Formulae for coordinates of each plot are given in terms of the underlying mark-rating data. 
 
 
 Plots are *visual* depictions of performance. Scalar measures derived from plots can serve as *quantitative* measures of performance. Empirical area under curve (AUC) measures associated with all plots are illustrated with a small FROC dataset. Except for the FROC plot all of the other plots include a straight line extension from the uppermost observed operating point to (1,1).
