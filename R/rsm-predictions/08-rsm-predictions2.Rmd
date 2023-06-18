@@ -11,8 +11,8 @@ library(gridExtra)
 ```
 
 
-## TBA How much finished {#rsm-other-predictions-how-much-finished}
-90%
+## TBA How much finished 90% {#rsm-other-predictions-how-much-finished}
+
 Work on intro and discussion
 
 <!-- Need to move lambda, nu parameterization to appendix; too distracting -->
