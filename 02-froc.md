@@ -17,43 +17,38 @@ For diagnostic tasks such as detecting diffuse interstitial lung disease[^1] *wh
 
 [^1]: Diffuse interstitial lung disease refers to disease within both lungs that affects the interstitium or connective tissue that forms the support structure of the lungs' air sacs or alveoli. When one inhales, the alveoli fill with air and pass oxygen to the blood stream. When one exhales, carbon dioxide passes from the blood into the alveoli and is expelled from the body. When interstitial disease is present, the interstitium becomes inflamed and stiff, preventing the alveoli from fully expanding. This limits both the delivery of oxygen to the blood stream and the removal of carbon dioxide from the body. As the disease progresses, the interstitium scars with thickening of the walls of the alveoli, which further hampers lung function. *Diffuse interstitial lung disease is spread through and confined to the lung*. 
 
-In clinical practice it is not only important to identify if the patient is diseased but also to offer guidance to subsequent care-givers (e.g., the surgeon responsible for resecting a diagnosed lesion) regarding other characteristics (such as location, type, size, extent) of the disease. For example, if the radiologist believes the patient is diseased there is generally a location (or locations) associated with the suspected disease. 
+In clinical practice it is not only important to identify if the patient is diseased but to also offer guidance to subsequent care-givers (e.g., the surgeon responsible for resecting a malignant lesion) regarding other characteristics (such as location, type, size, extent) of the lesion. 
 
-For localized disease the ROC paradigm constrains the collected information to a single rating that there is disease *somewhere* in the patient's imaged anatomy. The "somewhere" begs the question: if the radiologist believes the disease is "somewhere", why not have them to point to it? In fact they do "point to it" by recording the location(s) of suspect regions in their clinical report; however, the ROC paradigm cannot use the location information. 
+For localized disease the ROC paradigm limits the collected information to a single rating that categorizes on an ordinal scale the probability that there is disease *somewhere* in the patient's imaged anatomy. The "somewhere" begs the question: if the radiologist believes the disease is "somewhere", why not have them to point to it? In fact they do "point to it" by recording the location(s) of suspect regions in their clinical report; however, the ROC paradigm cannot use the location information. 
 
-From the data analyst's point of view the most troubling issue with ROC analysis is that neglect of location information leads to loss of statistical power as can be seen from the following simple example comparing expert and non-expert radiologists. 
+From the data analyst's point of view the most troubling issue with ROC analysis applied to a localization task is that neglect of location information leads to loss of statistical power. This can be appreciated from the following simple example comparing expert and non-expert radiologists. 
 
->Recall that a ROC paradigm true positive event occurs anytime a diseased patient is diagnosed as diseased - the marked location, if any, is irrelevant. Therefore two types of true positive events are possible in ROC studies involving localized disease: those with correct localizations (these tend to be associated with expert radiologists) and those with incorrect localizations (associated with non-expert radiologists). The indistinguishability between the two types of true positive events leads to reduced ability to detect a difference between expert and non-expert radiologists. Loss of statistical power inflates the sample size requirements for the study - a highly undesirable effect. 
+>Recall that a ROC paradigm true positive event occurs anytime a diseased patient is diagnosed as diseased - the marked location, if any, is irrelevant. Therefore two types of true positive events are possible in ROC studies involving localized disease: those with correct localizations (these tend to be associated with expert radiologists) and those with incorrect localizations (associated with non-expert radiologists). In the ROC paradigm the indistinguishability between the two types of true positive events leads to reduced ability to detect a difference between expert and non-expert radiologists, i.e., loss of statistical power, a highly undesirable effect since it inflates sample size requirements for a contemplated ROC study. 
 
-Numerical examples of the loss of statistical power of ROC analysis as compared to a method that only credits correct localizations are to be found [here](https://dpc10ster.github.io/RJafrocQuickStart/froc-sample-size.html). 
-
-
-### Chapter outline {#froc-paradigm-outline}
-
-Four observer performance paradigms are compared as to the kinds of location information collected/ignored. An essential characteristic of the FROC paradigm, namely *visual search*, is introduced. The FROC paradigm and its historical context are described. Key differences between FROC ratings and ROC ratings are noted. The FROC plot is introduced. A "solar" analogy is introduced which yields a good intuitive feel for the FROC paradigm. 
+Numerical examples of the loss of statistical power of ROC analysis as compared to a method that only credits correct localizations are  [here](https://dpc10ster.github.io/RJafrocQuickStart/froc-sample-size.html). 
 
 
 ## Location specific paradigms {#froc-paradigm-location-specific-paradigms}
 
-Location-specific paradigms^[Location-specific paradigms are sometimes referred to as lesion-specific (or lesion-level) paradigms: usage of these terms is discouraged. All observer performance methods involve detecting the presence of true lesions; so ROC methodology is, in this sense, also lesion-specific. On the other hand *location* is a characteristic of true and perceived focal lesions, and methods that account for location are better termed *location-specific* than lesion-specific.] take into account, to varying degrees, information regarding the locations of perceived lesions. 
+In this book the term "location-specific" is used for any paradigm that accounts for lesion location. These paradigms are sometimes referred to as lesion-specific (or lesion-level) paradigms: usage of these terms is discouraged. All observer performance methods involve detecting the presence of true lesions and ROC methodology is, in this sense, also lesion-specific. On the other hand *location* is a characteristic of true and perceived focal lesions, and methods that account for location are better termed *location-specific* than lesion-specific.
 
-There are three location-specific paradigms:
+There are three location-specific paradigms that take into account, to varying degrees, information regarding the locations of perceived lesions:
 
 -   the free-response ROC (FROC) [@bunch1977free; @chakraborty1989maximum];
 -   the location ROC (LROC) [@starr1977comments; @swensson1996unified];
 -   the region of interest (ROI) [@obuchowski2010data].
 
 
-Together with the ROC paradigm, which ignores localization, these constitute the four current observer performance paradigms. 
+Together with the ROC paradigm, which ignores location, they constitute the four currently-used observer performance paradigms. 
 
 >In this book *lesion* always refers to a true or real lesion. The term *suspicious region* or *perceived lesion* is used for any region that, as far as the observer is concerned, has "lesion-like" characteristics. *A lesion is a real entity while a suspicious region is a perceived entity.*
 
-The 4 panels in Fig. \@ref(fig:froc-paradigm-4) show a schematic mammogram interpreted according to these paradigms. The arrows point to two lesions and the three light-shaded crosses indicate suspicious regions. A marked suspicious region is indicated by a dark-shaded cross. Evidently the radiologist perceived one of the lesions (the light-shaded cross near the left most arrow in the top-left panel), missed the other lesion and mistook two normal structures for lesions (the two light-shaded crosses that are relatively far from any of the lesions). In this example there are three suspicious regions one of which is close to a real lesion.
+The 4 panels in Fig. \@ref(fig:froc-paradigm-4) show a schematic mammogram interpreted according to these paradigms. The panels are as follows: upper left -- ROC, upper right -- FROC, lower left -- LROC, lower right -- ROI. The arrows point to two lesions and the three light-shaded crosses indicate suspicious regions. A marked suspicious region is indicated by a dark-shaded cross. Evidently the radiologist perceived one of the lesions (the light-shaded cross near the left most arrow in the top-left panel), missed the other lesion and mistook two normal structures for lesions (the two light-shaded crosses that are relatively far from any of the lesions). In this example there are three suspicious regions one of which is close to a real lesion.
 
 
 <div class="figure" style="text-align: center">
-<img src="images/4Paradigms.png" alt="Observer performance paradigms in current usage: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI. The arrows point to two lesions and the light-shaded crosses indicate suspicious regions. A marked suspicious region is indicated by a dark-shaded cross." width="300pt" />
-<p class="caption">(\#fig:froc-paradigm-4)Observer performance paradigms in current usage: Upper Left -- ROC, Upper Right -- FROC, Lower Left -- LROC, Lower Right -- ROI. The arrows point to two lesions and the light-shaded crosses indicate suspicious regions. A marked suspicious region is indicated by a dark-shaded cross.</p>
+<img src="images/4Paradigms.png" alt="Observer performance paradigms in current usage. The arrows point to two lesions and the light-shaded crosses indicate suspicious regions. Marked suspicious regions are indicated by dark-shaded crosses." width="300pt" />
+<p class="caption">(\#fig:froc-paradigm-4)Observer performance paradigms in current usage. The arrows point to two lesions and the light-shaded crosses indicate suspicious regions. Marked suspicious regions are indicated by dark-shaded crosses.</p>
 </div>
 
 
@@ -117,11 +112,11 @@ Multiple marks near the same vicinity are rarely encountered with radiologists, 
 
 [^6]: The exception would be if the perceived lesions were speck-like objects in a mammogram, and even here radiologists tend to broadly outline the region containing perceived specks -- they do not mark individual specks with great precision.
 
-[^7]: The reason for using the highest rating is that this gives full and deserved credit for the localization. Other marks in the same vicinity with lower ratings need to be discarded from the analysis; specifically, they should not be classified as NLs, because each mark has successfully located the true lesion to within the clinically acceptable criterion, i.e., any one of them is a good decision because it would result in a patient recall and point further diagnostics to the true location.
+[^7]: The highest rating gives full and deserved credit for the correct localization. Other marks in the same vicinity with lower ratings need to be discarded from the analysis; specifically, they should not be classified as NLs, because each mark has successfully located the true lesion to within the clinically acceptable criterion, i.e., any one of them is a good decision because it would result in a patient recall and point further diagnostics to the true location.
 
 ### Historical context
 
-The term "free-response" was coined by [@RN897] to describe a task involving the detection of brief audio tone(s) against a background of noise. The tone(s) could occur at any instant within an active listening interval, defined by an indicator light bulb that is turned on. The listener's task was to respond by pressing a button at the specific instant(s) when a tone(s) was heard. The listener was uncertain how many true tones could occur in an active listening interval and when they might occur. Therefore, the number of responses (button presses) per active interval was a priori unpredictable: it could be zero, one or more. The study did not require the listener to rate each button press, but apart from this difference and with two-dimensional images replacing the listening intervals, the acoustic signal detection study is analogous to medical imaging search tasks. 
+The term "free-response" was coined by [@egan1961operating] to describe a task involving the detection of brief audio tone(s) against a background of noise. The tone(s) could occur at any instant within an active listening interval, defined by an indicator light bulb that is turned on. The listener's task was to respond by pressing a button at the specific instant(s) when a tone(s) was heard. The listener was uncertain how many true tones could occur in an active listening interval and when they might occur. Therefore, the number of responses (button presses) per active interval was a priori unpredictable: it could be zero, one or more. The study did not require the listener to rate each button press, but apart from this difference and with two-dimensional images replacing the listening intervals, the acoustic signal detection study is analogous to medical imaging search tasks. 
 
 
 ## The FROC plot {#froc-paradigm-froc-plot}
@@ -182,41 +177,42 @@ Consider the sun, regarded as a "lesion" to be detected, with two daily observat
 
 FROC curve implications of this analogy are:
 
--   Each 24-hour day corresponds to two "trials" in the [@RN897] sense, or two cases -- one diseased and one non-diseased -- in the medical imaging context.
+-   Each 24-hour day corresponds to two "trials" in the [@egan1961operating] sense, or two cases -- one diseased and one non-diseased -- in the medical imaging context.
 -   The denominator for calculating LLF is the total number of AM days, and the denominator for calculating NLF is twice the total number of 24-hour days.
 -   Most important, $\text{LLF}_{\text{max}} = 1$ and $\text{NLF}_{\text{max}} = 0$.
 
 In fact, even when the sun is not directly visible due to heavy cloud cover, since the actual location of the sun can be deduced from the local time and GPS coordinates, the rational observer will still "mark" the correct location of the sun and not make any false sun localizations. Consequently, even in this example $\text{LLF}_{\text{max}} = 1$ and $\text{NLF}_{\text{max}} = 0$.
 
-The conclusion is that in a task where a target is known to be present in the field of view and its location is known the observer will always achieve $\text{LLF}_{\text{max}} = 1$ and $\text{NLF}_{\text{max}} = 0$. Why are LLF and NLF subscripted "max"? By randomly choosing to not mark the position of the sun even though it is visible, for example, using a coin toss to decide whether or not to mark the sun, the observer can "walk down" the y-axis of the FROC plot, eventually reaching $LLF = 0$ and $NLF = 0$. The reason for allowing the observer to "walk down" the vertical is simply to demonstrate that a continuous FROC curve from the origin to (0,1) can, in fact, be realized.
+The conclusion is that in a task where a target is known to be present in the field of view and its location is known the observer will always achieve $\text{LLF}_{\text{max}} = 1$ and $\text{NLF}_{\text{max}} = 0$. LLF and NLF subscripted \"max\" because by randomly choosing to *not mark* the position of the sun, even though it is visible, the observer can "walk down" the y-axis of the FROC plot, eventually reaching $LLF = 0$ and $NLF = 0$, demonstrating that a continuous FROC curve from the origin to (0,1) can, in fact, be realized.
 
 Now consider a fictitious otherwise earth-like planet where the sun can be at random positions rendering GPS coordinates and the local time useless. All one knows is that the sun is somewhere in the upper or lower hemispheres subtended by the sky. If there are no clouds and consequently one can see the sun clearly during daytime, a rational observer will still correctly locate the sun while not marking the sky with any incorrect sightings, so $\text{LLF}_{\text{max}} = 1$ and $\text{NLF}_{\text{max}} = 0$. This is because, in spite of the fact that the expected location is unknown, the high contrast sun is enough the trigger peripheral vision, so that even if the observer did not start out looking in the correct direction, peripheral vision will guide the observer's gaze to the correct location.
 
-The implication of this is that a fundamentally different mechanism is involved from that considered in conventional observer performance methodology, namely *search*. 
+The implication of this is that a fundamentally different mechanism is involved from that considered in conventional (i.e., ROC) observer performance methodology, namely *search*. 
 
-> Search describes the process of *finding* lesions while *not finding* non-lesions and search performance is the ability to find all lesions while minimizing finding non-lesions. 
+> Search describes the process of *finding* lesions while *not finding* non-lesions; search performance is the ability to find lesions while not finding non-lesions. 
 
 Think of the eye as two cameras: a low-resolution camera (peripheral vision) with a wide field-of-view plus a high-resolution camera (foveal vision) with a narrow field-of-view. If one were limited to viewing with the high-resolution camera one would spend so much time steering the high-resolution narrow field-of-view camera from spot-to-spot that one would have a hard time finding the desired stellar object. Having a single high-resolution narrow field of view vision would also have negative evolutionary consequences as one would spend so much time scanning and processing the surroundings that one would miss dangers or opportunities. Nature has equipped us with essentially two cameras; the first low-resolution camera is able to "digest" large areas of the surroundings and process it rapidly so that if danger (or opportunity) is sensed, then the eye-brain system rapidly steers the second high-resolution camera to the appropriate location. This is Nature's way of optimally using the eye-brain system. For a similar reason astronomical telescopes come with a wide field of view lower magnification "spotter scope".
 
-When cloud cover completely blocks the fictitious random-position sun there is no stimulus to trigger the peripheral vision system to guide the fovea to the correct location. The observer is reduced to guessing and is led to different conclusions depending upon the benefits and costs involved. If, for example, the guessing observer earns a dollar for each LL and is fined a dollar for each NL, then the observer will likely not make any marks as the chance of winning a dollar is much smaller than losing many dollars. For this observer $\text{LLF}_{\text{max}} = 0$ and $\text{NLF}_{\text{max}} = 0$, and the operating point is "stuck" at the origin. If, on the other hand, the observer is told every LL is worth a dollar and there is no penalty to NLs, then with no risk of losing the observer will "fill up" the sky with false marks. 
+When cloud cover completely blocks the fictitious random-position sun there is no stimulus to trigger the peripheral vision system to guide the fovea to the correct location. The observer is reduced to guessing and is led to different conclusions depending upon the benefits and costs involved. If, for example, the guessing observer earns a dollar for each LL and is fined a dollar for each NL, then the observer will likely not make any marks as the chance of winning a dollar is much smaller than losing many dollars. For this observer $\text{LLF}_{\text{max}} = 0$ and $\text{NLF}_{\text{max}} = 0$, i.e., the operating point is "stuck" at the origin. On the other hand if the observer is told every LL is worth a dollar and there is no penalty to NLs, then with no risk of losing the observer will "fill up" the sky with false marks. 
 
-The analogy is not restricted to the sun, which one might argue is an almost infinite SNR object and therefore atypical. Consider finding stars or planets. In clear skies, if one knows the constellations, one can still locate bright stars and planets like Venus or Jupiter. With less bright stars and/or obscuring clouds, there will be false-sightings and the FROC plot could approach a flat horizontal line at ordinate equal to zero, but the observer will not fill up the sky with false sightings of a desired star.
+The analogy is not restricted to the sun, which one might argue is an almost infinite signal-to-noise-ratio (SNR) object and therefore atypical. Consider finding stars or planets. In clear skies one can still locate bright stars and planets like Venus or Jupiter. With less bright stars and/or obscuring clouds, there will be false-sightings and the FROC plot could approach a flat horizontal line at ordinate equal to zero, but TBA the observer will not fill up the sky with false sightings of a desired star. Why?
 
-False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization (LL) or incorrect localizations (NLs). At the time of writing there is a hunt for a new planet, possibly a gas giant , that is much further than even the newly demoted Pluto. 
+False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization or incorrect localizations.  
 
 
 ## Discussion {#froc-paradigm-discussion}
 
-The FROC paradigm is often misunderstood. Some of this has to do with loose terminology and some to misconceptions regarding the meaning of search, the paradigm and the FROC curve. 
+The FROC paradigm has been misunderstood: the culprits are loose terminology, and misconceptions about visual search, the FROC paradigm and the FROC curve. Some examples follow
 
 -   Loose terminology:
+    - Using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localizations, that apply to regions of the image.     
+    - Using the FROC-1 rating to mean in effect "I see no signs of disease in this image " when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
     - Using the term "lesion-specific" to describe location-specific paradigms.
     - Using the term "lesion" when one means a "suspicious region" that may or may not be a true lesion.
-    - Using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localizations, that apply to regions of the image.     - Using the FROC-1 rating to mean in effect "I see no signs of disease in this image " when in fact it should be used as the lowest level of a reportable suspicious region. The former usage amounts to wasting a confidence level.
 -   Misconceptions:
     - A fundamental misunderstanding of search performance is embodied in the statement *"CAD is perfect at search because it looks at everything"*.
-    - Showing FROC curves as reaching the unit ordinate as this is the exception rather than the rule.
-    - Believing that FROC curves extend to very large values (potentially infinite) along the abscissa and all the observer has to do to access this region is to lower the reporting threshold.
+    - Showing FROC curves as reaching the unit ordinate -- which is the exception rather than the rule.
+    - The belief that FROC curves extend to very large (potentially infinite) values along the abscissa and all the observer has to do to access this region is to lower the reporting threshold.
 
 The FROC plot is historically the first proposed way of visually summarizing FROC data. The next chapter deals with all empirical operating characteristics that can be defined from an FROC dataset that have evolved over the years.
 

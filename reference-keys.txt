@@ -210,7 +210,6 @@ tinytex-problems
 froc-paradigm
 froc-paradigm-how-much-finished
 froc-paradigm-intro
-froc-paradigm-outline
 froc-paradigm-location-specific-paradigms
 froc-paradigm-vis-search
 froc-paradigm-scoring-the-data
