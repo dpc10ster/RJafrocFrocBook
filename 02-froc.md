@@ -202,7 +202,7 @@ False sightings of objects in astronomy do occur. Finding a new astronomical obj
 
 ## Discussion {#froc-paradigm-discussion}
 
-The FROC paradigm has been misunderstood: the culprits are loose terminology, and misconceptions about visual search, the FROC paradigm and the FROC curve. Some examples follow
+The FROC paradigm has been misunderstood: contributing factors are loose terminology and misconceptions about visual search, the FROC paradigm and the FROC curve. Some examples follow
 
 -   Loose terminology:
     - Using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localizations, that apply to regions of the image.     
