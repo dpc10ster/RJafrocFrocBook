@@ -21,7 +21,7 @@ library(grid)
 
 ## Introduction {#empirical-intro}
 
-FROC data consists of mark-rating pairs. A distinction is made between *latent* marks (suspicious regions perceived by the visual system but not necessarily marked) and *actual* marks. A key table (used in later chapters) summarizing FROC notation is introduced which allows unambiguous description of the data. 
+FROC data consists of mark-rating pairs. An important distinction is made between *latent* marks (suspicious regions perceived by the visual system but not necessarily marked) and *actual* marks. A key table (used in later chapters) summarizing FROC notation is introduced which allows unambiguous description of the data. 
 
 
 Empirical plots refer to those generated directly from the data. Empirical operating characteristics (empirical plots) introduced in this chapter are the FROC, the inferred ROC, the alternative FROC (AFROC), the weighted AFROC (wAFROC), the AFROC1 and the wAFROC1. Formulae for coordinates of each plot are given in terms of the underlying mark-rating data. 

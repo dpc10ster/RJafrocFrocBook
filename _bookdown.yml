@@ -7,6 +7,7 @@ rmd_files: [
   "index.Rmd",
   "02-froc.Rmd",
   "03-empirical.Rmd",
+  "04-highest-rating-assumption.Rmd",
   "05-visual-search.Rmd",
   "06-rsm.Rmd",
   "07-rsm-predictions1.Rmd",
