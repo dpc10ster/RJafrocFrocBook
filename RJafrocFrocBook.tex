@@ -139,7 +139,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2023-07-30}
+\date{2023-08-07}
 
 \begin{document}
 \maketitle
@@ -665,7 +665,7 @@ The FROC plot is historically the first proposed way of visually summarizing FRO
 \hypertarget{empirical-intro}{%
 \section{Introduction}\label{empirical-intro}}
 
-FROC data consists of mark-rating pairs. A distinction is made between \emph{latent} marks (suspicious regions perceived by the visual system but not necessarily marked) and \emph{actual} marks. A key table (used in later chapters) summarizing FROC notation is introduced which allows unambiguous description of the data.
+FROC data consists of mark-rating pairs. An important distinction is made between \emph{latent} marks (suspicious regions perceived by the visual system but not necessarily marked) and \emph{actual} marks. A key table (used in later chapters) summarizing FROC notation is introduced which allows unambiguous description of the data.
 
 Empirical plots refer to those generated directly from the data. Empirical operating characteristics (empirical plots) introduced in this chapter are the FROC, the inferred ROC, the alternative FROC (AFROC), the weighted AFROC (wAFROC), the AFROC1 and the wAFROC1. Formulae for coordinates of each plot are given in terms of the underlying mark-rating data.
 
@@ -2171,6 +2171,190 @@ This is similar to the above expression for AFROC1 except for the presence of th
 \end{equation}
 
 A and B are as defined in Eqn. \eqref{eq:empirical-computational-afroc1ab}.
+
+\hypertarget{highest-rating}{%
+\chapter{Validity of the highest rating assumption}\label{highest-rating}}
+
+\hypertarget{highest-rating-how-much-finished}{%
+\section{How much finished 0\%}\label{highest-rating-how-much-finished}}
+
+\hypertarget{highest-rating-intro}{%
+\section{Introduction}\label{highest-rating-intro}}
+
+\hypertarget{highest-rating-2-datasets}{%
+\section{The FROC and real ROC datasets}\label{highest-rating-2-datasets}}
+
+\hypertarget{highest-rating-code}{%
+\section{Code implementation}\label{highest-rating-code}}
+
+\hypertarget{load-the-three-datasets}{%
+\section{Load the three datasets}\label{load-the-three-datasets}}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\CommentTok{\# start with original Federica FROC dataset}
+\NormalTok{ds }\OtherTok{\textless{}{-}}\NormalTok{ dataset04}
+\CommentTok{\# convert it to ROC and extract modalities 4 and 5}
+\CommentTok{\# infd\_ds means the highest rating inferred ROC dataset, }
+\CommentTok{\# implemented in DfFroc2Roc}
+\NormalTok{infd\_ds }\OtherTok{\textless{}{-}} \FunctionTok{DfExtractDataset}\NormalTok{(}\FunctionTok{DfFroc2Roc}\NormalTok{(ds), }\AttributeTok{trts =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+
+\CommentTok{\# Federica real ROC dataset; this used modalities 4 and 5, }
+\CommentTok{\# same readers and same cases as the previous FROC study }
+\NormalTok{real\_ds }\OtherTok{\textless{}{-}}\NormalTok{ dataset14}
+
+\CommentTok{\# load a cross modality dataset}
+\CommentTok{\# This will serve as a template whose list elements will be modified to create }
+\CommentTok{\# the desired cross modality dataset}
+\NormalTok{xds }\OtherTok{\textless{}{-}}\NormalTok{ datasetXModality}
+\end{Highlighting}
+\end{Shaded}
+
+Line 2, \texttt{ds\ \textless{}-\ dataset04}, is the Federica Zanca 5 modality, 4 reader, 200 case FROC dataset.
+
+Line 6 converts this to an \textbf{inferred} ROC dataset \texttt{infd\_ds} containing treatments 4 and 5 only.
+
+Line 10, \texttt{real\_ds\ \textless{}-\ dataset14} is the Federica Zanca 2 modality, 4 reader, 200 case \textbf{real} ROC dataset. The two modalities correspond to treatments 4 and 5 in the FROC dataset \texttt{dataset04}.
+
+Line 15 assigns a pre-loaded \textbf{crossed} modality dataset \texttt{xds\ \textless{}-\ datasetXModality} which serves as a template to be modified to meet our needs.
+
+The original dimensions of \texttt{xds\$ratings\$NL} is \texttt{dim(xds\$ratings\$NL)\ =\ 2,\ 4,\ 11,\ 68,\ 5}. This because it represents a crossed modality dataset with two modality-1 factors (adaptive iterative dose reduction and filtered back projection) crossed with 4 modality-2 factors (x-ray tube charge = 20 mAs, 40 mAs, 60 mAs and 80 mAs), 11 readers, and 68 cases with a maximum of 5 marks per case.
+
+\hypertarget{modify-the-template}{%
+\section{Modify the template}\label{modify-the-template}}
+
+Any dataset is a multilevel list containing three list members at level 1, as shown below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(xds, }\AttributeTok{max.level =} \DecValTok{1}\NormalTok{)}
+\CommentTok{\#\textgreater{} List of 3}
+\CommentTok{\#\textgreater{}  $ ratings     :List of 3}
+\CommentTok{\#\textgreater{}  $ lesions     :List of 3}
+\CommentTok{\#\textgreater{}  $ descriptions:List of 8}
+\end{Highlighting}
+\end{Shaded}
+
+Each of these lists needs to be modified as shown next for the \texttt{ratings} list member.
+
+\hypertarget{modify-the-ratings-list-member}{%
+\subsection{\texorpdfstring{Modify the \texttt{ratings} list member}{Modify the ratings list member}}\label{modify-the-ratings-list-member}}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\CommentTok{\# modify the ratings list}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{NL }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\AttributeTok{dim =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{200}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{NL[}\DecValTok{1}\NormalTok{,,,,] }\OtherTok{\textless{}{-}}\NormalTok{ infd\_ds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{NL}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{NL[}\DecValTok{2}\NormalTok{,,,,] }\OtherTok{\textless{}{-}}\NormalTok{ real\_ds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{NL}
+
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{LL }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\AttributeTok{dim =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{100}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{LL[}\DecValTok{1}\NormalTok{,,,,] }\OtherTok{\textless{}{-}}\NormalTok{ infd\_ds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{LL}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{LL[}\DecValTok{2}\NormalTok{,,,,] }\OtherTok{\textless{}{-}}\NormalTok{ real\_ds}\SpecialCharTok{$}\NormalTok{ratings}\SpecialCharTok{$}\NormalTok{LL}
+\end{Highlighting}
+\end{Shaded}
+
+Since the desired crossed modality dataset has two modality-1 factors (inferred ROC and real ROC), two modality-2 treatments (the investigated image processing algorithms), 4 readers, 200 cases and a maximum of 1 mark per case (because it is ROC data) we initialize the array with \texttt{NA}s, see line 2, \texttt{xds\$ratings\$NL\ \textless{}-\ array(dim\ =\ c(2,2,4,200,1))}.
+
+Line 3, \texttt{xds\$ratings\$NL{[}1,,,,{]}\ \textless{}-\ infd\_ds\$ratings\$NL}, copies the NL ratings from the inferred dataset \texttt{infd\_ds} to \texttt{xds}. The index 1 refers to the modality-1 factor (inferred-ROC).
+
+Line 4, \texttt{xds\$ratings\$NL{[}2,,,,{]}\ \textless{}-\ real\_ds\$ratings\$NL}, copies the NL ratings from the real dataset \texttt{real}\_ds\texttt{to}xds`. The index 2 refers to the modality-2 factor (real-ROC).
+
+Lines 6-8 repeats the above steps for the LL events. In the initialization at line 6, \texttt{xds\$ratings\$LL\ \textless{}-\ array(dim\ =\ c(2,2,4,100,1))}, the 100 follows from the fact that the maximum number of diseased cases is 100 each with 1 true lesion per case.
+
+\hypertarget{modify-the-lesions-list-member}{%
+\subsection{\texorpdfstring{Modify the \texttt{lesions} list member}{Modify the lesions list member}}\label{modify-the-lesions-list-member}}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\CommentTok{\# modify the lesions list}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{lesions}\SpecialCharTok{$}\NormalTok{perCase }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{dim =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{lesions}\SpecialCharTok{$}\NormalTok{IDs }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{dim =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{lesions}\SpecialCharTok{$}\NormalTok{weights }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{dim =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+The next three lines, 2-4, modify the lesions list. \texttt{xds\$lesions\$perCase} is set to an array of one-hundred ones, as each diseased case has one lesion. Likewise for the \texttt{xds\$lesions\$IDs} and \texttt{xds\$lesions\$weights} (the redundant dimension is necessary for compatibility with other code in \texttt{RJafroc}).
+
+\hypertarget{modify-the-descriptions-list-member}{%
+\subsection{\texorpdfstring{Modify the \texttt{descriptions} list member}{Modify the descriptions list member}}\label{modify-the-descriptions-list-member}}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\CommentTok{\# modify the descriptions list}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{descriptions}\SpecialCharTok{$}\NormalTok{fileName }\OtherTok{\textless{}{-}} \StringTok{"combined dataset04 \& dataset14"}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{descriptions}\SpecialCharTok{$}\NormalTok{type }\OtherTok{\textless{}{-}} \StringTok{"ROC"}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{descriptions}\SpecialCharTok{$}\NormalTok{name }\OtherTok{\textless{}{-}} \StringTok{"FEDERICA{-}INFERRED{-}PLUS{-}REAL"}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{descriptions}\SpecialCharTok{$}\NormalTok{design }\OtherTok{\textless{}{-}} \StringTok{"FCTRL{-}X{-}MOD"}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{descriptions}\SpecialCharTok{$}\NormalTok{modalityID1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"infd"}\NormalTok{, }\StringTok{"real"}\NormalTok{)}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{descriptions}\SpecialCharTok{$}\NormalTok{modalityID2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"trt4"}\NormalTok{, }\StringTok{"trt5"}\NormalTok{)}
+\NormalTok{xds}\SpecialCharTok{$}\NormalTok{descriptions}\SpecialCharTok{$}\NormalTok{readerID }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"rdr1"}\NormalTok{,}\StringTok{"rdr2"}\NormalTok{,}\StringTok{"rdr3"}\NormalTok{,}\StringTok{"rdr4"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Lines 2-8 update the \texttt{descriptions} list. As examples, \texttt{xds\$descriptions\$type\ \textless{}-\ "ROC"} sets the \texttt{type} member to ``ROC'', \texttt{xds\$descriptions\$design\ \textless{}-\ "FCTRL-X-MOD"} sets the \texttt{design} member to ``FCTRL-X-MOD'', for factorial crossed modality, \texttt{xds\$descriptions\$modalityID1\ \textless{}-\ c("infd",\ "real")} sets the two levels of the \texttt{modalityID1} member to \texttt{c("infd",\ "real")}, corresponding to inferred and real, respectively, \texttt{xds\$descriptions\$modalityID2\ \textless{}-\ c("trt4",\ "trt5")} sets the two levels of the \texttt{modalityID2} member to \texttt{c("trt4",\ "trt5")}, corresponding to the two image processing algorithms and \texttt{xds\$descriptions\$readerID\ \textless{}-\ c("rdr1","rdr2","rdr3","rdr4")} sets the \texttt{readerID} member to the indicated labels.
+
+This completes the merging of the two datasets, inferred ROC and real ROC, into a crossed modality dataset.
+
+\hypertarget{analysis-of-the-crossed-modality-dataset}{%
+\section{Analysis of the crossed modality dataset}\label{analysis-of-the-crossed-modality-dataset}}
+
+This is done as shown next.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{st }\OtherTok{\textless{}{-}} \FunctionTok{StSignificanceTestingCrossedModalities}\NormalTok{(}
+\NormalTok{  xds, }
+  \AttributeTok{avgIndx =} \DecValTok{2}\NormalTok{, }
+\NormalTok{  FOM }\OtherTok{\textless{}{-}} \StringTok{"Wilcoxon"}\NormalTok{, }
+  \AttributeTok{analysisOption =} \StringTok{"RRRC"}\NormalTok{)}
+\CommentTok{\#\textgreater{} Averaging over modality index = 2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{st}
+\CommentTok{\#\textgreater{} $fomArray}
+\CommentTok{\#\textgreater{}          [,1]    [,2]     [,3]     [,4]}
+\CommentTok{\#\textgreater{} [1,] 0.871875 0.80225 0.779900 0.863900}
+\CommentTok{\#\textgreater{} [2,] 0.889025 0.86520 0.845075 0.863525}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $msT}
+\CommentTok{\#\textgreater{} [1] 0.002624501}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $msTR}
+\CommentTok{\#\textgreater{} [1] 0.000542624}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $varComp}
+\CommentTok{\#\textgreater{}                  varCov}
+\CommentTok{\#\textgreater{} Var(R)     0.0005905767}
+\CommentTok{\#\textgreater{} Var(T*R)   0.0003041707}
+\CommentTok{\#\textgreater{} COV1       0.0003005249}
+\CommentTok{\#\textgreater{} COV2       0.0002561530}
+\CommentTok{\#\textgreater{} COV3       0.0002410342}
+\CommentTok{\#\textgreater{} Var(Error) 0.0005540970}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $fRRRC}
+\CommentTok{\#\textgreater{} [1] 4.351692}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ddfRRRC}
+\CommentTok{\#\textgreater{} [1] 3.70596}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $pRRRC}
+\CommentTok{\#\textgreater{} [1] 0.1108024}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ciDiffTrtRRRC}
+\CommentTok{\#\textgreater{}        Treatment  Estimate     StdErr      DF         t     PrGTt     CILower}
+\CommentTok{\#\textgreater{} 1 Row1\_infd{-}real {-}0.036225 0.01736518 3.70596 {-}2.086071 0.1108024 {-}0.08598526}
+\CommentTok{\#\textgreater{}      CIUpper}
+\CommentTok{\#\textgreater{} 1 0.01353526}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ciAvgRdrEachTrtRRRC}
+\CommentTok{\#\textgreater{}   Treatment      Area     StdErr        DF   CILower   CIUpper}
+\CommentTok{\#\textgreater{} 1      infd 0.8294812 0.02710049  6.097804 0.7634257 0.8955368}
+\CommentTok{\#\textgreater{} 2      real 0.8657063 0.01934464 63.712979 0.8270575 0.9043550}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{part-the-radiological-search-model-rsm}{%
 \part*{The radiological search model (RSM)}\label{part-the-radiological-search-model-rsm}}

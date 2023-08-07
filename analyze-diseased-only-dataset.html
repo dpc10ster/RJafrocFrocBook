@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Analyzing a dataset with only diseased cases | The RJafroc Froc Book</title>
+  <title>Chapter 12 Analyzing a dataset with only diseased cases | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Analyzing a dataset with only diseased cases | The RJafroc Froc Book" />
+  <meta property="og:title" content="Chapter 12 Analyzing a dataset with only diseased cases | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Artificial intelligence and observer performance book based on RJafroc." />
   <meta name="github-repo" content="dpc10ster/RJafrocFrocBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Analyzing a dataset with only diseased cases | The RJafroc Froc Book" />
+  <meta name="twitter:title" content="Chapter 12 Analyzing a dataset with only diseased cases | The RJafroc Froc Book" />
   
   <meta name="twitter:description" content="Artificial intelligence and observer performance book based on RJafroc." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-07-30" />
+<meta name="date" content="2023-08-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -290,159 +290,174 @@ div.csl-indent {
 <li class="chapter" data-level="3.17.6" data-path="empirical.html"><a href="empirical.html#wafroc1"><i class="fa fa-check"></i><b>3.17.6</b> wAFROC1</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="highest-rating.html"><a href="highest-rating.html"><i class="fa fa-check"></i><b>4</b> Validity of the highest rating assumption</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="highest-rating.html"><a href="highest-rating.html#highest-rating-how-much-finished"><i class="fa fa-check"></i><b>4.1</b> How much finished 0%</a></li>
+<li class="chapter" data-level="4.2" data-path="highest-rating.html"><a href="highest-rating.html#highest-rating-intro"><i class="fa fa-check"></i><b>4.2</b> Introduction</a></li>
+<li class="chapter" data-level="4.3" data-path="highest-rating.html"><a href="highest-rating.html#highest-rating-2-datasets"><i class="fa fa-check"></i><b>4.3</b> The FROC and real ROC datasets</a></li>
+<li class="chapter" data-level="4.4" data-path="highest-rating.html"><a href="highest-rating.html#highest-rating-code"><i class="fa fa-check"></i><b>4.4</b> Code implementation</a></li>
+<li class="chapter" data-level="4.5" data-path="highest-rating.html"><a href="highest-rating.html#load-the-three-datasets"><i class="fa fa-check"></i><b>4.5</b> Load the three datasets</a></li>
+<li class="chapter" data-level="4.6" data-path="highest-rating.html"><a href="highest-rating.html#modify-the-template"><i class="fa fa-check"></i><b>4.6</b> Modify the template</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="highest-rating.html"><a href="highest-rating.html#modify-the-ratings-list-member"><i class="fa fa-check"></i><b>4.6.1</b> Modify the <code>ratings</code> list member</a></li>
+<li class="chapter" data-level="4.6.2" data-path="highest-rating.html"><a href="highest-rating.html#modify-the-lesions-list-member"><i class="fa fa-check"></i><b>4.6.2</b> Modify the <code>lesions</code> list member</a></li>
+<li class="chapter" data-level="4.6.3" data-path="highest-rating.html"><a href="highest-rating.html#modify-the-descriptions-list-member"><i class="fa fa-check"></i><b>4.6.3</b> Modify the <code>descriptions</code> list member</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="highest-rating.html"><a href="highest-rating.html#analysis-of-the-crossed-modality-dataset"><i class="fa fa-check"></i><b>4.7</b> Analysis of the crossed modality dataset</a></li>
+</ul></li>
 <li class="part"><span><b>The radiological search model (RSM)</b></span></li>
-<li class="chapter" data-level="4" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>4</b> Visual Search</a>
+<li class="chapter" data-level="5" data-path="visual-search.html"><a href="visual-search.html"><i class="fa fa-check"></i><b>5</b> Visual Search</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-how-much-finished"><i class="fa fa-check"></i><b>4.1</b> How much finished 100%</a></li>
-<li class="chapter" data-level="4.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-intro"><i class="fa fa-check"></i><b>4.2</b> Introduction</a></li>
-<li class="chapter" data-level="4.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-grouping-labeling-rois"><i class="fa fa-check"></i><b>4.3</b> Grouping and labeling ROIs</a></li>
-<li class="chapter" data-level="4.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>4.4</b> Lesion-localization vs. detection</a></li>
-<li class="chapter" data-level="4.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>4.5</b> Lesion-localization vs. lesion-classification</a></li>
-<li class="chapter" data-level="4.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>4.6</b> The Kundel - Nodine search model</a>
+<li class="chapter" data-level="5.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-how-much-finished"><i class="fa fa-check"></i><b>5.1</b> How much finished 100%</a></li>
+<li class="chapter" data-level="5.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-intro"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
+<li class="chapter" data-level="5.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-grouping-labeling-rois"><i class="fa fa-check"></i><b>5.3</b> Grouping and labeling ROIs</a></li>
+<li class="chapter" data-level="5.4" data-path="visual-search.html"><a href="visual-search.html#visual-search-recognition-detection"><i class="fa fa-check"></i><b>5.4</b> Lesion-localization vs. detection</a></li>
+<li class="chapter" data-level="5.5" data-path="visual-search.html"><a href="visual-search.html#visual-search-search-classification"><i class="fa fa-check"></i><b>5.5</b> Lesion-localization vs. lesion-classification</a></li>
+<li class="chapter" data-level="5.6" data-path="visual-search.html"><a href="visual-search.html#visual-search-kundel-nodine-model"><i class="fa fa-check"></i><b>5.6</b> The Kundel - Nodine search model</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>4.6.1</b> Lesion-localization</a></li>
-<li class="chapter" data-level="4.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Lesion-classification</a></li>
-<li class="chapter" data-level="4.6.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-example"><i class="fa fa-check"></i><b>4.6.3</b> Example</a></li>
+<li class="chapter" data-level="5.6.1" data-path="visual-search.html"><a href="visual-search.html#visual-search-glancing-global-impression"><i class="fa fa-check"></i><b>5.6.1</b> Lesion-localization</a></li>
+<li class="chapter" data-level="5.6.2" data-path="visual-search.html"><a href="visual-search.html#visual-search-scanning-local-feature-analysis"><i class="fa fa-check"></i><b>5.6.2</b> Lesion-classification</a></li>
+<li class="chapter" data-level="5.6.3" data-path="visual-search.html"><a href="visual-search.html#visual-search-example"><i class="fa fa-check"></i><b>5.6.3</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>5</b> The radiological search model (RSM)</a>
+<li class="chapter" data-level="6" data-path="rsm.html"><a href="rsm.html"><i class="fa fa-check"></i><b>6</b> The radiological search model (RSM)</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="rsm.html"><a href="rsm.html#rsm-how-much-finished"><i class="fa fa-check"></i><b>5.1</b> How much finished 99%</a></li>
-<li class="chapter" data-level="5.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
-<li class="chapter" data-level="5.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>5.3</b> The radiological search model</a></li>
-<li class="chapter" data-level="5.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>5.4</b> RSM assumptions</a></li>
-<li class="chapter" data-level="5.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>5.5</b> Physical meanings of the RSM parameters</a>
+<li class="chapter" data-level="6.1" data-path="rsm.html"><a href="rsm.html#rsm-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> How much finished 99%</a></li>
+<li class="chapter" data-level="6.2" data-path="rsm.html"><a href="rsm.html#rsm-intro"><i class="fa fa-check"></i><b>6.2</b> Introduction</a></li>
+<li class="chapter" data-level="6.3" data-path="rsm.html"><a href="rsm.html#rsm-details"><i class="fa fa-check"></i><b>6.3</b> The radiological search model</a></li>
+<li class="chapter" data-level="6.4" data-path="rsm.html"><a href="rsm.html#rsm-assumptions"><i class="fa fa-check"></i><b>6.4</b> RSM assumptions</a></li>
+<li class="chapter" data-level="6.5" data-path="rsm.html"><a href="rsm.html#rsm-parameter-physical-meanings"><i class="fa fa-check"></i><b>6.5</b> Physical meanings of the RSM parameters</a>
 <ul>
-<li class="chapter" data-level="5.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>5.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
-<li class="chapter" data-level="5.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-parameter"><i class="fa fa-check"></i><b>5.5.2</b> The <span class="math inline">\(\lambda\)</span> parameter</a></li>
-<li class="chapter" data-level="5.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>5.5.3</b> The <span class="math inline">\(\nu\)</span> parameter</a></li>
+<li class="chapter" data-level="6.5.1" data-path="rsm.html"><a href="rsm.html#rsm-mu-parameter"><i class="fa fa-check"></i><b>6.5.1</b> The <span class="math inline">\(\mu\)</span> parameter</a></li>
+<li class="chapter" data-level="6.5.2" data-path="rsm.html"><a href="rsm.html#rsm-summary-lambda-parameter"><i class="fa fa-check"></i><b>6.5.2</b> The <span class="math inline">\(\lambda\)</span> parameter</a></li>
+<li class="chapter" data-level="6.5.3" data-path="rsm.html"><a href="rsm.html#rsm-summary-nu-parameter"><i class="fa fa-check"></i><b>6.5.3</b> The <span class="math inline">\(\nu\)</span> parameter</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="rsm.html"><a href="rsm.html#rsm-intrinsic-parameters"><i class="fa fa-check"></i><b>5.6</b> Intrinsic RSM parameters</a></li>
-<li class="chapter" data-level="5.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>5.7</b> Summary</a></li>
+<li class="chapter" data-level="6.6" data-path="rsm.html"><a href="rsm.html#rsm-intrinsic-parameters"><i class="fa fa-check"></i><b>6.6</b> Intrinsic RSM parameters</a></li>
+<li class="chapter" data-level="6.7" data-path="rsm.html"><a href="rsm.html#rsm-discussion-summary"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="rsm-predictions.html"><a href="rsm-predictions.html"><i class="fa fa-check"></i><b>6</b> ROC predictions of the RSM</a>
+<li class="chapter" data-level="7" data-path="rsm-predictions.html"><a href="rsm-predictions.html"><i class="fa fa-check"></i><b>7</b> ROC predictions of the RSM</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-how-much-finished"><i class="fa fa-check"></i><b>6.1</b> TBA How much finished 90%</a></li>
-<li class="chapter" data-level="6.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-intro"><i class="fa fa-check"></i><b>6.2</b> TBA Introduction</a></li>
-<li class="chapter" data-level="6.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-inferred-roc"><i class="fa fa-check"></i><b>6.3</b> Inferred ROC z-sample</a></li>
-<li class="chapter" data-level="6.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point"><i class="fa fa-check"></i><b>6.4</b> End-point of the ROC</a>
+<li class="chapter" data-level="7.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished 90%</a></li>
+<li class="chapter" data-level="7.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-intro"><i class="fa fa-check"></i><b>7.2</b> TBA Introduction</a></li>
+<li class="chapter" data-level="7.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-inferred-roc"><i class="fa fa-check"></i><b>7.3</b> Inferred ROC z-sample</a></li>
+<li class="chapter" data-level="7.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point"><i class="fa fa-check"></i><b>7.4</b> End-point of the ROC</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-abscissa"><i class="fa fa-check"></i><b>6.4.1</b> The abscissa of the ROC end-point</a></li>
-<li class="chapter" data-level="6.4.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-ordinate"><i class="fa fa-check"></i><b>6.4.2</b> The ordinate of the ROC end-point</a></li>
-<li class="chapter" data-level="6.4.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point-variable-number-lesions"><i class="fa fa-check"></i><b>6.4.3</b> Variable number of lesions per case</a></li>
+<li class="chapter" data-level="7.4.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-abscissa"><i class="fa fa-check"></i><b>7.4.1</b> The abscissa of the ROC end-point</a></li>
+<li class="chapter" data-level="7.4.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-constrained-end-point-ordinate"><i class="fa fa-check"></i><b>7.4.2</b> The ordinate of the ROC end-point</a></li>
+<li class="chapter" data-level="7.4.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-end-point-variable-number-lesions"><i class="fa fa-check"></i><b>7.4.3</b> Variable number of lesions per case</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve"><i class="fa fa-check"></i><b>6.5</b> ROC curve</a>
+<li class="chapter" data-level="7.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve"><i class="fa fa-check"></i><b>7.5</b> ROC curve</a>
 <ul>
-<li class="chapter" data-level="6.5.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-fpf"><i class="fa fa-check"></i><b>6.5.1</b> Derivation of FPF</a></li>
-<li class="chapter" data-level="6.5.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-tpf"><i class="fa fa-check"></i><b>6.5.2</b> Derivation of TPF</a></li>
-<li class="chapter" data-level="6.5.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-tpf-varying-lesions"><i class="fa fa-check"></i><b>6.5.3</b> Variable number of lesions per case</a></li>
-<li class="chapter" data-level="6.5.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-pdfs"><i class="fa fa-check"></i><b>6.5.4</b> ROC decision variable pdfs</a></li>
-<li class="chapter" data-level="6.5.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-auc"><i class="fa fa-check"></i><b>6.5.5</b> ROC AUC</a></li>
-<li class="chapter" data-level="6.5.6" data-path="rsm-predictions.html"><a href="rsm-predictions.html#comparing-tpf-formula-to-rjafroc-functions"><i class="fa fa-check"></i><b>6.5.6</b> Comparing TPF formula to <code>RJafroc</code> functions</a></li>
-<li class="chapter" data-level="6.5.7" data-path="rsm-predictions.html"><a href="rsm-predictions.html#effect-on-operating-point-of-varying-rsm-parameters"><i class="fa fa-check"></i><b>6.5.7</b> Effect on operating point of varying RSM parameters</a></li>
-<li class="chapter" data-level="6.5.8" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curves"><i class="fa fa-check"></i><b>6.5.8</b> Sample ROC curves</a></li>
-<li class="chapter" data-level="6.5.9" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-pdf-curves"><i class="fa fa-check"></i><b>6.5.9</b> Sample RSM pdf curves</a></li>
+<li class="chapter" data-level="7.5.1" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-fpf"><i class="fa fa-check"></i><b>7.5.1</b> Derivation of FPF</a></li>
+<li class="chapter" data-level="7.5.2" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-tpf"><i class="fa fa-check"></i><b>7.5.2</b> Derivation of TPF</a></li>
+<li class="chapter" data-level="7.5.3" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-tpf-varying-lesions"><i class="fa fa-check"></i><b>7.5.3</b> Variable number of lesions per case</a></li>
+<li class="chapter" data-level="7.5.4" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-pdfs"><i class="fa fa-check"></i><b>7.5.4</b> ROC decision variable pdfs</a></li>
+<li class="chapter" data-level="7.5.5" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-auc"><i class="fa fa-check"></i><b>7.5.5</b> ROC AUC</a></li>
+<li class="chapter" data-level="7.5.6" data-path="rsm-predictions.html"><a href="rsm-predictions.html#comparing-tpf-formula-to-rjafroc-functions"><i class="fa fa-check"></i><b>7.5.6</b> Comparing TPF formula to <code>RJafroc</code> functions</a></li>
+<li class="chapter" data-level="7.5.7" data-path="rsm-predictions.html"><a href="rsm-predictions.html#effect-on-operating-point-of-varying-rsm-parameters"><i class="fa fa-check"></i><b>7.5.7</b> Effect on operating point of varying RSM parameters</a></li>
+<li class="chapter" data-level="7.5.8" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curves"><i class="fa fa-check"></i><b>7.5.8</b> Sample ROC curves</a></li>
+<li class="chapter" data-level="7.5.9" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-pdf-curves"><i class="fa fa-check"></i><b>7.5.9</b> Sample RSM pdf curves</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-proper"><i class="fa fa-check"></i><b>6.6</b> Proper ROC curve</a></li>
-<li class="chapter" data-level="6.7" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-aucs-zeta1"><i class="fa fa-check"></i><b>6.7</b> <span class="math inline">\(\zeta\)</span> dependence of ROC AUC</a></li>
-<li class="chapter" data-level="6.8" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-discussion-summary"><i class="fa fa-check"></i><b>6.8</b> TBA Discussion / Summary</a></li>
-<li class="chapter" data-level="6.9" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix1"><i class="fa fa-check"></i><b>6.9</b> Appendix 1: Proof of continuity of slope at the end-point</a></li>
-<li class="chapter" data-level="6.10" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix2"><i class="fa fa-check"></i><b>6.10</b> Appendix 2: Numerical illustration of continuity</a></li>
+<li class="chapter" data-level="7.6" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-proper"><i class="fa fa-check"></i><b>7.6</b> Proper ROC curve</a></li>
+<li class="chapter" data-level="7.7" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-roc-curve-aucs-zeta1"><i class="fa fa-check"></i><b>7.7</b> <span class="math inline">\(\zeta\)</span> dependence of ROC AUC</a></li>
+<li class="chapter" data-level="7.8" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-discussion-summary"><i class="fa fa-check"></i><b>7.8</b> TBA Discussion / Summary</a></li>
+<li class="chapter" data-level="7.9" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix1"><i class="fa fa-check"></i><b>7.9</b> Appendix 1: Proof of continuity of slope at the end-point</a></li>
+<li class="chapter" data-level="7.10" data-path="rsm-predictions.html"><a href="rsm-predictions.html#rsm-predictions-appendix2"><i class="fa fa-check"></i><b>7.10</b> Appendix 2: Numerical illustration of continuity</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html"><i class="fa fa-check"></i><b>7</b> Other RSM predictions</a>
+<li class="chapter" data-level="8" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html"><i class="fa fa-check"></i><b>8</b> Other RSM predictions</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-how-much-finished"><i class="fa fa-check"></i><b>7.1</b> TBA How much finished 95%</a></li>
-<li class="chapter" data-level="7.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-intro"><i class="fa fa-check"></i><b>7.2</b> TBA Introduction</a></li>
-<li class="chapter" data-level="7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-curve"><i class="fa fa-check"></i><b>7.3</b> RSM-predicted FROC curve</a>
+<li class="chapter" data-level="8.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> TBA How much finished 95%</a></li>
+<li class="chapter" data-level="8.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-intro"><i class="fa fa-check"></i><b>8.2</b> TBA Introduction</a></li>
+<li class="chapter" data-level="8.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-curve"><i class="fa fa-check"></i><b>8.3</b> RSM-predicted FROC curve</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.3.1</b> FROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
+<li class="chapter" data-level="8.3.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>8.3.1</b> FROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-afroc-curve"><i class="fa fa-check"></i><b>7.4</b> RSM-predicted AFROC curve</a>
+<li class="chapter" data-level="8.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-afroc-curve"><i class="fa fa-check"></i><b>8.4</b> RSM-predicted AFROC curve</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#afroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.4.1</b> AFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
-<li class="chapter" data-level="7.4.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-no-marks"><i class="fa fa-check"></i><b>7.4.2</b> Case of the reader who does not make any marks</a></li>
+<li class="chapter" data-level="8.4.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#afroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>8.4.1</b> AFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
+<li class="chapter" data-level="8.4.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-no-marks"><i class="fa fa-check"></i><b>8.4.2</b> Case of the reader who does not make any marks</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-curve"><i class="fa fa-check"></i><b>7.5</b> RSM-predicted wAFROC curve</a>
+<li class="chapter" data-level="8.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-curve"><i class="fa fa-check"></i><b>8.5</b> RSM-predicted wAFROC curve</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#wafroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>7.5.1</b> wAFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
+<li class="chapter" data-level="8.5.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#wafroc-plots-lambda_i-nu_i-parameterization"><i class="fa fa-check"></i><b>8.5.1</b> wAFROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization</a></li>
 </ul></li>
-<li class="chapter" data-level="7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-comments"><i class="fa fa-check"></i><b>7.6</b> Comments on end-point-discontinuity property</a></li>
-<li class="chapter" data-level="7.7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-appendix"><i class="fa fa-check"></i><b>7.7</b> Appendix</a>
+<li class="chapter" data-level="8.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-comments"><i class="fa fa-check"></i><b>8.6</b> Comments on end-point-discontinuity property</a></li>
+<li class="chapter" data-level="8.7" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-appendix"><i class="fa fa-check"></i><b>8.7</b> Appendix</a>
 <ul>
-<li class="chapter" data-level="7.7.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-physical-parameters"><i class="fa fa-check"></i><b>7.7.1</b> Slope of the FROC curve</a></li>
-<li class="chapter" data-level="7.7.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda-nu-parameterization"><i class="fa fa-check"></i><b>7.7.2</b> FROC plots <span class="math inline">\(\lambda, \nu\)</span> parameterization</a></li>
-<li class="chapter" data-level="7.7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-afroc-physical-parameters"><i class="fa fa-check"></i><b>7.7.3</b> Slope of the AFROC curve</a></li>
-<li class="chapter" data-level="7.7.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-physical-parameters"><i class="fa fa-check"></i><b>7.7.4</b> wAFROC plots <span class="math inline">\(\lambda, \nu\)</span> parameterization</a></li>
-<li class="chapter" data-level="7.7.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-roc-above-afroc"><i class="fa fa-check"></i><b>7.7.5</b> ROC curves are above AFROC curves</a></li>
-<li class="chapter" data-level="7.7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-above-afroc"><i class="fa fa-check"></i><b>7.7.6</b> Are wAFROC curves above AFROC curves?</a></li>
+<li class="chapter" data-level="8.7.1" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-froc-physical-parameters"><i class="fa fa-check"></i><b>8.7.1</b> Slope of the FROC curve</a></li>
+<li class="chapter" data-level="8.7.2" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#froc-plots-lambda-nu-parameterization"><i class="fa fa-check"></i><b>8.7.2</b> FROC plots <span class="math inline">\(\lambda, \nu\)</span> parameterization</a></li>
+<li class="chapter" data-level="8.7.3" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-afroc-physical-parameters"><i class="fa fa-check"></i><b>8.7.3</b> Slope of the AFROC curve</a></li>
+<li class="chapter" data-level="8.7.4" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-physical-parameters"><i class="fa fa-check"></i><b>8.7.4</b> wAFROC plots <span class="math inline">\(\lambda, \nu\)</span> parameterization</a></li>
+<li class="chapter" data-level="8.7.5" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-roc-above-afroc"><i class="fa fa-check"></i><b>8.7.5</b> ROC curves are above AFROC curves</a></li>
+<li class="chapter" data-level="8.7.6" data-path="rsm-other-predictions.html"><a href="rsm-other-predictions.html#rsm-other-predictions-wafroc-above-afroc"><i class="fa fa-check"></i><b>8.7.6</b> Are wAFROC curves above AFROC curves?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html"><i class="fa fa-check"></i><b>8</b> Lesion localization and classification performances</a>
+<li class="chapter" data-level="9" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html"><i class="fa fa-check"></i><b>9</b> Lesion localization and classification performances</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-how-much-finished"><i class="fa fa-check"></i><b>8.1</b> How much finished 99%</a></li>
-<li class="chapter" data-level="8.2" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-intro"><i class="fa fa-check"></i><b>8.2</b> Introduction</a></li>
-<li class="chapter" data-level="8.3" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-quantifying"><i class="fa fa-check"></i><b>8.3</b> Quantifying lesion-localization performance</a></li>
-<li class="chapter" data-level="8.4" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-performance"><i class="fa fa-check"></i><b>8.4</b> Quantifying lesion-classification performance</a></li>
-<li class="chapter" data-level="8.5" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-discussion"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
+<li class="chapter" data-level="9.1" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> How much finished 99%</a></li>
+<li class="chapter" data-level="9.2" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-intro"><i class="fa fa-check"></i><b>9.2</b> Introduction</a></li>
+<li class="chapter" data-level="9.3" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-quantifying"><i class="fa fa-check"></i><b>9.3</b> Quantifying lesion-localization performance</a></li>
+<li class="chapter" data-level="9.4" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-performance"><i class="fa fa-check"></i><b>9.4</b> Quantifying lesion-classification performance</a></li>
+<li class="chapter" data-level="9.5" data-path="rsm-search-classification.html"><a href="rsm-search-classification.html#rsm-search-classification-discussion"><i class="fa fa-check"></i><b>9.5</b> Discussion</a></li>
 </ul></li>
 <li class="part"><span><b>CAD applications</b></span></li>
-<li class="chapter" data-level="9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>9</b> Standalone CAD</a>
+<li class="chapter" data-level="10" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html"><i class="fa fa-check"></i><b>10</b> Standalone CAD</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>9.1</b> How much finished 99%</a></li>
-<li class="chapter" data-level="9.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>9.2</b> Introduction</a></li>
-<li class="chapter" data-level="9.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-overview"><i class="fa fa-check"></i><b>9.3</b> Overview</a></li>
-<li class="chapter" data-level="9.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>9.4</b> Methods</a>
+<li class="chapter" data-level="10.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> How much finished 99%</a></li>
+<li class="chapter" data-level="10.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-introduction"><i class="fa fa-check"></i><b>10.2</b> Introduction</a></li>
+<li class="chapter" data-level="10.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-overview"><i class="fa fa-check"></i><b>10.3</b> Overview</a></li>
+<li class="chapter" data-level="10.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-methods"><i class="fa fa-check"></i><b>10.4</b> Methods</a>
 <ul>
-<li class="chapter" data-level="9.4.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>9.4.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
-<li class="chapter" data-level="9.4.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>9.4.2</b> The 1T-RRFC analysis model</a></li>
-<li class="chapter" data-level="9.4.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>9.4.3</b> The 2T-RRRC analysis model</a></li>
-<li class="chapter" data-level="9.4.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-1TRRRC-anlaysis"><i class="fa fa-check"></i><b>9.4.4</b> The 1T-RRRC analysis model</a></li>
+<li class="chapter" data-level="10.4.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-two-previous-studies"><i class="fa fa-check"></i><b>10.4.1</b> Studies assessing performance of CAD vs. radiologists</a></li>
+<li class="chapter" data-level="10.4.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#the-1t-rrfc-analysis-model"><i class="fa fa-check"></i><b>10.4.2</b> The 1T-RRFC analysis model</a></li>
+<li class="chapter" data-level="10.4.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-2TRRRC-anlaysis"><i class="fa fa-check"></i><b>10.4.3</b> The 2T-RRRC analysis model</a></li>
+<li class="chapter" data-level="10.4.4" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-1TRRRC-anlaysis"><i class="fa fa-check"></i><b>10.4.4</b> The 1T-RRRC analysis model</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>9.5</b> Implementation</a></li>
-<li class="chapter" data-level="9.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>9.6</b> Results</a></li>
-<li class="chapter" data-level="9.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>9.7</b> Discussion</a></li>
-<li class="chapter" data-level="9.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>9.8</b> Appendix 1</a>
+<li class="chapter" data-level="10.5" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-computational-details"><i class="fa fa-check"></i><b>10.5</b> Implementation</a></li>
+<li class="chapter" data-level="10.6" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-results"><i class="fa fa-check"></i><b>10.6</b> Results</a></li>
+<li class="chapter" data-level="10.7" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-discussion"><i class="fa fa-check"></i><b>10.7</b> Discussion</a></li>
+<li class="chapter" data-level="10.8" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix1"><i class="fa fa-check"></i><b>10.8</b> Appendix 1</a>
 <ul>
-<li class="chapter" data-level="9.8.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1"><i class="fa fa-check"></i><b>9.8.1</b> Example 1</a></li>
-<li class="chapter" data-level="9.8.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2"><i class="fa fa-check"></i><b>9.8.2</b> Example 2</a></li>
-<li class="chapter" data-level="9.8.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>9.8.3</b> Example 3</a></li>
+<li class="chapter" data-level="10.8.1" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-1"><i class="fa fa-check"></i><b>10.8.1</b> Example 1</a></li>
+<li class="chapter" data-level="10.8.2" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-2"><i class="fa fa-check"></i><b>10.8.2</b> Example 2</a></li>
+<li class="chapter" data-level="10.8.3" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#example-3"><i class="fa fa-check"></i><b>10.8.3</b> Example 3</a></li>
 </ul></li>
-<li class="chapter" data-level="9.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix2"><i class="fa fa-check"></i><b>9.9</b> Appendix 2</a></li>
+<li class="chapter" data-level="10.9" data-path="standalone-cad-radiologists.html"><a href="standalone-cad-radiologists.html#standalone-cad-radiologists-appendix2"><i class="fa fa-check"></i><b>10.9</b> Appendix 2</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>10</b> CAD optimal operating point</a>
+<li class="chapter" data-level="11" data-path="optim-op-point.html"><a href="optim-op-point.html"><i class="fa fa-check"></i><b>11</b> CAD optimal operating point</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>10.1</b> TBA How much finished 98%</a></li>
-<li class="chapter" data-level="10.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>10.2</b> Introduction</a></li>
-<li class="chapter" data-level="10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>10.3</b> Methods</a></li>
-<li class="chapter" data-level="10.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>10.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a>
+<li class="chapter" data-level="11.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> TBA How much finished 98%</a></li>
+<li class="chapter" data-level="11.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-intro"><i class="fa fa-check"></i><b>11.2</b> Introduction</a></li>
+<li class="chapter" data-level="11.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-methods"><i class="fa fa-check"></i><b>11.3</b> Methods</a></li>
+<li class="chapter" data-level="11.4" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-lambda"><i class="fa fa-check"></i><b>11.4</b> Varying <span class="math inline">\(\lambda\)</span> optimizations</a>
 <ul>
-<li class="chapter" data-level="10.4.1" data-path="optim-op-point.html"><a href="optim-op-point.html#summary-table"><i class="fa fa-check"></i><b>10.4.1</b> Summary table</a></li>
-<li class="chapter" data-level="10.4.2" data-path="optim-op-point.html"><a href="optim-op-point.html#froc-1"><i class="fa fa-check"></i><b>10.4.2</b> FROC</a></li>
-<li class="chapter" data-level="10.4.3" data-path="optim-op-point.html"><a href="optim-op-point.html#wafroc-1"><i class="fa fa-check"></i><b>10.4.3</b> wAFROC</a></li>
-<li class="chapter" data-level="10.4.4" data-path="optim-op-point.html"><a href="optim-op-point.html#roc-1"><i class="fa fa-check"></i><b>10.4.4</b> ROC</a></li>
-<li class="chapter" data-level="10.4.5" data-path="optim-op-point.html"><a href="optim-op-point.html#why-not-maximize-roc-auc"><i class="fa fa-check"></i><b>10.4.5</b> Why not maximize ROC-AUC?</a></li>
+<li class="chapter" data-level="11.4.1" data-path="optim-op-point.html"><a href="optim-op-point.html#summary-table"><i class="fa fa-check"></i><b>11.4.1</b> Summary table</a></li>
+<li class="chapter" data-level="11.4.2" data-path="optim-op-point.html"><a href="optim-op-point.html#froc-1"><i class="fa fa-check"></i><b>11.4.2</b> FROC</a></li>
+<li class="chapter" data-level="11.4.3" data-path="optim-op-point.html"><a href="optim-op-point.html#wafroc-1"><i class="fa fa-check"></i><b>11.4.3</b> wAFROC</a></li>
+<li class="chapter" data-level="11.4.4" data-path="optim-op-point.html"><a href="optim-op-point.html#roc-1"><i class="fa fa-check"></i><b>11.4.4</b> ROC</a></li>
+<li class="chapter" data-level="11.4.5" data-path="optim-op-point.html"><a href="optim-op-point.html#why-not-maximize-roc-auc"><i class="fa fa-check"></i><b>11.4.5</b> Why not maximize ROC-AUC?</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-mu"><i class="fa fa-check"></i><b>10.5</b> Varying <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> optimizations</a></li>
-<li class="chapter" data-level="10.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations"><i class="fa fa-check"></i><b>10.6</b> Limiting situations</a></li>
-<li class="chapter" data-level="10.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-trends"><i class="fa fa-check"></i><b>10.7</b> Trends</a></li>
-<li class="chapter" data-level="10.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>10.8</b> Applying the method</a>
+<li class="chapter" data-level="11.5" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-mu"><i class="fa fa-check"></i><b>11.5</b> Varying <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\mu\)</span> optimizations</a></li>
+<li class="chapter" data-level="11.6" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu-limiting-situations"><i class="fa fa-check"></i><b>11.6</b> Limiting situations</a></li>
+<li class="chapter" data-level="11.7" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-trends"><i class="fa fa-check"></i><b>11.7</b> Trends</a></li>
+<li class="chapter" data-level="11.8" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-how-to-use-method"><i class="fa fa-check"></i><b>11.8</b> Applying the method</a>
 <ul>
-<li class="chapter" data-level="10.8.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>10.8.1</b> A CAD application</a></li>
+<li class="chapter" data-level="11.8.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-application"><i class="fa fa-check"></i><b>11.8.1</b> A CAD application</a></li>
 </ul></li>
-<li class="chapter" data-level="10.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>10.9</b> TBA Discussion</a></li>
-<li class="chapter" data-level="10.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>10.10</b> Appendices</a>
+<li class="chapter" data-level="11.9" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-discussion"><i class="fa fa-check"></i><b>11.9</b> TBA Discussion</a></li>
+<li class="chapter" data-level="11.10" data-path="optim-op-point.html"><a href="optim-op-point.html#cad-optim-op-appendices"><i class="fa fa-check"></i><b>11.10</b> Appendices</a>
 <ul>
-<li class="chapter" data-level="10.10.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>10.10.1</b> Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
-<li class="chapter" data-level="10.10.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>10.10.2</b> Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
-<li class="chapter" data-level="10.10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>10.10.3</b> Limiting cases</a></li>
+<li class="chapter" data-level="11.10.1" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-nu"><i class="fa fa-check"></i><b>11.10.1</b> Varying <span class="math inline">\(\nu\)</span> optimizations</a></li>
+<li class="chapter" data-level="11.10.2" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-vary-mu"><i class="fa fa-check"></i><b>11.10.2</b> Varying <span class="math inline">\(\mu\)</span> optimizations</a></li>
+<li class="chapter" data-level="11.10.3" data-path="optim-op-point.html"><a href="optim-op-point.html#optim-op-point-limiting-situations"><i class="fa fa-check"></i><b>11.10.3</b> Limiting cases</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>11</b> Analyzing a dataset with only diseased cases</a>
+<li class="chapter" data-level="12" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html"><i class="fa fa-check"></i><b>12</b> Analyzing a dataset with only diseased cases</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished"><i class="fa fa-check"></i><b>11.1</b> TBA How much finished</a></li>
-<li class="chapter" data-level="11.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>11.2</b> The problem</a>
+<li class="chapter" data-level="12.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished"><i class="fa fa-check"></i><b>12.1</b> TBA How much finished</a></li>
+<li class="chapter" data-level="12.2" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods"><i class="fa fa-check"></i><b>12.2</b> The problem</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-step-1"><i class="fa fa-check"></i><b>11.2.1</b> Step 1: Create a test (diseased cases only) dataset</a></li>
+<li class="chapter" data-level="12.2.1" data-path="analyze-diseased-only-dataset.html"><a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-step-1"><i class="fa fa-check"></i><b>12.2.1</b> Step 1: Create a test (diseased cases only) dataset</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>REFERENCES</a></li>
@@ -466,75 +481,75 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="analyze-diseased-only-dataset" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Analyzing a dataset with only diseased cases<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="analyze-diseased-only-dataset-how-much-finished" class="section level2 hasAnchor" number="11.1">
-<h2><span class="header-section-number">11.1</span> TBA How much finished<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="analyze-diseased-only-dataset" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Analyzing a dataset with only diseased cases<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="analyze-diseased-only-dataset-how-much-finished" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> TBA How much finished<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-how-much-finished" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>0%</p>
 </div>
-<div id="analyze-diseased-only-dataset-methods" class="section level2 hasAnchor" number="11.2">
-<h2><span class="header-section-number">11.2</span> The problem<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="analyze-diseased-only-dataset-methods" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> The problem<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>How to analyze <span class="math inline">\(K_1 = 0\)</span> datasets.</p>
 <p>ROC-like plot of TPF vs. FPF1 is possible, see Section <a href="empirical.html#empirical-definition-empirical-auc-afroc1">3.12.1</a>. Can create a ROC-like dataset with equal number of “non-diseased” and diseased cases (the ratings of the non-diseased cases are the FP ratings on diseased cases). Fit RSM to this dataset. Proceed as before. Key assumption being violated: the FP ratings on diseased cases are independent of the TP ratings on same cases. However, without this assumption one cannot estimate RSM parameters. Need <code>RJafroc</code> function to handle this special case: <code>FitRsmRoc1</code>? No! Just need function to create a “ROC” dataset from one that only has diseased cases. e.g., <code>DfNoNormalsDataset</code>?</p>
-<div id="analyze-diseased-only-dataset-step-1" class="section level3 hasAnchor" number="11.2.1">
-<h3><span class="header-section-number">11.2.1</span> Step 1: Create a test (diseased cases only) dataset<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-step-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="analyze-diseased-only-dataset-step-1" class="section level3 hasAnchor" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> Step 1: Create a test (diseased cases only) dataset<a href="analyze-diseased-only-dataset.html#analyze-diseased-only-dataset-step-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Save TONY dataset to <code>dsTony</code>. Create copy <code>dsNoNormals</code>. Remove all normal cases from it.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="analyze-diseased-only-dataset.html#cb123-1" aria-hidden="true" tabindex="-1"></a>dsTony <span class="ot">&lt;-</span> RJafroc<span class="sc">::</span>dataset01 <span class="co"># TONY dataset</span></span>
-<span id="cb123-2"><a href="analyze-diseased-only-dataset.html#cb123-2" aria-hidden="true" tabindex="-1"></a>K2 <span class="ot">&lt;-</span> <span class="fu">length</span>(dsTony<span class="sc">$</span>lesions<span class="sc">$</span>perCase)</span>
-<span id="cb123-3"><a href="analyze-diseased-only-dataset.html#cb123-3" aria-hidden="true" tabindex="-1"></a>K1 <span class="ot">&lt;-</span> <span class="fu">length</span>(dsTony<span class="sc">$</span>ratings<span class="sc">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,<span class="dv">1</span>]) <span class="sc">-</span> K2</span>
-<span id="cb123-4"><a href="analyze-diseased-only-dataset.html#cb123-4" aria-hidden="true" tabindex="-1"></a>dsNoNormals <span class="ot">&lt;-</span> dsTony</span>
-<span id="cb123-5"><a href="analyze-diseased-only-dataset.html#cb123-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all normal cases</span></span>
-<span id="cb123-6"><a href="analyze-diseased-only-dataset.html#cb123-6" aria-hidden="true" tabindex="-1"></a>dsNoNormals<span class="sc">$</span>ratings<span class="sc">$</span>NL <span class="ot">&lt;-</span> dsNoNormals<span class="sc">$</span>ratings<span class="sc">$</span>NL[,,<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>K1),] </span>
-<span id="cb123-7"><a href="analyze-diseased-only-dataset.html#cb123-7" aria-hidden="true" tabindex="-1"></a><span class="co"># And fix truthTableStr</span></span>
-<span id="cb123-8"><a href="analyze-diseased-only-dataset.html#cb123-8" aria-hidden="true" tabindex="-1"></a>dsNoNormals<span class="sc">$</span>descriptions<span class="sc">$</span>truthTableStr <span class="ot">&lt;-</span> </span>
-<span id="cb123-9"><a href="analyze-diseased-only-dataset.html#cb123-9" aria-hidden="true" tabindex="-1"></a>  dsNoNormals<span class="sc">$</span>descriptions<span class="sc">$</span>truthTableStr[,,<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>K1),]</span>
-<span id="cb123-10"><a href="analyze-diseased-only-dataset.html#cb123-10" aria-hidden="true" tabindex="-1"></a>RJafroc<span class="sc">::</span><span class="fu">UtilFigureOfMerit</span>(dsTony,<span class="at">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
-<span id="cb123-11"><a href="analyze-diseased-only-dataset.html#cb123-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
-<span id="cb123-12"><a href="analyze-diseased-only-dataset.html#cb123-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.7602704 0.8406191 0.8171524 0.8153090 0.8278324</span></span>
-<span id="cb123-13"><a href="analyze-diseased-only-dataset.html#cb123-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.6425854 0.7049977 0.7518434 0.7724426 0.6836962</span></span>
-<span id="cb123-14"><a href="analyze-diseased-only-dataset.html#cb123-14" aria-hidden="true" tabindex="-1"></a><span class="co">#RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = &quot;wAFROC&quot;) #this will generate an error</span></span>
-<span id="cb123-15"><a href="analyze-diseased-only-dataset.html#cb123-15" aria-hidden="true" tabindex="-1"></a>RJafroc<span class="sc">::</span><span class="fu">UtilFigureOfMerit</span>(dsTony,<span class="at">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
-<span id="cb123-16"><a href="analyze-diseased-only-dataset.html#cb123-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
-<span id="cb123-17"><a href="analyze-diseased-only-dataset.html#cb123-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.8079866 0.8696629 0.8747798 0.8517613 0.8563468</span></span>
-<span id="cb123-18"><a href="analyze-diseased-only-dataset.html#cb123-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.7277103 0.7781506 0.8225630 0.7968418 0.7496963</span></span>
-<span id="cb123-19"><a href="analyze-diseased-only-dataset.html#cb123-19" aria-hidden="true" tabindex="-1"></a>RJafroc<span class="sc">::</span><span class="fu">UtilFigureOfMerit</span>(dsNoNormals,<span class="at">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
-<span id="cb123-20"><a href="analyze-diseased-only-dataset.html#cb123-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
-<span id="cb123-21"><a href="analyze-diseased-only-dataset.html#cb123-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.8594559 0.9009910 0.9369398 0.8910807 0.8871039</span></span>
-<span id="cb123-22"><a href="analyze-diseased-only-dataset.html#cb123-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.8195304 0.8570572 0.8988448 0.8231600 0.8208875</span></span>
-<span id="cb123-23"><a href="analyze-diseased-only-dataset.html#cb123-23" aria-hidden="true" tabindex="-1"></a>st <span class="ot">&lt;-</span> <span class="fu">StSignificanceTesting</span>(dsTony,<span class="at">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
-<span id="cb123-24"><a href="analyze-diseased-only-dataset.html#cb123-24" aria-hidden="true" tabindex="-1"></a>st1 <span class="ot">&lt;-</span> <span class="fu">StSignificanceTesting</span>(dsNoNormals,<span class="at">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
-<span id="cb123-25"><a href="analyze-diseased-only-dataset.html#cb123-25" aria-hidden="true" tabindex="-1"></a>st<span class="sc">$</span>RRRC</span>
-<span id="cb123-26"><a href="analyze-diseased-only-dataset.html#cb123-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FTests</span></span>
-<span id="cb123-27"><a href="analyze-diseased-only-dataset.html#cb123-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  DF         MS     FStat            p</span></span>
-<span id="cb123-28"><a href="analyze-diseased-only-dataset.html#cb123-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment  1.000000 4.72951648 10.298825 0.0036685784</span></span>
-<span id="cb123-29"><a href="analyze-diseased-only-dataset.html#cb123-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     24.702758 0.45922873        NA           NA</span></span>
-<span id="cb123-30"><a href="analyze-diseased-only-dataset.html#cb123-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb123-31"><a href="analyze-diseased-only-dataset.html#cb123-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciDiffTrt</span></span>
-<span id="cb123-32"><a href="analyze-diseased-only-dataset.html#cb123-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              Estimate      StdErr        DF         t        PrGTt     CILower</span></span>
-<span id="cb123-33"><a href="analyze-diseased-only-dataset.html#cb123-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.1011236 0.031510744 24.702758 3.2091783 0.0036685784 0.036186385</span></span>
-<span id="cb123-34"><a href="analyze-diseased-only-dataset.html#cb123-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                CIUpper</span></span>
-<span id="cb123-35"><a href="analyze-diseased-only-dataset.html#cb123-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.16606081</span></span>
-<span id="cb123-36"><a href="analyze-diseased-only-dataset.html#cb123-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb123-37"><a href="analyze-diseased-only-dataset.html#cb123-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciAvgRdrEachTrt</span></span>
-<span id="cb123-38"><a href="analyze-diseased-only-dataset.html#cb123-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         Estimate      StdErr        DF    CILower    CIUpper</span></span>
-<span id="cb123-39"><a href="analyze-diseased-only-dataset.html#cb123-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.81223666 0.026984337 59.281486 0.75824649 0.86622683</span></span>
-<span id="cb123-40"><a href="analyze-diseased-only-dataset.html#cb123-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.71111306 0.033910209 17.789298 0.63980982 0.78241630</span></span>
-<span id="cb123-41"><a href="analyze-diseased-only-dataset.html#cb123-41" aria-hidden="true" tabindex="-1"></a>st1<span class="sc">$</span>RRRC</span>
-<span id="cb123-42"><a href="analyze-diseased-only-dataset.html#cb123-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FTests</span></span>
-<span id="cb123-43"><a href="analyze-diseased-only-dataset.html#cb123-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  DF          MS     FStat            p</span></span>
-<span id="cb123-44"><a href="analyze-diseased-only-dataset.html#cb123-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment   1.00000 0.583686978 7.9579613 0.0051936318</span></span>
-<span id="cb123-45"><a href="analyze-diseased-only-dataset.html#cb123-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     236.88206 0.073346295        NA           NA</span></span>
-<span id="cb123-46"><a href="analyze-diseased-only-dataset.html#cb123-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb123-47"><a href="analyze-diseased-only-dataset.html#cb123-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciDiffTrt</span></span>
-<span id="cb123-48"><a href="analyze-diseased-only-dataset.html#cb123-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                Estimate      StdErr        DF         t        PrGTt</span></span>
-<span id="cb123-49"><a href="analyze-diseased-only-dataset.html#cb123-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.051218281 0.018156163 236.88206 2.8209859 0.0051936318</span></span>
-<span id="cb123-50"><a href="analyze-diseased-only-dataset.html#cb123-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 CILower    CIUpper</span></span>
-<span id="cb123-51"><a href="analyze-diseased-only-dataset.html#cb123-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.015450111 0.08698645</span></span>
-<span id="cb123-52"><a href="analyze-diseased-only-dataset.html#cb123-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb123-53"><a href="analyze-diseased-only-dataset.html#cb123-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciAvgRdrEachTrt</span></span>
-<span id="cb123-54"><a href="analyze-diseased-only-dataset.html#cb123-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         Estimate      StdErr        DF    CILower    CIUpper</span></span>
-<span id="cb123-55"><a href="analyze-diseased-only-dataset.html#cb123-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.89511425 0.019745498 24.733020 0.85442537 0.93580314</span></span>
-<span id="cb123-56"><a href="analyze-diseased-only-dataset.html#cb123-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.84389597 0.024970629 27.621445 0.79271436 0.89507759</span></span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="analyze-diseased-only-dataset.html#cb130-1" aria-hidden="true" tabindex="-1"></a>dsTony <span class="ot">&lt;-</span> RJafroc<span class="sc">::</span>dataset01 <span class="co"># TONY dataset</span></span>
+<span id="cb130-2"><a href="analyze-diseased-only-dataset.html#cb130-2" aria-hidden="true" tabindex="-1"></a>K2 <span class="ot">&lt;-</span> <span class="fu">length</span>(dsTony<span class="sc">$</span>lesions<span class="sc">$</span>perCase)</span>
+<span id="cb130-3"><a href="analyze-diseased-only-dataset.html#cb130-3" aria-hidden="true" tabindex="-1"></a>K1 <span class="ot">&lt;-</span> <span class="fu">length</span>(dsTony<span class="sc">$</span>ratings<span class="sc">$</span>NL[<span class="dv">1</span>,<span class="dv">1</span>,,<span class="dv">1</span>]) <span class="sc">-</span> K2</span>
+<span id="cb130-4"><a href="analyze-diseased-only-dataset.html#cb130-4" aria-hidden="true" tabindex="-1"></a>dsNoNormals <span class="ot">&lt;-</span> dsTony</span>
+<span id="cb130-5"><a href="analyze-diseased-only-dataset.html#cb130-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all normal cases</span></span>
+<span id="cb130-6"><a href="analyze-diseased-only-dataset.html#cb130-6" aria-hidden="true" tabindex="-1"></a>dsNoNormals<span class="sc">$</span>ratings<span class="sc">$</span>NL <span class="ot">&lt;-</span> dsNoNormals<span class="sc">$</span>ratings<span class="sc">$</span>NL[,,<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>K1),] </span>
+<span id="cb130-7"><a href="analyze-diseased-only-dataset.html#cb130-7" aria-hidden="true" tabindex="-1"></a><span class="co"># And fix truthTableStr</span></span>
+<span id="cb130-8"><a href="analyze-diseased-only-dataset.html#cb130-8" aria-hidden="true" tabindex="-1"></a>dsNoNormals<span class="sc">$</span>descriptions<span class="sc">$</span>truthTableStr <span class="ot">&lt;-</span> </span>
+<span id="cb130-9"><a href="analyze-diseased-only-dataset.html#cb130-9" aria-hidden="true" tabindex="-1"></a>  dsNoNormals<span class="sc">$</span>descriptions<span class="sc">$</span>truthTableStr[,,<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>K1),]</span>
+<span id="cb130-10"><a href="analyze-diseased-only-dataset.html#cb130-10" aria-hidden="true" tabindex="-1"></a>RJafroc<span class="sc">::</span><span class="fu">UtilFigureOfMerit</span>(dsTony,<span class="at">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
+<span id="cb130-11"><a href="analyze-diseased-only-dataset.html#cb130-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
+<span id="cb130-12"><a href="analyze-diseased-only-dataset.html#cb130-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.7602704 0.8406191 0.8171524 0.8153090 0.8278324</span></span>
+<span id="cb130-13"><a href="analyze-diseased-only-dataset.html#cb130-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.6425854 0.7049977 0.7518434 0.7724426 0.6836962</span></span>
+<span id="cb130-14"><a href="analyze-diseased-only-dataset.html#cb130-14" aria-hidden="true" tabindex="-1"></a><span class="co">#RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = &quot;wAFROC&quot;) #this will generate an error</span></span>
+<span id="cb130-15"><a href="analyze-diseased-only-dataset.html#cb130-15" aria-hidden="true" tabindex="-1"></a>RJafroc<span class="sc">::</span><span class="fu">UtilFigureOfMerit</span>(dsTony,<span class="at">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb130-16"><a href="analyze-diseased-only-dataset.html#cb130-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
+<span id="cb130-17"><a href="analyze-diseased-only-dataset.html#cb130-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.8079866 0.8696629 0.8747798 0.8517613 0.8563468</span></span>
+<span id="cb130-18"><a href="analyze-diseased-only-dataset.html#cb130-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.7277103 0.7781506 0.8225630 0.7968418 0.7496963</span></span>
+<span id="cb130-19"><a href="analyze-diseased-only-dataset.html#cb130-19" aria-hidden="true" tabindex="-1"></a>RJafroc<span class="sc">::</span><span class="fu">UtilFigureOfMerit</span>(dsNoNormals,<span class="at">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb130-20"><a href="analyze-diseased-only-dataset.html#cb130-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
+<span id="cb130-21"><a href="analyze-diseased-only-dataset.html#cb130-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.8594559 0.9009910 0.9369398 0.8910807 0.8871039</span></span>
+<span id="cb130-22"><a href="analyze-diseased-only-dataset.html#cb130-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.8195304 0.8570572 0.8988448 0.8231600 0.8208875</span></span>
+<span id="cb130-23"><a href="analyze-diseased-only-dataset.html#cb130-23" aria-hidden="true" tabindex="-1"></a>st <span class="ot">&lt;-</span> <span class="fu">StSignificanceTesting</span>(dsTony,<span class="at">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
+<span id="cb130-24"><a href="analyze-diseased-only-dataset.html#cb130-24" aria-hidden="true" tabindex="-1"></a>st1 <span class="ot">&lt;-</span> <span class="fu">StSignificanceTesting</span>(dsNoNormals,<span class="at">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb130-25"><a href="analyze-diseased-only-dataset.html#cb130-25" aria-hidden="true" tabindex="-1"></a>st<span class="sc">$</span>RRRC</span>
+<span id="cb130-26"><a href="analyze-diseased-only-dataset.html#cb130-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FTests</span></span>
+<span id="cb130-27"><a href="analyze-diseased-only-dataset.html#cb130-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  DF         MS     FStat            p</span></span>
+<span id="cb130-28"><a href="analyze-diseased-only-dataset.html#cb130-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment  1.000000 4.72951648 10.298825 0.0036685784</span></span>
+<span id="cb130-29"><a href="analyze-diseased-only-dataset.html#cb130-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     24.702758 0.45922873        NA           NA</span></span>
+<span id="cb130-30"><a href="analyze-diseased-only-dataset.html#cb130-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-31"><a href="analyze-diseased-only-dataset.html#cb130-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciDiffTrt</span></span>
+<span id="cb130-32"><a href="analyze-diseased-only-dataset.html#cb130-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              Estimate      StdErr        DF         t        PrGTt     CILower</span></span>
+<span id="cb130-33"><a href="analyze-diseased-only-dataset.html#cb130-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.1011236 0.031510744 24.702758 3.2091783 0.0036685784 0.036186385</span></span>
+<span id="cb130-34"><a href="analyze-diseased-only-dataset.html#cb130-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                CIUpper</span></span>
+<span id="cb130-35"><a href="analyze-diseased-only-dataset.html#cb130-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.16606081</span></span>
+<span id="cb130-36"><a href="analyze-diseased-only-dataset.html#cb130-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-37"><a href="analyze-diseased-only-dataset.html#cb130-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciAvgRdrEachTrt</span></span>
+<span id="cb130-38"><a href="analyze-diseased-only-dataset.html#cb130-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         Estimate      StdErr        DF    CILower    CIUpper</span></span>
+<span id="cb130-39"><a href="analyze-diseased-only-dataset.html#cb130-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.81223666 0.026984337 59.281486 0.75824649 0.86622683</span></span>
+<span id="cb130-40"><a href="analyze-diseased-only-dataset.html#cb130-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.71111306 0.033910209 17.789298 0.63980982 0.78241630</span></span>
+<span id="cb130-41"><a href="analyze-diseased-only-dataset.html#cb130-41" aria-hidden="true" tabindex="-1"></a>st1<span class="sc">$</span>RRRC</span>
+<span id="cb130-42"><a href="analyze-diseased-only-dataset.html#cb130-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FTests</span></span>
+<span id="cb130-43"><a href="analyze-diseased-only-dataset.html#cb130-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  DF          MS     FStat            p</span></span>
+<span id="cb130-44"><a href="analyze-diseased-only-dataset.html#cb130-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment   1.00000 0.583686978 7.9579613 0.0051936318</span></span>
+<span id="cb130-45"><a href="analyze-diseased-only-dataset.html#cb130-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     236.88206 0.073346295        NA           NA</span></span>
+<span id="cb130-46"><a href="analyze-diseased-only-dataset.html#cb130-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-47"><a href="analyze-diseased-only-dataset.html#cb130-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciDiffTrt</span></span>
+<span id="cb130-48"><a href="analyze-diseased-only-dataset.html#cb130-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                Estimate      StdErr        DF         t        PrGTt</span></span>
+<span id="cb130-49"><a href="analyze-diseased-only-dataset.html#cb130-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.051218281 0.018156163 236.88206 2.8209859 0.0051936318</span></span>
+<span id="cb130-50"><a href="analyze-diseased-only-dataset.html#cb130-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 CILower    CIUpper</span></span>
+<span id="cb130-51"><a href="analyze-diseased-only-dataset.html#cb130-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.015450111 0.08698645</span></span>
+<span id="cb130-52"><a href="analyze-diseased-only-dataset.html#cb130-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-53"><a href="analyze-diseased-only-dataset.html#cb130-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciAvgRdrEachTrt</span></span>
+<span id="cb130-54"><a href="analyze-diseased-only-dataset.html#cb130-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         Estimate      StdErr        DF    CILower    CIUpper</span></span>
+<span id="cb130-55"><a href="analyze-diseased-only-dataset.html#cb130-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.89511425 0.019745498 24.733020 0.85442537 0.93580314</span></span>
+<span id="cb130-56"><a href="analyze-diseased-only-dataset.html#cb130-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.84389597 0.024970629 27.621445 0.79271436 0.89507759</span></span></code></pre></div>
 <ul>
 <li><p><code>dsNoNormals</code> is the dataset with no non-diseased cases.</p></li>
 <li><p><code>st</code> contains the results of significance testing using the wAFROC-AUC figure of merit for the full dataset.</p></li>

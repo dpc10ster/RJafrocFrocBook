@@ -281,6 +281,17 @@ afroc
 wafroc
 afroc1
 wafroc1
+highest-rating
+highest-rating-how-much-finished
+highest-rating-intro
+highest-rating-2-datasets
+highest-rating-code
+load-the-three-datasets
+modify-the-template
+modify-the-ratings-list-member
+modify-the-lesions-list-member
+modify-the-descriptions-list-member
+analysis-of-the-crossed-modality-dataset
 visual-search
 visual-search-how-much-finished
 visual-search-intro
