@@ -50,40 +50,40 @@ RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = "wAFROC1")
 #>            rdr1      rdr2      rdr3      rdr4      rdr5
 #> trtBT 0.8594559 0.9009910 0.9369398 0.8910807 0.8871039
 #> trtDM 0.8195304 0.8570572 0.8988448 0.8231600 0.8208875
-st <- StSignificanceTesting(dsTony,FOM = "wAFROC")
-st1 <- StSignificanceTesting(dsNoNormals,FOM = "wAFROC1")
+st <- St(dsTony,FOM = "wAFROC")
+st1 <- St(dsNoNormals,FOM = "wAFROC1")
 st$RRRC
 #> $FTests
-#>                  DF         MS     FStat            p
-#> Treatment  1.000000 4.72951648 10.298825 0.0036685784
-#> Error     24.702758 0.45922873        NA           NA
+#>                 DF          MS    FStat           p
+#> Treatment  1.00000 0.025564954 10.29883 0.003668578
+#> Error     24.70276 0.002482317       NA          NA
 #> 
 #> $ciDiffTrt
-#>              Estimate      StdErr        DF         t        PrGTt     CILower
-#> trtBT-trtDM 0.1011236 0.031510744 24.702758 3.2091783 0.0036685784 0.036186385
-#>                CIUpper
-#> trtBT-trtDM 0.16606081
+#>              Estimate     StdErr       DF        t       PrGTt    CILower
+#> trtBT-trtDM 0.1011236 0.03151074 24.70276 3.209178 0.003668578 0.03618638
+#>               CIUpper
+#> trtBT-trtDM 0.1660608
 #> 
 #> $ciAvgRdrEachTrt
-#>         Estimate      StdErr        DF    CILower    CIUpper
-#> trtBT 0.81223666 0.026984337 59.281486 0.75824649 0.86622683
-#> trtDM 0.71111306 0.033910209 17.789298 0.63980982 0.78241630
+#>        Estimate     StdErr       DF   CILower   CIUpper         Cov2
+#> trtBT 0.8122367 0.02698434 59.28149 0.7582465 0.8662268 0.0005390098
+#> trtDM 0.7111131 0.03391021 17.78930 0.6398098 0.7824163 0.0006046324
 st1$RRRC
 #> $FTests
-#>                  DF          MS     FStat            p
-#> Treatment   1.00000 0.583686978 7.9579613 0.0051936318
-#> Error     236.88206 0.073346295        NA           NA
+#>                 DF           MS    FStat           p
+#> Treatment   1.0000 0.0065582806 7.957961 0.005193632
+#> Error     236.8821 0.0008241157       NA          NA
 #> 
 #> $ciDiffTrt
-#>                Estimate      StdErr        DF         t        PrGTt
-#> trtBT-trtDM 0.051218281 0.018156163 236.88206 2.8209859 0.0051936318
-#>                 CILower    CIUpper
-#> trtBT-trtDM 0.015450111 0.08698645
+#>               Estimate     StdErr       DF        t       PrGTt    CILower
+#> trtBT-trtDM 0.05121828 0.01815616 236.8821 2.820986 0.005193632 0.01545011
+#>                CIUpper
+#> trtBT-trtDM 0.08698645
 #> 
 #> $ciAvgRdrEachTrt
-#>         Estimate      StdErr        DF    CILower    CIUpper
-#> trtBT 0.89511425 0.019745498 24.733020 0.85442537 0.93580314
-#> trtDM 0.84389597 0.024970629 27.621445 0.79271436 0.89507759
+#>        Estimate     StdErr       DF   CILower   CIUpper         Cov2
+#> trtBT 0.8951143 0.01974550 24.73302 0.8544254 0.9358031 0.0002330913
+#> trtDM 0.8438960 0.02497063 27.62144 0.7927144 0.8950776 0.0003862498
 ```
 
 

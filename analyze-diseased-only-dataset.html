@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 Analyzing a dataset with only diseased cases | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 Analyzing a dataset with only diseased cases | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-08-07" />
+<meta name="date" content="2023-12-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,8 +203,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.5.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-plot-illustration"><i class="fa fa-check"></i><b>2.5.1</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>2.6</b> The “solar” analogy</a></li>
-<li class="chapter" data-level="2.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>2.7</b> Discussion</a></li>
+<li class="chapter" data-level="2.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>2.6</b> The Astronomical Analogy</a></li>
+<li class="chapter" data-level="2.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-implications"><i class="fa fa-check"></i><b>2.7</b> Implications for models of visual search</a></li>
+<li class="chapter" data-level="2.8" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>2.8</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>3</b> Empirical plots from FROC data</a>
 <ul>
@@ -516,40 +517,40 @@ div.csl-indent {
 <span id="cb130-20"><a href="analyze-diseased-only-dataset.html#cb130-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            rdr1      rdr2      rdr3      rdr4      rdr5</span></span>
 <span id="cb130-21"><a href="analyze-diseased-only-dataset.html#cb130-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.8594559 0.9009910 0.9369398 0.8910807 0.8871039</span></span>
 <span id="cb130-22"><a href="analyze-diseased-only-dataset.html#cb130-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.8195304 0.8570572 0.8988448 0.8231600 0.8208875</span></span>
-<span id="cb130-23"><a href="analyze-diseased-only-dataset.html#cb130-23" aria-hidden="true" tabindex="-1"></a>st <span class="ot">&lt;-</span> <span class="fu">StSignificanceTesting</span>(dsTony,<span class="at">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
-<span id="cb130-24"><a href="analyze-diseased-only-dataset.html#cb130-24" aria-hidden="true" tabindex="-1"></a>st1 <span class="ot">&lt;-</span> <span class="fu">StSignificanceTesting</span>(dsNoNormals,<span class="at">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
+<span id="cb130-23"><a href="analyze-diseased-only-dataset.html#cb130-23" aria-hidden="true" tabindex="-1"></a>st <span class="ot">&lt;-</span> <span class="fu">St</span>(dsTony,<span class="at">FOM =</span> <span class="st">&quot;wAFROC&quot;</span>)</span>
+<span id="cb130-24"><a href="analyze-diseased-only-dataset.html#cb130-24" aria-hidden="true" tabindex="-1"></a>st1 <span class="ot">&lt;-</span> <span class="fu">St</span>(dsNoNormals,<span class="at">FOM =</span> <span class="st">&quot;wAFROC1&quot;</span>)</span>
 <span id="cb130-25"><a href="analyze-diseased-only-dataset.html#cb130-25" aria-hidden="true" tabindex="-1"></a>st<span class="sc">$</span>RRRC</span>
 <span id="cb130-26"><a href="analyze-diseased-only-dataset.html#cb130-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FTests</span></span>
-<span id="cb130-27"><a href="analyze-diseased-only-dataset.html#cb130-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  DF         MS     FStat            p</span></span>
-<span id="cb130-28"><a href="analyze-diseased-only-dataset.html#cb130-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment  1.000000 4.72951648 10.298825 0.0036685784</span></span>
-<span id="cb130-29"><a href="analyze-diseased-only-dataset.html#cb130-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     24.702758 0.45922873        NA           NA</span></span>
+<span id="cb130-27"><a href="analyze-diseased-only-dataset.html#cb130-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 DF          MS    FStat           p</span></span>
+<span id="cb130-28"><a href="analyze-diseased-only-dataset.html#cb130-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment  1.00000 0.025564954 10.29883 0.003668578</span></span>
+<span id="cb130-29"><a href="analyze-diseased-only-dataset.html#cb130-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     24.70276 0.002482317       NA          NA</span></span>
 <span id="cb130-30"><a href="analyze-diseased-only-dataset.html#cb130-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb130-31"><a href="analyze-diseased-only-dataset.html#cb130-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciDiffTrt</span></span>
-<span id="cb130-32"><a href="analyze-diseased-only-dataset.html#cb130-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              Estimate      StdErr        DF         t        PrGTt     CILower</span></span>
-<span id="cb130-33"><a href="analyze-diseased-only-dataset.html#cb130-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.1011236 0.031510744 24.702758 3.2091783 0.0036685784 0.036186385</span></span>
-<span id="cb130-34"><a href="analyze-diseased-only-dataset.html#cb130-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                CIUpper</span></span>
-<span id="cb130-35"><a href="analyze-diseased-only-dataset.html#cb130-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.16606081</span></span>
+<span id="cb130-32"><a href="analyze-diseased-only-dataset.html#cb130-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              Estimate     StdErr       DF        t       PrGTt    CILower</span></span>
+<span id="cb130-33"><a href="analyze-diseased-only-dataset.html#cb130-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.1011236 0.03151074 24.70276 3.209178 0.003668578 0.03618638</span></span>
+<span id="cb130-34"><a href="analyze-diseased-only-dataset.html#cb130-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               CIUpper</span></span>
+<span id="cb130-35"><a href="analyze-diseased-only-dataset.html#cb130-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.1660608</span></span>
 <span id="cb130-36"><a href="analyze-diseased-only-dataset.html#cb130-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb130-37"><a href="analyze-diseased-only-dataset.html#cb130-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciAvgRdrEachTrt</span></span>
-<span id="cb130-38"><a href="analyze-diseased-only-dataset.html#cb130-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         Estimate      StdErr        DF    CILower    CIUpper</span></span>
-<span id="cb130-39"><a href="analyze-diseased-only-dataset.html#cb130-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.81223666 0.026984337 59.281486 0.75824649 0.86622683</span></span>
-<span id="cb130-40"><a href="analyze-diseased-only-dataset.html#cb130-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.71111306 0.033910209 17.789298 0.63980982 0.78241630</span></span>
+<span id="cb130-38"><a href="analyze-diseased-only-dataset.html#cb130-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        Estimate     StdErr       DF   CILower   CIUpper         Cov2</span></span>
+<span id="cb130-39"><a href="analyze-diseased-only-dataset.html#cb130-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.8122367 0.02698434 59.28149 0.7582465 0.8662268 0.0005390098</span></span>
+<span id="cb130-40"><a href="analyze-diseased-only-dataset.html#cb130-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.7111131 0.03391021 17.78930 0.6398098 0.7824163 0.0006046324</span></span>
 <span id="cb130-41"><a href="analyze-diseased-only-dataset.html#cb130-41" aria-hidden="true" tabindex="-1"></a>st1<span class="sc">$</span>RRRC</span>
 <span id="cb130-42"><a href="analyze-diseased-only-dataset.html#cb130-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FTests</span></span>
-<span id="cb130-43"><a href="analyze-diseased-only-dataset.html#cb130-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  DF          MS     FStat            p</span></span>
-<span id="cb130-44"><a href="analyze-diseased-only-dataset.html#cb130-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment   1.00000 0.583686978 7.9579613 0.0051936318</span></span>
-<span id="cb130-45"><a href="analyze-diseased-only-dataset.html#cb130-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     236.88206 0.073346295        NA           NA</span></span>
+<span id="cb130-43"><a href="analyze-diseased-only-dataset.html#cb130-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 DF           MS    FStat           p</span></span>
+<span id="cb130-44"><a href="analyze-diseased-only-dataset.html#cb130-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment   1.0000 0.0065582806 7.957961 0.005193632</span></span>
+<span id="cb130-45"><a href="analyze-diseased-only-dataset.html#cb130-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     236.8821 0.0008241157       NA          NA</span></span>
 <span id="cb130-46"><a href="analyze-diseased-only-dataset.html#cb130-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb130-47"><a href="analyze-diseased-only-dataset.html#cb130-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciDiffTrt</span></span>
-<span id="cb130-48"><a href="analyze-diseased-only-dataset.html#cb130-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                Estimate      StdErr        DF         t        PrGTt</span></span>
-<span id="cb130-49"><a href="analyze-diseased-only-dataset.html#cb130-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.051218281 0.018156163 236.88206 2.8209859 0.0051936318</span></span>
-<span id="cb130-50"><a href="analyze-diseased-only-dataset.html#cb130-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 CILower    CIUpper</span></span>
-<span id="cb130-51"><a href="analyze-diseased-only-dataset.html#cb130-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.015450111 0.08698645</span></span>
+<span id="cb130-48"><a href="analyze-diseased-only-dataset.html#cb130-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               Estimate     StdErr       DF        t       PrGTt    CILower</span></span>
+<span id="cb130-49"><a href="analyze-diseased-only-dataset.html#cb130-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.05121828 0.01815616 236.8821 2.820986 0.005193632 0.01545011</span></span>
+<span id="cb130-50"><a href="analyze-diseased-only-dataset.html#cb130-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                CIUpper</span></span>
+<span id="cb130-51"><a href="analyze-diseased-only-dataset.html#cb130-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT-trtDM 0.08698645</span></span>
 <span id="cb130-52"><a href="analyze-diseased-only-dataset.html#cb130-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb130-53"><a href="analyze-diseased-only-dataset.html#cb130-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciAvgRdrEachTrt</span></span>
-<span id="cb130-54"><a href="analyze-diseased-only-dataset.html#cb130-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         Estimate      StdErr        DF    CILower    CIUpper</span></span>
-<span id="cb130-55"><a href="analyze-diseased-only-dataset.html#cb130-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.89511425 0.019745498 24.733020 0.85442537 0.93580314</span></span>
-<span id="cb130-56"><a href="analyze-diseased-only-dataset.html#cb130-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.84389597 0.024970629 27.621445 0.79271436 0.89507759</span></span></code></pre></div>
+<span id="cb130-54"><a href="analyze-diseased-only-dataset.html#cb130-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        Estimate     StdErr       DF   CILower   CIUpper         Cov2</span></span>
+<span id="cb130-55"><a href="analyze-diseased-only-dataset.html#cb130-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtBT 0.8951143 0.01974550 24.73302 0.8544254 0.9358031 0.0002330913</span></span>
+<span id="cb130-56"><a href="analyze-diseased-only-dataset.html#cb130-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtDM 0.8438960 0.02497063 27.62144 0.7927144 0.8950776 0.0003862498</span></span></code></pre></div>
 <ul>
 <li><p><code>dsNoNormals</code> is the dataset with no non-diseased cases.</p></li>
 <li><p><code>st</code> contains the results of significance testing using the wAFROC-AUC figure of merit for the full dataset.</p></li>

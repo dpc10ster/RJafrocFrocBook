@@ -40,7 +40,7 @@ real_ds <- dataset14
 # load a cross modality dataset
 # This will serve as a template whose list elements will be modified to create 
 # the desired cross modality dataset
-xds <- datasetXModality
+xds <- datasetX
 ```
 
 Line 2, `ds <- dataset04`, is the Federica Zanca 5 modality, 4 reader, 200 case FROC dataset.
@@ -49,7 +49,7 @@ Line 6 converts this to an **inferred** ROC dataset `infd_ds` containing treatme
 
 Line 10, `real_ds <- dataset14` is the Federica Zanca 2 modality, 4 reader, 200 case **real** ROC dataset. The two modalities correspond to treatments 4 and 5 in the FROC dataset `dataset04`.
 
-Line 15 assigns a pre-loaded **crossed** modality dataset `xds <- datasetXModality` which serves as a template to be modified to meet our needs. 
+Line 15 assigns a pre-loaded **crossed** modality dataset `xds <- datasetX` which serves as a template to be modified to meet our needs. 
 
 The original dimensions of `xds$ratings$NL` is `dim(xds$ratings$NL) = 2, 4, 11, 68, 5`. This because it represents a crossed modality dataset with two modality-1 factors (adaptive iterative dose reduction and filtered back projection) crossed with 4 modality-2 factors (x-ray tube charge = 20 mAs, 40 mAs, 60 mAs and 80 mAs), 11 readers, and 68 cases with a maximum of 5 marks per case.
 
@@ -131,54 +131,150 @@ This is done as shown next.
 
 
 ```r
-st <- StSignificanceTestingCrossedModalities(
+st <- St(
   xds, 
-  avgIndx = 2, 
   FOM <- "Wilcoxon", 
   analysisOption = "RRRC")
-#> Averaging over modality index = 2
 ```
 
 
 ```r
 st
-#> $fomArray
-#>          [,1]    [,2]     [,3]     [,4]
-#> [1,] 0.871875 0.80225 0.779900 0.863900
-#> [2,] 0.889025 0.86520 0.845075 0.863525
+#> $FOMs
+#> $FOMs$foms
+#> $FOMs$foms$AvgMod1
+#>          rdrrdr1  rdrrdr2  rdrrdr3  rdrrdr4
+#> trttrt4 0.903125 0.848875 0.825100 0.879300
+#> trttrt5 0.857775 0.818575 0.799875 0.848125
 #> 
-#> $msT
-#> [1] 0.002624501
+#> $FOMs$foms$AvgMod2
+#>          rdrrdr1 rdrrdr2  rdrrdr3  rdrrdr4
+#> trtinfd 0.871875 0.80225 0.779900 0.863900
+#> trtreal 0.889025 0.86520 0.845075 0.863525
 #> 
-#> $msTR
-#> [1] 0.000542624
 #> 
-#> $varComp
-#>                  varCov
-#> Var(R)     0.0005905767
-#> Var(T*R)   0.0003041707
-#> COV1       0.0003005249
-#> COV2       0.0002561530
-#> COV3       0.0002410342
-#> Var(Error) 0.0005540970
+#> $FOMs$trtMeans
+#> $FOMs$trtMeans$AvgMod1
+#>          Estimate
+#> trttrt4 0.8641000
+#> trttrt5 0.8310875
 #> 
-#> $fRRRC
-#> [1] 4.351692
+#> $FOMs$trtMeans$AvgMod2
+#>          Estimate
+#> trtinfd 0.8294812
+#> trtreal 0.8657063
 #> 
-#> $ddfRRRC
-#> [1] 3.70596
 #> 
-#> $pRRRC
-#> [1] 0.1108024
+#> $FOMs$trtMeanDiffs
+#> $FOMs$trtMeanDiffs$AvgMod1
+#>                  Estimate
+#> trttrt4-trttrt5 0.0330125
 #> 
-#> $ciDiffTrtRRRC
-#>        Treatment  Estimate     StdErr      DF         t     PrGTt     CILower
-#> 1 Row1_infd-real -0.036225 0.01736518 3.70596 -2.086071 0.1108024 -0.08598526
-#>      CIUpper
-#> 1 0.01353526
+#> $FOMs$trtMeanDiffs$AvgMod2
+#>                  Estimate
+#> trtinfd-trtreal -0.036225
 #> 
-#> $ciAvgRdrEachTrtRRRC
-#>   Treatment      Area     StdErr        DF   CILower   CIUpper
-#> 1      infd 0.8294812 0.02710049  6.097804 0.7634257 0.8955368
-#> 2      real 0.8657063 0.01934464 63.712979 0.8270575 0.9043550
+#> 
+#> 
+#> $ANOVA
+#> $ANOVA$TRanova
+#> $ANOVA$TRanova$AvgMod1
+#>            SS DF           MS
+#> T  0.00217965  1 2.179650e-03
+#> R  0.00217965  3 1.842759e-03
+#> TR 0.00217965  3 3.726552e-05
+#> 
+#> $ANOVA$TRanova$AvgMod2
+#>             SS DF          MS
+#> T  0.005528277  1 0.002624501
+#> R  0.005528277  3 0.001842759
+#> TR 0.005528277  3 0.000542624
+#> 
+#> 
+#> $ANOVA$VarCom
+#> $ANOVA$VarCom$AvgMod1
+#>           Estimates      Rhos
+#> VarR   0.0008321326        NA
+#> VarTR -0.0001789411        NA
+#> Cov1   0.0003146504 0.5827166
+#> Cov2   0.0002531509 0.4688227
+#> Cov3   0.0002440363 0.4519429
+#> Var    0.0005399715        NA
+#> 
+#> $ANOVA$VarCom$AvgMod2
+#>          Estimates      Rhos
+#> VarR  0.0005905767        NA
+#> VarTR 0.0003041707        NA
+#> Cov1  0.0003005249 0.5423688
+#> Cov2  0.0002561530 0.4622891
+#> Cov3  0.0002410342 0.4350036
+#> Var   0.0005540970        NA
+#> 
+#> 
+#> $ANOVA$IndividualTrt
+#> $ANOVA$IndividualTrt$AvgMod1
+#>         DF  msREachTrt   varEachTrt  cov2EachTrt
+#> trttrt4  3 0.001168930 0.0005165784 0.0002390223
+#> trttrt5  3 0.000711094 0.0005633647 0.0002672795
+#> 
+#> $ANOVA$IndividualTrt$AvgMod2
+#>         DF   msREachTrt   varEachTrt  cov2EachTrt
+#> trtinfd  3 0.0020605739 0.0005708085 0.0002192931
+#> trtreal  3 0.0003248089 0.0005373855 0.0002930128
+#> 
+#> 
+#> $ANOVA$IndividualRdr
+#> $ANOVA$IndividualRdr$AvgMod1
+#>         DF   msTEachRdr   varEachRdr  cov1EachRdr
+#> rdrrdr1  1 0.0010283113 0.0004861758 0.0003203932
+#> rdrrdr2  1 0.0004590450 0.0005679882 0.0003195145
+#> rdrrdr3  1 0.0003181503 0.0006937098 0.0003582329
+#> rdrrdr4  1 0.0004859403 0.0004120123 0.0002604610
+#> 
+#> $ANOVA$IndividualRdr$AvgMod2
+#>         DF   msTEachRdr   varEachRdr  cov1EachRdr
+#> rdrrdr1  1 1.470612e-04 0.0004777946 0.0003287743
+#> rdrrdr2  1 1.981351e-03 0.0005660321 0.0003214706
+#> rdrrdr3  1 2.123890e-03 0.0006664924 0.0003854503
+#> rdrrdr4  1 7.031250e-08 0.0005060688 0.0001664044
+#> 
+#> 
+#> 
+#> $RRRC
+#> $RRRC$FTests
+#> $RRRC$FTests$AvgMod1
+#>                 DF           MS    FStat            p
+#> Treatment  1.00000 2.179650e-03 29.56509 0.0001627221
+#> Error     11.74146 7.372378e-05       NA           NA
+#> 
+#> $RRRC$FTests$AvgMod2
+#>                DF           MS    FStat         p
+#> Treatment 1.00000 0.0026245013 4.351692 0.1108024
+#> Error     3.70596 0.0006030991       NA        NA
+#> 
+#> 
+#> $RRRC$ciDiffTrt
+#> $RRRC$ciDiffTrt$AvgMod1
+#>                  Estimate      StdErr       DF        t        PrGTt    CILower
+#> trttrt4-trttrt5 0.0330125 0.006071399 11.74146 5.437379 0.0001627221 0.01975168
+#>                    CIUpper
+#> trttrt4-trttrt5 0.04627332
+#> 
+#> $RRRC$ciDiffTrt$AvgMod2
+#>                  Estimate     StdErr      DF         t     PrGTt     CILower
+#> trtinfd-trtreal -0.036225 0.01736518 3.70596 -2.086071 0.1108024 -0.08598526
+#>                    CIUpper
+#> trtinfd-trtreal 0.01353526
+#> 
+#> 
+#> $RRRC$ciAvgRdrEachTrt
+#> $RRRC$ciAvgRdrEachTrt$AvgMod1
+#>          Estimate     StdErr        DF   CILower   CIUpper         Cov2
+#> trttrt4 0.8641000 0.02304897  9.914476 0.8126836 0.9155164 0.0002390223
+#> trttrt5 0.8310875 0.02109628 18.802288 0.7869010 0.8752740 0.0002672795
+#> 
+#> $RRRC$ciAvgRdrEachTrt$AvgMod2
+#>          Estimate     StdErr        DF   CILower   CIUpper         Cov2
+#> trtinfd 0.8294812 0.02710049  6.097804 0.7634257 0.8955368 0.0002192931
+#> trtreal 0.8657063 0.01934464 63.712979 0.8270575 0.9043550 0.0002930128
 ```

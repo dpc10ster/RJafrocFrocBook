@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 The FROC paradigm and visual search | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 The FROC paradigm and visual search | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-08-07" />
+<meta name="date" content="2023-12-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,8 +203,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.5.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-plot-illustration"><i class="fa fa-check"></i><b>2.5.1</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>2.6</b> The “solar” analogy</a></li>
-<li class="chapter" data-level="2.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>2.7</b> Discussion</a></li>
+<li class="chapter" data-level="2.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>2.6</b> The Astronomical Analogy</a></li>
+<li class="chapter" data-level="2.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-implications"><i class="fa fa-check"></i><b>2.7</b> Implications for models of visual search</a></li>
+<li class="chapter" data-level="2.8" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>2.8</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>3</b> Empirical plots from FROC data</a>
 <ul>
@@ -594,7 +595,7 @@ FIGURE 2.2: Empirical FROC plot for <code>dataset04</code>, treatment 1 and read
 </div>
 </div>
 <div id="froc-paradigm-solar-analogy" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> The “solar” analogy<a href="froc-paradigm.html#froc-paradigm-solar-analogy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">2.6</span> The Astronomical Analogy<a href="froc-paradigm.html#froc-paradigm-solar-analogy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Consider the sun, regarded as a “lesion” to be detected, with two daily observations spaced 12 hours apart, so that at least one observation period is bound to have the sun in the sky. Furthermore assume the observer knows his GPS coordinates and has a watch that gives accurate local time, from which an accurate location of the sun can be deduced. Assuming clear skies and no obstructions to the view, the sun will always be correctly located and no rational observer will ever generate a non-lesion localization or NL, i.e., no region of the sky will be erroneously “marked” as being the sun.</p>
 <p>FROC curve implications of this analogy are:</p>
 <ul>
@@ -614,9 +615,14 @@ FIGURE 2.2: Empirical FROC plot for <code>dataset04</code>, treatment 1 and read
 <p>The analogy is not restricted to the sun, which one might argue is an almost infinite signal-to-noise-ratio (SNR) object and therefore atypical. Consider finding stars or planets. In clear skies one can still locate bright stars and planets like Venus or Jupiter. With less bright stars and/or obscuring clouds, there will be false-sightings and the FROC plot could approach a flat horizontal line at ordinate equal to zero, but TBA the observer will not fill up the sky with false sightings of a desired star. Why?</p>
 <p>False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization or incorrect localizations.</p>
 </div>
-<div id="froc-paradigm-discussion" class="section level2 hasAnchor" number="2.7">
-<h2><span class="header-section-number">2.7</span> Discussion<a href="froc-paradigm.html#froc-paradigm-discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The FROC paradigm has been misunderstood: contributing factors are loose terminology and misconceptions about visual search, the FROC paradigm and the FROC curve. Some examples follow</p>
+<div id="froc-paradigm-implications" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Implications for models of visual search<a href="froc-paradigm.html#froc-paradigm-implications" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>[This section will make more sense after reading Chapter <a href="rsm.html#rsm">6</a> on the Radiological Search Model (RSM).]</p>
+<p>The Astronomical Analogy elucidates some crucial features of visual search. In the medical imaging context visual search is defined as finding lesion(s) given that their locations are unknown while minimizing finding non-lesions. As shown in the previous section, if lesion contrast is high then the observer’s visual system will guide the eye to the correct location(s). The result is that incorrect localizations and missed lesions will rarely occur. In terms of the RSM, as lesion contrast, i.e., <span class="math inline">\(\mu\)</span>, increases the number of non-lesion localizations, i.e., <span class="math inline">\(\lambda\)</span>, decreases, and the fraction of detected lesions, i.e., <span class="math inline">\(\nu\)</span>, approaches unity. This tandem behavior will be accounted for in the formulation of the RSM, in particular the distinction made in Chapter <a href="rsm.html#rsm">6</a> between physical and intrinsic RSM <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\nu\)</span> parameters, see in particular Sections <a href="rsm.html#rsm-parameter-physical-meanings">6.5</a> and <a href="rsm.html#rsm-intrinsic-parameters">6.6</a>.</p>
+</div>
+<div id="froc-paradigm-discussion" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> Discussion<a href="froc-paradigm.html#froc-paradigm-discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The FROC paradigm has been confused by loose terminology and misconceptions about visual search, the FROC paradigm and the FROC curve. Some examples follow</p>
 <ul>
 <li>Loose terminology:
 <ul>

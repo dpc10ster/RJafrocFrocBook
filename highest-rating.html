@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Validity of the highest rating assumption | The RJafroc Froc Book</title>
   <meta name="description" content="Artificial intelligence and observer performance book based on RJafroc." />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Validity of the highest rating assumption | The RJafroc Froc Book" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-08-07" />
+<meta name="date" content="2023-12-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,8 +203,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.5.1" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-plot-illustration"><i class="fa fa-check"></i><b>2.5.1</b> Illustration with a dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>2.6</b> The “solar” analogy</a></li>
-<li class="chapter" data-level="2.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>2.7</b> Discussion</a></li>
+<li class="chapter" data-level="2.6" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-solar-analogy"><i class="fa fa-check"></i><b>2.6</b> The Astronomical Analogy</a></li>
+<li class="chapter" data-level="2.7" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-implications"><i class="fa fa-check"></i><b>2.7</b> Implications for models of visual search</a></li>
+<li class="chapter" data-level="2.8" data-path="froc-paradigm.html"><a href="froc-paradigm.html#froc-paradigm-discussion"><i class="fa fa-check"></i><b>2.8</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="empirical.html"><a href="empirical.html"><i class="fa fa-check"></i><b>3</b> Empirical plots from FROC data</a>
 <ul>
@@ -511,11 +512,11 @@ div.csl-indent {
 <span id="cb31-12"><a href="highest-rating.html#cb31-12"></a><span class="co"># load a cross modality dataset</span></span>
 <span id="cb31-13"><a href="highest-rating.html#cb31-13"></a><span class="co"># This will serve as a template whose list elements will be modified to create </span></span>
 <span id="cb31-14"><a href="highest-rating.html#cb31-14"></a><span class="co"># the desired cross modality dataset</span></span>
-<span id="cb31-15"><a href="highest-rating.html#cb31-15"></a>xds <span class="ot">&lt;-</span> datasetXModality</span></code></pre></div>
+<span id="cb31-15"><a href="highest-rating.html#cb31-15"></a>xds <span class="ot">&lt;-</span> datasetX</span></code></pre></div>
 <p>Line 2, <code>ds &lt;- dataset04</code>, is the Federica Zanca 5 modality, 4 reader, 200 case FROC dataset.</p>
 <p>Line 6 converts this to an <strong>inferred</strong> ROC dataset <code>infd_ds</code> containing treatments 4 and 5 only.</p>
 <p>Line 10, <code>real_ds &lt;- dataset14</code> is the Federica Zanca 2 modality, 4 reader, 200 case <strong>real</strong> ROC dataset. The two modalities correspond to treatments 4 and 5 in the FROC dataset <code>dataset04</code>.</p>
-<p>Line 15 assigns a pre-loaded <strong>crossed</strong> modality dataset <code>xds &lt;- datasetXModality</code> which serves as a template to be modified to meet our needs.</p>
+<p>Line 15 assigns a pre-loaded <strong>crossed</strong> modality dataset <code>xds &lt;- datasetX</code> which serves as a template to be modified to meet our needs.</p>
 <p>The original dimensions of <code>xds$ratings$NL</code> is <code>dim(xds$ratings$NL) = 2, 4, 11, 68, 5</code>. This because it represents a crossed modality dataset with two modality-1 factors (adaptive iterative dose reduction and filtered back projection) crossed with 4 modality-2 factors (x-ray tube charge = 20 mAs, 40 mAs, 60 mAs and 80 mAs), 11 readers, and 68 cases with a maximum of 5 marks per case.</p>
 </div>
 <div id="modify-the-template" class="section level2 hasAnchor" number="4.6">
@@ -567,52 +568,148 @@ div.csl-indent {
 <div id="analysis-of-the-crossed-modality-dataset" class="section level2 hasAnchor" number="4.7">
 <h2><span class="header-section-number">4.7</span> Analysis of the crossed modality dataset<a href="highest-rating.html#analysis-of-the-crossed-modality-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This is done as shown next.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="highest-rating.html#cb36-1" aria-hidden="true" tabindex="-1"></a>st <span class="ot">&lt;-</span> <span class="fu">StSignificanceTestingCrossedModalities</span>(</span>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="highest-rating.html#cb36-1" aria-hidden="true" tabindex="-1"></a>st <span class="ot">&lt;-</span> <span class="fu">St</span>(</span>
 <span id="cb36-2"><a href="highest-rating.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  xds, </span>
-<span id="cb36-3"><a href="highest-rating.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">avgIndx =</span> <span class="dv">2</span>, </span>
-<span id="cb36-4"><a href="highest-rating.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  FOM <span class="ot">&lt;-</span> <span class="st">&quot;Wilcoxon&quot;</span>, </span>
-<span id="cb36-5"><a href="highest-rating.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">analysisOption =</span> <span class="st">&quot;RRRC&quot;</span>)</span>
-<span id="cb36-6"><a href="highest-rating.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Averaging over modality index = 2</span></span></code></pre></div>
+<span id="cb36-3"><a href="highest-rating.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  FOM <span class="ot">&lt;-</span> <span class="st">&quot;Wilcoxon&quot;</span>, </span>
+<span id="cb36-4"><a href="highest-rating.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">analysisOption =</span> <span class="st">&quot;RRRC&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="highest-rating.html#cb37-1" aria-hidden="true" tabindex="-1"></a>st</span>
-<span id="cb37-2"><a href="highest-rating.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $fomArray</span></span>
-<span id="cb37-3"><a href="highest-rating.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          [,1]    [,2]     [,3]     [,4]</span></span>
-<span id="cb37-4"><a href="highest-rating.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 0.871875 0.80225 0.779900 0.863900</span></span>
-<span id="cb37-5"><a href="highest-rating.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] 0.889025 0.86520 0.845075 0.863525</span></span>
-<span id="cb37-6"><a href="highest-rating.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb37-7"><a href="highest-rating.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $msT</span></span>
-<span id="cb37-8"><a href="highest-rating.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.002624501</span></span>
-<span id="cb37-9"><a href="highest-rating.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb37-10"><a href="highest-rating.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $msTR</span></span>
-<span id="cb37-11"><a href="highest-rating.html#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.000542624</span></span>
-<span id="cb37-12"><a href="highest-rating.html#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb37-13"><a href="highest-rating.html#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $varComp</span></span>
-<span id="cb37-14"><a href="highest-rating.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  varCov</span></span>
-<span id="cb37-15"><a href="highest-rating.html#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Var(R)     0.0005905767</span></span>
-<span id="cb37-16"><a href="highest-rating.html#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Var(T*R)   0.0003041707</span></span>
-<span id="cb37-17"><a href="highest-rating.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; COV1       0.0003005249</span></span>
-<span id="cb37-18"><a href="highest-rating.html#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; COV2       0.0002561530</span></span>
-<span id="cb37-19"><a href="highest-rating.html#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; COV3       0.0002410342</span></span>
-<span id="cb37-20"><a href="highest-rating.html#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Var(Error) 0.0005540970</span></span>
-<span id="cb37-21"><a href="highest-rating.html#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb37-22"><a href="highest-rating.html#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $fRRRC</span></span>
-<span id="cb37-23"><a href="highest-rating.html#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4.351692</span></span>
-<span id="cb37-24"><a href="highest-rating.html#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb37-25"><a href="highest-rating.html#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ddfRRRC</span></span>
-<span id="cb37-26"><a href="highest-rating.html#cb37-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3.70596</span></span>
-<span id="cb37-27"><a href="highest-rating.html#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb37-28"><a href="highest-rating.html#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $pRRRC</span></span>
-<span id="cb37-29"><a href="highest-rating.html#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.1108024</span></span>
-<span id="cb37-30"><a href="highest-rating.html#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb37-31"><a href="highest-rating.html#cb37-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciDiffTrtRRRC</span></span>
-<span id="cb37-32"><a href="highest-rating.html#cb37-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        Treatment  Estimate     StdErr      DF         t     PrGTt     CILower</span></span>
-<span id="cb37-33"><a href="highest-rating.html#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Row1_infd-real -0.036225 0.01736518 3.70596 -2.086071 0.1108024 -0.08598526</span></span>
-<span id="cb37-34"><a href="highest-rating.html#cb37-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      CIUpper</span></span>
-<span id="cb37-35"><a href="highest-rating.html#cb37-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0.01353526</span></span>
+<span id="cb37-2"><a href="highest-rating.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs</span></span>
+<span id="cb37-3"><a href="highest-rating.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs$foms</span></span>
+<span id="cb37-4"><a href="highest-rating.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs$foms$AvgMod1</span></span>
+<span id="cb37-5"><a href="highest-rating.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          rdrrdr1  rdrrdr2  rdrrdr3  rdrrdr4</span></span>
+<span id="cb37-6"><a href="highest-rating.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt4 0.903125 0.848875 0.825100 0.879300</span></span>
+<span id="cb37-7"><a href="highest-rating.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt5 0.857775 0.818575 0.799875 0.848125</span></span>
+<span id="cb37-8"><a href="highest-rating.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-9"><a href="highest-rating.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs$foms$AvgMod2</span></span>
+<span id="cb37-10"><a href="highest-rating.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          rdrrdr1 rdrrdr2  rdrrdr3  rdrrdr4</span></span>
+<span id="cb37-11"><a href="highest-rating.html#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtinfd 0.871875 0.80225 0.779900 0.863900</span></span>
+<span id="cb37-12"><a href="highest-rating.html#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtreal 0.889025 0.86520 0.845075 0.863525</span></span>
+<span id="cb37-13"><a href="highest-rating.html#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-14"><a href="highest-rating.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-15"><a href="highest-rating.html#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs$trtMeans</span></span>
+<span id="cb37-16"><a href="highest-rating.html#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs$trtMeans$AvgMod1</span></span>
+<span id="cb37-17"><a href="highest-rating.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Estimate</span></span>
+<span id="cb37-18"><a href="highest-rating.html#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt4 0.8641000</span></span>
+<span id="cb37-19"><a href="highest-rating.html#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt5 0.8310875</span></span>
+<span id="cb37-20"><a href="highest-rating.html#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-21"><a href="highest-rating.html#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs$trtMeans$AvgMod2</span></span>
+<span id="cb37-22"><a href="highest-rating.html#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Estimate</span></span>
+<span id="cb37-23"><a href="highest-rating.html#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtinfd 0.8294812</span></span>
+<span id="cb37-24"><a href="highest-rating.html#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtreal 0.8657063</span></span>
+<span id="cb37-25"><a href="highest-rating.html#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-26"><a href="highest-rating.html#cb37-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-27"><a href="highest-rating.html#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs$trtMeanDiffs</span></span>
+<span id="cb37-28"><a href="highest-rating.html#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs$trtMeanDiffs$AvgMod1</span></span>
+<span id="cb37-29"><a href="highest-rating.html#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  Estimate</span></span>
+<span id="cb37-30"><a href="highest-rating.html#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt4-trttrt5 0.0330125</span></span>
+<span id="cb37-31"><a href="highest-rating.html#cb37-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-32"><a href="highest-rating.html#cb37-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FOMs$trtMeanDiffs$AvgMod2</span></span>
+<span id="cb37-33"><a href="highest-rating.html#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  Estimate</span></span>
+<span id="cb37-34"><a href="highest-rating.html#cb37-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtinfd-trtreal -0.036225</span></span>
+<span id="cb37-35"><a href="highest-rating.html#cb37-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb37-36"><a href="highest-rating.html#cb37-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb37-37"><a href="highest-rating.html#cb37-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ciAvgRdrEachTrtRRRC</span></span>
-<span id="cb37-38"><a href="highest-rating.html#cb37-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Treatment      Area     StdErr        DF   CILower   CIUpper</span></span>
-<span id="cb37-39"><a href="highest-rating.html#cb37-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      infd 0.8294812 0.02710049  6.097804 0.7634257 0.8955368</span></span>
-<span id="cb37-40"><a href="highest-rating.html#cb37-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      real 0.8657063 0.01934464 63.712979 0.8270575 0.9043550</span></span></code></pre></div>
+<span id="cb37-37"><a href="highest-rating.html#cb37-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-38"><a href="highest-rating.html#cb37-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA</span></span>
+<span id="cb37-39"><a href="highest-rating.html#cb37-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$TRanova</span></span>
+<span id="cb37-40"><a href="highest-rating.html#cb37-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$TRanova$AvgMod1</span></span>
+<span id="cb37-41"><a href="highest-rating.html#cb37-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            SS DF           MS</span></span>
+<span id="cb37-42"><a href="highest-rating.html#cb37-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; T  0.00217965  1 2.179650e-03</span></span>
+<span id="cb37-43"><a href="highest-rating.html#cb37-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R  0.00217965  3 1.842759e-03</span></span>
+<span id="cb37-44"><a href="highest-rating.html#cb37-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TR 0.00217965  3 3.726552e-05</span></span>
+<span id="cb37-45"><a href="highest-rating.html#cb37-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-46"><a href="highest-rating.html#cb37-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$TRanova$AvgMod2</span></span>
+<span id="cb37-47"><a href="highest-rating.html#cb37-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             SS DF          MS</span></span>
+<span id="cb37-48"><a href="highest-rating.html#cb37-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; T  0.005528277  1 0.002624501</span></span>
+<span id="cb37-49"><a href="highest-rating.html#cb37-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R  0.005528277  3 0.001842759</span></span>
+<span id="cb37-50"><a href="highest-rating.html#cb37-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TR 0.005528277  3 0.000542624</span></span>
+<span id="cb37-51"><a href="highest-rating.html#cb37-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-52"><a href="highest-rating.html#cb37-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-53"><a href="highest-rating.html#cb37-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$VarCom</span></span>
+<span id="cb37-54"><a href="highest-rating.html#cb37-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$VarCom$AvgMod1</span></span>
+<span id="cb37-55"><a href="highest-rating.html#cb37-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           Estimates      Rhos</span></span>
+<span id="cb37-56"><a href="highest-rating.html#cb37-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; VarR   0.0008321326        NA</span></span>
+<span id="cb37-57"><a href="highest-rating.html#cb37-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; VarTR -0.0001789411        NA</span></span>
+<span id="cb37-58"><a href="highest-rating.html#cb37-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cov1   0.0003146504 0.5827166</span></span>
+<span id="cb37-59"><a href="highest-rating.html#cb37-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cov2   0.0002531509 0.4688227</span></span>
+<span id="cb37-60"><a href="highest-rating.html#cb37-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cov3   0.0002440363 0.4519429</span></span>
+<span id="cb37-61"><a href="highest-rating.html#cb37-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Var    0.0005399715        NA</span></span>
+<span id="cb37-62"><a href="highest-rating.html#cb37-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-63"><a href="highest-rating.html#cb37-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$VarCom$AvgMod2</span></span>
+<span id="cb37-64"><a href="highest-rating.html#cb37-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Estimates      Rhos</span></span>
+<span id="cb37-65"><a href="highest-rating.html#cb37-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; VarR  0.0005905767        NA</span></span>
+<span id="cb37-66"><a href="highest-rating.html#cb37-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; VarTR 0.0003041707        NA</span></span>
+<span id="cb37-67"><a href="highest-rating.html#cb37-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cov1  0.0003005249 0.5423688</span></span>
+<span id="cb37-68"><a href="highest-rating.html#cb37-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cov2  0.0002561530 0.4622891</span></span>
+<span id="cb37-69"><a href="highest-rating.html#cb37-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Cov3  0.0002410342 0.4350036</span></span>
+<span id="cb37-70"><a href="highest-rating.html#cb37-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Var   0.0005540970        NA</span></span>
+<span id="cb37-71"><a href="highest-rating.html#cb37-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-72"><a href="highest-rating.html#cb37-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-73"><a href="highest-rating.html#cb37-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$IndividualTrt</span></span>
+<span id="cb37-74"><a href="highest-rating.html#cb37-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$IndividualTrt$AvgMod1</span></span>
+<span id="cb37-75"><a href="highest-rating.html#cb37-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         DF  msREachTrt   varEachTrt  cov2EachTrt</span></span>
+<span id="cb37-76"><a href="highest-rating.html#cb37-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt4  3 0.001168930 0.0005165784 0.0002390223</span></span>
+<span id="cb37-77"><a href="highest-rating.html#cb37-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt5  3 0.000711094 0.0005633647 0.0002672795</span></span>
+<span id="cb37-78"><a href="highest-rating.html#cb37-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-79"><a href="highest-rating.html#cb37-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$IndividualTrt$AvgMod2</span></span>
+<span id="cb37-80"><a href="highest-rating.html#cb37-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         DF   msREachTrt   varEachTrt  cov2EachTrt</span></span>
+<span id="cb37-81"><a href="highest-rating.html#cb37-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtinfd  3 0.0020605739 0.0005708085 0.0002192931</span></span>
+<span id="cb37-82"><a href="highest-rating.html#cb37-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtreal  3 0.0003248089 0.0005373855 0.0002930128</span></span>
+<span id="cb37-83"><a href="highest-rating.html#cb37-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-84"><a href="highest-rating.html#cb37-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-85"><a href="highest-rating.html#cb37-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$IndividualRdr</span></span>
+<span id="cb37-86"><a href="highest-rating.html#cb37-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$IndividualRdr$AvgMod1</span></span>
+<span id="cb37-87"><a href="highest-rating.html#cb37-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         DF   msTEachRdr   varEachRdr  cov1EachRdr</span></span>
+<span id="cb37-88"><a href="highest-rating.html#cb37-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; rdrrdr1  1 0.0010283113 0.0004861758 0.0003203932</span></span>
+<span id="cb37-89"><a href="highest-rating.html#cb37-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; rdrrdr2  1 0.0004590450 0.0005679882 0.0003195145</span></span>
+<span id="cb37-90"><a href="highest-rating.html#cb37-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; rdrrdr3  1 0.0003181503 0.0006937098 0.0003582329</span></span>
+<span id="cb37-91"><a href="highest-rating.html#cb37-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; rdrrdr4  1 0.0004859403 0.0004120123 0.0002604610</span></span>
+<span id="cb37-92"><a href="highest-rating.html#cb37-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-93"><a href="highest-rating.html#cb37-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ANOVA$IndividualRdr$AvgMod2</span></span>
+<span id="cb37-94"><a href="highest-rating.html#cb37-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         DF   msTEachRdr   varEachRdr  cov1EachRdr</span></span>
+<span id="cb37-95"><a href="highest-rating.html#cb37-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; rdrrdr1  1 1.470612e-04 0.0004777946 0.0003287743</span></span>
+<span id="cb37-96"><a href="highest-rating.html#cb37-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; rdrrdr2  1 1.981351e-03 0.0005660321 0.0003214706</span></span>
+<span id="cb37-97"><a href="highest-rating.html#cb37-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; rdrrdr3  1 2.123890e-03 0.0006664924 0.0003854503</span></span>
+<span id="cb37-98"><a href="highest-rating.html#cb37-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; rdrrdr4  1 7.031250e-08 0.0005060688 0.0001664044</span></span>
+<span id="cb37-99"><a href="highest-rating.html#cb37-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-100"><a href="highest-rating.html#cb37-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-101"><a href="highest-rating.html#cb37-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-102"><a href="highest-rating.html#cb37-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC</span></span>
+<span id="cb37-103"><a href="highest-rating.html#cb37-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC$FTests</span></span>
+<span id="cb37-104"><a href="highest-rating.html#cb37-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC$FTests$AvgMod1</span></span>
+<span id="cb37-105"><a href="highest-rating.html#cb37-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 DF           MS    FStat            p</span></span>
+<span id="cb37-106"><a href="highest-rating.html#cb37-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment  1.00000 2.179650e-03 29.56509 0.0001627221</span></span>
+<span id="cb37-107"><a href="highest-rating.html#cb37-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     11.74146 7.372378e-05       NA           NA</span></span>
+<span id="cb37-108"><a href="highest-rating.html#cb37-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-109"><a href="highest-rating.html#cb37-109" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC$FTests$AvgMod2</span></span>
+<span id="cb37-110"><a href="highest-rating.html#cb37-110" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                DF           MS    FStat         p</span></span>
+<span id="cb37-111"><a href="highest-rating.html#cb37-111" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Treatment 1.00000 0.0026245013 4.351692 0.1108024</span></span>
+<span id="cb37-112"><a href="highest-rating.html#cb37-112" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error     3.70596 0.0006030991       NA        NA</span></span>
+<span id="cb37-113"><a href="highest-rating.html#cb37-113" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-114"><a href="highest-rating.html#cb37-114" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-115"><a href="highest-rating.html#cb37-115" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC$ciDiffTrt</span></span>
+<span id="cb37-116"><a href="highest-rating.html#cb37-116" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC$ciDiffTrt$AvgMod1</span></span>
+<span id="cb37-117"><a href="highest-rating.html#cb37-117" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  Estimate      StdErr       DF        t        PrGTt    CILower</span></span>
+<span id="cb37-118"><a href="highest-rating.html#cb37-118" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt4-trttrt5 0.0330125 0.006071399 11.74146 5.437379 0.0001627221 0.01975168</span></span>
+<span id="cb37-119"><a href="highest-rating.html#cb37-119" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    CIUpper</span></span>
+<span id="cb37-120"><a href="highest-rating.html#cb37-120" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt4-trttrt5 0.04627332</span></span>
+<span id="cb37-121"><a href="highest-rating.html#cb37-121" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-122"><a href="highest-rating.html#cb37-122" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC$ciDiffTrt$AvgMod2</span></span>
+<span id="cb37-123"><a href="highest-rating.html#cb37-123" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  Estimate     StdErr      DF         t     PrGTt     CILower</span></span>
+<span id="cb37-124"><a href="highest-rating.html#cb37-124" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtinfd-trtreal -0.036225 0.01736518 3.70596 -2.086071 0.1108024 -0.08598526</span></span>
+<span id="cb37-125"><a href="highest-rating.html#cb37-125" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    CIUpper</span></span>
+<span id="cb37-126"><a href="highest-rating.html#cb37-126" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtinfd-trtreal 0.01353526</span></span>
+<span id="cb37-127"><a href="highest-rating.html#cb37-127" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-128"><a href="highest-rating.html#cb37-128" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-129"><a href="highest-rating.html#cb37-129" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC$ciAvgRdrEachTrt</span></span>
+<span id="cb37-130"><a href="highest-rating.html#cb37-130" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC$ciAvgRdrEachTrt$AvgMod1</span></span>
+<span id="cb37-131"><a href="highest-rating.html#cb37-131" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Estimate     StdErr        DF   CILower   CIUpper         Cov2</span></span>
+<span id="cb37-132"><a href="highest-rating.html#cb37-132" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt4 0.8641000 0.02304897  9.914476 0.8126836 0.9155164 0.0002390223</span></span>
+<span id="cb37-133"><a href="highest-rating.html#cb37-133" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trttrt5 0.8310875 0.02109628 18.802288 0.7869010 0.8752740 0.0002672795</span></span>
+<span id="cb37-134"><a href="highest-rating.html#cb37-134" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-135"><a href="highest-rating.html#cb37-135" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RRRC$ciAvgRdrEachTrt$AvgMod2</span></span>
+<span id="cb37-136"><a href="highest-rating.html#cb37-136" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          Estimate     StdErr        DF   CILower   CIUpper         Cov2</span></span>
+<span id="cb37-137"><a href="highest-rating.html#cb37-137" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtinfd 0.8294812 0.02710049  6.097804 0.7634257 0.8955368 0.0002192931</span></span>
+<span id="cb37-138"><a href="highest-rating.html#cb37-138" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; trtreal 0.8657063 0.01934464 63.712979 0.8270575 0.9043550 0.0002930128</span></span></code></pre></div>
 
 </div>
 </div>

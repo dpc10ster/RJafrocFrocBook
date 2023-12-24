@@ -171,7 +171,7 @@ The study in question was a 5 rating FROC study. The lowest non-trivial point (i
 The above plot is termed an *empirical plot* as it consists of the empirical (observed) operating points connected by straight line segments. A model based plot would be termed a *predicted plot*.
 
 
-## The "solar" analogy {#froc-paradigm-solar-analogy}
+## The Astronomical Analogy {#froc-paradigm-solar-analogy}
 
 Consider the sun, regarded as a "lesion" to be detected, with two daily observations spaced 12 hours apart, so that at least one observation period is bound to have the sun in the sky. Furthermore assume the observer knows his GPS coordinates and has a watch that gives accurate local time, from which an accurate location of the sun can be deduced. Assuming clear skies and no obstructions to the view, the sun will always be correctly located and no rational observer will ever generate a non-lesion localization or NL, i.e., no region of the sky will be erroneously "marked" as being the sun.
 
@@ -200,9 +200,17 @@ The analogy is not restricted to the sun, which one might argue is an almost inf
 False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization or incorrect localizations.  
 
 
+## Implications for models of visual search {#froc-paradigm-implications}
+
+[This section will make more sense after reading Chapter \@ref(rsm) on the Radiological Search Model (RSM).]
+
+The Astronomical Analogy elucidates some crucial features of visual search. In the medical imaging context visual search is defined as finding lesion(s) given that their locations are unknown while minimizing finding non-lesions. As shown in the previous section, if lesion contrast is high then the observer's visual system will guide the eye to the correct location(s). The result is that incorrect localizations and missed lesions will rarely occur. In terms of the RSM, as lesion contrast, i.e., $\mu$, increases the number of non-lesion localizations, i.e., $\lambda$, decreases, and the fraction of detected lesions, i.e., $\nu$, approaches unity. This tandem behavior will be accounted for in the formulation of the RSM, in particular the distinction made in Chapter \@ref(rsm) between physical and intrinsic RSM $\lambda$ and $\nu$ parameters, see in particular Sections \@ref(rsm-parameter-physical-meanings) and \@ref(rsm-intrinsic-parameters).
+
+
+
 ## Discussion {#froc-paradigm-discussion}
 
-The FROC paradigm has been misunderstood: contributing factors are loose terminology and misconceptions about visual search, the FROC paradigm and the FROC curve. Some examples follow
+The FROC paradigm has been confused by loose terminology and misconceptions about visual search, the FROC paradigm and the FROC curve. Some examples follow
 
 -   Loose terminology:
     - Using ROC paradigm terms, such as true positive and false positive, that apply to the whole case, to describe location-specific terms such as lesion and non-lesion localizations, that apply to regions of the image.     

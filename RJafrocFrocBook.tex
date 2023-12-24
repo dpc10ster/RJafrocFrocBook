@@ -139,7 +139,7 @@
 
 \title{The RJafroc Froc Book}
 \author{Dev P. Chakraborty, PhD}
-\date{2023-08-07}
+\date{2023-12-24}
 
 \begin{document}
 \maketitle
@@ -583,7 +583,7 @@ The study in question was a 5 rating FROC study. The lowest non-trivial point (i
 The above plot is termed an \emph{empirical plot} as it consists of the empirical (observed) operating points connected by straight line segments. A model based plot would be termed a \emph{predicted plot}.
 
 \hypertarget{froc-paradigm-solar-analogy}{%
-\section{The ``solar'' analogy}\label{froc-paradigm-solar-analogy}}
+\section{The Astronomical Analogy}\label{froc-paradigm-solar-analogy}}
 
 Consider the sun, regarded as a ``lesion'' to be detected, with two daily observations spaced 12 hours apart, so that at least one observation period is bound to have the sun in the sky. Furthermore assume the observer knows his GPS coordinates and has a watch that gives accurate local time, from which an accurate location of the sun can be deduced. Assuming clear skies and no obstructions to the view, the sun will always be correctly located and no rational observer will ever generate a non-lesion localization or NL, i.e., no region of the sky will be erroneously ``marked'' as being the sun.
 
@@ -619,10 +619,17 @@ The analogy is not restricted to the sun, which one might argue is an almost inf
 
 False sightings of objects in astronomy do occur. Finding a new astronomical object is a search task, where, as always, one can have two outcomes, correct localization or incorrect localizations.
 
+\hypertarget{froc-paradigm-implications}{%
+\section{Implications for models of visual search}\label{froc-paradigm-implications}}
+
+{[}This section will make more sense after reading Chapter \ref{rsm} on the Radiological Search Model (RSM).{]}
+
+The Astronomical Analogy elucidates some crucial features of visual search. In the medical imaging context visual search is defined as finding lesion(s) given that their locations are unknown while minimizing finding non-lesions. As shown in the previous section, if lesion contrast is high then the observer's visual system will guide the eye to the correct location(s). The result is that incorrect localizations and missed lesions will rarely occur. In terms of the RSM, as lesion contrast, i.e., \(\mu\), increases the number of non-lesion localizations, i.e., \(\lambda\), decreases, and the fraction of detected lesions, i.e., \(\nu\), approaches unity. This tandem behavior will be accounted for in the formulation of the RSM, in particular the distinction made in Chapter \ref{rsm} between physical and intrinsic RSM \(\lambda\) and \(\nu\) parameters, see in particular Sections \ref{rsm-parameter-physical-meanings} and \ref{rsm-intrinsic-parameters}.
+
 \hypertarget{froc-paradigm-discussion}{%
 \section{Discussion}\label{froc-paradigm-discussion}}
 
-The FROC paradigm has been misunderstood: contributing factors are loose terminology and misconceptions about visual search, the FROC paradigm and the FROC curve. Some examples follow
+The FROC paradigm has been confused by loose terminology and misconceptions about visual search, the FROC paradigm and the FROC curve. Some examples follow
 
 \begin{itemize}
 \tightlist
@@ -2206,7 +2213,7 @@ A and B are as defined in Eqn. \eqref{eq:empirical-computational-afroc1ab}.
 \CommentTok{\# load a cross modality dataset}
 \CommentTok{\# This will serve as a template whose list elements will be modified to create }
 \CommentTok{\# the desired cross modality dataset}
-\NormalTok{xds }\OtherTok{\textless{}{-}}\NormalTok{ datasetXModality}
+\NormalTok{xds }\OtherTok{\textless{}{-}}\NormalTok{ datasetX}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2216,7 +2223,7 @@ Line 6 converts this to an \textbf{inferred} ROC dataset \texttt{infd\_ds} conta
 
 Line 10, \texttt{real\_ds\ \textless{}-\ dataset14} is the Federica Zanca 2 modality, 4 reader, 200 case \textbf{real} ROC dataset. The two modalities correspond to treatments 4 and 5 in the FROC dataset \texttt{dataset04}.
 
-Line 15 assigns a pre-loaded \textbf{crossed} modality dataset \texttt{xds\ \textless{}-\ datasetXModality} which serves as a template to be modified to meet our needs.
+Line 15 assigns a pre-loaded \textbf{crossed} modality dataset \texttt{xds\ \textless{}-\ datasetX} which serves as a template to be modified to meet our needs.
 
 The original dimensions of \texttt{xds\$ratings\$NL} is \texttt{dim(xds\$ratings\$NL)\ =\ 2,\ 4,\ 11,\ 68,\ 5}. This because it represents a crossed modality dataset with two modality-1 factors (adaptive iterative dose reduction and filtered back projection) crossed with 4 modality-2 factors (x-ray tube charge = 20 mAs, 40 mAs, 60 mAs and 80 mAs), 11 readers, and 68 cases with a maximum of 5 marks per case.
 
@@ -2302,57 +2309,153 @@ This is done as shown next.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{st }\OtherTok{\textless{}{-}} \FunctionTok{StSignificanceTestingCrossedModalities}\NormalTok{(}
+\NormalTok{st }\OtherTok{\textless{}{-}} \FunctionTok{St}\NormalTok{(}
 \NormalTok{  xds, }
-  \AttributeTok{avgIndx =} \DecValTok{2}\NormalTok{, }
 \NormalTok{  FOM }\OtherTok{\textless{}{-}} \StringTok{"Wilcoxon"}\NormalTok{, }
   \AttributeTok{analysisOption =} \StringTok{"RRRC"}\NormalTok{)}
-\CommentTok{\#\textgreater{} Averaging over modality index = 2}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{st}
-\CommentTok{\#\textgreater{} $fomArray}
-\CommentTok{\#\textgreater{}          [,1]    [,2]     [,3]     [,4]}
-\CommentTok{\#\textgreater{} [1,] 0.871875 0.80225 0.779900 0.863900}
-\CommentTok{\#\textgreater{} [2,] 0.889025 0.86520 0.845075 0.863525}
+\CommentTok{\#\textgreater{} $FOMs}
+\CommentTok{\#\textgreater{} $FOMs$foms}
+\CommentTok{\#\textgreater{} $FOMs$foms$AvgMod1}
+\CommentTok{\#\textgreater{}          rdrrdr1  rdrrdr2  rdrrdr3  rdrrdr4}
+\CommentTok{\#\textgreater{} trttrt4 0.903125 0.848875 0.825100 0.879300}
+\CommentTok{\#\textgreater{} trttrt5 0.857775 0.818575 0.799875 0.848125}
 \CommentTok{\#\textgreater{} }
-\CommentTok{\#\textgreater{} $msT}
-\CommentTok{\#\textgreater{} [1] 0.002624501}
+\CommentTok{\#\textgreater{} $FOMs$foms$AvgMod2}
+\CommentTok{\#\textgreater{}          rdrrdr1 rdrrdr2  rdrrdr3  rdrrdr4}
+\CommentTok{\#\textgreater{} trtinfd 0.871875 0.80225 0.779900 0.863900}
+\CommentTok{\#\textgreater{} trtreal 0.889025 0.86520 0.845075 0.863525}
 \CommentTok{\#\textgreater{} }
-\CommentTok{\#\textgreater{} $msTR}
-\CommentTok{\#\textgreater{} [1] 0.000542624}
 \CommentTok{\#\textgreater{} }
-\CommentTok{\#\textgreater{} $varComp}
-\CommentTok{\#\textgreater{}                  varCov}
-\CommentTok{\#\textgreater{} Var(R)     0.0005905767}
-\CommentTok{\#\textgreater{} Var(T*R)   0.0003041707}
-\CommentTok{\#\textgreater{} COV1       0.0003005249}
-\CommentTok{\#\textgreater{} COV2       0.0002561530}
-\CommentTok{\#\textgreater{} COV3       0.0002410342}
-\CommentTok{\#\textgreater{} Var(Error) 0.0005540970}
+\CommentTok{\#\textgreater{} $FOMs$trtMeans}
+\CommentTok{\#\textgreater{} $FOMs$trtMeans$AvgMod1}
+\CommentTok{\#\textgreater{}          Estimate}
+\CommentTok{\#\textgreater{} trttrt4 0.8641000}
+\CommentTok{\#\textgreater{} trttrt5 0.8310875}
 \CommentTok{\#\textgreater{} }
-\CommentTok{\#\textgreater{} $fRRRC}
-\CommentTok{\#\textgreater{} [1] 4.351692}
+\CommentTok{\#\textgreater{} $FOMs$trtMeans$AvgMod2}
+\CommentTok{\#\textgreater{}          Estimate}
+\CommentTok{\#\textgreater{} trtinfd 0.8294812}
+\CommentTok{\#\textgreater{} trtreal 0.8657063}
 \CommentTok{\#\textgreater{} }
-\CommentTok{\#\textgreater{} $ddfRRRC}
-\CommentTok{\#\textgreater{} [1] 3.70596}
 \CommentTok{\#\textgreater{} }
-\CommentTok{\#\textgreater{} $pRRRC}
-\CommentTok{\#\textgreater{} [1] 0.1108024}
+\CommentTok{\#\textgreater{} $FOMs$trtMeanDiffs}
+\CommentTok{\#\textgreater{} $FOMs$trtMeanDiffs$AvgMod1}
+\CommentTok{\#\textgreater{}                  Estimate}
+\CommentTok{\#\textgreater{} trttrt4{-}trttrt5 0.0330125}
 \CommentTok{\#\textgreater{} }
-\CommentTok{\#\textgreater{} $ciDiffTrtRRRC}
-\CommentTok{\#\textgreater{}        Treatment  Estimate     StdErr      DF         t     PrGTt     CILower}
-\CommentTok{\#\textgreater{} 1 Row1\_infd{-}real {-}0.036225 0.01736518 3.70596 {-}2.086071 0.1108024 {-}0.08598526}
-\CommentTok{\#\textgreater{}      CIUpper}
-\CommentTok{\#\textgreater{} 1 0.01353526}
+\CommentTok{\#\textgreater{} $FOMs$trtMeanDiffs$AvgMod2}
+\CommentTok{\#\textgreater{}                  Estimate}
+\CommentTok{\#\textgreater{} trtinfd{-}trtreal {-}0.036225}
 \CommentTok{\#\textgreater{} }
-\CommentTok{\#\textgreater{} $ciAvgRdrEachTrtRRRC}
-\CommentTok{\#\textgreater{}   Treatment      Area     StdErr        DF   CILower   CIUpper}
-\CommentTok{\#\textgreater{} 1      infd 0.8294812 0.02710049  6.097804 0.7634257 0.8955368}
-\CommentTok{\#\textgreater{} 2      real 0.8657063 0.01934464 63.712979 0.8270575 0.9043550}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ANOVA}
+\CommentTok{\#\textgreater{} $ANOVA$TRanova}
+\CommentTok{\#\textgreater{} $ANOVA$TRanova$AvgMod1}
+\CommentTok{\#\textgreater{}            SS DF           MS}
+\CommentTok{\#\textgreater{} T  0.00217965  1 2.179650e{-}03}
+\CommentTok{\#\textgreater{} R  0.00217965  3 1.842759e{-}03}
+\CommentTok{\#\textgreater{} TR 0.00217965  3 3.726552e{-}05}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ANOVA$TRanova$AvgMod2}
+\CommentTok{\#\textgreater{}             SS DF          MS}
+\CommentTok{\#\textgreater{} T  0.005528277  1 0.002624501}
+\CommentTok{\#\textgreater{} R  0.005528277  3 0.001842759}
+\CommentTok{\#\textgreater{} TR 0.005528277  3 0.000542624}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ANOVA$VarCom}
+\CommentTok{\#\textgreater{} $ANOVA$VarCom$AvgMod1}
+\CommentTok{\#\textgreater{}           Estimates      Rhos}
+\CommentTok{\#\textgreater{} VarR   0.0008321326        NA}
+\CommentTok{\#\textgreater{} VarTR {-}0.0001789411        NA}
+\CommentTok{\#\textgreater{} Cov1   0.0003146504 0.5827166}
+\CommentTok{\#\textgreater{} Cov2   0.0002531509 0.4688227}
+\CommentTok{\#\textgreater{} Cov3   0.0002440363 0.4519429}
+\CommentTok{\#\textgreater{} Var    0.0005399715        NA}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ANOVA$VarCom$AvgMod2}
+\CommentTok{\#\textgreater{}          Estimates      Rhos}
+\CommentTok{\#\textgreater{} VarR  0.0005905767        NA}
+\CommentTok{\#\textgreater{} VarTR 0.0003041707        NA}
+\CommentTok{\#\textgreater{} Cov1  0.0003005249 0.5423688}
+\CommentTok{\#\textgreater{} Cov2  0.0002561530 0.4622891}
+\CommentTok{\#\textgreater{} Cov3  0.0002410342 0.4350036}
+\CommentTok{\#\textgreater{} Var   0.0005540970        NA}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ANOVA$IndividualTrt}
+\CommentTok{\#\textgreater{} $ANOVA$IndividualTrt$AvgMod1}
+\CommentTok{\#\textgreater{}         DF  msREachTrt   varEachTrt  cov2EachTrt}
+\CommentTok{\#\textgreater{} trttrt4  3 0.001168930 0.0005165784 0.0002390223}
+\CommentTok{\#\textgreater{} trttrt5  3 0.000711094 0.0005633647 0.0002672795}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ANOVA$IndividualTrt$AvgMod2}
+\CommentTok{\#\textgreater{}         DF   msREachTrt   varEachTrt  cov2EachTrt}
+\CommentTok{\#\textgreater{} trtinfd  3 0.0020605739 0.0005708085 0.0002192931}
+\CommentTok{\#\textgreater{} trtreal  3 0.0003248089 0.0005373855 0.0002930128}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ANOVA$IndividualRdr}
+\CommentTok{\#\textgreater{} $ANOVA$IndividualRdr$AvgMod1}
+\CommentTok{\#\textgreater{}         DF   msTEachRdr   varEachRdr  cov1EachRdr}
+\CommentTok{\#\textgreater{} rdrrdr1  1 0.0010283113 0.0004861758 0.0003203932}
+\CommentTok{\#\textgreater{} rdrrdr2  1 0.0004590450 0.0005679882 0.0003195145}
+\CommentTok{\#\textgreater{} rdrrdr3  1 0.0003181503 0.0006937098 0.0003582329}
+\CommentTok{\#\textgreater{} rdrrdr4  1 0.0004859403 0.0004120123 0.0002604610}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $ANOVA$IndividualRdr$AvgMod2}
+\CommentTok{\#\textgreater{}         DF   msTEachRdr   varEachRdr  cov1EachRdr}
+\CommentTok{\#\textgreater{} rdrrdr1  1 1.470612e{-}04 0.0004777946 0.0003287743}
+\CommentTok{\#\textgreater{} rdrrdr2  1 1.981351e{-}03 0.0005660321 0.0003214706}
+\CommentTok{\#\textgreater{} rdrrdr3  1 2.123890e{-}03 0.0006664924 0.0003854503}
+\CommentTok{\#\textgreater{} rdrrdr4  1 7.031250e{-}08 0.0005060688 0.0001664044}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $RRRC}
+\CommentTok{\#\textgreater{} $RRRC$FTests}
+\CommentTok{\#\textgreater{} $RRRC$FTests$AvgMod1}
+\CommentTok{\#\textgreater{}                 DF           MS    FStat            p}
+\CommentTok{\#\textgreater{} Treatment  1.00000 2.179650e{-}03 29.56509 0.0001627221}
+\CommentTok{\#\textgreater{} Error     11.74146 7.372378e{-}05       NA           NA}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $RRRC$FTests$AvgMod2}
+\CommentTok{\#\textgreater{}                DF           MS    FStat         p}
+\CommentTok{\#\textgreater{} Treatment 1.00000 0.0026245013 4.351692 0.1108024}
+\CommentTok{\#\textgreater{} Error     3.70596 0.0006030991       NA        NA}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $RRRC$ciDiffTrt}
+\CommentTok{\#\textgreater{} $RRRC$ciDiffTrt$AvgMod1}
+\CommentTok{\#\textgreater{}                  Estimate      StdErr       DF        t        PrGTt    CILower}
+\CommentTok{\#\textgreater{} trttrt4{-}trttrt5 0.0330125 0.006071399 11.74146 5.437379 0.0001627221 0.01975168}
+\CommentTok{\#\textgreater{}                    CIUpper}
+\CommentTok{\#\textgreater{} trttrt4{-}trttrt5 0.04627332}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $RRRC$ciDiffTrt$AvgMod2}
+\CommentTok{\#\textgreater{}                  Estimate     StdErr      DF         t     PrGTt     CILower}
+\CommentTok{\#\textgreater{} trtinfd{-}trtreal {-}0.036225 0.01736518 3.70596 {-}2.086071 0.1108024 {-}0.08598526}
+\CommentTok{\#\textgreater{}                    CIUpper}
+\CommentTok{\#\textgreater{} trtinfd{-}trtreal 0.01353526}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $RRRC$ciAvgRdrEachTrt}
+\CommentTok{\#\textgreater{} $RRRC$ciAvgRdrEachTrt$AvgMod1}
+\CommentTok{\#\textgreater{}          Estimate     StdErr        DF   CILower   CIUpper         Cov2}
+\CommentTok{\#\textgreater{} trttrt4 0.8641000 0.02304897  9.914476 0.8126836 0.9155164 0.0002390223}
+\CommentTok{\#\textgreater{} trttrt5 0.8310875 0.02109628 18.802288 0.7869010 0.8752740 0.0002672795}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $RRRC$ciAvgRdrEachTrt$AvgMod2}
+\CommentTok{\#\textgreater{}          Estimate     StdErr        DF   CILower   CIUpper         Cov2}
+\CommentTok{\#\textgreater{} trtinfd 0.8294812 0.02710049  6.097804 0.7634257 0.8955368 0.0002192931}
+\CommentTok{\#\textgreater{} trtreal 0.8657063 0.01934464 63.712979 0.8270575 0.9043550 0.0002930128}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4705,32 +4808,32 @@ The following code shows usage of the software to generate the results. Note tha
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{RRFC\_1T\_PCL\_0\_05 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
+\NormalTok{RRFC\_1T\_PCL\_0\_05 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
 \AttributeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\AttributeTok{FPFValue =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{method =} \StringTok{"1T{-}RRFC"}\NormalTok{)}
-\NormalTok{RRRC\_2T\_PCL\_0\_05 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
+\NormalTok{RRRC\_2T\_PCL\_0\_05 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
 \AttributeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\AttributeTok{FPFValue =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{method =} \StringTok{"2T{-}RRRC"}\NormalTok{)}
-\NormalTok{RRRC\_1T\_PCL\_0\_05 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
+\NormalTok{RRRC\_1T\_PCL\_0\_05 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
 \AttributeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\AttributeTok{FPFValue =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{method =} \StringTok{"1T{-}RRRC"}\NormalTok{)}
 
-\NormalTok{RRFC\_1T\_PCL\_0\_2 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
+\NormalTok{RRFC\_1T\_PCL\_0\_2 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
 \AttributeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\AttributeTok{FPFValue =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{method =} \StringTok{"1T{-}RRFC"}\NormalTok{)}
-\NormalTok{RRRC\_2T\_PCL\_0\_2 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
+\NormalTok{RRRC\_2T\_PCL\_0\_2 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
 \AttributeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\AttributeTok{FPFValue =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{method =} \StringTok{"2T{-}RRRC"}\NormalTok{)}
-\NormalTok{RRRC\_1T\_PCL\_0\_2 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
+\NormalTok{RRRC\_1T\_PCL\_0\_2 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
 \AttributeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\AttributeTok{FPFValue =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{method =} \StringTok{"1T{-}RRRC"}\NormalTok{)}
 
-\NormalTok{RRFC\_1T\_PCL\_1 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
+\NormalTok{RRFC\_1T\_PCL\_1 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
 \AttributeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\AttributeTok{FPFValue =} \DecValTok{1}\NormalTok{, }\AttributeTok{method =} \StringTok{"1T{-}RRFC"}\NormalTok{)}
-\NormalTok{RRRC\_2T\_PCL\_1 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
+\NormalTok{RRRC\_2T\_PCL\_1 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
 \AttributeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\AttributeTok{FPFValue =} \DecValTok{1}\NormalTok{, }\AttributeTok{method =} \StringTok{"2T{-}RRRC"}\NormalTok{)}
-\NormalTok{RRRC\_1T\_PCL\_1 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
+\NormalTok{RRRC\_1T\_PCL\_1 }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{datasetCadLroc, }
 \AttributeTok{FOM =} \StringTok{"PCL"}\NormalTok{, }\AttributeTok{FPFValue =} \DecValTok{1}\NormalTok{, }\AttributeTok{method =} \StringTok{"1T{-}RRRC"}\NormalTok{)}
 
-\NormalTok{RRFC\_1T\_AUC }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{dataset09, }
+\NormalTok{RRFC\_1T\_AUC }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{dataset09, }
 \AttributeTok{FOM =} \StringTok{"Wilcoxon"}\NormalTok{, }\AttributeTok{method =} \StringTok{"1T{-}RRFC"}\NormalTok{)}
-\NormalTok{RRRC\_2T\_AUC }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{dataset09, }
+\NormalTok{RRRC\_2T\_AUC }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{dataset09, }
 \AttributeTok{FOM =} \StringTok{"Wilcoxon"}\NormalTok{, }\AttributeTok{method =} \StringTok{"2T{-}RRRC"}\NormalTok{)}
-\NormalTok{RRRC\_1T\_AUC }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StSignificanceTestingCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{dataset09, }
+\NormalTok{RRRC\_1T\_AUC }\OtherTok{\textless{}{-}}\NormalTok{ RJafroc}\SpecialCharTok{::}\FunctionTok{StCadVsRad}\NormalTok{ (RJafroc}\SpecialCharTok{::}\NormalTok{dataset09, }
 \AttributeTok{FOM =} \StringTok{"Wilcoxon"}\NormalTok{, }\AttributeTok{method =} \StringTok{"1T{-}RRRC"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -4900,15 +5003,15 @@ The first example shows the structure of \texttt{RRFC\_1T\_PCL\_0\_2}.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{print}\NormalTok{(fom\_individual\_rad)}
-\CommentTok{\#\textgreater{}         rdr1 rdr2    rdr3  rdr4       rdr5       rdr6   rdr7  rdr8  rdr9}
-\CommentTok{\#\textgreater{} 1 0.69453125 0.65 0.80625 0.725 0.65982143 0.76845238 0.7375 0.675 0.675}
+\CommentTok{\#\textgreater{}        rdr1 rdr2    rdr3  rdr4      rdr5      rdr6   rdr7  rdr8  rdr9}
+\CommentTok{\#\textgreater{} 1 0.6945313 0.65 0.80625 0.725 0.6598214 0.7684524 0.7375 0.675 0.675}
 \FunctionTok{print}\NormalTok{(stats)}
-\CommentTok{\#\textgreater{}       fomCAD  avgRadFom avgDiffFom        varR     Tstat df          pval}
-\CommentTok{\#\textgreater{} 1 0.59166667 0.71017278 0.11850612 0.002808612 6.7083568  8 0.00015139664}
+\CommentTok{\#\textgreater{}      fomCAD avgRadFom avgDiffFom        varR    Tstat df         pval}
+\CommentTok{\#\textgreater{} 1 0.5916667 0.7101728  0.1185061 0.002808612 6.708357  8 0.0001513966}
 \FunctionTok{print}\NormalTok{(ConfidenceIntervals)}
 \CommentTok{\#\textgreater{}       CIAvgRadFom CIAvgDiffFom}
-\CommentTok{\#\textgreater{} Lower  0.66943619  0.077769525}
-\CommentTok{\#\textgreater{} Upper  0.75090938  0.159242710}
+\CommentTok{\#\textgreater{} Lower   0.6694362   0.07776953}
+\CommentTok{\#\textgreater{} Upper   0.7509094   0.15924271}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4981,16 +5084,16 @@ The next example shows the structure of \texttt{RRRC\_2T\_PCL\_0\_2}.
 \begin{Highlighting}[]
 
 \FunctionTok{print}\NormalTok{(fom\_individual\_rad)}
-\CommentTok{\#\textgreater{}         rdr1 rdr2    rdr3  rdr4       rdr5       rdr6   rdr7  rdr8  rdr9}
-\CommentTok{\#\textgreater{} 1 0.69453125 0.65 0.80625 0.725 0.65982143 0.76845238 0.7375 0.675 0.675}
+\CommentTok{\#\textgreater{}        rdr1 rdr2    rdr3  rdr4      rdr5      rdr6   rdr7  rdr8  rdr9}
+\CommentTok{\#\textgreater{} 1 0.6945313 0.65 0.80625 0.725 0.6598214 0.7684524 0.7375 0.675 0.675}
 \FunctionTok{print}\NormalTok{(stats1)}
-\CommentTok{\#\textgreater{}       fomCAD  avgRadFom avgDiffFom}
-\CommentTok{\#\textgreater{} 1 0.59166667 0.71017278 0.11850612}
+\CommentTok{\#\textgreater{}      fomCAD avgRadFom avgDiffFom}
+\CommentTok{\#\textgreater{} 1 0.5916667 0.7101728  0.1185061}
 \FunctionTok{print}\NormalTok{(stats2)}
-\CommentTok{\#\textgreater{}             varR         varTR          cov1         cov2          cov3}
-\CommentTok{\#\textgreater{} 1 {-}4.8789098e{-}19 0.00026488983 0.00076136841 0.0022942211 0.00076136841}
-\CommentTok{\#\textgreater{}            Var     FStat        df        pval}
-\CommentTok{\#\textgreater{} 1 0.0034336373 4.1576797 937.24371 0.041726262}
+\CommentTok{\#\textgreater{}           varR        varTR         cov1        cov2         cov3         Var}
+\CommentTok{\#\textgreater{} 1 {-}4.87891e{-}19 0.0002648898 0.0007613684 0.002294221 0.0007613684 0.003433637}
+\CommentTok{\#\textgreater{}     FStat       df       pval}
+\CommentTok{\#\textgreater{} 1 4.15768 937.2437 0.04172626}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5028,9 +5131,9 @@ Shown next are the confidence interval statistics \texttt{x\$ciAvgRdrEachTrt} fo
 \begin{Highlighting}[]
 
 \FunctionTok{print}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{ciAvgRdrEachTrt)}
-\CommentTok{\#\textgreater{}        Estimate      StdErr        DF    CILower    CIUpper         Cov2}
-\CommentTok{\#\textgreater{} trt1 0.59166667 0.058028349       Inf 0.47793319 0.70540014 0.0033672893}
-\CommentTok{\#\textgreater{} trt2 0.71017278 0.039156365 193.10832 0.63294372 0.78740185 0.0012211529}
+\CommentTok{\#\textgreater{}       Estimate     StdErr       DF   CILower   CIUpper        Cov2}
+\CommentTok{\#\textgreater{} trt1 0.5916667 0.05802835      Inf 0.4779332 0.7054001 0.003367289}
+\CommentTok{\#\textgreater{} trt2 0.7101728 0.03915636 193.1083 0.6329437 0.7874018 0.001221153}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5058,8 +5161,8 @@ Shown next are the confidence interval statistics \texttt{x\$ciDiffFom} between 
 \begin{Highlighting}[]
 
 \FunctionTok{print}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{ciDiffFom)}
-\CommentTok{\#\textgreater{}             Estimate      StdErr        DF         t       PrGTt     CILower}
-\CommentTok{\#\textgreater{} trt2{-}trt1 0.11850612 0.058118615 937.24371 2.0390389 0.041726262 0.004448434}
+\CommentTok{\#\textgreater{}            Estimate     StdErr       DF        t      PrGTt     CILower}
+\CommentTok{\#\textgreater{} trt2{-}trt1 0.1185061 0.05811861 937.2437 2.039039 0.04172626 0.004448434}
 \CommentTok{\#\textgreater{}             CIUpper}
 \CommentTok{\#\textgreater{} trt2{-}trt1 0.2325638}
 \end{Highlighting}
@@ -5106,20 +5209,20 @@ The last example shows the structure of \texttt{RRRC\_1T\_PCL\_0\_2}.
 \begin{Highlighting}[]
 \NormalTok{RRRC\_1T\_PCL\_0\_2}
 \CommentTok{\#\textgreater{} $fomCAD}
-\CommentTok{\#\textgreater{} [1] 0.59166667}
+\CommentTok{\#\textgreater{} [1] 0.5916667}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $fomRAD}
-\CommentTok{\#\textgreater{} [1] 0.69453125 0.65000000 0.80625000 0.72500000 0.65982143 0.76845238 0.73750000}
-\CommentTok{\#\textgreater{} [8] 0.67500000 0.67500000}
+\CommentTok{\#\textgreater{} [1] 0.6945313 0.6500000 0.8062500 0.7250000 0.6598214 0.7684524 0.7375000}
+\CommentTok{\#\textgreater{} [8] 0.6750000 0.6750000}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $avgRadFom}
-\CommentTok{\#\textgreater{} [1] 0.71017278}
+\CommentTok{\#\textgreater{} [1] 0.7101728}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $CIAvgRad}
-\CommentTok{\#\textgreater{} [1] 0.59611510 0.82423047}
+\CommentTok{\#\textgreater{} [1] 0.5961151 0.8242305}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $avgDiffFom}
-\CommentTok{\#\textgreater{} [1] 0.11850612}
+\CommentTok{\#\textgreater{} [1] 0.1185061}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $CIAvgDiffFom}
 \CommentTok{\#\textgreater{} [1] 0.004448434 0.232563801}
@@ -5128,22 +5231,22 @@ The last example shows the structure of \texttt{RRRC\_1T\_PCL\_0\_2}.
 \CommentTok{\#\textgreater{} [1] 0.002808612}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $varError}
-\CommentTok{\#\textgreater{} [1] 0.0053445377}
+\CommentTok{\#\textgreater{} [1] 0.005344538}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $cov2}
-\CommentTok{\#\textgreater{} [1] 0.0030657054}
+\CommentTok{\#\textgreater{} [1] 0.003065705}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $Tstat}
-\CommentTok{\#\textgreater{}      rdr2 }
-\CommentTok{\#\textgreater{} 2.0390389 }
+\CommentTok{\#\textgreater{}     rdr2 }
+\CommentTok{\#\textgreater{} 2.039039 }
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $df}
-\CommentTok{\#\textgreater{}      rdr2 }
-\CommentTok{\#\textgreater{} 937.24371 }
+\CommentTok{\#\textgreater{}     rdr2 }
+\CommentTok{\#\textgreater{} 937.2437 }
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $pval}
-\CommentTok{\#\textgreater{}        rdr2 }
-\CommentTok{\#\textgreater{} 0.041726262}
+\CommentTok{\#\textgreater{}       rdr2 }
+\CommentTok{\#\textgreater{} 0.04172626}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5159,7 +5262,7 @@ The differences from \texttt{RRFC\_1T\_PCL\_0\_2} are listed next:
   \texttt{varError} is \(\text{Var}\) of the single treatment model for comparing CAD to RAD.
 \end{itemize}
 
-Notice that the \texttt{RRRC\_1T\_PCL\_0\_2} p value, i.e., 0.04172626, is identical to that of \texttt{RRRC\_2T\_PCL\_0\_2}, i.e., 0.04172626.
+Notice that the \texttt{RRRC\_1T\_PCL\_0\_2} p value, i.e., 0.0417263, is identical to that of \texttt{RRRC\_2T\_PCL\_0\_2}, i.e., 0.0417263.
 
 \hypertarget{standalone-cad-radiologists-appendix2}{%
 \section{Appendix 2}\label{standalone-cad-radiologists-appendix2}}
@@ -6048,40 +6151,40 @@ Save TONY dataset to \texttt{dsTony}. Create copy \texttt{dsNoNormals}. Remove a
 \CommentTok{\#\textgreater{}            rdr1      rdr2      rdr3      rdr4      rdr5}
 \CommentTok{\#\textgreater{} trtBT 0.8594559 0.9009910 0.9369398 0.8910807 0.8871039}
 \CommentTok{\#\textgreater{} trtDM 0.8195304 0.8570572 0.8988448 0.8231600 0.8208875}
-\NormalTok{st }\OtherTok{\textless{}{-}} \FunctionTok{StSignificanceTesting}\NormalTok{(dsTony,}\AttributeTok{FOM =} \StringTok{"wAFROC"}\NormalTok{)}
-\NormalTok{st1 }\OtherTok{\textless{}{-}} \FunctionTok{StSignificanceTesting}\NormalTok{(dsNoNormals,}\AttributeTok{FOM =} \StringTok{"wAFROC1"}\NormalTok{)}
+\NormalTok{st }\OtherTok{\textless{}{-}} \FunctionTok{St}\NormalTok{(dsTony,}\AttributeTok{FOM =} \StringTok{"wAFROC"}\NormalTok{)}
+\NormalTok{st1 }\OtherTok{\textless{}{-}} \FunctionTok{St}\NormalTok{(dsNoNormals,}\AttributeTok{FOM =} \StringTok{"wAFROC1"}\NormalTok{)}
 \NormalTok{st}\SpecialCharTok{$}\NormalTok{RRRC}
 \CommentTok{\#\textgreater{} $FTests}
-\CommentTok{\#\textgreater{}                  DF         MS     FStat            p}
-\CommentTok{\#\textgreater{} Treatment  1.000000 4.72951648 10.298825 0.0036685784}
-\CommentTok{\#\textgreater{} Error     24.702758 0.45922873        NA           NA}
+\CommentTok{\#\textgreater{}                 DF          MS    FStat           p}
+\CommentTok{\#\textgreater{} Treatment  1.00000 0.025564954 10.29883 0.003668578}
+\CommentTok{\#\textgreater{} Error     24.70276 0.002482317       NA          NA}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $ciDiffTrt}
-\CommentTok{\#\textgreater{}              Estimate      StdErr        DF         t        PrGTt     CILower}
-\CommentTok{\#\textgreater{} trtBT{-}trtDM 0.1011236 0.031510744 24.702758 3.2091783 0.0036685784 0.036186385}
-\CommentTok{\#\textgreater{}                CIUpper}
-\CommentTok{\#\textgreater{} trtBT{-}trtDM 0.16606081}
+\CommentTok{\#\textgreater{}              Estimate     StdErr       DF        t       PrGTt    CILower}
+\CommentTok{\#\textgreater{} trtBT{-}trtDM 0.1011236 0.03151074 24.70276 3.209178 0.003668578 0.03618638}
+\CommentTok{\#\textgreater{}               CIUpper}
+\CommentTok{\#\textgreater{} trtBT{-}trtDM 0.1660608}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $ciAvgRdrEachTrt}
-\CommentTok{\#\textgreater{}         Estimate      StdErr        DF    CILower    CIUpper}
-\CommentTok{\#\textgreater{} trtBT 0.81223666 0.026984337 59.281486 0.75824649 0.86622683}
-\CommentTok{\#\textgreater{} trtDM 0.71111306 0.033910209 17.789298 0.63980982 0.78241630}
+\CommentTok{\#\textgreater{}        Estimate     StdErr       DF   CILower   CIUpper         Cov2}
+\CommentTok{\#\textgreater{} trtBT 0.8122367 0.02698434 59.28149 0.7582465 0.8662268 0.0005390098}
+\CommentTok{\#\textgreater{} trtDM 0.7111131 0.03391021 17.78930 0.6398098 0.7824163 0.0006046324}
 \NormalTok{st1}\SpecialCharTok{$}\NormalTok{RRRC}
 \CommentTok{\#\textgreater{} $FTests}
-\CommentTok{\#\textgreater{}                  DF          MS     FStat            p}
-\CommentTok{\#\textgreater{} Treatment   1.00000 0.583686978 7.9579613 0.0051936318}
-\CommentTok{\#\textgreater{} Error     236.88206 0.073346295        NA           NA}
+\CommentTok{\#\textgreater{}                 DF           MS    FStat           p}
+\CommentTok{\#\textgreater{} Treatment   1.0000 0.0065582806 7.957961 0.005193632}
+\CommentTok{\#\textgreater{} Error     236.8821 0.0008241157       NA          NA}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $ciDiffTrt}
-\CommentTok{\#\textgreater{}                Estimate      StdErr        DF         t        PrGTt}
-\CommentTok{\#\textgreater{} trtBT{-}trtDM 0.051218281 0.018156163 236.88206 2.8209859 0.0051936318}
-\CommentTok{\#\textgreater{}                 CILower    CIUpper}
-\CommentTok{\#\textgreater{} trtBT{-}trtDM 0.015450111 0.08698645}
+\CommentTok{\#\textgreater{}               Estimate     StdErr       DF        t       PrGTt    CILower}
+\CommentTok{\#\textgreater{} trtBT{-}trtDM 0.05121828 0.01815616 236.8821 2.820986 0.005193632 0.01545011}
+\CommentTok{\#\textgreater{}                CIUpper}
+\CommentTok{\#\textgreater{} trtBT{-}trtDM 0.08698645}
 \CommentTok{\#\textgreater{} }
 \CommentTok{\#\textgreater{} $ciAvgRdrEachTrt}
-\CommentTok{\#\textgreater{}         Estimate      StdErr        DF    CILower    CIUpper}
-\CommentTok{\#\textgreater{} trtBT 0.89511425 0.019745498 24.733020 0.85442537 0.93580314}
-\CommentTok{\#\textgreater{} trtDM 0.84389597 0.024970629 27.621445 0.79271436 0.89507759}
+\CommentTok{\#\textgreater{}        Estimate     StdErr       DF   CILower   CIUpper         Cov2}
+\CommentTok{\#\textgreater{} trtBT 0.8951143 0.01974550 24.73302 0.8544254 0.9358031 0.0002330913}
+\CommentTok{\#\textgreater{} trtDM 0.8438960 0.02497063 27.62144 0.7927144 0.8950776 0.0003862498}
 \end{Highlighting}
 \end{Shaded}
 

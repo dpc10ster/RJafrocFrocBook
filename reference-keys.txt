@@ -218,6 +218,7 @@ historical-context
 froc-paradigm-froc-plot
 froc-paradigm-plot-illustration
 froc-paradigm-solar-analogy
+froc-paradigm-implications
 froc-paradigm-discussion
 empirical
 empirical-how-much-finished

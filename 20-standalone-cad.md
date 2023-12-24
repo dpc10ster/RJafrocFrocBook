@@ -451,32 +451,32 @@ The following code shows usage of the software to generate the results. Note tha
 
 
 ```r
-RRFC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRFC_1T_PCL_0_05 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRFC")
-RRRC_2T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_2T_PCL_0_05 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "2T-RRRC")
-RRRC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_1T_PCL_0_05 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRRC")
 
-RRFC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRFC_1T_PCL_0_2 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRFC")
-RRRC_2T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_2T_PCL_0_2 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "2T-RRRC")
-RRRC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_1T_PCL_0_2 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRRC")
 
-RRFC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRFC_1T_PCL_1 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRFC")
-RRRC_2T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_2T_PCL_1 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "2T-RRRC")
-RRRC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_1T_PCL_1 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRRC")
 
-RRFC_1T_AUC <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::dataset09, 
+RRFC_1T_AUC <- RJafroc::StCadVsRad (RJafroc::dataset09, 
 FOM = "Wilcoxon", method = "1T-RRFC")
-RRRC_2T_AUC <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::dataset09, 
+RRRC_2T_AUC <- RJafroc::StCadVsRad (RJafroc::dataset09, 
 FOM = "Wilcoxon", method = "2T-RRRC")
-RRRC_1T_AUC <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::dataset09, 
+RRRC_1T_AUC <- RJafroc::StCadVsRad (RJafroc::dataset09, 
 FOM = "Wilcoxon", method = "1T-RRRC")
 ```
 
@@ -919,15 +919,15 @@ rownames(ConfidenceIntervals) <- c("Lower", "Upper")
 
 ```r
 print(fom_individual_rad)
-#>         rdr1 rdr2    rdr3  rdr4       rdr5       rdr6   rdr7  rdr8  rdr9
-#> 1 0.69453125 0.65 0.80625 0.725 0.65982143 0.76845238 0.7375 0.675 0.675
+#>        rdr1 rdr2    rdr3  rdr4      rdr5      rdr6   rdr7  rdr8  rdr9
+#> 1 0.6945313 0.65 0.80625 0.725 0.6598214 0.7684524 0.7375 0.675 0.675
 print(stats)
-#>       fomCAD  avgRadFom avgDiffFom        varR     Tstat df          pval
-#> 1 0.59166667 0.71017278 0.11850612 0.002808612 6.7083568  8 0.00015139664
+#>      fomCAD avgRadFom avgDiffFom        varR    Tstat df         pval
+#> 1 0.5916667 0.7101728  0.1185061 0.002808612 6.708357  8 0.0001513966
 print(ConfidenceIntervals)
 #>       CIAvgRadFom CIAvgDiffFom
-#> Lower  0.66943619  0.077769525
-#> Upper  0.75090938  0.159242710
+#> Lower   0.6694362   0.07776953
+#> Upper   0.7509094   0.15924271
 ```
 
 The results are displayed as three data frames. 
@@ -979,16 +979,16 @@ stats2 <- data.frame(varR = x$varR, varTR = x$varTR,
 ```r
 
 print(fom_individual_rad)
-#>         rdr1 rdr2    rdr3  rdr4       rdr5       rdr6   rdr7  rdr8  rdr9
-#> 1 0.69453125 0.65 0.80625 0.725 0.65982143 0.76845238 0.7375 0.675 0.675
+#>        rdr1 rdr2    rdr3  rdr4      rdr5      rdr6   rdr7  rdr8  rdr9
+#> 1 0.6945313 0.65 0.80625 0.725 0.6598214 0.7684524 0.7375 0.675 0.675
 print(stats1)
-#>       fomCAD  avgRadFom avgDiffFom
-#> 1 0.59166667 0.71017278 0.11850612
+#>      fomCAD avgRadFom avgDiffFom
+#> 1 0.5916667 0.7101728  0.1185061
 print(stats2)
-#>             varR         varTR          cov1         cov2          cov3
-#> 1 -4.8789098e-19 0.00026488983 0.00076136841 0.0022942211 0.00076136841
-#>            Var     FStat        df        pval
-#> 1 0.0034336373 4.1576797 937.24371 0.041726262
+#>           varR        varTR         cov1        cov2         cov3         Var
+#> 1 -4.87891e-19 0.0002648898 0.0007613684 0.002294221 0.0007613684 0.003433637
+#>     FStat       df       pval
+#> 1 4.15768 937.2437 0.04172626
 ```
 
 
@@ -1014,9 +1014,9 @@ Shown next are the confidence interval statistics `x$ciAvgRdrEachTrt` for the tw
 ```r
 
 print(x$ciAvgRdrEachTrt)
-#>        Estimate      StdErr        DF    CILower    CIUpper         Cov2
-#> trt1 0.59166667 0.058028349       Inf 0.47793319 0.70540014 0.0033672893
-#> trt2 0.71017278 0.039156365 193.10832 0.63294372 0.78740185 0.0012211529
+#>       Estimate     StdErr       DF   CILower   CIUpper        Cov2
+#> trt1 0.5916667 0.05802835      Inf 0.4779332 0.7054001 0.003367289
+#> trt2 0.7101728 0.03915636 193.1083 0.6329437 0.7874018 0.001221153
 ```
 
 
@@ -1035,8 +1035,8 @@ Shown next are the confidence interval statistics `x$ciDiffFom` between the two 
 ```r
 
 print(x$ciDiffFom)
-#>             Estimate      StdErr        DF         t       PrGTt     CILower
-#> trt2-trt1 0.11850612 0.058118615 937.24371 2.0390389 0.041726262 0.004448434
+#>            Estimate     StdErr       DF        t      PrGTt     CILower
+#> trt2-trt1 0.1185061 0.05811861 937.2437 2.039039 0.04172626 0.004448434
 #>             CIUpper
 #> trt2-trt1 0.2325638
 ```
@@ -1070,20 +1070,20 @@ The last example shows the structure of `RRRC_1T_PCL_0_2`.
 ```r
 RRRC_1T_PCL_0_2
 #> $fomCAD
-#> [1] 0.59166667
+#> [1] 0.5916667
 #> 
 #> $fomRAD
-#> [1] 0.69453125 0.65000000 0.80625000 0.72500000 0.65982143 0.76845238 0.73750000
-#> [8] 0.67500000 0.67500000
+#> [1] 0.6945313 0.6500000 0.8062500 0.7250000 0.6598214 0.7684524 0.7375000
+#> [8] 0.6750000 0.6750000
 #> 
 #> $avgRadFom
-#> [1] 0.71017278
+#> [1] 0.7101728
 #> 
 #> $CIAvgRad
-#> [1] 0.59611510 0.82423047
+#> [1] 0.5961151 0.8242305
 #> 
 #> $avgDiffFom
-#> [1] 0.11850612
+#> [1] 0.1185061
 #> 
 #> $CIAvgDiffFom
 #> [1] 0.004448434 0.232563801
@@ -1092,22 +1092,22 @@ RRRC_1T_PCL_0_2
 #> [1] 0.002808612
 #> 
 #> $varError
-#> [1] 0.0053445377
+#> [1] 0.005344538
 #> 
 #> $cov2
-#> [1] 0.0030657054
+#> [1] 0.003065705
 #> 
 #> $Tstat
-#>      rdr2 
-#> 2.0390389 
+#>     rdr2 
+#> 2.039039 
 #> 
 #> $df
-#>      rdr2 
-#> 937.24371 
+#>     rdr2 
+#> 937.2437 
 #> 
 #> $pval
-#>        rdr2 
-#> 0.041726262
+#>       rdr2 
+#> 0.04172626
 ```
 
 
@@ -1118,7 +1118,7 @@ The differences from `RRFC_1T_PCL_0_2` are listed next:
 * `cov2` is $\text{Cov}_2$ of the single treatment model for comparing CAD to RAD. 
 * `varError` is $\text{Var}$ of the single treatment model for comparing CAD to RAD. 
 
-Notice that the `RRRC_1T_PCL_0_2` p value, i.e., 0.04172626,  is identical to that of `RRRC_2T_PCL_0_2`, i.e., 0.04172626.  
+Notice that the `RRRC_1T_PCL_0_2` p value, i.e., 0.0417263,  is identical to that of `RRRC_2T_PCL_0_2`, i.e., 0.0417263.  
 
 
 ## Appendix 2 {#standalone-cad-radiologists-appendix2}
