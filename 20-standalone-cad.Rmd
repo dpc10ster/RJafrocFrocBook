@@ -293,32 +293,32 @@ The following code shows usage of the software to generate the results. Note tha
 
 
 ```{r standalone-cad-rjafroc-implementation, cache=TRUE, echo=TRUE}
-RRFC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRFC_1T_PCL_0_05 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRFC")
-RRRC_2T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_2T_PCL_0_05 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "2T-RRRC")
-RRRC_1T_PCL_0_05 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_1T_PCL_0_05 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.05, method = "1T-RRRC")
 
-RRFC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRFC_1T_PCL_0_2 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRFC")
-RRRC_2T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_2T_PCL_0_2 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "2T-RRRC")
-RRRC_1T_PCL_0_2 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_1T_PCL_0_2 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 0.2, method = "1T-RRRC")
 
-RRFC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRFC_1T_PCL_1 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRFC")
-RRRC_2T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_2T_PCL_1 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "2T-RRRC")
-RRRC_1T_PCL_1 <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::datasetCadLroc, 
+RRRC_1T_PCL_1 <- RJafroc::StCadVsRad (RJafroc::datasetCadLroc, 
 FOM = "PCL", FPFValue = 1, method = "1T-RRRC")
 
-RRFC_1T_AUC <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::dataset09, 
+RRFC_1T_AUC <- RJafroc::StCadVsRad (RJafroc::dataset09, 
 FOM = "Wilcoxon", method = "1T-RRFC")
-RRRC_2T_AUC <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::dataset09, 
+RRRC_2T_AUC <- RJafroc::StCadVsRad (RJafroc::dataset09, 
 FOM = "Wilcoxon", method = "2T-RRRC")
-RRRC_1T_AUC <- RJafroc::StSignificanceTestingCadVsRad (RJafroc::dataset09, 
+RRRC_1T_AUC <- RJafroc::StCadVsRad (RJafroc::dataset09, 
 FOM = "Wilcoxon", method = "1T-RRRC")
 
 ```

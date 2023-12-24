@@ -34,7 +34,7 @@ combine2Datasets <- function() {
   xds$descriptions$modalityID2 <- c("trt4", "trt5")
   xds$descriptions$readerID <- c("rdr1","rdr2","rdr3","rdr4")
   
-  st <- StSignificanceTestingCrossedModalities(xds, avgIndx = 2, FOM <- "Wilcoxon", analysisOption = "RRRC")
+  st <- St(xds, FOM <- "Wilcoxon", analysisOption = "RRRC")
   
   #print(st)
   

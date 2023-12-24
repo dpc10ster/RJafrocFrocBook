@@ -48,8 +48,8 @@ RJafroc::UtilFigureOfMerit(dsTony,FOM = "wAFROC")
 #RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = "wAFROC") #this will generate an error
 RJafroc::UtilFigureOfMerit(dsTony,FOM = "wAFROC1")
 RJafroc::UtilFigureOfMerit(dsNoNormals,FOM = "wAFROC1")
-st <- StSignificanceTesting(dsTony,FOM = "wAFROC")
-st1 <- StSignificanceTesting(dsNoNormals,FOM = "wAFROC1")
+st <- St(dsTony,FOM = "wAFROC")
+st1 <- St(dsNoNormals,FOM = "wAFROC1")
 st$RRRC
 st1$RRRC
 ```

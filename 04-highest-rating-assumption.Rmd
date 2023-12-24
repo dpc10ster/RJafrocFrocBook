@@ -34,7 +34,7 @@ source(here::here("R/highest-rating-assumption/inferred-vs-real.R"))
 ds <- dataset04
 infd_ds <- DfExtractDataset(DfFroc2Roc(ds), trts = c(4,5))
 real_ds <- dataset14
-xds <- datasetXModality
+xds <- datasetX
 ```
 
 
@@ -56,7 +56,7 @@ real_ds <- dataset14
 # load a cross modality dataset
 # This will serve as a template whose list elements will be modified to create 
 # the desired cross modality dataset
-xds <- datasetXModality
+xds <- datasetX
 ```
 
 Line 2, `ds <- dataset04`, is the Federica Zanca 5 modality, 4 reader, 200 case FROC dataset.
@@ -65,7 +65,7 @@ Line 6 converts this to an **inferred** ROC dataset `infd_ds` containing treatme
 
 Line 10, `real_ds <- dataset14` is the Federica Zanca 2 modality, 4 reader, 200 case **real** ROC dataset. The two modalities correspond to treatments 4 and 5 in the FROC dataset `dataset04`.
 
-Line 15 assigns a pre-loaded **crossed** modality dataset `xds <- datasetXModality` which serves as a template to be modified to meet our needs. 
+Line 15 assigns a pre-loaded **crossed** modality dataset `xds <- datasetX` which serves as a template to be modified to meet our needs. 
 
 The original dimensions of `xds$ratings$NL` is `dim(xds$ratings$NL) = `r dim(xds$ratings$NL)``. This because it represents a crossed modality dataset with two modality-1 factors (adaptive iterative dose reduction and filtered back projection) crossed with 4 modality-2 factors (x-ray tube charge = 20 mAs, 40 mAs, 60 mAs and 80 mAs), 11 readers, and 68 cases with a maximum of 5 marks per case.
 
@@ -138,9 +138,8 @@ This completes the merging of the two datasets, inferred ROC and real ROC, into 
 This is done as shown next.
 
 ```{r}
-st <- StSignificanceTestingCrossedModalities(
+st <- St(
   xds, 
-  avgIndx = 2, 
   FOM <- "Wilcoxon", 
   analysisOption = "RRRC")
 ```
