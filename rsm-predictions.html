@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-12-24" />
+<meta name="date" content="2023-12-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -719,7 +719,7 @@ P\left ( h_2 \geq \zeta \mid \mu, n, l, L \right ) \\
 \right \}
 \tag{7.19}
 \end{equation}\]</span></p>
-<p>In other words, they evaluate to the coordinates of the predicted end-point, <em>each of which is less than unity</em>. The reason is that the integration is along the <em>continuous</em> section of the ROC curve and does not include the contribution along the dashed straight line extension from <span class="math inline">\(\left ( \text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )\)</span> to (1,1). The latter contributions correspond to cases with no marks, i.e., <span class="math inline">\(1 - \text{FPF}_{\text{max}}\)</span> for non-diseased cases and <span class="math inline">\(1 - \text{TPF}_{\text{max}}\)</span> for diseased cases. Adding these contributions to the integrals along the continuous section yields unity for both types of cases. <a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
+<p>In other words, they evaluate to the coordinates of the predicted end-point, <em>each of which is less than unity</em>. The reason is that the integration is along the <em>continuous</em> section of the ROC curve and does not include the contribution along the dashed straight line extension from <span class="math inline">\(\left ( \text{FPF}_{\text{max}}, \text{TPF}_{\text{max}} \right )\)</span> to (1,1). The latter contributions correspond to cases with no marks, i.e., <span class="math inline">\(1 - \text{FPF}_{\text{max}}\)</span> for non-diseased cases and <span class="math inline">\(1 - \text{TPF}_{\text{max}}\)</span> for diseased cases. Adding these contributions to the integrals along the continuous section yields unity for both types of cases. <a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a></p>
 </div>
 <div id="rsm-predictions-roc-curve-auc" class="section level3 hasAnchor" number="7.5.5">
 <h3><span class="header-section-number">7.5.5</span> ROC AUC<a href="rsm-predictions.html#rsm-predictions-roc-curve-auc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -909,7 +909,7 @@ FIGURE 7.3: RSM pdf curves for indicated values of the <span class="math inline"
 <div id="rsm-predictions-roc-curve-proper" class="section level2 hasAnchor" number="7.6">
 <h2><span class="header-section-number">7.6</span> Proper ROC curve<a href="rsm-predictions.html#rsm-predictions-roc-curve-proper" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <blockquote>
-<p>A proper ROC curve has the property that it never crosses the chance diagonal and its slope never increases as the operating point moves up the ROC curve <span class="citation">(<a href="#ref-metz1999proper" role="doc-biblioref">Charles E. Metz and Pan 1999</a>; <a href="#ref-macmillan2004detection" role="doc-biblioref">Macmillan and Creelman 2004</a>)</span>. <em>It is shown below that the RSM predicted ROC curve, including the dashed straight line extension, is proper</em> <a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>.</p>
+<p>A proper ROC curve has the property that it never crosses the chance diagonal and its slope never increases as the operating point moves up the ROC curve <span class="citation">(<a href="#ref-metz1999proper" role="doc-biblioref">Charles E. Metz and Pan 1999</a>; <a href="#ref-macmillan2004detection" role="doc-biblioref">Macmillan and Creelman 2004</a>)</span>. <em>It is shown below that the RSM predicted ROC curve, including the dashed straight line extension, is proper</em> <a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>.</p>
 </blockquote>
 <p>Consider first the continuous section which is below-left of the end-point. For convenience one abbreviates FPF and TPF to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, respectively, and suppresses the dependence on model parameters. From Eqn. <a href="rsm-predictions.html#eq:rsm-predictions-fpf">(7.11)</a> and Eqn. <a href="rsm-predictions.html#eq:rsm-predictions-tpf2">(7.15)</a> one can express the ROC coordinates as:</p>
 <p><span class="math display" id="eq:rsm-predictions-f-g">\[\begin{equation}
@@ -1073,7 +1073,7 @@ h =&amp; 1-\text{exp} \left ( -\lambda \Phi\left ( -\zeta \right ) \right ) \sum
 FIGURE 7.7: ROC curve for selected RSM parameters. The slope of the dashed line is 0.4935272.
 </p>
 </div>
-<p>At first sight the slope appeared to me to be discontinuous at the end-point <a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> but this is not true. In fact the slope decreases as one approaches the end-point, and in the limit equals that of the dashed line. This is demonstrated by the next code section which creates a finely-spaced <span class="math inline">\(\zeta\)</span> array ranging from -3 to -20. These are the points at which the slope is evaluated numerically. Two types of calculations were performed - one using standard <code>R</code> double precision arithmetic and one using multiple precision arithmetic. The R-package <code>Rmpfr</code> was used for the latter. For example, the line <code>zeta_mpr -&gt; mpfr(zeta, 2000)</code> generates a 2000-bit representation of <span class="math inline">\(\zeta\)</span>. All subsequent computations using <code>zeta_mpr</code> uses multiple precision arithmetic. The computed slopes are saved in two arrays, <code>y1</code>, the standard precision arithmetic slope and <code>y2</code>, the multiple precision arithmetic slope.</p>
+<p>At first sight the slope appeared to me to be discontinuous at the end-point <a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> but this is not true. In fact the slope decreases as one approaches the end-point, and in the limit equals that of the dashed line. This is demonstrated by the next code section which creates a finely-spaced <span class="math inline">\(\zeta\)</span> array ranging from -3 to -20. These are the points at which the slope is evaluated numerically. Two types of calculations were performed - one using standard <code>R</code> double precision arithmetic and one using multiple precision arithmetic. The R-package <code>Rmpfr</code> was used for the latter. For example, the line <code>zeta_mpr -&gt; mpfr(zeta, 2000)</code> generates a 2000-bit representation of <span class="math inline">\(\zeta\)</span>. All subsequent computations using <code>zeta_mpr</code> uses multiple precision arithmetic. The computed slopes are saved in two arrays, <code>y1</code>, the standard precision arithmetic slope and <code>y2</code>, the multiple precision arithmetic slope.</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="rsm-predictions.html#cb94-1" aria-hidden="true" tabindex="-1"></a>zeta_arr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="fl">0.2</span>), <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">20</span>, <span class="sc">-</span><span class="fl">0.5</span>))</span>
 <span id="cb94-2"><a href="rsm-predictions.html#cb94-2" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="fu">length</span>(zeta_arr))</span>
 <span id="cb94-3"><a href="rsm-predictions.html#cb94-3" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="fu">length</span>(zeta_arr))</span>
@@ -1146,10 +1146,10 @@ Swensson, Richard G. 1996. <span>“Unified Measurement of Observer Performance 
 </div>
 <div class="footnotes">
 <hr />
-<ol start="21">
-<li id="fn21"><p>The original RSM publications <span class="citation">(<a href="#ref-chakraborty2006search" role="doc-biblioref">Dev P. Chakraborty 2006</a>; <a href="#ref-chakraborty2006roc" role="doc-biblioref">DP Chakraborty 2006</a>)</span> unnecessarily introduced Dirac delta functions to force the integrals to be unity. The explanation given here should clarify the issue.<a href="rsm-predictions.html#fnref21" class="footnote-back">↩︎</a></p></li>
-<li id="fn22"><p>The statement in the print book that the “proper” property only applies to the continuous section is incorrect.<a href="rsm-predictions.html#fnref22" class="footnote-back">↩︎</a></p></li>
-<li id="fn23"><p>Others have stated a different visual impression.<a href="rsm-predictions.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<ol start="23">
+<li id="fn23"><p>The original RSM publications <span class="citation">(<a href="#ref-chakraborty2006search" role="doc-biblioref">Dev P. Chakraborty 2006</a>; <a href="#ref-chakraborty2006roc" role="doc-biblioref">DP Chakraborty 2006</a>)</span> unnecessarily introduced Dirac delta functions to force the integrals to be unity. The explanation given here should clarify the issue.<a href="rsm-predictions.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p>The statement in the print book that the “proper” property only applies to the continuous section is incorrect.<a href="rsm-predictions.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p>Others have stated a different visual impression.<a href="rsm-predictions.html#fnref25" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

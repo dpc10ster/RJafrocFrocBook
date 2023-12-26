@@ -23,7 +23,7 @@
 <meta name="author" content="Dev P. Chakraborty, PhD" />
 
 
-<meta name="date" content="2023-12-24" />
+<meta name="date" content="2023-12-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -532,7 +532,7 @@ finite? discontinuous? end-point-discontinuity?</p>
 <p>The predicted FROC, AFROC and wAFROC curves that follow use the intrinsic <span class="math inline">\(\lambda_i, \nu_i\)</span> parameters.</p>
 <div id="froc-plots-lambda_i-nu_i-parameterization" class="section level3 hasAnchor" number="8.3.1">
 <h3><span class="header-section-number">8.3.1</span> FROC plots <span class="math inline">\(\lambda_i, \nu_i\)</span> parameterization<a href="rsm-other-predictions.html#froc-plots-lambda_i-nu_i-parameterization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The following code generates FROC plots using the intrinsic <span class="math inline">\(\lambda_i = 2\)</span> and <span class="math inline">\(\nu_i = 0.5\)</span> parameters for 4 values of <span class="math inline">\(\mu\)</span> contained in the array <code>muArr &lt;- c(0.1,1,2,4)</code> (to avoid a divide by zero error the value <span class="math inline">\(\mu=0\)</span> is not allowed). A <code>list</code> array <code>p_FROC_lambdai_nui</code> is created to hold the four plots<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>. The intrinsic <span class="math inline">\(\lambda_i, \nu_i\)</span> parameters are converted to <span class="math inline">\(\lambda, \nu\)</span> using the function <code>Util2Physical()</code>which implements Eqn. <a href="rsm-other-predictions.html#eq:rsm-other-predictions-transform">(8.3)</a>). The parameters are displayed using the <code>cat()</code> function. The plots are generated using <code>PlotRsmOperatingCharacteristics()</code>. Online help on this function is <a href="https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html">available</a>. The code-line <code>p_FROC_lambdai_nui[[i]] &lt;- ret1$FROCPlot</code> saves the plot to the previously created <code>list</code> array.</p>
+<p>The following code generates FROC plots using the intrinsic <span class="math inline">\(\lambda_i = 2\)</span> and <span class="math inline">\(\nu_i = 0.5\)</span> parameters for 4 values of <span class="math inline">\(\mu\)</span> contained in the array <code>muArr &lt;- c(0.1,1,2,4)</code> (to avoid a divide by zero error the value <span class="math inline">\(\mu=0\)</span> is not allowed). A <code>list</code> array <code>p_FROC_lambdai_nui</code> is created to hold the four plots<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a>. The intrinsic <span class="math inline">\(\lambda_i, \nu_i\)</span> parameters are converted to <span class="math inline">\(\lambda, \nu\)</span> using the function <code>Util2Physical()</code>which implements Eqn. <a href="rsm-other-predictions.html#eq:rsm-other-predictions-transform">(8.3)</a>). The parameters are displayed using the <code>cat()</code> function. The plots are generated using <code>PlotRsmOperatingCharacteristics()</code>. Online help on this function is <a href="https://dpc10ster.github.io/RJafroc/reference/PlotRsmOperatingCharacteristics.html">available</a>. The code-line <code>p_FROC_lambdai_nui[[i]] &lt;- ret1$FROCPlot</code> saves the plot to the previously created <code>list</code> array.</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="rsm-other-predictions.html#cb96-1" aria-hidden="true" tabindex="-1"></a>muArr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>)</span>
 <span id="cb96-2"><a href="rsm-other-predictions.html#cb96-2" aria-hidden="true" tabindex="-1"></a>lambda_i <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb96-3"><a href="rsm-other-predictions.html#cb96-3" aria-hidden="true" tabindex="-1"></a>nu_i <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
@@ -951,8 +951,8 @@ Bunch, Philip C, John F Hamilton, Gary K Sanderson, and Arthur H Simmons. 1977. 
 </div>
 <div class="footnotes">
 <hr />
-<ol start="24">
-<li id="fn24"><p>Notation: <code>p_</code> stands for a plot array, <code>FROC</code> stands for type of plot (also allowed are <code>AFROC</code> and <code>wAFROC</code>), <code>lambdai</code> stands for <span class="math inline">\(\lambda_i\)</span> and <code>nui</code> stands for <span class="math inline">\(\nu_i\)</span> (also allowed are <code>lambda</code> for <span class="math inline">\(\lambda\)</span> and <code>nu</code> for <span class="math inline">\(\nu\)</span> ).<a href="rsm-other-predictions.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<ol start="26">
+<li id="fn26"><p>Notation: <code>p_</code> stands for a plot array, <code>FROC</code> stands for type of plot (also allowed are <code>AFROC</code> and <code>wAFROC</code>), <code>lambdai</code> stands for <span class="math inline">\(\lambda_i\)</span> and <code>nui</code> stands for <span class="math inline">\(\nu_i\)</span> (also allowed are <code>lambda</code> for <span class="math inline">\(\lambda\)</span> and <code>nu</code> for <span class="math inline">\(\nu\)</span> ).<a href="rsm-other-predictions.html#fnref26" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
