@@ -194,7 +194,7 @@ plotwAfroc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
         mu <- muArr[i1]
         lambda <- lambdaArr[i2]
         nu <- nuArr[i3]
-        plotArr[[i]] <- RJafroc::PlotRsmOperatingCharacteristics(
+        plotArr[[i]] <- RJafroc::PlotRsmOpChrs(
           c(mu,mu),
           c(lambda,lambda),
           c(nu,nu),
@@ -202,7 +202,7 @@ plotwAfroc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
           lesDistr,
           relWeights,
           OpChType = "wAFROC",
-          legendPosition = "null"
+          legPos = "none"
         )$wAFROCPlot
         #ggtitle(paste0("mu = ", mu, ", nu = ", nu, ", lambda = ", lambda))
         #     polygon edge not found
@@ -231,7 +231,7 @@ plotRoc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
         mu <- muArr[i1]
         lambda <- lambdaArr[i2]
         nu <- nuArr[i3]
-        plotArr[[i]] <- RJafroc::PlotRsmOperatingCharacteristics(
+        plotArr[[i]] <- RJafroc::PlotRsmOpChrs(
           c(mu,mu),
           c(lambda,lambda),
           c(nu,nu),
@@ -239,7 +239,7 @@ plotRoc <- function(muArr, lambdaArr, nuArr, lesDistr, relWeights) {
           lesDistr,
           relWeights,
           OpChType = "ROC",
-          legendPosition = "null"
+          legPos = "none"
         )$ROCPlot
         for (y in 1:2) {
           optPt <- data.frame(

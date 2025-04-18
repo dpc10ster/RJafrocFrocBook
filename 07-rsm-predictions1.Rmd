@@ -326,7 +326,7 @@ For diseased cases,
 \end{equation}
 
 
-Both expressions can be evaluated using $\text{Maple}^{TM}$. The pdfs are implemented in the `RJafroc` function `PlotRsmOperatingCharacteristics()`. 
+Both expressions can be evaluated using $\text{Maple}^{TM}$. The pdfs are implemented in the `RJafroc` function `PlotRsmOpChrs()`. 
 
 The integrals of the pdfs (non-diseased followed by diseased) over the entire allowed range are given by (note the vertical bar notation, meaning the difference of two limiting values of $\zeta$):
 
@@ -602,9 +602,9 @@ lesDistr <- c(rep(0, L-1), 1)
 plotArr <- array(list(), dim = c(length(muArr)))
 for (i in 1:length(muArr)) {
   mu <- muArr[i]
-  ret1 <- PlotRsmOperatingCharacteristics(
+  ret1 <- PlotRsmOpChrs(
     mu, lambda, nu, 
-    lesDistr = L, legendPosition  = "none"
+    lesDistr = L, legPos = "none"
   )
   plotArr[[i]] <- ret1$ROCPlot + ggtitle(paste0("mu = ", as.character(muArr[i]), ", AUC = ", format(ret1$aucROC, digits = 3)))
 }
@@ -643,9 +643,9 @@ lesDistr <- c(rep(0, L-1), 1)
 plotArr <- array(list(), dim = c(length(muArr)))
 for (i in 1:length(muArr)) {
   mu <- muArr[i]
-  ret1 <- PlotRsmOperatingCharacteristics(
+  ret1 <- PlotRsmOpChrs(
     mu, lambda, nu, 
-    lesDistr = L, legendPosition  = "none"
+    lesDistr = L, legPos = "none"
   )
   plotArr[[i]] <- ret1$PDFPlot + ggtitle(paste0("mu = ", as.character(muArr[i])))
 }
@@ -722,7 +722,7 @@ In contrast, in addition to the basic RSM parameters, i.e., $\mu$, $\lambda$ and
 
 
 
-```{r rsm-predictions-operating-characteristics-help, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Help page for `RJafroc` function `PlotRsmOperatingCharacteristics`."}
+```{r rsm-predictions-operating-characteristics-help, out.width="300pt", fig.align = "center", echo=FALSE, fig.cap="Help page for `RJafroc` function `PlotRsmOpChrs`."}
 knitr::include_graphics("images/rsm-predictions/PlotRsmOperatingCharacteristics.png")
 ``` 
 
@@ -733,7 +733,7 @@ The dependence is demonstrated next for two values: $zeta = -10$ and $zeta = 1$.
 
 
 ```{r, echo=TRUE}
-roc <- PlotRsmOperatingCharacteristics(
+roc <- PlotRsmOpChrs(
      mu = c(2,2),
      lambda = c(1,1),
      nu = c(1,1),
@@ -741,7 +741,7 @@ roc <- PlotRsmOperatingCharacteristics(
      lesDistr = c(0.5, 0.5),
      relWeights = c(0.5, 0.5),
      OpChType = "ROC",
-     legendPosition = "null"
+     legPos = "none"
 )
 ```
 
@@ -884,14 +884,14 @@ The end-point coordinates are (`r maxFPF`, `r maxTPF`) and the slope is `r mStLi
 
 
 ```{r}
-ret <- PlotRsmOperatingCharacteristics(
+ret <- PlotRsmOpChrs(
   mu,
   lambda,
   nu,
   zeta1 = -Inf, 
   OpChType = "ROC",
   lesDistr = lesDistr,
-  legendPosition = "none"
+  legPos = "none"
 )
 ```
 

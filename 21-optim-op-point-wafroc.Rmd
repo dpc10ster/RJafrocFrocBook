@@ -379,7 +379,7 @@ grid.arrange(froc)
 
 
 ```{r, echo=FALSE}
-wafroc <- RJafroc::PlotRsmOperatingCharacteristics(
+wafroc <- RJafroc::PlotRsmOpChrs(
   c(mu,mu),
   c(lambda,lambda),
   c(nu,nu),
@@ -387,7 +387,7 @@ wafroc <- RJafroc::PlotRsmOperatingCharacteristics(
   lesDistrCad,
   relWeightsCad,
   OpChType = "wAFROC",
-  legendPosition = "null"
+  legPos = "none"
 )$wAFROCPlot
 ```
 
@@ -408,7 +408,7 @@ grid.arrange(wafroc)
 
 
 ```{r, echo=FALSE}
-roc <- RJafroc::PlotRsmOperatingCharacteristics(
+roc <- RJafroc::PlotRsmOpChrs(
   c(mu,mu),
   c(lambda,lambda),
   c(nu,nu),
@@ -416,7 +416,7 @@ roc <- RJafroc::PlotRsmOperatingCharacteristics(
   lesDistrCad,
   relWeightsCad,
   OpChType = "ROC",
-  legendPosition = "null"
+  legPos = "none"
 )$ROCPlot
 ```
 
