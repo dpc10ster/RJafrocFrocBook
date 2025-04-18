@@ -354,7 +354,7 @@ The following plot uses `dataset04` [@zanca2009evaluation] to illustrate an empi
 
 
 ```{r, echo=TRUE}
-ret <- PlotEmpiricalOperatingCharacteristics(
+ret <- PlotEmpOpChrs(
   dataset04, 
   trts = 1, rdrs = 1, opChType = "FROC")
 print(ret$Plot)
@@ -525,11 +525,11 @@ The upper-right corner (reached by counting all z-samples $\ge -\infty$) of the 
 
 ### Illustration with a dataset {#empirical-roc-plot-illustration}
 
-The following code uses `dataset04` to illustrate an empirical ROC plot for treatment 1 and reader 1. The reader should experiment by running `PlotEmpiricalOperatingCharacteristics(dataset04, trts = 1, rdrs = 1, opChType = ROC")$Plot` with different treatments `trts` and readers `rdrs` specified.
+The following code uses `dataset04` to illustrate an empirical ROC plot for treatment 1 and reader 1. The reader should experiment by running `PlotEmpOpChrs(dataset04, trts = 1, rdrs = 1, opChType = ROC")$Plot` with different treatments `trts` and readers `rdrs` specified.
 
 
 ```{r, echo=TRUE}
-ret <- PlotEmpiricalOperatingCharacteristics(
+ret <- PlotEmpOpChrs(
   dataset04, 
   trts = 1, rdrs = 1, opChType = "ROC")
 print(ret$Plot)
@@ -588,7 +588,7 @@ The following code uses `dataset04` to illustrate an empirical AFROC plot for tr
 
 
 ```{r, echo=TRUE}
-ret <- PlotEmpiricalOperatingCharacteristics(
+ret <- PlotEmpOpChrs(
   dataset04, 
   trts = 1, rdrs = 1, opChType = "AFROC")
 print(ret$Plot)
@@ -651,7 +651,7 @@ The following code uses `dataset04` to illustrate an empirical ROC plot for trea
 
 
 ```{r, echo=TRUE}
-ret <- PlotEmpiricalOperatingCharacteristics(
+ret <- PlotEmpOpChrs(
   dataset04, trts = 1, rdrs = 1, opChType = "wAFROC")
 print(ret$Plot)
 ```
@@ -724,20 +724,20 @@ K2 <- 5
 FP <- apply(frocData$ratings$NL, 3, max)
 FP <- FP[1:K1]
 
-afrocPlot <- PlotEmpiricalOperatingCharacteristics(
+afrocPlot <- PlotEmpOpChrs(
   frocData,
   trts = 1, 
   rdrs = 1, 
   opChType = "AFROC", 
-  legend.position = "NULL")
+  legPos = 0)
 afrocPlot <- afrocPlot$Plot + ggtitle("A")
 
-wafrocPlot <- PlotEmpiricalOperatingCharacteristics(
+wafrocPlot <- PlotEmpOpChrs(
   frocData,
   trts = 1, 
   rdrs = 1, 
   opChType = "wAFROC", 
-  legend.position = "NULL")
+  legPos = 0)
 wafrocPlot <- wafrocPlot$Plot + ggtitle("B")
 
 FPF <- afrocPlot$data$genAbscissa
@@ -1100,7 +1100,7 @@ The following code uses `dataset04` to illustrate an empirical AFROC1 plot for t
 
 
 ```{r, echo=TRUE}
-ret <- PlotEmpiricalOperatingCharacteristics(
+ret <- PlotEmpOpChrs(
   dataset04, 
   trts = 1, rdrs = 1, opChType = "AFROC1")
 print(ret$Plot)
@@ -1145,7 +1145,7 @@ The following code uses `dataset04` to illustrate an empirical wAFROC1 plot for 
 
 
 ```{r, echo=TRUE}
-ret <- PlotEmpiricalOperatingCharacteristics(
+ret <- PlotEmpOpChrs(
   dataset04, 
   trts = 1, rdrs = 1, opChType = "wAFROC1")
 print(ret$Plot)
@@ -1637,11 +1637,11 @@ trapz = function(x, y)
   return (as.double( (x[idx] - x[idx-1]) %*% (y[idx] + y[idx-1])) / 2)
 }
 
-frocPlot <- PlotEmpiricalOperatingCharacteristics(
+frocPlot <- PlotEmpOpChrs(
   frocData,trts = 1, 
   rdrs = 1, 
   opChType = "FROC", 
-  legend.position = "NULL")
+  legPos = "NULL") #PWEP: parameter name updated but passed value is no longer valid
 #print(frocPlot$Plot)
 
 NLF <- frocPlot$Points$genAbscissa

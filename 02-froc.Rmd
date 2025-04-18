@@ -167,7 +167,7 @@ The following code uses `dataset04` [@zanca2009evaluation] in `RJafroc` to illus
 
 
 ```{r froc-paradigm-5, echo=TRUE, fig.align='center', fig.cap="Empirical FROC plot for `dataset04`, treatment 1 and reader 1.", fig.show='hold'}
-ret <- PlotEmpiricalOperatingCharacteristics(
+ret <- PlotEmpOpChrs(
   dataset04, trts = 1, rdrs = 1, opChType = "FROC")
 print(ret$Plot)
 ```

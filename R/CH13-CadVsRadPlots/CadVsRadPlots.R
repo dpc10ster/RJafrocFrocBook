@@ -85,21 +85,21 @@ CadVsRadPlots <- function(muCad, muRad, lambda, nu, zeta1_1, zeta1_2, K1, K2, Lk
     perCase = Lk2)
   #frocComb$descriptions$readerID <- c("CAD", "RAD")
   
-  froc <- PlotEmpiricalOperatingCharacteristics(
+  froc <- PlotEmpOpChrs(
     frocComb,
     trts= 1,
     rdrs = c(1, 2),
     opChType = "FROC", maxDiscrete = 25)
   #froc$descriptions$readerID <- c("CAD1", "RAD1")
   
-  wafroc <- PlotEmpiricalOperatingCharacteristics(
+  wafroc <- PlotEmpOpChrs(
     frocComb,
     trts= 1,
     rdrs = c(1, 2),
     opChType = "wAFROC", maxDiscrete = 25)
   #wafroc$descriptions$readerID <- c("CAD1", "RAD1")
   
-  roc <- PlotEmpiricalOperatingCharacteristics(
+  roc <- PlotEmpOpChrs(
     frocComb,
     trts= 1,
     rdrs = c(1, 2),
@@ -205,13 +205,13 @@ ZetaEffectPlots <- function(mu, lambda, nu, zeta1, K1, K2, Lk2, seed, label) {
     perCase = Lk2)
   frocComb$descriptions$readerID <- c(paste0(label, "zeta1"), paste0(label, "negInf"))
   
-  froc <- PlotEmpiricalOperatingCharacteristics(
+  froc <- PlotEmpOpChrs(
     frocComb,
     trts= 1,
     rdrs = c(1, 2),
     opChType = "FROC", maxDiscrete = 25)
   
-  wafroc <- PlotEmpiricalOperatingCharacteristics(
+  wafroc <- PlotEmpOpChrs(
     frocComb,
     trts= 1,
     rdrs = c(1, 2),

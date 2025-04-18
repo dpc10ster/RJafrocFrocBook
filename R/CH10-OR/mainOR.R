@@ -113,7 +113,7 @@ for (i in 1 : nDiffs) {
 
 plotM <- list(1, 2, 3, 4)
 plotR <- list(c(1:5), c(1:5), c(1:5), c(1:5))
-plot <- PlotEmpiricalOperatingCharacteristics(dataset = rocData, trts = plotM, rdrs = plotR,legendPosition = "NULL")
+plot <- PlotEmpOpChrs(dataset = rocData, trts = plotM, rdrs = plotR,legendPosition = "NULL")
 p <- plot$ROCPlot +
   scale_colour_manual(values=c("black","grey", "blue", "darkblue")) + 
   theme(axis.title.y = element_text(size = 25,face="bold"),
